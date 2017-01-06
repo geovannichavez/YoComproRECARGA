@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">YoComproRECARGA</string>
+
+    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
+    <string name="button_continue">Continuar</string>
+</resources>
