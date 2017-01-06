@@ -29,7 +29,6 @@
         <activity
             android:name=".ui.activities.Home"
             android:screenOrientation="portrait">
-
         </activity>
         <activity
             android:name=".ui.activities.AcceptTerms"
@@ -39,6 +38,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activities.ValidatePhone">
         </activity>
     </application>
 
