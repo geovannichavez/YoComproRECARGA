@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">YoComproRECARGA</string>
 
+    <!--    ACCEPT TERMS    -->
     <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
+
+    <!--    VALIDATE PHONE-->
+    <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
+
+    <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
+    <string name="button_login">Iniciar Sesión</string>
+
+    <!--    HINTS   -->
+    <string name="hint_your_phone_number"><font size="16">Tu número de Teléfono</font></string>
 </resources>

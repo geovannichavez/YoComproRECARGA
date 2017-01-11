@@ -23,7 +23,7 @@ public class AcceptTerms extends AppCompatActivity
 
     public void acceptTerms(View view)
     {
-        Intent accept = new Intent(AcceptTerms.this, Home.class);
+        Intent accept = new Intent(AcceptTerms.this, ValidatePhone.class);
         startActivity(accept);
     }
 }

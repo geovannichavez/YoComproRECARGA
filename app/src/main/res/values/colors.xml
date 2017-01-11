@@ -8,9 +8,11 @@
     <color name="ApplicationGreenTheme">#66cc00</color>
     <color name="ApplicationGreenThemeDark">#59af03</color>
     <color name="ActivityWhiteBackground">#FFFFFF</color>
+    <color name="GeneralTextColor">#666666</color>
     <color name="SubtitleTextColor">#999999</color>
     <color name="TextColor">#666666</color>
     <color name="UltraLightGray">#e6e6e6</color>
+    <color name="LightGray">#c3c3c3</color>
     <color name="SuperUltraLightGray">#f2f2f2</color>
     <color name="SuperUltraLightGray2">#f7f7f7</color>
     <color name="SemiTransparentBlack">#d2000000</color>
