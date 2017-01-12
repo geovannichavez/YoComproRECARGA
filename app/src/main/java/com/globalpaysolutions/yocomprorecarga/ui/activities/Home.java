@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap pGoogleMap)
     {
         googleMap = pGoogleMap;
-        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -73,7 +73,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback
         }
         googleMap.setTrafficEnabled(false);
         googleMap.setIndoorEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
 
         // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
         CameraPosition cameraPosition = new CameraPosition.Builder()
