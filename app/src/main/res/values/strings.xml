@@ -7,10 +7,19 @@
     <!--    VALIDATE PHONE-->
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
 
+    <!--    REQUEST TOPUP   -->
+    <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
+    <string name="label_type_vendor_code">Ingresa el código de vendedor:</string>
+    <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
+    <string name="label_select_operator">Selecciona el operador móvil:</string>
+
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
     <string name="button_login">Iniciar Sesión</string>
-
+    <string name="button_my_number">Mi número</string>
+    <string name="button_request_topup">Solicitar Recarga</string>
     <!--    HINTS   -->
     <string name="hint_your_phone_number"><font size="16">Tu número de Teléfono</font></string>
+    <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
+    <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 </resources>
