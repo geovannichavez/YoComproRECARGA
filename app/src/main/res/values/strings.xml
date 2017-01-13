@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">YoComproRECARGA</string>
+    <string name="app_name">Yo Compro RECARGA</string>
 
     <!--    ACCEPT TERMS    -->
     <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
 
     <!--    VALIDATE PHONE-->
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
+    <string name="label_country">País</string>
+    <string name="label_country_code">Cód.</string>
 
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
@@ -18,8 +20,11 @@
     <string name="button_login">Iniciar Sesión</string>
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
+    <string name="button_accept">Aceptar</string>
+
     <!--    HINTS   -->
-    <string name="hint_your_phone_number"><font size="16">Tu número de Teléfono</font></string>
+    <string name="spinner_select">Seleccione...</string>
+    <string name="hint_your_phone_number"><font size="16">TU NÚMERO DE TELÉFONO</font></string>
     <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 </resources>

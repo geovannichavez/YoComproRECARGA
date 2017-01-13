@@ -72,7 +72,7 @@
                                   android:layout_alignParentLeft="true"
                                   android:layout_alignParentStart="true"
                                   android:gravity="start"
-                                  android:text="El Salvador"
+                                  android:text="@string/label_country"
                                   android:textColor="@color/GeneralTextColor"
                                   android:textSize="15sp"/>
 
@@ -116,7 +116,7 @@
                                   android:layout_width="wrap_content"
                                   android:layout_height="wrap_content"
                                   android:layout_gravity="center_vertical"
-                                  android:text="+503"
+                                  android:text="@string/label_country_code"
                                   android:textColor="@color/GeneralTextColor"
                                   android:textSize="21sp"/>
 
