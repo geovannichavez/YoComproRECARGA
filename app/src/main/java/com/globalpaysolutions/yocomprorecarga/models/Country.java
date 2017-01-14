@@ -13,7 +13,7 @@ public class Country
     private String code;
     private String name;
     private String countrycode;
-    private String phoneCode;
+    private String PhoneCode;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getCode()
@@ -48,12 +48,12 @@ public class Country
 
     public String getPhoneCode()
     {
-        return phoneCode;
+        return PhoneCode;
     }
 
     public void setPhoneCode(String phoneCode)
     {
-        this.phoneCode = phoneCode;
+        this.PhoneCode = phoneCode;
     }
 
     public Map<String, Object> getAdditionalProperties()

@@ -21,7 +21,7 @@
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
     <string name="button_accept">Aceptar</string>
-    <string name="label_loading_please_wait">Cargando, por favor espere...</string>
+    <string name="label_loading_please_wait">Por favor espere...</string>
 
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione...</string>

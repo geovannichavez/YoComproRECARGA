@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
@@ -26,6 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterI
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ValidatePhone extends AppCompatActivity implements ValidatePhoneView
@@ -35,14 +39,16 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     Button btnSignin;
     RelativeLayout relSelectCountry;
     ProgressDialog progressDialog;
+    TextView lblSelectedCountry;
+    TextView lblPhoneCode;
 
     //MVP
     IValidatePhonePresenter presenter;
 
-
     //Objetos globales para activity
     List<String> countriesNames = new ArrayList<>();
-
+    HashMap<String, Country> countriesMap = new HashMap<>();
+    Country selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +58,8 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
         btnSignin = (Button) findViewById(R.id.btnConfirm);
+        lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
+        lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
@@ -69,6 +77,87 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
         EntriesValidations();
     }
+
+    public void Signin(View view)
+    {
+        Intent signin = new Intent(ValidatePhone.this, Home.class);
+        startActivity(signin);
+    }
+
+    @Override
+    public void showLoading()
+    {
+        displayProgressDialog(getString(R.string.label_loading_please_wait));
+    }
+
+    @Override
+    public void hideLoading()
+    {
+        if (progressDialog != null && progressDialog.isShowing())
+        {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showErrorMessage(ErrorResponseViewModel pErrorMessage)
+    {
+        CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());
+    }
+
+    @Override
+    public void renderCountries(Countries pCountries)
+    {
+        for(Country item : pCountries.getCountries())
+        {
+            countriesNames.add(item.getName());
+            countriesMap.put(item.getName(), item);
+        }
+    }
+
+    public void showCountries()
+    {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.spinner_select));
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, countriesNames);
+        builder.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        String countryName = countriesNames.get(i);
+                        selectedCountry = countriesMap.get(countryName);
+                    }
+                });
+
+        builder.setPositiveButton(getString(R.string.button_accept), new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                setSelectedCountry(selectedCountry);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void setSelectedCountry(Country pSelected)
+    {
+        lblSelectedCountry.setText(pSelected.getName());
+        lblPhoneCode.setText("+" + pSelected.getPhoneCode());
+
+        lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
+        lblSelectedCountry.setTypeface(null, Typeface.BOLD);
+    }
+
+
+    /*
+    * ****************************************************
+    *   OTROS METODOS
+    * ****************************************************
+    */
 
     private void EntriesValidations()
     {
@@ -125,72 +214,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
             }
         });
-    }
-
-    public void Signin(View view)
-    {
-        Intent signin = new Intent(ValidatePhone.this, Home.class);
-        startActivity(signin);
-    }
-
-    @Override
-    public void showLoading()
-    {
-        displayProgressDialog(getString(R.string.label_loading_please_wait));
-    }
-
-    @Override
-    public void hideLoading()
-    {
-        if (progressDialog != null && progressDialog.isShowing())
-        {
-            progressDialog.dismiss();
-        }
-    }
-
-    @Override
-    public void showErrorMessage(ErrorResponseViewModel pErrorMessage)
-    {
-        CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());
-    }
-
-    @Override
-    public void renderCountries(Countries pCountries)
-    {
-        for(Country item : pCountries.getCountries())
-        {
-            countriesNames.add(item.getName());
-        }
-    }
-
-    public void showCountries()
-    {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.spinner_select));
-
-        // Initialize a new array adapter instance
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, countriesNames);
-
-        builder.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-
-                    }
-                });
-
-        builder.setPositiveButton(getString(R.string.button_accept), new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-
-            }
-        });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     public void displayProgressDialog(String pContent)
