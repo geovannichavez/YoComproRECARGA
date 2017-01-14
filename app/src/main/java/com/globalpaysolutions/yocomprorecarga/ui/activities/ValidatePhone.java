@@ -1,15 +1,15 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -20,9 +20,9 @@ import android.widget.RelativeLayout;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.Country;
+import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
-import com.globalpaysolutions.yocomprorecarga.ui.adapters.CountriesAdapter;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.util.ArrayList;
@@ -34,6 +34,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     EditText etPhoneNumber;
     Button btnSignin;
     RelativeLayout relSelectCountry;
+    ProgressDialog progressDialog;
 
     //MVP
     IValidatePhonePresenter presenter;
@@ -133,6 +134,27 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     }
 
     @Override
+    public void showLoading()
+    {
+        displayProgressDialog(getString(R.string.label_loading_please_wait));
+    }
+
+    @Override
+    public void hideLoading()
+    {
+        if (progressDialog != null && progressDialog.isShowing())
+        {
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showErrorMessage(ErrorResponseViewModel pErrorMessage)
+    {
+        CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());
+    }
+
+    @Override
     public void renderCountries(Countries pCountries)
     {
         for(Country item : pCountries.getCountries())
@@ -163,12 +185,35 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                // Just dismiss the alert dialog after selection
-                // Or do something now
+
             }
         });
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void displayProgressDialog(String pContent)
+    {
+        progressDialog = new ProgressDialog(ValidatePhone.this);
+        progressDialog.setMessage(pContent);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    public void CreateDialog(String pTitle, String pMessage, String pButton)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ValidatePhone.this);
+        alertDialog.setTitle(pTitle);
+        alertDialog.setMessage(pMessage);
+        alertDialog.setPositiveButton(pButton, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //etRegPass.setText("");
+            }
+        });
+        alertDialog.show();
     }
 }

@@ -3,58 +3,108 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ContentFrameLayout;
 
-import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
-import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
+import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneListener;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
+import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.net.SocketTimeoutException;
 
 /**
  * Created by Josué Chávez on 13/01/2017.
  */
 
-public class ValidatePhonePresenterImpl implements IValidatePhonePresenter
+public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, ValidatePhoneListener
 {
     private ValidatePhoneView View;
-    private Countries countries;
+    private Context context;
+    private ValidatePhoneInteractor interactor;
 
-    public  ValidatePhonePresenterImpl(ValidatePhoneView pView, AppCompatActivity pActivity, Context pContext)
+    public ValidatePhonePresenterImpl(ValidatePhoneView pView, AppCompatActivity pActivity, Context pContext)
     {
         this.View = pView;
+        this.context = pContext;
+        this.interactor = new ValidatePhoneInteractor();
     }
 
     @Override
     public void fetchCountries()
     {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<Countries> call = apiService.getCountries();
+        this.View.showLoading();
+        this.interactor.fethCountries(this);
+    }
 
-        call.enqueue(new Callback<Countries>()
+
+    @Override
+    public void onError(int pCodeStatus, Throwable pThrowable)
+    {
+        this.View.hideLoading();
+        ProcessErrorMessage(pCodeStatus, pThrowable);
+    }
+
+    @Override
+    public void onGetCountriesSuccess(Countries pCountries)
+    {
+        this.View.hideLoading();
+        this.View.renderCountries(pCountries);
+    }
+
+    @Override
+    public void onValidatePhoneSuccess()
+    {
+
+    }
+
+    public void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
+    {
+        ErrorResponseViewModel errorResponse = new ErrorResponseViewModel();
+
+        try
         {
-            @Override
-            public void onResponse(Call<Countries> call, Response<Countries> response)
+            if (pThrowable != null)
             {
-                if(response.isSuccessful())
+                if (pThrowable instanceof SocketTimeoutException)
                 {
-                    countries = response.body();
-                    View.renderCountries(countries);
+                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    String Button = context.getString(R.string.button_accept);
+
+                    errorResponse.setTitle(Titulo);
+                    errorResponse.setLine1(Linea1);
+                    errorResponse.setAcceptButton(Button);
+                    this.View.showErrorMessage(errorResponse);
+
                 }
                 else
                 {
+                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    String Button = context.getString(R.string.button_accept);
 
+                    errorResponse.setTitle(Titulo);
+                    errorResponse.setLine1(Linea1);
+                    errorResponse.setAcceptButton(Button);
+                    this.View.showErrorMessage(errorResponse);
                 }
             }
-            @Override
-            public void onFailure(Call<Countries> call, Throwable t)
+            else
             {
+                String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                String Button = context.getString(R.string.button_accept);
 
+                errorResponse.setTitle(Titulo);
+                errorResponse.setLine1(Linea1);
+                errorResponse.setAcceptButton(Button);
+                this.View.showErrorMessage(errorResponse);
             }
-        });
-
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

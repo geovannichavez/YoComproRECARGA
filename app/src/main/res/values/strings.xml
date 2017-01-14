@@ -21,10 +21,15 @@
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
     <string name="button_accept">Aceptar</string>
+    <string name="label_loading_please_wait">Cargando, por favor espere...</string>
 
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione...</string>
     <string name="hint_your_phone_number"><font size="16">TU NÚMERO DE TELÉFONO</font></string>
     <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
+    
+    <!--    ERRRO MESSAGES  -->
+    <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
+    <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
 </resources>
