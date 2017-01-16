@@ -31,6 +31,12 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
+    public void setInitialViewState()
+    {
+        this.View.initialViewsStates();
+    }
+
+    @Override
     public void fetchCountries()
     {
         this.View.showLoading();

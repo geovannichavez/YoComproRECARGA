@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 
 public interface ValidatePhoneView
 {
+    void initialViewsStates();
     void showLoading();
     void hideLoading();
     void showErrorMessage(ErrorResponseViewModel pErrorMessage);

@@ -63,6 +63,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
+        presenter.setInitialViewState();
         presenter.fetchCountries();
 
         relSelectCountry.setOnClickListener(new View.OnClickListener()
@@ -82,6 +83,13 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     {
         Intent signin = new Intent(ValidatePhone.this, Home.class);
         startActivity(signin);
+    }
+
+    @Override
+    public void initialViewsStates()
+    {
+        etPhoneNumber.setEnabled(false);
+        btnSignin.setEnabled(false);
     }
 
     @Override
@@ -135,7 +143,10 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                setSelectedCountry(selectedCountry);
+                if(selectedCountry != null)
+                {
+                    setSelectedCountry(selectedCountry);
+                }
             }
         });
 
@@ -146,10 +157,11 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     public void setSelectedCountry(Country pSelected)
     {
         lblSelectedCountry.setText(pSelected.getName());
-        lblPhoneCode.setText("+" + pSelected.getPhoneCode());
+        lblPhoneCode.setText(getString(R.string.sign_plus) +  pSelected.getPhoneCode());
 
         lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
         lblSelectedCountry.setTypeface(null, Typeface.BOLD);
+        etPhoneNumber.setEnabled(true);
     }
 
 
@@ -178,6 +190,11 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
                 {
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    btnSignin.setEnabled(true);
+                }
+                else
+                {
+                    btnSignin.setEnabled(false);
                 }
 
                 // Remove spacing char

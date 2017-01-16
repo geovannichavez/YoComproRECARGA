@@ -29,7 +29,12 @@
     <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
     
-    <!--    ERRRO MESSAGES  -->
+    <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+
+    <!--    SPECIAL SIGNS   -->
+    <string name="sign_plus">+</string>
+
+
 </resources>

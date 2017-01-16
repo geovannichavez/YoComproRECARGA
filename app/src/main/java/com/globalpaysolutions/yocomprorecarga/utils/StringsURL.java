@@ -10,4 +10,6 @@ public class StringsURL
     public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/v1/";
 
     public final static String COUNTRIES = "countries";
+
+    public final static String OPERATORS = "GetOperators";
 }

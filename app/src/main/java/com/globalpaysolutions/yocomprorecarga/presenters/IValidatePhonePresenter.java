@@ -6,5 +6,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 public interface IValidatePhonePresenter
 {
+    void setInitialViewState();
     void fetchCountries();
 }

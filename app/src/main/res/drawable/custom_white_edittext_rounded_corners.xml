@@ -6,7 +6,7 @@
 
     <stroke
         android:width="1dp"
-        android:color="@color/SubtitleTextColor">
+        android:color="@color/LightGray">
     </stroke>
 
     <corners
