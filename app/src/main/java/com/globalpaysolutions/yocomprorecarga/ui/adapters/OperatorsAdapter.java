@@ -18,8 +18,8 @@ import com.squareup.picasso.Picasso;
 
 public class OperatorsAdapter extends ArrayAdapter<CountryOperator>
 {
-    Context AdapterContext;
-    int AdapResource;
+    private Context AdapterContext;
+    private int AdapResource;
     int SelectedItem;
 
     public OperatorsAdapter(Context pContext, int pResource)

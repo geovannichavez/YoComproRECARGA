@@ -14,4 +14,5 @@ public interface ValidatePhoneView
     void hideLoading();
     void showErrorMessage(ErrorResponseViewModel pErrorMessage);
     void renderCountries(Countries pCountries);
+    void navigateTokenInput();
 }

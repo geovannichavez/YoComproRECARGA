@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_token_input"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7"
+    android:background="@drawable/bg_general_background"
+    android:paddingBottom="@dimen/ActivityVerticalExtraCustomMargin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ActivityVerticalExtraCustomMargin"
+            android:src="@drawable/img_ycr_logo"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_type_token"
+            android:textColor="@color/GeneralTextColor"
+            android:textSize="14sp"
+            android:id="@+id/textView"/>
+
+        <EditText
+            android:id="@+id/etToken"
+            android:inputType="number"
+            android:maxLength="5"
+            android:gravity="center_horizontal"
+            android:hint="@string/hint_type_token"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+
+        <Button
+            android:id="@+id/btnConfirmToken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="180dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_effect_ripple_green"
+            android:paddingLeft="@dimen/ActivityHorizontalCustomMargin"
+            android:paddingRight="@dimen/ActivityHorizontalCustomMargin"
+            android:text="@string/button_verify"
+            android:textColor="@color/ActivityWhiteBackground"/>
+    </RelativeLayout>
+
+</LinearLayout>

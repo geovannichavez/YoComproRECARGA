@@ -11,5 +11,9 @@ public class StringsURL
 
     public final static String COUNTRIES = "countries";
 
-    public final static String OPERATORS = "GetOperators";
+    public final static String OPERATORS = "reqTopupOperators";
+
+    public final static String TOKEN = "token";
+
+    public final static String VALIDATE_TOKEN = "validtoken";
 }

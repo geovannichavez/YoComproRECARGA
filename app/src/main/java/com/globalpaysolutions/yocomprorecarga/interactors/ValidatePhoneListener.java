@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 
 
 /**
@@ -11,5 +12,5 @@ public interface ValidatePhoneListener
 {
     void onError(int pCodeStatus, Throwable pThrowable);
     void onGetCountriesSuccess(Countries pCountries);
-    void onValidatePhoneSuccess();
+    void onRequestPhoneValResult(SimpleMessageResponse pResponse);
 }

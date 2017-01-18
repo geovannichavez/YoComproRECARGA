@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.globalpaysolutions.yocomprorecarga.interactors.RequestTopupInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.RequestTopupListener;
-import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
+import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
-import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.util.List;
 

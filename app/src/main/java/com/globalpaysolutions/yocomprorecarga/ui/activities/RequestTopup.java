@@ -11,7 +11,7 @@ import android.widget.Spinner;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
-import com.globalpaysolutions.yocomprorecarga.presenters.IRequestTopupPresenter;
+import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.RequestTopupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;

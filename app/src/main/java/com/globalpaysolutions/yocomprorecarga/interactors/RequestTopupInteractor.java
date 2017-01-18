@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
+import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopup;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 
 import retrofit2.Call;

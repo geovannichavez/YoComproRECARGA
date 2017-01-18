@@ -24,7 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
-import com.globalpaysolutions.yocomprorecarga.presenters.IValidatePhonePresenter;
+import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
@@ -81,8 +81,23 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
     public void Signin(View view)
     {
-        Intent signin = new Intent(ValidatePhone.this, Home.class);
-        startActivity(signin);
+        String msisdn;
+        String countryID;
+
+        try
+        {
+            String phoneNumber = etPhoneNumber.getText().toString();
+            phoneNumber = phoneNumber.replace("-", "");
+
+            msisdn = selectedCountry.getPhoneCode() + phoneNumber;
+            countryID = selectedCountry.getCountrycode();
+
+            this.presenter.requestToken(msisdn, countryID);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -121,6 +136,14 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             countriesNames.add(item.getName());
             countriesMap.put(item.getName(), item);
         }
+    }
+
+    @Override
+    public void navigateTokenInput()
+    {
+        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName());
+        Intent inputToken = new Intent(ValidatePhone.this, TokenInput.class);
+        startActivity(inputToken);
     }
 
     public void showCountries()

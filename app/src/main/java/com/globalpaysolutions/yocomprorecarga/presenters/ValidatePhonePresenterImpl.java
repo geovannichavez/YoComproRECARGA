@@ -9,6 +9,8 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteracto
 import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneListener;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.net.SocketTimeoutException;
@@ -27,7 +29,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     {
         this.View = pView;
         this.context = pContext;
-        this.interactor = new ValidatePhoneInteractor();
+        this.interactor = new ValidatePhoneInteractor(pContext);
     }
 
     @Override
@@ -43,6 +45,18 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
         this.interactor.fethCountries(this);
     }
 
+    @Override
+    public void requestToken(String pMsisdn, String pCountryID)
+    {
+        this.View.showLoading();
+        this.interactor.validatePhone(this, pMsisdn, pCountryID);
+    }
+
+    @Override
+    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName)
+    {
+        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode);
+    }
 
     @Override
     public void onError(int pCodeStatus, Throwable pThrowable)
@@ -59,12 +73,14 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void onValidatePhoneSuccess()
+    public void onRequestPhoneValResult(SimpleMessageResponse pResponse)
     {
+        this.View.hideLoading();
+        this.View.navigateTokenInput();
 
     }
 
-    public void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
+    private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
     {
         ErrorResponseViewModel errorResponse = new ErrorResponseViewModel();
 
