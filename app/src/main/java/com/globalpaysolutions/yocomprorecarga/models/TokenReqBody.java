@@ -6,26 +6,26 @@ package com.globalpaysolutions.yocomprorecarga.models;
 
 public class TokenReqBody
 {
-    private String msisdn;
-    private String countryId;
+    private String Msisdn;
+    private String CountryId;
 
     public String getMsisdn()
     {
-        return msisdn;
+        return Msisdn;
     }
 
     public void setMsisdn(String msisdn)
     {
-        this.msisdn = msisdn;
+        this.Msisdn = msisdn;
     }
 
     public String getCountryId()
     {
-        return countryId;
+        return CountryId;
     }
 
     public void setCountryId(String countryId)
     {
-        this.countryId = countryId;
+        this.CountryId = countryId;
     }
 }

@@ -53,9 +53,9 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName)
+    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName, String pPhone)
     {
-        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode);
+        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode, pPhone);
     }
 
     @Override

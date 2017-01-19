@@ -96,9 +96,9 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     }
 
     @Override
-    public void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode)
+    public void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone)
     {
-        userData.SaveUserGeneralInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName);
+        userData.SaveUserGeneralInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName, pPhone);
     }
 
     @Override

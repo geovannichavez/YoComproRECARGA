@@ -2,7 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
-import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopup;
+import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopupInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 
 import retrofit2.Call;
@@ -13,9 +13,9 @@ import retrofit2.Response;
  * Created by Josué Chávez on 16/01/2017.
  */
 
-public class RequestTopupInteractor implements IRequestTopup
+public class RequestTopupInteractor implements IRequestTopupInteractor
 {
-    int countryID = 69;
+    int countryID = 0;
 
     @Override
     public void fetchOperators(final RequestTopupListener pListener)

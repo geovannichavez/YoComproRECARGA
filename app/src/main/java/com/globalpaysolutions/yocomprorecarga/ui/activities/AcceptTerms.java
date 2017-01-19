@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,12 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
     {
         presenter.acceptTerms();
         Intent accept = new Intent(AcceptTerms.this, ValidatePhone.class);
+        accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        accept.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        accept.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(accept);
     }
 

@@ -12,6 +12,7 @@
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
     <string name="label_type_token">Hemos enviado un SMS al número proporcionado, por favor ingrese el código de confirmación.</string>
+    <string name="dialog_success_token_validation_message">Se ha validado tu número de teléfono exitosamente.</string>
 
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
@@ -37,6 +38,10 @@
     <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+    
+    <!--    DIALOGS -->
+    <string name="dialog_success_title">¡ÉXITO!</string>
+    
 
     <!--    SPECIAL SIGNS   -->
     <string name="sign_plus">+</string>

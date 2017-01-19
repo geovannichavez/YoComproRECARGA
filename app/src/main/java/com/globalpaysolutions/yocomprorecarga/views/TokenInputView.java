@@ -12,5 +12,7 @@ public interface TokenInputView
     void showLoading();
     void dismissLoading();
     void showErrorMessage(ErrorResponseViewModel pErrorMessage);
+    void showSucceesTokenValidation();
     void navigateHome();
+    void vibrateOnSuccess();
 }

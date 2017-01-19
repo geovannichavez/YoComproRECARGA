@@ -3,6 +3,8 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashMap;
+
 /**
  * Created by Josué Chávez on 16/01/2017.
  */
@@ -14,16 +16,17 @@ public class UserData
     private Context mContext;
     private int PRIVATE_MODE = 0;
 
-    public static final String PREFERENCES_NAME = "ycrGeneralPreferences";
+    private static final String PREFERENCES_NAME = "ycrGeneralPreferences";
 
-    public static final String KEY_COUNTRY_ID = "usr_country_id";
-    public static final String KEY_COUNTRY_PHONE_CODE = "usr_country_phone_code";
-    public static final String KEY_COUNTRY_IS3CODE = "usr_country_iso3code";
-    public static final String KEY_COUNTRY_NAME = "usr_country_name";
+    private static final String KEY_COUNTRY_ID = "usr_country_id";
+    private static final String KEY_COUNTRY_PHONE_CODE = "usr_country_phone_code";
+    private static final String KEY_COUNTRY_IS3CODE = "usr_country_iso3code";
+    private static final String KEY_COUNTRY_NAME = "usr_country_name";
+    private static final String KEY_USER_PHONE = "usr_phone_number";
 
-    public static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
-    public static final String KEY_HAS_SELECTED_COUNTRY = "usr_has_selected_country";
-    public static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
+    private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
+    private static final String KEY_HAS_SELECTED_COUNTRY = "usr_has_selected_country";
+    private static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
 
     public UserData(Context pContext)
     {
@@ -40,7 +43,7 @@ public class UserData
     * ******************
     */
 
-    public void SaveUserGeneralInfo(String pCountryID, String pCountryPhoneCode, String pIso3Code, String pCountryName)
+    public void SaveUserGeneralInfo(String pCountryID, String pCountryPhoneCode, String pIso3Code, String pCountryName, String pPhone)
     {
         try
         {
@@ -48,6 +51,7 @@ public class UserData
             mEditor.putString(KEY_COUNTRY_PHONE_CODE, pCountryPhoneCode);
             mEditor.putString(KEY_COUNTRY_IS3CODE, pIso3Code);
             mEditor.putString(KEY_COUNTRY_NAME, pCountryName);
+            mEditor.putString(KEY_USER_PHONE, pPhone);
             mEditor.commit();
         }
         catch (Exception ex)
@@ -72,6 +76,23 @@ public class UserData
     {
         mEditor.putBoolean(KEY_HAS_CONFIRMED_PHONE, pConfirmedPhone);
         mEditor.commit();
+    }
+
+    /*
+    * ********************
+    *
+    *       SELECT
+    *
+    * ******************
+    */
+
+    public String GetMsisdn()
+    {
+        String phoneCode = mPreferences.getString(KEY_COUNTRY_PHONE_CODE, "");
+        String phoneNumber = mPreferences.getString(KEY_USER_PHONE, "");
+
+        return phoneCode + phoneNumber;
+
     }
 
     /*

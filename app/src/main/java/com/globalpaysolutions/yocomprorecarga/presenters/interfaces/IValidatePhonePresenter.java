@@ -9,5 +9,5 @@ public interface IValidatePhonePresenter
     void setInitialViewState();
     void fetchCountries();
     void requestToken(String pMsisdn, String pCountryID);
-    void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName);
+    void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName, String pPhone);
 }

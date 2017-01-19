@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -141,8 +142,17 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     @Override
     public void navigateTokenInput()
     {
-        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName());
+        String phone = etPhoneNumber.getText().toString();
+        phone = phone.replace("-", "");
+        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName(), phone);
+
         Intent inputToken = new Intent(ValidatePhone.this, TokenInput.class);
+        inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(inputToken);
     }
 

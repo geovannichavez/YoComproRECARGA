@@ -1,49 +1,197 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Vibrator;
+import android.support.v4.content.IntentCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
+import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
 public class TokenInput extends AppCompatActivity implements TokenInputView
 {
+    //Adapters y Layouts
+    private EditText etToken;
+    private Button btnConfirmToken;
+    private ProgressDialog progressDialog;
+
+    //MVP
+    TokenInputPresenterImpl mPresenter;
+
+    //Objetos globales
+    UserData mUserData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_input);
+
+        etToken = (EditText) findViewById(R.id.etToken);
+        btnConfirmToken = (Button) findViewById(R.id.btnConfirmToken);
+
+        mPresenter = new TokenInputPresenterImpl(this, this, this);
+        mUserData = new UserData(this);
+
+        mPresenter.setInitialViewState();
+    }
+
+    public void VerifyToken(View view)
+    {
+        try
+        {
+            String token = etToken.getText().toString();
+            mPresenter.sendValidationToken(mUserData.GetMsisdn(), token);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void initialViewsState()
     {
-
+        btnConfirmToken.setEnabled(false);
+        EntriesValidations();
     }
 
     @Override
     public void showLoading()
     {
-
+        displayProgressDialog(getString(R.string.label_loading_please_wait));
     }
 
     @Override
     public void dismissLoading()
     {
-
+        if (progressDialog != null && progressDialog.isShowing())
+        {
+            progressDialog.dismiss();
+        }
     }
 
     @Override
     public void showErrorMessage(ErrorResponseViewModel pErrorMessage)
     {
+        CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());
+    }
 
+    @Override
+    public void showSucceesTokenValidation()
+    {
+        CreateDialog(getString(R.string.dialog_success_title), getString(R.string.dialog_success_token_validation_message), getString(R.string.button_accept));
     }
 
     @Override
     public void navigateHome()
     {
+        Intent home = new Intent(this, Home.class);
+        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Borra el stack completo de navegación:
+        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(home);
+    }
 
+    @Override
+    public void vibrateOnSuccess()
+    {
+        try
+        {
+            Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(500); //500 milisegundos
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    /*
+    * ****************************************************
+    *   OTROS METODOS
+    * ****************************************************
+    */
+
+    private void EntriesValidations()
+    {
+        etToken.addTextChangedListener(new TextWatcher()
+        {
+            int TextLength = 0;
+
+            @Override
+            public void afterTextChanged(Editable text)
+            {
+                String NumberText = etToken.getText().toString();
+
+                //Esconde el teclado después que el EditText alcanzó los 9 dígitos
+                if (NumberText.length() == 5 && TextLength < NumberText.length())
+                {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    btnConfirmToken.setEnabled(true);
+                }
+                else
+                {
+                    btnConfirmToken.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+                String str = etToken.getText().toString();
+                TextLength = str.length();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+
+            }
+        });
+    }
+
+    public void displayProgressDialog(String pContent)
+    {
+        progressDialog = new ProgressDialog(TokenInput.this);
+        progressDialog.setMessage(pContent);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    public void CreateDialog(String pTitle, String pMessage, String pButton)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TokenInput.this);
+        alertDialog.setTitle(pTitle);
+        alertDialog.setMessage(pMessage);
+        alertDialog.setPositiveButton(pButton, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //etRegPass.setText("");
+            }
+        });
+        alertDialog.show();
     }
 }
