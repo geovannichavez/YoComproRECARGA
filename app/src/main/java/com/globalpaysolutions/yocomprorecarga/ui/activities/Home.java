@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -22,7 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-public class Home extends AppCompatActivity implements OnMapReadyCallback
+public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeView
 {
     //Adapters y Layouts
     private Toolbar toolbar;
@@ -32,6 +34,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback
 
     private static final LatLng SYDNEY = new LatLng(-33.88,151.21);
     private static final LatLng AV_LA_CAPILLA = new LatLng(13.686005,-89.242484);
+
+    //MVP
+    HomePresenterImpl mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,21 +50,11 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback
         btnRequestTopup = (Button) findViewById(R.id.btnRequestTopoup);
         btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
 
-        InitilizeMap();
+        mPresenter = new HomePresenterImpl(this, this, this);
+        mPresenter.checkUserDataComplited();
 
-    }
+        //InitilizeMap();
 
-    private void InitilizeMap()
-    {
-        try
-        {
-            MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
     }
 
     @Override
@@ -124,6 +119,26 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback
                 ex.printStackTrace();
             }
         }
+
+    }
+
+    @Override
+    public void renderMap()
+    {
+        try
+        {
+            MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void initialViesState()
+    {
 
     }
 }

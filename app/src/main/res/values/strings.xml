@@ -8,11 +8,14 @@
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
     <string name="label_country">País</string>
     <string name="label_country_code">Cód.</string>
+    <string name="label_title_select_country">Seleccione país</string>
 
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
     <string name="label_type_token">Hemos enviado un SMS al número proporcionado, por favor ingrese el código de confirmación.</string>
     <string name="dialog_success_token_validation_message">Se ha validado tu número de teléfono exitosamente.</string>
+    <string name="error_title_incorrect_token">CÓDIGO</string>
+    <string name="error_label_incorrect_token">Código incorrecto, inténtalo nuevamente.</string>
 
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>

@@ -159,7 +159,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     public void showCountries()
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.spinner_select));
+        builder.setTitle(getString(R.string.label_title_select_country));
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, countriesNames);
         builder.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener()
                 {

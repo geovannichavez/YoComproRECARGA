@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.app.IntentService;
 import android.content.Context;
+import android.content.Intent;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
@@ -74,4 +76,6 @@ public class TokenInputInteractor implements ITokenInputInteractor
         mUserData = new UserData(mContext);
         mUserData.HasSelectedCountry(pConfirmedCountry);
     }
+
+
 }

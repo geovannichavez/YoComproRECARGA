@@ -15,4 +15,5 @@ public interface TokenInputView
     void showSucceesTokenValidation();
     void navigateHome();
     void vibrateOnSuccess();
+    void cleanFields();
 }

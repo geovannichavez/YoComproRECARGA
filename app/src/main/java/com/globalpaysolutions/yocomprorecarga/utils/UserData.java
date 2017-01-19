@@ -92,7 +92,30 @@ public class UserData
         String phoneNumber = mPreferences.getString(KEY_USER_PHONE, "");
 
         return phoneCode + phoneNumber;
+    }
 
+    public String GetCountryID()
+    {
+        String countryId = mPreferences.getString(KEY_COUNTRY_ID, "0");
+        return countryId;
+    }
+
+    public boolean UserAcceptedTerms()
+    {
+        boolean accepted = mPreferences.getBoolean(KEY_HAS_ACCEPTED_TERMS, false);
+        return accepted;
+    }
+
+    public boolean UserSelectedCountry()
+    {
+        boolean country = mPreferences.getBoolean(KEY_HAS_SELECTED_COUNTRY, false);
+        return country;
+    }
+
+    public boolean UserVerifiedPhone()
+    {
+        boolean phone = mPreferences.getBoolean(KEY_HAS_CONFIRMED_PHONE, false);
+        return phone;
     }
 
     /*

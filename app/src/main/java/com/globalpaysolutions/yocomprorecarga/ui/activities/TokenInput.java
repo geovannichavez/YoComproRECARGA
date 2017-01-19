@@ -107,7 +107,6 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Borra el stack completo de navegación:
         home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(home);
     }
@@ -124,6 +123,12 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void cleanFields()
+    {
+        etToken.setText("");
     }
 
     /*
@@ -182,14 +187,14 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
     public void CreateDialog(String pTitle, String pMessage, String pButton)
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TokenInput.this);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(TokenInput.this);
         alertDialog.setTitle(pTitle);
         alertDialog.setMessage(pMessage);
         alertDialog.setPositiveButton(pButton, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
             {
-                //etRegPass.setText("");
+                dialog.dismiss();
             }
         });
         alertDialog.show();

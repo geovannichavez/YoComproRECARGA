@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
+import android.app.IntentService;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -9,6 +11,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITokenInputPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
 import java.net.SocketTimeoutException;
@@ -22,7 +25,6 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     private TokenInputView mView;
     private Context mContext;
     private TokenInputInteractor mInteractor;
-
 
     public TokenInputPresenterImpl(TokenInputView pView, AppCompatActivity pActivity, Context pContext)
     {
@@ -91,6 +93,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
                     errorResponse.setTitle(Titulo);
                     errorResponse.setLine1(Linea1);
                     errorResponse.setAcceptButton(Button);
+                    mView.cleanFields();
                     mView.showErrorMessage(errorResponse);
 
                 }
@@ -103,7 +106,50 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
                     errorResponse.setTitle(Titulo);
                     errorResponse.setLine1(Linea1);
                     errorResponse.setAcceptButton(Button);
+                    mView.cleanFields();
                     mView.showErrorMessage(errorResponse);
+                }
+            }
+            else if(pCodeStatus != 0)
+            {
+                String Titulo;
+                String Linea1;
+                String Button;
+
+                switch (pCodeStatus)
+                {
+                    case 403:
+                        Titulo = mContext.getString(R.string.error_title_incorrect_token);
+                        Linea1 = mContext.getString(R.string.error_label_incorrect_token);
+                        Button = mContext.getString(R.string.button_accept);
+
+                        errorResponse.setTitle(Titulo);
+                        errorResponse.setLine1(Linea1);
+                        errorResponse.setAcceptButton(Button);
+                        mView.cleanFields();
+                        mView.showErrorMessage(errorResponse);
+                        break;
+                    case 500:
+                        Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                        Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                        Button = mContext.getString(R.string.button_accept);
+
+                        errorResponse.setTitle(Titulo);
+                        errorResponse.setLine1(Linea1);
+                        errorResponse.setAcceptButton(Button);
+                        mView.cleanFields();
+                        mView.showErrorMessage(errorResponse);
+                        break;
+                    default:
+                        Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                        Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                        Button = mContext.getString(R.string.button_accept);
+
+                        errorResponse.setTitle(Titulo);
+                        errorResponse.setLine1(Linea1);
+                        errorResponse.setAcceptButton(Button);
+                        mView.showErrorMessage(errorResponse);
+                        break;
                 }
             }
             else
@@ -115,6 +161,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
                 errorResponse.setTitle(Titulo);
                 errorResponse.setLine1(Linea1);
                 errorResponse.setAcceptButton(Button);
+                mView.cleanFields();
                 mView.showErrorMessage(errorResponse);
             }
         }
@@ -123,4 +170,5 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
             ex.printStackTrace();
         }
     }
+
 }
