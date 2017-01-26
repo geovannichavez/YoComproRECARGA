@@ -67,10 +67,9 @@
             </intent-filter>
         </receiver>
 
-
         <!-- Intent service -->
         <service
-            android:name=".presenters.TokenInputPresenterImpl"
+            android:name=".utils.TokenInputService"
             android:exported="false" />
 
 

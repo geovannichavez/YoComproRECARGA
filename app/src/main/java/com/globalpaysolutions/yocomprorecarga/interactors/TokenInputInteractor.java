@@ -23,6 +23,7 @@ public class TokenInputInteractor implements ITokenInputInteractor
 {
     private Context mContext;
     private UserData mUserData;
+    private TokenInputListener mListener;
 
     public TokenInputInteractor(Context pContext)
     {
@@ -53,6 +54,7 @@ public class TokenInputInteractor implements ITokenInputInteractor
                 {
                     int codeResponse = response.code();
                     pListener.onError(codeResponse, null);
+
                 }
             }
             @Override

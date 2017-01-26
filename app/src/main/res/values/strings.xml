@@ -23,6 +23,13 @@
     <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
     <string name="label_select_operator">Selecciona el operador móvil:</string>
 
+    <!--    HOME    -->
+    <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
+    <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
+    <string name="dialog_permissions_title">PERMISOS</string>
+    <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
+
+
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
     <string name="button_login">Iniciar Sesión</string>
@@ -31,6 +38,9 @@
     <string name="button_accept">Aceptar</string>
     <string name="label_loading_please_wait">Por favor espere...</string>
     <string name="button_verify">Verificar</string>
+    <string name="button_activate">Activar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="button_retry">Reintentar</string>
 
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione...</string>
@@ -44,6 +54,7 @@
     
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
+
     
 
     <!--    SPECIAL SIGNS   -->
