@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.api;
 
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.TokenValidationBody;
@@ -33,5 +34,9 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_TOKEN)
     Call<SimpleMessageResponse> requestTokenValidation(@Body TokenValidationBody pTokenValBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REQUESTTOPUP)
+    Call<SimpleMessageResponse> requestTopup(@Body RequestTopupReqBody pRequestTopupBody);
 
 }

@@ -1,9 +1,14 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.content.Context;
+
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopupInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,13 +20,20 @@ import retrofit2.Response;
 
 public class RequestTopupInteractor implements IRequestTopupInteractor
 {
-    int countryID = 0;
+    private Context mContext;
+    private UserData userData;
+
+    public RequestTopupInteractor(Context pContext)
+    {
+        this.mContext = pContext;
+        userData = new UserData(this.mContext);
+    }
 
     @Override
     public void fetchOperators(final RequestTopupListener pListener)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<OperatorsResponse> call = apiService.getOperators(countryID);
+        final Call<OperatorsResponse> call = apiService.getOperators(Integer.valueOf(userData.GetCountryID()));
 
 
         call.enqueue(new Callback<OperatorsResponse>()
@@ -43,6 +55,39 @@ public class RequestTopupInteractor implements IRequestTopupInteractor
             }
             @Override
             public void onFailure(Call<OperatorsResponse> call, Throwable t)
+            {
+                pListener.onError(0, t);
+            }
+        });
+    }
+
+    @Override
+    public void sendTopupRequest(final RequestTopupListener pListener, RequestTopupReqBody pRequest)
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<SimpleMessageResponse> call = apiService.requestTopup(pRequest);
+
+        call.enqueue(new Callback<SimpleMessageResponse>()
+        {
+            @Override
+            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+
+                    SimpleMessageResponse Message = response.body();
+                    pListener.onRequestTopupSuccess(Message);
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    pListener.onError(codeResponse, null);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleMessageResponse> call, Throwable t)
             {
                 pListener.onError(0, t);
             }

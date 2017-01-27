@@ -43,6 +43,7 @@
             android:maxLength="5"
             android:gravity="center_horizontal"
             android:hint="@string/hint_type_token"
+            android:imeOptions="actionDone"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_width="150dp"
             android:layout_height="wrap_content"/>

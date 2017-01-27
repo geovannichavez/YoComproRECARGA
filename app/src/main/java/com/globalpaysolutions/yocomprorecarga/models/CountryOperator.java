@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.models;
 
 
+import java.util.List;
+
 public class CountryOperator
 {
 
@@ -14,6 +16,7 @@ public class CountryOperator
     private String hexColor;
     private String rGBColor;
     private Integer relevance;
+    private List<Amount> Amounts;
 
     public Integer getOperatorID()
     {
@@ -113,6 +116,16 @@ public class CountryOperator
     public void setRelevance(Integer relevance)
     {
         this.relevance = relevance;
+    }
+
+    public List<Amount> getAmounts()
+    {
+        return Amounts;
+    }
+
+    public void setAmounts(List<Amount> amounts)
+    {
+        this.Amounts = amounts;
     }
 
 }

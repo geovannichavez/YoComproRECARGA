@@ -16,4 +16,6 @@ public class StringsURL
     public final static String TOKEN = "token";
 
     public final static String VALIDATE_TOKEN = "validtoken";
+
+    public final static String REQUESTTOPUP = "reqTopup";
 }

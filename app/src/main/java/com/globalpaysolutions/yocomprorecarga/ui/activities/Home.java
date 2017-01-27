@@ -222,7 +222,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             Log.d(TAG, "updateUserLocationOnMap");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(19).build();
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(15).build();
             mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
         catch (Exception ex)
@@ -239,7 +239,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             Log.d(TAG, "setInitialUserLocation");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 19));
+            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
         }
         catch (Exception ex)
