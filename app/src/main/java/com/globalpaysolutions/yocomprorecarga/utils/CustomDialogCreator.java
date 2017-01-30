@@ -2,60 +2,131 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.ui.fragments.CustomDialogFragment;
+import com.globalpaysolutions.yocomprorecarga.ui.fragments.ICustomDialogListener;
+import com.globalpaysolutions.yocomprorecarga.ui.fragments.IFragmentListener;
 
 /**
  * Created by Josué Chávez on 27/01/2017.
  */
 
-public class CustomDialogCreator
+public class CustomDialogCreator implements IFragmentListener
 {
     Context mContext;
     FragmentActivity mFragmentManager;
-    CustomDialogFragment mCustomDialog;
+    ICustomDialogListener mDialogListener;
 
-    public CustomDialogCreator(Context pContext, FragmentActivity pFragmentManager)
+    private CustomDialogCreator(Context pContext, FragmentActivity pFragmentManager)
     {
         mContext = pContext;
         mFragmentManager = pFragmentManager;
     }
 
-    public void CreateCustomDialogCreator(String pTitle, String pMsgLine1, String pMsgLine2, String pMsgLine3, String pButton, String pInteraction)
+    @Override
+    public void onButtonClick()
     {
-        Bundle bundle = new Bundle();
-        bundle.putString("Title", pTitle);
-        bundle.putString("Line1", pMsgLine1);
-        bundle.putString("Line2", pMsgLine2);
-        bundle.putString("Line3", pMsgLine3);
-        bundle.putString("Button", pButton);
-        bundle.putString("Interaction", pInteraction);
+        //Toast.makeText(mContext, "Botón Neutro Pulsado", Toast.LENGTH_LONG).show();
 
-        FragmentManager fragmentManager = mFragmentManager.getSupportFragmentManager();
-        mCustomDialog = new CustomDialogFragment();
-        mCustomDialog.setArguments(bundle);
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(android.R.id.content, mCustomDialog, "CustomDialogFragment").addToBackStack("tag").commit();
     }
 
-    /*@Override
-    public void dismissDialog()
+    public static class Builder extends CustomDialogCreator implements ICustomDialogListener
     {
-        try
+        Context mContext;
+        FragmentActivity mFragmentManager;
+
+        private String Title;
+        private String MessageLine1;
+        private String MessageLine2;
+        private String MessageLine3;
+        private String Button;
+        private String Interaction;
+        private ICustomDialogListener mListener;
+
+
+        public Builder(Context pContext, FragmentActivity pFragmentManager)
         {
-            FragmentManager manager = mFragmentManager.getSupportFragmentManager();
-            FragmentTransaction trans = manager.beginTransaction();
-            trans.remove(mCustomDialog);
-            trans.commit();
-            manager.popBackStack();
+            super(pContext, pFragmentManager);
+            mContext = pContext;
+            mFragmentManager = pFragmentManager;
         }
-        catch (Exception ex)
+
+        public Builder setTitle(String title)
         {
-            ex.printStackTrace();
+            Title = title;
+            return this;
         }
-    }*/
+
+        public Builder setMessageLine1(String line1)
+        {
+            MessageLine1 = line1;
+            return this;
+        }
+
+        public Builder setMessageLine2(String line2)
+        {
+            MessageLine2 = line2;
+            return this;
+        }
+
+        public Builder setMessageLine3(String line3)
+        {
+            MessageLine3 = line3;
+            return this;
+        }
+
+        public Builder setButton(String button)
+        {
+            Button = button;
+            return this;
+        }
+
+        public Builder setInteraction(String interaction)
+        {
+            Interaction = interaction;
+            return this;
+        }
+
+        public Builder setOnClickListener(ICustomDialogListener pListener)
+        {
+            mListener = pListener;
+            return this;
+        }
+
+        //public CustomDialogCreator build(Context pContext, FragmentActivity pFragmentManager)
+        public CustomDialogCreator build()
+        {
+            //CustomDialogCreator creator = new CustomDialogCreator(pContext,pFragmentManager );
+            CustomDialogCreator creator = new CustomDialogCreator(mContext, mFragmentManager);
+            Bundle bundle = new Bundle();
+            bundle.putString("Title", Title);
+            bundle.putString("Line1", MessageLine1);
+            bundle.putString("Line2", MessageLine2);
+            bundle.putString("Line3", MessageLine3);
+            bundle.putString("Button", Button);
+            bundle.putString("Interaction", Interaction);
+            bundle.putSerializable("fragmentListener", creator);
+
+            FragmentManager fragmentManager = mFragmentManager.getSupportFragmentManager();
+            CustomDialogFragment mCustomDialog = new CustomDialogFragment();
+            mCustomDialog.setArguments(bundle);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.replace(android.R.id.content, mCustomDialog, "CustomDialogFragment").addToBackStack("tag").commit();
+
+            return creator;
+        }
+
+        @Override
+        public void onClickListener()
+        {
+
+        }
+    }
+
 }

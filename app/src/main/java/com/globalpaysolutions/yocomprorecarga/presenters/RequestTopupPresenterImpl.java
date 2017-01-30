@@ -54,6 +54,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     public void setInitialViewState()
     {
         this.view.initialViewsState();
+        this.view.showSuccessMessage();
     }
 
     @Override

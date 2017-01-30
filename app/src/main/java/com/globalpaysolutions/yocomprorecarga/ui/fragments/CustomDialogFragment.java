@@ -3,6 +3,9 @@ package com.globalpaysolutions.yocomprorecarga.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +20,18 @@ import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 /**
  * A simple {@link DialogFragment} subclass.
  */
-public class CustomDialogFragment extends DialogFragment
+public class CustomDialogFragment extends Fragment
 {
     private static final String TAG = CustomDialogFragment.class.getSimpleName();
+
+
     TextView tvTitle;
     TextView tvLine1;
     TextView tvLine2;
     TextView tvLine3;
     Button btnDismiss;
     ImageView ivResult;
+    IFragmentListener mFragmentListener;
 
     public CustomDialogFragment()
     {
@@ -45,12 +51,14 @@ public class CustomDialogFragment extends DialogFragment
         ivResult = (ImageView) view.findViewById(R.id.ivResult);
         btnDismiss = (Button) view.findViewById(R.id.btnDismiss);
 
+
         String Title = this.getArguments().getString("Title");
         String Line1 = this.getArguments().getString("Line1");
         String Line2 = this.getArguments().getString("Line2");
         String Line3 = this.getArguments().getString("Line3");
         String Button = this.getArguments().getString("Button");
         String Interaction = this.getArguments().getString("Interaction");
+        mFragmentListener = (IFragmentListener) this.getArguments().getSerializable("fragmentListener");
 
         tvTitle.setText(Title);
         tvLine1.setText(Line1);
@@ -90,6 +98,20 @@ public class CustomDialogFragment extends DialogFragment
         }
 
         btnDismiss.setText(Button);
+        btnDismiss.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction trans = manager.beginTransaction();
+                trans.remove(CustomDialogFragment.this);
+                trans.commit();
+                manager.popBackStack();
+                mFragmentListener.onButtonClick();
+            }
+        });
+
         return view;
     }
 

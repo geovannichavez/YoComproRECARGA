@@ -1,39 +1,37 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.Dimension;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
-import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.RequestTopupPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
+import com.globalpaysolutions.yocomprorecarga.ui.fragments.CustomDialogFragment;
+import com.globalpaysolutions.yocomprorecarga.ui.fragments.ICustomDialogListener;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
+import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,7 +53,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     //Global variables
     Amount selectedAmount;
     Validation mValidator;
-    CustomDialogCreator mDialogCreator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,7 +69,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
 
         mValidator = new Validation(this);
-        mDialogCreator = new CustomDialogCreator(this, this);
         presenter = new RequestTopupPresenterImpl(this, this, this);
         presenter.setInitialViewState();
         presenter.fetchOperators();
@@ -195,6 +191,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     @Override
     public void showSuccessMessage()
     {
+        CustomDialogCreator.Builder dialogCreator = new CustomDialogCreator.Builder(this, this);
+        dialogCreator.setTitle("PRUEBA FRAGMENT")
+                .setMessageLine1("Linea 1 de mensaje")
+                .setMessageLine2("Prueba linea 2")
+                .setButton("ACEPTAR")
+                .setInteraction(CustomDialogScenarios.TOPUP_ERROR)
+                .setOnClickListener(new ICustomDialogListener()
+                {
+                    @Override
+                    public void onClickListener()
+                    {
+
+                    }
+                })
+                .build();
 
     }
 
