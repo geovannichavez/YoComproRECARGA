@@ -123,7 +123,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     }
 
     @Override
-    public void initialViewsState()
+    public void setInitialViewsState()
     {
         try
         {
@@ -235,7 +235,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     }
 
     @Override
-    public void showLoading(String pLabel)
+    public void showLoadingDialog(String pLabel)
     {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(pLabel);
@@ -245,7 +245,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     }
 
     @Override
-    public void hideLoading()
+    public void hideLoadingDialog()
     {
         try
         {

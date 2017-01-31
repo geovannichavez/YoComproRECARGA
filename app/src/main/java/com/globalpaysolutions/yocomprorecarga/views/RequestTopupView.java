@@ -15,13 +15,13 @@ import java.util.List;
 public interface RequestTopupView
 {
     void renderOperators(List<CountryOperator> countryOperators);
-    void initialViewsState();
+    void setInitialViewsState();
     void showAmounts(List<String> pOperatorNames, HashMap<String, Amount> pOperatorsMap);
     void setSelectedOperator(int pPosition);
     void resetAmount();
     void showGenericMessage(DialogViewModel pMessageModel);
-    void showLoading(String pLabel);
-    void hideLoading();
+    void showLoadingDialog(String pLabel);
+    void hideLoadingDialog();
     void showSuccessMessage(DialogViewModel pMessageModel);
     void showErrorMessage(DialogViewModel pMessageModel);
 }

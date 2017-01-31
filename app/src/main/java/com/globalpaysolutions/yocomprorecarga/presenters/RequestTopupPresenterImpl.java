@@ -55,15 +55,15 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     @Override
     public void onRequestTopupSuccess()
     {
-        this.view.initialViewsState();
-        this.view.hideLoading();
+        this.view.setInitialViewsState();
+        this.view.hideLoadingDialog();
         this.view.showSuccessMessage(getSuccessContent());
     }
 
     @Override
     public void setInitialViewState()
     {
-        this.view.initialViewsState();
+        this.view.setInitialViewsState();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     {
         if(checkConnection())
         {
-            this.view.showLoading(context.getString(R.string.progress_dialog_sending_topup_request));
+            this.view.showLoadingDialog(context.getString(R.string.progress_dialog_sending_topup_request));
             this.interactor.sendTopupRequest(this, mRequestTopup);
         }
     }
