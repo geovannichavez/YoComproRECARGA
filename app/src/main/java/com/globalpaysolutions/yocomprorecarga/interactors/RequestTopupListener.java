@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface RequestTopupListener
 {
     void onError(int pCodeStatus, Throwable pThrowable);
     void onGetOperatorsSuccess(List<CountryOperator> pCountryOperators);
-    void onRequestTopupSuccess(SimpleMessageResponse pResponse);
+    void onRequestTopupSuccess();
 }

@@ -1,16 +1,21 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.RequestTopupInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.RequestTopupListener;
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +30,9 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     private RequestTopupInteractor interactor;
     private Context context;
 
+    //Entity
+    private static RequestTopupReqBody mRequestTopup = new RequestTopupReqBody();
+
     public RequestTopupPresenterImpl(RequestTopupView pView, AppCompatActivity pActivity, Context pContext)
     {
         this.view = pView;
@@ -35,7 +43,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     @Override
     public void onError(int pCodeStatus, Throwable pThrowable)
     {
-
+        ProcessErrorMessage(pCodeStatus, pThrowable);
     }
 
     @Override
@@ -45,22 +53,26 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     }
 
     @Override
-    public void onRequestTopupSuccess(SimpleMessageResponse pResponse)
+    public void onRequestTopupSuccess()
     {
-
+        this.view.initialViewsState();
+        this.view.hideLoading();
+        this.view.showSuccessMessage(getSuccessContent());
     }
 
     @Override
     public void setInitialViewState()
     {
         this.view.initialViewsState();
-        this.view.showSuccessMessage();
     }
 
     @Override
     public void fetchOperators()
     {
-        this.interactor.fetchOperators(this);
+        if(checkConnection())
+        {
+            this.interactor.fetchOperators(this);
+        }
     }
 
     @Override
@@ -84,5 +96,133 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
         this.view.resetAmount();
     }
 
+    @Override
+    public RequestTopupReqBody createRequestTopupObject()
+    {
+        return mRequestTopup;
+    }
 
+    @Override
+    public void sendTopupRequest()
+    {
+        if(checkConnection())
+        {
+            this.view.showLoading(context.getString(R.string.progress_dialog_sending_topup_request));
+            this.interactor.sendTopupRequest(this, mRequestTopup);
+        }
+    }
+
+
+    /*
+    *
+    *
+    *   OTROS METODOS
+    *
+    *
+    */
+    private boolean checkConnection()
+    {
+        boolean connected = true;
+        if(!hasNetworkConnection())
+        {
+            connected = false;
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(context.getString(R.string.error_title_internet_connecttion));
+            dialog.setLine1(context.getString(R.string.error_content_internet_connecttion));
+            dialog.setAcceptButton(context.getString(R.string.button_accept));
+            this.view.showGenericMessage(dialog);
+        }
+        return connected;
+    }
+
+    private boolean hasNetworkConnection()
+    {
+        boolean isConnectedWifi = false;
+        boolean isConnectedMobile = false;
+
+        try
+        {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if (activeNetwork != null)
+            {
+                if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI)
+                {
+                    isConnectedWifi = true;
+                }
+                else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE)
+                {
+                    isConnectedMobile = true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return isConnectedWifi || isConnectedMobile;
+    }
+
+    private DialogViewModel getSuccessContent()
+    {
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(context.getString(R.string.title_success_dialog_label));
+        dialog.setLine1(context.getString(R.string.content_success_dialog_label_line1));
+        dialog.setLine2(context.getString(R.string.content_success_dialog_label_line2));
+        dialog.setAcceptButton(context.getString(R.string.button_accept));
+
+        return dialog;
+    }
+
+    private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
+    {
+        DialogViewModel errorResponse = new DialogViewModel();
+
+        try
+        {
+            if (pThrowable != null)
+            {
+                if (pThrowable instanceof SocketTimeoutException)
+                {
+                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    String Button = context.getString(R.string.button_accept);
+
+                    errorResponse.setTitle(Titulo);
+                    errorResponse.setLine1(Linea1);
+                    errorResponse.setAcceptButton(Button);
+                    this.view.showErrorMessage(errorResponse);
+
+                }
+                else
+                {
+                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    String Button = context.getString(R.string.button_accept);
+
+                    errorResponse.setTitle(Titulo);
+                    errorResponse.setLine1(Linea1);
+                    errorResponse.setAcceptButton(Button);
+                    this.view.showErrorMessage(errorResponse);
+                }
+            }
+            else
+            {
+                String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                String Button = context.getString(R.string.button_accept);
+
+                errorResponse.setTitle(Titulo);
+                errorResponse.setLine1(Linea1);
+                errorResponse.setAcceptButton(Button);
+                this.view.showErrorMessage(errorResponse);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

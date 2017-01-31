@@ -2,11 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.ui.fragments.CustomDialogFragment;
 import com.globalpaysolutions.yocomprorecarga.ui.fragments.ICustomDialogListener;
@@ -18,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.fragments.IFragmentListener;
 
 public class CustomDialogCreator implements IFragmentListener
 {
+    private static final String TAG = CustomDialogCreator.class.getSimpleName();
     Context mContext;
     FragmentActivity mFragmentManager;
     ICustomDialogListener mDialogListener;
@@ -32,6 +32,7 @@ public class CustomDialogCreator implements IFragmentListener
     public void onButtonClick()
     {
         //Toast.makeText(mContext, "Botón Neutro Pulsado", Toast.LENGTH_LONG).show();
+        Log.i(TAG, "Custom dialog has been dismissed from it's button click");
 
     }
 

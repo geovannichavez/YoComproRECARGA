@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
+import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface IRequestTopupPresenter
     void fetchOperators();
     void selectAmount(CountryOperator pOperator);
     void onOperatorSelected(int pPosition);
+    RequestTopupReqBody createRequestTopupObject();
+    void sendTopupRequest();
 }

@@ -2,11 +2,19 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.globalpaysolutions.yocomprorecarga.R;
 
 import java.util.regex.Pattern;
 
@@ -17,6 +25,7 @@ import java.util.regex.Pattern;
 public class Validation
 {
     Context mContext;
+    CoordinatorLayout mCoordinatorLayout;
 
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PHONE_REGEX = "\\d{4}-\\d{4}";
@@ -24,11 +33,12 @@ public class Validation
     private static final String USERNAME_REGEX = "^[_A-Za-z0-9-\\+]{3,15}$";
     private static final String AMOUNT_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     private static final String VOUCHER_REGEX = "\\d+$";
-    private static final String VENDOR_CODE_REGEX = "\\d{4}";
+    private static final String VENDOR_CODE_REGEX = "^[0-9]{4,5}$";
 
-    public Validation(Context pContext)
+    public Validation(Context pContext, CoordinatorLayout pCoordinatorLayout)
     {
         mContext = pContext;
+        mCoordinatorLayout  = pCoordinatorLayout;
     }
 
     /*
@@ -38,7 +48,9 @@ public class Validation
     */
     public boolean isPhoneNumber(EditText pEditText, boolean pRequired)
     {
-        return IsValid(pEditText, PHONE_REGEX, null, pRequired);
+        String requiredMsg = mContext.getResources().getString(R.string.validation_required_phone_message);
+        String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_phone_message);
+        return IsValid(pEditText, PHONE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
 
     public void setPhoneInutFormatter(final EditText pEditText)
@@ -104,7 +116,9 @@ public class Validation
     */
     public boolean isVendorCode(EditText pEdittext, boolean pRequired)
     {
-        return IsValid(pEdittext, VENDOR_CODE_REGEX, null, true);
+        String requiredMsg = mContext.getResources().getString(R.string.validation_required_vendor_code);
+        String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_vendor_code);
+        return IsValid(pEdittext, VENDOR_CODE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
 
 
@@ -114,15 +128,19 @@ public class Validation
     *   VALIDATORS
     *
     */
-    private boolean IsValid(EditText pEditText, String pRegex, String pErrorMessage, boolean pRequired)
+    private boolean IsValid(EditText pEditText, String pRegex, String pRequiredMsg, String pErrorMessage, boolean pRequired)
     {
         String text = pEditText.getText().toString().trim();
 
         if (pRequired && !HasText(pEditText))
+        {
+            CreateSnackbar(mCoordinatorLayout, pRequiredMsg);
             return false;
+        }
 
         if (pRequired && !Pattern.matches(pRegex, text))
         {
+            CreateSnackbar(mCoordinatorLayout, pErrorMessage);
             return false;
         }
 
@@ -133,7 +151,6 @@ public class Validation
     {
         boolean valid = true;
         String text = pEditText.getText().toString().trim();
-        pEditText.setError(null);
 
         if (text.length() == 0)
         {
@@ -141,6 +158,23 @@ public class Validation
         }
 
         return valid;
+    }
+
+
+    /*
+    *
+    * OTROS METODOS
+    *
+    */
+
+    private void CreateSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
+    {
+        Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
+        View snackbarView = mSnackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(mContext,  R.color.materia_error_700));
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        mSnackbar.show();
     }
 
 }

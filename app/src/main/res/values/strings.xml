@@ -23,6 +23,10 @@
     <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
     <string name="label_select_operator">Selecciona el operador móvil:</string>
     <string name="label_title_select_amount_dialog">Seleccione un monto</string>
+    <string name="progress_dialog_sending_topup_request">Enviando su solicitud...</string>
+    <string name="title_success_dialog_label">¡SOLICITUD ENVIADA!</string>
+    <string name="content_success_dialog_label_line1">Se ha enviado tu solicitud de recarga al vendedor.</string>
+    <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
 
     <!--    HOME    -->
     <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
@@ -52,6 +56,9 @@
     <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+    <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
+    <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
+
 
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
@@ -63,5 +70,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--    VALIDATIONS -->
+    <string name="validation_not_valid_phone_message">Teléfono no válido</string>
+    <string name="validation_required_phone_message">El número de teléfono es requerido</string>
+    <string name="validation_required_operator">Debe seleccionar un operador</string>
+    <string name="validation_required_amount">Debe seleccionar un monto</string>
+    <string name="validation_not_valid_vendor_code">El código de vendedor no es válido</string>
+    <string name="validation_required_vendor_code">El código de vendedor es requerido</string>
 
 </resources>

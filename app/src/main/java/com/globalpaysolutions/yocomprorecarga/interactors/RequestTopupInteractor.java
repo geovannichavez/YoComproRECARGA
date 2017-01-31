@@ -1,10 +1,13 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopupInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
@@ -20,6 +23,7 @@ import retrofit2.Response;
 
 public class RequestTopupInteractor implements IRequestTopupInteractor
 {
+    private static final String TAG = RequestTopupInteractor.class.getSimpleName();
     private Context mContext;
     private UserData userData;
 
@@ -74,9 +78,9 @@ public class RequestTopupInteractor implements IRequestTopupInteractor
             {
                 if(response.isSuccessful())
                 {
-
                     SimpleMessageResponse Message = response.body();
-                    pListener.onRequestTopupSuccess(Message);
+                    Log.i(TAG, "Exito: " + Message.getMessage());
+                    pListener.onRequestTopupSuccess();
                 }
                 else
                 {

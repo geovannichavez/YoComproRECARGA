@@ -1,13 +1,17 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,16 +21,14 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RequestTopupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
-import com.globalpaysolutions.yocomprorecarga.ui.fragments.CustomDialogFragment;
-import com.globalpaysolutions.yocomprorecarga.ui.fragments.ICustomDialogListener;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
@@ -46,6 +48,8 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     OperatorsAdapter mOperatorsAdapter;
     GridView mOperatorsGridView;
     LinearLayout lnrSelectAmount;
+    CoordinatorLayout coordinatorLayout;
+    ProgressDialog progressDialog;
 
     //MVP
     IRequestTopupPresenter presenter;
@@ -67,8 +71,9 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         lblSelectedAmount = (TextView) findViewById(R.id.lblSelectedAmount);
         btnMyNumber = (Button) findViewById(R.id.btnMyNumber);
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
-        mValidator = new Validation(this);
+        mValidator = new Validation(this, coordinatorLayout);
         presenter = new RequestTopupPresenterImpl(this, this, this);
         presenter.setInitialViewState();
         presenter.fetchOperators();
@@ -88,6 +93,8 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             {
                 final CountryOperator operator = ((CountryOperator) parent.getItemAtPosition(position));
                 presenter.onOperatorSelected(position);
+                presenter.createRequestTopupObject().setOperatorId(String.valueOf(operator.getOperatorID()));
+
                 selectedAmount = null;
                 lnrSelectAmount.setOnClickListener(new View.OnClickListener()
                 {
@@ -118,8 +125,39 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     @Override
     public void initialViewsState()
     {
-        mValidator.setPhoneInutFormatter(etExplPhone);
-        lblSelectedAmount.setEnabled(false);
+        try
+        {
+            //Setea 'formater' en el EditText y limpia campos
+            mValidator.setPhoneInutFormatter(etExplPhone);
+            lblSelectedAmount.setEnabled(false);
+            etExplPhone.setText("");
+            etExplPhone.clearFocus();
+            etCodeNumber.setText("");
+            etCodeNumber.clearFocus();
+
+            //Resetea el MONTO
+            lblSelectedAmount.setText(getString(R.string.spinner_select));
+            lblSelectedAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+            lblSelectedAmount.setTypeface(null, Typeface.NORMAL);
+            lnrSelectAmount.setOnClickListener(null);
+
+            //Deselecciona el operador del GridView
+            for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
+            {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                {
+                    mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                }
+                else
+                {
+                    mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -145,6 +183,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             {
                 if(selectedAmount != null)
                 {
+                    presenter.createRequestTopupObject().setAmount(selectedAmount.getAmount());
                     setSelectedAmount(selectedAmount);
                 }
             }
@@ -179,6 +218,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         }
     }
 
+
     @Override
     public void resetAmount()
     {
@@ -189,24 +229,60 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     }
 
     @Override
-    public void showSuccessMessage()
+    public void showGenericMessage(DialogViewModel pMessageModel)
+    {
+        CreateDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+    }
+
+    @Override
+    public void showLoading(String pLabel)
+    {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(pLabel);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void hideLoading()
+    {
+        try
+        {
+            if (progressDialog != null && progressDialog.isShowing())
+            {
+                progressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showSuccessMessage(DialogViewModel pDialogModel)
     {
         CustomDialogCreator.Builder dialogCreator = new CustomDialogCreator.Builder(this, this);
-        dialogCreator.setTitle("PRUEBA FRAGMENT")
-                .setMessageLine1("Linea 1 de mensaje")
-                .setMessageLine2("Prueba linea 2")
-                .setButton("ACEPTAR")
-                .setInteraction(CustomDialogScenarios.TOPUP_ERROR)
-                .setOnClickListener(new ICustomDialogListener()
-                {
-                    @Override
-                    public void onClickListener()
-                    {
-
-                    }
-                })
+        dialogCreator.setTitle(pDialogModel.getTitle())
+                .setMessageLine1(pDialogModel.getLine1())
+                .setMessageLine2(pDialogModel.getLine2())
+                .setButton(pDialogModel.getAcceptButton())
+                .setInteraction(CustomDialogScenarios.SUCCESS)
                 .build();
 
+    }
+
+    @Override
+    public void showErrorMessage(DialogViewModel pMessageModel)
+    {
+        CustomDialogCreator.Builder dialogCreator = new CustomDialogCreator.Builder(this, this);
+        dialogCreator.setTitle(pMessageModel.getTitle())
+                .setMessageLine1(pMessageModel.getLine1())
+                .setMessageLine2(pMessageModel.getLine2())
+                .setButton(pMessageModel.getAcceptButton())
+                .setInteraction(CustomDialogScenarios.ERROR)
+                .build();
     }
 
     public void setSelectedAmount(Amount pSelected)
@@ -216,5 +292,79 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         lblSelectedAmount.setTypeface(null, Typeface.BOLD);
     }
 
+    public void sendTopupRequest(View view)
+    {
+        if(CheckValidation())
+        {
+            presenter.createRequestTopupObject().setMSISDN(etExplPhone.getText().toString());
+            presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString());
+            presenter.sendTopupRequest();
+        }
+    }
+
+    /*
+    *
+    *
+    *   OTROS METODOS
+    *
+    */
+    public void CreateDialog(String pTitle, String pMessage, String pButton)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RequestTopup.this);
+        alertDialog.setTitle(pTitle);
+        alertDialog.setMessage(pMessage);
+        alertDialog.setPositiveButton(pButton, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void CreateSnackbar(String pLine)
+    {
+        Snackbar mSnackbar = Snackbar.make(coordinatorLayout, pLine, Snackbar.LENGTH_LONG);
+        View snackbarView = mSnackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(this,  R.color.materia_error_700));
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        mSnackbar.show();
+    }
+
+    private boolean CheckValidation()
+    {
+        boolean valid = true;
+
+        if(presenter.createRequestTopupObject() == null)
+        {
+            return false;
+        }
+
+        if (!mValidator.isPhoneNumber(etExplPhone, true))
+        {
+            return false;
+        }
+
+        if(TextUtils.isEmpty(presenter.createRequestTopupObject().getOperatorId()))
+        {
+            CreateSnackbar(getString(R.string.validation_required_operator));
+            return false;
+        }
+
+        if(selectedAmount == null)
+        {
+            CreateSnackbar(getString(R.string.validation_required_amount));
+            return false;
+        }
+
+        if(!mValidator.isVendorCode(etCodeNumber, true))
+        {
+            return false;
+        }
+
+        return valid;
+    }
 
 }
