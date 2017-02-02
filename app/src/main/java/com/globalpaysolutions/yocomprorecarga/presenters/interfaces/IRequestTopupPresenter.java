@@ -18,4 +18,5 @@ public interface IRequestTopupPresenter
     void onOperatorSelected(int pPosition);
     RequestTopupReqBody createRequestTopupObject();
     void sendTopupRequest();
+    void refreshOperators();
 }

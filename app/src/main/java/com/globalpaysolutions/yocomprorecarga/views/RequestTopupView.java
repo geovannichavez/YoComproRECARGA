@@ -22,6 +22,7 @@ public interface RequestTopupView
     void showGenericMessage(DialogViewModel pMessageModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
+    void toggleShowRefreshing(boolean setRefreshing);
     void showSuccessMessage(DialogViewModel pMessageModel);
     void showErrorMessage(DialogViewModel pMessageModel);
 }

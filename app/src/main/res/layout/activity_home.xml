@@ -99,7 +99,7 @@
 
         <ImageView
             android:id="@+id/ivLogo"
-            android:layout_width="195dp"
+            android:layout_width="match_parent"
             android:layout_height="23dp"
             android:src="@drawable/logo_horizontal"/>
 
@@ -114,7 +114,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:layout_width="match_parent"

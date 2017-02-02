@@ -118,6 +118,19 @@ public class UserData
         return phone;
     }
 
+    public String GetUserPhone()
+    {
+        String phoneCode = mPreferences.getString(KEY_USER_PHONE, "");
+        return phoneCode;
+    }
+
+    public String GetUserFormattedPhone()
+    {
+        String phoneCode = mPreferences.getString(KEY_USER_PHONE, "");
+        phoneCode = phoneCode.substring(0,4) + "-" + phoneCode.substring(4,phoneCode.length());
+        return phoneCode;
+    }
+
     /*
     * ********************
     *

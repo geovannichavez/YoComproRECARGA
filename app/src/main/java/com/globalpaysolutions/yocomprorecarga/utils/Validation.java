@@ -69,8 +69,11 @@ public class Validation
                 //Esconde el teclado después que el EditText alcanzó los 9 dígitos
                 if (NumberText.length() == 9 && TextLength < NumberText.length())
                 {
-                    InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    if(pEditText.isEnabled())
+                    {
+                        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    }
                 }
 
                 // Remove spacing char

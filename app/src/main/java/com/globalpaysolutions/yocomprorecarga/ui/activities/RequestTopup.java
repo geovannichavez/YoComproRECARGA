@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
@@ -31,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopu
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
@@ -43,13 +47,14 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     Button btnEnvar;
     EditText etCodeNumber;
     EditText etExplPhone;
-    Button btnMyNumber;
+    ToggleButton btnMyNumber;
     TextView lblSelectedAmount;
     OperatorsAdapter mOperatorsAdapter;
     GridView mOperatorsGridView;
     LinearLayout lnrSelectAmount;
     CoordinatorLayout coordinatorLayout;
     ProgressDialog progressDialog;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     //MVP
     IRequestTopupPresenter presenter;
@@ -57,6 +62,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     //Global variables
     Amount selectedAmount;
     Validation mValidator;
+    UserData mUserData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,10 +75,12 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
         lnrSelectAmount = (LinearLayout) findViewById(R.id.lnrSelectAmount);
         lblSelectedAmount = (TextView) findViewById(R.id.lblSelectedAmount);
-        btnMyNumber = (Button) findViewById(R.id.btnMyNumber);
+        btnMyNumber = (ToggleButton) findViewById(R.id.btnMyNumber);
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
+        mUserData = new UserData(this);
         mValidator = new Validation(this, coordinatorLayout);
         presenter = new RequestTopupPresenterImpl(this, this, this);
         presenter.setInitialViewState();
@@ -84,6 +92,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     public void renderOperators(final List<CountryOperator> countryOperators)
     {
         mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
+        mOperatorsAdapter.notifyDataSetChanged();
         mOperatorsGridView.setNumColumns(countryOperators.size());
         mOperatorsGridView.setAdapter(mOperatorsAdapter);
         mOperatorsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -130,16 +139,30 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             //Setea 'formater' en el EditText y limpia campos
             mValidator.setPhoneInutFormatter(etExplPhone);
             lblSelectedAmount.setEnabled(false);
+            etExplPhone.setEnabled(true);
             etExplPhone.setText("");
             etExplPhone.clearFocus();
             etCodeNumber.setText("");
             etCodeNumber.clearFocus();
+            btnMyNumber.setChecked(false);
 
             //Resetea el MONTO
             lblSelectedAmount.setText(getString(R.string.spinner_select));
             lblSelectedAmount.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
             lblSelectedAmount.setTypeface(null, Typeface.NORMAL);
             lnrSelectAmount.setOnClickListener(null);
+
+            //Setea el SwipeRefreshLayout
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3, R.color.SubtitleTextColor);
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+            {
+                @Override
+                public void onRefresh()
+                {
+                    presenter.refreshOperators();
+                }
+            });
+
 
             //Deselecciona el operador del GridView
             for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
@@ -218,7 +241,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         }
     }
 
-
     @Override
     public void resetAmount()
     {
@@ -253,6 +275,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             {
                 progressDialog.dismiss();
             }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void toggleShowRefreshing(boolean pSetRefreshing)
+    {
+        try
+        {
+            //Cambia la altura del spinner
+            //mSwipeRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            mSwipeRefreshLayout.setRefreshing(pSetRefreshing);
         }
         catch (Exception ex)
         {
@@ -299,6 +336,30 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             presenter.createRequestTopupObject().setMSISDN(etExplPhone.getText().toString());
             presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString());
             presenter.sendTopupRequest();
+        }
+    }
+
+    public void toggleNumber(View view)
+    {
+        boolean isChecked = ((ToggleButton) view).isChecked();
+        try
+        {
+            if (isChecked)
+            {
+                String userPhone = mUserData.GetUserFormattedPhone();
+                etExplPhone.setEnabled(false);
+                etExplPhone.setText(userPhone);
+                etExplPhone.clearFocus();
+            }
+            else
+            {
+                etExplPhone.setText("");
+                etExplPhone.setEnabled(true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 

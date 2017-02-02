@@ -15,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
+import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,12 +44,16 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     @Override
     public void onError(int pCodeStatus, Throwable pThrowable)
     {
+        this.view.hideLoadingDialog();
+        this.view.toggleShowRefreshing(false);
         ProcessErrorMessage(pCodeStatus, pThrowable);
     }
 
     @Override
     public void onGetOperatorsSuccess(List<CountryOperator> pCountryOperators)
     {
+        this.view.hideLoadingDialog();
+        this.view.toggleShowRefreshing(false);
         this.view.renderOperators(pCountryOperators);
     }
 
@@ -71,6 +76,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     {
         if(checkConnection())
         {
+            this.view.showLoadingDialog(context.getString(R.string.label_loading_please_wait));
             this.interactor.fetchOperators(this);
         }
     }
@@ -110,6 +116,14 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
             this.view.showLoadingDialog(context.getString(R.string.progress_dialog_sending_topup_request));
             this.interactor.sendTopupRequest(this, mRequestTopup);
         }
+    }
+
+    @Override
+    public void refreshOperators()
+    {
+        this.view.setInitialViewsState();
+        this.view.toggleShowRefreshing(true);
+        this.interactor.fetchOperators(this);
     }
 
 
@@ -182,43 +196,42 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
 
         try
         {
+            String Titulo;
+            String Linea1;
+            String Button;
+
             if (pThrowable != null)
             {
                 if (pThrowable instanceof SocketTimeoutException)
                 {
-                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
-                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
-                    String Button = context.getString(R.string.button_accept);
-
-                    errorResponse.setTitle(Titulo);
-                    errorResponse.setLine1(Linea1);
-                    errorResponse.setAcceptButton(Button);
-                    this.view.showErrorMessage(errorResponse);
-
+                    Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = context.getString(R.string.button_accept);
+                }
+                else if (pThrowable instanceof IOException)
+                {
+                    Titulo = context.getString(R.string.error_title_internet_connecttion);
+                    Linea1 = context.getString(R.string.error_content_internet_connecttion);
+                    Button = context.getString(R.string.button_accept);
                 }
                 else
                 {
-                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
-                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
-                    String Button = context.getString(R.string.button_accept);
-
-                    errorResponse.setTitle(Titulo);
-                    errorResponse.setLine1(Linea1);
-                    errorResponse.setAcceptButton(Button);
-                    this.view.showErrorMessage(errorResponse);
+                    Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = context.getString(R.string.button_accept);
                 }
             }
             else
             {
-                String Titulo = context.getString(R.string.error_title_something_went_wrong);
-                String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
-                String Button = context.getString(R.string.button_accept);
-
-                errorResponse.setTitle(Titulo);
-                errorResponse.setLine1(Linea1);
-                errorResponse.setAcceptButton(Button);
-                this.view.showErrorMessage(errorResponse);
+                Titulo = context.getString(R.string.error_title_something_went_wrong);
+                Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                Button = context.getString(R.string.button_accept);
             }
+
+            errorResponse.setTitle(Titulo);
+            errorResponse.setLine1(Linea1);
+            errorResponse.setAcceptButton(Button);
+            this.view.showErrorMessage(errorResponse);
         }
         catch (Exception ex)
         {
