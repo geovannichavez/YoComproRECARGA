@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -47,6 +48,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     Button btnEnvar;
     EditText etCodeNumber;
     EditText etExplPhone;
+    Toolbar mToolbar;
     ToggleButton btnMyNumber;
     TextView lblSelectedAmount;
     OperatorsAdapter mOperatorsAdapter;
@@ -69,6 +71,10 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_topup);
+        mToolbar = (Toolbar) findViewById(R.id.requestTopupToolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);

@@ -223,7 +223,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(15).build();
-            mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
         catch (Exception ex)
         {

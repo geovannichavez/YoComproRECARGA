@@ -31,7 +31,7 @@
 
             <!--  TOOLBAR  -->
             <android.support.v7.widget.Toolbar
-                android:id="@+id/homeToolbar"
+                android:id="@+id/requestTopupToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/ApplicationGreenTheme"
@@ -41,7 +41,8 @@
 
                 <ImageView
                     android:id="@+id/ivLogo"
-                    android:layout_width="match_parent"
+                    android:layout_marginRight="?attr/actionBarSize"
+                    android:layout_width="fill_parent"
                     android:layout_height="23dp"
                     android:src="@drawable/logo_horizontal"/>
             </android.support.v7.widget.Toolbar>
