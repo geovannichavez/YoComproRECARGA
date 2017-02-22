@@ -58,6 +58,8 @@
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
     <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
+    <string name="error_title_vendor_not_found">VENDEDOR NO ENCONTRADO</string>
+    <string name="error_content_vendor_not_found_line">No encontramos ningún vendedor con ese código. Asegúrate de escribir el código correcto.</string>
 
 
     <!--    DIALOGS -->

@@ -13,6 +13,7 @@ import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
 
     //Entity
     private static RequestTopupReqBody mRequestTopup = new RequestTopupReqBody();
+
 
     public RequestTopupPresenterImpl(RequestTopupView pView, AppCompatActivity pActivity, Context pContext)
     {
@@ -223,9 +225,18 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
             }
             else
             {
-                Titulo = context.getString(R.string.error_title_something_went_wrong);
-                Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
-                Button = context.getString(R.string.button_accept);
+                if(pCodeStatus == 401)
+                {
+                    Titulo = context.getString(R.string.error_title_vendor_not_found);
+                    Linea1 = context.getString(R.string.error_content_vendor_not_found_line);
+                    Button = context.getString(R.string.button_accept);
+                }
+                else
+                {
+                    Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = context.getString(R.string.button_accept);
+                }
             }
 
             errorResponse.setTitle(Titulo);

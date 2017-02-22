@@ -131,6 +131,18 @@ public class UserData
         return phoneCode;
     }
 
+    public String GetIso3Code()
+    {
+        String iso3 = mPreferences.getString(KEY_COUNTRY_IS3CODE, "");
+        return iso3;
+    }
+
+    public String GetPhoneCode()
+    {
+        String phoneCode = mPreferences.getString(KEY_COUNTRY_PHONE_CODE, "");
+        return phoneCode;
+    }
+
     /*
     * ********************
     *

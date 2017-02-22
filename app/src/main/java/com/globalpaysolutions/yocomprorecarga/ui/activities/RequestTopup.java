@@ -339,8 +339,11 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     {
         if(CheckValidation())
         {
-            presenter.createRequestTopupObject().setMSISDN(etExplPhone.getText().toString());
-            presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString());
+            String msisdn = mUserData.GetPhoneCode() + etExplPhone.getText().toString().trim();
+            msisdn = msisdn.replace("-", "");
+            presenter.createRequestTopupObject().setCountryId(mUserData.GetCountryID());
+            presenter.createRequestTopupObject().setMSISDN(msisdn);
+            presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString().trim());
             presenter.sendTopupRequest();
         }
     }
