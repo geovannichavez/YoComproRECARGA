@@ -51,6 +51,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     HashMap<String, Country> countriesMap = new HashMap<>();
     Country selectedCountry;
 
+    //Cambio de endpoints
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
