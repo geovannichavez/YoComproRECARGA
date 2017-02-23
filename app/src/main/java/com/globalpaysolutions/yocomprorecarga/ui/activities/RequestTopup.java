@@ -108,7 +108,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             {
                 final CountryOperator operator = ((CountryOperator) parent.getItemAtPosition(position));
                 presenter.onOperatorSelected(position);
-                presenter.createRequestTopupObject().setOperatorId(String.valueOf(operator.getOperatorID()));
+                presenter.createRequestTopupObject().setOperatorID(String.valueOf(operator.getOperatorID()));
 
                 selectedAmount = null;
                 lnrSelectAmount.setOnClickListener(new View.OnClickListener()
@@ -341,8 +341,9 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             String msisdn = mUserData.GetPhoneCode() + etExplPhone.getText().toString().trim();
             msisdn = msisdn.replace("-", "");
-            presenter.createRequestTopupObject().setCountryId(mUserData.GetCountryID());
-            presenter.createRequestTopupObject().setMSISDN(msisdn);
+            presenter.createRequestTopupObject().setConsumerId(mUserData.GetConsumerID());
+            //presenter.createRequestTopupObject().set(mUserData.GetCountryID());
+            presenter.createRequestTopupObject().setTargetPhoneNumber(msisdn);
             presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString().trim());
             presenter.sendTopupRequest();
         }
@@ -417,7 +418,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             return false;
         }
 
-        if(TextUtils.isEmpty(presenter.createRequestTopupObject().getOperatorId()))
+        if(TextUtils.isEmpty(presenter.createRequestTopupObject().getOperatorID()))
         {
             CreateSnackbar(getString(R.string.validation_required_operator));
             return false;

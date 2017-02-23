@@ -7,7 +7,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface ITokenInputPresenter
 {
     void setInitialViewState();
-    void sendValidationToken(String pMsisdn, String pToken);
+    void sendValidationToken(String pToken);
     void setConfirmedPhone(boolean pConfirmedPhone);
     void setConfirmedCountry(boolean pConfirmedCountry);
 }

@@ -3,13 +3,11 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRequestTopupInteractor;
-import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
-import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
@@ -93,7 +91,6 @@ public class RequestTopupInteractor implements IRequestTopupInteractor
             @Override
             public void onFailure(Call<SimpleMessageResponse> call, Throwable t)
             {
-
                 pListener.onError(0, t);
             }
         });

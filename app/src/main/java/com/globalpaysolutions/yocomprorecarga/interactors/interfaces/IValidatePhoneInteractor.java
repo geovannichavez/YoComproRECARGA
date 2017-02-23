@@ -12,7 +12,7 @@ public interface IValidatePhoneInteractor
 
     void validatePhone(ValidatePhoneListener pListener, String pMsisdn, String pCountryID);
 
-    void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone);
+    void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone, int pConsumerID);
 
     void deleteUserGeneralInfo();
 

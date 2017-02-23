@@ -25,6 +25,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
@@ -51,7 +52,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     HashMap<String, Country> countriesMap = new HashMap<>();
     Country selectedCountry;
 
-    //Cambio de endpoints
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -141,11 +142,11 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     }
 
     @Override
-    public void navigateTokenInput()
+    public void navigateTokenInput(RegisterClientResponse pResponse)
     {
         String phone = etPhoneNumber.getText().toString();
         phone = phone.replace("-", "");
-        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName(), phone);
+        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName(), phone, pResponse.getConsumerID());
 
         Intent inputToken = new Intent(ValidatePhone.this, TokenInput.class);
         inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

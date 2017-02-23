@@ -11,13 +11,10 @@ import android.support.v4.content.IntentCompat;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
-import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Home;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
-import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
 import java.net.SocketTimeoutException;
 
@@ -48,15 +45,18 @@ public class TokenInputService extends IntentService
 
             mUserData = new UserData(getApplicationContext());
 
-            sendValidationToken(msisdn, token);
+            sendValidationToken(token);
         }
     }
 
-    public void sendValidationToken(String pMsisdn, String pToken)
+    public void sendValidationToken(String pToken)
     {
+        mUserData = new UserData(getApplicationContext());
+        int consumerID = mUserData.GetConsumerID();
+
         TokenValidationBody tokenValidation = new TokenValidationBody();
-        tokenValidation.setMsisdn(pMsisdn);
-        tokenValidation.setCode(pToken);
+        tokenValidation.setConsumerID(consumerID);
+        tokenValidation.setToken(pToken);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<SimpleMessageResponse> call = apiService.requestTokenValidation(tokenValidation);

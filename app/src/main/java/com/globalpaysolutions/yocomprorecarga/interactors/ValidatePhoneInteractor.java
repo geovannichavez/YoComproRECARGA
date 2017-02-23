@@ -6,8 +6,8 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IValidatePhoneInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.TokenReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
@@ -21,12 +21,12 @@ import retrofit2.Response;
 public class ValidatePhoneInteractor implements IValidatePhoneInteractor
 {
     private Context mContext;
-    private UserData userData;
+    private UserData mUserData;
 
     public ValidatePhoneInteractor(Context pContext)
     {
         this.mContext = pContext;
-        userData = new UserData(this.mContext);
+        mUserData = new UserData(this.mContext);
     }
 
     @Override
@@ -64,21 +64,23 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     @Override
     public void validatePhone(final ValidatePhoneListener pListener, String pMsisdn, String pCountryID)
     {
-        TokenReqBody tokenBody = new TokenReqBody();
-        tokenBody.setMsisdn(pMsisdn);
-        tokenBody.setCountryId(pCountryID);
+        String deviceID = mUserData.GetDeviceID();
+        RegisterConsumerReqBody registerConsumerBody = new RegisterConsumerReqBody();
+        registerConsumerBody.setConsumerMsisdn(pMsisdn);
+        registerConsumerBody.setCountryId(pCountryID);
+        registerConsumerBody.setDeviceId(deviceID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleMessageResponse> call = apiService.requestPhoneValidationResult(tokenBody);
+        final Call<RegisterClientResponse> call = apiService.registerConsumer(registerConsumerBody);
 
-        call.enqueue(new Callback<SimpleMessageResponse>()
+        call.enqueue(new Callback<RegisterClientResponse>()
         {
             @Override
-            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response)
+            public void onResponse(Call<RegisterClientResponse> call, Response<RegisterClientResponse> response)
             {
                 if(response.isSuccessful())
                 {
-                    SimpleMessageResponse Message = response.body();
+                    RegisterClientResponse Message = response.body();
                     pListener.onRequestPhoneValResult(Message);
                 }
                 else
@@ -88,7 +90,7 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
                 }
             }
             @Override
-            public void onFailure(Call<SimpleMessageResponse> call, Throwable t)
+            public void onFailure(Call<RegisterClientResponse> call, Throwable t)
             {
                 pListener.onError(0, t);
             }
@@ -96,15 +98,15 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     }
 
     @Override
-    public void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone)
+    public void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone, int pConsumerID)
     {
-        userData.SaveUserGeneralInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName, pPhone);
+        mUserData.SaveUserGeneralInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName, pPhone, pConsumerID);
     }
 
     @Override
     public void deleteUserGeneralInfo()
     {
-        userData.DeleteUserGeneralInfo();
+        mUserData.DeleteUserGeneralInfo();
     }
 
 

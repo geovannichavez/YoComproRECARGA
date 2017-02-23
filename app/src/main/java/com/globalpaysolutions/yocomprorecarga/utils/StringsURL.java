@@ -15,7 +15,9 @@ public class StringsURL
 
     public final static String TOKEN = "token";
 
-    public final static String VALIDATE_TOKEN = "validtoken";
+    public final static String VALIDATE_TOKEN = "validateToken";
 
-    public final static String REQUESTTOPUP = "reqTopup";
+    public final static String REQUESTTOPUP = "requestTopup";
+
+    public final static String REGISTER_CONSUMER = "registerConsumer";
 }

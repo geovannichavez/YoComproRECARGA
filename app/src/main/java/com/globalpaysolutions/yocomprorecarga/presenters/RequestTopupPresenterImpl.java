@@ -11,9 +11,8 @@ import com.globalpaysolutions.yocomprorecarga.interactors.RequestTopupListener;
 import com.globalpaysolutions.yocomprorecarga.models.Amount;
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
-import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
 import java.io.IOException;

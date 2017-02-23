@@ -10,10 +10,13 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneListener;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.net.SocketTimeoutException;
+import java.util.UUID;
 
 /**
  * Created by Josué Chávez on 13/01/2017.
@@ -24,12 +27,14 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     private ValidatePhoneView View;
     private Context context;
     private ValidatePhoneInteractor interactor;
+    private UserData userData;
 
     public ValidatePhonePresenterImpl(ValidatePhoneView pView, AppCompatActivity pActivity, Context pContext)
     {
         this.View = pView;
         this.context = pContext;
         this.interactor = new ValidatePhoneInteractor(pContext);
+        this.userData = new UserData(context);
     }
 
     @Override
@@ -53,9 +58,9 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName, String pPhone)
+    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName, String pPhone, int pConsumerID)
     {
-        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode, pPhone);
+        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode, pPhone, pConsumerID);
     }
 
     @Override
@@ -73,10 +78,10 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void onRequestPhoneValResult(SimpleMessageResponse pResponse)
+    public void onRequestPhoneValResult(RegisterClientResponse pResponse)
     {
         this.View.hideLoading();
-        this.View.navigateTokenInput();
+        this.View.navigateTokenInput(pResponse);
 
     }
 

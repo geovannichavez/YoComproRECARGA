@@ -46,7 +46,6 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         btnConfirmToken = (Button) findViewById(R.id.btnConfirmToken);
 
         mPresenter = new TokenInputPresenterImpl(this, this, this);
-        mUserData = new UserData(this);
 
         mPresenter.setInitialViewState();
     }
@@ -56,7 +55,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         try
         {
             String token = etToken.getText().toString();
-            mPresenter.sendValidationToken(mUserData.GetMsisdn(), token);
+            mPresenter.sendValidationToken(token);
         }
         catch (Exception ex)
         {

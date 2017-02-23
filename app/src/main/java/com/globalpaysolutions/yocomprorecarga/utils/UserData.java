@@ -23,10 +23,13 @@ public class UserData
     private static final String KEY_COUNTRY_IS3CODE = "usr_country_iso3code";
     private static final String KEY_COUNTRY_NAME = "usr_country_name";
     private static final String KEY_USER_PHONE = "usr_phone_number";
+    private static final String KEY_CONSUMER_ID = "usr_consumer_id";
 
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
     private static final String KEY_HAS_SELECTED_COUNTRY = "usr_has_selected_country";
     private static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
+
+    private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
 
     public UserData(Context pContext)
     {
@@ -43,7 +46,7 @@ public class UserData
     * ******************
     */
 
-    public void SaveUserGeneralInfo(String pCountryID, String pCountryPhoneCode, String pIso3Code, String pCountryName, String pPhone)
+    public void SaveUserGeneralInfo(String pCountryID, String pCountryPhoneCode, String pIso3Code, String pCountryName, String pPhone, int pConsumerID)
     {
         try
         {
@@ -52,6 +55,7 @@ public class UserData
             mEditor.putString(KEY_COUNTRY_IS3CODE, pIso3Code);
             mEditor.putString(KEY_COUNTRY_NAME, pCountryName);
             mEditor.putString(KEY_USER_PHONE, pPhone);
+            mEditor.putInt(KEY_CONSUMER_ID, pConsumerID);
             mEditor.commit();
         }
         catch (Exception ex)
@@ -75,6 +79,12 @@ public class UserData
     public void HasConfirmedPhone(boolean pConfirmedPhone)
     {
         mEditor.putBoolean(KEY_HAS_CONFIRMED_PHONE, pConfirmedPhone);
+        mEditor.commit();
+    }
+
+    public void SaveDeviceID(String pDeviceID)
+    {
+        mEditor.putString(KEY_UNIQUE_DEVICE_ID, pDeviceID);
         mEditor.commit();
     }
 
@@ -141,6 +151,16 @@ public class UserData
     {
         String phoneCode = mPreferences.getString(KEY_COUNTRY_PHONE_CODE, "");
         return phoneCode;
+    }
+
+    public String GetDeviceID()
+    {
+        return mPreferences.getString(KEY_UNIQUE_DEVICE_ID, "");
+    }
+
+    public int GetConsumerID()
+    {
+        return mPreferences.getInt(KEY_CONSUMER_ID, 0);
     }
 
     /*

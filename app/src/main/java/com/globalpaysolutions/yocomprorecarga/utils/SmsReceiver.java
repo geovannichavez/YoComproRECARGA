@@ -52,7 +52,6 @@ public class SmsReceiver extends BroadcastReceiver
 
                     Intent httpIntent = new Intent(context, TokenInputService.class);
                     httpIntent.putExtra("token", verificationCode);
-                    httpIntent.putExtra("msisdn", mUserData.GetMsisdn());
                     context.startService(httpIntent);
 
                 }

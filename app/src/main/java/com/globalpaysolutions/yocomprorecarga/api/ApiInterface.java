@@ -2,10 +2,12 @@ package com.globalpaysolutions.yocomprorecarga.api;
 
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
-import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.TokenReqBody;
-import com.globalpaysolutions.yocomprorecarga.models.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
 import retrofit2.Call;
@@ -38,5 +40,10 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUESTTOPUP)
     Call<SimpleMessageResponse> requestTopup(@Body RequestTopupReqBody pRequestTopupBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REGISTER_CONSUMER)
+    Call<RegisterClientResponse> registerConsumer(@Body RegisterConsumerReqBody pRegisterConsumerBody);
+
 
 }

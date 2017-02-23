@@ -1,13 +1,13 @@
-package com.globalpaysolutions.yocomprorecarga.models;
+package com.globalpaysolutions.yocomprorecarga.models.api;
 
 /**
  * Created by Josué Chávez on 18/01/2017.
  */
 
-public class TokenValidationBody
+public class TokenReqBody
 {
     private String Msisdn;
-    private String Code;
+    private String CountryId;
 
     public String getMsisdn()
     {
@@ -19,13 +19,13 @@ public class TokenValidationBody
         this.Msisdn = msisdn;
     }
 
-    public String getCode()
+    public String getCountryId()
     {
-        return Code;
+        return CountryId;
     }
 
-    public void setCode(String code)
+    public void setCountryId(String countryId)
     {
-        this.Code = code;
+        this.CountryId = countryId;
     }
 }

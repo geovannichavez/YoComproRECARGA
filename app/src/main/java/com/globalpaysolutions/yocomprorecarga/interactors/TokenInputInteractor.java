@@ -1,14 +1,12 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
-import android.app.IntentService;
 import android.content.Context;
-import android.content.Intent;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ITokenInputInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
@@ -31,11 +29,14 @@ public class TokenInputInteractor implements ITokenInputInteractor
     }
 
     @Override
-    public void sendTokenValidation(final TokenInputListener pListener, String pMsisdn, String pToken)
+    public void sendTokenValidation(final TokenInputListener pListener, String pToken)
     {
+        mUserData = new UserData(mContext);
+        int consumerID = mUserData.GetConsumerID();
+
         TokenValidationBody tokenValidation = new TokenValidationBody();
-        tokenValidation.setMsisdn(pMsisdn);
-        tokenValidation.setCode(pToken);
+        tokenValidation.setToken(pToken);
+        tokenValidation.setConsumerID(consumerID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<SimpleMessageResponse> call = apiService.requestTokenValidation(tokenValidation);

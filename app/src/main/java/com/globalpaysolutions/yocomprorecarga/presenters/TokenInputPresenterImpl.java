@@ -40,10 +40,10 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     }
 
     @Override
-    public void sendValidationToken(String pMsisdn, String pToken)
+    public void sendValidationToken(String pToken)
     {
         mView.showLoading();
-        mInteractor.sendTokenValidation(this, pMsisdn, pToken);
+        mInteractor.sendTokenValidation(this, pToken);
     }
 
     @Override
