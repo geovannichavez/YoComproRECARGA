@@ -72,13 +72,14 @@
                         android:paddingLeft="@dimen/activity_horizontal_margin"
                         android:paddingRight="@dimen/activity_horizontal_margin"
                         android:paddingTop="@dimen/activity_vertical_margin"
-                        android:weightSum="15">
+                        android:weightSum="16">
 
-                        <!--    PRIMER SECCION  -->
+                        <!--    PRIMER SECCION
+                                Peso: 2         -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="12dp"
                             android:layout_weight="2"
                             android:gravity="center_vertical"
                             android:weightSum="7">
@@ -123,16 +124,19 @@
                         <View style="@style/HorizontalGrayLine"/>
 
                         <!--    SEGUNDA SECCION
-                                Operadores GridView -->
+                                Operadores GridView
+                                Peso: 4         -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="4"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="8dp"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
-                            android:paddingTop="20dp">
+                            android:paddingTop="12dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -163,22 +167,23 @@
                         </LinearLayout>
 
                         <!--    TERCERA SECCION
-                                Contenedor de Monto de Recarga-->
+                                Contenedor de Monto de Recarga
+                                Peso: 3         -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="3"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingBottom="8dp"
+                            android:layout_marginBottom="12dp"
                             android:paddingLeft="16dp"
-                            android:paddingRight="16dp"
-                            android:paddingTop="8dp">
+                            android:paddingRight="16dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="12dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
                                 android:text="@string/label_select_recharge_amount"
                                 android:textColor="@color/SubtitleTextColor"
                                 android:textSize="14sp"/>
@@ -213,17 +218,18 @@
                         </LinearLayout>
 
                         <!--    CUARTA SECCION
-                                Contenedor del Numero a Recargar-->
+                                Contenedor del Código de Vendedor
+                                Peso: 3         -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginBottom="@dimen/ActivityVerticalExtraCustomMargin"
                             android:layout_weight="3"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
-                            android:paddingTop="16dp">
+                            android:layout_marginBottom="12dp"
+                            >
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -231,7 +237,8 @@
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/label_type_vendor_code"
                                 android:textColor="@color/SubtitleTextColor"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp"
+                                android:id="@+id/textView2"/>
 
                             <EditText
                                 android:id="@+id/etCodeNumber"
@@ -250,14 +257,14 @@
 
 
                         <!--    QUINTA SECCION
-                                Contenedor de Boton-->
+                                Contenedor de Boton
+                                Peso: 4             -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="3"
+                            android:layout_weight="4"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingBottom="14dp"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp">
 
@@ -281,6 +288,17 @@
                                 android:onClick="sendTopupRequest"
                                 android:text="@string/button_request_topup"
                                 android:textColor="@color/ActivityWhiteBackground"/>
+
+
+                            <TextView
+                                android:id="@+id/tvStoreLink"
+                                android:textColor="@color/AppGreen"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/label_become_a_vendor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
 
                         </LinearLayout>
                     </LinearLayout>

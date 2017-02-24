@@ -27,6 +27,7 @@
     <string name="title_success_dialog_label">¡SOLICITUD ENVIADA!</string>
     <string name="content_success_dialog_label_line1">Se ha enviado tu solicitud de recarga al vendedor.</string>
     <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
+    <string name="label_become_a_vendor"><u>¿Quieres ser un vendedor? Click Aquí</u></string>
 
     <!--    HOME    -->
     <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>

@@ -2,8 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -46,6 +48,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 {
     //Adapters y Layouts
     Button btnEnvar;
+    TextView tvStoreLink;
     EditText etCodeNumber;
     EditText etExplPhone;
     Toolbar mToolbar;
@@ -79,12 +82,17 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
+        tvStoreLink = (TextView) findViewById(R.id.tvStoreLink);
         lnrSelectAmount = (LinearLayout) findViewById(R.id.lnrSelectAmount);
         lblSelectedAmount = (TextView) findViewById(R.id.lblSelectedAmount);
         btnMyNumber = (ToggleButton) findViewById(R.id.btnMyNumber);
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+
+        //Adapters
+        mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
+        mOperatorsGridView.setAdapter(mOperatorsAdapter);
 
         mUserData = new UserData(this);
         mValidator = new Validation(this, coordinatorLayout);
@@ -97,10 +105,8 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     @Override
     public void renderOperators(final List<CountryOperator> countryOperators)
     {
-        mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
         mOperatorsAdapter.notifyDataSetChanged();
         mOperatorsGridView.setNumColumns(countryOperators.size());
-        mOperatorsGridView.setAdapter(mOperatorsAdapter);
         mOperatorsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -171,17 +177,35 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
 
             //Deselecciona el operador del GridView
-            for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
+            if(mOperatorsGridView.getAdapter().getCount() > 0)
             {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
                 {
-                    mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
-                }
-                else
-                {
-                    mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                    {
+                        mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                    }
+                    else
+                    {
+                        mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                    }
                 }
             }
+
+            //Añade Click Listener a TextView
+            tvStoreLink.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Uri webpage = Uri.parse("https://play.google.com/store/apps/details?id=com.globalpaysolutions.yovendorecarga");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(getPackageManager()) != null)
+                    {
+                        startActivity(intent);
+                    }
+                }
+            });
         }
         catch (Exception ex)
         {
