@@ -21,6 +21,11 @@ public class StringsURL
 
     public final static String REGISTER_CONSUMER = "registerConsumer";
 
+    //FIREBASE
+    public static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
+
+    public static final String STATIC_POINTS = URL_FIREBASE + "staticPoints";
+    public static final String DATA_STATIC_PONTS = URL_FIREBASE + "dataStaticPoints";
 
     //OTRAS URL'S
     public final static String YVR_STORE = "https://play.google.com/store/apps/details?id=com.globalpaysolutions.yovendorecarga";

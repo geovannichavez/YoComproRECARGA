@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
@@ -41,4 +42,15 @@ dependencies {
 
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //Firebase
+    compile 'com.google.firebase:firebase-database:10.0.0'
+
+    //GeoFire
+    compile 'com.firebase:geofire-android:2.1.1'
 }
+
+
+//Google Services
+//OBLIGATORIO: ESta línea debe ir al final del documento
+apply plugin: 'com.google.gms.google-services'
