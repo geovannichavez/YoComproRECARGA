@@ -37,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopu
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
@@ -198,7 +199,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                 @Override
                 public void onClick(View v)
                 {
-                    Uri webpage = Uri.parse("https://play.google.com/store/apps/details?id=com.globalpaysolutions.yovendorecarga");
+                    Uri webpage = Uri.parse(StringsURL.YVR_STORE);
                     Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
                     if (intent.resolveActivity(getPackageManager()) != null)
                     {

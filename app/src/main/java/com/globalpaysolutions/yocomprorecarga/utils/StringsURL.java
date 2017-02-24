@@ -20,4 +20,9 @@ public class StringsURL
     public final static String REQUESTTOPUP = "requestTopup";
 
     public final static String REGISTER_CONSUMER = "registerConsumer";
+
+
+    //OTRAS URL'S
+    public final static String YVR_STORE = "https://play.google.com/store/apps/details?id=com.globalpaysolutions.yovendorecarga";
+
 }
