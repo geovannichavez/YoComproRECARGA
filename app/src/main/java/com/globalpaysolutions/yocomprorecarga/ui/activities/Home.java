@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +30,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeView
 {
     private static final String TAG = Home.class.getSimpleName();
@@ -47,6 +49,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
     //Global Variables
     final private int REQUEST_ACCESS_FINE_LOCATION = 3;
+    private Map<String, Marker> mSalesPointsMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +60,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
+        mSalesPointsMarkers = new HashMap<>();
+
         btnRequestTopup = (Button) findViewById(R.id.btnRequestTopoup);
         btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
 
@@ -64,6 +69,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         mPresenter.checkUserDataComplited();
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
+        mPresenter.intializeGeolocation();
 
     }
 
@@ -78,6 +84,36 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         mGoogleMap.setTrafficEnabled(false);
         mGoogleMap.setIndoorEnabled(true);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+        /*mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
+        {
+            @Override
+            public void onCameraMove()
+            {
+                LatLng location = mGoogleMap.getCameraPosition().target;
+                Log.i(TAG, location.toString());
+                mPresenter.salesPointsQuery(location);
+            }
+        });*/
+        /** Se utiliza el metodo deprecado por cuestiones de rendimiento **/
+        mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition)
+            {
+                LatLng location = mGoogleMap.getCameraPosition().target;
+                Log.i(TAG, location.toString());
+                mPresenter.updateSalePntCriteria(location);
+            }
+        });
+
+       /* mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+        {
+            @Override
+            public void onInfoWindowClick(Marker marker)
+            {
+
+            }
+        });*/
 
         try
         {
@@ -88,46 +124,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             ex.printStackTrace();
         }
 
-        /*CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(AV_LA_CAPILLA)      // Sets the center of the map to Mountain View
-                .zoom(19)                   // Sets the zoom
-                //.bearing(90)                // Sets the orientation of the camera to east
-                //.tilt(30)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder*/
-
         mPresenter.onMapReady();
 
     }
 
-    public void RequestTopup(View view)
-    {
-        Intent requestTopup = new Intent(Home.this, RequestTopup.class);
-        startActivity(requestTopup);
-    }
-
-    public void OpenCamera(View view)
-    {
-        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
-            {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
-            }
-        }
-        else
-        {
-            try
-            {
-                Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(camera);
-            }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
-        }
-
-    }
 
     @Override
     public void renderMap()
@@ -223,8 +223,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(15).build();
-            //mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+            mPresenter.salesPointsQuery(currentLocation);
         }
         catch (Exception ex)
         {
@@ -247,6 +248,36 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void addSalePoint(String pKey, LatLng pLocation)
+    {
+        Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation));
+        mSalesPointsMarkers.put(pKey, marker);
+    }
+
+    @Override
+    public void addSalePointData(String pKey, String pTitle, String pSnippet)
+    {
+        try
+        {
+            Marker marker = mSalesPointsMarkers.get(pKey);
+            marker.setSnippet(pSnippet);
+            marker.setTitle(pTitle);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeSalePoint(String pKey)
+    {
+        Marker marker = mSalesPointsMarkers.get(pKey);
+        marker.remove();
+        mSalesPointsMarkers.remove(pKey);
     }
 
     @Override
@@ -292,4 +323,36 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     }
 
 
+    public void RequestTopup(View view)
+    {
+        Intent requestTopup = new Intent(Home.this, RequestTopup.class);
+        startActivity(requestTopup);
+    }
+
+    public void OpenCamera(View view)
+    {
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+        {
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
+            {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 3);
+            }
+        }
+        else
+        {
+            try
+            {
+                Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(camera);
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+
 }
+

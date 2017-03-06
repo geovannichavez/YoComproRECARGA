@@ -1,31 +1,33 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.firebase.geofire.GeoLocation;
+import com.globalpaysolutions.yocomprorecarga.interactors.HomeInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
+import com.globalpaysolutions.yocomprorecarga.models.data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DatabaseError;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
  */
 
-public class HomePresenterImpl implements IHomePresenter, LocationCallback
+public class HomePresenterImpl implements IHomePresenter, HomeListener, LocationCallback
 {
     private static final String TAG = HomePresenterImpl.class.getSimpleName();
 
@@ -33,6 +35,7 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
     private Context mContext;
     private UserData mUserData;
     private Activity mActivity;
+    private HomeInteractor mInteractor;
 
     private GoogleLocationApiManager mGoogleLocationApiManager;
 
@@ -42,6 +45,7 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
         mContext = pContext;
         mUserData = new UserData(mContext);
         mActivity = pActivity;
+        mInteractor = new HomeInteractor(mContext, this);
 
         this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext);
         this.mGoogleLocationApiManager.setLocationCallback(this);
@@ -74,9 +78,9 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
         }
     }
 
-   @Override
-   public void chekcLocationServiceEnabled()
-   {
+    @Override
+    public void chekcLocationServiceEnabled()
+    {
        LocationManager locationManager;
        boolean gpsEnabled = false;
        boolean networkEnabled = false;
@@ -96,7 +100,7 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
        {
             mView.displayActivateLocationDialog();
        }
-   }
+    }
 
     @Override
     public void checkPermissions()
@@ -116,6 +120,26 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
     {
         Log.d(TAG, "disconnectFromLocationService: hit");
         mGoogleLocationApiManager.disconnect();
+    }
+
+    @Override
+    public void intializeGeolocation()
+    {
+        mInteractor.intializeGeolocation();
+    }
+
+    @Override
+    public void salesPointsQuery(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.salesPointsQuery(location);
+    }
+
+    @Override
+    public void updateSalePntCriteria(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.salesPointsUpdateCriteria(location);
     }
 
     @Override
@@ -139,5 +163,35 @@ public class HomePresenterImpl implements IHomePresenter, LocationCallback
     public void onLocationApiManagerConnected(Location location)
     {
         mView.setInitialUserLocation(location);
+    }
+
+
+   /*
+   *
+   *   HomeListener
+   *
+   */
+    @Override
+    public void gf_salePoint_onKeyEntered(String pKey, LatLng pLocation)
+    {
+        mView.addSalePoint(pKey, pLocation );
+    }
+
+    @Override
+    public void gf_salePoint_onKeyExited(String pKey)
+    {
+        mView.removeSalePoint(pKey);
+    }
+
+    @Override
+    public void gf_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
+    {
+        mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet());
+    }
+
+    @Override
+    public void gf_salePoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "gf_salePoint_onCancelled -" + databaseError.getMessage());
     }
 }
