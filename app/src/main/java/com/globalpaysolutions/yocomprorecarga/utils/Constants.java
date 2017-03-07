@@ -6,6 +6,6 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 public class Constants
 {
-    public static final double SALES_POINTS_RADIUS_KM = 0.8;
+    public static final double SALES_POINTS_RADIUS_KM = 2;
     public static final double VENDOR_RADIUS_KM = 5;
 }

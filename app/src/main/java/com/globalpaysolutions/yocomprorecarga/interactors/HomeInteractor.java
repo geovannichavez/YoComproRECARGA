@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -70,7 +71,14 @@ public class HomeInteractor implements IHomeInteractor
     @Override
     public void salesPointsUpdateCriteria(GeoLocation pLocation)
     {
-        mSalesPntsQuery.setLocation(pLocation, Constants.SALES_POINTS_RADIUS_KM);
+        try
+        {
+            mSalesPntsQuery.setLocation(pLocation, Constants.SALES_POINTS_RADIUS_KM);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -120,19 +128,19 @@ public class HomeInteractor implements IHomeInteractor
         @Override
         public void onKeyMoved(String key, GeoLocation location)
         {
-
+            Log.i(TAG, "StaticPoint: Key moved fired.");
         }
 
         @Override
         public void onGeoQueryReady()
         {
-
+            Log.i(TAG, "StaticPoint: GeoQuery ready fired.");
         }
 
         @Override
         public void onGeoQueryError(DatabaseError error)
         {
-
+            Log.e(TAG, "StaticPoint: GeoFire Database error fired.");
         }
     };
 
