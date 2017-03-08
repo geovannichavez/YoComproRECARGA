@@ -19,4 +19,9 @@ public interface HomeView
     void addSalePoint(String pKey, LatLng pLocation);
     void addSalePointData(String pKey, String pTitle, String pSnippet);
     void removeSalePoint(String pKey);
+
+    void addVendorPoint(String pKey, LatLng pLocation);
+    void addVendorPointData(String pKey, String pTitle, String pSnippet);
+    void moveVendorPoint(String pKey, LatLng pLocation);
+    void removeVendorPoint(String pKey);
 }

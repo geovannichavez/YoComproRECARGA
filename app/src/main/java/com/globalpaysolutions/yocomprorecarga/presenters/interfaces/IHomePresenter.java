@@ -22,4 +22,7 @@ public interface IHomePresenter
     void intializeGeolocation();
     void salesPointsQuery(LatLng pLocation);
     void updateSalePntCriteria(LatLng pLocation);
+
+    void vendorPointsQuery(LatLng pLocation);
+    void updateVendorePntCriteria(LatLng pLocation);
 }

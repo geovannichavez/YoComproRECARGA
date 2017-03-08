@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
@@ -143,6 +144,20 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     }
 
     @Override
+    public void vendorPointsQuery(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.vendorPointsQuery(location);
+    }
+
+    @Override
+    public void updateVendorePntCriteria(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.vendorPointsUpdateCriteria(location);
+    }
+
+    @Override
     public void onMapReady()
     {
         connnectToLocationService();
@@ -171,6 +186,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
    *   HomeListener
    *
    */
+
+    // GEOFIRE STATIC POINTS
     @Override
     public void gf_salePoint_onKeyEntered(String pKey, LatLng pLocation)
     {
@@ -183,15 +200,61 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
         mView.removeSalePoint(pKey);
     }
 
+    // GEOFIRE VENDOR POINTS
     @Override
-    public void gf_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
+    public void gf_vendorPoint_onKeyEntered(String pKey, LatLng pLocation)
+    {
+        mView.addVendorPoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_vendorPoint_onKeyExited(String pKey)
+    {
+        mView.removeVendorPoint(pKey);
+    }
+
+    @Override
+    public void gf_vendorPoint_onKeyMoved(String pKey, LatLng pLocation)
+    {
+        mView.moveVendorPoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_vendorPoint_onGeoQueryReady()
+    {
+
+    }
+
+    @Override
+    public void gf_vendorPoint_onGeoQueryError(DatabaseError pError)
+    {
+
+    }
+
+    // FIREBASE STATIC POINTS
+    @Override
+    public void fb_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
     {
         mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet());
     }
 
     @Override
-    public void gf_salePoint_onCancelled(DatabaseError databaseError)
+    public void fb_salePoint_onCancelled(DatabaseError databaseError)
     {
-        Log.e(TAG, "gf_salePoint_onCancelled -" + databaseError.getMessage());
+        Log.e(TAG, "fb_salePoint_onCancelled -" + databaseError.getMessage());
+    }
+
+    // FIREBASE VENDOR POINTS
+    @Override
+    public void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData)
+    {
+        //TODO: Quitar el parámetro del metodo
+        mView.addVendorPointData(pKey, "¡YoVendoRecarga!", pSalePointData.getVendorCode());
+    }
+
+    @Override
+    public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
+    {
+
     }
 }

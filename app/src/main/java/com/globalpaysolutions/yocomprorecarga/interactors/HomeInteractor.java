@@ -9,6 +9,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,7 @@ public class HomeInteractor implements IHomeInteractor
     private DatabaseReference mSalesPoints = mRootReference.child("staticPoints");
     private DatabaseReference mDataSalesPoints = mRootReference.child("dataStaticPoints");
     private DatabaseReference mVendorPoints = mRootReference.child("YVR");
+    private DatabaseReference mDataVendorPoints = mRootReference.child("dataYVR");
 
     //GeoFire
     private GeoFire mSalesPntsRef;
@@ -84,7 +86,28 @@ public class HomeInteractor implements IHomeInteractor
     @Override
     public void vendorPointsQuery(GeoLocation pLocation)
     {
-        mVendorPntsQuery = mVendorPntsRef.queryAtLocation(pLocation, Constants.VENDOR_RADIUS_KM);
+        try
+        {
+            mVendorPntsQuery = mVendorPntsRef.queryAtLocation(pLocation, Constants.VENDOR_RADIUS_KM);
+            mVendorPntsQuery.addGeoQueryEventListener(vendorPointsListener);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void vendorPointsUpdateCriteria(GeoLocation pLocation)
+    {
+        try
+        {
+            mVendorPntsQuery.setLocation(pLocation, Constants.VENDOR_RADIUS_KM);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -105,13 +128,13 @@ public class HomeInteractor implements IHomeInteractor
                 public void onDataChange(DataSnapshot dataSnapshot)
                 {
                     SalePointData salePoint = dataSnapshot.getValue(SalePointData.class);
-                    mHomeListener.gf_salePoint_onDataChange(key, salePoint);
+                    mHomeListener.fb_salePoint_onDataChange(key, salePoint);
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError)
                 {
-                    mHomeListener.gf_salePoint_onCancelled(databaseError);
+                    mHomeListener.fb_salePoint_onCancelled(databaseError);
                 }
             });
 
@@ -141,6 +164,59 @@ public class HomeInteractor implements IHomeInteractor
         public void onGeoQueryError(DatabaseError error)
         {
             Log.e(TAG, "StaticPoint: GeoFire Database error fired.");
+        }
+    };
+
+    private GeoQueryEventListener vendorPointsListener = new GeoQueryEventListener()
+    {
+        @Override
+        public void onKeyEntered(final String key, GeoLocation location)
+        {
+            mDataVendorPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    VendorPointData vendorPoint = dataSnapshot.getValue(VendorPointData.class);
+                    mHomeListener.fb_vendorPoint_onDataChange(key, vendorPoint);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    mHomeListener.fb_vendorPoint_onCancelled(databaseError);
+                }
+            });
+
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mHomeListener.gf_vendorPoint_onKeyEntered(key, geoLocation);
+        }
+
+        @Override
+        public void onKeyExited(String key)
+        {
+            mHomeListener.gf_vendorPoint_onKeyExited(key);
+        }
+
+        @Override
+        public void onKeyMoved(String key, GeoLocation location)
+        {
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mHomeListener.gf_vendorPoint_onKeyMoved(key, geoLocation);
+        }
+
+        @Override
+        public void onGeoQueryReady()
+        {
+            mHomeListener.gf_vendorPoint_onGeoQueryReady();
+            Log.i(TAG, "VendorPoint: GeoQuery ready fired.");
+        }
+
+        @Override
+        public void onGeoQueryError(DatabaseError error)
+        {
+            mHomeListener.gf_vendorPoint_onGeoQueryError(error);
+            Log.e(TAG, "VendorPoint: GeoFire Database error fired.");
         }
     };
 

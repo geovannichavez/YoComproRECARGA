@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -15,16 +18,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -51,6 +59,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     //Global Variables
     final private int REQUEST_ACCESS_FINE_LOCATION = 3;
     private Map<String, Marker> mSalesPointsMarkers;
+    private Map<String, Marker> mVendorPointsMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +71,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         getSupportActionBar().setTitle(null);
 
         mSalesPointsMarkers = new HashMap<>();
+        mVendorPointsMarkers = new HashMap<>();
 
         btnRequestTopup = (Button) findViewById(R.id.btnRequestTopoup);
         btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
@@ -104,6 +114,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 LatLng location = mGoogleMap.getCameraPosition().target;
                 Log.i(TAG, location.toString());
                 mPresenter.updateSalePntCriteria(location);
+                mPresenter.updateVendorePntCriteria(location);
             }
         });
 
@@ -227,6 +238,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             mPresenter.salesPointsQuery(currentLocation);
+            mPresenter.vendorPointsQuery(currentLocation);
         }
         catch (Exception ex)
         {
@@ -281,6 +293,55 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         Marker marker = mSalesPointsMarkers.get(pKey);
         marker.remove();
         mSalesPointsMarkers.remove(pKey);
+    }
+
+    @Override
+    public void addVendorPoint(String pKey, LatLng pLocation)
+    {
+        Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_yvr_marker))
+        );
+        mVendorPointsMarkers.put(pKey, marker);
+    }
+
+    @Override
+    public void addVendorPointData(String pKey, String pTitle, String pSnippet)
+    {
+        try
+        {
+            String vendorCode = String.format(getString(R.string.label_vendor_code_snippet), pSnippet);
+
+            Marker marker = mVendorPointsMarkers.get(pKey);
+            marker.setSnippet(vendorCode);
+            marker.setTitle(pTitle);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void moveVendorPoint(String pKey, LatLng pLocation)
+    {
+        try
+        {
+            Marker marker = mVendorPointsMarkers.get(pKey);
+            animateMarkerTo(marker, pLocation);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void removeVendorPoint(String pKey)
+    {
+        Marker marker = mVendorPointsMarkers.get(pKey);
+        marker.remove();
+        mVendorPointsMarkers.remove(pKey);
     }
 
     @Override
@@ -356,6 +417,49 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
     }
 
+
+    /*
+    * **********************************
+    *
+    *   OTROS METODOS
+    *
+    * **********************************
+    */
+
+    private void animateMarkerTo(final Marker marker, final LatLng toPosition)
+    {
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = mGoogleMap.getProjection();
+        Point startPoint = proj.toScreenLocation(marker.getPosition());
+        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
+        final long duration = 500;
+
+        final Interpolator interpolator = new LinearInterpolator();
+
+        handler.post(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+                double lng = t * toPosition.longitude + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * toPosition.latitude + (1 - t)
+                        * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+
+                if (t < 1.0)
+                {
+                    // Post again 16ms later.
+                    handler.postDelayed(this, 16);
+                }
+
+            }
+        });
+    }
 
 }
 

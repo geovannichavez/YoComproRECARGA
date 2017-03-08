@@ -14,4 +14,5 @@ public interface IHomeInteractor
     void salesPointsQuery(GeoLocation pLocation);
     void salesPointsUpdateCriteria(GeoLocation pLocation);
     void vendorPointsQuery(GeoLocation pLocation);
+    void vendorPointsUpdateCriteria(GeoLocation pLocation);
 }

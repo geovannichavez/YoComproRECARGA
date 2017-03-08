@@ -34,11 +34,11 @@
     <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
-
+    <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
 
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
-    <string name="button_login">Iniciar Sesión</string>
+    <string name="button_login">Registrarme</string>
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
     <string name="button_accept">Aceptar</string>
