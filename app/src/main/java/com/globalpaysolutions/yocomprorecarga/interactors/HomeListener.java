@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
-import com.firebase.geofire.GeoLocation;
-import com.globalpaysolutions.yocomprorecarga.models.data.SalePointData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 

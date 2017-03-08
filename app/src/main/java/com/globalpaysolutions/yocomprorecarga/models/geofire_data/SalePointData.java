@@ -1,4 +1,4 @@
-package com.globalpaysolutions.yocomprorecarga.models.data;
+package com.globalpaysolutions.yocomprorecarga.models.geofire_data;
 
 /**
  * Created by Josué Chávez on 06/03/2017.

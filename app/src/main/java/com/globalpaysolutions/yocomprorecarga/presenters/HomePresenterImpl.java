@@ -13,7 +13,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
-import com.globalpaysolutions.yocomprorecarga.models.data.SalePointData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
