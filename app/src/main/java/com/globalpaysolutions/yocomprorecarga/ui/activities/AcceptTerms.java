@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,18 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
     public void acceptTerms(View view)
     {
         presenter.acceptTerms();
-        Intent accept = new Intent(AcceptTerms.this, ValidatePhone.class);
+
+        Intent accept;
+
+        if(Build.VERSION.SDK_INT >= 23)
+        {
+            accept = new Intent(AcceptTerms.this, Permissions.class);
+        }
+        else
+        {
+            accept = new Intent(AcceptTerms.this, ValidatePhone.class);
+        }
+
         accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

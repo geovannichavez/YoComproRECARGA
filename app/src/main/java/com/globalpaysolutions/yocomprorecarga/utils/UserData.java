@@ -28,6 +28,7 @@ public class UserData
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
     private static final String KEY_HAS_SELECTED_COUNTRY = "usr_has_selected_country";
     private static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
+    private static final String KEY_HAS_GRANTED_DEVICE_PERMISSIONS = "usr_has_granted_device_permissions";
 
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
 
@@ -82,6 +83,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void HasGrantedDevicePermissions(boolean pGrantedPermissions)
+    {
+        mEditor.putBoolean(KEY_HAS_GRANTED_DEVICE_PERMISSIONS, pGrantedPermissions);
+        mEditor.commit();
+    }
+
     public void SaveDeviceID(String pDeviceID)
     {
         mEditor.putString(KEY_UNIQUE_DEVICE_ID, pDeviceID);
@@ -126,6 +133,11 @@ public class UserData
     {
         boolean phone = mPreferences.getBoolean(KEY_HAS_CONFIRMED_PHONE, false);
         return phone;
+    }
+
+    public boolean UserGrantedDevicePermissions()
+    {
+        return mPreferences.getBoolean(KEY_HAS_GRANTED_DEVICE_PERMISSIONS, false);
     }
 
     public String GetUserPhone()

@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -26,7 +25,7 @@ import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
-import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -77,7 +76,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
 
         mPresenter = new HomePresenterImpl(this, this, this);
-        mPresenter.checkUserDataComplited();
+        mPresenter.checkUserDataCompleted();
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
         mPresenter.intializeGeolocation();
@@ -118,14 +117,17 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             }
         });
 
-       /* mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
+       mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener()
         {
             @Override
             public void onInfoWindowClick(Marker marker)
             {
-
+                String vendorCode = marker.getTag().toString();
+                Intent requestTopup = new Intent(Home.this, RequestTopup.class);
+                requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
+                startActivity(requestTopup);
             }
-        });*/
+        });
 
         try
         {
@@ -314,6 +316,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             Marker marker = mVendorPointsMarkers.get(pKey);
             marker.setSnippet(vendorCode);
             marker.setTitle(pTitle);
+            marker.setTag(vendorCode);
         }
         catch (Exception ex)
         {

@@ -4,6 +4,10 @@
     <!--    ACCEPT TERMS    -->
     <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
 
+    <!--    PERMISSIONS     -->
+    <string name="label_permissions_title">Concede Permisos</string>
+    <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus carácteristicas. Haz click en el siguiente botón</string>
+    <string name="toast_permissions_denied">Permisos denegados. Inténtalo de nuevo.</string>
     <!--    VALIDATE PHONE-->
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
     <string name="label_country">País</string>

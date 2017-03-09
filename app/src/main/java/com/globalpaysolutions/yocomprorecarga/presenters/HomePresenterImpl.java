@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -17,6 +19,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -60,23 +63,42 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     }
 
     @Override
-    public void checkUserDataComplited()
+    public void checkUserDataCompleted()
     {
         if(!mUserData.UserAcceptedTerms())
         {
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);
         }
+        else if(!mUserData.UserGrantedDevicePermissions())
+        {
+            if(Build.VERSION.SDK_INT >= 23)
+            {
+                Intent permissions = new Intent(mActivity, Permissions.class);
+                this.addFlags(permissions);
+                mContext.startActivity(permissions);
+            }
+            else
+            {
+                mUserData.HasGrantedDevicePermissions(true);
+                Intent selectCountry = new Intent(mActivity, ValidatePhone.class);
+                this.addFlags(selectCountry);
+                mContext.startActivity(selectCountry);
+            }
+        }
         else if (!mUserData.UserSelectedCountry())
         {
             Intent selectCountry = new Intent(mActivity, ValidatePhone.class);
+            this.addFlags(selectCountry);
             mContext.startActivity(selectCountry);
         }
         else if(!mUserData.UserVerifiedPhone())
         {
             Intent inputToken = new Intent(mActivity, TokenInput.class);
+            this.addFlags(inputToken);
             mContext.startActivity(inputToken);
         }
+
     }
 
     @Override
@@ -256,5 +278,23 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
     {
 
+    }
+
+    /*
+    *
+    *
+    *   OTROS METODOS
+    *
+    *
+    */
+
+    private void addFlags(Intent pIntent)
+    {
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }
