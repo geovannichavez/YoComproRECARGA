@@ -113,7 +113,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 LatLng location = mGoogleMap.getCameraPosition().target;
                 Log.i(TAG, location.toString());
                 mPresenter.updateSalePntCriteria(location);
-                mPresenter.updateVendorePntCriteria(location);
             }
         });
 
@@ -122,10 +121,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             @Override
             public void onInfoWindowClick(Marker marker)
             {
-                String vendorCode = marker.getTag().toString();
-                Intent requestTopup = new Intent(Home.this, RequestTopup.class);
-                requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
-                startActivity(requestTopup);
+                if(marker.getTag() != null)
+                {
+                    String vendorCode = marker.getTag().toString();
+                    Intent requestTopup = new Intent(Home.this, RequestTopup.class);
+                    requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
+                    startActivity(requestTopup);
+                }
             }
         });
 
@@ -233,14 +235,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     {
         try
         {
-            Log.d(TAG, "updateUserLocationOnMap");
+            Log.d(TAG, "setInitialUserLocation");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(15).build();
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-            mPresenter.salesPointsQuery(currentLocation);
             mPresenter.vendorPointsQuery(currentLocation);
+            mPresenter.salesPointsQuery(currentLocation);
         }
         catch (Exception ex)
         {
@@ -253,11 +255,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     {
         try
         {
-            Log.d(TAG, "setInitialUserLocation");
+            Log.d(TAG, "updateUserLocationOnMap");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
+            mPresenter.updateVendorePntCriteria(currentLocation);
         }
         catch (Exception ex)
         {
@@ -316,7 +319,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             Marker marker = mVendorPointsMarkers.get(pKey);
             marker.setSnippet(vendorCode);
             marker.setTitle(pTitle);
-            marker.setTag(vendorCode);
+            marker.setTag(pSnippet);
         }
         catch (Exception ex)
         {

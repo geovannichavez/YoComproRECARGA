@@ -72,19 +72,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
         }
         else if(!mUserData.UserGrantedDevicePermissions())
         {
-            if(Build.VERSION.SDK_INT >= 23)
-            {
-                Intent permissions = new Intent(mActivity, Permissions.class);
-                this.addFlags(permissions);
-                mContext.startActivity(permissions);
-            }
-            else
-            {
-                mUserData.HasGrantedDevicePermissions(true);
-                Intent selectCountry = new Intent(mActivity, ValidatePhone.class);
-                this.addFlags(selectCountry);
-                mContext.startActivity(selectCountry);
-            }
+            Intent permissions = new Intent(mActivity, Permissions.class);
+            this.addFlags(permissions);
+            mContext.startActivity(permissions);
         }
         else if (!mUserData.UserSelectedCountry())
         {
@@ -270,8 +260,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     @Override
     public void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData)
     {
-        //TODO: Quitar el parámetro del metodo
-        mView.addVendorPointData(pKey, "¡YoVendoRecarga!", pSalePointData.getVendorCode());
+        if(pSalePointData != null)
+            //TODO: Quitar el parámetro del metodo
+            mView.addVendorPointData(pKey, "¡YoVendoRecarga!", pSalePointData.getVendorCode());
     }
 
     @Override

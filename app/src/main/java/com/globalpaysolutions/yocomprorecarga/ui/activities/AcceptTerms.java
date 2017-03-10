@@ -41,6 +41,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         }
         else
         {
+            presenter.grantDevicePermissions();
             accept = new Intent(AcceptTerms.this, ValidatePhone.class);
         }
 

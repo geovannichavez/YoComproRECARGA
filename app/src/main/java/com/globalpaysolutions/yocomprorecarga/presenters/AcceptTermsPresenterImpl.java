@@ -38,4 +38,11 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
         Log.i(TAG, uniqueID);
         this.userData.SaveDeviceID(uniqueID);
     }
+
+    @Override
+    public void grantDevicePermissions()
+    {
+        this.userData = new UserData(this.context);
+        this.userData.HasGrantedDevicePermissions(true);
+    }
 }

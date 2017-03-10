@@ -35,6 +35,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RequestTopupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
@@ -69,6 +70,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     Amount selectedAmount;
     Validation mValidator;
     UserData mUserData;
+    String mVendorCodeExtra = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -80,6 +82,10 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Extras
+        mVendorCodeExtra = getIntent().getStringExtra(Constants.VENDOR_CODE_REQUEST_EXTRA);
+
+        //Views
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
@@ -155,7 +161,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             etExplPhone.setEnabled(true);
             etExplPhone.setText("");
             etExplPhone.clearFocus();
-            etCodeNumber.setText("");
+            etCodeNumber.setText(mVendorCodeExtra);
             etCodeNumber.clearFocus();
             btnMyNumber.setChecked(false);
 
