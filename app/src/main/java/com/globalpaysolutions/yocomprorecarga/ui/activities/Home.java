@@ -303,10 +303,26 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     @Override
     public void addVendorPoint(String pKey, LatLng pLocation)
     {
-        Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_yvr_marker))
-        );
-        mVendorPointsMarkers.put(pKey, marker);
+        try
+        {
+            Marker marker = mVendorPointsMarkers.get(pKey);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
+                animateMarkerTo(marker, pLocation);
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_yvr_marker))
+                );
+                mVendorPointsMarkers.put(pKey, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -345,9 +361,20 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     @Override
     public void removeVendorPoint(String pKey)
     {
-        Marker marker = mVendorPointsMarkers.get(pKey);
-        marker.remove();
-        mVendorPointsMarkers.remove(pKey);
+        try
+        {
+            Marker marker = mVendorPointsMarkers.get(pKey);
+            marker.remove();
+            mVendorPointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

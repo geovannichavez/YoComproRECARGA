@@ -1,18 +1,23 @@
 <resources>
     <string name="app_name">Yo Compro RECARGA</string>
 
+
     <!--    ACCEPT TERMS    -->
     <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
+
 
     <!--    PERMISSIONS     -->
     <string name="label_permissions_title">Concede Permisos</string>
     <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus carácteristicas. Haz click en el siguiente botón</string>
     <string name="toast_permissions_denied">Permisos denegados. Inténtalo de nuevo.</string>
+
+
     <!--    VALIDATE PHONE-->
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
     <string name="label_country">País</string>
     <string name="label_country_code">Cód.</string>
     <string name="label_title_select_country">Seleccione país</string>
+
 
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
@@ -20,6 +25,7 @@
     <string name="dialog_success_token_validation_message">Se ha validado tu número de teléfono exitosamente.</string>
     <string name="error_title_incorrect_token">CÓDIGO</string>
     <string name="error_label_incorrect_token">Código incorrecto, inténtalo nuevamente.</string>
+
 
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
@@ -33,12 +39,14 @@
     <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
     <string name="label_become_a_vendor"><u>¿Quieres ser un vendedor? Click Aquí</u></string>
 
+
     <!--    HOME    -->
     <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
     <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
     <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
+
 
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
@@ -52,11 +60,13 @@
     <string name="button_cancel">Cancelar</string>
     <string name="button_retry">Reintentar</string>
 
+
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione...</string>
     <string name="hint_your_phone_number"><font size="16">TU TELÉFONO</font></string>
     <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
+
 
     <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
@@ -76,6 +86,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!--    VALIDATIONS -->
     <string name="validation_not_valid_phone_message">Teléfono no válido</string>
