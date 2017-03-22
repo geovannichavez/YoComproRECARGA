@@ -11,6 +11,12 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
+        //OneSignal
+        manifestPlaceholders = [onesignal_app_id: "1ec1e355-543b-4e69-8651-d2d0ac579797",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
+
     }
     buildTypes {
         release {
@@ -27,12 +33,13 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
 
     //Google Maps
-    //compile 'com.google.android.gms:play-services-maps:10.0.1'
     compile 'com.google.android.gms:play-services-maps:10.0.1'
 
     //Google Location API
-    //compile 'com.google.android.gms:play-services-location:9.8.0'
     compile 'com.google.android.gms:play-services-location:10.0.1'
+
+    //Google GCM
+    compile 'com.google.android.gms:play-services-gcm:10.0.1'
 
     //Google Maps Utilities
     compile 'com.google.maps.android:android-maps-utils:0.5+'
@@ -52,6 +59,9 @@ dependencies {
 
     //GeoFire
     compile 'com.firebase:geofire-android:2.1.1'
+
+    //OneSignal
+    compile 'com.onesignal:OneSignal:3.+@aar'
 }
 
 
