@@ -1,7 +1,10 @@
 package com.globalpaysolutions.yocomprorecarga.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.ui.activities.NotificationDetail;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
@@ -14,8 +17,15 @@ import org.json.JSONObject;
 
 public class OneSignalNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler
 {
-    // This fires when a notification is opened by tapping on it.
+    private static final String TAG = OneSignalNotificationOpenedHandler.class.getSimpleName();
+    private Context mContext;
 
+    public OneSignalNotificationOpenedHandler(Context pContext)
+    {
+        this.mContext = pContext;
+    }
+
+    // This fires when a notification is opened by tapping on it.
     @Override
     public void notificationOpened(OSNotificationOpenResult result)
     {
@@ -27,24 +37,24 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
         {
             customKey = data.optString("customkey", null);
             if (customKey != null)
-                Log.i("OneSignalExample", "customkey set with value: " + customKey);
+                Log.i(TAG, "customkey set with value: " + customKey);
         }
 
         if (actionType == OSNotificationAction.ActionType.ActionTaken)
-            Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
+            Log.i(TAG, "Button pressed with id: " + result.action.actionID);
 
-        // The following can be used to open an Activity of your choice.
-        // Replace - getApplicationContext() - with any Android Context.
-        // Intent intent = new Intent(getApplicationContext(), YourActivity.class);
-        // intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-        // startActivity(intent);
+        try
+        {
+            Intent intent = new Intent(mContext, NotificationDetail.class);
+            intent.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, result.notification.payload.title);
+            intent.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(intent);
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
-        // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
-        //   if you are calling startActivity above.
-     /*
-        <application ...>
-          <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
-        </application>
-     */
     }
 }

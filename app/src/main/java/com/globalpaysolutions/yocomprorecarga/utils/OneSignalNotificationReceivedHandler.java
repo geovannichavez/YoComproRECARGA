@@ -13,6 +13,8 @@ import org.json.JSONObject;
 
 public class OneSignalNotificationReceivedHandler implements OneSignal.NotificationReceivedHandler
 {
+    private static final String TAG = OneSignalNotificationReceivedHandler.class.getSimpleName();
+
     @Override
     public void notificationReceived(OSNotification notification)
     {
@@ -23,7 +25,7 @@ public class OneSignalNotificationReceivedHandler implements OneSignal.Notificat
         {
             customKey = data.optString("customkey", null);
             if (customKey != null)
-                Log.i("OneSignalExample", "customkey set with value: " + customKey);
+                Log.i(TAG, "customkey set with value: " + customKey);
         }
     }
 }

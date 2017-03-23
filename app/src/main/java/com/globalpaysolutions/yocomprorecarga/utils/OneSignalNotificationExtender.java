@@ -16,6 +16,7 @@ import com.onesignal.OSNotificationReceivedResult;
 public class OneSignalNotificationExtender extends NotificationExtenderService
 {
     final static String TAG = OneSignalNotificationExtender.class.getSimpleName();
+
     final static String GROUP_KEY_NOTIF = "yocomprorecarga_default_notification";
 
     @Override

@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.core;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
@@ -14,7 +15,6 @@ import com.onesignal.OneSignal;
 public class YoComproRecargaApplication extends Application
 {
     private static YoComproRecargaApplication appSingleton;
-
     public static YoComproRecargaApplication getInstance()
     {
         return appSingleton;
@@ -34,7 +34,7 @@ public class YoComproRecargaApplication extends Application
 
         //OneSignal Required Code
         OneSignal.startInit(this)
-                .setNotificationOpenedHandler(new OneSignalNotificationOpenedHandler())
+                .setNotificationOpenedHandler(new OneSignalNotificationOpenedHandler(this))
                 .setNotificationReceivedHandler(new OneSignalNotificationReceivedHandler())
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .init();
