@@ -1,4 +1,3 @@
-
 package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.BroadcastReceiver;
@@ -25,41 +24,44 @@ public class SmsReceiver extends BroadcastReceiver
         final Bundle bundle = intent.getExtras();
         mUserData = new UserData(context);
 
-        try
+        if (!mUserData.UserVerifiedPhone())
         {
-            if (bundle != null)
+            try
             {
-                Object[] pdusObjetc = (Object[]) bundle.get("pdus");
-
-                for (Object aPdusObj : pdusObjetc)
+                if (bundle != null)
                 {
-                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
+                    Object[] pdusObjetc = (Object[]) bundle.get("pdus");
 
-                    String message = currentMessage.getDisplayMessageBody();
-                    String arr[] = message.split(" ", 2);
-                    String firstWord = arr[0];
-
-                    if(!firstWord.equals("YoComproRecarga"))
+                    for (Object aPdusObj : pdusObjetc)
                     {
-                        return;
+                        SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) aPdusObj);
+
+                        String message = currentMessage.getDisplayMessageBody();
+                        String arr[] = message.split(" ", 2);
+                        String firstWord = arr[0];
+
+                        if (!firstWord.equals("YoComproRecarga"))
+                        {
+                            return;
+                        }
+
+                        Log.e(TAG, "Received SMS: " + message + ", Sender: " + firstWord);
+
+                        String verificationCode = getVerificationCode(message);
+
+                        Log.e(TAG, "Token received: " + verificationCode);
+
+                        Intent httpIntent = new Intent(context, TokenInputService.class);
+                        httpIntent.putExtra("token", verificationCode);
+                        context.startService(httpIntent);
+
                     }
-
-                    Log.e(TAG, "Received SMS: " + message + ", Sender: " + firstWord);
-
-                    String verificationCode = getVerificationCode(message);
-
-                    Log.e(TAG, "Token received: " + verificationCode);
-
-                    Intent httpIntent = new Intent(context, TokenInputService.class);
-                    httpIntent.putExtra("token", verificationCode);
-                    context.startService(httpIntent);
-
                 }
             }
-        }
-        catch (Exception e)
-        {
-            Log.e(TAG, "Exception: " + e.getMessage());
+            catch (Exception e)
+            {
+                Log.e(TAG, "Exception: " + e.getMessage());
+            }
         }
     }
 
