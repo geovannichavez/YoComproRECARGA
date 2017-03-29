@@ -81,7 +81,7 @@
                     android:layout_height="52dp"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="fitXY"
-                    android:onClick="OpenCamera"
+                    android:onClick="CapturePrize"
                     android:src="@drawable/ic_virtual_reality"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
             </LinearLayout>

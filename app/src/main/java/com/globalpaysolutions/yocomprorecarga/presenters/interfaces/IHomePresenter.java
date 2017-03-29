@@ -25,4 +25,7 @@ public interface IHomePresenter
 
     void vendorPointsQuery(LatLng pLocation);
     void updateVendorePntCriteria(LatLng pLocation);
+
+    void prizePointsQuery(LatLng pLocation);
+    void updatePrizePntCriteria(LatLng pLocation);
 }

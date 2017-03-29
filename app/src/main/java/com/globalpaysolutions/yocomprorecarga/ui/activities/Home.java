@@ -59,6 +59,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     final private int REQUEST_ACCESS_FINE_LOCATION = 3;
     private Map<String, Marker> mSalesPointsMarkers;
     private Map<String, Marker> mVendorPointsMarkers;
+    private Map<String, Marker> mGoldPointsMarkers;
+    private Map<String, Marker> mSilverPointsMarkers;
+    private Map<String, Marker> mBronzePointsMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,6 +74,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
         mSalesPointsMarkers = new HashMap<>();
         mVendorPointsMarkers = new HashMap<>();
+        mGoldPointsMarkers = new HashMap<>();
+        mSilverPointsMarkers = new HashMap<>();
+        mBronzePointsMarkers = new HashMap<>();
 
         btnRequestTopup = (Button) findViewById(R.id.btnRequestTopoup);
         btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
@@ -243,6 +249,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
             mPresenter.vendorPointsQuery(currentLocation);
             mPresenter.salesPointsQuery(currentLocation);
+            mPresenter.prizePointsQuery(currentLocation);
+
         }
         catch (Exception ex)
         {
@@ -378,6 +386,180 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     }
 
     @Override
+    public void addGoldPoint(String pKey, LatLng pLocation)
+    {
+        try
+        {
+            Marker marker = mGoldPointsMarkers.get(pKey);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_gold))
+                );
+                mGoldPointsMarkers.put(pKey, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addGoldPointData(String pKey, String pTitle, String pSnippet)
+    {
+        try
+        {
+            Marker marker = mGoldPointsMarkers.get(pKey);
+            marker.setSnippet(pSnippet);
+            marker.setTitle(pTitle);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeGoldPoint(String pKey)
+    {
+        try
+        {
+            Marker marker = mGoldPointsMarkers.get(pKey);
+            marker.remove();
+            mGoldPointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addSilverPoint(String pKey, LatLng pLocation)
+    {
+        try
+        {
+            Marker marker = mSilverPointsMarkers.get(pKey);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_silver))
+                );
+                mSilverPointsMarkers.put(pKey, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addSilverPointData(String pKey, String pTitle, String pSnippet)
+    {
+        try
+        {
+            Marker marker = mSilverPointsMarkers.get(pKey);
+            marker.setSnippet(pSnippet);
+            marker.setTitle(pTitle);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeSilverPoint(String pKey)
+    {
+        try
+        {
+            Marker marker = mSilverPointsMarkers.get(pKey);
+            marker.remove();
+            mSilverPointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addBronzePoint(String pKey, LatLng pLocation)
+    {
+        try
+        {
+            Marker marker = mBronzePointsMarkers.get(pKey);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_bronze))
+                );
+                mBronzePointsMarkers.put(pKey, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addBronzePointData(String pKey, String pTitle, String pSnippet)
+    {
+        try
+        {
+            Marker marker = mBronzePointsMarkers.get(pKey);
+            marker.setSnippet(pSnippet);
+            marker.setTitle(pTitle);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeBronzePoint(String pKey)
+    {
+        try
+        {
+            Marker marker = mBronzePointsMarkers.get(pKey);
+            marker.remove();
+            mBronzePointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
         switch (requestCode)
@@ -426,7 +608,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         startActivity(requestTopup);
     }
 
-    public void OpenCamera(View view)
+    public void CapturePrize(View view)
     {
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
@@ -439,8 +621,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         {
             try
             {
-                Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(camera);
+                //Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
+                Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
+                startActivity(prizeCaptureAR);
             }
             catch (Exception ex)
             {

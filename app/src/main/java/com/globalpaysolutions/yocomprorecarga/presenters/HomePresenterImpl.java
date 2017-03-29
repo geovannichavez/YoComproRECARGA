@@ -15,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
@@ -170,6 +171,24 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     }
 
     @Override
+    public void prizePointsQuery(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.goldPointsQuery(location);
+        mInteractor.silverPointsQuery(location);
+        mInteractor.bronzePointsQuery(location);
+    }
+
+    @Override
+    public void updatePrizePntCriteria(LatLng pLocation)
+    {
+        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        mInteractor.goldPointsUpdateCriteria(location);
+        mInteractor.silverPointsUpdateCriteria(location);
+        mInteractor.bronzePointsUpdateCriteria(location);
+    }
+
+    @Override
     public void onMapReady()
     {
         connnectToLocationService();
@@ -243,6 +262,42 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
 
     }
 
+    @Override
+    public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation)
+    {
+        mView.addGoldPoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_goldPoint_onKeyExited(String pKey)
+    {
+        mView.removeGoldPoint(pKey);
+    }
+
+    @Override
+    public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation)
+    {
+        mView.addSilverPoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_silverPoint_onKeyExited(String pKey)
+    {
+        mView.removeSilverPoint(pKey);
+    }
+
+    @Override
+    public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation)
+    {
+        mView.addBronzePoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_bronzePoint_onKeyExited(String pKey)
+    {
+        mView.removeBronzePoint(pKey);
+    }
+
     // FIREBASE STATIC POINTS
     @Override
     public void fb_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
@@ -269,6 +324,47 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
     {
 
+    }
+
+    //  FIREBASE GOLD POINTS
+    @Override
+    public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
+    {
+        if(pGoldPointData != null)
+            mView.addGoldPointData(pKey, pGoldPointData.getCoins(), pGoldPointData.getDetail());
+    }
+
+    @Override
+    public void fb_goldPoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "GoldPoint DatabaseError: OnCancelled Fired!");
+    }
+
+    //  FIREBASE SILVER POINTS
+    @Override
+    public void fb_silverPoint_onDataChange(String pKey, LocationPrizeYCRData pSilverPointData)
+    {
+        if(pSilverPointData != null)
+            mView.addSilverPointData(pKey, pSilverPointData.getCoins(), pSilverPointData.getDetail());
+    }
+
+    @Override
+    public void fb_silverPoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "SilverPoint DatabaseError: OnCancelled Fired!");
+    }
+
+    @Override
+    public void fb_bronzePoint_onDataChange(String pKey, LocationPrizeYCRData pBronzePointData)
+    {
+        if(pBronzePointData != null)
+            mView.addBronzePointData(pKey, pBronzePointData.getCoins(), pBronzePointData.getDetail());
+    }
+
+    @Override
+    public void fb_bronzePoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "BronzePoint DatabaseError: OnCancelled Fired!");
     }
 
     /*

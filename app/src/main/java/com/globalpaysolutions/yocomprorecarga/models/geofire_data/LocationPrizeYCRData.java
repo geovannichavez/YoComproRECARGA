@@ -40,6 +40,11 @@ public class LocationPrizeYCRData
         this.detail = detail;
     }
 
+    public LocationPrizeYCRData()
+    {
+
+    }
+
     public LocationPrizeYCRData(String pBrand, String pCoins, String pDetail)
     {
         this.brand = pBrand;

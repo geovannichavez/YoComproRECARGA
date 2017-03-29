@@ -9,7 +9,7 @@ init: function initFn() {
     //this.createModelBronzeAtLocation(13.685976, -89.242948,"Bronce");
     //this.createModelGoldAtLocation(13.685525, -89.244185,"Oro");
     //this.createModelSilverAtLocation(13.684915, -89.241423,"Plata");
-    this.createModelAtLocation();
+    //this.createModelAtLocation();
 
 },
    

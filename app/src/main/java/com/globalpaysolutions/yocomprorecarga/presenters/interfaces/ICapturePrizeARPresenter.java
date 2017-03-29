@@ -6,4 +6,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface ICapturePrizeARPresenter
 {
+    void initialize();
 }

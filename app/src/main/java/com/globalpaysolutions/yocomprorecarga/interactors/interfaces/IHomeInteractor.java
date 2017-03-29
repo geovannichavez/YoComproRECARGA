@@ -15,4 +15,11 @@ public interface IHomeInteractor
     void salesPointsUpdateCriteria(GeoLocation pLocation);
     void vendorPointsQuery(GeoLocation pLocation);
     void vendorPointsUpdateCriteria(GeoLocation pLocation);
+
+    void goldPointsQuery(GeoLocation pLocation);
+    void goldPointsUpdateCriteria(GeoLocation pLocation);
+    void silverPointsQuery(GeoLocation pLocation);
+    void silverPointsUpdateCriteria(GeoLocation pLocation);
+    void bronzePointsQuery(GeoLocation pLocation);
+    void bronzePointsUpdateCriteria(GeoLocation pLocation);
 }
