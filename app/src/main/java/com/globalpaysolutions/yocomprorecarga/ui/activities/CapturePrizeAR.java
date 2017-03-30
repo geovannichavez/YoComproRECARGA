@@ -1,13 +1,12 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
-import com.google.android.gms.maps.model.LatLng;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
@@ -28,6 +27,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
 
         mPresenter = new CapturePrizeARPResenterImpl(this, this, this);
+        mPresenter.initialize();
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
@@ -48,23 +48,33 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public void initialize()
-    {
 
     }
 
     @Override
-    public void updateUserLocation(LatLng pLocation)
+    public void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy)
     {
-
+        try
+        {
+            this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void locationManagerConnected(LatLng pLocation)
+    public void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy)
     {
-
+        try
+        {
+            this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
