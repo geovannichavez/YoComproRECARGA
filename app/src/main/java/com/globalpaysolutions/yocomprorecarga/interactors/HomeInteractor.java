@@ -7,6 +7,7 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -36,27 +37,14 @@ public class HomeInteractor implements IHomeInteractor
     private DatabaseReference mVendorPoints = mRootReference.child("YVR");
     private DatabaseReference mDataVendorPoints = mRootReference.child("dataYVR");
 
-    private DatabaseReference mGoldPoints = mRootReference.child("locationGoldYCR");
-    private DatabaseReference mGoldPointsData = mRootReference.child("locationGoldYCRData");
-    private DatabaseReference mSilverPoints = mRootReference.child("locationSilverYCR");
-    private DatabaseReference mSilverPointsData = mRootReference.child("locationSilverYCRData");
-    private DatabaseReference mBronzePoints = mRootReference.child("locationBronzeYCR");
-    private DatabaseReference mBronzePointsData = mRootReference.child("locationBronzeYCRData");
-
 
     //GeoFire
     private GeoFire mSalesPntsRef;
     private GeoFire mVendorPntsRef;
-    private GeoFire mGoldPointsRef;
-    private GeoFire mSilverPointsRef;
-    private GeoFire mBronzePointsRef;
 
+    //GeoFire Queries
     private GeoQuery mSalesPntsQuery;
     private GeoQuery mVendorPntsQuery;
-    private GeoQuery mGoldPointsQuery;
-    private GeoQuery mSilverPointsQuery;
-    private GeoQuery mBronzePointsQuery;
-
 
     public HomeInteractor(Context pContext, HomeListener pListener)
     {
@@ -64,17 +52,12 @@ public class HomeInteractor implements IHomeInteractor
         mHomeListener = pListener;
     }
 
-
     @Override
-    public void intializeGeolocation()
+    public void initializeGeolocation()
     {
         //GeoFire
         mSalesPntsRef = new GeoFire(mSalesPoints);
         mVendorPntsRef = new GeoFire(mVendorPoints);
-
-        mGoldPointsRef = new GeoFire(mGoldPoints);
-        mSilverPointsRef = new GeoFire(mSilverPoints);
-        mBronzePointsRef = new GeoFire(mBronzePoints);
     }
 
     @Override
@@ -131,86 +114,7 @@ public class HomeInteractor implements IHomeInteractor
         }
     }
 
-    @Override
-    public void goldPointsQuery(GeoLocation pLocation)
-    {
-        try
-        {
-            mGoldPointsQuery = mGoldPointsRef.queryAtLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-            mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
 
-    @Override
-    public void goldPointsUpdateCriteria(GeoLocation pLocation)
-    {
-        try
-        {
-            mGoldPointsQuery.setLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void silverPointsQuery(GeoLocation pLocation)
-    {
-        try
-        {
-            mSilverPointsQuery = mSilverPointsRef.queryAtLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-            mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void silverPointsUpdateCriteria(GeoLocation pLocation)
-    {
-        try
-        {
-            mSilverPointsQuery.setLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void bronzePointsQuery(GeoLocation pLocation)
-    {
-        try
-        {
-            mBronzePointsQuery = mBronzePointsRef.queryAtLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-            mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void bronzePointsUpdateCriteria(GeoLocation pLocation)
-    {
-        try
-        {
-            mBronzePointsQuery.setLocation(pLocation, Constants.PRIZES_STOP_RADIUS_KM);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
 
 
     /*
@@ -322,158 +226,6 @@ public class HomeInteractor implements IHomeInteractor
         }
     };
 
-    private GeoQueryEventListener goldPointsListener = new GeoQueryEventListener()
-    {
-
-        @Override
-        public void onKeyEntered(final String key, GeoLocation location)
-        {
-            mGoldPointsData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
-            {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    LocationPrizeYCRData goldPoint = dataSnapshot.getValue(LocationPrizeYCRData.class);
-                    mHomeListener.fb_goldPoint_onDataChange(key, goldPoint);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError)
-                {
-                    mHomeListener.fb_goldPoint_onCancelled(databaseError);
-                }
-            });
-
-            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mHomeListener.gf_goldPoint_onKeyEntered(key, geoLocation);
-        }
-
-        @Override
-        public void onKeyExited(String key)
-        {
-            mHomeListener.gf_goldPoint_onKeyExited(key);
-        }
-
-        @Override
-        public void onKeyMoved(String key, GeoLocation location)
-        {
-            Log.i(TAG, "GoldPoint: Key moved fired.");
-        }
-
-        @Override
-        public void onGeoQueryReady()
-        {
-            Log.i(TAG, "GoldPoint: GeoQuery ready fired.");
-        }
-
-        @Override
-        public void onGeoQueryError(DatabaseError error)
-        {
-            Log.e(TAG, "GoldPoint: GeoFire Database error fired.");
-        }
-    };
-
-    private GeoQueryEventListener silverPointsListener = new GeoQueryEventListener()
-    {
-
-        @Override
-        public void onKeyEntered(final String key, GeoLocation location)
-        {
-            mSilverPointsData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
-            {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    LocationPrizeYCRData silverPoint = dataSnapshot.getValue(LocationPrizeYCRData.class);
-                    mHomeListener.fb_silverPoint_onDataChange(key, silverPoint);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError)
-                {
-                    mHomeListener.fb_silverPoint_onCancelled(databaseError);
-                }
-            });
-
-            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mHomeListener.gf_silverPoint_onKeyEntered(key, geoLocation);
-        }
-
-        @Override
-        public void onKeyExited(String key)
-        {
-            mHomeListener.gf_silverPoint_onKeyExited(key);
-        }
-
-        @Override
-        public void onKeyMoved(String key, GeoLocation location)
-        {
-            Log.i(TAG, "SilverPoint: Key moved fired");
-        }
-
-        @Override
-        public void onGeoQueryReady()
-        {
-            Log.i(TAG, "SilverPoint: GeoQuery ready fired");
-        }
-
-        @Override
-        public void onGeoQueryError(DatabaseError error)
-        {
-            Log.e(TAG, "SilverPoint: Firebase DatabaseError fired");
-        }
-    };
-
-    private GeoQueryEventListener bronzePointsListener = new GeoQueryEventListener()
-    {
-
-        @Override
-        public void onKeyEntered(final String key, GeoLocation location)
-        {
-            mBronzePointsData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
-            {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
-                    LocationPrizeYCRData bronzePoint = dataSnapshot.getValue(LocationPrizeYCRData.class);
-                    mHomeListener.fb_bronzePoint_onDataChange(key, bronzePoint);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError)
-                {
-                    mHomeListener.fb_bronzePoint_onCancelled(databaseError);
-                }
-            });
-
-            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mHomeListener.gf_bronzePoint_onKeyEntered(key, geoLocation);
-        }
-
-        @Override
-        public void onKeyExited(String key)
-        {
-            mHomeListener.gf_bronzePoint_onKeyExited(key);
-        }
-
-        @Override
-        public void onKeyMoved(String key, GeoLocation location)
-        {
-            Log.i(TAG, "BronzePoint: Warning, bronze point key moved fired!");
-        }
-
-        @Override
-        public void onGeoQueryReady()
-        {
-            Log.i(TAG, "BronzePoint: GeoQuery for BronzePoint ready");
-        }
-
-        @Override
-        public void onGeoQueryError(DatabaseError error)
-        {
-            Log.e(TAG, "BronzePoint: DatabaseError for BronzePoint fired");
-        }
-    };
 
 
 }

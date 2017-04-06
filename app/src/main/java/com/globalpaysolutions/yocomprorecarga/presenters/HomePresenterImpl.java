@@ -5,12 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
+import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
@@ -23,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -32,7 +34,7 @@ import com.google.firebase.database.DatabaseError;
  * Created by Josué Chávez on 19/01/2017.
  */
 
-public class HomePresenterImpl implements IHomePresenter, HomeListener, LocationCallback
+public class HomePresenterImpl implements IHomePresenter, HomeListener, FirebasePOIListener, LocationCallback
 {
     private static final String TAG = HomePresenterImpl.class.getSimpleName();
 
@@ -41,6 +43,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     private UserData mUserData;
     private Activity mActivity;
     private HomeInteractor mInteractor;
+    private FirebasePOIInteractor mFirebaseInteractor;
 
     private GoogleLocationApiManager mGoogleLocationApiManager;
 
@@ -51,6 +54,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
         mUserData = new UserData(mContext);
         mActivity = pActivity;
         mInteractor = new HomeInteractor(mContext, this);
+        mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
 
         this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext);
         this.mGoogleLocationApiManager.setLocationCallback(this);
@@ -139,7 +143,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     @Override
     public void intializeGeolocation()
     {
-        mInteractor.intializeGeolocation();
+        mInteractor.initializeGeolocation();
+        mFirebaseInteractor.initializePOIGeolocation();
     }
 
     @Override
@@ -174,18 +179,18 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Location
     public void prizePointsQuery(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        mInteractor.goldPointsQuery(location);
-        mInteractor.silverPointsQuery(location);
-        mInteractor.bronzePointsQuery(location);
+        mFirebaseInteractor.goldPointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.silverPointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.bronzePointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
     }
 
     @Override
     public void updatePrizePntCriteria(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        mInteractor.goldPointsUpdateCriteria(location);
-        mInteractor.silverPointsUpdateCriteria(location);
-        mInteractor.bronzePointsUpdateCriteria(location);
+        mFirebaseInteractor.goldPointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
     }
 
     @Override

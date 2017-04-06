@@ -1,12 +1,20 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DatabaseError;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
@@ -14,6 +22,7 @@ import java.io.IOException;
 
 public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeView
 {
+    private static final String TAG = CapturePrizeAR.class.getSimpleName();
     private ArchitectView architectView;
 
     //MVP
@@ -28,6 +37,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         mPresenter = new CapturePrizeARPResenterImpl(this, this, this);
         mPresenter.initialize();
+        mPresenter.setPOIClickListener();
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
@@ -48,33 +58,182 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
     public void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy)
     {
-        try
-        {
-            this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        LatLng location = new LatLng(pLatitude, pLongitude);
+        this.mPresenter.updatePrizePntCriteria(location);
+        this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
     }
 
     @Override
     public void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy)
     {
-        try
-        {
-            this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        LatLng location = new LatLng(pLatitude, pLongitude);
+        this.mPresenter.prizePointsQuery(location);
+        this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+
     }
+
+    @Override
+    public void onPOIClick()
+    {
+        this.architectView.registerUrlListener(new ArchitectView.ArchitectUrlListener()
+        {
+            @Override
+            public boolean urlWasInvoked(String s)
+            {
+                switch (s)
+                {
+                    case StringsURL.ARCH_GOLD:
+                        mPresenter._genericPOIAction("Oro");
+                        break;
+                    case StringsURL.ARCH_SILVER:
+                        mPresenter._genericPOIAction("Plata");
+                        break;
+                    case StringsURL.ARCH_BRONZE:
+                        mPresenter._genericPOIAction("Bronce");
+                        break;
+                    default:
+                        Log.i(TAG, "No Wikitude-ArchitectView URL Provided");
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void showGenericDialog(DialogViewModel pMessageModel)
+    {
+        CreateDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+    }
+
+    @Override
+    public void onGoldKeyEntered(String pKey, LatLng pLocation)
+    {
+        this.architectView.callJavascript
+                ("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+    }
+
+    @Override
+    public void onGoldKeyExited(String pKey)
+    {
+
+    }
+
+    @Override
+    public void onGoldPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
+    {
+
+    }
+
+    @Override
+    public void onGoldPointCancelled(DatabaseError pDatabaseError)
+    {
+
+    }
+
+    @Override
+    public void onSilverKeyEntered(String pKey, LatLng pLocation)
+    {
+        this.architectView.callJavascript
+                ("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+    }
+
+    @Override
+    public void onSilverKeyExited(String pKey)
+    {
+
+    }
+
+    @Override
+    public void onSilverPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
+    {
+
+    }
+
+    @Override
+    public void onSilverPointCancelled(DatabaseError pDatabaseError)
+    {
+
+    }
+
+    @Override
+    public void onBronzeKeyEntered(String pKey, LatLng pLocation)
+    {
+        this.architectView.callJavascript
+                ("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+
+    }
+
+    @Override
+    public void onBronzeKeyExited(String pKey)
+    {
+
+    }
+
+    @Override
+    public void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
+    {
+
+    }
+
+    @Override
+    public void onBronzePointCancelled(DatabaseError pDatabaseError)
+    {
+
+    }
+
+
+    /*
+    *
+    *   ACTIVITY LIFECYCLES
+    *
+    */
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        architectView.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        architectView.onPause();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        architectView.onDestroy();
+    }
+
+    /*
+    *
+    *
+    * OTROS METODOS
+    *
+    */
+
+    public void CreateDialog(String pTitle, String pMessage, String pButton)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
+        alertDialog.setTitle(pTitle);
+        alertDialog.setMessage(pMessage);
+        alertDialog.setPositiveButton(pButton, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
+
 }

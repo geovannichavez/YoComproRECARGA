@@ -1,5 +1,10 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DatabaseError;
+
 /**
  * Created by Josué Chávez on 29/03/2017.
  */
@@ -8,4 +13,21 @@ public interface CapturePrizeView
 {
     void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy);
     void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy);
+    void onPOIClick();
+    void showGenericDialog(DialogViewModel pMessageModel);
+
+    void onGoldKeyEntered(String pKey, LatLng pLocation);
+    void onGoldKeyExited(String pKey);
+    void onGoldPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
+    void onGoldPointCancelled(DatabaseError pDatabaseError);
+
+    void onSilverKeyEntered(String pKey, LatLng pLocation);
+    void onSilverKeyExited(String pKey);
+    void onSilverPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
+    void onSilverPointCancelled(DatabaseError pDatabaseError);
+
+    void onBronzeKeyEntered(String pKey, LatLng pLocation);
+    void onBronzeKeyExited(String pKey);
+    void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
+    void onBronzePointCancelled(DatabaseError pDatabaseError);
 }

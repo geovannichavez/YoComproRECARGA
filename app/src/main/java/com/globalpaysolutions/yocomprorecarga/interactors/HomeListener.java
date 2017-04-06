@@ -29,17 +29,7 @@ public interface HomeListener
     void gf_vendorPoint_onGeoQueryReady();
     void gf_vendorPoint_onGeoQueryError(DatabaseError pError);
 
-    //GeoFire GoldPoints
-    void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_goldPoint_onKeyExited(String pKey);
 
-    //GeoFire SilverPoints
-    void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_silverPoint_onKeyExited(String pKey);
-
-    //GeoFire BronzePoints
-    void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_bronzePoint_onKeyExited(String pKey);
 
     /*
     *
@@ -55,16 +45,5 @@ public interface HomeListener
     void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData);
     void fb_vendorPoint_onCancelled(DatabaseError databaseError);
 
-    // GeoFire GoldPointsData
-    void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
-    void fb_goldPoint_onCancelled(DatabaseError databaseError);
-
-    // GeoFire SilverPointsData
-    void fb_silverPoint_onDataChange(String pKey, LocationPrizeYCRData pSilverPointData);
-    void fb_silverPoint_onCancelled(DatabaseError databaseError);
-
-    // GeoFire BronzePointsData
-    void fb_bronzePoint_onDataChange(String pKey, LocationPrizeYCRData pBronzePointData);
-    void fb_bronzePoint_onCancelled(DatabaseError databaseError);
 
 }

@@ -10,16 +10,9 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 
 public interface IHomeInteractor
 {
-    void intializeGeolocation();
+    void initializeGeolocation();
     void salesPointsQuery(GeoLocation pLocation);
     void salesPointsUpdateCriteria(GeoLocation pLocation);
     void vendorPointsQuery(GeoLocation pLocation);
     void vendorPointsUpdateCriteria(GeoLocation pLocation);
-
-    void goldPointsQuery(GeoLocation pLocation);
-    void goldPointsUpdateCriteria(GeoLocation pLocation);
-    void silverPointsQuery(GeoLocation pLocation);
-    void silverPointsUpdateCriteria(GeoLocation pLocation);
-    void bronzePointsQuery(GeoLocation pLocation);
-    void bronzePointsUpdateCriteria(GeoLocation pLocation);
 }
