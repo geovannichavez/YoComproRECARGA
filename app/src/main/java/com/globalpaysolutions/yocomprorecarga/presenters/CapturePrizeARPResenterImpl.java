@@ -1,8 +1,15 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -11,12 +18,15 @@ import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.RequirementsAR;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+
+import java.util.HashMap;
 
 /**
  * Created by Josué Chávez on 29/03/2017.
@@ -38,21 +48,39 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mContext = pContext;
         this.mActivity = pActivity;
         this.mView = pView;
-
-        this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
-        this.mGoogleLocationApiManager.setLocationCallback(this);
-
-        this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
-
     }
 
     @Override
     public void initialize()
     {
-        if(!this.mGoogleLocationApiManager.isConnectionEstablished())
-            this.mGoogleLocationApiManager.connect();
+        RequirementsAR requirements = checkARchitectRequirements(mContext);
 
-        mFirebaseInteractor.initializePOIGeolocation();
+        if(requirements.isCompatible())
+        {
+            this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
+            this.mGoogleLocationApiManager.setLocationCallback(this);
+
+            this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
+
+
+            if (!this.mGoogleLocationApiManager.isConnectionEstablished())
+                this.mGoogleLocationApiManager.connect();
+
+            mFirebaseInteractor.initializePOIGeolocation();
+            mView.onPOIClick();
+        }
+        else
+        {
+            String[] components = requirements.getComponents().values().toArray(new String[0]);
+            String line2 = TextUtils.join(", ", components);
+
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.dialog_title_incompatible_device));
+            dialog.setLine1(mContext.getString(R.string.dialog_content_incompatible_device));
+            dialog.setLine2(line2);
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showIncompatibleDeviceDialog(dialog);
+        }
     }
 
     @Override
@@ -74,15 +102,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void setPOIClickListener()
-    {
-        mView.onPOIClick();
-    }
-
-    @Override
     public void _genericPOIAction(String pDisplayText)
     {
-        DialogViewModel dialog  = new DialogViewModel();
+        DialogViewModel dialog = new DialogViewModel();
         dialog.setTitle(String.format("Punto de %1$s", pDisplayText));
         dialog.setLine1(String.format("Ha tocado el Punto de %1$s", pDisplayText));
         dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
@@ -171,5 +193,55 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void fb_bronzePoint_onCancelled(DatabaseError databaseError)
     {
         mView.onBronzePointCancelled(databaseError);
+    }
+
+    /*
+    *
+    *
+    *
+    * OTROS METODOS
+    *
+    *
+    */
+
+    private RequirementsAR checkARchitectRequirements(final Context context)
+    {
+        RequirementsAR result = new RequirementsAR();
+        HashMap<Integer, String> components = new HashMap<>();
+
+        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+
+        //Digital compass
+        final boolean hasCompass = sensorManager != null && sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
+        if(!hasCompass)
+            components.put(1, mContext.getString(R.string.component_compass));
+
+        //GPS Senson
+        final boolean hasGPS = locationManager != null && locationManager.getAllProviders() != null && locationManager.getAllProviders().size() > 0;
+        if(!hasGPS)
+            components.put(2, mContext.getString(R.string.component_gps));
+
+        // openGL-API version for rendering
+        final boolean hasOpenGL20 = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getDeviceConfigurationInfo().reqGlEsVersion >= 0x20000;
+        if(!hasOpenGL20)
+            components.put(3, mContext.getString(R.string.component_opengl));
+
+        // Rear camera
+        final boolean hasRearCam = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        if(!hasRearCam)
+            components.put(4, mContext.getString(R.string.component_camera));
+
+        //Checks if requierements are fulfilled
+        final boolean hasAllRequirements = hasCompass && hasGPS && hasOpenGL20 && hasRearCam;
+        result.setCompatible(hasAllRequirements);
+        result.setComponents(components);
+
+        Log.i(TAG, "All requirements fulfilled? " + String.valueOf(hasAllRequirements));
+        Log.i(TAG, "Device features available:  Compass: " + hasCompass + "; GPS: " + hasGPS + "; OpenGL 2.0: " + hasOpenGL20 + "; Rear Cam: " + hasRearCam + ";");
+
+
+        return result;
+
     }
 }

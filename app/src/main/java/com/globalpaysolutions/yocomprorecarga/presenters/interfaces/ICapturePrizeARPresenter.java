@@ -11,6 +11,5 @@ public interface ICapturePrizeARPresenter
     void initialize();
     void prizePointsQuery(LatLng pLocation);
     void updatePrizePntCriteria(LatLng pLocation);
-    void setPOIClickListener();
     void _genericPOIAction(String pDisplayText);
 }

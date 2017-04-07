@@ -21,6 +21,8 @@ public class StringsURL
 
     public final static String REGISTER_CONSUMER = "registerConsumer";
 
+    public final static String SEND_STORE_AIRTIME_REPORT = "sendLackCreditReport";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

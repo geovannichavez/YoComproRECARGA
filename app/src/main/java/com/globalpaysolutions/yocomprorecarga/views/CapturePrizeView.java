@@ -15,6 +15,7 @@ public interface CapturePrizeView
     void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy);
     void onPOIClick();
     void showGenericDialog(DialogViewModel pMessageModel);
+    void showIncompatibleDeviceDialog(DialogViewModel pMessageModel);
 
     void onGoldKeyEntered(String pKey, LatLng pLocation);
     void onGoldKeyExited(String pKey);

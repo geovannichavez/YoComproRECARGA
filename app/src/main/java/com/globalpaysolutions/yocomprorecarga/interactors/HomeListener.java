@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
@@ -12,6 +13,9 @@ import com.google.firebase.database.DatabaseError;
 
 public interface HomeListener
 {
+    void onStoreAirtimeReportSuccess(SimpleMessageResponse pResponse);
+    void onError(int pCodeStatus, Throwable pThrowable);
+
     /*
     *
     *

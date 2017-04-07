@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 import android.location.Location;
 
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -15,6 +16,11 @@ public interface HomeView
     void checkPermissions();
     void setInitialUserLocation(Location pLocation);
     void updateUserLocationOnMap(Location pLocation);
+    void showCustomStoreReportDialog();
+    void showSuccessMessage(DialogViewModel pMessageModel);
+    void showErrorMessage(DialogViewModel pMessageModel);
+    void showLoadingDialog(String pLabel);
+    void hideLoadingDialog();
 
     void addSalePoint(String pKey, LatLng pLocation);
     void addSalePointData(String pKey, String pTitle, String pSnippet);

@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,8 +25,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
+import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -51,6 +55,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     private Marker currentPositionMarker;
     private Button btnRequestTopup;
     private ImageButton btnVirtualReality;
+    private ProgressDialog progressDialog;
 
     //MVP
     HomePresenterImpl mPresenter;
@@ -133,6 +138,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                     Intent requestTopup = new Intent(Home.this, RequestTopup.class);
                     requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
                     startActivity(requestTopup);
+                }
+                else
+                {
+
                 }
             }
         });
@@ -269,6 +278,62 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
             mPresenter.updateVendorePntCriteria(currentLocation);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showCustomStoreReportDialog()
+    {
+
+    }
+
+    @Override
+    public void showSuccessMessage(DialogViewModel pMessageModel)
+    {
+        CustomDialogCreator.Builder dialogCreator = new CustomDialogCreator.Builder(this, this);
+        dialogCreator.setTitle(pMessageModel.getTitle())
+                .setMessageLine1(pMessageModel.getLine1())
+                .setMessageLine2(pMessageModel.getLine2())
+                .setButton(pMessageModel.getAcceptButton())
+                .setInteraction(CustomDialogScenarios.SUCCESS)
+                .build();
+    }
+
+    @Override
+    public void showErrorMessage(DialogViewModel pMessageModel)
+    {
+        CustomDialogCreator.Builder dialogCreator = new CustomDialogCreator.Builder(this, this);
+        dialogCreator.setTitle(pMessageModel.getTitle())
+                .setMessageLine1(pMessageModel.getLine1())
+                .setMessageLine2(pMessageModel.getLine2())
+                .setButton(pMessageModel.getAcceptButton())
+                .setInteraction(CustomDialogScenarios.ERROR)
+                .build();
+    }
+
+    @Override
+    public void showLoadingDialog(String pLabel)
+    {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(pLabel);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (progressDialog != null && progressDialog.isShowing())
+            {
+                progressDialog.dismiss();
+            }
         }
         catch (Exception ex)
         {

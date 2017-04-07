@@ -1,7 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,7 +39,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         mPresenter = new CapturePrizeARPResenterImpl(this, this, this);
         mPresenter.initialize();
-        mPresenter.setPOIClickListener();
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
@@ -80,35 +81,69 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onPOIClick()
     {
-        this.architectView.registerUrlListener(new ArchitectView.ArchitectUrlListener()
+        try
         {
-            @Override
-            public boolean urlWasInvoked(String s)
+            this.architectView.registerUrlListener(new ArchitectView.ArchitectUrlListener()
             {
-                switch (s)
+                @Override
+                public boolean urlWasInvoked(String s)
                 {
-                    case StringsURL.ARCH_GOLD:
-                        mPresenter._genericPOIAction("Oro");
-                        break;
-                    case StringsURL.ARCH_SILVER:
-                        mPresenter._genericPOIAction("Plata");
-                        break;
-                    case StringsURL.ARCH_BRONZE:
-                        mPresenter._genericPOIAction("Bronce");
-                        break;
-                    default:
-                        Log.i(TAG, "No Wikitude-ArchitectView URL Provided");
-                        break;
+                    switch (s)
+                    {
+                        case StringsURL.ARCH_GOLD:
+                            mPresenter._genericPOIAction("Oro");
+                            break;
+                        case StringsURL.ARCH_SILVER:
+                            mPresenter._genericPOIAction("Plata");
+                            break;
+                        case StringsURL.ARCH_BRONZE:
+                            mPresenter._genericPOIAction("Bronce");
+                            break;
+                        default:
+                            Log.i(TAG, "No Wikitude-ArchitectView URL Provided");
+                            break;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void showGenericDialog(DialogViewModel pMessageModel)
     {
         CreateDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+    }
+
+    @Override
+    public void showIncompatibleDeviceDialog(DialogViewModel pMessageModel)
+    {
+        String message = String.format("%1$s %2$s.", pMessageModel.getLine1(), pMessageModel.getLine2());
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
+        alertDialog.setTitle(pMessageModel.getTitle());
+        alertDialog.setMessage(message);
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton(pMessageModel.getAcceptButton(), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+                Intent returnHome = new Intent(CapturePrizeAR.this, Home.class);
+                returnHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                returnHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                returnHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                returnHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                returnHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                returnHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(returnHome);
+            }
+        });
+        alertDialog.show();
     }
 
     @Override

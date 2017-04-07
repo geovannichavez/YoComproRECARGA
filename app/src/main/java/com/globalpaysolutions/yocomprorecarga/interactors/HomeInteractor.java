@@ -7,18 +7,27 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
+import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
+import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Josué Chávez on 24/02/2017.
@@ -112,6 +121,46 @@ public class HomeInteractor implements IHomeInteractor
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID)
+    {
+        UserData userData = new UserData(mContext);
+        StoreAirtimeReportReqBody airtimeReportReqBody = new StoreAirtimeReportReqBody();
+        airtimeReportReqBody.setStoreName(pStoreName);
+        airtimeReportReqBody.setAddressStore(pAddressStore);
+        airtimeReportReqBody.setLongitude(pLongitude);
+        airtimeReportReqBody.setLatitude(pLatitude);
+        airtimeReportReqBody.setFirebaseID(pFirebaseID);
+        airtimeReportReqBody.setConsumerID(userData.GetConsumerID());
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<SimpleMessageResponse> call = apiService.sendStoreAirtimeReport(airtimeReportReqBody);
+
+        call.enqueue(new Callback<SimpleMessageResponse>()
+        {
+            @Override
+            public void onResponse(Call<SimpleMessageResponse> call, Response<SimpleMessageResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+                    SimpleMessageResponse Message = response.body();
+                    mHomeListener.onStoreAirtimeReportSuccess(Message);
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    mHomeListener.onError(codeResponse, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleMessageResponse> call, Throwable t)
+            {
+                mHomeListener.onError(0, t);
+            }
+        });
     }
 
 

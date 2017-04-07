@@ -10,12 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
@@ -29,6 +32,9 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
@@ -141,6 +147,15 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void sendStoreAirtimeReport(String pStoreName, String pAddress, LatLng pLocation, String pFirebaseID)
+    {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        double longitide = pLocation.longitude;
+        double latitude = pLocation.latitude;
+        mInteractor.sendStoreAirtimeReport(pStoreName, pAddress, longitide, latitude, pFirebaseID);
+    }
+
+    @Override
     public void intializeGeolocation()
     {
         mInteractor.initializeGeolocation();
@@ -222,6 +237,24 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
    *   HomeListener
    *
    */
+
+    @Override
+    public void onStoreAirtimeReportSuccess(SimpleMessageResponse pResponse)
+    {
+        mView.hideLoadingDialog();
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(mContext.getString(R.string.title_success_dialog_store_report));
+        dialog.setLine1(mContext.getString(R.string.dialog_content_report_sent));
+        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        mView.showSuccessMessage(dialog);
+    }
+
+    @Override
+    public void onError(int pCodeStatus, Throwable pThrowable)
+    {
+        mView.hideLoadingDialog();
+        ProcessErrorMessage(pCodeStatus, pThrowable);
+    }
 
     // GEOFIRE STATIC POINTS
     @Override
@@ -388,5 +421,56 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+    }
+
+    private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
+    {
+        DialogViewModel errorResponse = new DialogViewModel();
+
+        try
+        {
+            String Titulo;
+            String Linea1;
+            String Button;
+
+            if (pThrowable != null)
+            {
+                if (pThrowable instanceof SocketTimeoutException)
+                {
+                    Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else if (pThrowable instanceof IOException)
+                {
+                    Titulo = mContext.getString(R.string.error_title_internet_connecttion);
+                    Linea1 = mContext.getString(R.string.error_content_internet_connecttion);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else
+                {
+                    Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+            }
+            else
+            {
+
+                Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                Button = mContext.getString(R.string.button_accept);
+
+            }
+
+            errorResponse.setTitle(Titulo);
+            errorResponse.setLine1(Linea1);
+            errorResponse.setAcceptButton(Button);
+            this.mView.showErrorMessage(errorResponse);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

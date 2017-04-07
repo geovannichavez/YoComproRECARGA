@@ -6,6 +6,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
@@ -44,6 +45,10 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REGISTER_CONSUMER)
     Call<RegisterClientResponse> registerConsumer(@Body RegisterConsumerReqBody pRegisterConsumerBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
+    Call<SimpleMessageResponse> sendStoreAirtimeReport(@Body StoreAirtimeReportReqBody pStoreAirtimeReportReqBody);
 
 
 }

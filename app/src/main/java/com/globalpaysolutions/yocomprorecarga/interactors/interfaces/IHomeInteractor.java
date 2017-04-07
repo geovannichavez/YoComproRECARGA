@@ -15,4 +15,6 @@ public interface IHomeInteractor
     void salesPointsUpdateCriteria(GeoLocation pLocation);
     void vendorPointsQuery(GeoLocation pLocation);
     void vendorPointsUpdateCriteria(GeoLocation pLocation);
+
+    void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
 }
