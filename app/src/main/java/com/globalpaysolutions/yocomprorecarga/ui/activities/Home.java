@@ -115,6 +115,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 mPresenter.salesPointsQuery(location);
             }
         });*/
+
+        //TODO: Verificar si el rendimiento del metodo deprecado es mejor que el metodo actual
         /** Se utiliza el metodo deprecado por cuestiones de rendimiento **/
         mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener()
         {

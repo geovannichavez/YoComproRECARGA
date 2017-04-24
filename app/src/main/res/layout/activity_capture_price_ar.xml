@@ -33,6 +33,25 @@
             android:id="@+id/architectView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
+
+        <RelativeLayout
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnBar"
+                android:scaleType="fitXY"
+                android:layout_marginBottom="24dp"
+                android:layout_gravity="center_horizontal"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/btn_bar_2_coins"
+                android:layout_width="250dp"
+                android:layout_height="67dp"/>
+
+        </RelativeLayout>
+
     </FrameLayout>
 
 </LinearLayout>

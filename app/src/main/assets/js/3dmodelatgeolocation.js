@@ -21,7 +21,8 @@ alertPrueba: function alertPruebaFn(word) {
     
 //Funcion para crear modelo Bronze
 createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,longitude, key) {
-    var modelEarth = new AR.Model("assets/Bronze.wt3", {
+    //var modelEarth = new AR.Model("assets/Bronze.wt3", {
+    var modelEarth = new AR.Model("assets/RegaloVerde2.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,
@@ -51,7 +52,8 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
 //Funcion para crear modelo Silver
 createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,longitude, key) {
 
-    var modelEarth = new AR.Model("assets/Silver.wt3", {
+    //var modelEarth = new AR.Model("assets/Silver.wt3", {
+    var modelEarth = new AR.Model("assets/RegaloVerde2.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,
@@ -82,7 +84,8 @@ createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,lon
 createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitude, key) {
     //alert("Oro");
     
-    var modelEarth = new AR.Model("assets/Gold.wt3", {
+    //var modelEarth = new AR.Model("assets/Gold.wt3", {
+    var modelEarth = new AR.Model("assets/RegaloVerde2.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,

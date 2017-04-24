@@ -24,6 +24,18 @@
     </style>
 
 
+    <!--    ALERT DIALOGS   -->
+    <!--<style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/AppGreen</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:windowTitleStyle">@style/WindowTitleStyle</item>
+        <item name="android:background">@color/ActivityWhiteBackground</item>
+    </style>
+
+    <style name="WindowTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/AppGreen</item>
+        <item name="android:textStyle">bold</item>
+    </style>-->
 
     <style name="HorizontalGrayLine">
         <item name="android:layout_width">match_parent</item>
