@@ -156,6 +156,17 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void onSalePointClick(String pStoreName, String pAddress, LatLng pLocation, String pFirebaseID)
+    {
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(mContext.getString(R.string.dialog_title_airtime_report));
+        dialog.setLine1(mContext.getString(R.string.dialog_content_airtime_report));
+        dialog.setAcceptButton(mContext.getString(R.string.button_yes));
+        dialog.setCanelButton(mContext.getString(R.string.button_no));
+        mView.showCustomStoreReportDialog(dialog, pStoreName, pAddress, pLocation, pFirebaseID);
+    }
+
+    @Override
     public void intializeGeolocation()
     {
         mInteractor.initializeGeolocation();

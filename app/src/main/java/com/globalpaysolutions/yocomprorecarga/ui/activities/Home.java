@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -52,9 +53,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     //Adapters y Layouts
     private Toolbar toolbar;
     private GoogleMap mGoogleMap;
-    private Marker currentPositionMarker;
-    private Button btnRequestTopup;
-    private ImageButton btnVirtualReality;
     private ProgressDialog progressDialog;
 
     //MVP
@@ -67,6 +65,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     private Map<String, Marker> mGoldPointsMarkers;
     private Map<String, Marker> mSilverPointsMarkers;
     private Map<String, Marker> mBronzePointsMarkers;
+    private Map<String, String> mSalePointMarkersFirebaseKeys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,9 +81,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         mGoldPointsMarkers = new HashMap<>();
         mSilverPointsMarkers = new HashMap<>();
         mBronzePointsMarkers = new HashMap<>();
+        mSalePointMarkersFirebaseKeys = new HashMap<>();
 
-        btnRequestTopup = (Button) findViewById(R.id.btnRequestTopoup);
-        btnVirtualReality = (ImageButton) findViewById(R.id.btnVirtualReality);
 
         mPresenter = new HomePresenterImpl(this, this, this);
         mPresenter.checkUserDataCompleted();
@@ -143,7 +141,22 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 }
                 else
                 {
+                    try
+                    {
+                        String firebaseKey = mSalePointMarkersFirebaseKeys.get(marker.getId());
 
+                        if(!TextUtils.isEmpty(firebaseKey))
+                        {
+                            String storeName = marker.getTitle();
+                            String storeAddress = marker.getSnippet();
+                            LatLng location = marker.getPosition();
+                            mPresenter.onSalePointClick(storeName, storeAddress, location, firebaseKey);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });
@@ -288,9 +301,34 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     }
 
     @Override
-    public void showCustomStoreReportDialog()
+    public void showCustomStoreReportDialog(DialogViewModel pStoreReport, final String pStoreName, final String pAddress, final LatLng pLocation, final String pFirebaseID)
     {
-
+        try
+        {
+            AlertDialog.Builder reportDialog = new AlertDialog.Builder(Home.this);
+            reportDialog.setTitle(pStoreReport.getTitle());
+            reportDialog.setMessage(pStoreReport.getLine1());
+            reportDialog.setPositiveButton(pStoreReport.getAcceptButton(), new DialogInterface.OnClickListener()
+            {
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    Log.i(TAG, "Positive dialog button clicked");
+                }
+            });
+            reportDialog.setNegativeButton(pStoreReport.getCanelButton(), new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    mPresenter.sendStoreAirtimeReport(pStoreName, pAddress, pLocation, pFirebaseID);
+                }
+            });
+            reportDialog.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -350,6 +388,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_claro_marker))
         );
         mSalesPointsMarkers.put(pKey, marker);
+        mSalePointMarkersFirebaseKeys.put(marker.getId(), pKey);
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface HomeView
     void checkPermissions();
     void setInitialUserLocation(Location pLocation);
     void updateUserLocationOnMap(Location pLocation);
-    void showCustomStoreReportDialog();
+    void showCustomStoreReportDialog(DialogViewModel pStoreReport, String pStoreName, String pAddress, LatLng pLocation, String pFirebaseID);
     void showSuccessMessage(DialogViewModel pMessageModel);
     void showErrorMessage(DialogViewModel pMessageModel);
     void showLoadingDialog(String pLabel);

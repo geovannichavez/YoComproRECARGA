@@ -16,6 +16,13 @@ public interface CapturePrizeView
     void onPOIClick();
     void showGenericDialog(DialogViewModel pMessageModel);
     void showIncompatibleDeviceDialog(DialogViewModel pMessageModel);
+    void navigatePrizeDetail();
+    void showLoadingDialog(String pLabel);
+    void hideLoadingDialog();
+    void obtainUserProgress();
+
+    void updateIndicators(String pPrizes, String pCoins);
+    void changeBar(int pCoins);
 
     void onGoldKeyEntered(String pKey, LatLng pLocation);
     void onGoldKeyExited(String pKey);

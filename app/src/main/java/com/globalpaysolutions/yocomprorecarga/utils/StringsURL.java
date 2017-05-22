@@ -23,6 +23,10 @@ public class StringsURL
 
     public final static String SEND_STORE_AIRTIME_REPORT = "sendLackCreditReport";
 
+    public final static String EXCHANGE = "Exchange";
+
+    public final static String TRACKING = "Tracking";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

@@ -12,4 +12,7 @@ public interface ICapturePrizeARPresenter
     void prizePointsQuery(LatLng pLocation);
     void updatePrizePntCriteria(LatLng pLocation);
     void _genericPOIAction(String pDisplayText);
+    void attemptExchangeCoin(String pFirebaseID);
+    void _navigateToPrize();
+    void retrieveUserTracking();
 }

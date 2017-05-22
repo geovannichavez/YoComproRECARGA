@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.globalpaysolutions.yocomprorecarga">
+          package="com.globalpaysolutions.yocomprorecarga"> <!-- Permisos de OneSignal -->
+    <!--
+        <uses-permission android:name="com.sec.android.provider.badge.permission.READ" tools:node="remove" />
+        <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" tools:node="remove" />
+        <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" tools:node="remove" />
+        <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" tools:node="remove" />
+        <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" tools:node="remove" />
+        <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" tools:node="remove" />
+        <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" tools:node="remove" />
+        <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" tools:node="remove" />
+        <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" tools:node="remove"/>
+        <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" tools:node="remove" />
+        <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" tools:node="remove" />
+    -->
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="24"/>
 
     <!-- PERMISOS -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -9,7 +25,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    -->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
@@ -40,29 +57,11 @@
         android:name="android.hardware.sensor.compass"
         android:required="true"/>
 
-    <!-- Permisos de OneSignal -->
-    <!--
-        <uses-permission android:name="com.sec.android.provider.badge.permission.READ" tools:node="remove" />
-        <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" tools:node="remove" />
-        <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" tools:node="remove" />
-        <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" tools:node="remove" />
-        <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" tools:node="remove" />
-        <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" tools:node="remove" />
-        <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" tools:node="remove" />
-        <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" tools:node="remove" />
-        <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" tools:node="remove"/>
-        <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" tools:node="remove" />
-        <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" tools:node="remove" />
-    -->
-
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="24"/>
-
     <!-- OpenGL -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
+
 
 
     <application
@@ -149,6 +148,8 @@
         <activity
             android:name=".ui.activities.CapturePrizeAR"
             android:configChanges="screenSize|orientation"/>
+        <activity android:name=".ui.activities.PrizeDetail">
+        </activity>
     </application>
 
 </manifest>

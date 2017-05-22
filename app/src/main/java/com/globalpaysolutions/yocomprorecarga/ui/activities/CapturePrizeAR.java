@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +8,14 @@ import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +28,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 {
     private static final String TAG = CapturePrizeAR.class.getSimpleName();
     private ArchitectView architectView;
+
+    //Views and layouts
+    ProgressDialog progressDialog;
+    TextView tvCoinsEarned;
+    TextView tvPrizesEarned;
+    ImageButton btnBar;
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
@@ -43,6 +51,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
         this.architectView.onCreate(config);
+
+        tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
+        tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
+        btnBar = (ImageButton) findViewById(R.id.btnBar);
 
     }
 
@@ -88,21 +100,22 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 @Override
                 public boolean urlWasInvoked(String s)
                 {
-                    switch (s)
+                    //TODO: Se maneja switch para identificar el premio, sin embargo no es más necesario ya que se usa el FirebaseID
+                    Log.i(TAG, s);
+                    /*switch (s)
                     {
                         case StringsURL.ARCH_GOLD:
-                            mPresenter._genericPOIAction("Oro");
                             break;
                         case StringsURL.ARCH_SILVER:
-                            mPresenter._genericPOIAction("Plata");
                             break;
                         case StringsURL.ARCH_BRONZE:
-                            mPresenter._genericPOIAction("Bronce");
                             break;
                         default:
                             Log.i(TAG, "No Wikitude-ArchitectView URL Provided");
                             break;
-                    }
+                    }*/
+
+
                     return false;
                 }
             });
@@ -144,6 +157,75 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             }
         });
         alertDialog.show();
+    }
+
+    @Override
+    public void navigatePrizeDetail()
+    {
+        Intent prizeDetail = new Intent(this, PrizeDetail.class);
+        startActivity(prizeDetail);
+    }
+
+    @Override
+    public void showLoadingDialog(String pLabel)
+    {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(pLabel);
+        progressDialog.show();
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (progressDialog != null && progressDialog.isShowing())
+            {
+                progressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void obtainUserProgress()
+    {
+        mPresenter.retrieveUserTracking();
+    }
+
+    @Override
+    public void updateIndicators(String pPrizes, String pCoins)
+    {
+        tvPrizesEarned.setText(pPrizes);
+        tvCoinsEarned.setText(pCoins);
+    }
+
+    @Override
+    public void changeBar(int pCoins)
+    {
+        switch (pCoins)
+        {
+            case 0:
+                btnBar.setImageResource(R.drawable.bar_recargo_empty);
+                break;
+            case 1:
+                btnBar.setImageResource(R.drawable.bar_recargo_one);
+                break;
+            case 2:
+                btnBar.setImageResource(R.drawable.bar_recargo_two);
+                break;
+            case 3:
+                btnBar.setImageResource(R.drawable.bar_recargo_three);
+                break;
+            default:
+                btnBar.setImageResource(R.drawable.bar_recargo_empty);
+                break;
+        }
     }
 
     @Override

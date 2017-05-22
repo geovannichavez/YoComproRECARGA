@@ -13,15 +13,21 @@ import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.interactors.CapturePrizeInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.CapturePrizeListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.RequirementsAR;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -32,22 +38,28 @@ import java.util.HashMap;
  * Created by Josué Chávez on 29/03/2017.
  */
 
-public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, FirebasePOIListener, LocationCallback
+public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, FirebasePOIListener, LocationCallback, CapturePrizeListener
 {
     private static final String TAG = CapturePrizeARPResenterImpl.class.getSimpleName();
 
     private Context mContext;
     private AppCompatActivity mActivity;
+    private CapturePrizeInteractor mInteractor;
     private CapturePrizeView mView;
 
     private GoogleLocationApiManager mGoogleLocationApiManager;
     private FirebasePOIInteractor mFirebaseInteractor;
+
+    private Location mCurrentLocation;
+    private UserData mUserData;
 
     public CapturePrizeARPResenterImpl(Context pContext, AppCompatActivity pActivity, CapturePrizeView pView)
     {
         this.mContext = pContext;
         this.mActivity = pActivity;
         this.mView = pView;
+        this.mUserData = new UserData(mContext);
+        this.mInteractor = new CapturePrizeInteractor(mContext, this);
     }
 
     @Override
@@ -57,6 +69,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         if(requirements.isCompatible())
         {
+            this.mView.obtainUserProgress();
             this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
             this.mGoogleLocationApiManager.setLocationCallback(this);
 
@@ -112,15 +125,39 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void attemptExchangeCoin(String pFirebaseID)
+    {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        LatLng currentLocation = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        mInteractor.exchangePrizeData(currentLocation, pFirebaseID, mUserData.GetConsumerID());
+    }
+
+    @Override
+    public void _navigateToPrize()
+    {
+        mView.navigatePrizeDetail();
+    }
+
+    @Override
+    public void retrieveUserTracking()
+    {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        mInteractor.retrieveConsumerTracking();
+    }
+
+    @Override
     public void onLocationChanged(Location location)
     {
         mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+        mCurrentLocation = location;
+
     }
 
     @Override
     public void onLocationApiManagerConnected(Location location)
     {
         mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+        mCurrentLocation = location;
     }
 
     @Override
@@ -194,6 +231,49 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.onBronzePointCancelled(databaseError);
     }
+
+    @Override
+    public void onRetrieveTracking(TrackingResponse pTracking)
+    {
+        mView.hideLoadingDialog();
+        mInteractor.saveUserTracking(pTracking);
+        mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()));
+        mView.changeBar(pTracking.getCurrentCoinsProgress());
+
+    }
+
+    @Override
+    public void onTrackingError(int pCodeStatus, Throwable pThrowable)
+    {
+        mView.hideLoadingDialog();
+        int coins = mUserData.GetConsumerCoins();
+        int prizes = mUserData.GetConsumerPrizes();
+        int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
+        mView.updateIndicators(String.valueOf(prizes), String.valueOf(coins));
+        mView.changeBar(coinsProgress);
+
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+        dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+        mView.showGenericDialog(dialog);
+
+    }
+
+    @Override
+    public void onExchangeCoinSuccess(ExchangeResponse pExchangeResponse)
+    {
+        mView.hideLoadingDialog();
+        //mView.changeBar(pExchangeResponse.);
+    }
+
+    @Override
+    public void onExchangeError(int pCodeStatus, Throwable pThrowable)
+    {
+        mView.hideLoadingDialog();
+    }
+
+
 
     /*
     *

@@ -30,6 +30,10 @@ public class UserData
     private static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
     private static final String KEY_HAS_GRANTED_DEVICE_PERMISSIONS = "usr_has_granted_device_permissions";
 
+    private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
+    private static final String KEY_TOTAL_WON_PRIZES = "usr_total_won_prizes";
+    private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
+
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
 
     public UserData(Context pContext)
@@ -92,6 +96,14 @@ public class UserData
     public void SaveDeviceID(String pDeviceID)
     {
         mEditor.putString(KEY_UNIQUE_DEVICE_ID, pDeviceID);
+        mEditor.commit();
+    }
+
+    public void SaveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress)
+    {
+        mEditor.putInt(KEY_TOTAL_WON_COINS, pCoins);
+        mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
+        mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.commit();
     }
 
@@ -173,6 +185,21 @@ public class UserData
     public int GetConsumerID()
     {
         return mPreferences.getInt(KEY_CONSUMER_ID, 0);
+    }
+
+    public int GetConsumerCoins()
+    {
+        return mPreferences.getInt(KEY_TOTAL_WON_COINS, 0);
+    }
+
+    public int GetConsumerPrizes()
+    {
+        return mPreferences.getInt(KEY_TOTAL_WON_PRIZES, 0);
+    }
+
+    public int GetUserCurrentCoinsProgress()
+    {
+        return mPreferences.getInt(KEY_CURRENT_COINS_PROGRESS, 0);
     }
 
     /*

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_prize_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_general_background"
+    android:orientation="vertical"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizeDetail">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/arToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ApplicationGreenTheme"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat"
+        app:theme="@style/ToolbarTheme">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:src="@drawable/logo_horizontal"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ActivityVerticalExtraCustomMargin"
+            android:paddingLeft="@dimen/ActivityHorizontalExtraCustomMargin"
+            android:paddingRight="@dimen/ActivityHorizontalExtraCustomMargin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            >
+
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
+                android:layout_marginBottom="@dimen/ActivityVerticalCustomMargin"
+                android:src="@drawable/claro_logo"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_congratulations_title"
+
+                android:textColor="@color/AppGreen"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_have_collected_prize"
+                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
+                android:textColor="@color/TextColor"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_prize_title"
+                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
+                android:layout_marginBottom="@dimen/ActivityVerticalCustomMargin"
+                android:textColor="@color/AppGreen"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+
+            <TextView
+                android:id="@+id/lblMoreInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_prize_detail"
+                android:textColor="@color/TextColor"
+                android:textSize="15sp"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
+                android:gravity="center_horizontal"
+                android:text="@string/label_copy_paste_code"
+                android:textColor="@color/TextColor"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/etEmailReferred"
+                android:layout_width="135dp"
+                android:layout_height="42dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/custom_white_edittext_rounded_corners"
+                android:gravity="center_horizontal"
+                android:focusable="false"
+                android:text="@string/edittext_code_example"
+                android:textSize="24sp"
+                android:inputType="textEmailAddress"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_activate_dialing"
+                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
+                android:textColor="@color/TextColor"
+                android:textSize="15sp"
+                android:id="@+id/textView4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_ussd_exchange_number"
+                android:textColor="@color/TextColor"
+                android:textSize="30sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

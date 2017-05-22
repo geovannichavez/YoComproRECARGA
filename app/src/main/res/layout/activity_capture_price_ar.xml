@@ -17,6 +17,7 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat"
         app:theme="@style/ToolbarTheme">
+
         <ImageView
             android:id="@+id/ivLogo"
             android:layout_width="match_parent"
@@ -35,20 +36,81 @@
             android:layout_height="fill_parent"/>
 
         <RelativeLayout
-            android:gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp">
 
-            <ImageButton
-                android:id="@+id/btnBar"
-                android:scaleType="fitXY"
-                android:layout_marginBottom="24dp"
-                android:layout_gravity="center_horizontal"
-                android:background="?attr/selectableItemBackgroundBorderless"
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_recargo_indicator"/>
+
+                <TextView
+                    android:id="@+id/tvCoinsEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:shadowColor="@color/GeneralTextColor"
+                    android:textColor="@color/ActivityWhiteBackground"
+                    android:textSize="18sp"/>
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_recargo_indicator"/>
+
+                <TextView
+                    android:id="@+id/tvPrizesEarned"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:shadowColor="@color/GeneralTextColor"
+                    android:textColor="@color/ActivityWhiteBackground"
+                    android:textSize="18sp"/>
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:src="@drawable/btn_bar_2_coins"
-                android:layout_width="250dp"
-                android:layout_height="67dp"/>
+                android:gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnBar"
+                    android:layout_width="250dp"
+                    android:layout_height="67dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitXY"/>
+            </RelativeLayout>
+
 
         </RelativeLayout>
 

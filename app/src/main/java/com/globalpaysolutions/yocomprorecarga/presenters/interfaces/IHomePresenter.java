@@ -19,6 +19,7 @@ public interface IHomePresenter
     void onMapReady();
     void disconnectFromLocationService();
     void sendStoreAirtimeReport(String pStoreName, String pAddress, LatLng pLocation, String pFirebaseID);
+    void onSalePointClick(String pStoreName, String pAddress, LatLng pLocation, String pFirebaseID);
 
     void intializeGeolocation();
     void salesPointsQuery(LatLng pLocation);

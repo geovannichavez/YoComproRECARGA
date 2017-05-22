@@ -2,13 +2,16 @@ package com.globalpaysolutions.yocomprorecarga.api;
 
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
 import retrofit2.Call;
@@ -49,6 +52,14 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
     Call<SimpleMessageResponse> sendStoreAirtimeReport(@Body StoreAirtimeReportReqBody pStoreAirtimeReportReqBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE)
+    Call<ExchangeResponse> exchangeCoin(@Body ExchangeReqBody pExchangeCoin);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.TRACKING)
+    Call<TrackingResponse> getConsumerTracking(@Header("ConsumerID") int pConsumerID);
 
 
 }

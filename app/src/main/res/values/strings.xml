@@ -53,6 +53,17 @@
     <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
     <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
 
+    <!--    PRIZE DETAIL    -->
+    <string name="label_congratulations_title">¡Felicidades!</string>
+    <string name="label_have_collected_prize">Haz recolectado tu premio de:</string>
+    <string name="label_prize_title">PERSONA FAVORITA</string>
+    <string name="label_prize_detail">Para que le puedas llamar y que te llame ilimitado con tu prepago.</string>
+    <string name="label_copy_paste_code">Copia y pega este código:</string>
+    <string name="edittext_code_example">2901</string>
+    <string name="label_activate_dialing">Actívalo marcando el:</string>
+    <string name="label_ussd_exchange_number">*555#</string>
+
+
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
     <string name="button_login">Registrarme</string>
@@ -64,6 +75,8 @@
     <string name="button_activate">Activar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="button_retry">Reintentar</string>
+    <string name="button_yes">Si</string>
+    <string name="button_no">No</string>
 
 
     <!--    HINTS   -->
@@ -76,6 +89,7 @@
     <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+    <string name="error_content_progress_something_went_wrong_try_again">Algo ha salido mal al obtener los datos de su progreso, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
     <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
     <string name="error_title_vendor_not_found">VENDEDOR NO ENCONTRADO</string>
@@ -84,6 +98,8 @@
 
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
+    <string name="dialog_title_airtime_report">Reporte de Recargas</string>
+    <string name="dialog_content_airtime_report">¿Tenían recargas?</string>
 
 
     <!--    SPECIAL SIGNS   -->

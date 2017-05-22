@@ -43,7 +43,8 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                 indicator: [indicatorDrawable]
                                 },
                                 onClick : function() {
-                                var architectSdkUrl = "architectsdk://Bronze";
+                                //var architectSdkUrl = "architectsdk://Bronze/" + key + '/' + latitude + '/' longitude;
+                                var architectSdkUrl = "architectsdk://Bronze/" + key;
                                 document.location = architectSdkUrl;
                                 }
                                 });
@@ -74,7 +75,8 @@ createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,lon
                                indicator: [indicatorDrawable]
                                },
                                onClick : function() {
-                               var architectSdkUrl = "architectsdk://Silver";
+                               //var architectSdkUrl = "architectsdk://Silver/" + key + '/' + latitude + '/' longitude;
+                               var architectSdkUrl = "architectsdk://Silver/" + key;
                                document.location = architectSdkUrl;
                                }
                                });
@@ -106,7 +108,8 @@ createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitu
                                indicator: [indicatorDrawable]
                                },
                                onClick : function() {
-                               var architectSdkUrl = "architectsdk://Gold";
+                               //var architectSdkUrl = "architectsdk://Gold/" + key + '/' + latitude + '/' longitude;
+                               var architectSdkUrl = "architectsdk://Gold/" + key;
                                document.location = architectSdkUrl;
                                }
                                });
