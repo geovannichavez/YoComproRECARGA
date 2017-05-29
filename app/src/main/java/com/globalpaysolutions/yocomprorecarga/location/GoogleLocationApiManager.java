@@ -31,8 +31,8 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     private static final String TAG = GoogleLocationApiManager.class.getSimpleName();
 
     private static final int DISPLACEMENT = 10;
-    private static final int LOCATION_REQUEST_INTERVAL = 10000;
-    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
+    private static final int LOCATION_REQUEST_INTERVAL = 6000;
+    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 3000;
     private static final int LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
     private Context mContext;

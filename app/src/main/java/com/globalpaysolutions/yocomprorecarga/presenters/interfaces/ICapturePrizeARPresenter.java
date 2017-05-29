@@ -9,10 +9,13 @@ import com.google.android.gms.maps.model.LatLng;
 public interface ICapturePrizeARPresenter
 {
     void initialize();
+    void resume();
     void prizePointsQuery(LatLng pLocation);
     void updatePrizePntCriteria(LatLng pLocation);
     void _genericPOIAction(String pDisplayText);
     void attemptExchangeCoin(String pFirebaseID);
     void _navigateToPrize();
     void retrieveUserTracking();
+    void handleCoinTouch();
+    void handleCoinExchangeKeyUp();
 }

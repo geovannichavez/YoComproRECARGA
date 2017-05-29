@@ -10,6 +10,7 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,8 +28,9 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private Context mContext;
     private FirebasePOIListener mFirebaseListener;
 
+    private UserData mUserData; //TODO: Revisar si es necesario usar Singleton
+
     //Firebase
-    //TODO: Asegurarse que la referencia de Firebase usada en el SDK es un Singleton
     private DatabaseReference mRootReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mGoldPoints = mRootReference.child("locationGoldYCR");
     private DatabaseReference mGoldPointsData = mRootReference.child("locationGoldYCRData");
@@ -51,6 +53,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     {
         this.mContext = pContext;
         this.mFirebaseListener = pListener;
+        this.mUserData = new UserData(mContext);
     }
 
     @Override
@@ -166,13 +169,13 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             });
 
             LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mFirebaseListener.gf_goldPoint_onKeyEntered(key, geoLocation);
+            mFirebaseListener.gf_goldPoint_onKeyEntered(key, geoLocation, mUserData.Is3DCompatibleDevice());
         }
 
         @Override
         public void onKeyExited(String key)
         {
-            mFirebaseListener.gf_goldPoint_onKeyExited(key);
+            mFirebaseListener.gf_goldPoint_onKeyExited(key, mUserData.Is3DCompatibleDevice());
         }
 
         @Override
@@ -217,13 +220,13 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             });
 
             LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mFirebaseListener.gf_silverPoint_onKeyEntered(key, geoLocation);
+            mFirebaseListener.gf_silverPoint_onKeyEntered(key, geoLocation, mUserData.Is3DCompatibleDevice());
         }
 
         @Override
         public void onKeyExited(String key)
         {
-            mFirebaseListener.gf_silverPoint_onKeyExited(key);
+            mFirebaseListener.gf_silverPoint_onKeyExited(key, mUserData.Is3DCompatibleDevice());
         }
 
         @Override
@@ -268,13 +271,13 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             });
 
             LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mFirebaseListener.gf_bronzePoint_onKeyEntered(key, geoLocation);
+            mFirebaseListener.gf_bronzePoint_onKeyEntered(key, geoLocation, mUserData.Is3DCompatibleDevice());
         }
 
         @Override
         public void onKeyExited(String key)
         {
-            mFirebaseListener.gf_bronzePoint_onKeyExited(key);
+            mFirebaseListener.gf_bronzePoint_onKeyExited(key, mUserData.Is3DCompatibleDevice());
         }
 
         @Override

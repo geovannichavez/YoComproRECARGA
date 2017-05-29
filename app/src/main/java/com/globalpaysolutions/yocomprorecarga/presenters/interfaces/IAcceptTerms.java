@@ -8,4 +8,5 @@ public interface IAcceptTerms
 {
     void acceptTerms();
     void grantDevicePermissions();
+    void checkDeviceComponents();
 }

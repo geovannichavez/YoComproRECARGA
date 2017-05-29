@@ -35,6 +35,7 @@ public class UserData
     private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
 
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
+    private static final String KEY_3D_COMPATIBLE_DEVICE = "app_3d_compatible_device";
 
     public UserData(Context pContext)
     {
@@ -107,6 +108,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void Save3DCompatibleValue(boolean isCompatible)
+    {
+        mEditor.putBoolean(KEY_3D_COMPATIBLE_DEVICE, isCompatible);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -125,26 +132,22 @@ public class UserData
 
     public String GetCountryID()
     {
-        String countryId = mPreferences.getString(KEY_COUNTRY_ID, "0");
-        return countryId;
+        return mPreferences.getString(KEY_COUNTRY_ID, "0");
     }
 
     public boolean UserAcceptedTerms()
     {
-        boolean accepted = mPreferences.getBoolean(KEY_HAS_ACCEPTED_TERMS, false);
-        return accepted;
+        return mPreferences.getBoolean(KEY_HAS_ACCEPTED_TERMS, false);
     }
 
     public boolean UserSelectedCountry()
     {
-        boolean country = mPreferences.getBoolean(KEY_HAS_SELECTED_COUNTRY, false);
-        return country;
+        return mPreferences.getBoolean(KEY_HAS_SELECTED_COUNTRY, false);
     }
 
     public boolean UserVerifiedPhone()
     {
-        boolean phone = mPreferences.getBoolean(KEY_HAS_CONFIRMED_PHONE, false);
-        return phone;
+        return mPreferences.getBoolean(KEY_HAS_CONFIRMED_PHONE, false);
     }
 
     public boolean UserGrantedDevicePermissions()
@@ -154,8 +157,7 @@ public class UserData
 
     public String GetUserPhone()
     {
-        String phoneCode = mPreferences.getString(KEY_USER_PHONE, "");
-        return phoneCode;
+        return mPreferences.getString(KEY_USER_PHONE, "");
     }
 
     public String GetUserFormattedPhone()
@@ -167,14 +169,12 @@ public class UserData
 
     public String GetIso3Code()
     {
-        String iso3 = mPreferences.getString(KEY_COUNTRY_IS3CODE, "");
-        return iso3;
+        return mPreferences.getString(KEY_COUNTRY_IS3CODE, "");
     }
 
     public String GetPhoneCode()
     {
-        String phoneCode = mPreferences.getString(KEY_COUNTRY_PHONE_CODE, "");
-        return phoneCode;
+        return mPreferences.getString(KEY_COUNTRY_PHONE_CODE, "");
     }
 
     public String GetDeviceID()
@@ -200,6 +200,11 @@ public class UserData
     public int GetUserCurrentCoinsProgress()
     {
         return mPreferences.getInt(KEY_CURRENT_COINS_PROGRESS, 0);
+    }
+
+    public boolean Is3DCompatibleDevice()
+    {
+        return mPreferences.getBoolean(KEY_3D_COMPATIBLE_DEVICE, false);
     }
 
     /*

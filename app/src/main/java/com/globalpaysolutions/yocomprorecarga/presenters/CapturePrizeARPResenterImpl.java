@@ -1,15 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
-import android.app.ActivityManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.location.Location;
-import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -20,19 +13,15 @@ import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.RequirementsAR;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
-
-import java.util.HashMap;
 
 /**
  * Created by Josué Chávez on 29/03/2017.
@@ -53,6 +42,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     private Location mCurrentLocation;
     private UserData mUserData;
 
+    private boolean m3Dcompatible;
+
     public CapturePrizeARPResenterImpl(Context pContext, AppCompatActivity pActivity, CapturePrizeView pView)
     {
         this.mContext = pContext;
@@ -65,53 +56,67 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void initialize()
     {
-        RequirementsAR requirements = checkARchitectRequirements(mContext);
+        this.mView.obtainUserProgress();
+        this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
+        this.mGoogleLocationApiManager.setLocationCallback(this);
 
-        if(requirements.isCompatible())
+        this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
+
+        if (!this.mGoogleLocationApiManager.isConnectionEstablished())
+            this.mGoogleLocationApiManager.connect();
+
+        mFirebaseInteractor.initializePOIGeolocation();
+
+        m3Dcompatible = mUserData.Is3DCompatibleDevice();
+
+        mView.switchRecarcoinVisible(false);
+
+        if (m3Dcompatible)
         {
-            this.mView.obtainUserProgress();
-            this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
-            this.mGoogleLocationApiManager.setLocationCallback(this);
-
-            this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
-
-
-            if (!this.mGoogleLocationApiManager.isConnectionEstablished())
-                this.mGoogleLocationApiManager.connect();
-
-            mFirebaseInteractor.initializePOIGeolocation();
             mView.onPOIClick();
         }
         else
         {
-            String[] components = requirements.getComponents().values().toArray(new String[0]);
-            String line2 = TextUtils.join(", ", components);
+            mView.onCoinLongClick();
+            mView.hideArchViewLoadingMessage();
+            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        }
+    }
 
-            DialogViewModel dialog = new DialogViewModel();
-            dialog.setTitle(mContext.getString(R.string.dialog_title_incompatible_device));
-            dialog.setLine1(mContext.getString(R.string.dialog_content_incompatible_device));
-            dialog.setLine2(line2);
-            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showIncompatibleDeviceDialog(dialog);
+    @Override
+    public void resume()
+    {
+        if (!this.mGoogleLocationApiManager.isConnectionEstablished())
+            this.mGoogleLocationApiManager.connect();
+
+        mFirebaseInteractor.initializePOIGeolocation();
+
+        if (!m3Dcompatible)
+        {
+            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            mView.removeBlinkingAnimation();
+            mView.switchRecarcoinVisible(false);
         }
     }
 
     @Override
     public void prizePointsQuery(LatLng pLocation)
     {
+        double radius = (mUserData.Is3DCompatibleDevice()) ? Constants.AR_POI_RADIOS_KM : Constants.RECARSTOP_2D_RADIUS_KM;
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        this.mFirebaseInteractor.goldPointsQuery(location, Constants.AR_POI_RADIOS_KM);
-        this.mFirebaseInteractor.silverPointsQuery(location, Constants.AR_POI_RADIOS_KM);
-        this.mFirebaseInteractor.bronzePointsQuery(location, Constants.AR_POI_RADIOS_KM);
+        this.mFirebaseInteractor.goldPointsQuery(location, radius);
+        this.mFirebaseInteractor.silverPointsQuery(location, radius);
+        this.mFirebaseInteractor.bronzePointsQuery(location, radius);
     }
 
     @Override
     public void updatePrizePntCriteria(LatLng pLocation)
     {
+        double radius = (mUserData.Is3DCompatibleDevice()) ? Constants.AR_POI_RADIOS_KM : Constants.RECARSTOP_2D_RADIUS_KM;
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        this.mFirebaseInteractor.goldPointsUpdateCriteria(location, Constants.AR_POI_RADIOS_KM);
-        this.mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.AR_POI_RADIOS_KM);
-        this.mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.AR_POI_RADIOS_KM);
+        this.mFirebaseInteractor.goldPointsUpdateCriteria(location, radius);
+        this.mFirebaseInteractor.silverPointsUpdateCriteria(location, radius);
+        this.mFirebaseInteractor.bronzePointsUpdateCriteria(location, radius);
     }
 
     @Override
@@ -146,11 +151,25 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void handleCoinTouch()
+    {
+        mView.onCoinTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
+    }
+
+    @Override
+    public void handleCoinExchangeKeyUp()
+    {
+        mView.showToast(mContext.getString(R.string.toast_keep_pressed_three_seconds));
+        mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        mView.blinkRecarcoin();
+        mView.removeRunnableCallback();
+    }
+
+    @Override
     public void onLocationChanged(Location location)
     {
         mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
         mCurrentLocation = location;
-
     }
 
     @Override
@@ -161,39 +180,100 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.onGoldKeyEntered(pKey, pLocation);
+        if (p3DCompatible)
+        {
+            mView.onGoldKeyEntered(pKey, pLocation);
+        }
+        else
+        {
+            mView.onGoldKeyEntered_2D(pKey, pLocation);
+            mView.switchRecarcoinVisible(true);
+            mView.blinkRecarcoin();
+            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        }
+
     }
 
     @Override
-    public void gf_goldPoint_onKeyExited(String pKey)
+    public void gf_goldPoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
-        mView.onGoldKeyExited(pKey);
+        if(!p3DCompatible)
+        {
+            mView.stopVibrate();
+
+            mView.removeBlinkingAnimation();
+            mView.switchRecarcoinVisible(false);
+            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //TODO: Para pruebas
+            mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
+        }
     }
 
     @Override
-    public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.onSilverKeyEntered(pKey, pLocation);
+        if (p3DCompatible)
+        {
+            mView.onSilverKeyEntered(pKey, pLocation);
+        }
+        else
+        {
+            mView.onSilverKeyEntered_2D(pKey, pLocation);
+            mView.switchRecarcoinVisible(true);
+            mView.blinkRecarcoin();
+            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        }
+
     }
 
     @Override
-    public void gf_silverPoint_onKeyExited(String pKey)
+    public void gf_silverPoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
-        mView.onSilverKeyExited(pKey);
+        if(!p3DCompatible)
+        {
+            mView.stopVibrate();
+
+            mView.removeBlinkingAnimation();
+            mView.onSilverKeyExited(pKey);
+            mView.switchRecarcoinVisible(false);
+            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //TODO: Para pruebas
+            mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
+        }
     }
 
     @Override
-    public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.onBronzeKeyEntered(pKey, pLocation);
+        if (p3DCompatible)
+        {
+            mView.onBronzeKeyEntered(pKey, pLocation);
+        }
+        else
+        {
+            mView.onBronzeKeyEntered_2D(pKey, pLocation);
+            mView.switchRecarcoinVisible(true);
+            mView.blinkRecarcoin();
+            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        }
     }
 
     @Override
-    public void gf_bronzePoint_onKeyExited(String pKey)
+    public void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
-        mView.onBronzeKeyExited(pKey);
+        if(!p3DCompatible)
+        {
+            mView.stopVibrate();
+
+            mView.removeBlinkingAnimation();
+            mView.onBronzeKeyExited(pKey);
+            mView.switchRecarcoinVisible(false);
+            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //TODO: Para pruebas
+            mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
+        }
     }
 
     @Override
@@ -239,7 +319,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()));
         mView.changeBar(pTracking.getCurrentCoinsProgress());
-
     }
 
     @Override
@@ -273,55 +352,4 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.hideLoadingDialog();
     }
 
-
-
-    /*
-    *
-    *
-    *
-    * OTROS METODOS
-    *
-    *
-    */
-
-    private RequirementsAR checkARchitectRequirements(final Context context)
-    {
-        RequirementsAR result = new RequirementsAR();
-        HashMap<Integer, String> components = new HashMap<>();
-
-        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        final SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-
-        //Digital compass
-        final boolean hasCompass = sensorManager != null && sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null;
-        if(!hasCompass)
-            components.put(1, mContext.getString(R.string.component_compass));
-
-        //GPS Senson
-        final boolean hasGPS = locationManager != null && locationManager.getAllProviders() != null && locationManager.getAllProviders().size() > 0;
-        if(!hasGPS)
-            components.put(2, mContext.getString(R.string.component_gps));
-
-        // openGL-API version for rendering
-        final boolean hasOpenGL20 = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getDeviceConfigurationInfo().reqGlEsVersion >= 0x20000;
-        if(!hasOpenGL20)
-            components.put(3, mContext.getString(R.string.component_opengl));
-
-        // Rear camera
-        final boolean hasRearCam = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
-        if(!hasRearCam)
-            components.put(4, mContext.getString(R.string.component_camera));
-
-        //Checks if requierements are fulfilled
-        final boolean hasAllRequirements = hasCompass && hasGPS && hasOpenGL20 && hasRearCam;
-        result.setCompatible(hasAllRequirements);
-        result.setComponents(components);
-
-        Log.i(TAG, "All requirements fulfilled? " + String.valueOf(hasAllRequirements));
-        Log.i(TAG, "Device features available:  Compass: " + hasCompass + "; GPS: " + hasGPS + "; OpenGL 2.0: " + hasOpenGL20 + "; Rear Cam: " + hasRearCam + ";");
-
-
-        return result;
-
-    }
 }

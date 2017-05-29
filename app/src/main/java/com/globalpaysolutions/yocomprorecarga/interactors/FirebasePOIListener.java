@@ -11,16 +11,16 @@ import com.google.firebase.database.DatabaseError;
 public interface FirebasePOIListener
 {
     //GeoFire GoldPoints
-    void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_goldPoint_onKeyExited(String pKey);
+    void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
+    void gf_goldPoint_onKeyExited(String pKey, boolean p3DCompatible);
 
     //GeoFire SilverPoints
-    void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_silverPoint_onKeyExited(String pKey);
+    void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
+    void gf_silverPoint_onKeyExited(String pKey, boolean p3DCompatible);
 
     //GeoFire BronzePoints
-    void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation);
-    void gf_bronzePoint_onKeyExited(String pKey);
+    void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
+    void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible);
 
     /*
     *

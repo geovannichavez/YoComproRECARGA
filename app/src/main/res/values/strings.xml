@@ -77,6 +77,10 @@
     <string name="button_retry">Reintentar</string>
     <string name="button_yes">Si</string>
     <string name="button_no">No</string>
+    <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
+    <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
+    <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
+    <string name="toast_bronze_out_of_search_range">BRONCE: Saliste del rango de búsqueda</string>
 
 
     <!--    HINTS   -->
@@ -122,5 +126,6 @@
     <string name="component_gps">GPS</string>
     <string name="component_camera">Cámara</string>
     <string name="component_opengl">OpenGL 2.0</string>
+    <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
 
 </resources>

@@ -146,6 +146,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.activities.CapturePrizeAR"
             android:configChanges="screenSize|orientation"/>
         <activity android:name=".ui.activities.PrizeDetail">

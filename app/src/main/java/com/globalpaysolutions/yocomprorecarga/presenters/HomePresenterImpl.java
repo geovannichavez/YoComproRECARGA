@@ -312,37 +312,37 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
-    public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
         mView.addGoldPoint(pKey, pLocation);
     }
 
     @Override
-    public void gf_goldPoint_onKeyExited(String pKey)
+    public void gf_goldPoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
         mView.removeGoldPoint(pKey);
     }
 
     @Override
-    public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
         mView.addSilverPoint(pKey, pLocation);
     }
 
     @Override
-    public void gf_silverPoint_onKeyExited(String pKey)
+    public void gf_silverPoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
         mView.removeSilverPoint(pKey);
     }
 
     @Override
-    public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation)
+    public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
         mView.addBronzePoint(pKey, pLocation);
     }
 
     @Override
-    public void gf_bronzePoint_onKeyExited(String pKey)
+    public void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
         mView.removeBronzePoint(pKey);
     }

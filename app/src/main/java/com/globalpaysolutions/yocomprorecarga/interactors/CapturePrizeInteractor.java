@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
@@ -48,6 +49,9 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 {
                     TrackingResponse trackingResponse = response.body();
                     mListener.onRetrieveTracking(trackingResponse);
+                    Log.i(TAG, "TotalWinCoins:" + String.valueOf(trackingResponse.getTotalWinCoins())
+                            + ", TotalWinPrizes:" + String.valueOf(trackingResponse.getTotalWinCoins())
+                            + ", CurrentCoinsProgress:" + String.valueOf(trackingResponse.getCurrentCoinsProgress()));
                 }
                 else
                 {

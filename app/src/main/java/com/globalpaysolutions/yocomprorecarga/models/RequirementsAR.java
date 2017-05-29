@@ -27,7 +27,7 @@ public class RequirementsAR
         return components;
     }
 
-    public boolean isCompatible()
+    public boolean is3Dcompatible()
     {
         return compatible;
     }

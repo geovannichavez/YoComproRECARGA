@@ -24,6 +24,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         setContentView(R.layout.activity_accept_terms);
 
         presenter = new AcceptTermsPresenterImpl(this, this, this);
+        presenter.checkDeviceComponents();
 
         btnAccept = (Button) findViewById(R.id.btnAcceptTerms);
 

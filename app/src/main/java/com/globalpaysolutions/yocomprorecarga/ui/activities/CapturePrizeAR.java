@@ -1,15 +1,25 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
@@ -19,6 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Transaction;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
@@ -34,6 +45,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     TextView tvCoinsEarned;
     TextView tvPrizesEarned;
     ImageButton btnBar;
+    ImageButton ivPrize2D;
+    Vibrator mVibrator;
+
+    //Global Variables
+    Animation mAnimation;
+    Handler mHandler;
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
@@ -45,17 +62,20 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         setContentView(R.layout.activity_capture_price_ar);
         this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
 
+        tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
+        tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
+        btnBar = (ImageButton) findViewById(R.id.btnBar);
+        ivPrize2D = (ImageButton) findViewById(R.id.ivPrize2D);
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mAnimation = new AlphaAnimation(1, 0);
+
         mPresenter = new CapturePrizeARPResenterImpl(this, this, this);
         mPresenter.initialize();
+        mHandler = new Handler();
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
         this.architectView.onCreate(config);
-
-        tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
-        tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
-        btnBar = (ImageButton) findViewById(R.id.btnBar);
-
     }
 
     @Override
@@ -124,6 +144,51 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         {
             ex.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void onCoinLongClick()
+    {
+        ivPrize2D.setOnTouchListener(new View.OnTouchListener()
+        {
+            long then;
+            long longClickDuration = Constants.REQUIRED_TIME_TOUCH_MILLISECONDS;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event)
+            {
+                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    then = System.currentTimeMillis();
+
+                    //Stops vibrating and removes animation
+                    mPresenter.handleCoinTouch();
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    if ((System.currentTimeMillis() - then) > longClickDuration)
+                    {
+                        //Long click behavior here
+                        return false;
+                    }
+                    else
+                    {
+                        //Short click behavior here
+                        mPresenter.handleCoinExchangeKeyUp();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void hideArchViewLoadingMessage()
+    {
+        this.architectView.callJavascript("World.worldLoaded()");
     }
 
     @Override
@@ -199,6 +264,74 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
+    public void switchRecarcoinVisible(boolean pVisible)
+    {
+        int visible = (pVisible) ? View.VISIBLE : View.GONE;
+        ivPrize2D.setVisibility(visible);
+    }
+
+    @Override
+    public void blinkRecarcoin()
+    {
+        mAnimation.setDuration(300);
+        mAnimation.setInterpolator(new LinearInterpolator());
+        mAnimation.setRepeatCount(Animation.INFINITE);
+        mAnimation.setRepeatMode(Animation.REVERSE);
+        ivPrize2D.startAnimation(mAnimation);
+    }
+
+    @Override
+    public void makeVibrate(int pVibrationMs, int pSleepMs)
+    {
+        //Resets vibrator if it was already vibrating
+        mVibrator.cancel();
+
+        long[] pattern = {0, pVibrationMs, pSleepMs};
+
+        mVibrator.vibrate(pattern, 0);
+    }
+
+    @Override
+    public void stopVibrate()
+    {
+        try
+        {
+            if(mVibrator != null)
+                mVibrator.cancel();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showToast(String pText)
+    {
+        Toast.makeText(CapturePrizeAR.this, pText, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void removeBlinkingAnimation()
+    {
+        ivPrize2D.clearAnimation();
+    }
+
+    @Override
+    public void onCoinTouch(int pAwait)
+    {
+        mVibrator.cancel();
+        removeBlinkingAnimation();
+        mHandler.postDelayed(runCoinExchange, pAwait);
+    }
+
+    @Override
+    public void removeRunnableCallback()
+    {
+        mHandler.removeCallbacks(runCoinExchange);
+    }
+
+    @Override
     public void updateIndicators(String pPrizes, String pCoins)
     {
         tvPrizesEarned.setText(pPrizes);
@@ -231,14 +364,19 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onGoldKeyEntered(String pKey, LatLng pLocation)
     {
-        this.architectView.callJavascript
-                ("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
     }
 
     @Override
     public void onGoldKeyExited(String pKey)
     {
 
+    }
+
+    @Override
+    public void onGoldKeyEntered_2D(String pKey, LatLng pLocation)
+    {
+        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_gold);
     }
 
     @Override
@@ -256,8 +394,13 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onSilverKeyEntered(String pKey, LatLng pLocation)
     {
-        this.architectView.callJavascript
-                ("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+    }
+
+    @Override
+    public void onSilverKeyEntered_2D(String pKey, LatLng pLocation)
+    {
+        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_silver);
     }
 
     @Override
@@ -281,9 +424,13 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onBronzeKeyEntered(String pKey, LatLng pLocation)
     {
-        this.architectView.callJavascript
-                ("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+    }
 
+    @Override
+    public void onBronzeKeyEntered_2D(String pKey, LatLng pLocation)
+    {
+        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_bronze);
     }
 
     @Override
@@ -315,6 +462,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         super.onResume();
         architectView.onResume();
+        mPresenter.resume();
     }
 
     @Override
@@ -322,6 +470,31 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         super.onPause();
         architectView.onPause();
+
+        try
+        {
+            if(mVibrator != null)
+                mVibrator.cancel();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        try
+        {
+            if(mVibrator != null)
+                mVibrator.cancel();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -329,7 +502,19 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         super.onDestroy();
         architectView.onDestroy();
+
+        try
+        {
+            if(mVibrator != null)
+                mVibrator.cancel();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
+
+
 
     /*
     *
@@ -352,5 +537,23 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         });
         alertDialog.show();
     }
+
+
+    /*
+    *
+    *
+    *   VIBRATOR AUXILIAR RUNNABLE
+    *
+    *
+    */
+    Runnable runCoinExchange = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            mVibrator.vibrate(Constants.ON_EARNED_COIN_SUCCESSFULLY_VIBRATION_MILLISECONDS);
+            mPresenter._navigateToPrize();
+        }
+    };
 
 }
