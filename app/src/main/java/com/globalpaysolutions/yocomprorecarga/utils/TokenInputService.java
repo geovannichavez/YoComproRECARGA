@@ -15,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Home;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
 
 import java.net.SocketTimeoutException;
 
@@ -29,6 +30,7 @@ import retrofit2.Response;
 public class TokenInputService extends IntentService
 {
     private UserData mUserData;
+    private boolean is3Dcompatible;
 
     public TokenInputService()
     {
@@ -53,6 +55,7 @@ public class TokenInputService extends IntentService
     {
         mUserData = new UserData(getApplicationContext());
         int consumerID = mUserData.GetConsumerID();
+        is3Dcompatible = mUserData.Is3DCompatibleDevice();
 
         TokenValidationBody tokenValidation = new TokenValidationBody();
         tokenValidation.setConsumerID(consumerID);
@@ -82,14 +85,25 @@ public class TokenInputService extends IntentService
                         mUserData.HasConfirmedPhone(true);
 
                         //NAVIGATE HOME
-                        Intent home = new Intent(getApplicationContext(), Home.class);
-                        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(home);
+
+                        Intent next = null;
+
+                        if(is3Dcompatible)
+                        {
+                            next = new Intent(getApplicationContext(), Home.class);
+                        }
+                        else
+                        {
+                            next = new Intent(getApplicationContext(), LimitedFunctionality.class);
+                        }
+
+                        next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        next.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(next);
 
                     }
                     catch (Exception ex)

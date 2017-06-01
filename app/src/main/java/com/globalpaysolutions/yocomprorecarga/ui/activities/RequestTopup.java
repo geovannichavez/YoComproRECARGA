@@ -138,6 +138,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         //Llenado de items en el GridView
         try
         {
+            mOperatorsAdapter.clear();
             for (CountryOperator item : countryOperators)
             {
                 mOperatorsAdapter.add(item);

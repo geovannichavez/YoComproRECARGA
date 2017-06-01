@@ -28,6 +28,7 @@ public class PermissionsPresenterImpl implements IPermissions
     private AppCompatActivity mActivity;
     private UserData mUserData;
     private PermissionsView mView;
+    private boolean arCompatible;
 
     public PermissionsPresenterImpl(PermissionsView pView, Context pContext, AppCompatActivity pActivity)
     {

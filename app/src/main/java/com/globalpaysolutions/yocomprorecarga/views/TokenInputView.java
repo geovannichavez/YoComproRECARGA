@@ -13,7 +13,7 @@ public interface TokenInputView
     void dismissLoading();
     void showErrorMessage(ErrorResponseViewModel pErrorMessage);
     void showSucceesTokenValidation();
-    void navigateHome();
+    void navigateHome(boolean p3DCompatible);
     void vibrateOnSuccess();
     void cleanFields();
 }

@@ -278,17 +278,36 @@
                                 android:textSize="14sp"
                                 android:id="@+id/textView3"/>
 
-                            <Button
-                                android:id="@+id/btnEnvar"
+                            <LinearLayout
+                                android:weightSum="10"
+                                android:gravity="center_horizontal"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                                android:background="@drawable/btn_effect_ripple_green"
-                                android:clickable="true"
-                                android:onClick="sendTopupRequest"
-                                android:text="@string/button_request_topup"
-                                android:textColor="@color/ActivityWhiteBackground"/>
+                                android:layout_height="wrap_content">
+
+                                <Button
+                                    android:id="@+id/btnEnvar"
+                                    android:layout_weight="6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:clickable="true"
+                                    android:onClick="sendTopupRequest"
+                                    android:text="@string/button_request_topup"
+                                    android:textColor="@color/ActivityWhiteBackground"/>
+
+                                <Button
+                                    android:id="@+id/btnComprar"
+                                    android:layout_weight="4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:clickable="true"
+                                    android:text="@string/button_buy"
+                                    android:textColor="@color/ActivityWhiteBackground"/>
+                            </LinearLayout>
 
 
                             <TextView

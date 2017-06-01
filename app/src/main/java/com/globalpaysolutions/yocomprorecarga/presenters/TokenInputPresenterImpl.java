@@ -25,12 +25,16 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     private TokenInputView mView;
     private Context mContext;
     private TokenInputInteractor mInteractor;
+    private UserData mUserData;
+    private boolean is3Dcompatible;
 
     public TokenInputPresenterImpl(TokenInputView pView, AppCompatActivity pActivity, Context pContext)
     {
         mView = pView;
         mContext = pContext;
         mInteractor = new TokenInputInteractor(mContext);
+        mUserData = new UserData(mContext);
+        is3Dcompatible = mUserData.Is3DCompatibleDevice();
     }
 
     @Override
@@ -73,7 +77,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         mInteractor.setConfirmedCountry(true);
         mInteractor.setConfirmedPhone(true);
 
-        mView.navigateHome();
+        mView.navigateHome(is3Dcompatible);
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)

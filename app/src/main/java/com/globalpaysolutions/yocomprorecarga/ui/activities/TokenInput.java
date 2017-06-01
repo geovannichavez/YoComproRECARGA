@@ -98,16 +98,33 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     }
 
     @Override
-    public void navigateHome()
+    public void navigateHome(boolean p3DCompatible)
     {
-        Intent home = new Intent(this, Home.class);
-        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(home);
+        try
+        {
+            Intent next = null;
+
+            if(p3DCompatible)
+            {
+                next = new Intent(this, Home.class);
+            }
+            else
+            {
+                next = new Intent(this, LimitedFunctionality.class);
+            }
+
+            next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            next.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(next);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

@@ -9,7 +9,7 @@
     <!--    PERMISSIONS     -->
     <string name="label_permissions_title">Concede Permisos</string>
     <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus carácteristicas. Haz click en el siguiente botón</string>
-    <string name="toast_permissions_denied">Permisos denegados. Inténtalo de nuevo.</string>
+    <string name="toast_permissions_denied">Denegaste los permisos. Inténtalo de nuevo.</string>
 
 
     <!--    VALIDATE PHONE-->
@@ -33,7 +33,7 @@
     <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
     <string name="label_select_operator">Selecciona el operador móvil:</string>
     <string name="label_title_select_amount_dialog">Seleccione un monto</string>
-    <string name="progress_dialog_sending_topup_request">Enviando su solicitud...</string>
+    <string name="progress_dialog_sending_topup_request">Enviando su solicitud…</string>
     <string name="title_success_dialog_label">¡SOLICITUD ENVIADA!</string>
     <string name="content_success_dialog_label_line1">Se ha enviado tu solicitud de recarga al vendedor.</string>
     <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
@@ -63,20 +63,27 @@
     <string name="label_activate_dialing">Actívalo marcando el:</string>
     <string name="label_ussd_exchange_number">*555#</string>
 
+    
+    <!--    LIMITED FUNCTIONALITY    -->
+    <string name="title_limited_functionality">FUNCIONALIDAD LIMITADA</string>
+    <string name="label_limited_functionality_content">Tu dispositivo carece de características necesarias para el funcionamiento de RecarGO! con realidad aumentada (%1$s), por lo que podrás jugar al RecarGO! con una mecánica diferente.</string>
+
 
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
     <string name="button_login">Registrarme</string>
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
+    <string name="button_buy">Comprar</string>
     <string name="button_accept">Aceptar</string>
-    <string name="label_loading_please_wait">Por favor espere...</string>
+    <string name="label_loading_please_wait">Por favor espere…</string>
     <string name="button_verify">Verificar</string>
     <string name="button_activate">Activar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="button_retry">Reintentar</string>
     <string name="button_yes">Si</string>
     <string name="button_no">No</string>
+    <string name="button_whatever">Ni modo</string>
     <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
@@ -84,14 +91,14 @@
 
 
     <!--    HINTS   -->
-    <string name="spinner_select">Seleccione...</string>
+    <string name="spinner_select">Seleccione…</string>
     <string name="hint_your_phone_number"><font size="16">TU TELÉFONO</font></string>
     <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 
 
     <!--    ERRROR MESSAGES  -->
-    <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
+    <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL…</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
     <string name="error_content_progress_something_went_wrong_try_again">Algo ha salido mal al obtener los datos de su progreso, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
