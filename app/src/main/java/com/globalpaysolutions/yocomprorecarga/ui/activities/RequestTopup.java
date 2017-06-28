@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -50,6 +52,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 {
     //Adapters y Layouts
     Button btnEnvar;
+    Button btnComprar;
     TextView tvStoreLink;
     EditText etCodeNumber;
     EditText etExplPhone;
@@ -68,6 +71,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
     //Global variables
     Amount selectedAmount;
+    CountryOperator selectedOperator;
     Validation mValidator;
     UserData mUserData;
     String mVendorCodeExtra = "";
@@ -87,6 +91,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
         //Views
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
+        btnComprar = (Button) findViewById(R.id.btnComprar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
         tvStoreLink = (TextView) findViewById(R.id.tvStoreLink);
@@ -119,9 +124,9 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                final CountryOperator operator = ((CountryOperator) parent.getItemAtPosition(position));
+                selectedOperator = ((CountryOperator) parent.getItemAtPosition(position));
                 presenter.onOperatorSelected(position);
-                presenter.createRequestTopupObject().setOperatorID(String.valueOf(operator.getOperatorID()));
+                presenter.createRequestTopupObject().setOperatorID(String.valueOf(selectedOperator.getOperatorID()));
 
                 selectedAmount = null;
                 lnrSelectAmount.setOnClickListener(new View.OnClickListener()
@@ -129,7 +134,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                     @Override
                     public void onClick(View v)
                     {
-                        presenter.selectAmount(operator);
+                        presenter.selectAmount(selectedOperator);
                     }
                 });
             }
@@ -360,6 +365,24 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                 .build();
     }
 
+    @Override
+    public void launchChromeView(String pURL)
+    {
+        try
+        {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            builder.setToolbarColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
+            customTabsIntent.launchUrl(this, Uri.parse(pURL));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            //TODO: Quitar toast
+            Toast.makeText(this, "_debug info: " + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void setSelectedAmount(Amount pSelected)
     {
         lblSelectedAmount.setText(pSelected.getDescription());
@@ -369,7 +392,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
     public void sendTopupRequest(View view)
     {
-        if(CheckValidation())
+        if(CheckValidation(true))
         {
             String msisdn = mUserData.GetPhoneCode() + etExplPhone.getText().toString().trim();
             msisdn = msisdn.replace("-", "");
@@ -378,6 +401,24 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             presenter.createRequestTopupObject().setTargetPhoneNumber(msisdn);
             presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString().trim());
             presenter.sendTopupRequest();
+        }
+    }
+
+    public void creditCardPayment(View view)
+    {
+        try
+        {
+            if(CheckValidation(false))
+            {
+                String phone = etExplPhone.getText().toString();
+                String amount = selectedAmount.getAmount();
+                String operator = selectedOperator.getName();
+                presenter.creditCardPayment(phone, amount, operator);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 
@@ -436,7 +477,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         mSnackbar.show();
     }
 
-    private boolean CheckValidation()
+    private boolean CheckValidation(boolean pValidateVendorCode)
     {
         boolean valid = true;
 
@@ -462,10 +503,18 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             return false;
         }
 
-        if(!mValidator.isVendorCode(etCodeNumber, true))
+        if(pValidateVendorCode)
         {
-            return false;
+            if(!mValidator.isVendorCode(etCodeNumber, true))
+            {
+                return false;
+            }
         }
+        else
+        {
+            return true;
+        }
+
 
         return valid;
     }

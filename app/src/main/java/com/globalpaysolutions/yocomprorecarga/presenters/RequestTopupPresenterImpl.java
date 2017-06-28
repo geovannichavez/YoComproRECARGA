@@ -13,6 +13,7 @@ import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
 import java.io.IOException;
@@ -125,6 +126,13 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
         this.view.setInitialViewsState();
         this.view.toggleShowRefreshing(true);
         this.interactor.fetchOperators(this);
+    }
+
+    @Override
+    public void creditCardPayment(String pPhone, String pAmount, String pOperatorName)
+    {
+        String url = Constants.POS_YOCOMPRORECARGA;
+        view.launchChromeView(url);
     }
 
 

@@ -151,8 +151,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activities.PrizeDetail">
         </activity>
-        <activity android:name=".ui.activities.LimitedFunctionality"
+        <activity
+            android:name=".ui.activities.LimitedFunctionality"
             android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activities.Authenticate">
         </activity>
     </application>
 

@@ -63,7 +63,7 @@
     <string name="label_activate_dialing">Actívalo marcando el:</string>
     <string name="label_ussd_exchange_number">*555#</string>
 
-    
+
     <!--    LIMITED FUNCTIONALITY    -->
     <string name="title_limited_functionality">FUNCIONALIDAD LIMITADA</string>
     <string name="label_limited_functionality_content">Tu dispositivo carece de características necesarias para el funcionamiento de RecarGO! con realidad aumentada (%1$s), por lo que podrás jugar al RecarGO! con una mecánica diferente.</string>
@@ -134,5 +134,9 @@
     <string name="component_camera">Cámara</string>
     <string name="component_opengl">OpenGL 2.0</string>
     <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
+
+    <!--    AUTHENTICATE    -->
+    <string name="label_welcome_to_ycr">¡Te damos la bienvenida a YoComproRecarga!</string>
+    <string name="label_login_with_facebook">Comprar recargas nunca fue tan facil. Para continuar registrate o inicia sesión con tu cuenta de Facebook.</string>
 
 </resources>

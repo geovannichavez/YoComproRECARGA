@@ -36,4 +36,7 @@ public class Constants
     public static final int ON_EARNED_COIN_SUCCESSFULLY_VIBRATION_MILLISECONDS = 400;
     public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 2000;
 
+    //URLs y URIs
+    public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
+
 }

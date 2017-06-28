@@ -25,4 +25,5 @@ public interface RequestTopupView
     void toggleShowRefreshing(boolean setRefreshing);
     void showSuccessMessage(DialogViewModel pMessageModel);
     void showErrorMessage(DialogViewModel pMessageModel);
+    void launchChromeView(String pURL);
 }

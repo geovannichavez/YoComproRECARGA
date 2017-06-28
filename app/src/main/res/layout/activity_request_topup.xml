@@ -306,6 +306,7 @@
                                     android:background="@drawable/btn_effect_ripple_green"
                                     android:clickable="true"
                                     android:text="@string/button_buy"
+                                    android:onClick="creditCardPayment"
                                     android:textColor="@color/ActivityWhiteBackground"/>
                             </LinearLayout>
 

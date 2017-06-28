@@ -16,4 +16,5 @@ public interface IRequestTopupPresenter
     RequestTopupReqBody createRequestTopupObject();
     void sendTopupRequest();
     void refreshOperators();
+    void creditCardPayment(String pPhone, String pAmount, String pOperatorName);
 }
