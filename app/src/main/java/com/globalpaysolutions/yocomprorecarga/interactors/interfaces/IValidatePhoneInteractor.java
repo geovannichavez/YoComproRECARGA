@@ -10,7 +10,7 @@ public interface IValidatePhoneInteractor
 {
     void fethCountries(ValidatePhoneListener pListener);
 
-    void validatePhone(ValidatePhoneListener pListener, String pMsisdn, String pCountryID);
+    void validatePhone(ValidatePhoneListener pListener, String pPhone, String pCountryID);
 
     void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone, int pConsumerID);
 

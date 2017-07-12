@@ -30,6 +30,8 @@ repositories {
     flatDir{
         dirs 'libs'
     }
+    mavenCentral()
+
 }
 
 dependencies {
@@ -73,6 +75,9 @@ dependencies {
 
     //Chrome TabView
     compile 'com.android.support:customtabs:24.2.1'
+
+    //Facebook SDK
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
 }
 

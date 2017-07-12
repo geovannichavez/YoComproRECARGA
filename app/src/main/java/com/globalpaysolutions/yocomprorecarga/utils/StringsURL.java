@@ -19,13 +19,17 @@ public class StringsURL
 
     public final static String REQUESTTOPUP = "requestTopup";
 
-    public final static String REGISTER_CONSUMER = "registerConsumer";
+    public final static String REGISTER_PHONE_CONSUMER = "registerPhoneConsumer";
 
     public final static String SEND_STORE_AIRTIME_REPORT = "sendLackCreditReport";
 
     public final static String EXCHANGE = "Exchange";
 
     public final static String TRACKING = "Tracking";
+
+    public final static String AUTHENTICATE_CONSUMER = "ConsumerSignin";
+
+    public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";

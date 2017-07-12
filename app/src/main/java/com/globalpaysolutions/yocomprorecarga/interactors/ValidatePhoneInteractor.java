@@ -7,7 +7,7 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IValidatePhoneInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
@@ -62,16 +62,16 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     }
 
     @Override
-    public void validatePhone(final ValidatePhoneListener pListener, String pMsisdn, String pCountryID)
+    public void validatePhone(final ValidatePhoneListener pListener, String pPhone, String pCountryID)
     {
         String deviceID = mUserData.GetDeviceID();
-        RegisterConsumerReqBody registerConsumerBody = new RegisterConsumerReqBody();
-        registerConsumerBody.setConsumerMsisdn(pMsisdn);
-        registerConsumerBody.setCountryId(pCountryID);
-        registerConsumerBody.setDeviceId(deviceID);
+        RegisterPhoneConsumerReqBody registerConsumerBody = new RegisterPhoneConsumerReqBody();
+        registerConsumerBody.setPhone(pPhone);
+        registerConsumerBody.setCountryID(pCountryID);
+        registerConsumerBody.setDeviceID(deviceID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<RegisterClientResponse> call = apiService.registerConsumer(registerConsumerBody);
+        final Call<RegisterClientResponse> call = apiService.registerConsumer(mUserData.getUserAuthenticationKey(), registerConsumerBody);
 
         call.enqueue(new Callback<RegisterClientResponse>()
         {
@@ -100,7 +100,7 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     @Override
     public void saveUserGeneralInfo(String pCountryID, String pIso3Code, String pCountryName, String pPhoneCode, String pPhone, int pConsumerID)
     {
-        mUserData.SaveUserGeneralInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName, pPhone, pConsumerID);
+        mUserData.saveUserPhoneInfo(pCountryID, pPhoneCode, pIso3Code, pCountryName, pPhone, pConsumerID);
     }
 
     @Override

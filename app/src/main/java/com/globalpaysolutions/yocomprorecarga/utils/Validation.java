@@ -30,7 +30,7 @@ public class Validation
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PHONE_REGEX = "\\d{4}-\\d{4}";
     private static final String NAME_REGEX = "^[\\p{L} .'-]+$";
-    private static final String USERNAME_REGEX = "^[_A-Za-z0-9-\\+]{3,15}$";
+    private static final String NICKNAME_REGEX = "^[_A-Za-z0-9-\\.]{3,15}$";
     private static final String AMOUNT_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     private static final String VOUCHER_REGEX = "\\d+$";
     private static final String VENDOR_CODE_REGEX = "^[0-9]{4,5}$";
@@ -124,6 +124,20 @@ public class Validation
         return IsValid(pEdittext, VENDOR_CODE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
 
+    /*
+    *
+    *
+    *   NICKNAME
+    *
+    *
+    */
+    public boolean isValidNickname(EditText pEdittext, boolean pRequired)
+    {
+        String requiredMsg = mContext.getResources().getString(R.string.validation_required_nickname);
+        String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_nickname);
+        return IsValid(pEdittext, NICKNAME_REGEX, requiredMsg, notValidMsg, pRequired);
+    }
+
 
 
     /*
@@ -137,13 +151,13 @@ public class Validation
 
         if (pRequired && !HasText(pEditText))
         {
-            CreateSnackbar(mCoordinatorLayout, pRequiredMsg);
+            createSnackbar(mCoordinatorLayout, pRequiredMsg);
             return false;
         }
 
         if (pRequired && !Pattern.matches(pRegex, text))
         {
-            CreateSnackbar(mCoordinatorLayout, pErrorMessage);
+            createSnackbar(mCoordinatorLayout, pErrorMessage);
             return false;
         }
 
@@ -170,7 +184,7 @@ public class Validation
     *
     */
 
-    private void CreateSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
+    private void createSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
     {
         Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
         View snackbarView = mSnackbar.getView();

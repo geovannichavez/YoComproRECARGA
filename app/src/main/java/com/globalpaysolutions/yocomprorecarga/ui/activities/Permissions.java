@@ -48,8 +48,8 @@ public class Permissions extends AppCompatActivity implements PermissionsView
     {
         try
         {
-            Intent validatePhone = new Intent(this, ValidatePhone.class);
-            startActivity(validatePhone);
+            Intent authenticate = new Intent(this, Authenticate.class);
+            startActivity(authenticate);
         }
         catch (Exception ex)
         {

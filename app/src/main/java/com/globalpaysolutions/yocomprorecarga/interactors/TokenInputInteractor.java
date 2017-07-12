@@ -39,7 +39,7 @@ public class TokenInputInteractor implements ITokenInputInteractor
         tokenValidation.setConsumerID(consumerID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleMessageResponse> call = apiService.requestTokenValidation(tokenValidation);
+        final Call<SimpleMessageResponse> call = apiService.requestTokenValidation(mUserData.getUserAuthenticationKey(), tokenValidation);
 
         call.enqueue(new Callback<SimpleMessageResponse>()
         {

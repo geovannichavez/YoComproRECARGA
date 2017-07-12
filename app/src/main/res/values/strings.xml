@@ -127,6 +127,9 @@
     <string name="validation_required_amount">Debe seleccionar un monto</string>
     <string name="validation_not_valid_vendor_code">El código de vendedor no es válido</string>
     <string name="validation_required_vendor_code">El código de vendedor es requerido</string>
+    <string name="validation_required_nickname">El nickname es requerido.</string>
+    <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
+
 
     <!--    COMPONENTS -->
     <string name="component_compass">Giroscopio</string>
@@ -136,7 +139,23 @@
     <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
 
     <!--    AUTHENTICATE    -->
-    <string name="label_welcome_to_ycr">¡Te damos la bienvenida a YoComproRecarga!</string>
-    <string name="label_login_with_facebook">Comprar recargas nunca fue tan facil. Para continuar registrate o inicia sesión con tu cuenta de Facebook.</string>
+    <string name="label_welcome_to_ycr">¡Bienvenida a YoComproRecarga!</string>
+    <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan facil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+
+
+    <!--    FACEBOOK    -->
+    <string name="facebook_app_id">1738584339775798</string>
+    <string name="fb_login_protocol_scheme">fb1738584339775798</string>
+
+    <!--    NICKNAME    -->
+    <string name="title_nickname">NICKNAME (APODO)</string>
+    <string name="label_content_nickname">Elige un nombre de usuario (apodo) para identificarte. Este nombre se mostrará en las tablas de Rankings y otros contenidos de uso público. Ejemplos:</string>
+    <string name="hint_nickname">Nickname</string>
+    <string name="validation_nickname_already_exists">Este nickname ya está en uso, usa uno diferente.</string>
+    <string-array name="array_nickname_examples">
+        <item>Pepe43</item>
+        <item>jose.luis</item>
+        <item>majo12</item>
+    </string-array>
 
 </resources>

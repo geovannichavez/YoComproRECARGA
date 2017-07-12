@@ -3,11 +3,15 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.RegisterConsumerReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
@@ -39,15 +43,15 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_TOKEN)
-    Call<SimpleMessageResponse> requestTokenValidation(@Body TokenValidationBody pTokenValBody);
+    Call<SimpleMessageResponse> requestTokenValidation(@Header("authenticationKey") String pAuthKey, @Body TokenValidationBody pTokenValBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUESTTOPUP)
     Call<SimpleMessageResponse> requestTopup(@Body RequestTopupReqBody pRequestTopupBody);
 
     @Headers("Content-Type: application/json")
-    @POST(StringsURL.REGISTER_CONSUMER)
-    Call<RegisterClientResponse> registerConsumer(@Body RegisterConsumerReqBody pRegisterConsumerBody);
+    @POST(StringsURL.REGISTER_PHONE_CONSUMER)
+    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey, @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
@@ -60,6 +64,14 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @GET(StringsURL.TRACKING)
     Call<TrackingResponse> getConsumerTracking(@Header("ConsumerID") int pConsumerID);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.AUTHENTICATE_CONSUMER)
+    Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticaReqBody pAuthenticateBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.VALIDATE_NICKNAME)
+    Call<SimpleResultResponse> registerNickname(@Header("authenticationKey") String pAuthKey, @Body NicknameReqBody pNicknameRequest);
 
 
 }

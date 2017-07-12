@@ -43,7 +43,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         else
         {
             presenter.grantDevicePermissions();
-            accept = new Intent(AcceptTerms.this, ValidatePhone.class);
+            accept = new Intent(AcceptTerms.this, Authenticate.class);
         }
 
         accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
@@ -24,6 +25,8 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
@@ -81,6 +84,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);
         }
+        else if (!mUserData.isUserAuthenticated())
+        {
+            Intent authenticate = new Intent(mActivity, Authenticate.class);
+            this.addFlags(authenticate);
+            mContext.startActivity(authenticate);
+        }
         else if(!mUserData.UserGrantedDevicePermissions())
         {
             Intent permissions = new Intent(mActivity, Permissions.class);
@@ -98,6 +107,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             Intent inputToken = new Intent(mActivity, TokenInput.class);
             this.addFlags(inputToken);
             mContext.startActivity(inputToken);
+        }
+        else if(TextUtils.isEmpty(mUserData.getNickname()))
+        {
+            Intent nickname = new Intent(mActivity, Nickname.class);
+            this.addFlags(nickname);
+            mContext.startActivity(nickname);
         }
 
     }

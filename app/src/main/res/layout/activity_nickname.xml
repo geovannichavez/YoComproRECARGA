@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname">
+
+    <!--    CONTENEDOR, PADRE DE TODAS  -->
+    <LinearLayout
+        android:id="@+id/activity_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_general_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="20dp"
+                            android:src="@drawable/img_ycr_logo"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title_nickname"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/AppGreen"
+                            android:textSize="20sp"
+                            android:textAllCaps="true"
+                            android:layout_marginBottom="8dp"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:text="@string/label_content_nickname"
+                            android:layout_marginBottom="@dimen/activity_vertical_margin"
+                            android:textColor="@color/GeneralTextColor"
+                            android:textSize="15sp"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/tvExamples"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="@dimen/activity_vertical_margin"
+                            android:gravity="center_horizontal"
+                            android:textStyle="bold"
+                            android:textColor="@color/GeneralTextColor"
+                            android:textSize="15sp"  />
+
+                        <EditText
+                            android:id="@+id/etNickname"
+                            android:gravity="center_horizontal"
+                            android:hint="@string/hint_nickname"
+                            android:imeOptions="actionDone"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="200dp"
+                            android:layout_marginBottom="@dimen/ActivityVerticalCustomMargin"
+                            android:layout_height="wrap_content"/>
+
+                        <Button
+                            android:id="@+id/btnAcceptNick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="validateNickname"
+                            android:minWidth="180dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/btn_effect_ripple_green"
+                            android:paddingLeft="@dimen/ActivityHorizontalCustomMargin"
+                            android:paddingRight="@dimen/ActivityHorizontalCustomMargin"
+                            android:text="@string/button_accept"
+                            android:textColor="@color/ActivityWhiteBackground"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+
