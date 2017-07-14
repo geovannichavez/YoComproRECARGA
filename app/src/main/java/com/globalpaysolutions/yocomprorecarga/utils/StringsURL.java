@@ -31,6 +31,8 @@ public class StringsURL
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
+    public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

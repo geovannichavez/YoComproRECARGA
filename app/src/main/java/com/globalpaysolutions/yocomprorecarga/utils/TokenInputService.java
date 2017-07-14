@@ -43,7 +43,6 @@ public class TokenInputService extends IntentService
         if (intent != null)
         {
             String token = intent.getStringExtra("token");
-            String msisdn = intent.getStringExtra("msisdn");
 
             mUserData = new UserData(getApplicationContext());
 

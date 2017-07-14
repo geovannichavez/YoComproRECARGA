@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -59,24 +60,13 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void initializePOIGeolocation()
     {
-        //GeoFire
-        mGoldPointsRef = new GeoFire(mGoldPoints);
-        mSilverPointsRef = new GeoFire(mSilverPoints);
-        mBronzePointsRef = new GeoFire(mBronzePoints);
+        new initializeGeolocation().execute();
     }
 
     @Override
     public void goldPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        try
-        {
-            mGoldPointsQuery = mGoldPointsRef.queryAtLocation(pLocation, pRadius);
-            mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
+        new executeGoldPointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -95,15 +85,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void silverPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        try
-        {
-            mSilverPointsQuery = mSilverPointsRef.queryAtLocation(pLocation, pRadius);
-            mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
+        new executeSilverPointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -122,15 +104,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void bronzePointsQuery(GeoLocation pLocation, double pRadius)
     {
-        try
-        {
-            mBronzePointsQuery = mBronzePointsRef.queryAtLocation(pLocation, pRadius);
-            mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
-        }
-        catch (IllegalArgumentException ex)
-        {
-            ex.printStackTrace();
-        }
+        new executeBronzePointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -298,5 +272,111 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             Log.e(TAG, "BronzePoint: DatabaseError for BronzePoint fired");
         }
     };
+
+
+
+    /*
+    *******************************************************
+    *
+    *
+    *   ASYNC TASKS
+    *
+    *******************************************************
+    */
+    private class initializeGeolocation extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            //GeoFire
+            mGoldPointsRef = new GeoFire(mGoldPoints);
+            mSilverPointsRef = new GeoFire(mSilverPoints);
+            mBronzePointsRef = new GeoFire(mBronzePoints);
+            return null;
+        }
+    }
+
+    private class executeGoldPointsQuery extends AsyncTask<Void, Void, Void>
+    {
+        GeoLocation geoLocation;
+        double radius;
+
+        executeGoldPointsQuery(GeoLocation pLocation, double pRadius)
+        {
+            this.geoLocation = pLocation;
+            this.radius = pRadius;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try
+            {
+                mGoldPointsQuery = mGoldPointsRef.queryAtLocation(geoLocation, radius);
+                mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private class executeSilverPointsQuery extends AsyncTask<Void, Void, Void>
+    {
+        GeoLocation geoLocation;
+        double radius;
+
+        executeSilverPointsQuery(GeoLocation pLocation, double pRadius)
+        {
+            this.geoLocation = pLocation;
+            this.radius = pRadius;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try
+            {
+                mSilverPointsQuery = mSilverPointsRef.queryAtLocation(geoLocation, radius);
+                mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                ex.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+    private class executeBronzePointsQuery extends AsyncTask<Void, Void, Void>
+    {
+        GeoLocation geoLocation;
+        double radius;
+
+        executeBronzePointsQuery(GeoLocation pLocation, double pRadius)
+        {
+            this.geoLocation = pLocation;
+            this.radius = pRadius;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try
+            {
+                mBronzePointsQuery = mBronzePointsRef.queryAtLocation(geoLocation, radius);
+                mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+    }
 
 }

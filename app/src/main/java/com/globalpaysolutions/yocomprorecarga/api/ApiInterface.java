@@ -15,7 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
-import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
 import retrofit2.Call;
@@ -59,11 +59,11 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE)
-    Call<ExchangeResponse> exchangeCoin(@Body ExchangeReqBody pExchangeCoin);
+    Call<ExchangeResponse> exchangeChest(@Header("authenticationKey") String pAuthKey, @Body ExchangeReqBody pExchangeCoin);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.TRACKING)
-    Call<TrackingResponse> getConsumerTracking(@Header("ConsumerID") int pConsumerID);
+    Call<Tracking> getConsumerTracking(@Header("authenticationKey") String pAuthKey);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.AUTHENTICATE_CONSUMER)

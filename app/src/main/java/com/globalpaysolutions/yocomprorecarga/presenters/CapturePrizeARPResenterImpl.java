@@ -2,7 +2,9 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -14,7 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -22,6 +24,9 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Josué Chávez on 29/03/2017.
@@ -57,8 +62,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void initialize()
     {
         this.mView.obtainUserProgress();
-        this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
-        this.mGoogleLocationApiManager.setLocationCallback(this);
+        mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
+        new initializeGoogleMapsCallback().execute();
 
         this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
 
@@ -130,11 +135,36 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void attemptExchangeCoin(String pFirebaseID)
+    public void exchangeCoinsChest(String pArchitectURL)
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        LatLng currentLocation = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        mInteractor.exchangePrizeData(currentLocation, pFirebaseID, mUserData.GetConsumerID());
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
+        Map<String, String> urlMap = getURLMap(pArchitectURL);
+        String firebaseID = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
+        String chestType = urlMap.get(Constants.URI_MAP_VALUE_CHEST_TYPE);
+        String latitude = urlMap.get(Constants.URI_MAP_VALUE_LATITUDE);
+        String longitude = urlMap.get(Constants.URI_MAP_VALUE_LONGITUDE);
+        int chestValue = 0;
+
+        LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
+        Log.i(TAG, "Chest type: " + chestType + "; FirebaseID: " + firebaseID + "; lat: " + latitude + "; long: " + longitude);
+
+        switch (chestType)
+        {
+            case Constants.NAME_CHEST_TYPE_GOLD:
+                chestValue = Constants.VALUE_CHEST_TYPE_GOLD;
+                break;
+            case Constants.NAME_CHEST_TYPE_SILVER:
+                chestValue = Constants.VALUE_CHEST_TYPE_SILVER;
+                break;
+            case Constants.NAME_CHEST_TYPE_BRONZE:
+                chestValue = Constants.VALUE_CHEST_TYPE_BRONZE;
+                break;
+            default:
+                Log.e(TAG, "No chest type found");
+                break;
+        }
+
+        mInteractor.exchangePrizeData(location, firebaseID, chestValue);
     }
 
     @Override
@@ -206,7 +236,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
             mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
-            //TODO: Para pruebas
+            //Game UX
             mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
     }
@@ -239,7 +269,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onSilverKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
             mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
-            //TODO: Para pruebas
+            //Game UX
             mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
         }
     }
@@ -271,7 +301,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onBronzeKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
             mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
-            //TODO: Para pruebas
+            //Game UX
             mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
     }
@@ -313,12 +343,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onRetrieveTracking(TrackingResponse pTracking)
+    public void onRetrieveTracking(Tracking pTracking)
     {
         mView.hideLoadingDialog();
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()));
-        mView.changeBar(pTracking.getCurrentCoinsProgress());
+        mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
     }
 
     @Override
@@ -329,7 +359,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         int prizes = mUserData.GetConsumerPrizes();
         int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
         mView.updateIndicators(String.valueOf(prizes), String.valueOf(coins));
-        mView.changeBar(coinsProgress);
+        mView.updatePrizeButton(coinsProgress);
 
         DialogViewModel dialog = new DialogViewModel();
         dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
@@ -340,16 +370,75 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onExchangeCoinSuccess(ExchangeResponse pExchangeResponse)
+    public void onExchangeChestSuccess(ExchangeResponse pExchangeResponse)
     {
+        DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
-        //mView.changeBar(pExchangeResponse.);
+
+        if(pExchangeResponse.getExchangeCoins() != null)
+        {
+            mInteractor.saveUserTracking(pExchangeResponse.getTracking());
+            mUserData.saveLastChestValue(pExchangeResponse.getExchangeCoins());
+            mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()), String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()));
+            mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
+
+            dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
+            dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        }
+        else
+        {
+            dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
+            dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        }
+
+        mView.showGenericDialog(dialog);
     }
 
     @Override
     public void onExchangeError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
+    }
+
+    /*
+    *
+    *
+    *   OTHER METHODS
+    *
+    *
+    */
+    private Map<String, String> getURLMap(String url)
+    {
+        String[] params = url.split("//");
+        Map<String, String> map = new HashMap<>();
+        map.put(Constants.URI_MAP_VALUE_CHEST_TYPE, params[1]);
+        map.put(Constants.URI_MAP_VALUE_FIREBASE_ID, params[2]);
+        map.put(Constants.URI_MAP_VALUE_LATITUDE, params[3]);
+        map.put(Constants.URI_MAP_VALUE_LONGITUDE, params[4]);
+
+        return map;
+    }
+
+
+    /*
+    *
+    *
+    *
+    *   ASYNC TASKS
+    *
+    *
+    */
+
+    private class initializeGoogleMapsCallback extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            mGoogleLocationApiManager.setLocationCallback(CapturePrizeARPResenterImpl.this);
+            return null;
+        }
     }
 
 }

@@ -22,10 +22,13 @@ public class Constants
     public static final String NOTIFICATION_BODY_EXTRA = "notification_body_extgra";
 
     //Wikitude
-    public static final String WIKITUDE_LICENSE_KEY = "sDhQ4W0tbAycdZMFcwYR2dVTNNNYgX38e61aDP1dE1tHpD0Cs7F1C85DZYVLisPytso30pc40JVHVKHP8+Q5PLo1BQ5KEgS5rAgtTRS9yHklcJL/XQqqgPFKtHHdrwKzJNTv2xAnvDDaVQv+NIJ4g6BDM6vJH6zOG/hukmW+y0FTYWx0ZWRfXywK/kdaLX2JDcQrkdWGD3byR204FA8Lwn0ubcMp2137jADN+MZ6wqjryxkgIc9j+fHd4KeJK1lG9TftwUcBa7FkrZ+oV+3hmhgls8KJwcc1C1pk0P0nrOIFrRxdf+NyDFwDjvvV3mqChHW7HrfRBk/SWQuKYLHcBr/sHrEYJ+wyWJz5gEvcszhrAdNjfaG4A1093WhPTllp+est2+iCV7JqQYT3Kzjj3wBZQ+ax9Yhohnhy0ufK09c/fPV05bui7pZ9CQ7w5h6fPIwv+44zHyFrMfN6mz4xPDWY+G0lDXW/KH+MNuyii+fkbTYMSN4/3/BVd+wbcDi4PmtNSa7VNJ++oKamVf6u0Qnoj5WBY8IQVt9sH1AXzHg+mSTW09qC/n2wYmxOEub8+5wAiD7JnfH2MzBogQEVOgAOx5F3wbtcylKbqUmYr6mN2tU2wmutKauu+1wkWtEQ3JcUzMO2oI01KJumB7rLT1hiSh/VkzE8mMg5s+El9DM=";
+    //public static final String WIKITUDE_LICENSE_KEY = "sDhQ4W0tbAycdZMFcwYR2dVTNNNYgX38e61aDP1dE1tHpD0Cs7F1C85DZYVLisPytso30pc40JVHVKHP8+Q5PLo1BQ5KEgS5rAgtTRS9yHklcJL/XQqqgPFKtHHdrwKzJNTv2xAnvDDaVQv+NIJ4g6BDM6vJH6zOG/hukmW+y0FTYWx0ZWRfXywK/kdaLX2JDcQrkdWGD3byR204FA8Lwn0ubcMp2137jADN+MZ6wqjryxkgIc9j+fHd4KeJK1lG9TftwUcBa7FkrZ+oV+3hmhgls8KJwcc1C1pk0P0nrOIFrRxdf+NyDFwDjvvV3mqChHW7HrfRBk/SWQuKYLHcBr/sHrEYJ+wyWJz5gEvcszhrAdNjfaG4A1093WhPTllp+est2+iCV7JqQYT3Kzjj3wBZQ+ax9Yhohnhy0ufK09c/fPV05bui7pZ9CQ7w5h6fPIwv+44zHyFrMfN6mz4xPDWY+G0lDXW/KH+MNuyii+fkbTYMSN4/3/BVd+wbcDi4PmtNSa7VNJ++oKamVf6u0Qnoj5WBY8IQVt9sH1AXzHg+mSTW09qC/n2wYmxOEub8+5wAiD7JnfH2MzBogQEVOgAOx5F3wbtcylKbqUmYr6mN2tU2wmutKauu+1wkWtEQ3JcUzMO2oI01KJumB7rLT1hiSh/VkzE8mMg5s+El9DM=";
+    public static final String WIKITUDE_LICENSE_KEY = "SAX0HsmTOzZpdSvk58FmNHXXd0q+7L6sNhNSLmSIvfNaekRFhWEvk/cmJcuLZyGadQnS7PDerr+Hwt9IvV2I8o/eeYWP6cP8uhptpfHGRFDNtJBIbCg5CH6yuWLjaX1qZvPk/MGeQPT3/sHc+7n8hCtr5SSxN9XXeGgdOkFk+iNTYWx0ZWRfXxnRfdUk3sUaSDwbJOHacO6lfT/v+HR5zwARDj3kkzbP8WcwI1N5B1pWFGh+xxuWG7qArGGwIoVDipIw1mRJ6Kdm2rx7TQrSS9GVb3nXlmJS0f+AS5HFKyrCAcUya3Ka2ZU4rJAjr6N7rhGvsR5T9vKr2OEjcgLD4KBhM3XWlBk2JU2uZ0QMLvyekIm5pGSTZJnxsIFYjtRGlORQwPJEmiPK5umuVizS7QF/kDvQXkkvLGs4ZMXw5eZcIFsQ+IikY4dJgNOqKtR1I5mc1IqrjPCE8ez+vZlW+HkDiBRV7Dh2afm8GXxn1P4NqEOEholNKKRjsxp3GMbN/gAx1yHgyXhSUphMrLys4/EiPzXpF9zzg+d8GsotNDRFaMWz27hMe1noX/18VQSpR1MD4mgT3jemajKEREu+yNVRXcLK67OgkezZr1IVj2xdvAxtOdgLfw0tmeYiHMYrXbtwG+/A4CrGx1c5krGtXzm+jnT3Uq2DkYqwyyWFUm6RYGnip5oSwDzk/rnRoJTFgF2VGlbeKvZQ0CqoBlXY2eCjJIoKaRcIoDsuOWSd7gjCcuB8GM6I46nCN6yMBgzINtyTCbhwfWeucIPe2tUaS+vb+dF9GvH6RG24tXrW69o=";
 
     //Wikitude: AR-POI
-    public static final double AR_POI_RADIOS_KM = 0.01; //15 meters
+    //public static final double AR_POI_RADIOS_KM = 0.015; //15 meters
+    public static final double AR_POI_RADIOS_KM = 0.030; //30 meters
+    //public static final double AR_POI_RADIOS_KM = 1; // 1 KM
 
     //RecarGO 2D
     public static final double RECARSTOP_2D_RADIUS_KM = 0.006;
@@ -36,7 +39,19 @@ public class Constants
     public static final int ON_EARNED_COIN_SUCCESSFULLY_VIBRATION_MILLISECONDS = 400;
     public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 2000;
 
-    //URLs y URIs
-    public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
+    //Chest Types
+    public static final int VALUE_CHEST_TYPE_GOLD = 3;
+    public static final int VALUE_CHEST_TYPE_SILVER = 2;
+    public static final int VALUE_CHEST_TYPE_BRONZE = 1;
+    public static final String NAME_CHEST_TYPE_GOLD = "Gold";
+    public static final String NAME_CHEST_TYPE_SILVER = "Silver";
+    public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
+
+    //URL Map Properties
+    public static final String URI_MAP_VALUE_CHEST_TYPE = "chestType";
+    public static final String URI_MAP_VALUE_FIREBASE_ID = "firebaseID";
+    public static final String URI_MAP_VALUE_LATITUDE = "latitude";
+    public static final String URI_MAP_VALUE_LONGITUDE = "longitude";
+
 
 }

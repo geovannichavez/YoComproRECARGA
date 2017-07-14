@@ -9,22 +9,6 @@
     android:orientation="vertical"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.CapturePrizeAR">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/arToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/ApplicationGreenTheme"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat"
-        app:theme="@style/ToolbarTheme">
-
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:src="@drawable/logo_horizontal"/>
-
-    </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -36,6 +20,24 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/arToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat"
+            app:theme="@style/transparentToolbarTheme">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_recargo"/>
+
+        </android.support.v7.widget.Toolbar>
+
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -44,103 +46,129 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="8dp">
+            android:paddingTop="65dp">
 
-            <!-- INDICADOR -->
-            <FrameLayout
-                android:id="@+id/fmlIndicatorLeft"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true">
+            <!-- *************
+            INDICADORES
+            ****************** -->
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin_8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"   >
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_recargo_indicator"/>
+                <!-- INDICADOR -->
+                <FrameLayout
+                    android:id="@+id/framePrizes"
+                    android:layout_width="115dp"
+                    android:layout_height="58dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin">
 
-                <TextView
-                    android:id="@+id/tvCoinsEarned"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:shadowColor="@color/GeneralTextColor"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textSize="18sp"/>
-            </FrameLayout>
+                    <ImageView
+                        android:layout_width="115dp"
+                        android:layout_height="58dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/contentdescription_indicator"
+                        android:src="@drawable/img_indicator_prize"/>
 
-            <!-- INDICADOR -->
-            <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true">
+                    <TextView
+                        android:id="@+id/tvPrizesEarned"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginLeft="@dimen/margin_20dp"
+                        android:layout_marginStart="@dimen/margin_20dp"
+                        android:gravity="center"
+                        android:shadowColor="@color/GeneralTextColor"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_recargo_indicator"/>
+                </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tvPrizesEarned"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:shadowColor="@color/GeneralTextColor"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textSize="18sp"/>
-            </FrameLayout>
+                <!-- INDICADOR -->
+                <FrameLayout
+                    android:id="@+id/frameCoins"
+                    android:layout_width="115dp"
+                    android:layout_height="58dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true">
+
+                    <ImageView
+                        android:layout_width="115dp"
+                        android:layout_height="58dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/contentdescription_indicator"
+                        android:src="@drawable/img_indicator_saved"/>
+
+                    <TextView
+                        android:id="@+id/tvCoinsEarned"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_8dp"
+                        android:layout_marginLeft="@dimen/margin_14dp"
+                        android:layout_marginStart="@dimen/margin_14dp"
+                        android:gravity="center"
+                        android:shadowColor="@color/GeneralTextColor"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                </FrameLayout>
+            </LinearLayout>
 
             <!--    OBJETO 2D   -->
             <RelativeLayout
-                android:gravity="center"
-                android:layout_below="@+id/fmlIndicatorLeft"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="26dp"
-                android:layout_above="@+id/relBarContainer">
+                android:layout_above="@+id/relBarContainer"
+                android:gravity="center"
+                android:paddingBottom="26dp">
 
                 <ImageButton
                     android:id="@+id/ivPrize2D"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/contentdescription_2d_prize_image"
-                    android:scaleType="fitXY"
-                    android:background="@android:color/transparent"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/contentdescription_2d_prize_image"
+                    android:scaleType="fitXY"/>
             </RelativeLayout>
 
             <!-- BARRA -->
             <RelativeLayout
+                android:id="@+id/relBarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:gravity="center_horizontal"
-                android:id="@+id/relBarContainer">
+                android:layout_alignParentBottom="true">
 
                 <ImageButton
-                    android:id="@+id/btnBar"
-                    android:layout_width="250dp"
-                    android:layout_height="67dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="24dp"
+                    android:id="@+id/btnCoinCounter"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:layout_marginRight="@dimen/margin_8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:scaleType="fitXY"/>
+                    android:contentDescription="@string/contentdescription_coin_counter"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_coin_counter_twenty"/>
             </RelativeLayout>
 
 
         </RelativeLayout>
 
     </FrameLayout>
+
 
 </LinearLayout>

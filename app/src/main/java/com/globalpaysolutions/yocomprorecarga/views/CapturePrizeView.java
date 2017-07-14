@@ -32,7 +32,7 @@ public interface CapturePrizeView
     void removeRunnableCallback();
 
     void updateIndicators(String pPrizes, String pCoins);
-    void changeBar(int pCoins);
+    void updatePrizeButton(int pCoins);
 
     void onGoldKeyEntered(String pKey, LatLng pLocation);
     void onGoldKeyExited(String pKey);

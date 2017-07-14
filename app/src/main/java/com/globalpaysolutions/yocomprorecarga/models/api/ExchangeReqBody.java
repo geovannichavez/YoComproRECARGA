@@ -9,21 +9,12 @@ import java.util.Map;
 
 public class ExchangeReqBody
 {
-    private Integer consumerID;
+
     private String locationID;
     private Double longitude;
     private Double latitude;
+    private Integer chestType;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    public Integer getConsumerID()
-    {
-        return consumerID;
-    }
-
-    public void setConsumerID(Integer consumerID)
-    {
-        this.consumerID = consumerID;
-    }
 
     public String getLocationID()
     {
@@ -53,6 +44,16 @@ public class ExchangeReqBody
     public void setLatitude(Double latitude)
     {
         this.latitude = latitude;
+    }
+
+    public Integer getChestType()
+    {
+        return chestType;
+    }
+
+    public void setChestType(Integer chestType)
+    {
+        this.chestType = chestType;
     }
 
     public Map<String, Object> getAdditionalProperties()

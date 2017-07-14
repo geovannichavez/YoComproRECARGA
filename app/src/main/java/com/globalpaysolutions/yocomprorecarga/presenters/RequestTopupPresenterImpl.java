@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
 
 import java.io.IOException;
@@ -131,7 +132,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     @Override
     public void creditCardPayment(String pPhone, String pAmount, String pOperatorName)
     {
-        String url = Constants.POS_YOCOMPRORECARGA;
+        String url = StringsURL.POS_YOCOMPRORECARGA;
         view.launchChromeView(url);
     }
 

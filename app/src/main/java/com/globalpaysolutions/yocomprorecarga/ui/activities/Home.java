@@ -504,7 +504,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             else
             {
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_gold))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point))
                 );
                 mGoldPointsMarkers.put(pKey, marker);
             }
@@ -562,7 +562,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             else
             {
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_silver))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_silver_point))
                 );
                 mSilverPointsMarkers.put(pKey, marker);
             }
@@ -620,7 +620,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             else
             {
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_price_bronze))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_bronze_point))
                 );
                 mBronzePointsMarkers.put(pKey, marker);
             }

@@ -37,6 +37,7 @@ public class UserData
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
     private static final String KEY_TOTAL_WON_PRIZES = "usr_total_won_prizes";
     private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
+    private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
 
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
     private static final String KEY_3D_COMPATIBLE_DEVICE = "app_3d_compatible_device";
@@ -163,6 +164,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveLastChestValue(int pCoins)
+    {
+        mEditor.putInt(KEY_LAST_CHEST_EXCHANGED_VALUE, pCoins);
+        mEditor.commit();
+    }
+
 
 
     /*
@@ -256,6 +263,11 @@ public class UserData
     public int GetUserCurrentCoinsProgress()
     {
         return mPreferences.getInt(KEY_CURRENT_COINS_PROGRESS, 0);
+    }
+
+    public int getLastChestExchangedValue()
+    {
+        return mPreferences.getInt(KEY_LAST_CHEST_EXCHANGED_VALUE, 0);
     }
 
     public boolean Is3DCompatibleDevice()

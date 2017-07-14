@@ -52,6 +52,12 @@
     <!--    CAPTURE PRIZE AR    -->
     <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
     <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
+    <string name="label_loading_exchanging_chest">¡Abriendo cofre, espera!</string>
+    <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
+    <string name="label_allowed_open_chest_once_per_day">Sólo puedes abrir el mismo cofre una vez al día.</string>
+    <string name="label_chest_open_succesfully">¡Has abierto un cofre y obtuviste %1$s nuevas monedas! ¡Sigue buscando más cofres!</string>
+    <string name="label_indicator_prizes">PREMIOS</string>
+    <string name="label_indicator_saved">ACUMULADO</string>
 
     <!--    PRIZE DETAIL    -->
     <string name="label_congratulations_title">¡Felicidades!</string>
@@ -157,5 +163,11 @@
         <item>jose.luis</item>
         <item>majo12</item>
     </string-array>
+
+
+    <!--    CONTENT DESCRIPTION     -->
+    <string name="contentdescription_indicator">indicator</string>
+    <string name="contentdescription_coin_counter">coin counter</string>
+
 
 </resources>

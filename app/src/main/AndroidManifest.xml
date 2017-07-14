@@ -186,7 +186,9 @@
             android:name=".ui.activities.Authenticate"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.activities.Nickname">
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.activities.Nickname">
         </activity>
     </application>
 

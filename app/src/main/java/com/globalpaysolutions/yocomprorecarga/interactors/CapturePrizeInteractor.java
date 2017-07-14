@@ -8,7 +8,7 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -38,16 +38,16 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     public void retrieveConsumerTracking()
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<TrackingResponse> call = apiService.getConsumerTracking(mUserData.GetConsumerID());
+        final Call<Tracking> call = apiService.getConsumerTracking(mUserData.getUserAuthenticationKey());
 
-        call.enqueue(new Callback<TrackingResponse>()
+        call.enqueue(new Callback<Tracking>()
         {
             @Override
-            public void onResponse(Call<TrackingResponse> call, Response<TrackingResponse> response)
+            public void onResponse(Call<Tracking> call, Response<Tracking> response)
             {
                 if(response.isSuccessful())
                 {
-                    TrackingResponse trackingResponse = response.body();
+                    Tracking trackingResponse = response.body();
                     mListener.onRetrieveTracking(trackingResponse);
                     Log.i(TAG, "TotalWinCoins:" + String.valueOf(trackingResponse.getTotalWinCoins())
                             + ", TotalWinPrizes:" + String.valueOf(trackingResponse.getTotalWinCoins())
@@ -61,7 +61,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
             }
 
             @Override
-            public void onFailure(Call<TrackingResponse> call, Throwable t)
+            public void onFailure(Call<Tracking> call, Throwable t)
             {
                 mListener.onTrackingError(0, t);
             }
@@ -70,16 +70,16 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pConsumerID)
+    public void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         ExchangeReqBody requestBody = new ExchangeReqBody();
-        requestBody.setConsumerID(pConsumerID);
         requestBody.setLocationID(pFirebaseID);
         requestBody.setLatitude(pLocation.latitude);
         requestBody.setLongitude(pLocation.longitude);
+        requestBody.setChestType(pChestType);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ExchangeResponse> call = apiService.exchangeCoin(requestBody);
+        final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);
 
         call.enqueue(new Callback<ExchangeResponse>()
         {
@@ -89,7 +89,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 if(response.isSuccessful())
                 {
                     ExchangeResponse exchangeResponse = response.body();
-                    mListener.onExchangeCoinSuccess(exchangeResponse);
+                    mListener.onExchangeChestSuccess(exchangeResponse);
                 }
                 else
                 {
@@ -107,7 +107,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void saveUserTracking(TrackingResponse pTracking)
+    public void saveUserTracking(Tracking pTracking)
     {
         mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(), pTracking.getTotalWinPrizes(), pTracking.getCurrentCoinsProgress());
     }

@@ -4,6 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -17,7 +20,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,6 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Transaction;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
@@ -44,7 +45,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     ProgressDialog progressDialog;
     TextView tvCoinsEarned;
     TextView tvPrizesEarned;
-    ImageButton btnBar;
+    ImageButton btnCoinsCounter;
     ImageButton ivPrize2D;
     Vibrator mVibrator;
 
@@ -64,7 +65,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
         tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
-        btnBar = (ImageButton) findViewById(R.id.btnBar);
+        btnCoinsCounter = (ImageButton) findViewById(R.id.btnCoinCounter);
         ivPrize2D = (ImageButton) findViewById(R.id.ivPrize2D);
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mAnimation = new AlphaAnimation(1, 0);
@@ -106,8 +107,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         LatLng location = new LatLng(pLatitude, pLongitude);
         this.mPresenter.prizePointsQuery(location);
-        this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
-
+        architectView.setLocation(pLatitude, pLongitude, pAccuracy);
     }
 
     @Override
@@ -120,22 +120,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 @Override
                 public boolean urlWasInvoked(String s)
                 {
-                    //TODO: Se maneja switch para identificar el premio, sin embargo no es más necesario ya que se usa el FirebaseID
                     Log.i(TAG, s);
-                    /*switch (s)
-                    {
-                        case StringsURL.ARCH_GOLD:
-                            break;
-                        case StringsURL.ARCH_SILVER:
-                            break;
-                        case StringsURL.ARCH_BRONZE:
-                            break;
-                        default:
-                            Log.i(TAG, "No Wikitude-ArchitectView URL Provided");
-                            break;
-                    }*/
-
-
+                    mPresenter.exchangeCoinsChest(s);
                     return false;
                 }
             });
@@ -339,26 +325,81 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void changeBar(int pCoins)
+    public void updatePrizeButton(int pCoins)
     {
+        int coinsButton;
+
         switch (pCoins)
         {
             case 0:
-                btnBar.setImageResource(R.drawable.bar_recargo_empty);
+                coinsButton = R.drawable.img_coin_counter_zero;
                 break;
             case 1:
-                btnBar.setImageResource(R.drawable.bar_recargo_one);
+                coinsButton = R.drawable.img_coin_counter_one;
                 break;
             case 2:
-                btnBar.setImageResource(R.drawable.bar_recargo_two);
+                coinsButton = R.drawable.img_coin_counter_two;
                 break;
             case 3:
-                btnBar.setImageResource(R.drawable.bar_recargo_three);
+                coinsButton = R.drawable.img_coin_counter_three;
+                break;
+            case 4:
+                coinsButton = R.drawable.img_coin_counter_four;
+                break;
+            case 5:
+                coinsButton = R.drawable.img_coin_counter_five;
+                break;
+            case 6:
+                coinsButton = R.drawable.img_coin_counter_six;
+                break;
+            case 7:
+                coinsButton = R.drawable.img_coin_counter_seven;
+                break;
+            case 8:
+                coinsButton = R.drawable.img_coin_counter_eight;
+                break;
+            case 9:
+                coinsButton = R.drawable.img_coin_counter_nine;
+                break;
+            case 10:
+                coinsButton = R.drawable.img_coin_counter_ten;
+                break;
+            case 11:
+                coinsButton = R.drawable.img_coin_counter_eleven;
+                break;
+            case 12:
+                coinsButton = R.drawable.img_coin_counter_twelve;
+                break;
+            case 13:
+                coinsButton = R.drawable.img_coin_counter_thirteen;
+                break;
+            case 14:
+                coinsButton = R.drawable.img_coin_counter_fourteen;
+                break;
+            case 15:
+                coinsButton = R.drawable.img_coin_counter_fifteen;
+                break;
+            case 16:
+                coinsButton = R.drawable.img_coin_counter_sixteen;
+                break;
+            case 17:
+                coinsButton = R.drawable.img_coin_counter_seventeen;
+                break;
+            case 18:
+                coinsButton = R.drawable.img_coin_counter_eighteen;
+                break;
+            case 19:
+                coinsButton = R.drawable.img_coin_counter_nineteen;
+                break;
+            case 20:
+                coinsButton = R.drawable.img_coin_counter_twenty;
                 break;
             default:
-                btnBar.setImageResource(R.drawable.bar_recargo_empty);
+                coinsButton = R.drawable.img_coin_counter_zero;
                 break;
         }
+
+        btnCoinsCounter.setImageResource(coinsButton);
     }
 
     @Override
@@ -376,7 +417,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onGoldKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_gold);
+        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_gold);
     }
 
     @Override
@@ -400,7 +441,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onSilverKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_silver);
+        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_silver);
     }
 
     @Override
@@ -430,7 +471,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onBronzeKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_bronze);
+        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_bronze);
     }
 
     @Override
@@ -555,5 +596,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             mPresenter._navigateToPrize();
         }
     };
+
 
 }

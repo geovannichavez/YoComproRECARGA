@@ -1,6 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors.interfaces;
 
-import com.globalpaysolutions.yocomprorecarga.models.api.TrackingResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -10,6 +10,6 @@ import com.google.android.gms.maps.model.LatLng;
 public interface ICapturePrizeInteractor
 {
     void retrieveConsumerTracking();
-    void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pConsumerID);
-    void saveUserTracking(TrackingResponse pTracking);
+    void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pChestType);
+    void saveUserTracking(Tracking pTracking);
 }
