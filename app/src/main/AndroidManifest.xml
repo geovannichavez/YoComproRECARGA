@@ -175,8 +175,13 @@
         <activity
             android:name=".ui.activities.CapturePrizeAR"
             android:configChanges="screenSize|orientation"
+            android:theme="@style/AppThemeTrans"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activities.PrizeDetail">
+        <activity android:name=".ui.activities.PrizeDetail"
+                  android:parentActivityName=".ui.activities.CapturePrizeAR"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/contextualToolbarTheme"
+            >
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"

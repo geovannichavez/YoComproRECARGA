@@ -31,6 +31,8 @@ public class StringsURL
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
+    public final static String REDEEM_PRIZE = "WinPrize";
+
     public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
 
     //FIREBASE

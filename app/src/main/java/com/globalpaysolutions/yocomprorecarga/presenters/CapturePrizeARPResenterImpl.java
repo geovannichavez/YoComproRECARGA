@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +18,13 @@ import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.PrizeDetail;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.CustomClickListener;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -178,6 +183,25 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.retrieveConsumerTracking();
+    }
+
+    @Override
+    public void redeemPrize()
+    {
+        mView.showLoadingDialog(mContext.getString(R.string.label_redeeming_prize_wait));
+        if(mUserData.getCurrentCoinsProgress() < 20)
+        {
+            mView.hideLoadingDialog();
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_not_enough_coins));
+            dialog.setLine1(mContext.getString(R.string.label_not_enough_coins));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
+        else
+        {
+            mInteractor.atemptRedeemPrize();
+        }
     }
 
     @Override
@@ -401,6 +425,52 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.hideLoadingDialog();
     }
+
+    @Override
+    public void onRedeemPrizeSuccess(WinPrizeResponse pResponse)
+    {
+
+        DialogViewModel dialog = new DialogViewModel();
+        mView.hideLoadingDialog();
+
+        if(pResponse.getWaitTime() == null || pResponse.getTracking() != null)
+        {
+            //Saves tracking and updates UI
+            mInteractor.saveUserTracking(pResponse.getTracking());
+            mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()), String.valueOf(pResponse.getTracking().getTotalWinCoins()));
+            mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
+
+            //Saves last saved prize
+            mUserData.saveLastPrizeTitle(pResponse.getTitle());
+            mUserData.saveLastPrizeDescription(pResponse.getDescription());
+            mUserData.saveLastPrizeCode(pResponse.getCode());
+            mUserData.saveLastPrizeDial(pResponse.getDial());
+            mUserData.saveLastPrizeLevel(pResponse.getPrizeLevel());
+
+            //Shows data on UI
+            dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
+            dialog.setLine1(mContext.getString(R.string.label_click_on_button_to_redeem));
+            dialog.setAcceptButton(mContext.getString(R.string.button_redeem_now));
+            mView.showPrizeColectedDialog(dialog);
+        }
+        else
+        {
+            mUserData.saveAwaitTime(pResponse.getWaitTime());
+            dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
+            dialog.setLine1(String.format(mContext.getString(R.string.redeem_prize_interval), mUserData.getAwaitTimePending()));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
+
+
+    }
+
+    @Override
+    public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable)
+    {
+        mView.showToast("DEBUG: Something went wrong.");
+    }
+
 
     /*
     *

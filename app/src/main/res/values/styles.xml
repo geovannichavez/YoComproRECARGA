@@ -12,6 +12,11 @@
         <item name="colorAccent">@color/ApplicationGreenTheme</item>
     </style>
 
+    <style name="AppThemeTrans" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -29,6 +34,21 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:textColor">@color/ApplicationGreenTheme</item>
+    </style>
+
+    <style name="contextualToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/ApplicationGreenTheme</item>
+        <item name="colorPrimaryDark">@color/ApplicationGreenThemeDark</item>
+        <item name="colorAccent">@color/ApplicationGreenTheme</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColor">@color/ApplicationGreenTheme</item>
+    </style>
+
+    <style name="contextualDarkToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/ApplicationGreenThemeDark</item>
+        <item name="android:textColor">@color/ActivityWhiteBackground</item>
     </style>
 
 

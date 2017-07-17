@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.os.Bundle;
+
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.google.android.gms.maps.model.LatLng;
@@ -17,6 +19,7 @@ public interface CapturePrizeView
     void onCoinLongClick();
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogViewModel pMessageModel);
+    void showPrizeColectedDialog(DialogViewModel pDialogModel);
     void showIncompatibleDeviceDialog(DialogViewModel pMessageModel);
     void navigatePrizeDetail();
     void showLoadingDialog(String pLabel);

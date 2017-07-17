@@ -12,4 +12,5 @@ public interface ICapturePrizeInteractor
     void retrieveConsumerTracking();
     void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pChestType);
     void saveUserTracking(Tracking pTracking);
+    void atemptRedeemPrize();
 }

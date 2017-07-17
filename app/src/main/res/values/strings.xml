@@ -58,6 +58,12 @@
     <string name="label_chest_open_succesfully">¡Has abierto un cofre y obtuviste %1$s nuevas monedas! ¡Sigue buscando más cofres!</string>
     <string name="label_indicator_prizes">PREMIOS</string>
     <string name="label_indicator_saved">ACUMULADO</string>
+    <string name="cant_redeem_title">¡No tan Rápido!</string>
+    <string name="redeem_prize_interval">¡Solo te faltan %1$s hora(s) para canjear tu premio! ¡No te canses de jugar, buena suerte!</string>
+    <string name="title_not_enough_coins">Sin Monedas...</string>
+    <string name="label_not_enough_coins">No tienes suficientes monedas para canjear un premio. ¡Abre más cofres y conseguirás monedas!</string>
+    <string name="label_redeeming_prize_wait">¡Canjeando premio, espera!</string>
+    <string name="label_click_on_button_to_redeem">¡Haz click en el botón \"Canjear Ahora\" para saber qué ganaste!</string>
 
     <!--    PRIZE DETAIL    -->
     <string name="label_congratulations_title">¡Felicidades!</string>
@@ -65,9 +71,11 @@
     <string name="label_prize_title">PERSONA FAVORITA</string>
     <string name="label_prize_detail">Para que le puedas llamar y que te llame ilimitado con tu prepago.</string>
     <string name="label_copy_paste_code">Copia y pega este código:</string>
-    <string name="edittext_code_example">2901</string>
+    <string name="edittext_code_example">5A567H232Q</string>
     <string name="label_activate_dialing">Actívalo marcando el:</string>
     <string name="label_ussd_exchange_number">*555#</string>
+    <string name="prize_colected_thanks_to">Haz recolectado un premio gracias a:</string>
+    <string name="label_reedem_it_dialing">Canjealo marcando el número:</string>
 
 
     <!--    LIMITED FUNCTIONALITY    -->
@@ -90,6 +98,7 @@
     <string name="button_yes">Si</string>
     <string name="button_no">No</string>
     <string name="button_whatever">Ni modo</string>
+    <string name="button_redeem_now">Canjear Ahora</string>
     <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
@@ -168,6 +177,7 @@
     <!--    CONTENT DESCRIPTION     -->
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
+
 
 
 </resources>

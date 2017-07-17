@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePri
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -110,5 +111,37 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     public void saveUserTracking(Tracking pTracking)
     {
         mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(), pTracking.getTotalWinPrizes(), pTracking.getCurrentCoinsProgress());
+    }
+
+    @Override
+    public void atemptRedeemPrize()
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<WinPrizeResponse> call = apiService.redeemPrize(mUserData.getUserAuthenticationKey());
+
+        call.enqueue(new Callback<WinPrizeResponse>()
+        {
+            @Override
+            public void onResponse(Call<WinPrizeResponse> call, Response<WinPrizeResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+                    WinPrizeResponse redeemPrize = response.body();
+                    mListener.onRedeemPrizeSuccess(redeemPrize);
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    mListener.onRedeemPrizeError(codeResponse, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WinPrizeResponse> call, Throwable t)
+            {
+                mListener.onRedeemPrizeError(0, t);
+            }
+        });
+
     }
 }

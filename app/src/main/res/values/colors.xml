@@ -38,7 +38,7 @@
     <color name="materia_error_700">#D32F2F</color>
     <color name="material_gray_100">#F5F5F5</color>
 
-    <color name="navigation_drawer_icon_color">#333333</color>
+    <color name="gray_bg_text_color">#333333</color>
 
 
     <color name="refresh_progress_1">@color/AppGreen</color>

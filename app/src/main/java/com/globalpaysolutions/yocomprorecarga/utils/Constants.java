@@ -27,7 +27,9 @@ public class Constants
 
     //Wikitude: AR-POI
     //public static final double AR_POI_RADIOS_KM = 0.015; //15 meters
-    public static final double AR_POI_RADIOS_KM = 0.030; //30 meters
+    //public static final double AR_POI_RADIOS_KM = 0.030; //30 meters
+    //public static final double AR_POI_RADIOS_KM = 0.03; //30 meters
+    public static final double AR_POI_RADIOS_KM = 0.05; //30 meters
     //public static final double AR_POI_RADIOS_KM = 1; // 1 KM
 
     //RecarGO 2D
@@ -52,6 +54,13 @@ public class Constants
     public static final String URI_MAP_VALUE_FIREBASE_ID = "firebaseID";
     public static final String URI_MAP_VALUE_LATITUDE = "latitude";
     public static final String URI_MAP_VALUE_LONGITUDE = "longitude";
+
+    //Prize Detail Bundle Keys
+    public static final String BUNDLE_PRIZE_TITLE = "bundle_data_prize_title";
+    public static final String BUNDLE_PRIZE_CODE = "bundle_data_prize_code";
+    public static final String BUNDLE_PRIZE_DIAL = "bundle_data_prize_dial";
+    public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
+    public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
 
 
 }

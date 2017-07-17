@@ -16,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBo
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
 import retrofit2.Call;
@@ -72,6 +73,10 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_NICKNAME)
     Call<SimpleResultResponse> registerNickname(@Header("authenticationKey") String pAuthKey, @Body NicknameReqBody pNicknameRequest);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REDEEM_PRIZE)
+    Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey);
 
 
 }

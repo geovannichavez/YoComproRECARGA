@@ -16,6 +16,7 @@ public class UserData
 
     private static final String PREFERENCES_NAME = "ycrGeneralPreferences";
 
+    //User Info
     private static final String KEY_CONSUMER_COUNTRY_ID = "usr_country_id";
     private static final String KEY_CONSUMER_COUNTRY_PHONE_CODE = "usr_country_phone_code";
     private static final String KEY_CONSUMER_COUNTRY_IS3CODE = "usr_country_iso3code";
@@ -27,6 +28,7 @@ public class UserData
     private static final String KEY_CONSUMER_EMAIL = "usr_email";
     private static final String KEY_CONSUMER_NICKNAME = "usr_nickname";
 
+    //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
     private static final String KEY_HAS_SELECTED_COUNTRY = "usr_has_selected_country";
     private static final String KEY_HAS_CONFIRMED_PHONE = "usr_has_confirmed_phone";
@@ -34,11 +36,21 @@ public class UserData
     private static final String KEY_HAS_AUTHENTICATED = "usr_has_authenticated";
     private static final String KEY_AUTHENTICATION_KEY = "usr_authentication_key";
 
+    //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
     private static final String KEY_TOTAL_WON_PRIZES = "usr_total_won_prizes";
     private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
     private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
+    private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
 
+    //Prizes
+    private static final String KEY_LAST_PRIZE_EXCHANGED_TITLE = "usr_last_prize_exchanged_title";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_DESCRIPTION = "usr_last_prize_exchanged_description";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_CODE = "usr_last_prize_exchanged_code";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_DIAL = "usr_last_prize_exchanged_dial";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_LEVEL = "usr_last_prize_exchanged_level";
+
+    //Device
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
     private static final String KEY_3D_COMPATIBLE_DEVICE = "app_3d_compatible_device";
 
@@ -170,7 +182,41 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveAwaitTime(String pTime)
+    {
+        mEditor.putString(KEY_AWAIT_TIME_PENDING, pTime);
+        mEditor.commit();
+    }
 
+    public void saveLastPrizeTitle(String pTitle)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_TITLE, pTitle);
+        mEditor.commit();
+    }
+
+    public void saveLastPrizeDescription(String pDescription)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_DESCRIPTION, pDescription);
+        mEditor.commit();
+    }
+
+    public void saveLastPrizeCode(String pCode)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_CODE, pCode);
+        mEditor.commit();
+    }
+
+    public void saveLastPrizeDial(String pDial)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_DIAL, pDial);
+        mEditor.commit();
+    }
+
+    public void saveLastPrizeLevel(int pLevel)
+    {
+        mEditor.putInt(KEY_LAST_PRIZE_EXCHANGED_LEVEL, pLevel);
+        mEditor.commit();
+    }
 
     /*
     * ********************
@@ -283,6 +329,41 @@ public class UserData
     public String getNickname()
     {
         return mPreferences.getString(KEY_CONSUMER_NICKNAME, "");
+    }
+
+    public String getAwaitTimePending()
+    {
+        return mPreferences.getString(KEY_AWAIT_TIME_PENDING, "");
+    }
+
+    public int getCurrentCoinsProgress()
+    {
+        return mPreferences.getInt(KEY_CURRENT_COINS_PROGRESS, 0);
+    }
+
+    public String getLastPrizeTitle()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_TITLE, "");
+    }
+
+    public String getLastPrizeDescription()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_DESCRIPTION, "");
+    }
+
+    public String getLastPrizeCode()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_CODE, "");
+    }
+
+    public String getLastPrizeDial()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_DIAL, "");
+    }
+
+    public int getLastPrizeLevel()
+    {
+        return mPreferences.getInt(KEY_LAST_PRIZE_EXCHANGED_LEVEL, 0);
     }
 
     /*

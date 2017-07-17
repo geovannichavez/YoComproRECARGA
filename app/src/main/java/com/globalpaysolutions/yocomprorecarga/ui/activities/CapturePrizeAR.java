@@ -4,15 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +26,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.CustomClickListener;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -48,6 +47,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     ImageButton btnCoinsCounter;
     ImageButton ivPrize2D;
     Vibrator mVibrator;
+    Toolbar toolbar;
 
     //Global Variables
     Animation mAnimation;
@@ -62,6 +62,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture_price_ar);
         this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
+
+        toolbar = (Toolbar) findViewById(R.id.arToolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
 
         tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
         tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
@@ -180,7 +184,25 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void showGenericDialog(DialogViewModel pMessageModel)
     {
-        CreateDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+        createDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+    }
+
+    @Override
+    public void showPrizeColectedDialog(DialogViewModel pDialogModel)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
+        alertDialog.setTitle(pDialogModel.getTitle());
+        alertDialog.setMessage(pDialogModel.getLine1());
+        alertDialog.setPositiveButton(pDialogModel.getAcceptButton(), new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                dialog.dismiss();
+                Intent prizeDetail = new Intent(CapturePrizeAR.this, PrizeDetail.class);
+                startActivity(prizeDetail);
+            }
+        });
+        alertDialog.show();
     }
 
     @Override
@@ -564,7 +586,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     *
     */
 
-    public void CreateDialog(String pTitle, String pMessage, String pButton)
+    public void createDialog(String pTitle, String pMessage, String pButton)
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
         alertDialog.setTitle(pTitle);
@@ -577,6 +599,24 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             }
         });
         alertDialog.show();
+    }
+
+    public int getStatusBarHeight()
+    {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+        {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public void redeemPrize(View view)
+    {
+        mPresenter.redeemPrize();
+        /*Intent prize = new Intent(this, PrizeDetail.class);
+        startActivity(prize);*/
     }
 
 

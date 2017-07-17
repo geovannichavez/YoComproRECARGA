@@ -6,10 +6,183 @@
     android:id="@+id/activity_prize_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_general_background"
+    android:background="@drawable/bg_gray_background"
     android:orientation="vertical"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizeDetail">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/prizeDetailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ApplicationGreenTheme"
+        android:elevation="4dp"
+        android:popupTheme="@style/contextualDarkToolbarTheme"
+        app:theme="@style/contextualToolbarTheme">
+
+        <ImageView
+            android:layout_marginRight="?attr/actionBarSize"
+            android:layout_width="fill_parent"
+            android:layout_height="23dp"
+            android:src="@drawable/img_logo_trans_recargo"/>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/ActivityVerticalExtraCustomMargin"
+            android:paddingLeft="@dimen/ActivityHorizontalExtraCustomMargin"
+            android:paddingRight="@dimen/ActivityHorizontalExtraCustomMargin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:weightSum="30"
+            >
+
+            <!--
+                SECCION 1
+            -->
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+            </LinearLayout>-->
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:src="@drawable/img_congrats"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:text="@string/prize_colected_thanks_to"
+                android:textColor="@color/gray_bg_text_color"/>
+
+            <!--
+                SECCION 2
+            -->
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+            </LinearLayout>-->
+            <ImageView
+                android:id="@+id/imgPrizeType"
+                android:layout_width="144dp"
+                android:layout_height="180dp"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:src="@drawable/img_chest_ruby"/>
+
+            <TextView
+                android:id="@+id/lblPrizeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:text="Samsung Galaxy S8"
+                android:gravity="center_horizontal"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_bg_text_color"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/lblPrizeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:gravity="center_horizontal"
+                android:text="Para que continues disfrutando de los servicios de RecarGO! desde tu nuevo Samsung Galaxy S8."
+                android:textColor="@color/gray_bg_text_color"
+                android:textSize="12sp"/>
+
+
+            <!--
+                           SECCION 3
+                       -->
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+            </LinearLayout>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:text="@string/label_copy_paste_code"
+                android:textColor="@color/gray_bg_text_color"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/etPrizeCode"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:background="@drawable/img_brush_background"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
+                android:text="@string/edittext_code_example"
+                android:textAllCaps="true"
+                android:textColor="@color/ActivityWhiteBackground"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <!--
+                           SECCION 4
+                       -->
+            <!--<LinearLayout
+                android:padding="0dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5">
+            </LinearLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8dp"
+                android:text="@string/label_reedem_it_dialing"
+                android:textColor="@color/gray_bg_text_color"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/lblExchange"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:background="@drawable/img_brush_background"
+                android:focusable="false"
+                android:gravity="center"
+                android:inputType="textEmailAddress"
+                android:text="Merliot"
+                android:textAllCaps="true"
+                android:textColor="@color/ActivityWhiteBackground"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/arToolbar"
@@ -24,122 +197,8 @@
             android:id="@+id/ivLogo"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:src="@drawable/logo_horizontal"/>
+            android:src="@drawable/img_logo_trans_recargo"
+            />
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/ActivityVerticalExtraCustomMargin"
-            android:paddingLeft="@dimen/ActivityHorizontalExtraCustomMargin"
-            android:paddingRight="@dimen/ActivityHorizontalExtraCustomMargin"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            >
-
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
-                android:layout_marginBottom="@dimen/ActivityVerticalCustomMargin"
-                android:src="@drawable/claro_logo"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_congratulations_title"
-
-                android:textColor="@color/AppGreen"
-                android:textSize="30sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_have_collected_prize"
-                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
-                android:textColor="@color/TextColor"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_prize_title"
-                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
-                android:layout_marginBottom="@dimen/ActivityVerticalCustomMargin"
-                android:textColor="@color/AppGreen"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-
-
-            <TextView
-                android:id="@+id/lblMoreInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_prize_detail"
-                android:textColor="@color/TextColor"
-                android:textSize="15sp"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
-                android:gravity="center_horizontal"
-                android:text="@string/label_copy_paste_code"
-                android:textColor="@color/TextColor"
-                android:textSize="15sp"/>
-
-            <EditText
-                android:id="@+id/etEmailReferred"
-                android:layout_width="135dp"
-                android:layout_height="42dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/custom_white_edittext_rounded_corners"
-                android:gravity="center_horizontal"
-                android:focusable="false"
-                android:text="@string/edittext_code_example"
-                android:textSize="24sp"
-                android:inputType="textEmailAddress"
-                android:paddingEnd="8dp"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_activate_dialing"
-                android:layout_marginTop="@dimen/ActivityVerticalCustomMargin"
-                android:textColor="@color/TextColor"
-                android:textSize="15sp"
-                android:id="@+id/textView4"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="@string/label_ussd_exchange_number"
-                android:textColor="@color/TextColor"
-                android:textSize="30sp"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>
