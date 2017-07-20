@@ -7,7 +7,10 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
@@ -78,5 +81,12 @@ public interface ApiInterface
     @POST(StringsURL.REDEEM_PRIZE)
     Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey);
 
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.LEADERBOARDS)
+    Call<LeaderboardsResponse> retrieveLeaderboards(@Header("authenticationKey") String pAuthKey, @Body LeaderboardReqBody pInterval);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.PRIZES_HISTORY)
+    Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey);
 
 }

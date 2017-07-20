@@ -79,6 +79,13 @@ dependencies {
     //Facebook SDK
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
+
+    //CircleImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    //Picasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
 }
 
 

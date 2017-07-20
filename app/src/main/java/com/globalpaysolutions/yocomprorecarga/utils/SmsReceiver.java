@@ -22,7 +22,7 @@ public class SmsReceiver extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         final Bundle bundle = intent.getExtras();
-        mUserData = new UserData(context);
+        mUserData = UserData.getInstance(context);
 
         if (!mUserData.UserVerifiedPhone())
         {

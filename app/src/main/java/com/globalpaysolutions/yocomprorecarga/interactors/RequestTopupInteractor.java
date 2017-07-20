@@ -28,7 +28,7 @@ public class RequestTopupInteractor implements IRequestTopupInteractor
     public RequestTopupInteractor(Context pContext)
     {
         this.mContext = pContext;
-        userData = new UserData(this.mContext);
+        userData = UserData.getInstance(this.mContext);
     }
 
     @Override

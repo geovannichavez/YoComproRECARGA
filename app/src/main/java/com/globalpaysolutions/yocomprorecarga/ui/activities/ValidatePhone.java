@@ -192,7 +192,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     public void setSelectedCountry(Country pSelected)
     {
         lblSelectedCountry.setText(pSelected.getName());
-        lblPhoneCode.setText(getString(R.string.sign_plus) +  pSelected.getPhoneCode());
+        lblPhoneCode.setText(String.format(getString(R.string.sign_plus), pSelected.getPhoneCode()));
 
         lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
         lblSelectedCountry.setTypeface(null, Typeface.BOLD);

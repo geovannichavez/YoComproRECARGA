@@ -28,7 +28,7 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
         this.mContext = context;
         this.mActivity = activity;
         this.mView = view;
-        this.mUserData = new UserData(mContext);
+        this.mUserData = UserData.getInstance(mContext);
     }
 
     @Override

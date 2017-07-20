@@ -126,7 +126,7 @@ public class HomeInteractor implements IHomeInteractor
     @Override
     public void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID)
     {
-        UserData userData = new UserData(mContext);
+        UserData userData = UserData.getInstance(mContext);
         StoreAirtimeReportReqBody airtimeReportReqBody = new StoreAirtimeReportReqBody();
         airtimeReportReqBody.setStoreName(pStoreName);
         airtimeReportReqBody.setAddressStore(pAddressStore);

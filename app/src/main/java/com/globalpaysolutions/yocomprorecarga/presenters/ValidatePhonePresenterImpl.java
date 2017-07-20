@@ -34,7 +34,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
         this.View = pView;
         this.context = pContext;
         this.interactor = new ValidatePhoneInteractor(pContext);
-        this.userData = new UserData(context);
+        this.userData = UserData.getInstance(context);
     }
 
     @Override

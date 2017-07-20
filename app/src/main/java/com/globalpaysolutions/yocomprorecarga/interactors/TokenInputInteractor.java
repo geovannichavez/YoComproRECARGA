@@ -31,7 +31,7 @@ public class TokenInputInteractor implements ITokenInputInteractor
     @Override
     public void sendTokenValidation(final TokenInputListener pListener, String pToken)
     {
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
         int consumerID = mUserData.GetConsumerID();
 
         TokenValidationBody tokenValidation = new TokenValidationBody();
@@ -69,14 +69,14 @@ public class TokenInputInteractor implements ITokenInputInteractor
     @Override
     public void setConfirmedPhone(boolean pConfirmed)
     {
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
         mUserData.HasConfirmedPhone(pConfirmed);
     }
 
     @Override
     public void setConfirmedCountry(boolean pConfirmedCountry)
     {
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
         mUserData.HasSelectedCountry(pConfirmedCountry);
     }
 

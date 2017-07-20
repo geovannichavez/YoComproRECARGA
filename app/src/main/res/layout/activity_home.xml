@@ -9,22 +9,27 @@
     android:orientation="vertical"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Home">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/homeToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+    <FrameLayout
         android:background="@color/ApplicationGreenTheme"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat"
-        app:theme="@style/ToolbarTheme">
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/homeToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat"
+            app:theme="@style/ToolbarTheme" />
 
         <ImageView
             android:id="@+id/ivLogo"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="179dp"
             android:layout_height="23dp"
             android:src="@drawable/logo_horizontal"/>
 
-    </android.support.v7.widget.Toolbar>
+    </FrameLayout>
 
     <fragment
         android:id="@+id/map"

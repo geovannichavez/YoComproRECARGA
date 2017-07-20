@@ -54,7 +54,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     {
         this.mContext = pContext;
         this.mFirebaseListener = pListener;
-        this.mUserData = new UserData(mContext);
+        this.mUserData = UserData.getInstance(mContext);
     }
 
     @Override

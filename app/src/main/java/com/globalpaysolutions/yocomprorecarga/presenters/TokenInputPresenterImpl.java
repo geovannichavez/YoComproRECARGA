@@ -33,7 +33,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         mView = pView;
         mContext = pContext;
         mInteractor = new TokenInputInteractor(mContext);
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
         is3Dcompatible = mUserData.Is3DCompatibleDevice();
     }
 

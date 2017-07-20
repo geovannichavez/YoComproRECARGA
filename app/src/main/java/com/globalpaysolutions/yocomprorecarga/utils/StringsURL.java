@@ -35,6 +35,10 @@ public class StringsURL
 
     public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
 
+    public static final String LEADERBOARDS = "leaderboards/";
+
+    public static final String PRIZES_HISTORY = "prize/history";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

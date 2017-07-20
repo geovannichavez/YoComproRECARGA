@@ -32,7 +32,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     {
         this.mContext = pContext;
         this.mListener = pListener;
-        this.mUserData = new UserData(mContext);
+        this.mUserData = UserData.getInstance(mContext);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     public ValidatePhoneInteractor(Context pContext)
     {
         this.mContext = pContext;
-        mUserData = new UserData(this.mContext);
+        mUserData = UserData.getInstance(this.mContext);
     }
 
     @Override

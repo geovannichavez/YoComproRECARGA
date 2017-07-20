@@ -19,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
@@ -738,6 +740,33 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         }
 
     }
+
+    /*
+    * **********************************
+    *
+    *   ACTIVITY
+    *
+    * **********************************
+    */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id = item.getItemId();
+        if (id == R.id.action_profile)
+        {
+            Intent profile = new Intent(Home.this, Profile.class);
+            startActivity(profile);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     /*

@@ -30,6 +30,8 @@ import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +61,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mContext = pContext;
         this.mActivity = pActivity;
         this.mView = pView;
-        this.mUserData = new UserData(mContext);
+        this.mUserData = UserData.getInstance(mContext);
         this.mInteractor = new CapturePrizeInteractor(mContext, this);
     }
 
@@ -424,6 +426,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void onExchangeError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
+        processErrorMessage(pCodeStatus, pThrowable);
     }
 
     @Override
@@ -468,7 +471,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable)
     {
-        mView.showToast("DEBUG: Something went wrong.");
+        processErrorMessage(pCodeStatus, pThrowable);
     }
 
 
@@ -489,6 +492,64 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         map.put(Constants.URI_MAP_VALUE_LONGITUDE, params[4]);
 
         return map;
+    }
+
+    private void processErrorMessage(int pCodeStatus, Throwable pThrowable)
+    {
+        DialogViewModel errorResponse = new DialogViewModel();
+
+        try
+        {
+            String Titulo;
+            String Linea1;
+            String Button;
+
+            if (pThrowable != null)
+            {
+                if (pThrowable instanceof SocketTimeoutException)
+                {
+                    Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else if (pThrowable instanceof IOException)
+                {
+                    Titulo = mContext.getString(R.string.error_title_internet_connecttion);
+                    Linea1 = mContext.getString(R.string.error_content_internet_connecttion);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else
+                {
+                    Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+            }
+            else
+            {
+                if(pCodeStatus == 401)
+                {
+                    Titulo = mContext.getString(R.string.error_title_vendor_not_found);
+                    Linea1 = mContext.getString(R.string.error_content_vendor_not_found_line);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else
+                {
+                    Titulo = mContext.getString(R.string.error_title_something_went_wrong);
+                    Linea1 = mContext.getString(R.string.error_content_something_went_wrong_try_again);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+            }
+
+            errorResponse.setTitle(Titulo);
+            errorResponse.setLine1(Linea1);
+            errorResponse.setAcceptButton(Button);
+            this.mView.showGenericDialog(errorResponse);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
 

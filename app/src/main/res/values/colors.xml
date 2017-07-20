@@ -46,6 +46,7 @@
     <color name="refresh_progress_3">@color/PressedGreenTheme</color>
 
     <color name="edittext_primary_color_android">#87000000</color>
+    <color name="color_middle_green">#a0cc00</color>
     <color name="pure_black">#1F1F1F</color>
-
+    <color name="dark_recargo_green">#1A8129</color>
 </resources>

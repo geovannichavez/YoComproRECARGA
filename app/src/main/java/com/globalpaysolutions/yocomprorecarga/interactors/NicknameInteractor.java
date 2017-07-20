@@ -33,7 +33,7 @@ public class NicknameInteractor implements INicknameInteractor
     {
         NicknameReqBody requestBody = new NicknameReqBody();
         requestBody.setNickname(nickname);
-        UserData userData = new UserData(mContext);
+        UserData userData = UserData.getInstance(mContext);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<SimpleResultResponse> call = apiService.registerNickname(userData.getUserAuthenticationKey(), requestBody);

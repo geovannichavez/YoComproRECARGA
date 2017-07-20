@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:weightSum="15">
+
+    <!--    Column 1: Weight 3-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivPrizeIcon"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/ic_virtual_reality"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/custom_dashed_vertical_line"/>
+
+    <!--    Column 2: Weight 8-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_weight="8"
+        android:gravity="center">
+
+        <LinearLayout
+            android:padding="@dimen/margin_6dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvPrizeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:gravity="center_horizontal"
+                android:textSize="14sp"
+                android:textColor="@color/pure_black"/>
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/tvPin"
+                android:gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/pure_black"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/custom_dashed_vertical_line"/>
+
+
+    <!--    Column 3: Weight 4-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="66dp"
+        android:layout_weight="4"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvExchange"
+            android:textSize="14sp"
+            android:maxLines="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pure_black"/>
+    </RelativeLayout>
+</LinearLayout>

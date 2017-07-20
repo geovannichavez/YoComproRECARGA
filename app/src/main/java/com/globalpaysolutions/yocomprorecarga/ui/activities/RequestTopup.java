@@ -106,7 +106,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
         mOperatorsGridView.setAdapter(mOperatorsAdapter);
 
-        mUserData = new UserData(this);
+        mUserData = UserData.getInstance(this);
         mValidator = new Validation(this, coordinatorLayout);
         presenter = new RequestTopupPresenterImpl(this, this, this);
         presenter.setInitialViewState();
@@ -196,11 +196,11 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
                     {
-                        mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                        mOperatorsGridView.getChildAt(i).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
                     }
                     else
                     {
-                        mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                        mOperatorsGridView.getChildAt(i).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
                     }
                 }
             }
@@ -266,21 +266,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
             {
-                mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                mOperatorsGridView.getChildAt(i).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
             }
             else
             {
-                mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                mOperatorsGridView.getChildAt(i).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
             }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
         {
-            mOperatorsGridView.getChildAt(position).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_selected));
+            mOperatorsGridView.getChildAt(position).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_selected));
         }
         else
         {
-            mOperatorsGridView.getChildAt(position).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_selected));
+            mOperatorsGridView.getChildAt(position).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_selected));
         }
     }
 

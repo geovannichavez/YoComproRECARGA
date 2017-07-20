@@ -42,8 +42,6 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
 
     //Facebook
     private CallbackManager mCallbackManager;
-    private ProfileTracker mProfileTracker;
-    private AccessTokenTracker mAccessTokenTracker;
 
 
     public AuthenticateInteractor(Context pContext)
@@ -56,7 +54,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     {
         mCallbackManager = CallbackManager.Factory.create();
 
-        mProfileTracker = new ProfileTracker()
+        ProfileTracker mProfileTracker = new ProfileTracker()
         {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile)
@@ -65,7 +63,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
             }
         };
 
-        mAccessTokenTracker = new AccessTokenTracker()
+        AccessTokenTracker mAccessTokenTracker = new AccessTokenTracker()
         {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken)

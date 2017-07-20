@@ -62,5 +62,12 @@ public class Constants
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
 
+    //Leaderboards
+    public static final String TODAY = "Today";
+    public static final String WEEK = "Week";
+    public static final String MONTH = "Month";
+    public static final String OVER_ALL = "OverAll";
+
+
 
 }

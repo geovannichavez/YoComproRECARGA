@@ -60,7 +60,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         mView = pView;
         mContext = pContext;
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
         mActivity = pActivity;
         mInteractor = new HomeInteractor(mContext, this);
         mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);

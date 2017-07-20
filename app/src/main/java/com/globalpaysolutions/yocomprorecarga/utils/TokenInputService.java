@@ -44,7 +44,7 @@ public class TokenInputService extends IntentService
         {
             String token = intent.getStringExtra("token");
 
-            mUserData = new UserData(getApplicationContext());
+            mUserData = UserData.getInstance(getApplicationContext());
 
             sendValidationToken(token);
         }
@@ -52,7 +52,7 @@ public class TokenInputService extends IntentService
 
     public void sendValidationToken(String pToken)
     {
-        mUserData = new UserData(getApplicationContext());
+        mUserData = UserData.getInstance(getApplicationContext());
         int consumerID = mUserData.GetConsumerID();
         is3Dcompatible = mUserData.Is3DCompatibleDevice();
 
@@ -77,7 +77,7 @@ public class TokenInputService extends IntentService
                         vibrator.vibrate(500); //500 milisegundos
 
                         //SET SELECTED COUNTRY
-                        mUserData = new UserData(getApplicationContext());
+                        mUserData = UserData.getInstance(getApplicationContext());
                         mUserData.HasSelectedCountry(true);
 
                         //SET CONFIRMED PHONE

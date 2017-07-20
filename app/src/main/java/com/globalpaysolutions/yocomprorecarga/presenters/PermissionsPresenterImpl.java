@@ -35,7 +35,7 @@ public class PermissionsPresenterImpl implements IPermissions
         mContext = pContext;
         mView = pView;
         mActivity = pActivity;
-        mUserData = new UserData(mContext);
+        mUserData = UserData.getInstance(mContext);
     }
 
     @Override

@@ -25,21 +25,19 @@ import java.util.UUID;
 public class AcceptTermsPresenterImpl implements IAcceptTerms
 {
     private static final String TAG = ValidatePhonePresenterImpl.class.getSimpleName();
-    private AcceptTermsView view;
     private Context context;
     private UserData userData;
 
     public AcceptTermsPresenterImpl(AcceptTermsView pView, AppCompatActivity pActivity, Context pContext)
     {
-        this.view = pView;
         this.context = pContext;
-        this.userData = new UserData(context);
+        this.userData = UserData.getInstance(context);
     }
 
     @Override
     public void acceptTerms()
     {
-        this.userData = new UserData(this.context);
+        this.userData = UserData.getInstance(this.context);
         this.userData.HasAccpetedTerms(true);
 
         String uniqueID = UUID.randomUUID().toString().toUpperCase();
@@ -50,7 +48,7 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
     @Override
     public void grantDevicePermissions()
     {
-        this.userData = new UserData(this.context);
+        this.userData = UserData.getInstance(this.context);
         this.userData.HasGrantedDevicePermissions(true);
     }
 

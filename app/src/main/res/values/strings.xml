@@ -2,6 +2,11 @@
     <string name="app_name">Yo Compro RECARGA</string>
 
 
+    <!--    ACTIVITIES  -->
+    <string name="activity_title_my_profile">Mi Perfil</string>
+    <string name="activity_title_leaderboards">Tabla de Líderes</string>
+    <string name="activity_title_prizes_history">Historial de Premios</string>
+
     <!--    ACCEPT TERMS    -->
     <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
 
@@ -54,7 +59,7 @@
     <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
     <string name="label_loading_exchanging_chest">¡Abriendo cofre, espera!</string>
     <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
-    <string name="label_allowed_open_chest_once_per_day">Sólo puedes abrir el mismo cofre una vez al día.</string>
+    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo cofre una vez al día.</string>
     <string name="label_chest_open_succesfully">¡Has abierto un cofre y obtuviste %1$s nuevas monedas! ¡Sigue buscando más cofres!</string>
     <string name="label_indicator_prizes">PREMIOS</string>
     <string name="label_indicator_saved">ACUMULADO</string>
@@ -99,6 +104,9 @@
     <string name="button_no">No</string>
     <string name="button_whatever">Ni modo</string>
     <string name="button_redeem_now">Canjear Ahora</string>
+    <string name="button_leaders_board">Tabla de líderes</string>
+    <string name="button_my_prizes">Mis Premios</string>
+    <string name="button_logout">Cerrar sesión</string>
     <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
@@ -129,7 +137,7 @@
 
 
     <!--    SPECIAL SIGNS   -->
-    <string name="sign_plus">+</string>
+    <string name="sign_plus">+%1$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -173,11 +181,30 @@
         <item>majo12</item>
     </string-array>
 
+    <!--    LEADER BOARDS   -->
+    <string name="label_name">Nombre</string>
+    <string name="label_nickname">Nickname</string>
+    <string name="label_ranking">Ranking</string>
+    <string name="label_username">Usuario</string>
+    <string name="label_recarcoins">RecarCoins</string>
+    <string name="label_last_winner">Último Ganador: %1$s</string>
+
+    <!--    PRIZE HISTORY   -->
+    <string name="label_prize_type">Tipo</string>
+    <string name="label_prize_name">Premio</string>
+    <string name="label_prize_exchange">Canje</string>
+
 
     <!--    CONTENT DESCRIPTION     -->
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
-
+    <string name="action_profile">Mi Perfil</string>
+    <string name="label_daily">Diario</string>
+    <string name="label_weekly">Semanal</string>
+    <string name="label_monthly">Mensual</string>
+    <string name="label_global">Global</string>
+    <string name="label_choose">Elegir</string>
+    <string name="label_code">Código: %1$s</string>
 
 
 </resources>

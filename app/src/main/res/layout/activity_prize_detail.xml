@@ -95,7 +95,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_8dp"
-                android:text="Samsung Galaxy S8"
                 android:gravity="center_horizontal"
                 android:textAllCaps="true"
                 android:textColor="@color/gray_bg_text_color"
@@ -108,7 +107,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_16dp"
                 android:gravity="center_horizontal"
-                android:text="Para que continues disfrutando de los servicios de RecarGO! desde tu nuevo Samsung Galaxy S8."
                 android:textColor="@color/gray_bg_text_color"
                 android:textSize="12sp"/>
 
@@ -175,7 +173,6 @@
                 android:focusable="false"
                 android:gravity="center"
                 android:inputType="textEmailAddress"
-                android:text="Merliot"
                 android:textAllCaps="true"
                 android:textColor="@color/ActivityWhiteBackground"
                 android:textSize="24sp"

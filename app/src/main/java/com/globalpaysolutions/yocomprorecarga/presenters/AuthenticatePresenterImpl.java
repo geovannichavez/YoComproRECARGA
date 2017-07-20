@@ -42,7 +42,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     public AuthenticatePresenterImpl(Context pContext, AuthenticateView pView, AppCompatActivity pActivity)
     {
         this.mContext = pContext;
-        this.mUserData = new UserData(mContext);
+        this.mUserData = UserData.getInstance(mContext);
         this.mView = pView;
         this.mInteractor = new AuthenticateInteractor(mContext);
     }
@@ -82,6 +82,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             facebookConsumer.setMiddleName(profile.getMiddleName());
             facebookConsumer.setUserID(profile.getId());
             mUserData.saveFacebookData(profile.getId(), profile.getLinkUri().toString());
+            mUserData.saveFacebookFullname(profile.getName());
             mInteractor.authenticateUser(this, facebookConsumer);
         }
         catch (Exception ex) {  ex.printStackTrace();   }

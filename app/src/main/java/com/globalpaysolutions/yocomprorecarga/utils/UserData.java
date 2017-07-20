@@ -11,8 +11,9 @@ public class UserData
 {
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
-    private Context mContext;
+    private static Context mContext;
     private int PRIVATE_MODE = 0;
+    private static UserData singleton;
 
     private static final String PREFERENCES_NAME = "ycrGeneralPreferences";
 
@@ -58,14 +59,24 @@ public class UserData
     private static final String KEY_FACEBOOK_FIRST_NAME = "usr_facebook_first_name";
     private static final String KEY_FACEBOOK_LAST_NAME = "usr_facebook_last_name";
     private static final String KEY_FACEBOOK_EMAIL = "usr_facebook_email";
+    private static final String KEY_FACEBOOK_FULLNAME = "usr_facebook_fullname";
     private static final String KEY_FACEBOOK_PROFILE_ID = "usr_facebook_profile_id";
     private static final String KEY_FACEBOOK_URL = "usr_facebook_url";
 
-    public UserData(Context pContext)
+    private UserData(Context pContext)
     {
-        this.mContext = pContext;
+        UserData.mContext = pContext;
         mPreferences = mContext.getSharedPreferences(PREFERENCES_NAME, PRIVATE_MODE);
         mEditor = mPreferences.edit();
+    }
+
+    public static synchronized UserData getInstance(Context context)
+    {
+        if (singleton == null)
+        {
+            singleton = new UserData(context);
+        }
+        return singleton;
     }
 
     /*
@@ -218,6 +229,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveFacebookFullname(String pFullname)
+    {
+        mEditor.putString(KEY_FACEBOOK_FULLNAME, pFullname);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -364,6 +381,11 @@ public class UserData
     public int getLastPrizeLevel()
     {
         return mPreferences.getInt(KEY_LAST_PRIZE_EXCHANGED_LEVEL, 0);
+    }
+
+    public String getFacebookFullname()
+    {
+        return mPreferences.getString(KEY_FACEBOOK_FULLNAME, "");
     }
 
     /*

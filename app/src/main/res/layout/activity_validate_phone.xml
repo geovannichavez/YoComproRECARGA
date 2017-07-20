@@ -90,7 +90,7 @@
                                android:layout_marginEnd="6dp"
                                android:layout_marginRight="6dp"
                                android:gravity="center_vertical"
-                               android:text="Elegir"
+                               android:text="@string/label_choose"
                                android:textColor="@color/GeneralTextColor"
                                android:textSize="15sp"/>
 
