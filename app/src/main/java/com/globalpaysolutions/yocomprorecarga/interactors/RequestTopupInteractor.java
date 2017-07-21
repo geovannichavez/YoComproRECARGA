@@ -67,7 +67,7 @@ public class RequestTopupInteractor implements IRequestTopupInteractor
     public void sendTopupRequest(final RequestTopupListener pListener, RequestTopupReqBody pRequest)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleMessageResponse> call = apiService.requestTopup(pRequest);
+        final Call<SimpleMessageResponse> call = apiService.requestTopup(UserData.getInstance(mContext).getUserAuthenticationKey(), pRequest);
 
         call.enqueue(new Callback<SimpleMessageResponse>()
         {

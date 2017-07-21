@@ -13,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
 
 public class LimitedFunctionality extends AppCompatActivity implements LimitedFunctionalityView
 {
-    TextView tvComponents;
     Button btnWhatever;
 
     //MVP
@@ -25,12 +24,11 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_limited_functionality);
 
-        tvComponents = (TextView) findViewById(R.id.tvComponents);
         btnWhatever = (Button) findViewById(R.id.btnWhatever);
 
         mPresenter = new LimitedFunctionalityPresenterImpl(this, this, this);
 
-        mPresenter.enlistMissingComponents();
+        //mPresenter.enlistMissingComponents();
 
         btnWhatever.setOnClickListener(new View.OnClickListener()
         {
@@ -41,20 +39,6 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
             }
         });
 
-    }
-
-    @Override
-    public void displayMissingComponents(String pComponents)
-    {
-       try
-       {
-           String componentsText = String.format(getString(R.string.label_limited_functionality_content), pComponents);
-           tvComponents.setText(componentsText);
-       }
-       catch (Exception ex)
-       {
-           ex.printStackTrace();
-       }
     }
 
     @Override

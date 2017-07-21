@@ -82,13 +82,12 @@
                 android:layout_height="wrap_content"/>-->
                 <ImageButton
                     android:id="@+id/btnVirtualReality"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="75dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="fitXY"
                     android:onClick="CapturePrize"
-                    android:src="@drawable/ic_virtual_reality"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="@drawable/btn_ripple_gradient_recargo"/>
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

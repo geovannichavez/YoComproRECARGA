@@ -91,31 +91,39 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     @Override
     public void onGraphLoginSuccess(LoginResult pLoginResult)
     {
+        //TODO: Quitar el toast
         Log.i(TAG, "Facebook email request started");
+        mView.showGenericToast(mContext.getString(R.string.label_facebook_logged_in));
         mInteractor.requestUserEmail(this, pLoginResult);
     }
 
     @Override
     public void onGraphLoginCancel()
     {
+        //TODO: Quitar el toast
+        //mView.showGenericToast("Graph login cancel");
         Log.i(TAG, "Facebook email request cancelled");
     }
 
     @Override
     public void onGraphLoginError(FacebookException pException)
     {
+        //TODO: Quitar el toast
+        //mView.showGenericToast("Graph login error");
         Log.i(TAG, "Facebook email request failed");
     }
 
     @Override
     public void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile)
     {
+        //TODO: quitar el toast
         mView.showGenericToast("Profile changed");
     }
 
     @Override
     public void onCurrentAccessTokenChanged(AccessToken pOldAccessToken, AccessToken pCurrentAccessToken)
     {
+        //TODO: quitar el toast
         mView.showGenericToast("Access token changed");
     }
 

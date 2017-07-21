@@ -136,7 +136,7 @@ public class HomeInteractor implements IHomeInteractor
         airtimeReportReqBody.setConsumerID(userData.GetConsumerID());
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleMessageResponse> call = apiService.sendStoreAirtimeReport(airtimeReportReqBody);
+        final Call<SimpleMessageResponse> call = apiService.sendStoreAirtimeReport(UserData.getInstance(mContext).getUserAuthenticationKey(), airtimeReportReqBody);
 
         call.enqueue(new Callback<SimpleMessageResponse>()
         {

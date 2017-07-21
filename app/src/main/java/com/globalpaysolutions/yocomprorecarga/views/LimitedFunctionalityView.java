@@ -6,6 +6,5 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 public interface LimitedFunctionalityView
 {
-    void displayMissingComponents(String pComponents);
     void navigateNextActivity();
 }

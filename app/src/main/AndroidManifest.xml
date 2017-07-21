@@ -187,6 +187,7 @@
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
+            android:excludeFromRecents="true"
             android:screenOrientation="portrait">
         </activity>
         <activity

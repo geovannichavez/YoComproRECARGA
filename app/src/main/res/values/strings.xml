@@ -22,7 +22,7 @@
     <string name="label_country">País</string>
     <string name="label_country_code">Cód.</string>
     <string name="label_title_select_country">Seleccione país</string>
-
+    <string name="label_choose">Elegir</string>
 
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
@@ -86,7 +86,9 @@
     <!--    LIMITED FUNCTIONALITY    -->
     <string name="title_limited_functionality">FUNCIONALIDAD LIMITADA</string>
     <string name="label_limited_functionality_content">Tu dispositivo carece de características necesarias para el funcionamiento de RecarGO! con realidad aumentada (%1$s), por lo que podrás jugar al RecarGO! con una mecánica diferente.</string>
-
+    <string name="label_warning">¡Atención!</string>
+    <string name="label_divice_not_ar_compatible">Tu dispositivo no es compatible con la función de Realidad Aumentada (AR)</string>
+    <string name="label_2d_playable">Sin embargo, puedes seguir disfrutando de RecarGO! en su versión en 2 dimensiones.</string>
 
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
@@ -162,7 +164,7 @@
     <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
 
     <!--    AUTHENTICATE    -->
-    <string name="label_welcome_to_ycr">¡Bienvenida a YoComproRecarga!</string>
+    <string name="label_welcome_to_ycr">¡Bienvenido a YoComproRecarga!</string>
     <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan facil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
 
 
@@ -181,6 +183,9 @@
         <item>majo12</item>
     </string-array>
 
+    <!--    PROFILE     -->
+    <string name="action_profile">Mi Perfil</string>
+
     <!--    LEADER BOARDS   -->
     <string name="label_name">Nombre</string>
     <string name="label_nickname">Nickname</string>
@@ -188,23 +193,21 @@
     <string name="label_username">Usuario</string>
     <string name="label_recarcoins">RecarCoins</string>
     <string name="label_last_winner">Último Ganador: %1$s</string>
+    <string name="label_daily">Diario</string>
+    <string name="label_weekly">Semanal</string>
+    <string name="label_monthly">Mensual</string>
+    <string name="label_global">Global</string>
 
     <!--    PRIZE HISTORY   -->
     <string name="label_prize_type">Tipo</string>
     <string name="label_prize_name">Premio</string>
     <string name="label_prize_exchange">Canje</string>
-
+    <string name="label_code">Código: %1$s</string>
 
     <!--    CONTENT DESCRIPTION     -->
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
-    <string name="action_profile">Mi Perfil</string>
-    <string name="label_daily">Diario</string>
-    <string name="label_weekly">Semanal</string>
-    <string name="label_monthly">Mensual</string>
-    <string name="label_global">Global</string>
-    <string name="label_choose">Elegir</string>
-    <string name="label_code">Código: %1$s</string>
+    <string name="label_facebook_logged_in">Inició sesión en Facebook</string>
 
 
 </resources>

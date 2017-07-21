@@ -77,7 +77,6 @@ public class LimitedFunctionalityPresenterImpl implements ILimitedFunctionality
         String[] components = result.getComponents().values().toArray(new String[0]);
         String componentsString = TextUtils.join(", ", components);
 
-        mView.displayMissingComponents(componentsString);
 
     }
 

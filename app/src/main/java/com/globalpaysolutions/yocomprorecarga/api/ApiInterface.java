@@ -51,7 +51,7 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUESTTOPUP)
-    Call<SimpleMessageResponse> requestTopup(@Body RequestTopupReqBody pRequestTopupBody);
+    Call<SimpleMessageResponse> requestTopup(@Header("authenticationKey") String pAuthKey, @Body RequestTopupReqBody pRequestTopupBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REGISTER_PHONE_CONSUMER)
@@ -59,7 +59,7 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
-    Call<SimpleMessageResponse> sendStoreAirtimeReport(@Body StoreAirtimeReportReqBody pStoreAirtimeReportReqBody);
+    Call<SimpleMessageResponse> sendStoreAirtimeReport(@Header("authenticationKey") String pAuthKey, @Body StoreAirtimeReportReqBody pStoreAirtimeReportReqBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE)
