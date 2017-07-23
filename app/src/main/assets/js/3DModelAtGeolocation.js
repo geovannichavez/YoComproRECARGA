@@ -43,7 +43,7 @@ var World = {
 
         var bronzeChestAnim = new AR.ModelAnimation(modelBronze, "Scene");
 
-        var indicatorImage = new AR.ImageResource("assets/indi.png");
+        var indicatorImage = new AR.ImageResource("assets/BronzeArrow.png");
         var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1,
         {
             verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
@@ -94,7 +94,7 @@ var World = {
 
         var silverChestAnim = new AR.ModelAnimation(modelSilver, "Scene");
 
-        var indicatorImage = new AR.ImageResource("assets/indi.png");
+        var indicatorImage = new AR.ImageResource("assets/SilverArrow.png");
         var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1,
         {
             verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
@@ -148,7 +148,7 @@ var World = {
         var goldChestAnim = new AR.ModelAnimation(modelGold, "Scene");
 
 
-        var indicatorImage = new AR.ImageResource("assets/indi.png");
+        var indicatorImage = new AR.ImageResource("assets/GoldArrow.png");
         var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1,
         {
             verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP

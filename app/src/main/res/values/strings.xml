@@ -53,6 +53,7 @@
     <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
     <string name="title_success_dialog_store_report">REPORTE ENVIADO</string>
     <string name="dialog_content_report_sent">Su reporte ha sido enviado exitosamente. ¡Muchas gracias por ayudarnos con información!</string>
+    <string name="yvr_vendor_marker_title">¡YoVendoRecarga! Click aquí</string>
 
     <!--    CAPTURE PRIZE AR    -->
     <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
@@ -208,6 +209,7 @@
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
     <string name="label_facebook_logged_in">Inició sesión en Facebook</string>
+
 
 
 </resources>

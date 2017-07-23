@@ -52,7 +52,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 {
     //Adapters y Layouts
     Button btnEnvar;
-    Button btnComprar;
+    //Button btnComprar;
     TextView tvStoreLink;
     EditText etCodeNumber;
     EditText etExplPhone;
@@ -91,7 +91,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
         //Views
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
-        btnComprar = (Button) findViewById(R.id.btnComprar);
+        //btnComprar = (Button) findViewById(R.id.btnComprar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
         tvStoreLink = (TextView) findViewById(R.id.tvStoreLink);

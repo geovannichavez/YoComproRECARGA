@@ -287,8 +287,7 @@
 
                                 <Button
                                     android:id="@+id/btnEnvar"
-                                    android:layout_weight="6"
-                                    android:layout_width="0dp"
+                                    android:layout_width="200dp"
                                     android:layout_height="40dp"
                                     android:layout_marginRight="8dp"
                                     android:layout_marginEnd="8dp"
@@ -298,7 +297,20 @@
                                     android:text="@string/button_request_topup"
                                     android:textColor="@color/ActivityWhiteBackground"/>
 
-                                <Button
+                                <!--<Button
+                                    android:id="@+id/btnEnvar"
+                                    android:layout_weight="6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:clickable="true"
+                                    android:onClick="sendTopupRequest"
+                                    android:text="@string/button_request_topup"
+                                    android:textColor="@color/ActivityWhiteBackground"/>-->
+
+                                <!--<Button
                                     android:id="@+id/btnComprar"
                                     android:layout_weight="4"
                                     android:layout_width="0dp"
@@ -307,7 +319,7 @@
                                     android:clickable="true"
                                     android:text="@string/button_buy"
                                     android:onClick="creditCardPayment"
-                                    android:textColor="@color/ActivityWhiteBackground"/>
+                                    android:textColor="@color/ActivityWhiteBackground"/>-->
                             </LinearLayout>
 
 

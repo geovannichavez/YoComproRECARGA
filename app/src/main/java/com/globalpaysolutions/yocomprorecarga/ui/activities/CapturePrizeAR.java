@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
@@ -33,6 +34,9 @@ import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeView
 {
@@ -47,10 +51,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     ImageButton ivPrize2D;
     Vibrator mVibrator;
     Toolbar toolbar;
+    Toast mToast;
 
     //Global Variables
     Animation mAnimation;
     Handler mHandler;
+    HashMap<String, ChestData2D> mFirbaseObjects;
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
@@ -76,6 +82,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         mPresenter = new CapturePrizeARPResenterImpl(this, this, this);
         mPresenter.initialize();
         mHandler = new Handler();
+        mFirbaseObjects = new HashMap<>();
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
@@ -303,7 +310,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         try
         {
-            if(mVibrator != null)
+            if (mVibrator != null)
                 mVibrator.cancel();
         }
         catch (Exception ex)
@@ -315,7 +322,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void showToast(String pText)
     {
-        Toast.makeText(CapturePrizeAR.this, pText, Toast.LENGTH_LONG).show();
+        if(mToast != null)
+        {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(CapturePrizeAR.this, pText, Toast.LENGTH_LONG);
+        mToast.show();
     }
 
     @Override
@@ -325,7 +337,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onCoinTouch(int pAwait)
+    public void onChestTouch(int pAwait)
     {
         mVibrator.cancel();
         removeBlinkingAnimation();
@@ -432,13 +444,19 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onGoldKeyExited(String pKey)
     {
-
+        this.architectView.callJavascript("deleteObjectGeoFn()");
     }
 
     @Override
     public void onGoldKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_gold);
+        ChestData2D data = new ChestData2D();
+        data.setLocation(pLocation);
+        data.setChestType(Constants.VALUE_CHEST_TYPE_GOLD);
+
+        mFirbaseObjects.clear();
+        mFirbaseObjects.put(pKey, data);
+        ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d);
     }
 
     @Override
@@ -462,13 +480,19 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onSilverKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_silver);
+        ChestData2D data = new ChestData2D();
+        data.setLocation(pLocation);
+        data.setChestType(Constants.VALUE_CHEST_TYPE_SILVER);
+
+        mFirbaseObjects.clear();
+        mFirbaseObjects.put(pKey, data);
+        ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d);
     }
 
     @Override
     public void onSilverKeyExited(String pKey)
     {
-
+        this.architectView.callJavascript("deleteObjectGeoFn()");
     }
 
     @Override
@@ -492,13 +516,19 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onBronzeKeyEntered_2D(String pKey, LatLng pLocation)
     {
-        //ivPrize2D.setImageResource(R.drawable.img_recarstop_2d_bronze);
+        ChestData2D data = new ChestData2D();
+        data.setLocation(pLocation);
+        data.setChestType(Constants.VALUE_CHEST_TYPE_BRONZE);
+
+        mFirbaseObjects.clear();
+        mFirbaseObjects.put(pKey, data);
+        ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d);
     }
 
     @Override
     public void onBronzeKeyExited(String pKey)
     {
-
+        this.architectView.callJavascript("deleteObjectGeoFn()");
     }
 
     @Override
@@ -535,8 +565,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         try
         {
-            if(mVibrator != null)
-                mVibrator.cancel();
+            mVibrator.cancel();
         }
         catch (Exception ex)
         {
@@ -550,8 +579,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         super.onStop();
         try
         {
-            if(mVibrator != null)
-                mVibrator.cancel();
+
+            mVibrator.cancel();
         }
         catch (Exception ex)
         {
@@ -567,8 +596,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         try
         {
-            if(mVibrator != null)
-                mVibrator.cancel();
+
+            mVibrator.cancel();
         }
         catch (Exception ex)
         {
@@ -625,14 +654,26 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     *   VIBRATOR AUXILIAR RUNNABLE
     *
     *
-    */
-    Runnable runCoinExchange = new Runnable()
+    */ Runnable runCoinExchange = new Runnable()
     {
         @Override
         public void run()
         {
             mVibrator.vibrate(Constants.ON_EARNED_COIN_SUCCESSFULLY_VIBRATION_MILLISECONDS);
-            mPresenter._navigateToPrize();
+
+            try
+            {
+                Map.Entry<String, ChestData2D> entry = mFirbaseObjects.entrySet().iterator().next();
+                String firebaseID = entry.getKey();
+                ChestData2D chestData = entry.getValue();
+
+                //Atempt to exchange chest
+                mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
         }
     };
 

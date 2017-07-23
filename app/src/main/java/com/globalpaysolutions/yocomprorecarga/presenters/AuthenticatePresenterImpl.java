@@ -71,7 +71,6 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             Profile profile = Profile.getCurrentProfile();
 
             //REGISTER CONSUMER
-            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             FacebookConsumer facebookConsumer = new FacebookConsumer();
             facebookConsumer.setFirstName(profile.getFirstName());
             facebookConsumer.setLastName(profile.getLastName());
@@ -93,7 +92,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     {
         //TODO: Quitar el toast
         Log.i(TAG, "Facebook email request started");
-        mView.showGenericToast(mContext.getString(R.string.label_facebook_logged_in));
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.requestUserEmail(this, pLoginResult);
     }
 
@@ -117,14 +116,14 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     public void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile)
     {
         //TODO: quitar el toast
-        mView.showGenericToast("Profile changed");
+        //mView.showGenericToast("Profile changed");
     }
 
     @Override
     public void onCurrentAccessTokenChanged(AccessToken pOldAccessToken, AccessToken pCurrentAccessToken)
     {
         //TODO: quitar el toast
-        mView.showGenericToast("Access token changed");
+        //mView.showGenericToast("Access token changed");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -21,10 +20,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.PrizeDetail;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.CustomClickListener;
-import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -175,6 +171,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
+    {
+        mInteractor.exchangePrizeData(pLocation, pFirebaseID, pChestType);
+    }
+
+    @Override
     public void _navigateToPrize()
     {
         mView.navigatePrizeDetail();
@@ -209,7 +211,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void handleCoinTouch()
     {
-        mView.onCoinTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
+        mView.stopVibrate();
+        mView.onChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
     }
 
     @Override
@@ -244,6 +247,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
+            mView.hideArchViewLoadingMessage();
             mView.onGoldKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
@@ -276,6 +280,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
+            mView.hideArchViewLoadingMessage();
             mView.onSilverKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
@@ -309,6 +314,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
+            mView.hideArchViewLoadingMessage();
             mView.onBronzeKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();

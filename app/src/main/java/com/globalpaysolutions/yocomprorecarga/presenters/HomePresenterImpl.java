@@ -381,7 +381,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         if(pSalePointData != null)
             //TODO: Quitar el parámetro del metodo
-            mView.addVendorPointData(pKey, "¡YoVendoRecarga!", pSalePointData.getVendorCode());
+            mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), pSalePointData.getVendorCode());
     }
 
     @Override

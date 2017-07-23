@@ -16,15 +16,13 @@ import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl
 public class SmsReceiver extends BroadcastReceiver
 {
     private static final String TAG = SmsReceiver.class.getSimpleName();
-    private UserData mUserData;
 
     @Override
     public void onReceive(Context context, Intent intent)
     {
         final Bundle bundle = intent.getExtras();
-        mUserData = UserData.getInstance(context);
 
-        if (!mUserData.UserVerifiedPhone())
+        if (!UserData.getInstance(context).UserVerifiedPhone())
         {
             try
             {

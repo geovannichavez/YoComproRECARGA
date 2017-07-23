@@ -16,9 +16,9 @@
 
         <!-- ARCHITECT VIEW WIKITUDE -->
         <com.wikitude.architect.ArchitectView
-            android:id="@+id/architectView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+              android:id="@+id/architectView"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"/>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/arToolbar"
@@ -36,6 +36,20 @@
         </android.support.v7.widget.Toolbar>
 
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--    OBJETO 2D   -->
+            <ImageButton
+                android:id="@+id/ivPrize2D"
+                android:layout_width="143dp"
+                android:layout_height="165dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/contentdescription_2d_prize_image"
+                android:scaleType="fitXY"/>
+        </FrameLayout>
 
 
         <RelativeLayout
@@ -47,14 +61,15 @@
             android:paddingStart="8dp"
             android:paddingTop="65dp">
 
+
             <!-- *************
             INDICADORES
             ****************** -->
             <LinearLayout
-                android:layout_marginTop="@dimen/margin_16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"   >
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:orientation="vertical">
 
                 <!-- INDICADOR -->
                 <FrameLayout
@@ -78,9 +93,9 @@
                         android:layout_width="70dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/margin_8dp"
                         android:layout_marginLeft="@dimen/margin_20dp"
                         android:layout_marginStart="@dimen/margin_20dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
                         android:gravity="center"
                         android:shadowColor="@color/GeneralTextColor"
                         android:textColor="@color/ActivityWhiteBackground"
@@ -110,9 +125,9 @@
                         android:layout_width="70dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/margin_8dp"
                         android:layout_marginLeft="@dimen/margin_14dp"
                         android:layout_marginStart="@dimen/margin_14dp"
+                        android:layout_marginTop="@dimen/margin_8dp"
                         android:gravity="center"
                         android:shadowColor="@color/GeneralTextColor"
                         android:textColor="@color/ActivityWhiteBackground"
@@ -122,25 +137,6 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <!--    OBJETO 2D   -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/relBarContainer"
-                android:gravity="center"
-                android:paddingBottom="26dp">
-
-                <ImageButton
-                    android:id="@+id/ivPrize2D"
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/contentdescription_2d_prize_image"
-                    android:scaleType="fitXY"/>
-            </RelativeLayout>
 
             <!-- BARRA -->
             <RelativeLayout
@@ -153,7 +149,6 @@
                     android:id="@+id/btnCoinCounter"
                     android:layout_width="135dp"
                     android:layout_height="135dp"
-                    android:onClick="redeemPrize"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/margin_16dp"
@@ -161,6 +156,7 @@
                     android:layout_marginRight="@dimen/margin_8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/contentdescription_coin_counter"
+                    android:onClick="redeemPrize"
                     android:scaleType="fitXY"
                     android:src="@drawable/img_coin_counter_twenty"/>
             </RelativeLayout>
