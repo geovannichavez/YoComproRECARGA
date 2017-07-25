@@ -110,6 +110,7 @@
     <string name="button_leaders_board">Tabla de líderes</string>
     <string name="button_my_prizes">Mis Premios</string>
     <string name="button_logout">Cerrar sesión</string>
+    <string name="button_tutorial">Ver Tutorial</string>
     <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
@@ -166,7 +167,7 @@
 
     <!--    AUTHENTICATE    -->
     <string name="label_welcome_to_ycr">¡Bienvenido a YoComproRecarga!</string>
-    <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan facil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+    <string name="label_login_with_facebook">¡Comprar recargas núnca fue tan fácil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
 
 
     <!--    FACEBOOK    -->
@@ -209,7 +210,7 @@
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
     <string name="label_facebook_logged_in">Inició sesión en Facebook</string>
-
+    <string name="label_portable_phone_number">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp <b>7697-8980</b> al número para obtener tu código.</string>
 
 
 </resources>

@@ -11,8 +11,10 @@ import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITokenInputPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
+import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;
 
@@ -76,6 +78,9 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         mView.dismissLoading();
         mInteractor.setConfirmedCountry(true);
         mInteractor.setConfirmedPhone(true);
+
+        //Sets tag for OneSignal
+        OneSignal.sendTag(Constants.ONESIGNAL_USER_TAG_KEY, mUserData.GetMsisdn());
 
         mView.navigateHome(is3Dcompatible);
     }

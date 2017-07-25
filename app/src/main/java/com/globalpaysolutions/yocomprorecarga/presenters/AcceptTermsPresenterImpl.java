@@ -12,6 +12,8 @@ import android.util.Log;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.RequirementsAR;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IAcceptTerms;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
@@ -27,11 +29,13 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
     private static final String TAG = ValidatePhonePresenterImpl.class.getSimpleName();
     private Context context;
     private UserData userData;
+    private AcceptTermsView mView;
 
     public AcceptTermsPresenterImpl(AcceptTermsView pView, AppCompatActivity pActivity, Context pContext)
     {
         this.context = pContext;
         this.userData = UserData.getInstance(context);
+        this.mView = pView;
     }
 
     @Override
@@ -91,5 +95,11 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
 
 
         userData.Save3DCompatibleValue(hasAllRequirements);
+    }
+
+    @Override
+    public void viewTerms()
+    {
+        mView.viewTerms(StringsURL.TERMS_AND_CONDITIONS_URL);
     }
 }

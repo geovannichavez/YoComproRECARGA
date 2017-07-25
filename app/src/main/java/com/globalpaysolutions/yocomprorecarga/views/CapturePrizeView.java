@@ -19,7 +19,6 @@ public interface CapturePrizeView
     void showGenericDialog(DialogViewModel pMessageModel);
     void showPrizeColectedDialog(DialogViewModel pDialogModel);
     void showIncompatibleDeviceDialog(DialogViewModel pMessageModel);
-    void navigatePrizeDetail();
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();

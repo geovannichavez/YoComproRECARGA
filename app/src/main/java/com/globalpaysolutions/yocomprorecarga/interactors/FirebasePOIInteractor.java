@@ -29,7 +29,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private Context mContext;
     private FirebasePOIListener mFirebaseListener;
 
-    private UserData mUserData; //TODO: Revisar si es necesario usar Singleton
+    private UserData mUserData;
 
     //Firebase
     private DatabaseReference mRootReference = FirebaseDatabase.getInstance().getReference();

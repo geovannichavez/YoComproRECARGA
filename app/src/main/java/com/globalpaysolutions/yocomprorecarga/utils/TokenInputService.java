@@ -16,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Home;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
+import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;
 
@@ -82,6 +83,9 @@ public class TokenInputService extends IntentService
 
                         //SET CONFIRMED PHONE
                         mUserData.HasConfirmedPhone(true);
+
+                        //SETS TAG FOR ONESIGNAL
+                        OneSignal.sendTag(Constants.ONESIGNAL_USER_TAG_KEY, mUserData.GetMsisdn());
 
                         //NAVIGATE HOME
 

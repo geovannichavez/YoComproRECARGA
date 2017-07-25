@@ -10,6 +10,10 @@
         <item name="colorPrimary">@color/ApplicationGreenTheme</item>
         <item name="colorPrimaryDark">@color/ApplicationGreenThemeDark</item>
         <item name="colorAccent">@color/ApplicationGreenTheme</item>
+
+        <!--    TOOLBAR     -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/dark_recargo_green</item>
     </style>
 
     <style name="AppThemeTrans" parent="AppTheme">
@@ -26,6 +30,8 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:textColor">@color/ApplicationGreenTheme</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/dark_recargo_green</item>
     </style>
 
     <style name="transparentToolbarTheme" parent="AppTheme">
@@ -36,7 +42,7 @@
         <item name="android:textColor">@color/ApplicationGreenTheme</item>
     </style>
 
-    <style name="contextualToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!--<style name="contextualToolbarTheme" parent="AppTheme">
         <item name="colorPrimary">@color/ApplicationGreenTheme</item>
         <item name="colorPrimaryDark">@color/ApplicationGreenThemeDark</item>
         <item name="colorAccent">@color/ApplicationGreenTheme</item>
@@ -44,6 +50,15 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:textColor">@color/ApplicationGreenTheme</item>
+        <item name="actionModeBackground">@color/dark_recargo_green</item>
+    </style>-->
+
+    <style name="contextualToolbarTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColor">@color/ApplicationGreenTheme</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/dark_recargo_green</item>
     </style>
 
     <style name="contextualDarkToolbarTheme" parent="ThemeOverlay.AppCompat.Light">

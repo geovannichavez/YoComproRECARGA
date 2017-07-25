@@ -130,7 +130,7 @@
                 android:textColor="@color/gray_bg_text_color"
                 android:textSize="16sp"/>
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/etPrizeCode"
                 android:layout_width="200dp"
                 android:layout_height="45dp"
@@ -140,6 +140,21 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:inputType="textEmailAddress"
+                android:text="@string/edittext_code_example"
+                android:textAllCaps="true"
+                android:textColor="@color/ActivityWhiteBackground"
+                android:textSize="24sp"
+                android:textStyle="bold"/>-->
+
+            <TextView
+                android:id="@+id/etPrizeCode"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="@dimen/margin_16dp"
+                android:background="@drawable/img_brush_background"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:gravity="center"
                 android:text="@string/edittext_code_example"
                 android:textAllCaps="true"
                 android:textColor="@color/ActivityWhiteBackground"

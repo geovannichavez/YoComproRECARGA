@@ -28,6 +28,7 @@
             android:src="@drawable/img_ycr_logo"/>
 
         <TextView
+            android:id="@+id/tvTermsAndConditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -49,7 +50,7 @@
             android:layout_height="wrap_content"
             android:onClick="acceptTerms"
             android:minWidth="180dp"
-            android:background="@drawable/btn_effect_ripple_green"
+            android:background="@drawable/btn_effect_ripple_green_rounded_corners"
             android:paddingLeft="@dimen/ActivityHorizontalCustomMargin"
             android:paddingRight="@dimen/ActivityHorizontalCustomMargin"
             android:textColor="@color/ActivityWhiteBackground"

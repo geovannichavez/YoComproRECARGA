@@ -6,5 +6,5 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 public interface AcceptTermsView
 {
-    //void accepTerms(View viewButton);
+    void viewTerms(String url);
 }

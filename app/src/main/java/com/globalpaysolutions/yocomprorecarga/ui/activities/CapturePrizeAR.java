@@ -239,13 +239,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void navigatePrizeDetail()
-    {
-        Intent prizeDetail = new Intent(this, PrizeDetail.class);
-        startActivity(prizeDetail);
-    }
-
-    @Override
     public void showLoadingDialog(String pLabel)
     {
         progressDialog = new ProgressDialog(this);
@@ -642,9 +635,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
     public void redeemPrize(View view)
     {
+
         mPresenter.redeemPrize();
-        /*Intent prize = new Intent(this, PrizeDetail.class);
-        startActivity(prize);*/
+        //Intent prize = new Intent(this, PrizeDetail.class);
+        //startActivity(prize);
     }
 
 

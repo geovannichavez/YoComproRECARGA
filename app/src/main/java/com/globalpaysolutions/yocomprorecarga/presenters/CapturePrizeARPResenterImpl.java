@@ -65,7 +65,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void initialize()
     {
         this.mView.obtainUserProgress();
-        mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext);
+        mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext, Constants.ONE_METTER_DISPLACEMENT);
         new initializeGoogleMapsCallback().execute();
 
         this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
@@ -127,7 +127,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mFirebaseInteractor.bronzePointsUpdateCriteria(location, radius);
     }
 
-    @Override
     public void _genericPOIAction(String pDisplayText)
     {
         DialogViewModel dialog = new DialogViewModel();
@@ -174,12 +173,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         mInteractor.exchangePrizeData(pLocation, pFirebaseID, pChestType);
-    }
-
-    @Override
-    public void _navigateToPrize()
-    {
-        mView.navigatePrizeDetail();
     }
 
     @Override

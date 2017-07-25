@@ -65,7 +65,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mInteractor = new HomeInteractor(mContext, this);
         mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
 
-        this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext);
+        this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext, Constants.TEN_METTERS_DISPLACEMENT);
         this.mGoogleLocationApiManager.setLocationCallback(this);
 
     }
@@ -220,18 +220,18 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void prizePointsQuery(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        mFirebaseInteractor.goldPointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
-        mFirebaseInteractor.silverPointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
-        mFirebaseInteractor.bronzePointsQuery(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.goldPointsQuery(location, Constants.GOLD_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.silverPointsQuery(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.bronzePointsQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
     }
 
     @Override
     public void updatePrizePntCriteria(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        mFirebaseInteractor.goldPointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
-        mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
-        mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.PRIZES_STOP_RADIUS_KM);
+        mFirebaseInteractor.goldPointsUpdateCriteria(location, Constants.GOLD_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
     }
 
     @Override

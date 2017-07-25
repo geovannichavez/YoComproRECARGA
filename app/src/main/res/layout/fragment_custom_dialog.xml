@@ -76,7 +76,7 @@
                 android:minWidth="180dp"
                 android:paddingRight="24dp"
                 android:paddingLeft="24dp"
-                android:background="@drawable/btn_effect_ripple_green" />
+                android:background="@drawable/btn_effect_ripple_green_rounded_corners" />
         </LinearLayout>
 
     </FrameLayout>

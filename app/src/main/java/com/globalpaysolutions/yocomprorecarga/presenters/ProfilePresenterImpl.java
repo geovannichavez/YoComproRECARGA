@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.facebook.Profile;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IProfilePresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ProfileView;
 
@@ -41,5 +43,11 @@ public class ProfilePresenterImpl implements IProfilePresenter
         {
             mView.loadViewsState(mUserData.getFacebookFullname(), mUserData.getNickname(), null);
         }
+    }
+
+    @Override
+    public void viewTutorial()
+    {
+        mView.launchChromeView(StringsURL.TUTORIAL_VIDEO_URL);
     }
 }

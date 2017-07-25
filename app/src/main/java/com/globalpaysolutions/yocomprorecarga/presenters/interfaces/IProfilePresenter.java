@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IProfilePresenter
 {
     void loadInitialData();
+    void viewTutorial();
 }

@@ -1,11 +1,14 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,6 +79,23 @@ public class Profile extends AppCompatActivity implements ProfileView
 
     }
 
+    @Override
+    public void launchChromeView(String url)
+    {
+        try
+        {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            builder.setToolbarColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
+            customTabsIntent.launchUrl(this, Uri.parse(url));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            Log.e(TAG, "Something went wrong launching Chrome View");
+        }
+    }
+
     public void navigateLeaderboards(View view)
     {
         Intent leaderboards = new Intent(this, Leaderboards.class);
@@ -86,5 +106,10 @@ public class Profile extends AppCompatActivity implements ProfileView
     {
         Intent history = new Intent(this, PrizesHistory.class);
         startActivity(history);
+    }
+
+    public void viewTutorial(View view)
+    {
+        mPresenter.viewTutorial();
     }
 }

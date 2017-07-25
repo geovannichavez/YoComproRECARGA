@@ -36,8 +36,8 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/ApplicationGreenTheme"
                 android:elevation="4dp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat"
-                app:theme="@style/ToolbarTheme">
+                android:popupTheme="@style/contextualDarkToolbarTheme"
+                app:theme="@style/ToolbarTheme" >
 
                 <ImageView
                     android:id="@+id/ivLogo"
@@ -291,7 +291,7 @@
                                     android:layout_height="40dp"
                                     android:layout_marginRight="8dp"
                                     android:layout_marginEnd="8dp"
-                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:background="@drawable/btn_effect_ripple_green_rounded_corners"
                                     android:clickable="true"
                                     android:onClick="sendTopupRequest"
                                     android:text="@string/button_request_topup"

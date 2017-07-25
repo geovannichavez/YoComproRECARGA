@@ -29,13 +29,13 @@
             app:theme="@style/ToolbarTheme"/>
 
         <TextView
-            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/activity_title_my_profile"
-            android:textStyle="bold"
+            android:textAllCaps="true"
             android:textColor="@color/ActivityWhiteBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold"/>
 
     </FrameLayout>
 
@@ -121,11 +121,11 @@
                         android:text="@string/button_leaders_board"/>
 
                     <Button
-                        android:onClick="navigatePrizesHistory"
                         android:layout_width="match_parent"
                         android:layout_height="38dp"
                         android:layout_marginBottom="@dimen/margin_8dp"
                         android:background="@drawable/btn_ripple_gray_gradient"
+                        android:onClick="navigatePrizesHistory"
                         android:text="@string/button_my_prizes"/>
 
                     <Button
@@ -134,7 +134,17 @@
                         android:layout_marginBottom="@dimen/margin_8dp"
                         android:background="@drawable/btn_ripple_gray_gradient"
                         android:enabled="false"
-                        android:text="@string/button_logout"/>
+                        android:text="@string/button_logout"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/btnTutorial"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:layout_marginBottom="@dimen/margin_8dp"
+                        android:background="@drawable/btn_ripple_gray_gradient"
+                        android:onClick="viewTutorial"
+                        android:text="@string/button_tutorial"/>
 
 
                 </LinearLayout>

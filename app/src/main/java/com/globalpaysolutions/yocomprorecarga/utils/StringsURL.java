@@ -6,8 +6,11 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 public class StringsURL
 {
-    //PRE-PRODUCCIÓN
+    //DESARROLLO
     public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/v1/";
+
+    //PRE-PRODUCCION
+    //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/PreTem/";
 
     public final static String COUNTRIES = "countries";
 
@@ -47,6 +50,8 @@ public class StringsURL
 
     //OTRAS URL'S
     public final static String YVR_STORE = "https://play.google.com/store/apps/details?id=com.globalpaysolutions.yovendorecarga";
+    public final static String TUTORIAL_VIDEO_URL = "http://www.recar-go.com/home/tutorial/";
+    public final static String TERMS_AND_CONDITIONS_URL = "http://www.recar-go.com/home/terminos/";
 
     //WIKITUDE
     private static final String ARCHITECT_SDK = "architectsdk://";

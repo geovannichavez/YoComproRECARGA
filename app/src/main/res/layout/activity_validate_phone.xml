@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="Signin"
                 android:minWidth="180dp"
-                android:background="@drawable/btn_effect_ripple_green"
+                android:background="@drawable/btn_effect_ripple_green_rounded_corners"
                 android:paddingLeft="@dimen/ActivityHorizontalCustomMargin"
                 android:paddingRight="@dimen/ActivityHorizontalCustomMargin"
                 android:text="@string/button_login"

@@ -72,7 +72,7 @@
                         android:onClick="RequestPermissions"
                         android:minWidth="180dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/btn_effect_ripple_green"
+                        android:background="@drawable/btn_effect_ripple_green_rounded_corners"
                         android:paddingLeft="@dimen/ActivityHorizontalCustomMargin"
                         android:paddingRight="@dimen/ActivityHorizontalCustomMargin"
                         android:text="@string/button_accept"

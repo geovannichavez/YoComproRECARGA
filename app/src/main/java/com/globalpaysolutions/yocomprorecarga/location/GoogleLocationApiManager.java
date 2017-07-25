@@ -30,7 +30,6 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
 {
     private static final String TAG = GoogleLocationApiManager.class.getSimpleName();
 
-    private static final int DISPLACEMENT = 10;
     private static final int LOCATION_REQUEST_INTERVAL = 6000;
     private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 3000;
     private static final int LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
@@ -46,7 +45,7 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     private LocationCallback locationCallback;
 
 
-    public GoogleLocationApiManager(AppCompatActivity pActivity, Context pContext)
+    public GoogleLocationApiManager(AppCompatActivity pActivity, Context pContext, float displacementMetters)
     {
         this.mContext = pContext;
         this.mGoogleApiClient = new GoogleApiClient.Builder(pActivity)
@@ -60,7 +59,7 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
         this.mLocationRequest.setInterval(LOCATION_REQUEST_INTERVAL);
         this.mLocationRequest.setFastestInterval(LOCATION_REQUEST_FASTEST_INTERVAL);
         this.mLocationRequest.setPriority(LOCATION_REQUEST_PRIORITY);
-        this.mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+        this.mLocationRequest.setSmallestDisplacement(displacementMetters);
 
         this.mLocationSettingsRequestBuilder = new LocationSettingsRequest.Builder().addLocationRequest(this.mLocationRequest);
     }
@@ -171,5 +170,9 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
         this.locationCallback = locationCallback;
     }
 
+    /*public void changeSmallestDisplacement(float displacementMeters)
+    {
+        this.mLocationRequest.setSmallestDisplacement(displacementMeters);
+    }*/
 
 }

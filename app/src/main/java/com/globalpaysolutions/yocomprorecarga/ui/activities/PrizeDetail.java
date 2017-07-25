@@ -20,7 +20,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     //Views and Layouts
     Toolbar toolbar;
     ImageView imgPrizeType;
-    EditText etPrizeCode;
+    TextView etPrizeCode;
     TextView lblPrizeTitle;
     TextView lblPrizeDescription;
     TextView lblExchange;
@@ -39,7 +39,8 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imgPrizeType = (ImageView) findViewById(R.id.imgPrizeType);
-        etPrizeCode = (EditText) findViewById(R.id.etPrizeCode);
+        //etPrizeCode = (EditText) findViewById(R.id.etPrizeCode);
+        etPrizeCode = (TextView) findViewById(R.id.etPrizeCode);
         lblPrizeTitle = (TextView) findViewById(R.id.lblPrizeTitle);
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
         lblExchange = (TextView) findViewById(R.id.lblExchange);

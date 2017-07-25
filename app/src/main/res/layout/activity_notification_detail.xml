@@ -99,7 +99,7 @@
             android:layout_marginBottom="22dp"
             android:text="@string/button_accept"
             android:textColor="@color/ActivityWhiteBackground"
-            android:background="@drawable/btn_effect_ripple_green"
+            android:background="@drawable/btn_effect_ripple_green_rounded_corners"
             />
     </LinearLayout>
 

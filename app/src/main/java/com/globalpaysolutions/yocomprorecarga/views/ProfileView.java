@@ -11,4 +11,5 @@ public interface ProfileView
     void loadViewsState(String fullName, String nickname, String photoUrl);
     void generateToast(String text);
     void showGenericDialog(DialogViewModel model);
+    void launchChromeView(String url);
 }
