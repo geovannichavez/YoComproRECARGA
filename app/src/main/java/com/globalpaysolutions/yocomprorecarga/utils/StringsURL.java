@@ -7,10 +7,13 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 public class StringsURL
 {
     //DESARROLLO
-    public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/v1/";
+    //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/v1/";
 
     //PRE-PRODUCCION
     //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/PreTem/";
+
+    //PRODUCCION
+    public final static String URL_BASE  = "https://api.yovendorecarga.com/";
 
     public final static String COUNTRIES = "countries";
 

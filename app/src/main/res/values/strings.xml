@@ -8,12 +8,12 @@
     <string name="activity_title_prizes_history">Historial de Premios</string>
 
     <!--    ACCEPT TERMS    -->
-    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
+    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos, Condiciones</u> y <u>Políticas de Privacidad</u> de YoComproRecarga.</string>
 
 
     <!--    PERMISSIONS     -->
     <string name="label_permissions_title">Concede Permisos</string>
-    <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus carácteristicas. Haz click en el siguiente botón</string>
+    <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus características. Haz click en el siguiente botón</string>
     <string name="toast_permissions_denied">Denegaste los permisos. Inténtalo de nuevo.</string>
 
 
@@ -167,7 +167,7 @@
 
     <!--    AUTHENTICATE    -->
     <string name="label_welcome_to_ycr">¡Bienvenido a YoComproRecarga!</string>
-    <string name="label_login_with_facebook">¡Comprar recargas núnca fue tan fácil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+    <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan fácil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
 
 
     <!--    FACEBOOK    -->
