@@ -196,21 +196,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/arToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/ApplicationGreenTheme"
-        android:elevation="4dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat"
-        app:theme="@style/ToolbarTheme">
-
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:src="@drawable/img_logo_trans_recargo"
-            />
-    </android.support.v7.widget.Toolbar>
-
 </LinearLayout>
