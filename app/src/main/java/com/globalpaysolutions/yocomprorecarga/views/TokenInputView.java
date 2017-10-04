@@ -16,4 +16,5 @@ public interface TokenInputView
     void navigateHome(boolean p3DCompatible);
     void vibrateOnSuccess();
     void cleanFields();
+    void setCallcenterContactText();
 }

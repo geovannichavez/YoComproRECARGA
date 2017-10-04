@@ -21,6 +21,7 @@ public interface HomeView
     void showErrorMessage(DialogViewModel pMessageModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
+    void swtichMapStyle(boolean isNightTime);
 
     void addSalePoint(String pKey, LatLng pLocation);
     void addSalePointData(String pKey, String pTitle, String pSnippet);

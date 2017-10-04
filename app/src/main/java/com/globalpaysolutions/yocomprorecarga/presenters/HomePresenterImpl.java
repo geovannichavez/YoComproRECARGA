@@ -38,6 +38,7 @@ import com.google.firebase.database.DatabaseError;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Calendar;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
@@ -179,6 +180,27 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         dialog.setAcceptButton(mContext.getString(R.string.button_yes));
         dialog.setCanelButton(mContext.getString(R.string.button_no));
         mView.showCustomStoreReportDialog(dialog, pStoreName, pAddress, pLocation, pFirebaseID);
+    }
+
+    @Override
+    public void setMapStyle()
+    {
+        Calendar calendar = Calendar.getInstance();
+        int timeOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+
+        //if(timeOfDay >= 18 && timeOfDay < 5)
+        if(timeOfDay > 0 && timeOfDay <= 5)
+        {
+            mView.swtichMapStyle(true);
+        }
+        else if (timeOfDay >= 18 && timeOfDay <= 24)
+        {
+            mView.swtichMapStyle(true);
+        }
+        else
+        {
+            mView.swtichMapStyle(false);
+        }
     }
 
     @Override

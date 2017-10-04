@@ -42,9 +42,11 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,6 +107,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         mGoogleMap.setTrafficEnabled(false);
         mGoogleMap.setIndoorEnabled(true);
         mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
+
+        mPresenter.setMapStyle();
+
         /*mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
         {
             @Override
@@ -381,6 +386,19 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void swtichMapStyle(boolean isNightTime)
+    {
+        try
+        {
+            if(isNightTime)
+                mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.green_lantern_style));
+            else
+                mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.light_green_style));
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     @Override

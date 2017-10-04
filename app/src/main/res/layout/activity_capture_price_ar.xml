@@ -148,7 +148,7 @@
                 <ImageButton
                     android:id="@+id/btnCoinCounter"
                     android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_height="111dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginBottom="@dimen/margin_16dp"

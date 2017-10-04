@@ -227,8 +227,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onLocationApiManagerConnected(Location location)
     {
-        mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-        mCurrentLocation = location;
+        try
+        {
+            mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+            mCurrentLocation = location;
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -400,7 +407,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
 
-        if(pExchangeResponse.getExchangeCoins() != null)
+        if(pExchangeResponse.getExchangeCoins() != null && pExchangeResponse.getExchangeCoins() > 0)
         {
             mInteractor.saveUserTracking(pExchangeResponse.getTracking());
             mUserData.saveLastChestValue(pExchangeResponse.getExchangeCoins());
@@ -416,6 +423,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
             dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        }
+
+        //Removes Image and updates UI
+        if(!mUserData.Is3DCompatibleDevice())
+        {
+            mView.removeBlinkingAnimation();
+            mView.switchRecarcoinVisible(false);
         }
 
         mView.showGenericDialog(dialog);

@@ -20,6 +20,11 @@ var World = {
     {
         AR.context.destroyAll();
     },
+    destroyObjectGeo: function destroyObjectGeoFn()
+    {
+        actualARObject.destroy();
+    },
+
 
 
     //Funcion para crear modelo Bronze
@@ -67,10 +72,12 @@ var World = {
                         var architectSdkUrl = "architectsdk://Bronze//" + key + "//" + latitude + "//" + longitude;
                         document.location = architectSdkUrl;
                         exchanging = false;
-                    }, 2450);
+                    }, 2300); //2450
                 }
             }
         });
+
+         actualARObject = obj;
     },
 
     //Funcion para crear modelo Silver
@@ -118,10 +125,12 @@ var World = {
                         var architectSdkUrl = "architectsdk://Silver//" + key + "//" + latitude + "//" + longitude;
                         document.location = architectSdkUrl;
                         exchanging = false;
-                    }, 2450);
+                    }, 2300); //2450
                 }
             }
         });
+
+        actualARObject = obj;
     },
 
     //Funcion para crear modelo Gold
@@ -172,17 +181,65 @@ var World = {
                         var architectSdkUrl = "architectsdk://Gold//" + key + "//" + latitude + "//" + longitude;
                         document.location = architectSdkUrl;
                         exchanging = false;
-                    }, 2450);
+                    }, 2300);//2450
                 }
             }
         });
+
+        actualARObject = obj;
     },
+
+    //Funcion para crear modelo Mazda
+    createModelMazdaAtLocation: function createModelMazdaAtLocationFn(latitude,longitude, key) {
+
+        exchanging=false;
+        var modelGold = new AR.Model("assets/Mazda.wt3", {
+                                     onLoaded: this.worldLoaded,
+                                     scale: {
+                                     x: 1,
+                                     y: 1,
+                                     z: 1
+                                     }
+                                     });
+
+        var a = new AR.PropertyAnimation(modelGold, 'rotate.heading', 90.0, -270.0, 5000);
+
+        a.start(-1);
+
+
+        var goldChestAnim = new AR.ModelAnimation(modelGold, "Scene");
+        var indicatorImage = new AR.ImageResource("assets/GreenArrow.png");
+        var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1, {
+                                                     verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
+                                                     });
+        var location = new AR.GeoLocation(latitude,longitude , AR.CONST.UNKNOWN_ALTITUDE);
+        var obj = new AR.GeoObject(location, {
+                                   drawables: {
+                                   cam: [modelGold],
+                                   indicator: [indicatorDrawable]
+                                   },
+                                   onClick : function() {
+                                   if(!exchanging)
+                                   {
+                                   exchanging = true;
+                                   goldChestAnim.start(1);
+                                   setTimeout(function() {
+                                              var architectSdkUrl = "architectsdk://Mazda//" + key + "//" + latitude + "//" + longitude;
+                                              document.location = architectSdkUrl;
+                                              exchanging = false;
+                                              },4000);
+                                   }
+                                   }
+                                   });
+        actualARObject = obj;
+    },
+
 
 
     worldLoaded: function worldLoadedFn()
     {
         World.loaded = true;
-        var e = document.getElementById('loadingMessage');
+        var e = document.getElementById('container');
         e.parentElement.removeChild(e);
     }
 };

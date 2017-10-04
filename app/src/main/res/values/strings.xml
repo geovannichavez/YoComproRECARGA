@@ -210,7 +210,11 @@
     <string name="contentdescription_indicator">indicator</string>
     <string name="contentdescription_coin_counter">coin counter</string>
     <string name="label_facebook_logged_in">Inició sesión en Facebook</string>
-    <string name="label_portable_phone_number">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp <b>7697-8980</b> al número para obtener tu código.</string>
+    <string name="label_portable_phone_number">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número <b>7768-1443</b> para obtener tu código.</string>
+
+    <string name="label_portable_phone_number_part1">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número </string>
+    <string name="label_portable_phone_number_part2"> para obtener tu código.</string>
+    <string name="label_callcenter_phone_number">7768-1443</string>
 
 
 </resources>

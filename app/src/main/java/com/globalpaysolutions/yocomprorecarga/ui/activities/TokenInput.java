@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Vibrator;
 import android.support.v4.content.IntentCompat;
@@ -13,7 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -158,6 +163,27 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     public void cleanFields()
     {
         etToken.setText("");
+    }
+
+    @Override
+    public void setCallcenterContactText()
+    {
+        try
+        {
+            String phone = getString(R.string.label_callcenter_phone_number);
+
+            SpannableString part1 = new SpannableString(getString(R.string.label_portable_phone_number_part1));
+            SpannableString part2 = new SpannableString(phone);
+            part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phone.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableString part3 = new SpannableString(getString(R.string.label_portable_phone_number_part2));
+
+            tvPortableNumber.setText(TextUtils.concat(part1, " ", part2, " ", part3));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     /*

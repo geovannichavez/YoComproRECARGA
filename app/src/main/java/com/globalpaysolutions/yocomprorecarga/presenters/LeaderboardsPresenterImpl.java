@@ -79,6 +79,7 @@ public class LeaderboardsPresenterImpl implements ILeaderboardsPresenter, Leader
     @Override
     public void onError(int code, Throwable throwable)
     {
+        mView.hideLoadingMessage();
         processErrorMessage(code, throwable);
     }
 

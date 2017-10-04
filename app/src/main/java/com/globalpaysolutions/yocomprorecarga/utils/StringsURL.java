@@ -12,6 +12,9 @@ public class StringsURL
     //PRE-PRODUCCION
     //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8074/PreTem/";
 
+    //API V2 - PRE PRODUCCION
+    //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8073/v1/";
+
     //PRODUCCION
     public final static String URL_BASE  = "https://api.yovendorecarga.com/";
 
