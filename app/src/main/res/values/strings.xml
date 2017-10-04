@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yo Compro RECARGA</string>
+    <string name="app_name">RecarGO!</string>
 
 
     <!--    ACTIVITIES  -->
@@ -8,7 +8,7 @@
     <string name="activity_title_prizes_history">Historial de Premios</string>
 
     <!--    ACCEPT TERMS    -->
-    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos, Condiciones</u> y <u>Políticas de Privacidad</u> de YoComproRecarga.</string>
+    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos, Condiciones</u> y <u>Políticas de Privacidad</u> de RecarGO!</string>
 
 
     <!--    PERMISSIONS     -->
@@ -166,8 +166,9 @@
     <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
 
     <!--    AUTHENTICATE    -->
-    <string name="label_welcome_to_ycr">¡Bienvenido a YoComproRecarga!</string>
+    <string name="label_welcome_to_recargo">¡Bienvenido a RecarGO!</string>
     <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan fácil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+    <string name="label_what_is_recargo">Gana muchísimos premios increíbles y tiempo aire! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
 
 
     <!--    FACEBOOK    -->
@@ -215,6 +216,7 @@
     <string name="label_portable_phone_number_part1">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número </string>
     <string name="label_portable_phone_number_part2"> para obtener tu código.</string>
     <string name="label_callcenter_phone_number">7768-1443</string>
+    <string name="title_terms_and_conditions">Términos y Condiciones</string>
 
 
 </resources>

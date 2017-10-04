@@ -10,4 +10,5 @@ public interface IAcceptTerms
     void grantDevicePermissions();
     void checkDeviceComponents();
     void viewTerms();
+    void generateWebDialog();
 }

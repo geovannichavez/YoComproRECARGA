@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -7,9 +8,12 @@ import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.IntentCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -50,27 +54,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 
     public void acceptTerms(View view)
     {
-        presenter.acceptTerms();
-
-        Intent accept;
-
-        if(Build.VERSION.SDK_INT >= 23)
-        {
-            accept = new Intent(AcceptTerms.this, Permissions.class);
-        }
-        else
-        {
-            presenter.grantDevicePermissions();
-            accept = new Intent(AcceptTerms.this, Authenticate.class);
-        }
-
-        accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        accept.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        accept.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(accept);
+        presenter.generateWebDialog();
     }
 
     @Override
@@ -87,6 +71,65 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         {
             ex.printStackTrace();
             Log.e(TAG, "Something went wrong launching Chrome View");
+        }
+    }
+
+    @Override
+    public void displayWebDialog(String url)
+    {
+        try
+        {
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(getString(R.string.title_terms_and_conditions));
+
+
+            WebView wv = new WebView(this);
+            wv.loadUrl(url);
+            wv.setWebViewClient(new WebViewClient()
+            {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url)
+                {
+                    view.loadUrl(url);
+                    return true;
+                }
+            });
+
+            alert.setView(wv);
+            alert.setNegativeButton(getString(R.string.button_accept), new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    presenter.acceptTerms();
+
+                    Intent accept;
+
+                    if(Build.VERSION.SDK_INT >= 23)
+                    {
+                        accept = new Intent(AcceptTerms.this, Permissions.class);
+                    }
+                    else
+                    {
+                        presenter.grantDevicePermissions();
+                        accept = new Intent(AcceptTerms.this, Authenticate.class);
+                    }
+
+                    accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    accept.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    accept.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(accept);
+                }
+            });
+            alert.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 }

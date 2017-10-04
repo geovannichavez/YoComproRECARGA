@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.views;
 public interface AcceptTermsView
 {
     void viewTerms(String url);
+    void displayWebDialog(String url);
 }

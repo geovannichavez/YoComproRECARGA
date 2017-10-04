@@ -102,4 +102,10 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
     {
         mView.viewTerms(StringsURL.TERMS_AND_CONDITIONS_URL);
     }
+
+    @Override
+    public void generateWebDialog()
+    {
+        mView.displayWebDialog(StringsURL.TERMS_AND_CONDITIONS_URL);
+    }
 }

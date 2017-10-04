@@ -275,7 +275,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             Log.d(TAG, "setInitialUserLocation");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(15).build();
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(17).build();
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             mPresenter.vendorPointsQuery(currentLocation);

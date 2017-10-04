@@ -36,8 +36,9 @@
                        android:layout_width="200dp"
                        android:layout_height="wrap_content"
                        android:layout_gravity="center_horizontal"
+                       android:layout_marginTop="@dimen/margin_32dp"
                        android:layout_marginBottom="@dimen/ActivityVerticalExtraCustomMargin"
-                       android:src="@drawable/img_ycr_logo"/>
+                       android:src="@drawable/img_logo_green_recargo"/>
 
                    <TextView
                        android:layout_width="match_parent"
