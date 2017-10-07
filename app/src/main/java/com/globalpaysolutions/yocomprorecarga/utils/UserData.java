@@ -63,6 +63,9 @@ public class UserData
     private static final String KEY_FACEBOOK_PROFILE_ID = "usr_facebook_profile_id";
     private static final String KEY_FACEBOOK_URL = "usr_facebook_url";
 
+    //First time settings
+    private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -235,6 +238,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveSimpleInstructionsSetting(boolean pShowed)
+    {
+        mEditor.putBoolean(KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED, pShowed);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -386,6 +395,11 @@ public class UserData
     public String getFacebookFullname()
     {
         return mPreferences.getString(KEY_FACEBOOK_FULLNAME, "");
+    }
+
+    public boolean getSimpleInstructionsShowed()
+    {
+        return mPreferences.getBoolean(KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED, false);
     }
 
     /*

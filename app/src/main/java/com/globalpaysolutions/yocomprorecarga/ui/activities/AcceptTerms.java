@@ -37,6 +37,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 
         presenter = new AcceptTermsPresenterImpl(this, this, this);
         presenter.checkDeviceComponents();
+        presenter.setFirstTimeSettings();
 
         btnAccept = (Button) findViewById(R.id.btnAcceptTerms);
         tvTermsAndConditions = (TextView) findViewById(R.id.tvTermsAndConditions);

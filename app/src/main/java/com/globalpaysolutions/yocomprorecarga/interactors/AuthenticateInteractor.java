@@ -118,7 +118,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
                         {
                             try
                             {
-                                String facebookEmail = me.getString("email");
+                                String facebookEmail = !me.isNull("email") ? me.getString("email") : "";
                                 pListener.onFacebookEmailSuccess(facebookEmail);
                                 Log.i(TAG, "FacebookEmail: " + facebookEmail);
                             }

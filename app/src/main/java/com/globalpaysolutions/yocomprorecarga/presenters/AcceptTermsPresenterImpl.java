@@ -50,6 +50,12 @@ public class AcceptTermsPresenterImpl implements IAcceptTerms
     }
 
     @Override
+    public void setFirstTimeSettings()
+    {
+        this.userData.saveSimpleInstructionsSetting(false);
+    }
+
+    @Override
     public void grantDevicePermissions()
     {
         this.userData = UserData.getInstance(this.context);

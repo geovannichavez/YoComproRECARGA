@@ -204,6 +204,29 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void displayInfography()
+    {
+        mView.showInfographyDialog();
+    }
+
+    @Override
+    public void checkFirstTimeInstructions()
+    {
+        try
+        {
+            if(!mUserData.getSimpleInstructionsShowed())
+            {
+                mView.showInfographyDialog();
+                mUserData.saveSimpleInstructionsSetting(true);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void intializeGeolocation()
     {
         mInteractor.initializeGeolocation();

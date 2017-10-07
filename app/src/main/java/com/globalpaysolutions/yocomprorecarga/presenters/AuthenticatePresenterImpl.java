@@ -70,18 +70,26 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         {
             Profile profile = Profile.getCurrentProfile();
 
-            //REGISTER CONSUMER
+            //Validates all fields from Profile
             FacebookConsumer facebookConsumer = new FacebookConsumer();
-            facebookConsumer.setFirstName(profile.getFirstName());
-            facebookConsumer.setLastName(profile.getLastName());
+            String firstname = (!TextUtils.isEmpty(profile.getFirstName())) ? profile.getFirstName() : "NotFound";
+            String lastname = (!TextUtils.isEmpty(profile.getLastName())) ? profile.getLastName() : "NotFound";
+            String facebookUrl = (!TextUtils.isEmpty(profile.getLinkUri().toString())) ? profile.getLinkUri().toString() : "NotFound";
+            String profileId = (!TextUtils.isEmpty(profile.getId())) ? profile.getId() : "NotFound";
+            String middlename = (!TextUtils.isEmpty(profile.getMiddleName())) ? profile.getMiddleName() : "NotFound";
+            String name = (!TextUtils.isEmpty(profile.getName())) ? profile.getName() : "NotFound";
+
+            //REGISTER CONSUMER
+            facebookConsumer.setFirstName(firstname);
+            facebookConsumer.setLastName(lastname);
             facebookConsumer.setDeviceID(mUserData.GetDeviceID());
-            facebookConsumer.setURL(profile.getLinkUri().toString());
-            facebookConsumer.setProfileID(profile.getId());
+            facebookConsumer.setURL(facebookUrl);
+            facebookConsumer.setProfileID(profileId);
             facebookConsumer.setEmail(pEmail);
-            facebookConsumer.setMiddleName(profile.getMiddleName());
-            facebookConsumer.setUserID(profile.getId());
-            mUserData.saveFacebookData(profile.getId(), profile.getLinkUri().toString());
-            mUserData.saveFacebookFullname(profile.getName());
+            facebookConsumer.setMiddleName(middlename);
+            facebookConsumer.setUserID(profileId);
+            mUserData.saveFacebookData(profileId, facebookUrl);
+            mUserData.saveFacebookFullname(name);
             mInteractor.authenticateUser(this, facebookConsumer);
         }
         catch (Exception ex) {  ex.printStackTrace();   }
@@ -109,6 +117,12 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     {
         //TODO: Quitar el toast
         //mView.showGenericToast("Graph login error");
+
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        mView.showGenericDialog(dialog);
         Log.i(TAG, "Facebook email request failed");
     }
 

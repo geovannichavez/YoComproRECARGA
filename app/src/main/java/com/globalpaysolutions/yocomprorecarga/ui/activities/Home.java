@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,6 +94,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
         mPresenter.intializeGeolocation();
+        mPresenter.checkFirstTimeInstructions();
 
     }
 
@@ -399,6 +401,20 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.light_green_style));
         }
         catch (Exception ex) {  ex.printStackTrace();   }
+    }
+
+    @Override
+    public void showInfographyDialog()
+    {
+        try
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            LayoutInflater inflater = Home.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_image_dialog, null);
+
+            builder.setView(dialogView).create().show();
+        }
+        catch (Exception ex) {   ex.printStackTrace();   }
     }
 
     @Override
@@ -781,6 +797,10 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         {
             Intent profile = new Intent(Home.this, Profile.class);
             startActivity(profile);
+        }
+        if(id == R.id.action_info)
+        {
+           mPresenter.displayInfography();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -132,7 +132,7 @@
     <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
     <string name="error_title_vendor_not_found">VENDEDOR NO ENCONTRADO</string>
     <string name="error_content_vendor_not_found_line">No encontramos ningún vendedor con ese código. Asegúrate de escribir el código correcto.</string>
-
+    <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
 
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
@@ -185,6 +185,10 @@
         <item>jose.luis</item>
         <item>majo12</item>
     </string-array>
+
+    <!--    INFO     -->
+    <string name="action_info">Cómo Jugar</string>
+
 
     <!--    PROFILE     -->
     <string name="action_profile">Mi Perfil</string>

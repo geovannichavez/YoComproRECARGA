@@ -22,6 +22,7 @@ public interface HomeView
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void swtichMapStyle(boolean isNightTime);
+    void showInfographyDialog();
 
     void addSalePoint(String pKey, LatLng pLocation);
     void addSalePointData(String pKey, String pTitle, String pSnippet);
