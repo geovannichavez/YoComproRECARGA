@@ -75,6 +75,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void setInitialViewsState()
     {
         this.mView.renderMap();
+        this.mView.setClickListeners();
     }
 
     @Override

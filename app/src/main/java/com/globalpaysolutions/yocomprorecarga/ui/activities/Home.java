@@ -14,23 +14,21 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
@@ -47,16 +45,22 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeView
 {
     private static final String TAG = Home.class.getSimpleName();
 
+    //Views
+    RelativeLayout ibtnProfile;
+    RelativeLayout ibtnInfo;
+
     //Adapters y Layouts
-    private Toolbar toolbar;
     private GoogleMap mGoogleMap;
     private ProgressDialog progressDialog;
 
@@ -77,9 +81,9 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.homeToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(null);
+
+        ibtnProfile = (RelativeLayout) findViewById(R.id.ibtnProfile);
+        ibtnInfo = (RelativeLayout) findViewById(R.id.ibtnInfo);
 
         mSalesPointsMarkers = new HashMap<>();
         mVendorPointsMarkers = new HashMap<>();
@@ -196,6 +200,34 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        try
+        {
+            ibtnProfile.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent profile = new Intent(Home.this, Profile.class);
+                    startActivity(profile);
+                }
+            });
+
+            ibtnInfo.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mPresenter.displayInfography();
+                }
+            });
+
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     @Override
@@ -406,11 +438,31 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     @Override
     public void showInfographyDialog()
     {
+        int currentPage = 0;
+        Integer[] slides = {R.drawable.img_tuto_0,R.drawable.img_tuto_1,R.drawable.img_tuto_2, R.drawable.img_tuto_3};
+        ArrayList<Integer> tutorialArray = new ArrayList<>();
+
         try
         {
+            //Creates the builder and inflater of dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
             LayoutInflater inflater = Home.this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custom_image_dialog, null);
+            View dialogView = inflater.inflate(R.layout.custom_tutorial_dialog, null);
+
+            //Finds all views once the parent view is inflated
+            ViewPager tutorialPager = (ViewPager) dialogView.findViewById(R.id.pager);
+            CircleIndicator indicator = (CircleIndicator) dialogView.findViewById(R.id.indicator);
+
+            Collections.addAll(tutorialArray, slides);
+
+            tutorialPager.setAdapter(new TutorialAdapter(Home.this, tutorialArray));
+            indicator.setViewPager(tutorialPager);
+
+            if (currentPage == slides.length)
+            {
+                currentPage = 0;
+            }
+            tutorialPager.setCurrentItem(currentPage++, true);
 
             builder.setView(dialogView).create().show();
         }
@@ -782,29 +834,6 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     *
     * **********************************
     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id = item.getItemId();
-        if (id == R.id.action_profile)
-        {
-            Intent profile = new Intent(Home.this, Profile.class);
-            startActivity(profile);
-        }
-        if(id == R.id.action_info)
-        {
-           mPresenter.displayInfography();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
 
     /*

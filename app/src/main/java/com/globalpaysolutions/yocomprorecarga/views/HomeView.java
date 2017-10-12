@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 public interface HomeView
 {
     void renderMap();
+    void setClickListeners();
     void displayActivateLocationDialog();
     void checkPermissions();
     void setInitialUserLocation(Location pLocation);

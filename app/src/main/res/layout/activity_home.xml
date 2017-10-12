@@ -10,24 +10,58 @@
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Home">
 
     <FrameLayout
-        android:background="@color/ApplicationGreenTheme"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/ApplicationGreenTheme">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/homeToolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
-            app:popupTheme="@style/ThemeOverlay.AppCompat"
-            app:theme="@style/ToolbarTheme" />
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="6">
 
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_gravity="center"
-            android:layout_width="179dp"
-            android:layout_height="23dp"
-            android:src="@drawable/img_logo_trans_recargo"/>
+            <RelativeLayout
+                android:id="@+id/ibtnInfo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/action_info"
+                    android:layout_width="@dimen/margin_28dp"
+                    android:layout_height="@dimen/margin_28dp"
+                    android:src="@drawable/ic_info"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="0dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:layout_weight="4"
+                android:src="@drawable/img_logo_trans_recargo"/>
+
+            <RelativeLayout
+                android:id="@+id/ibtnProfile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center">
+
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/action_profile"
+                    android:layout_width="@dimen/margin_34dp"
+                    android:layout_height="@dimen/margin_34dp"
+                    android:src="@drawable/ic_profile_person"/>
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </FrameLayout>
 
@@ -63,11 +97,11 @@
                     android:layout_width="200dp"
                     android:layout_height="38dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/btn_effect_ripple_green_rounded_corners"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:onClick="RequestTopup"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/btn_ripple_gradient_recargo_theme"
+                    android:onClick="RequestTopup"
                     android:text="@string/button_request_topup"
                     android:textColor="@color/ActivityWhiteBackground"/>
                 <!--<Button
@@ -85,9 +119,9 @@
                     android:layout_width="75dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
-                    android:scaleType="fitXY"
+                    android:background="@drawable/btn_ripple_gradient_recargo"
                     android:onClick="CapturePrize"
-                    android:background="@drawable/btn_ripple_gradient_recargo"/>
+                    android:scaleType="fitXY"/>
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

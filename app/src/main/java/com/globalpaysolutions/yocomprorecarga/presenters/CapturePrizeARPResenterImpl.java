@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
@@ -51,9 +52,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     private UserData mUserData;
 
     private boolean m3Dcompatible;
+    private static String mCurrentChestKey;
 
     public CapturePrizeARPResenterImpl(Context pContext, AppCompatActivity pActivity, CapturePrizeView pView)
     {
+        mCurrentChestKey = "";
+
         this.mContext = pContext;
         this.mActivity = pActivity;
         this.mView = pView;
@@ -87,7 +91,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
-            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
     }
 
@@ -101,7 +105,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         if (!m3Dcompatible)
         {
-            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
         }
@@ -212,7 +216,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void handleCoinExchangeKeyUp()
     {
         mView.showToast(mContext.getString(R.string.toast_keep_pressed_three_seconds));
-        mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+        //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         mView.blinkRecarcoin();
         mView.removeRunnableCallback();
     }
@@ -243,7 +247,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         if (p3DCompatible)
         {
-            mView.onGoldKeyEntered(pKey, pLocation);
+            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            {
+                mCurrentChestKey = pKey;
+                mView.onGoldKeyEntered(pKey, pLocation);
+            }
         }
         else
         {
@@ -251,7 +259,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onGoldKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
-            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
 
     }
@@ -262,10 +270,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         if(!p3DCompatible)
         {
             mView.stopVibrate();
-
+            mView.onGoldKeyExited(pKey);
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
-            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
@@ -276,7 +284,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         if (p3DCompatible)
         {
-            mView.onSilverKeyEntered(pKey, pLocation);
+            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            {
+                mCurrentChestKey = pKey;
+                mView.onSilverKeyEntered(pKey, pLocation);
+            }
         }
         else
         {
@@ -284,7 +296,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onSilverKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
-            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
 
     }
@@ -292,6 +304,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_silverPoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
+        mCurrentChestKey = "";
+
         if(!p3DCompatible)
         {
             mView.stopVibrate();
@@ -299,7 +313,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.onSilverKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
-            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
         }
@@ -310,7 +324,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         if (p3DCompatible)
         {
-            mView.onBronzeKeyEntered(pKey, pLocation);
+            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            {
+                mCurrentChestKey = pKey;
+                mView.onBronzeKeyEntered(pKey, pLocation);
+            }
         }
         else
         {
@@ -318,7 +336,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onBronzeKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
-            mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
     }
 
@@ -332,7 +350,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.onBronzeKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
-            mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
