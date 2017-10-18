@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -57,7 +58,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     EditText etCodeNumber;
     EditText etExplPhone;
     Toolbar mToolbar;
-    ToggleButton btnMyNumber;
+    //ToggleButton btnMyNumber;
     TextView lblSelectedAmount;
     OperatorsAdapter mOperatorsAdapter;
     GridView mOperatorsGridView;
@@ -75,6 +76,9 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     Validation mValidator;
     UserData mUserData;
     String mVendorCodeExtra = "";
+
+    //Constants
+    static final int REQUEST_SELECT_PHONE_NUMBER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,7 +101,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         tvStoreLink = (TextView) findViewById(R.id.tvStoreLink);
         lnrSelectAmount = (LinearLayout) findViewById(R.id.lnrSelectAmount);
         lblSelectedAmount = (TextView) findViewById(R.id.lblSelectedAmount);
-        btnMyNumber = (ToggleButton) findViewById(R.id.btnMyNumber);
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
@@ -169,7 +172,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             etExplPhone.clearFocus();
             etCodeNumber.setText(mVendorCodeExtra);
             etCodeNumber.clearFocus();
-            btnMyNumber.setChecked(false);
 
             //Resetea el MONTO
             lblSelectedAmount.setText(getString(R.string.spinner_select));
@@ -383,6 +385,32 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         }
     }
 
+    @Override
+    public void setPhoneOnEdittext(String phoneNumber)
+    {
+        try
+        {
+            String phone = phoneNumber.trim();
+            phone = phone.replace(" ", "");
+
+            if (phone.length() >= 8)
+            {
+                phone = phone.substring(phone.length() - 8);
+                phone = phone.substring(0, 4) + "-" + phone.substring(4, phone.length());
+
+                etExplPhone.setText(phone);
+            }
+            else
+            {
+                Toast.makeText(this, getString(R.string.toast_not_valid_phone), Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     public void setSelectedAmount(Amount pSelected)
     {
         lblSelectedAmount.setText(pSelected.getDescription());
@@ -444,6 +472,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             ex.printStackTrace();
         }
+    }
+
+    public void openContacts(View view)
+    {
+        presenter.openContacts(REQUEST_SELECT_PHONE_NUMBER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_SELECT_PHONE_NUMBER && resultCode == RESULT_OK)
+        {
+            presenter.handleContactsResult(data);
+        }
+
     }
 
     /*

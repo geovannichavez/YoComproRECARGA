@@ -439,7 +439,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     public void showInfographyDialog()
     {
         int currentPage = 0;
-        Integer[] slides = {R.drawable.img_tuto_0,R.drawable.img_tuto_1,R.drawable.img_tuto_2, R.drawable.img_tuto_3};
+        Integer[] slides = {R.drawable.img_tuto_0,R.drawable.img_tuto_1,R.drawable.img_tuto_2, R.drawable.img_tuto_3, R.drawable.img_tuto_4};
         ArrayList<Integer> tutorialArray = new ArrayList<>();
 
         try

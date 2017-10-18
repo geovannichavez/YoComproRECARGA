@@ -26,4 +26,5 @@ public interface RequestTopupView
     void showSuccessMessage(DialogViewModel pMessageModel);
     void showErrorMessage(DialogViewModel pMessageModel);
     void launchChromeView(String pURL);
+    void setPhoneOnEdittext(String phoneNumber);
 }

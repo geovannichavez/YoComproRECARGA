@@ -34,7 +34,7 @@
 
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
-    <string name="label_type_vendor_code">Ingresa el código de vendedor:</string>
+    <string name="label_type_vendor_code">Ingresa el código de vendedor</string>
     <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
     <string name="label_select_operator">Selecciona el operador móvil:</string>
     <string name="label_title_select_amount_dialog">Seleccione un monto</string>
@@ -42,7 +42,7 @@
     <string name="title_success_dialog_label">¡SOLICITUD ENVIADA!</string>
     <string name="content_success_dialog_label_line1">Se ha enviado tu solicitud de recarga al vendedor.</string>
     <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
-    <string name="label_become_a_vendor"><u>¿Quieres ser un vendedor? Click Aquí</u></string>
+    <string name="label_become_a_vendor"><u>¿Quieres vender recargas?</u></string>
 
 
     <!--    HOME    -->
@@ -69,7 +69,7 @@
     <string name="title_not_enough_coins">Sin Monedas...</string>
     <string name="label_not_enough_coins">No tienes suficientes monedas para canjear un premio. ¡Abre más cofres y conseguirás monedas!</string>
     <string name="label_redeeming_prize_wait">¡Canjeando premio, espera!</string>
-    <string name="label_click_on_button_to_redeem">¡Haz click en el botón \"Canjear Ahora\" para saber qué ganaste!</string>
+    <string name="label_click_on_button_to_redeem">¡Haz click en el botón \"Ver Premio\" para saber qué ganaste!</string>
 
     <!--    PRIZE DETAIL    -->
     <string name="label_congratulations_title">¡Felicidades!</string>
@@ -106,7 +106,7 @@
     <string name="button_yes">Si</string>
     <string name="button_no">No</string>
     <string name="button_whatever">Ni modo</string>
-    <string name="button_redeem_now">Canjear Ahora</string>
+    <string name="button_redeem_now">Ver Premio</string>
     <string name="button_leaders_board">Tabla de líderes</string>
     <string name="button_my_prizes">Mis Premios</string>
     <string name="button_logout">Cerrar sesión</string>
@@ -120,7 +120,8 @@
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione…</string>
     <string name="hint_your_phone_number"><font size="16">TU TELÉFONO</font></string>
-    <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
+   <!-- <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>-->
+    <string name="hint_specify_phone_number"><font size="16">NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 
 
@@ -221,6 +222,7 @@
     <string name="label_portable_phone_number_part2"> para obtener tu código.</string>
     <string name="label_callcenter_phone_number">7768-1443</string>
     <string name="title_terms_and_conditions">Términos y Condiciones</string>
+    <string name="toast_not_valid_phone">Número telefónico inválido</string>
 
 
 </resources>

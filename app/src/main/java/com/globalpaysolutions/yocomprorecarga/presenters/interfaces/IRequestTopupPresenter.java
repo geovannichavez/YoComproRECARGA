@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
+import android.content.Intent;
+
 import com.globalpaysolutions.yocomprorecarga.models.CountryOperator;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 
@@ -17,4 +19,6 @@ public interface IRequestTopupPresenter
     void sendTopupRequest();
     void refreshOperators();
     void creditCardPayment(String pPhone, String pAmount, String pOperatorName);
+    void openContacts(int requestCode);
+    void handleContactsResult(Intent data);
 }

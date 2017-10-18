@@ -1,8 +1,13 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.provider.ContactsContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -23,6 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Josué Chávez on 16/01/2017.
  */
@@ -32,6 +39,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     private RequestTopupView view;
     private RequestTopupInteractor interactor;
     private Context context;
+    private AppCompatActivity activity;
 
     //Entity
     private static RequestTopupReqBody mRequestTopup = new RequestTopupReqBody();
@@ -42,6 +50,7 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
         this.view = pView;
         this.context = pContext;
         this.interactor = new RequestTopupInteractor(context);
+        this.activity = pActivity;
     }
 
     @Override
@@ -134,6 +143,43 @@ public class RequestTopupPresenterImpl implements IRequestTopupPresenter, Reques
     {
         String url = StringsURL.POS_YOCOMPRORECARGA;
         view.launchChromeView(url);
+    }
+
+    @Override
+    public void openContacts(int requestCode)
+    {
+        // Start an activity for the user to pick a phone number from contacts
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+
+        if (intent.resolveActivity(context.getPackageManager()) != null)
+        {
+            activity.startActivityForResult(intent, requestCode);
+        }
+    }
+
+    @Override
+    public void handleContactsResult(Intent data)
+    {
+        try
+        {
+            // Get the URI and query the content provider for the phone number
+            Uri contactUri = data.getData();
+            String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
+
+            Cursor cursor = context.getContentResolver().query(contactUri, projection, null, null, null);
+
+            // If the cursor returned is valid, get the phone number
+            if (cursor != null && cursor.moveToFirst())
+            {
+                int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                String number = cursor.getString(numberIndex);
+                // Do something with the phone number
+
+                view.setPhoneOnEdittext(number);
+            }
+        }
+        catch (Exception ex) { ex.printStackTrace();    }
     }
 
 

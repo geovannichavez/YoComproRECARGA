@@ -74,51 +74,54 @@
                         android:paddingTop="@dimen/activity_vertical_margin"
                         android:weightSum="16">
 
-                        <!--    PRIMER SECCION
-                                Peso: 2         -->
+                        <!--    CUARTA SECCION
+                                Contenedor del Código de Vendedor
+                                Peso: 3         -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginBottom="12dp"
-                            android:layout_weight="2"
-                            android:gravity="center_vertical"
-                            android:weightSum="7">
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:layout_marginBottom="@dimen/margin_16dp"
+                            >
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_marginBottom="8dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_marginBottom="@dimen/margin_2dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="@string/label_type_vendor_code"
+                                    android:textColor="@color/color_general_text"
+                                    android:textSize="14sp"/>
+                                <ImageView
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_yvr_small"
+                                    android:layout_width="110dp"
+                                    android:layout_height="14dp"/>
+                            </LinearLayout>
 
                             <EditText
-                                android:id="@+id/etExplPhone"
-                                android:layout_width="0dp"
+                                android:id="@+id/etCodeNumber"
+                                android:layout_width="170dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="4"
-                                android:digits="-0123456789"
+                                android:background="@drawable/custom_white_edittext_rounded_corners"
+                                android:digits="0123456789"
                                 android:ellipsize="start"
                                 android:gravity="center"
-                                android:hint="@string/hint_specify_phone_number"
-                                android:inputType="number|phone"
-                                android:maxLength="9"
-                                android:textColor="@drawable/custom_edittext_color_selector"
-                                android:textSize="25sp"/>
-
-                            <View
-                                style="@style/VerticalGrayLine"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_marginStart="8dp"/>
-
-                            <ToggleButton
-                                android:id="@+id/btnMyNumber"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:background="@drawable/custom_toggle_button_selector"
-                                android:drawableEnd="@drawable/ic_account"
-                                android:drawableRight="@drawable/ic_account"
-                                android:gravity="center"
-                                android:onClick="toggleNumber"
-                                android:paddingEnd="10dp"
-                                android:paddingRight="10dp"
-                                android:textOff="@string/button_my_number"
-                                android:textOn="@string/button_my_number"/>
+                                android:hint="@string/hint_vendor_code"
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:textSize="23sp"/>
                         </LinearLayout>
 
                         <View style="@style/HorizontalGrayLine"/>
@@ -143,7 +146,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/label_select_operator"
-                                android:textColor="@color/SubtitleTextColor"
+                                android:textColor="@color/color_general_text"
                                 android:textSize="14sp"/>
 
 
@@ -185,8 +188,9 @@
                                 android:layout_marginTop="8dp"
                                 android:layout_marginBottom="8dp"
                                 android:text="@string/label_select_recharge_amount"
-                                android:textColor="@color/SubtitleTextColor"
-                                android:textSize="14sp"/>
+                                android:textColor="@color/color_general_text"
+                                android:textSize="14sp"
+                                android:id="@+id/textView4"/>
 
                             <!--<Spinner
                                 android:id="@+id/spMontoRecarga"
@@ -217,43 +221,47 @@
 
                         </LinearLayout>
 
-                        <!--    CUARTA SECCION
-                                Contenedor del Código de Vendedor
-                                Peso: 3         -->
+                        <!--    PRIMER SECCION
+                                Peso: 2         -->
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
                             android:layout_height="0dp"
-                            android:layout_weight="3"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="2"
                             android:gravity="center"
-                            android:orientation="vertical"
-                            android:paddingLeft="16dp"
-                            android:paddingRight="16dp"
-                            android:layout_marginBottom="8dp"
+
+                            android:layout_width="match_parent"
                             >
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:text="@string/label_type_vendor_code"
-                                android:textColor="@color/SubtitleTextColor"
-                                android:textSize="14sp"
-                                android:id="@+id/textView2"/>
-
                             <EditText
-                                android:id="@+id/etCodeNumber"
-                                android:layout_width="170dp"
+                                android:id="@+id/etExplPhone"
+                                android:layout_width="220dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/custom_white_edittext_rounded_corners"
-                                android:digits="0123456789"
+                                android:digits="-0123456789"
                                 android:ellipsize="start"
                                 android:gravity="center"
-                                android:hint="@string/hint_vendor_code"
-                                android:imeOptions="actionDone"
-                                android:inputType="number"
-                                android:maxLength="5"
-                                android:textSize="23sp"/>
+                                android:hint="@string/hint_specify_phone_number"
+                                android:inputType="number|phone"
+                                android:maxLength="9"
+                                android:textColor="@drawable/custom_edittext_color_selector"
+                                android:textSize="25sp"/>
+
+                            <ImageButton
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:scaleType="fitCenter"
+                                android:padding="4dp"
+                                android:background="@drawable/btn_effect_ripple_dark_gray"
+                                android:src="@drawable/ic_contacts"
+                                android:onClick="openContacts"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/ibContacts"/>
+
                         </LinearLayout>
+
+
 
 
                         <!--    QUINTA SECCION
@@ -274,7 +282,7 @@
                                 android:layout_marginBottom="12dp"
                                 android:gravity="center"
                                 android:text="@string/label_make_sure_correct_phone"
-                                android:textColor="@color/TextColor"
+                                android:textColor="@color/color_general_text"
                                 android:textSize="14sp"
                                 android:id="@+id/textView3"/>
 

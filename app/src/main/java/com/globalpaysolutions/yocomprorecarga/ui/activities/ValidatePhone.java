@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     EditText etPhoneNumber;
     Button btnSignin;
     RelativeLayout relSelectCountry;
+    LinearLayout lnrPhoneContainer;
     ProgressDialog progressDialog;
     TextView lblSelectedCountry;
     TextView lblPhoneCode;
@@ -64,6 +66,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
         lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
+        lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
         presenter.setInitialViewState();
@@ -108,6 +111,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     {
         etPhoneNumber.setEnabled(false);
         btnSignin.setEnabled(false);
+        lnrPhoneContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -181,6 +185,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
                 if(selectedCountry != null)
                 {
                     setSelectedCountry(selectedCountry);
+                    lnrPhoneContainer.setVisibility(View.VISIBLE);
                 }
             }
         });

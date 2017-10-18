@@ -82,5 +82,7 @@ public class Constants
     public static final String MONTH = "Month";
     public static final String OVER_ALL = "OverAll";
 
+    //Prizes
+    public static final String SMS_NUMBER_PRIZE_EXCHANGE = "323";
 
 }

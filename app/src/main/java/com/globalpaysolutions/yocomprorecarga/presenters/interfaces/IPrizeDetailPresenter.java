@@ -7,4 +7,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IPrizeDetailPresenter
 {
     void loadInitialData();
+    void setClickListeners();
+    void createSmsPrizeContent(String exchangePin);
 }

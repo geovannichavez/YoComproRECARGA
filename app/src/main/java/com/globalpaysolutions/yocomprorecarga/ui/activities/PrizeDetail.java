@@ -1,8 +1,10 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +49,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
         mPresenter.loadInitialData();
+        mPresenter.setClickListeners();
 
     }
 
@@ -85,5 +88,36 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     public void showGenericDialog(DialogViewModel dialogViewModel)
     {
 
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        try
+        {
+            etPrizeCode.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    String prizePin = etPrizeCode.getText().toString();
+                    mPresenter.createSmsPrizeContent(prizePin);
+                }
+            });
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
+    }
+
+    @Override
+    public void navigateToSms(Intent sms)
+    {
+        try
+        {
+            startActivity(sms);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

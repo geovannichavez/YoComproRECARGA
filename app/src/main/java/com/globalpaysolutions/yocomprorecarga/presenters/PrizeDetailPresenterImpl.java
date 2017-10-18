@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -41,5 +43,28 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
         data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
         data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
         mView.updateViews(data);
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        mView.setClickListeners();
+    }
+
+    @Override
+    public void createSmsPrizeContent(String exchangePin)
+    {
+        try
+        {
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + Constants.SMS_NUMBER_PRIZE_EXCHANGE));
+            sendIntent.putExtra("sms_body", exchangePin);
+            sendIntent.setType("vnd.android-dir/mms-sms");
+            mView.navigateToSms(sendIntent);
+
+        }
+        catch (Exception ex)
+        {
+           ex.printStackTrace();
+        }
     }
 }
