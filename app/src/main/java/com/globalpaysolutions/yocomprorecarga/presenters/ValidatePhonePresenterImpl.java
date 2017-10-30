@@ -8,6 +8,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneListener;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
+import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
@@ -51,16 +52,59 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void requestToken(String pMsisdn, String pCountryID)
+    public void requestToken(String pPhoneNumber)
     {
-        this.View.showLoading();
-        this.interactor.validatePhone(this, pMsisdn, pCountryID);
+        try
+        {
+            String simplePhone = new StringBuilder(pPhoneNumber).insert(pPhoneNumber.length()-4, "-").toString();
+            userData.saveSimpleUserPhone(simplePhone);
+
+            Country country = userData.getSelectedCountry();
+            String msisdn = country.getPhoneCode() + pPhoneNumber;
+            String countryID = country.getCode();
+
+            this.View.showLoading();
+            this.interactor.validatePhone(this, msisdn, countryID);
+        }
+        catch (Exception ex)  { ex.printStackTrace();   }
     }
 
     @Override
-    public void saveUserGeneralData(String pPhoneCode, String pCountryID, String pIso3Code, String pCountryName, String pPhone, int pConsumerID)
+    public void savePreselectedCountry(Country pCountry)
     {
-        this.interactor.saveUserGeneralInfo(pCountryID, pIso3Code, pCountryName, pPhoneCode, pPhone, pConsumerID);
+        userData.savePreselectedCountryInfo(pCountry.getCountrycode(), pCountry.getPhoneCode(), pCountry.getCode(), pCountry.getName());
+    }
+
+    @Override
+    public void saveUserGeneralData(String pPhone, int pConsumerID)
+    {
+        try
+        {
+            Country country = userData.getSelectedCountry();
+            this.interactor.saveUserGeneralInfo(country.getCode(), country.getCountrycode(), country.getName(), country.getPhoneCode(), pPhone, pConsumerID);
+        }
+        catch (Exception ex) { ex.printStackTrace();    }
+    }
+
+    @Override
+    public void setSelectedCountry(Country pCountry)
+    {
+        if(pCountry != null)
+        {
+            View.setSelectedCountry(pCountry);
+        }
+        else
+        {
+            View.retypePhoneView();
+            Country country = userData.getSelectedCountry();
+            View.setSelectedCountry(country);
+        }
+    }
+
+    @Override
+    public void setTypedPhone()
+    {
+        View.setTypedPhone(userData.getUserSimplePhone());
     }
 
     @Override

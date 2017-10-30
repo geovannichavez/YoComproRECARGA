@@ -161,6 +161,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         @Override
         public void onGeoQueryReady()
         {
+            mFirebaseListener.gf_goldPoint_onGeoQueryReady();
             Log.i(TAG, "GoldPoint: GeoQuery ready fired.");
         }
 
@@ -212,6 +213,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         @Override
         public void onGeoQueryReady()
         {
+            mFirebaseListener.gf_silverPoint_onGeoQueryReady();
             Log.i(TAG, "SilverPoint: GeoQuery ready fired");
         }
 
@@ -263,6 +265,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         @Override
         public void onGeoQueryReady()
         {
+            mFirebaseListener.gf_bronzePoint_onGeoQueryReady();
             Log.i(TAG, "BronzePoint: GeoQuery for BronzePoint ready");
         }
 

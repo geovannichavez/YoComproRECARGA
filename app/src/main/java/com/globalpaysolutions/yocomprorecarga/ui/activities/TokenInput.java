@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
@@ -37,6 +38,8 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     private EditText etToken;
     private Button btnConfirmToken;
     private TextView tvPortableNumber;
+    private TextView tvCodeSent;
+    private TextView tvWrongPhone;
     private ProgressDialog progressDialog;
 
     //MVP
@@ -54,10 +57,19 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         etToken = (EditText) findViewById(R.id.etToken);
         btnConfirmToken = (Button) findViewById(R.id.btnConfirmToken);
         tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
+        tvCodeSent = (TextView) findViewById(R.id.tvCodeSent);
+        tvWrongPhone = (TextView) findViewById(R.id.tvWrongPhone);
 
+        //Get data from intent
+        String userPhone = getIntent().getExtras().getString(Constants.BUNDLE_TOKEN_VALIDATION);
+
+        //Initialize objects
         mPresenter = new TokenInputPresenterImpl(this, this, this);
 
         mPresenter.setInitialViewState();
+
+        if(!TextUtils.isEmpty(userPhone))
+            mPresenter.buildSentText(userPhone);
     }
 
     public void VerifyToken(View view)
@@ -86,6 +98,20 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
             tvPortableNumber.setText(Html.fromHtml(getString(R.string.label_portable_phone_number)));
         }
         EntriesValidations();
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        //Wrong phone hyperlink
+        tvWrongPhone.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mPresenter.retypePhoneNumber(true);
+            }
+        });
     }
 
     @Override
@@ -184,6 +210,36 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void setCodeSentLabelText(String phoneNumber)
+    {
+        try
+        {
+            SpannableString part1 = new SpannableString(getString(R.string.label_type_token_part1));
+            SpannableString part2 = new SpannableString(phoneNumber);
+            part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phoneNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            SpannableString part3 = new SpannableString(getString(R.string.label_type_token_part2));
+
+            tvCodeSent.setText(TextUtils.concat(part1, " ", part2, " ", part3));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigatePhoneValidation(boolean retypePhone)
+    {
+        try
+        {
+            Intent validatePhone = new Intent(TokenInput.this, ValidatePhone.class);
+            validatePhone.putExtra(Constants.BUNDLE_PHONE_RETYPE, retypePhone);
+            startActivity(validatePhone);
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     /*

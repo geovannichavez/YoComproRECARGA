@@ -385,6 +385,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void gf_goldPoint_onGeoQueryReady()
+    {
+        Log.i(TAG, "Gold geoquery finished");
+    }
+
+    @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
         mView.addSilverPoint(pKey, pLocation);
@@ -397,6 +403,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void gf_silverPoint_onGeoQueryReady()
+    {
+        Log.i(TAG, "Silver geoquery finished");
+    }
+
+    @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
         mView.addBronzePoint(pKey, pLocation);
@@ -406,6 +418,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible)
     {
         mView.removeBronzePoint(pKey);
+    }
+
+    @Override
+    public void gf_bronzePoint_onGeoQueryReady()
+    {
+        Log.i(TAG, "Bronze geoquery finished");
     }
 
     // FIREBASE STATIC POINTS

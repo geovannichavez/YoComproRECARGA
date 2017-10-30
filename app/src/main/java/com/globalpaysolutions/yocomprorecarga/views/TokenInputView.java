@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 public interface TokenInputView
 {
     void initialViewsState();
+    void setClickListeners();
     void showLoading();
     void dismissLoading();
     void showErrorMessage(ErrorResponseViewModel pErrorMessage);
@@ -17,4 +18,6 @@ public interface TokenInputView
     void vibrateOnSuccess();
     void cleanFields();
     void setCallcenterContactText();
+    void setCodeSentLabelText(String phoneNumber);
+    void navigatePhoneValidation(boolean retypePhone);
 }

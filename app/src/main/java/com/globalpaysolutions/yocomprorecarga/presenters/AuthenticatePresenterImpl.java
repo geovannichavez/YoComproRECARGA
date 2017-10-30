@@ -64,7 +64,54 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     }
 
     @Override
-    public void onFacebookEmailSuccess(String pEmail)
+    public void onFacebookEmailSuccess(String pEmail, LoginResult pLoginResult)
+    {
+        try
+        {
+            //Authenticates user with Firebase
+            mInteractor.authenticateFirebaseUser(this, pLoginResult.getAccessToken(), pEmail);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onFacebookEmailError()
+    {
+        mInteractor.logoutFacebookUser();
+    }
+
+    @Override
+    public void onGraphLoginSuccess(LoginResult pLoginResult)
+    {
+        Log.i(TAG, "Facebook email request started");
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        mInteractor.requestUserEmail(this, pLoginResult);
+
+    }
+
+    @Override
+    public void onGraphLoginCancel()
+    {
+        Log.i(TAG, "Facebook email request cancelled");
+    }
+
+    @Override
+    public void onGraphLoginError(FacebookException pException)
+    {
+        mInteractor.logoutFacebookUser();
+        DialogViewModel dialog = new DialogViewModel();
+        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+        mView.showGenericDialog(dialog);
+        Log.i(TAG, "Facebook email request failed");
+    }
+
+    @Override
+    public void onFirebaseAuthSuccess(String pEmail)
     {
         try
         {
@@ -90,40 +137,29 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             facebookConsumer.setUserID(profileId);
             mUserData.saveFacebookData(profileId, facebookUrl);
             mUserData.saveFacebookFullname(name);
+
+            //Registers user on RecarGO! API
             mInteractor.authenticateUser(this, facebookConsumer);
+
         }
-        catch (Exception ex) {  ex.printStackTrace();   }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void onGraphLoginSuccess(LoginResult pLoginResult)
+    public void onFirebaseAuthError()
     {
-        //TODO: Quitar el toast
-        Log.i(TAG, "Facebook email request started");
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.requestUserEmail(this, pLoginResult);
-    }
-
-    @Override
-    public void onGraphLoginCancel()
-    {
-        //TODO: Quitar el toast
-        //mView.showGenericToast("Graph login cancel");
-        Log.i(TAG, "Facebook email request cancelled");
-    }
-
-    @Override
-    public void onGraphLoginError(FacebookException pException)
-    {
-        //TODO: Quitar el toast
-        //mView.showGenericToast("Graph login error");
-
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
-        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-        mView.showGenericDialog(dialog);
-        Log.i(TAG, "Facebook email request failed");
+        try
+        {
+            mInteractor.logoutFirebaseUser();
+            mInteractor.logoutFacebookUser();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -161,6 +197,8 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     @Override
     public void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable)
     {
+        mInteractor.logoutFacebookUser();
+        mInteractor.logoutFirebaseUser();
         mView.hideLoadingDialog();
         this.processErrorMessage(pCodeStatus, pThrowable);
     }

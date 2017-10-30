@@ -245,6 +245,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
+        mView.hideArchViewLoadingMessage();
         if (p3DCompatible)
         {
             if(!TextUtils.equals(mCurrentChestKey, pKey))
@@ -255,11 +256,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
-            mView.hideArchViewLoadingMessage();
             mView.onGoldKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
-            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
 
     }
@@ -277,6 +276,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
+    }
+
+    @Override
+    public void gf_goldPoint_onGeoQueryReady()
+    {
+        mView.hideArchViewLoadingMessage();
     }
 
     @Override
@@ -320,6 +325,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void gf_silverPoint_onGeoQueryReady()
+    {
+        mView.hideArchViewLoadingMessage();
+    }
+
+    @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
         if (p3DCompatible)
@@ -354,6 +365,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
+    }
+
+    @Override
+    public void gf_bronzePoint_onGeoQueryReady()
+    {
+        mView.hideArchViewLoadingMessage();
     }
 
     @Override
@@ -486,6 +503,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setLine1(mContext.getString(R.string.label_click_on_button_to_redeem));
             dialog.setAcceptButton(mContext.getString(R.string.button_redeem_now));
             mView.showPrizeColectedDialog(dialog);
+
+            //Deletes 3D model from AR
+
         }
         else
         {

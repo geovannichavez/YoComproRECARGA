@@ -11,7 +11,9 @@ import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -80,13 +82,19 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
     {
         try
         {
-
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(getString(R.string.title_terms_and_conditions));
 
+            LayoutInflater inflater = AcceptTerms.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_terms_conditions_dialog, null);
 
-            WebView wv = new WebView(this);
+            WebView wv = (WebView) dialogView.findViewById(R.id.wvTermsAndConditions);
+            wv.getSettings().setJavaScriptEnabled(true);
+            wv.getSettings().setUseWideViewPort(true);
+            wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
             wv.loadUrl(url);
+
             wv.setWebViewClient(new WebViewClient()
             {
                 @Override
@@ -97,7 +105,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
                 }
             });
 
-            alert.setView(wv);
+            alert.setView(dialogView);
             alert.setNegativeButton(getString(R.string.button_accept), new DialogInterface.OnClickListener()
             {
                 @Override

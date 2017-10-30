@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -59,6 +60,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     //Views
     RelativeLayout ibtnProfile;
     RelativeLayout ibtnInfo;
+    ImageButton btnCloseInfography;
+    AlertDialog infographyDialog;
 
     //Adapters y Layouts
     private GoogleMap mGoogleMap;
@@ -76,6 +79,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     private Map<String, Marker> mBronzePointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -84,6 +88,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
         ibtnProfile = (RelativeLayout) findViewById(R.id.ibtnProfile);
         ibtnInfo = (RelativeLayout) findViewById(R.id.ibtnInfo);
+        btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
 
         mSalesPointsMarkers = new HashMap<>();
         mVendorPointsMarkers = new HashMap<>();
@@ -464,7 +469,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             }
             tutorialPager.setCurrentItem(currentPage++, true);
 
-            builder.setView(dialogView).create().show();
+            infographyDialog = builder.setView(dialogView).create();
+            infographyDialog.show();
         }
         catch (Exception ex) {   ex.printStackTrace();   }
     }
@@ -825,6 +831,19 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
             }
         }
 
+    }
+
+    public void closeInfographyDialog(View view)
+    {
+        try
+        {
+            if(infographyDialog != null)
+                infographyDialog.dismiss();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     /*

@@ -68,9 +68,9 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         setContentView(R.layout.activity_capture_price_ar);
         this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
 
-        toolbar = (Toolbar) findViewById(R.id.arToolbar);
+        /*toolbar = (Toolbar) findViewById(R.id.arToolbar);
         setSupportActionBar(toolbar);
-        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);*/
 
         tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
         tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
@@ -212,33 +212,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void showIncompatibleDeviceDialog(DialogViewModel pMessageModel)
-    {
-        String message = String.format("%1$s %2$s.", pMessageModel.getLine1(), pMessageModel.getLine2());
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
-        alertDialog.setTitle(pMessageModel.getTitle());
-        alertDialog.setMessage(message);
-        alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton(pMessageModel.getAcceptButton(), new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                dialog.dismiss();
-                Intent returnHome = new Intent(CapturePrizeAR.this, Home.class);
-                returnHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                returnHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                returnHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                returnHome.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                returnHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                returnHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(returnHome);
-            }
-        });
-        alertDialog.show();
-    }
-
-    @Override
     public void showLoadingDialog(String pLabel)
     {
         progressDialog = new ProgressDialog(this);
@@ -341,6 +314,16 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     public void removeRunnableCallback()
     {
         mHandler.removeCallbacks(runCoinExchange);
+    }
+
+    @Override
+    public void deleteModelAR()
+    {
+        try
+        {
+            this.architectView.callJavascript("deleteObjectGeoFn()");
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     @Override

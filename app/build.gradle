@@ -9,11 +9,11 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 5
+        versionCode 6
         versionName "1.0"
 
         //OneSignal
-        manifestPlaceholders = [onesignal_app_id: "1ec1e355-543b-4e69-8651-d2d0ac579797",
+        manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
@@ -27,7 +27,7 @@ android {
 }
 
 repositories {
-    flatDir{
+    flatDir {
         dirs 'libs'
     }
     mavenCentral()
@@ -40,7 +40,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
 
-    compile (name: 'wikitudesdk', ext:'aar')
+    compile(name: 'wikitudesdk', ext: 'aar')
 
     //Google Maps
     compile 'com.google.android.gms:play-services-maps:10.0.1'
@@ -67,6 +67,9 @@ dependencies {
     //Firebase
     compile 'com.google.firebase:firebase-database:10.0.0'
 
+    //Firebase Auth
+    compile 'com.google.firebase:firebase-auth:10.0.0'
+
     //GeoFire
     compile 'com.firebase:geofire-android:2.1.1'
 
@@ -79,7 +82,6 @@ dependencies {
     //Facebook SDK
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-
     //CircleImageView
     compile 'de.hdodenhof:circleimageview:2.1.0'
 
@@ -90,7 +92,6 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.2@aar'
 
 }
-
 
 //Google Services
 //OBLIGATORIO: ESta línea debe ir al final del documento

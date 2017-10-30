@@ -53,7 +53,7 @@ public class Constants
     public static final int OUT_RADIUS_VIBRATION_TIME_MILLISECONDS = 130;
     public static final int OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS = 1800;
     public static final int ON_EARNED_COIN_SUCCESSFULLY_VIBRATION_MILLISECONDS = 400;
-    public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 2000;
+    public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 1000;
 
     //Chest Types
     public static final int VALUE_CHEST_TYPE_GOLD = 3;
@@ -75,6 +75,11 @@ public class Constants
     public static final String BUNDLE_PRIZE_DIAL = "bundle_data_prize_dial";
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
+
+    //General bundle keys
+    public static final String BUNDLE_TOKEN_VALIDATION = "bundle_data_usr_phone_validation";
+    public static final String BUNDLE_PHONE_RETYPE = "bundle_data_phone_retype";
+    public static final String BUNDLE_PHONE_TYPED = "bundle_data_phone_typed";
 
     //Leaderboards
     public static final String TODAY = "Today";

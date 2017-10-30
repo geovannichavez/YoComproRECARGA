@@ -27,6 +27,9 @@
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
     <string name="label_type_token">Hemos enviado un SMS al número proporcionado, por favor ingrese el código de confirmación.</string>
+    <string name="label_type_token_part1">Hemos enviado un SMS al número</string>
+    <string name="label_type_token_part2">, por favor ingrese el código de confirmación.</string>
+    <string name="label_type_token_part3"><s>¿Número equivocado?</s></string>
     <string name="dialog_success_token_validation_message">Se ha validado tu número de teléfono exitosamente.</string>
     <string name="error_title_incorrect_token">CÓDIGO</string>
     <string name="error_label_incorrect_token">Código incorrecto, inténtalo nuevamente.</string>
@@ -223,6 +226,7 @@
     <string name="label_callcenter_phone_number">7768-1443</string>
     <string name="title_terms_and_conditions">Términos y Condiciones</string>
     <string name="toast_not_valid_phone">Número telefónico inválido</string>
+    <string name="contentdescription_close_infograpgy">Cerrar dialogo</string>
 
 
 </resources>

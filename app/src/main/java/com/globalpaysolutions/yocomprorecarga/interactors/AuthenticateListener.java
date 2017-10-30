@@ -12,10 +12,14 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 
 public interface AuthenticateListener
 {
-    void onFacebookEmailSuccess(String pEmail);
+    void onFacebookEmailSuccess(String pEmail, LoginResult pLoginResult);
+    void onFacebookEmailError();
     void onGraphLoginSuccess(LoginResult pLoginResult);
     void onGraphLoginCancel();
     void onGraphLoginError(FacebookException pException);
+
+    void onFirebaseAuthSuccess(String pEmail);
+    void onFirebaseAuthError();
 
     void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile);
     void onCurrentAccessTokenChanged(AccessToken pOldAccessToken, AccessToken pCurrentAccessToken);

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
+import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITokenInputPresenter;
@@ -44,6 +45,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     {
         mView.initialViewsState();
         mView.setCallcenterContactText();
+        mView.setClickListeners();
     }
 
     @Override
@@ -51,6 +53,18 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     {
         mView.showLoading();
         mInteractor.sendTokenValidation(this, pToken);
+    }
+
+    @Override
+    public void buildSentText(String phone)
+    {
+        mView.setCodeSentLabelText(phone);
+    }
+
+    @Override
+    public void retypePhoneNumber(boolean retypePhone)
+    {
+        mView.navigatePhoneValidation(retypePhone);
     }
 
     @Override

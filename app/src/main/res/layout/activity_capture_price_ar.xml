@@ -20,7 +20,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>
 
-        <android.support.v7.widget.Toolbar
+        <!--<android.support.v7.widget.Toolbar
             android:id="@+id/arToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:layout_height="38dp"
                 android:src="@drawable/ic_recargo"/>
 
-        </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>-->
 
 
         <FrameLayout
@@ -59,7 +59,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingStart="8dp"
-            android:paddingTop="65dp">
+            android:paddingTop="@dimen/margin_16dp">
 
 
             <!-- *************

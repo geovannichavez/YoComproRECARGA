@@ -29,6 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.util.ArrayList;
@@ -69,8 +70,17 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
-        presenter.setInitialViewState();
         presenter.fetchCountries();
+
+        if(getIntent().getBooleanExtra(Constants.BUNDLE_PHONE_RETYPE, false))
+        {
+            presenter.setSelectedCountry(null);
+            presenter.setTypedPhone();
+        }
+        else
+        {
+            presenter.setInitialViewState();
+        }
 
         relSelectCountry.setOnClickListener(new View.OnClickListener()
         {
@@ -87,18 +97,12 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
     public void Signin(View view)
     {
-        String msisdn;
-        String countryID;
-
         try
         {
             String phoneNumber = etPhoneNumber.getText().toString();
             phoneNumber = phoneNumber.replace("-", "");
 
-            msisdn = selectedCountry.getPhoneCode() + phoneNumber;
-            countryID = selectedCountry.getCountrycode();
-
-            this.presenter.requestToken(msisdn, countryID);
+            this.presenter.requestToken(phoneNumber);
         }
         catch (Exception ex)
         {
@@ -112,6 +116,24 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         etPhoneNumber.setEnabled(false);
         btnSignin.setEnabled(false);
         lnrPhoneContainer.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void retypePhoneView()
+    {
+        etPhoneNumber.setEnabled(true);
+        btnSignin.setEnabled(false);
+        lnrPhoneContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setTypedPhone(String phone)
+    {
+        try
+        {
+            etPhoneNumber.setText(phone);
+        }
+        catch (Exception ex) { ex.printStackTrace();    }
     }
 
     @Override
@@ -149,8 +171,9 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     public void navigateTokenInput(RegisterClientResponse pResponse)
     {
         String phone = etPhoneNumber.getText().toString();
-        phone = phone.replace("-", "");
-        this.presenter.saveUserGeneralData(selectedCountry.getPhoneCode(), selectedCountry.getCountrycode(), selectedCountry.getCode(), selectedCountry.getName(), phone, pResponse.getConsumerID());
+
+        String rawPhone = phone.replace("-", "");
+        this.presenter.saveUserGeneralData(rawPhone, pResponse.getConsumerID());
 
         Intent inputToken = new Intent(ValidatePhone.this, TokenInput.class);
         inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -159,6 +182,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        inputToken.putExtra(Constants.BUNDLE_TOKEN_VALIDATION, phone);
         startActivity(inputToken);
     }
 
@@ -184,8 +208,13 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             {
                 if(selectedCountry != null)
                 {
-                    setSelectedCountry(selectedCountry);
+                    presenter.setSelectedCountry(selectedCountry);
+                    presenter.savePreselectedCountry(selectedCountry);
                     lnrPhoneContainer.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    presenter.setSelectedCountry(null);
                 }
             }
         });
@@ -194,6 +223,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         dialog.show();
     }
 
+    @Override
     public void setSelectedCountry(Country pSelected)
     {
         lblSelectedCountry.setText(pSelected.getName());

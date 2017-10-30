@@ -18,7 +18,6 @@ public interface CapturePrizeView
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogViewModel pMessageModel);
     void showPrizeColectedDialog(DialogViewModel pDialogModel);
-    void showIncompatibleDeviceDialog(DialogViewModel pMessageModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();
@@ -30,6 +29,7 @@ public interface CapturePrizeView
     void removeBlinkingAnimation();
     void onChestTouch(int pAwait);
     void removeRunnableCallback();
+    void deleteModelAR();
 
     void updateIndicators(String pPrizes, String pCoins);
     void updatePrizeButton(int pCoins);

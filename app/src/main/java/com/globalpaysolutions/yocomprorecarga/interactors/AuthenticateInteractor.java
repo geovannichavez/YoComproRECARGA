@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -14,6 +15,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -22,6 +24,14 @@ import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IAuthentica
 import com.globalpaysolutions.yocomprorecarga.models.FacebookConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,10 +53,14 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     //Facebook
     private CallbackManager mCallbackManager;
 
+    //Firebase
+    private FirebaseAuth mFirebaseAuth;
+
 
     public AuthenticateInteractor(Context pContext)
     {
         this.mContext = pContext;
+        this.mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -78,6 +92,54 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     }
 
     @Override
+    public void authenticateFirebaseUser(final AuthenticateListener pListener, final AccessToken pAcessToken, final String pEmail)
+    {
+        try
+        {
+            AuthCredential credential = FacebookAuthProvider.getCredential(pAcessToken.getToken());
+
+            mFirebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+            {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task)
+                {
+                    if (task.isSuccessful())
+                    {
+                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                        if(user != null)
+                        {
+                            Log.i(TAG, String.format("FirebaseAuth: %1$s - %2$s)", user.getDisplayName(), user.getUid()));
+                            pListener.onFirebaseAuthSuccess(pEmail);
+                        }
+                    }
+                    else
+                    {
+                        Log.w(TAG, "FirebaseAuth failed", task.getException());
+                        pListener.onFirebaseAuthError();
+                    }
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void logoutFirebaseUser()
+    {
+        try
+        {
+            FirebaseAuth.getInstance().signOut();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void authenticateFacebookUser(final AuthenticateListener pListener, LoginButton pLoginButton)
     {
         pLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>()
@@ -106,26 +168,45 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     }
 
     @Override
+    public void logoutFacebookUser()
+    {
+        try
+        {
+            LoginManager.getInstance().logOut();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void requestUserEmail(final AuthenticateListener pListener, final LoginResult pLoginResult)
     {
-        GraphRequest mGraphRequest = GraphRequest.newMeRequest(pLoginResult.getAccessToken(),
-                new GraphRequest.GraphJSONObjectCallback()
+        GraphRequest mGraphRequest = GraphRequest.newMeRequest(pLoginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback()
+        {
+            @Override
+            public void onCompleted(JSONObject me, GraphResponse response)
+            {
+                if (response.getError() == null)
                 {
-                    @Override
-                    public void onCompleted(JSONObject me, GraphResponse response)
+                    try
                     {
-                        if (response.getError() == null)
-                        {
-                            try
-                            {
-                                String facebookEmail = !me.isNull("email") ? me.getString("email") : "";
-                                pListener.onFacebookEmailSuccess(facebookEmail);
-                                Log.i(TAG, "FacebookEmail: " + facebookEmail);
-                            }
-                            catch (JSONException ex) {  ex.printStackTrace();   }
-                        }
+                        String facebookEmail = !me.isNull("email") ? me.getString("email") : "";
+                        pListener.onFacebookEmailSuccess(facebookEmail, pLoginResult);
+                        Log.i(TAG, "FacebookEmail: " + facebookEmail);
                     }
-                });
+                    catch (JSONException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                }
+                else
+                {
+                    pListener.onFacebookEmailError();
+                }
+            }
+        });
         Bundle parameters = new Bundle();
         parameters.putString("fields", "email, name");
         mGraphRequest.setParameters(parameters);
@@ -159,7 +240,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
             @Override
             public void onResponse(Call<AuthenticateResponse> call, Response<AuthenticateResponse> response)
             {
-                if(response.isSuccessful())
+                if (response.isSuccessful())
                 {
                     AuthenticateResponse authResult = response.body();
                     pListener.onAuthenticateConsumerSuccess(authResult);
@@ -171,6 +252,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
 
                 }
             }
+
             @Override
             public void onFailure(Call<AuthenticateResponse> call, Throwable t)
             {

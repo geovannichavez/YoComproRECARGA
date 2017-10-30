@@ -13,14 +13,17 @@ public interface FirebasePOIListener
     //GeoFire GoldPoints
     void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
     void gf_goldPoint_onKeyExited(String pKey, boolean p3DCompatible);
+    void gf_goldPoint_onGeoQueryReady();
 
     //GeoFire SilverPoints
     void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
     void gf_silverPoint_onKeyExited(String pKey, boolean p3DCompatible);
+    void gf_silverPoint_onGeoQueryReady();
 
     //GeoFire BronzePoints
     void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
     void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible);
+    void gf_bronzePoint_onGeoQueryReady();
 
     /*
     *

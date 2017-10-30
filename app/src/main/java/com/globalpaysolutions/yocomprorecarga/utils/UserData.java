@@ -3,6 +3,8 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.globalpaysolutions.yocomprorecarga.models.Country;
+
 /**
  * Created by Josué Chávez on 16/01/2017.
  */
@@ -28,6 +30,7 @@ public class UserData
     private static final String KEY_CONSUMER_LASTNAME = "usr_lastname";
     private static final String KEY_CONSUMER_EMAIL = "usr_email";
     private static final String KEY_CONSUMER_NICKNAME = "usr_nickname";
+    private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
 
     //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
@@ -100,6 +103,22 @@ public class UserData
             mEditor.putString(KEY_CONSUMER_COUNTRY_NAME, pCountryName);
             mEditor.putString(KEY_CONSUMER_PHONE, pPhone);
             mEditor.putInt(KEY_CONSUMER_ID, pConsumerID);
+            mEditor.commit();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void savePreselectedCountryInfo(String countryId, String countryPhoneCode, String iso3code, String countryName)
+    {
+        try
+        {
+            mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryId);
+            mEditor.putString(KEY_CONSUMER_COUNTRY_PHONE_CODE, countryPhoneCode);
+            mEditor.putString(KEY_CONSUMER_COUNTRY_IS3CODE, iso3code);
+            mEditor.putString(KEY_CONSUMER_COUNTRY_NAME, countryName);
             mEditor.commit();
         }
         catch (Exception ex)
@@ -241,6 +260,12 @@ public class UserData
     public void saveSimpleInstructionsSetting(boolean pShowed)
     {
         mEditor.putBoolean(KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED, pShowed);
+        mEditor.commit();
+    }
+
+    public void saveSimpleUserPhone(String pUserPhone)
+    {
+        mEditor.putString(KEY_CONSUMER_SIMPLE_PHONE, pUserPhone);
         mEditor.commit();
     }
 
@@ -401,6 +426,30 @@ public class UserData
     {
         return mPreferences.getBoolean(KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED, false);
     }
+
+    public Country getSelectedCountry()
+    {
+        Country country = new Country();
+        try
+        {
+            country.setCode(mPreferences.getString(KEY_CONSUMER_COUNTRY_ID, ""));
+            country.setPhoneCode(mPreferences.getString(KEY_CONSUMER_COUNTRY_PHONE_CODE, ""));
+            country.setCountrycode(mPreferences.getString(KEY_CONSUMER_COUNTRY_IS3CODE, ""));
+            country.setName(mPreferences.getString(KEY_CONSUMER_COUNTRY_NAME, ""));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return country;
+    }
+
+    public String getUserSimplePhone()
+    {
+        return mPreferences.getString(KEY_CONSUMER_SIMPLE_PHONE, "");
+    }
+
 
     /*
     * ********************

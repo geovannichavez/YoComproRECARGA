@@ -28,14 +28,21 @@
             android:src="@drawable/img_logo_green_recargo"/>
 
         <TextView
-
-            android:id="@+id/textView"
+            android:id="@+id/tvCodeSent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/label_type_token"
             android:textColor="@color/GeneralTextColor"
             android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/tvWrongPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/label_type_token_part3"
+            android:textColor="@color/AppGreen"
+            android:textSize="12sp"/>
 
 
         <EditText
