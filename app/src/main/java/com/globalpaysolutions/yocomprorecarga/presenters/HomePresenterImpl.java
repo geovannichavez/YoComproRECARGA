@@ -26,6 +26,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointDat
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Intro;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
@@ -81,7 +82,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void checkUserDataCompleted()
     {
-        if(!mUserData.UserAcceptedTerms())
+        if(!mUserData.hasReadIntro())
+        {
+            Intent intro = new Intent(mActivity, Intro.class);
+            mContext.startActivity(intro);
+        }
+        else if(!mUserData.UserAcceptedTerms())
         {
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);

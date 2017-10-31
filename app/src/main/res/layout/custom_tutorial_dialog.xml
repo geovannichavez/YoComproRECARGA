@@ -32,13 +32,13 @@
                 android:src="@drawable/ic_close"/>
         </FrameLayout>
 
-        <me.relex.circleindicator.CircleIndicator
+       <!-- <me.relex.circleindicator.CircleIndicator
             android:id="@+id/indicator"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             app:ci_drawable="@drawable/ic_dot_green"
-            app:ci_drawable_unselected="@drawable/ic_dot_white"/>
+            app:ci_drawable_unselected="@drawable/ic_dot_white"/>-->
     </RelativeLayout>
 
 </LinearLayout>

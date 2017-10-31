@@ -456,12 +456,12 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
             //Finds all views once the parent view is inflated
             ViewPager tutorialPager = (ViewPager) dialogView.findViewById(R.id.pager);
-            CircleIndicator indicator = (CircleIndicator) dialogView.findViewById(R.id.indicator);
+            //CircleIndicator indicator = (CircleIndicator) dialogView.findViewById(R.id.indicator);
 
             Collections.addAll(tutorialArray, slides);
 
             tutorialPager.setAdapter(new TutorialAdapter(Home.this, tutorialArray));
-            indicator.setViewPager(tutorialPager);
+            //indicator.setViewPager(tutorialPager);
 
             if (currentPage == slides.length)
             {

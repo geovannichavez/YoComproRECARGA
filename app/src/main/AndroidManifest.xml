@@ -213,6 +213,8 @@
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".ui.activities.Intro">
+        </activity>
     </application>
 
 </manifest>

@@ -43,11 +43,11 @@ public class TutorialAdapter extends PagerAdapter
     @Override
     public Object instantiateItem(ViewGroup view, int position)
     {
-        View myImageLayout = mInflater.inflate(R.layout.custom_slide, view, false);
-        ImageView image = (ImageView) myImageLayout.findViewById(R.id.slideImage);
+        View imageLayout = mInflater.inflate(R.layout.custom_slide, view, false);
+        ImageView image = (ImageView) imageLayout.findViewById(R.id.slideImage);
         image.setImageResource(mImages.get(position));
-        view.addView(myImageLayout, 0);
-        return myImageLayout;
+        view.addView(imageLayout, 0);
+        return imageLayout;
     }
 
     @Override

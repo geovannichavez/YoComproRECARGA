@@ -114,6 +114,10 @@
     <string name="button_my_prizes">Mis Premios</string>
     <string name="button_logout">Cerrar sesión</string>
     <string name="button_tutorial">Ver Tutorial</string>
+    <string name="button_next">Siguiente</string>
+    <string name="button_skip">Omitir</string>
+    <string name="button_start">Iniciar</string>
+
     <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
@@ -123,7 +127,7 @@
     <!--    HINTS   -->
     <string name="spinner_select">Seleccione…</string>
     <string name="hint_your_phone_number"><font size="16">TU TELÉFONO</font></string>
-   <!-- <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>-->
+    <!-- <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>-->
     <string name="hint_specify_phone_number"><font size="16">NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 
@@ -227,6 +231,7 @@
     <string name="title_terms_and_conditions">Términos y Condiciones</string>
     <string name="toast_not_valid_phone">Número telefónico inválido</string>
     <string name="contentdescription_close_infograpgy">Cerrar dialogo</string>
+
 
 
 </resources>

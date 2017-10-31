@@ -39,6 +39,7 @@ public class UserData
     private static final String KEY_HAS_GRANTED_DEVICE_PERMISSIONS = "usr_has_granted_device_permissions";
     private static final String KEY_HAS_AUTHENTICATED = "usr_has_authenticated";
     private static final String KEY_AUTHENTICATION_KEY = "usr_authentication_key";
+    private static final String KEY_HAS_READ_INTRO = "usr_has_read_intro";
 
     //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
@@ -269,6 +270,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveHasReadIntro(boolean pRead)
+    {
+        mEditor.putBoolean(KEY_HAS_READ_INTRO, pRead);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -448,6 +455,11 @@ public class UserData
     public String getUserSimplePhone()
     {
         return mPreferences.getString(KEY_CONSUMER_SIMPLE_PHONE, "");
+    }
+
+    public boolean hasReadIntro()
+    {
+        return mPreferences.getBoolean(KEY_HAS_READ_INTRO, false);
     }
 
 
