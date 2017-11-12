@@ -26,7 +26,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    -->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS"/>
@@ -123,15 +122,12 @@
         <activity
             android:name=".ui.activities.Home"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.AcceptTerms"
             android:screenOrientation="portrait">
+
         </activity>
         <activity
             android:name=".ui.activities.ValidatePhone"
@@ -201,20 +197,45 @@
         <activity
             android:name=".ui.activities.Profile"
             android:parentActivityName=".ui.activities.Home"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Leaderboards"
             android:parentActivityName=".ui.activities.Profile"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.PrizesHistory"
             android:parentActivityName=".ui.activities.Profile"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity android:name=".ui.activities.Intro">
         </activity>
+        <activity
+            android:name=".ui.activities.EraSelection"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"/>
+        <activity
+            android:name=".ui.activities.Main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activities.Store"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"/>
+        <activity
+            android:name=".ui.activities.Souvenirs"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"/>
     </application>
 
 </manifest>

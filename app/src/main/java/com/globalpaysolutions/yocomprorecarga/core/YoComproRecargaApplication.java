@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;
 import com.onesignal.OneSignal;
@@ -38,6 +39,12 @@ public class YoComproRecargaApplication extends Application
                 .setNotificationReceivedHandler(new OneSignalNotificationReceivedHandler())
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .init();
+
+        //Calligraphy
+        /*CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/baloo_regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());*/
     }
 
     @Override

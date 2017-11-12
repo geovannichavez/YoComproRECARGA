@@ -14,6 +14,7 @@ public class ExchangeReqBody
     private Double longitude;
     private Double latitude;
     private Integer chestType;
+    private Integer ageID;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getLocationID()
@@ -54,6 +55,16 @@ public class ExchangeReqBody
     public void setChestType(Integer chestType)
     {
         this.chestType = chestType;
+    }
+
+    public Integer getAgeID()
+    {
+        return ageID;
+    }
+
+    public void setAgeID(Integer ageID)
+    {
+        this.ageID = ageID;
     }
 
     public Map<String, Object> getAdditionalProperties()

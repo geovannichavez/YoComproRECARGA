@@ -10,7 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 public interface ICapturePrizeInteractor
 {
     void retrieveConsumerTracking();
-    void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pChestType);
+    void openCoinsChest(LatLng pLocation, String pFirebaseID, int pChestType, int pEraID);
     void saveUserTracking(Tracking pTracking);
     void atemptRedeemPrize();
 }

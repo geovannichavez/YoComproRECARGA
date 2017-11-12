@@ -51,6 +51,10 @@ public class StringsURL
 
     public static final String PRIZES_HISTORY = "prize/history";
 
+    public static final String GET_ERAS = "GetAges";
+
+    public static final String SOUVENIRS = "SouvenirsByConsumer";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

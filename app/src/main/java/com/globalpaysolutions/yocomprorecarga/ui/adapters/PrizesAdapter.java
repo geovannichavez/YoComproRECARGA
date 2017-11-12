@@ -54,13 +54,13 @@ public class PrizesAdapter extends ArrayAdapter<Prize>
         switch (currentItem.getLevel())
         {
             case 1:
-                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_sapphire_icon));
+                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_third));
                 break;
             case 2:
-                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_emerald_icon));
+                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_second));
                 break;
             case 3:
-                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_ruby_icon));
+                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_first));
                 break;
             default:
                 Log.i(TAG, "No icon provided for prize");

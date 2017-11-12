@@ -71,13 +71,14 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void exchangePrizeData(LatLng pLocation, String pFirebaseID, int pChestType)
+    public void openCoinsChest(LatLng pLocation, String pFirebaseID, int pChestType, int pEraID)
     {
         ExchangeReqBody requestBody = new ExchangeReqBody();
         requestBody.setLocationID(pFirebaseID);
         requestBody.setLatitude(pLocation.latitude);
         requestBody.setLongitude(pLocation.longitude);
         requestBody.setChestType(pChestType);
+        requestBody.setAgeID(pEraID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);
@@ -110,7 +111,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     @Override
     public void saveUserTracking(Tracking pTracking)
     {
-        mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(), pTracking.getTotalWinPrizes(), pTracking.getCurrentCoinsProgress());
+        mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(), pTracking.getTotalWinPrizes(), pTracking.getCurrentCoinsProgress(), pTracking.getTotalSouvenirs(), pTracking.getAgeID());
     }
 
     @Override

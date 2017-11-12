@@ -16,9 +16,22 @@
         <item name="actionModeBackground">@color/dark_recargo_green</item>
     </style>
 
+    <style name="AppThemeFullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/ApplicationGreenTheme</item>
+        <item name="colorPrimaryDark">@color/ApplicationGreenThemeDark</item>
+        <item name="colorAccent">@color/ApplicationGreenTheme</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <style name="AppThemeTrans" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -86,6 +99,7 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/LightGray</item>
     </style>
+
     <style name="VerticalGrayLine">
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -112,5 +126,6 @@
         <item name="android:textColor">@color/ActivityWhiteBackground</item>
         <item name="textAllCaps">true</item>
     </style>
+
 
 </resources>

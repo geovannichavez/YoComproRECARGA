@@ -20,5 +20,6 @@ public interface LeaderboardsView
     void hideLoadingMessage();
     void showGenericDialog(DialogViewModel dialogViewModel);
     void showGenericToast(String label);
+    void changeButtonsBar(String labelValue);
     void swithTextColor(TextView textView);
 }

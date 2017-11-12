@@ -47,6 +47,10 @@ public class UserData
     private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
     private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
     private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
+    private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
+    private static final String KEY_ERA_ID = "usr_age_id";
+    private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
+    private static final String KEY_ACHIEVEMENT_DESCRIPTION = "usr_achievement_description";
 
     //Prizes
     private static final String KEY_LAST_PRIZE_EXCHANGED_TITLE = "usr_last_prize_exchanged_title";
@@ -66,6 +70,12 @@ public class UserData
     private static final String KEY_FACEBOOK_FULLNAME = "usr_facebook_fullname";
     private static final String KEY_FACEBOOK_PROFILE_ID = "usr_facebook_profile_id";
     private static final String KEY_FACEBOOK_URL = "usr_facebook_url";
+
+    //Souvenir
+    private static final String KEY_SOUVENIR_TITLE = "usr_souvenir_title";
+    private static final String KEY_SOUVENIR_DESCRIPTION = "usr_souvenir_description";
+    private static final String KEY_SOUVENIR_IMG_URL = "usr_souvenir_img_url";
+    private static final String KEY_SOUVENIR_QUANTITY_OWNED = "usr_souvenir_quantity_owned";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -177,11 +187,13 @@ public class UserData
         mEditor.commit();
     }
 
-    public void SaveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress)
+    public void SaveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress, int pSouvenirs, int pEraID)
     {
         mEditor.putInt(KEY_TOTAL_WON_COINS, pCoins);
         mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
+        mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
+        mEditor.putInt(KEY_ERA_ID, pEraID);
         mEditor.commit();
     }
 
@@ -273,6 +285,28 @@ public class UserData
     public void saveHasReadIntro(boolean pRead)
     {
         mEditor.putBoolean(KEY_HAS_READ_INTRO, pRead);
+        mEditor.commit();
+    }
+
+    public void saveEraID(int eraID)
+    {
+        mEditor.putInt(KEY_ERA_ID, eraID);
+        mEditor.commit();
+    }
+
+    public void saveLastAchievement(String pAchievement, String pDescription)
+    {
+        mEditor.putString(KEY_ACHIEVEMENT_TITLE, pAchievement);
+        mEditor.putString(KEY_ACHIEVEMENT_DESCRIPTION, pDescription);
+        mEditor.commit();
+    }
+
+    public void saveSouvenirObtained(String pTitle, String pDescription, String pImageUrl, int pQuantityOwned )
+    {
+        mEditor.putString(KEY_SOUVENIR_TITLE, pTitle);
+        mEditor.putString(KEY_SOUVENIR_DESCRIPTION, pDescription);
+        mEditor.putString(KEY_SOUVENIR_IMG_URL, pImageUrl);
+        mEditor.putInt(KEY_SOUVENIR_QUANTITY_OWNED, pQuantityOwned);
         mEditor.commit();
     }
 
@@ -461,6 +495,23 @@ public class UserData
     {
         return mPreferences.getBoolean(KEY_HAS_READ_INTRO, false);
     }
+
+    public int getEraID()
+    {
+        return mPreferences.getInt(KEY_ERA_ID, 0);
+    }
+
+    public String getLastAchievementTitle()
+    {
+        return mPreferences.getString(KEY_ACHIEVEMENT_TITLE, "");
+    }
+
+    public String getLastAchievementDescription()
+    {
+        return mPreferences.getString(KEY_ACHIEVEMENT_DESCRIPTION, "");
+    }
+
+
 
 
     /*

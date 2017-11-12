@@ -90,4 +90,8 @@ public class Constants
     //Prizes
     public static final String SMS_NUMBER_PRIZE_EXCHANGE = "323";
 
+    //Chest Types
+    public static final int CHEST_COINS_TYPE = 1;
+    public static final int CHEST_SOUVENIR_TYPE = 2;
+
 }

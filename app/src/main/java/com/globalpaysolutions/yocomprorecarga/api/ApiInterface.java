@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
@@ -15,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
@@ -88,5 +90,13 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.PRIZES_HISTORY)
     Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_ERAS)
+    Call<AgesResponse> retrieveAges(@Header("authenticationKey") String pAuthKey);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.SOUVENIRS)
+    Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey);
 
 }

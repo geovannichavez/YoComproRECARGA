@@ -8,15 +8,15 @@
     <!--    Column 1: Weight 3-->
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="66dp"
+        android:layout_height="72dp"
         android:layout_weight="3"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/ivPrizeIcon"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:src="@drawable/ic_virtual_reality"/>
+            android:layout_width="38dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_prize_first"/>
     </RelativeLayout>
 
     <View
@@ -27,7 +27,7 @@
     <!--    Column 2: Weight 8-->
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="66dp"
+        android:layout_height="72dp"
         android:layout_weight="8"
         android:gravity="center">
 
@@ -38,14 +38,16 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvPrizeName"
+                android:text="Nevagcion Ilimitada 1 Sem."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:maxLines="2"
                 android:gravity="center_horizontal"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/pure_black"/>
             <TextView
+                android:text="Nevega ilimitado por 7 dias "
                 android:layout_gravity="center"
                 android:id="@+id/tvPin"
                 android:gravity="center_horizontal"
@@ -70,13 +72,14 @@
         android:paddingEnd="@dimen/margin_6dp"
         android:paddingRight="@dimen/margin_6dp"
         android:layout_width="0dp"
-        android:layout_height="66dp"
+        android:layout_height="72dp"
         android:layout_weight="4"
         android:gravity="center">
 
         <TextView
+            android:text="SMS al 323"
             android:id="@+id/tvExchange"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:maxLines="2"
             android:textStyle="bold"
             android:gravity="center_horizontal"

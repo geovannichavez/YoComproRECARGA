@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -66,7 +67,7 @@
                     android:orientation="horizontal"
                     android:weightSum="15">
 
-                    <!--    Column 1: Weight 3-->
+                    &lt;!&ndash;    Column 1: Weight 3&ndash;&gt;
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -77,7 +78,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"/>
 
-                    <!--    Column 2: Weight 8-->
+                    &lt;!&ndash;    Column 2: Weight 8&ndash;&gt;
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"/>
 
-                    <!--    Column 3: Weight 4-->
+                    &lt;!&ndash;    Column 3: Weight 4&ndash;&gt;
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -111,3 +112,70 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
+-->
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_era_selection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory"
+    tools:layout_editor_absoluteY="25dp">
+
+    <include layout="@layout/custom_timemachine_background" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_screen_narrow"/>
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_title_prizes"/>
+
+    <ListView
+        android:id="@+id/lvHistory"
+        android:layout_width="269dp"
+        android:layout_height="366dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_back"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

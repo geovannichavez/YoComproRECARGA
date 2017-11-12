@@ -231,7 +231,7 @@
     <string name="title_terms_and_conditions">Términos y Condiciones</string>
     <string name="toast_not_valid_phone">Número telefónico inválido</string>
     <string name="contentdescription_close_infograpgy">Cerrar dialogo</string>
-
+    <string name="label_title_era_selection">Viaje en el tiempo</string>
 
 
 </resources>

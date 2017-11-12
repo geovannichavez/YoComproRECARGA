@@ -99,7 +99,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
 
         mPresenter = new HomePresenterImpl(this, this, this);
-        mPresenter.checkUserDataCompleted();
+        //mPresenter.checkUserDataCompleted();
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
         mPresenter.intializeGeolocation();

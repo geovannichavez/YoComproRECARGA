@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.globalpaysolutions.yocomprorecarga"
@@ -91,6 +91,11 @@ dependencies {
     //CircleIndicator
     compile 'me.relex:circleindicator:1.2.2@aar'
 
+    //Coordinator Layout
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //Calligraphy
+    //compile 'uk.co.chrisjenx:calligraphy:2.3.0'
 }
 
 //Google Services

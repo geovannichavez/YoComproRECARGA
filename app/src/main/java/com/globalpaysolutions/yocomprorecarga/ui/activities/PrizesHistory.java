@@ -42,10 +42,10 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prizes_history);
-        toolbar = (Toolbar) findViewById(R.id.toolbarPrizesHistory);
+        /*toolbar = (Toolbar) findViewById(R.id.toolbarPrizesHistory);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         //Presenter
         mPresenter = new PrizesHistoryPresenterImpl(this, this);
@@ -68,7 +68,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     @Override
     public void initializeViews()
     {
-        mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
+       mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)

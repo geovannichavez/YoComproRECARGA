@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,14 +31,16 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     private static final String TAG = Leaderboards.class.getSimpleName();
 
     //Layouts and Views
-    Toolbar toolbar;
-    NonScrollableListView mLeaderboardListView;
+    //Toolbar toolbar;
+    //NonScrollableListView mLeaderboardListView;
+    ListView mLeaderboardListView;
     TextView tvToday;
     TextView tvWeek;
     TextView tvMonth;
     TextView tvGlobal;
-    TextView tvLastWinner;
+    //TextView tvLastWinner;
     ProgressDialog progressDialog;
+    ImageView imgButtonsBar;
 
     //Adapters
     LeadersAdapter mLeaderboardAdapter;
@@ -53,18 +56,19 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboards);
-        toolbar = (Toolbar) findViewById(R.id.toolbarLeaderboards);
+        /*toolbar = (Toolbar) findViewById(R.id.toolbarLeaderboards);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         //Layouts
-        mLeaderboardListView = (NonScrollableListView) findViewById(R.id.lvLeaderboard);
-        tvToday = (TextView) findViewById(R.id.tvToday);
-        tvWeek = (TextView) findViewById(R.id.tvWeek);
-        tvMonth = (TextView) findViewById(R.id.tvMonth);
-        tvGlobal = (TextView) findViewById(R.id.tvGlobal);
-        tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
+        mLeaderboardListView = (ListView) findViewById(R.id.lvLeaderboard);
+        tvToday = (TextView) findViewById(R.id.btnToday);
+        tvWeek = (TextView) findViewById(R.id.btnWeek);
+        tvMonth = (TextView) findViewById(R.id.btnMonth);
+        tvGlobal = (TextView) findViewById(R.id.btnGlobal);
+        imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
+        //tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
 
         //Adapters
         mLeaderboardAdapter = new LeadersAdapter(this, R.layout.custom_leaderboard_listview_item);
@@ -72,7 +76,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
 
         mPresenter = new LeaderboardsPresenterImpl(this, this);
         mPresenter.initialize();
-        mPresenter.getLeaderboards(Constants.TODAY, tvToday);
+        mPresenter.getLeaderboards(Constants.TODAY, null);
     }
 
     @Override
@@ -139,7 +143,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     @Override
     public void setLastWinner(String data)
     {
-        tvLastWinner.setText(data);
+        //tvLastWinner.setText(data);
     }
 
     @Override
@@ -181,12 +185,50 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     }
 
     @Override
+    public void changeButtonsBar(String labelValue)
+    {
+        try
+        {
+            int resourceImage = 0;
+
+            switch (labelValue)
+            {
+                case Constants.TODAY:
+                    resourceImage = R.drawable.btns_leaderboards_today;
+                    imgButtonsBar.setImageResource(resourceImage);
+                    break;
+                case Constants.WEEK:
+                    resourceImage = R.drawable.btns_leaderboards_week;
+                    imgButtonsBar.setImageResource(resourceImage);
+                    break;
+                case Constants.MONTH:
+                    resourceImage = R.drawable.btns_leaderboards_month;
+                    imgButtonsBar.setImageResource(resourceImage);
+                    break;
+                case Constants.OVER_ALL:
+                    resourceImage = R.drawable.btns_leaderboards_global;
+                    imgButtonsBar.setImageResource(resourceImage);
+                    break;
+                default:
+                    resourceImage = R.drawable.btns_leaderboards_today;
+                    imgButtonsBar.setImageResource(resourceImage);
+
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void swithTextColor(TextView textView)
     {
-        tvToday.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
+       /* tvToday.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
         tvWeek.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
         tvGlobal.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
-        tvMonth.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
+        tvMonth.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));*/
         textView.setTextColor(ContextCompat.getColor(this, R.color.dark_recargo_green));
     }
 

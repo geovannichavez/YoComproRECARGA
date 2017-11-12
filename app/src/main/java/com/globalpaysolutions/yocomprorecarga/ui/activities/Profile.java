@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
@@ -39,14 +40,10 @@ public class Profile extends AppCompatActivity implements ProfileView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        toolbar = (Toolbar) findViewById(R.id.toolbarProfile);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        tvName = (TextView) findViewById(R.id.tvName);
+        /*tvName = (TextView) findViewById(R.id.tvName);
         tvNickname = (TextView) findViewById(R.id.tvNickname);
-        ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);
+        ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);*/
 
         mPresenter = new ProfilePresenterImpl(this, this, this);
         mPresenter.loadInitialData();
@@ -55,7 +52,7 @@ public class Profile extends AppCompatActivity implements ProfileView
     @Override
     public void loadViewsState(String fullName, String nickname, String photoUrl)
     {
-        tvName.setText(fullName);
+        /*tvName.setText(fullName);
         tvNickname.setText(nickname);
         if(TextUtils.isEmpty(photoUrl))
         {
@@ -64,7 +61,19 @@ public class Profile extends AppCompatActivity implements ProfileView
         else
         {
             Picasso.with(this).load(photoUrl).into(ivProfilePicture);
+        }*/
+
+        try
+        {
+            View decorView = getWindow().getDecorView();
+            int ui = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(ui);
+
+            //Hide actionbar
+            ActionBar actionBar = getActionBar();
+            actionBar.hide();
         }
+        catch (Exception ex) {ex.printStackTrace();}
     }
 
     @Override
@@ -106,6 +115,12 @@ public class Profile extends AppCompatActivity implements ProfileView
     {
         Intent history = new Intent(this, PrizesHistory.class);
         startActivity(history);
+    }
+
+    public void navigateSouvenirs(View view)
+    {
+        Intent souvenirs = new Intent(this, Souvenirs.class);
+        startActivity(souvenirs);
     }
 
     public void viewTutorial(View view)

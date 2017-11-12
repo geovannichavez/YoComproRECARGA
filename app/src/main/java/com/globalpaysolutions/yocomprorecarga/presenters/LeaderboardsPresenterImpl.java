@@ -49,8 +49,9 @@ public class LeaderboardsPresenterImpl implements ILeaderboardsPresenter, Leader
     public void getLeaderboards(String interval, TextView textView)
     {
         mView.showLoadingMessage(mContext.getString(R.string.label_loading_please_wait));
-        mView.swithTextColor(textView);
+        //mView.swithTextColor(textView);
         mInteractor.retrieveLeaderboard(interval);
+        mView.changeButtonsBar(interval);
     }
 
     @Override

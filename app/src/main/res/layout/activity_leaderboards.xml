@@ -1,193 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_leaderboards"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_chests_recargo_theme"
-    android:orientation="vertical"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Leaderboards">
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Leaderboards"
+    tools:layout_editor_absoluteY="25dp">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+    <include layout="@layout/custom_timemachine_background"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarLeaderboards"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="4dp"
-            app:theme="@style/ToolbarTheme"/>
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_screen_narrow"/>
 
-        <TextView
-            android:textAllCaps="true"
-            android:layout_gravity="center"
-            android:text="@string/activity_title_leaderboards"
-            android:textStyle="bold"
-            android:textColor="@color/ActivityWhiteBackground"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_title_leaderboards"/>
 
-    </FrameLayout>
+    <ListView
+        android:id="@+id/lvLeaderboard"
+        android:layout_width="269dp"
+        android:layout_height="341dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgButtonsBar"/>
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_back"/>
+
+    <ImageView
+        android:id="@+id/imgButtonsBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/lvLeaderboard"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/lvLeaderboard"
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        app:srcCompat="@drawable/btns_leaderboards_today"/>
 
 
-    <ScrollView
+    <TextView
+        android:id="@+id/btnToday"
+        android:layout_width="50dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintStart_toStartOf="@+id/imgButtonsBar"
+        app:layout_constraintTop_toTopOf="@+id/imgButtonsBar"/>
+
+    <TextView
+        android:id="@+id/btnWeek"
+        android:layout_width="75dp"
+        android:layout_height="34dp"
+        app:layout_constraintStart_toEndOf="@+id/btnToday"
+        app:layout_constraintTop_toTopOf="@+id/imgButtonsBar"/>
+
+    <TextView
+        android:id="@+id/btnMonth"
+        android:layout_width="53dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgButtonsBar"
+        app:layout_constraintTop_toTopOf="@+id/imgButtonsBar"/>
+
+    <TextView
+        android:id="@+id/btnGlobal"
+        android:layout_width="67dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgButtonsBar"
+        app:layout_constraintTop_toTopOf="@+id/imgButtonsBar"/>
+
+
+</android.support.constraint.ConstraintLayout>
+    <!--
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_leaderboards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="@drawable/bg_chests_recargo_theme"
+        android:orientation="vertical"
+        tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Leaderboards">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/margin_16dp"
-            android:paddingEnd="@dimen/margin_8dp"
-            android:paddingLeft="@dimen/margin_8dp"
-            android:paddingRight="@dimen/margin_8dp"
-            android:paddingStart="@dimen/margin_8dp">
+            android:layout_height="?attr/actionBarSize">
 
-            <!--    CONTENEDOR DE INTERVALOS     -->
-            <LinearLayout
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarLeaderboards"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_8dp"
-                android:orientation="horizontal"
-                android:weightSum="8">
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="4dp"
+                app:theme="@style/ToolbarTheme"/>
 
-                <TextView
-                    android:id="@+id/tvToday"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_daily"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textStyle="bold"/>
+            <TextView
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:text="@string/activity_title_leaderboards"
+                android:textStyle="bold"
+                android:textColor="@color/ActivityWhiteBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/tvWeek"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_weekly"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textStyle="bold"/>
+        </FrameLayout>
 
-                <TextView
-                    android:id="@+id/tvMonth"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_monthly"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textStyle="bold"/>
 
-                <TextView
-                    android:id="@+id/tvGlobal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_global"
-                    android:textColor="@color/dark_recargo_green"
-                    android:textStyle="bold"/>
-
-            </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_16dp_rounded_corner_background"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/margin_16dp"
                 android:paddingEnd="@dimen/margin_8dp"
                 android:paddingLeft="@dimen/margin_8dp"
                 android:paddingRight="@dimen/margin_8dp"
-                android:paddingStart="@dimen/margin_8dp"
-                android:paddingTop="@dimen/margin_16dp">
+                android:paddingStart="@dimen/margin_8dp">
+
+                &lt;!&ndash;    CONTENEDOR DE INTERVALOS     &ndash;&gt;
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
+                        android:id="@+id/tvToday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_daily"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvWeek"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_weekly"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvMonth"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_monthly"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvGlobal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_global"
+                        android:textColor="@color/dark_recargo_green"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_8dp"
-                    android:orientation="horizontal"
-                    android:weightSum="15">
+                    android:background="@drawable/custom_16dp_rounded_corner_background"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/margin_16dp"
+                    android:paddingEnd="@dimen/margin_8dp"
+                    android:paddingLeft="@dimen/margin_8dp"
+                    android:paddingRight="@dimen/margin_8dp"
+                    android:paddingStart="@dimen/margin_8dp"
+                    android:paddingTop="@dimen/margin_16dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:gravity="center_horizontal"
-                        android:text="@string/label_ranking"
-                        android:textColor="@color/AppGreen"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
+                        android:layout_marginBottom="@dimen/margin_8dp"
+                        android:orientation="horizontal"
+                        android:weightSum="15">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:gravity="center_horizontal"
-                        android:text="@string/label_username"
-                        android:textColor="@color/AppGreen"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:gravity="center_horizontal"
+                            android:text="@string/label_ranking"
+                            android:textColor="@color/AppGreen"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6"
+                            android:gravity="center_horizontal"
+                            android:text="@string/label_username"
+                            android:textColor="@color/AppGreen"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
 
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:gravity="center_horizontal"
-                        android:text="@string/label_recarcoins"
-                        android:textColor="@color/AppGreen"
-                        android:textSize="12sp"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:gravity="center_horizontal"
+                            android:text="@string/label_recarcoins"
+                            android:textColor="@color/AppGreen"
+                            android:textSize="12sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+
+                    <com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView
+                        android:id="@+id/lvLeaderboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
                 </LinearLayout>
 
-
-                <com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView
-                    android:id="@+id/lvLeaderboard"
+                <LinearLayout
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:paddingStart="@dimen/margin_16dp"
+                    android:paddingLeft="@dimen/margin_16dp"
+                    android:paddingEnd="@dimen/margin_16dp"
+                    android:paddingRight="@dimen/margin_16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+
+                   <ImageView
+                       android:id="@+id/ivLastWinner"
+                       android:src="@drawable/ic_last_winner"
+                       android:layout_width="30dp"
+                       android:layout_height="30dp"/>
+
+                    <TextView
+                        android:id="@+id/tvLastWinner"
+                        android:textColor="@color/ActivityWhiteBackground"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/margin_8dp"
+                        android:layout_marginStart="@dimen/margin_8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="@dimen/margin_16dp"
-                android:paddingStart="@dimen/margin_16dp"
-                android:paddingLeft="@dimen/margin_16dp"
-                android:paddingEnd="@dimen/margin_16dp"
-                android:paddingRight="@dimen/margin_16dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-               <ImageView
-                   android:id="@+id/ivLastWinner"
-                   android:src="@drawable/ic_last_winner"
-                   android:layout_width="30dp"
-                   android:layout_height="30dp"/>
-
-                <TextView
-                    android:id="@+id/tvLastWinner"
-                    android:textColor="@color/ActivityWhiteBackground"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="@dimen/margin_8dp"
-                    android:layout_marginStart="@dimen/margin_8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
 
 
-</LinearLayout>
+    </LinearLayout>
+    -->

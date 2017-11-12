@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Main">
+
+
+<include layout="@layout/custom_timemachine_background" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="48dp"
+            android:paddingTop="48dp">
+
+            <ImageButton
+                android:id="@+id/btnPlay"
+                android:onClick="navigateAR"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:id="@+id/btnProfile"
+                android:onClick="navigateProfile"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:onClick="navigateEraSelection"
+                android:id="@+id/btnTravel"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_travel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/margin_22dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnTopupRequest"
+                android:onClick="navigateTopupRequest"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/margin_6dp"
+                android:layout_marginLeft="@dimen/margin_6dp"
+                android:layout_marginRight="@dimen/margin_6dp"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_topup_request"/>
+
+            <ImageButton
+                android:onClick="navigateStore"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/margin_6dp"
+                android:layout_marginLeft="@dimen/margin_6dp"
+                android:layout_marginRight="@dimen/margin_6dp"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_store"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/margin_6dp"
+                android:layout_marginLeft="@dimen/margin_6dp"
+                android:layout_marginRight="@dimen/margin_6dp"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_prize"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/margin_6dp"
+                android:layout_marginLeft="@dimen/margin_6dp"
+                android:layout_marginRight="@dimen/margin_6dp"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_settings"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

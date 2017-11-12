@@ -338,75 +338,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         int coinsButton;
 
-        switch (pCoins)
-        {
-            case 0:
-                coinsButton = R.drawable.img_coin_counter_zero;
-                break;
-            case 1:
-                coinsButton = R.drawable.img_coin_counter_one;
-                break;
-            case 2:
-                coinsButton = R.drawable.img_coin_counter_two;
-                break;
-            case 3:
-                coinsButton = R.drawable.img_coin_counter_three;
-                break;
-            case 4:
-                coinsButton = R.drawable.img_coin_counter_four;
-                break;
-            case 5:
-                coinsButton = R.drawable.img_coin_counter_five;
-                break;
-            case 6:
-                coinsButton = R.drawable.img_coin_counter_six;
-                break;
-            case 7:
-                coinsButton = R.drawable.img_coin_counter_seven;
-                break;
-            case 8:
-                coinsButton = R.drawable.img_coin_counter_eight;
-                break;
-            case 9:
-                coinsButton = R.drawable.img_coin_counter_nine;
-                break;
-            case 10:
-                coinsButton = R.drawable.img_coin_counter_ten;
-                break;
-            case 11:
-                coinsButton = R.drawable.img_coin_counter_eleven;
-                break;
-            case 12:
-                coinsButton = R.drawable.img_coin_counter_twelve;
-                break;
-            case 13:
-                coinsButton = R.drawable.img_coin_counter_thirteen;
-                break;
-            case 14:
-                coinsButton = R.drawable.img_coin_counter_fourteen;
-                break;
-            case 15:
-                coinsButton = R.drawable.img_coin_counter_fifteen;
-                break;
-            case 16:
-                coinsButton = R.drawable.img_coin_counter_sixteen;
-                break;
-            case 17:
-                coinsButton = R.drawable.img_coin_counter_seventeen;
-                break;
-            case 18:
-                coinsButton = R.drawable.img_coin_counter_eighteen;
-                break;
-            case 19:
-                coinsButton = R.drawable.img_coin_counter_nineteen;
-                break;
-            case 20:
-                coinsButton = R.drawable.img_coin_counter_twenty;
-                break;
-            default:
-                coinsButton = R.drawable.img_coin_counter_zero;
-                break;
-        }
+        coinsButton = R.drawable.img_coin_counter_twenty;
 
         btnCoinsCounter.setImageResource(coinsButton);
     }

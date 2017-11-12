@@ -170,13 +170,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 break;
         }
 
-        mInteractor.exchangePrizeData(location, firebaseID, chestValue);
+        mInteractor.openCoinsChest(location, firebaseID, chestValue, mUserData.getEraID());
     }
 
     @Override
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
-        mInteractor.exchangePrizeData(pLocation, pFirebaseID, pChestType);
+        mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
 
     @Override
@@ -442,23 +442,39 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
 
-        if(pExchangeResponse.getExchangeCoins() != null && pExchangeResponse.getExchangeCoins() > 0)
+        if(pExchangeResponse.getType() == Constants.CHEST_COINS_TYPE)
         {
-            mInteractor.saveUserTracking(pExchangeResponse.getTracking());
-            mUserData.saveLastChestValue(pExchangeResponse.getExchangeCoins());
-            mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()), String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()));
-            mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
+            if(pExchangeResponse.getExchangeCoins() != null && pExchangeResponse.getExchangeCoins() > 0)
+            {
+                mInteractor.saveUserTracking(pExchangeResponse.getTracking());
+                mUserData.saveLastChestValue(pExchangeResponse.getExchangeCoins());
+                mUserData.saveLastAchievement(pExchangeResponse.getAchievement(), null);
+                mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()), String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()));
+                mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
 
-            dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
-            dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
-            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
+                dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            }
+            else
+            {
+                dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
+                dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            }
         }
         else
         {
-            dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
-            dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
-            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mUserData.saveSouvenirObtained( pExchangeResponse.getTitle(),
+                                            pExchangeResponse.getDescription(),
+                                            pExchangeResponse.getImgUrl(),
+                                            pExchangeResponse.getValue());
+
+
+
         }
+
+
 
         //Removes Image and updates UI
         if(!mUserData.Is3DCompatibleDevice())

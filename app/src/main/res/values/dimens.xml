@@ -31,6 +31,9 @@
     <dimen name="margin_30dp">30dp</dimen>
     <dimen name="margin_32dp">32dp</dimen>
     <dimen name="margin_34dp">34dp</dimen>
+    <dimen name="margin_36dp">36dp</dimen>
+    <dimen name="margin_38dp">38dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
 
     <!--Margenes de pantalla personalizados-->
     <dimen name="ActivityHorizontalCustomMargin">20dp</dimen>
