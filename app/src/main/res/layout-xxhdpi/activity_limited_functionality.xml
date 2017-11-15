@@ -16,14 +16,15 @@
 
     <ImageView
         android:id="@+id/imageView28"
-        android:layout_width="363dp"
+        android:layout_width="333dp"
         android:layout_height="437dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/screen_board_texture_1"
-        tools:layout_editor_absoluteY="132dp"/>
+        tools:layout_editor_absoluteY="97dp"/>
 
     <ImageView
         android:id="@+id/imageView23"
@@ -49,29 +50,29 @@
         android:textColor="@color/orange_textView_color"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="181dp"/>
+        tools:layout_editor_absoluteX="126dp"
+        tools:layout_editor_absoluteY="163dp"/>
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:gravity="center"
         android:text="Tu dispositivo no es compatible con la \n función de Realidad Aumentada (AR)"
         android:textColor="@color/gray_textView_color"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/textView18"
-        tools:layout_editor_absoluteX="82dp"/>
+        tools:layout_editor_absoluteX="59dp"/>
 
     <ImageView
         android:id="@+id/imageView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/img_2d_chest"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="280dp"/>
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="246dp"/>
 
     <TextView
         android:id="@+id/textView20"
@@ -93,19 +94,21 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView27"
         app:layout_constraintVertical_bias="0.132"/>
 
-    <ImageView
-        android:id="@+id/imageView30"
+    <ImageButton
+        android:id="@+id/btnWhatever"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="@+id/include4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView28"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/btn_button_6"/>
 
     <TextView
@@ -122,10 +125,10 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
-        app:layout_constraintEnd_toEndOf="@+id/imageView30"
-        app:layout_constraintStart_toStartOf="@+id/imageView30"
-        app:layout_constraintTop_toTopOf="@+id/imageView30"/>
+        app:layout_constraintBottom_toBottomOf="@+id/btnWhatever"
+        app:layout_constraintEnd_toEndOf="@+id/btnWhatever"
+        app:layout_constraintStart_toStartOf="@+id/btnWhatever"
+        app:layout_constraintTop_toTopOf="@+id/btnWhatever"/>
 
 </android.support.constraint.ConstraintLayout>
 <!--

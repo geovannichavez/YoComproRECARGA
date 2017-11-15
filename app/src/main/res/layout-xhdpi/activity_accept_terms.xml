@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"/>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnAcceptTerms"
         android:layout_width="208dp"
         android:layout_height="74dp"
         android:layout_marginBottom="8dp"
@@ -76,9 +76,9 @@
         android:text="CONTINUAR"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"/>
+        app:layout_constraintEnd_toEndOf="@+id/btnAcceptTerms"
+        app:layout_constraintStart_toStartOf="@+id/btnAcceptTerms"
+        app:layout_constraintTop_toTopOf="@+id/btnAcceptTerms"/>
 
 </android.support.constraint.ConstraintLayout>
 
