@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,8 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -91,7 +95,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
-            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
     }
 
@@ -105,7 +108,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         if (!m3Dcompatible)
         {
-            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
         }
@@ -129,15 +131,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mFirebaseInteractor.goldPointsUpdateCriteria(location, radius);
         this.mFirebaseInteractor.silverPointsUpdateCriteria(location, radius);
         this.mFirebaseInteractor.bronzePointsUpdateCriteria(location, radius);
-    }
-
-    public void _genericPOIAction(String pDisplayText)
-    {
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(String.format("Punto de %1$s", pDisplayText));
-        dialog.setLine1(String.format("Ha tocado el Punto de %1$s", pDisplayText));
-        dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
-        mView.showGenericDialog(dialog);
     }
 
     @Override
@@ -197,7 +190,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.title_not_enough_coins));
             dialog.setLine1(mContext.getString(R.string.label_not_enough_coins));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showGenericDialog(dialog);
+            mView.showImageDialog(dialog, R.drawable.ic_alert);
         }
         else
         {
@@ -216,7 +209,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void handleCoinExchangeKeyUp()
     {
         mView.showToast(mContext.getString(R.string.toast_keep_pressed_three_seconds));
-        //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         mView.blinkRecarcoin();
         mView.removeRunnableCallback();
     }
@@ -272,7 +264,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onGoldKeyExited(pKey);
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
-            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
@@ -318,7 +310,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.onSilverKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
-            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
         }
@@ -347,7 +339,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onBronzeKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
-            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
         }
     }
 
@@ -361,7 +352,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.onBronzeKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
-            //mView.makeVibrate(Constants.OUT_RADIUS_VIBRATION_TIME_MILLISECONDS, Constants.OUT_RADIUS_VIBRATION_SLEEP_MILLISECONDS);
+
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
@@ -414,7 +405,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.hideLoadingDialog();
         mInteractor.saveUserTracking(pTracking);
-        mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()));
+        mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()), String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
     }
 
@@ -424,8 +415,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.hideLoadingDialog();
         int coins = mUserData.GetConsumerCoins();
         int prizes = mUserData.GetConsumerPrizes();
+        int souvenirs = mUserData.getSavedSouvenirsCount();
         int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
-        mView.updateIndicators(String.valueOf(prizes), String.valueOf(coins));
+        mView.updateIndicators(String.valueOf(prizes), String.valueOf(coins), String.valueOf(souvenirs));
         mView.updatePrizeButton(coinsProgress);
 
         DialogViewModel dialog = new DialogViewModel();
@@ -437,7 +429,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onExchangeChestSuccess(ExchangeResponse pExchangeResponse)
+    public void onOpenChestSuccess(ExchangeResponse pExchangeResponse)
     {
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
@@ -448,19 +440,23 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             {
                 mInteractor.saveUserTracking(pExchangeResponse.getTracking());
                 mUserData.saveLastChestValue(pExchangeResponse.getExchangeCoins());
-                mUserData.saveLastAchievement(pExchangeResponse.getAchievement(), null);
-                mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()), String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()));
+                mUserData.saveLastAchievement(pExchangeResponse.getAchievement());
+                mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()),
+                        String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()),
+                        String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs()));
                 mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
 
                 dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
                 dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
                 dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple);
             }
             else
             {
                 dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
                 dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
                 dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
             }
         }
         else
@@ -469,12 +465,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                                             pExchangeResponse.getDescription(),
                                             pExchangeResponse.getImgUrl(),
                                             pExchangeResponse.getValue());
-
-
-
+            mView.showSouvenirWonDialog(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl());
         }
-
-
 
         //Removes Image and updates UI
         if(!mUserData.Is3DCompatibleDevice())
@@ -482,15 +474,19 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
         }
-
-        mView.showGenericDialog(dialog);
     }
 
     @Override
-    public void onExchangeError(int pCodeStatus, Throwable pThrowable)
+    public void onOpenChestError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
         processErrorMessage(pCodeStatus, pThrowable);
+
+        if(!mUserData.Is3DCompatibleDevice())
+        {
+            this.mView.obtainUserProgress();
+            mView.switchRecarcoinVisible(false);
+        }
     }
 
     @Override
@@ -504,8 +500,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             //Saves tracking and updates UI
             mInteractor.saveUserTracking(pResponse.getTracking());
-            mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()), String.valueOf(pResponse.getTracking().getTotalWinCoins()));
+            mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
+                    String.valueOf(pResponse.getTracking().getTotalWinCoins()),
+                    String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
             mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
+
+            if(pResponse.getAchievement() != null)
+            {
+                mUserData.saveLastAchievement(pResponse.getAchievement());
+            }
 
             //Saves last saved prize
             mUserData.saveLastPrizeTitle(pResponse.getTitle());
@@ -513,6 +516,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mUserData.saveLastPrizeCode(pResponse.getCode());
             mUserData.saveLastPrizeDial(pResponse.getDial());
             mUserData.saveLastPrizeLevel(pResponse.getPrizeLevel());
+            mUserData.saveLastPrizeLogoUrl(pResponse.getLogoUrl());
+            mUserData.saveLastPrizeExchangedColor(pResponse.getHexColor());
 
             //Shows data on UI
             dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
@@ -529,7 +534,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
             dialog.setLine1(String.format(mContext.getString(R.string.redeem_prize_interval), mUserData.getAwaitTimePending()));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showGenericDialog(dialog);
+            mView.showImageDialog(dialog, R.drawable.ic_alert);
         }
 
 
@@ -538,8 +543,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable)
     {
+        mView.blinkRecarcoin();
         processErrorMessage(pCodeStatus, pThrowable);
     }
+
 
 
     /*
@@ -612,6 +619,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             errorResponse.setLine1(Linea1);
             errorResponse.setAcceptButton(Button);
             this.mView.showGenericDialog(errorResponse);
+
         }
         catch (Exception ex)
         {

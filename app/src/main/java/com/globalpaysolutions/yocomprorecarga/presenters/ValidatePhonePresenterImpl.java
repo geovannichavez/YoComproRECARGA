@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteractor;
@@ -166,6 +167,12 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
                 String Titulo = context.getString(R.string.error_title_something_went_wrong);
                 String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
                 String Button = context.getString(R.string.button_accept);
+
+                /*if(pCodeStatus == 500 && !TextUtils.equals(pSecondsRemaining, ""))
+                {
+                    Titulo = context.getString(R.string.error_title_sms_await_title);
+                    Linea1 = pSecondsRemaining;
+                }*/
 
                 errorResponse.setTitle(Titulo);
                 errorResponse.setLine1(Linea1);

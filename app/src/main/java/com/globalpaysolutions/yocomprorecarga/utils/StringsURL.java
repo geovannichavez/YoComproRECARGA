@@ -55,6 +55,8 @@ public class StringsURL
 
     public static final String SOUVENIRS = "SouvenirsByConsumer";
 
+    public static final String STORE_ITEMS = "StoreItems";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

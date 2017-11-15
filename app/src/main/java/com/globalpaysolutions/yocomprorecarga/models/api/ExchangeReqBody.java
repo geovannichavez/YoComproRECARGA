@@ -1,5 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.models.api;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,70 +13,59 @@ import java.util.Map;
 public class ExchangeReqBody
 {
 
+    @SerializedName("LocationID")
+    @Expose
     private String locationID;
+    @SerializedName("Longitude")
+    @Expose
     private Double longitude;
+    @SerializedName("Latitude")
+    @Expose
     private Double latitude;
+    @SerializedName("ChestType")
+    @Expose
     private Integer chestType;
+    @SerializedName("AgeID")
+    @Expose
     private Integer ageID;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String getLocationID()
-    {
+    public String getLocationID() {
         return locationID;
     }
 
-    public void setLocationID(String locationID)
-    {
+    public void setLocationID(String locationID) {
         this.locationID = locationID;
     }
 
-    public Double getLongitude()
-    {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Double longitude)
-    {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public Double getLatitude()
-    {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Double latitude)
-    {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getChestType()
-    {
+    public Integer getChestType() {
         return chestType;
     }
 
-    public void setChestType(Integer chestType)
-    {
+    public void setChestType(Integer chestType) {
         this.chestType = chestType;
     }
 
-    public Integer getAgeID()
-    {
+    public Integer getAgeID() {
         return ageID;
     }
 
-    public void setAgeID(Integer ageID)
-    {
+    public void setAgeID(Integer ageID) {
         this.ageID = ageID;
-    }
-
-    public Map<String, Object> getAdditionalProperties()
-    {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value)
-    {
-        this.additionalProperties.put(name, value);
     }
 }
