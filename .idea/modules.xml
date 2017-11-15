@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RecarGO.iml" filepath="$PROJECT_DIR$/RecarGO.iml" />
+      <module fileurl="file://C:\JOSUE\YoComproRECARGA\YoComproRECARGA\RecarGO.iml" filepath="C:\JOSUE\YoComproRECARGA\YoComproRECARGA\RecarGO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YoComproRECARGA.iml" filepath="$PROJECT_DIR$/YoComproRECARGA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
