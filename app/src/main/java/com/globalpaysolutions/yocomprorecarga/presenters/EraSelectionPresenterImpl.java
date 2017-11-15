@@ -48,7 +48,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void switchEra(AgesListModel ageID)
     {
-        if(ageID.getStatus() > 0)
+        if (ageID.getStatus() > 0)
         {
             mInteractor.eraSelection(ageID.getAgeID(), this);
         }
@@ -88,8 +88,6 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void onEraSelectionError(int pCodeStatus, Throwable pThrowable)
     {
-        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                mContext.getString(R.string.error_content_something_went_wrong_try_again),
-                R.drawable.ic_alert);
+        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
     }
 }
