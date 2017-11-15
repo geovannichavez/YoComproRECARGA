@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IStoreInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.squareup.picasso.Picasso;
@@ -60,6 +62,40 @@ public class StoreInteractor implements IStoreInteractor
             }
         });
 
+    }
+
+    @Override
+    public void purchaseStoreItem(final StoreListener listener, int itemID)
+    {
+        PurchaseStoreReqBody request = new PurchaseStoreReqBody();
+        request.setStoreId(itemID);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<PurchaseItemResponse> call = apiService.purchaseStoreItem(UserData.getInstance(mContext).getUserAuthenticationKey(), request);
+
+        call.enqueue(new Callback<PurchaseItemResponse>()
+        {
+            @Override
+            public void onResponse(Call<PurchaseItemResponse> call, Response<PurchaseItemResponse> response)
+            {
+                if (response.isSuccessful())
+                {
+                    PurchaseItemResponse storeItems = response.body();
+                    listener.onPurchaseSuccess(storeItems);
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    listener.onPurchaseError(codeResponse, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PurchaseItemResponse> call, Throwable t)
+            {
+                listener.onPurchaseError(0, null);
+            }
+        });
     }
 
     @Override

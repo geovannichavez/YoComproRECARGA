@@ -3,10 +3,13 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasListener;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IEraSelectionPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
 import java.util.List;
@@ -43,6 +46,20 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
+    public void switchEra(AgesListModel ageID)
+    {
+        if(ageID.getStatus() > 0)
+        {
+            mInteractor.eraSelection(ageID.getAgeID(), this);
+        }
+        else
+        {
+            mView.createLockedEraDialog();
+        }
+
+    }
+
+    @Override
     public void onRetrieveSuccess(List<AgesListModel> eras)
     {
         mView.renderEras(eras);
@@ -52,5 +69,27 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
     {
 
+    }
+
+    @Override
+    public void onEraSelectionSuccess(EraSelectionResponse eraSelection)
+    {
+        try
+        {
+            UserData.getInstance(mContext).saveEraSelected(eraSelection.getAgeID(), eraSelection.getName(), eraSelection.getIconImage());
+            mView.navigateMap();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable)
+    {
+        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                mContext.getString(R.string.error_content_something_went_wrong_try_again),
+                R.drawable.ic_alert);
     }
 }

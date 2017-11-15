@@ -236,5 +236,11 @@
 
     <string name="label_storeitem_price">%1$s RecarCoin</string>
     <string name="label_sell">VENDER</string>
+    <string name="label_buy">COMPRAR</string>
+    <string name="label_store">TIENDA</string>
+    <string name="label_quantity_recarcoins">%1$s RecarCoins</string>
+    <string name="lbl_store_item_description">En los barriles de tienda encontrarás souvenirs que son elementos que debes seleccionar poder ganarte los premios mayores.</string>
+    <string name="label_locked_era">¡ERA BLOQUEADA!</string>
+    <string name="label_locked_era_content">Continúa recolectando más souvenirs o monedas, muy pronto podrás realizar otro viaje y descubrir una nueva era.</string>
 
 </resources>

@@ -5,7 +5,10 @@ import android.content.Context;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IErasInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
@@ -27,6 +30,40 @@ public class ErasInteractor implements IErasInteractor
     {
         this.mContext = context;
         this.mUserData = UserData.getInstance(mContext);
+    }
+
+    @Override
+    public void eraSelection(int eraID, final ErasListener listener)
+    {
+        EraSelectionReq request = new EraSelectionReq();
+        request.setAgeID(eraID);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(), request);
+
+        call.enqueue(new Callback<EraSelectionResponse>()
+        {
+            @Override
+            public void onResponse(Call<EraSelectionResponse> call, Response<EraSelectionResponse> response)
+            {
+                if (response.isSuccessful())
+                {
+                    EraSelectionResponse eraSelection = response.body();
+                    listener.onEraSelectionSuccess(eraSelection);
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    listener.onEraSelectionError(codeResponse, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EraSelectionResponse> call, Throwable t)
+            {
+                listener.onEraSelectionError(0, t);
+            }
+        });
     }
 
     @Override

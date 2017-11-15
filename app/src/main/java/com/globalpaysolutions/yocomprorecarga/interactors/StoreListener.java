@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.graphics.Bitmap;
 
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface StoreListener
     void onError(int codeStatus, Throwable throwable);
     void onImageSuccess(Bitmap bitmap, int itemID);
     void onImageError();
+    void onPurchaseSuccess(PurchaseItemResponse response);
+    void onPurchaseError(int codeStatus, Throwable throwable);
 }

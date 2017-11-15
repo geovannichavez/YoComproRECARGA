@@ -1,11 +1,20 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -61,8 +70,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 AgesListModel currentItem = ((AgesListModel) parent.getItemAtPosition(position));
-                //TODO: Quitar toast
-                Toast.makeText(EraSelection.this, String.format("Clickeaste una era: %1$s", currentItem.getName()), Toast.LENGTH_LONG).show();
+                mPresenter.switchEra(currentItem);
             }
         });
 
@@ -74,6 +82,84 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
             {
                 mErasAdapter.add(item);
             }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigateMap()
+    {
+        Intent pointsMap = new Intent(this, PointsMap.class);
+        startActivity(pointsMap);
+    }
+
+    @Override
+    public void createImageDialog(String title, String description, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(description);
+            imgSouvenir.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createLockedEraDialog()
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_locked_era, null);
+
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
         }
         catch (Exception ex)
         {

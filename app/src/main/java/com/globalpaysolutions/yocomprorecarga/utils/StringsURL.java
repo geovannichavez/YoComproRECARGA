@@ -77,5 +77,7 @@ public class StringsURL
 
     public static final String ARCH_BRONZE = ARCHITECT_SDK + "Bronze";
 
+    public static final String PURCHASE = "Purchase";
+    public static final String ERA_SELECTION = "SelectAge";
 }
 

@@ -7,6 +7,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IStorePresenter
 {
     void retrieveStoreItems();
-    void purchaseitem(int itemID);
+    void purchaseitem(int itemID, double price);
     void navigateNext();
+    void initialValues();
 }

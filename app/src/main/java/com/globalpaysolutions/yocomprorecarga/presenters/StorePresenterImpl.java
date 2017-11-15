@@ -4,10 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreListener;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IStorePresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 
 import java.util.HashMap;
@@ -40,14 +43,31 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     }
 
     @Override
-    public void purchaseitem(int itemID)
+    public void purchaseitem(int itemID, double price)
     {
+        if(price < UserData.getInstance(mContext).getConsumerCoins())
+        {
+            mInteractor.purchaseStoreItem(this, itemID);
+        }
+        else
+        {
+            mView.createImageDialog(mContext.getString(R.string.title_not_enough_coins),
+                    mContext.getString(R.string.title_not_enough_coins),
+                    R.drawable.ic_alert);
+        }
 
     }
 
     @Override
     public void navigateNext()
     {
+
+    }
+
+    @Override
+    public void initialValues()
+    {
+        mView.setInitialValues(String.valueOf(UserData.getInstance(mContext).getConsumerCoins()));
 
     }
 
@@ -87,5 +107,30 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     public void onImageError()
     {
         //Show toast or something
+    }
+
+    @Override
+    public void onPurchaseSuccess(PurchaseItemResponse response)
+    {
+       try
+       {
+           UserData.getInstance(mContext).saveSouvenirObtained( response.getTitle(),
+                   response.getDescription(),
+                   response.getImgUrl(),
+                   response.getValue());
+           mView.showSouvenirWonDialog(response.getTitle(), response.getDescription(), response.getImgUrl());
+       }
+       catch (Exception ex)
+       {
+           ex.printStackTrace();
+       }
+    }
+
+    @Override
+    public void onPurchaseError(int codeStatus, Throwable throwable)
+    {
+        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                mContext.getString(R.string.error_content_progress_something_went_wrong_try_again),
+                R.drawable.ic_alert);
     }
 }
