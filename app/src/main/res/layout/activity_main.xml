@@ -26,7 +26,7 @@
 
             <ImageButton
                 android:id="@+id/btnPlay"
-                android:onClick="navigateMap"
+                android:onClick="navigateAR"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_play"
                 android:layout_width="wrap_content"
