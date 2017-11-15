@@ -17,6 +17,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -27,8 +28,8 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 {
     private static final String TAG = AcceptTerms.class.getSimpleName();
 
-    Button btnAccept;
-    TextView tvTermsAndConditions;
+    ImageButton btnAccept;
+    //TextView tvTermsAndConditions;
     AcceptTermsPresenterImpl presenter;
 
     @Override
@@ -41,17 +42,17 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         presenter.checkDeviceComponents();
         presenter.setFirstTimeSettings();
 
-        btnAccept = (Button) findViewById(R.id.btnAcceptTerms);
-        tvTermsAndConditions = (TextView) findViewById(R.id.tvTermsAndConditions);
+        btnAccept = (ImageButton) findViewById(R.id.btnAcceptTerms);
+        //tvTermsAndConditions = (TextView) findViewById(R.id.tvTermsAndConditions);
 
-        tvTermsAndConditions.setOnClickListener(new View.OnClickListener()
+        /*tvTermsAndConditions.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 presenter.viewTerms();
             }
-        });
+        });*/
 
     }
 

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_capture_price_ar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.wikitude.architect.ArchitectView
+        android:id="@+id/architectView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.CapturePrizeAR">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="111dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_recarcoins_counter"/>
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="111dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView19"
+            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_prizes_counter"/>
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="111dp"
+            android:layout_height="39dp"
+            app:srcCompat="@drawable/ic_souvenir_counter_map"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="16dp"/>
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/btn_back_ra"/>
+
+        <ImageButton
+            android:id="@+id/imgCoinMeter"
+            android:layout_width="165dp"
+            android:layout_height="98dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="redeemPrize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_recarcoin_meter_zero"/>
+
+        <ImageView
+            android:id="@+id/btnNavigateTimeMachine"
+            android:layout_width="65dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="navigateTimeMachine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_timemachine_map"/>
+
+        <ImageView
+            android:id="@+id/ivPrize2D"
+            android:layout_width="234dp"
+            android:layout_height="235dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/imgCoinMeter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView11"
+            app:layout_constraintVertical_bias="0.822"
+            app:srcCompat="@drawable/img_bronze_closed_chest"/>
+
+        <TextView
+            android:id="@+id/tvCoinsEarned"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="900,000"
+            android:textColor="@color/ActivityWhiteBackground"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintStart_toStartOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            app:layout_constraintVertical_bias="0.75"/>
+
+        <TextView
+            android:id="@+id/tvPrizesEarned"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="5003"
+            android:textColor="@color/ActivityWhiteBackground"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="@+id/imageView11"
+            app:layout_constraintTop_toTopOf="@+id/imageView11"/>
+
+        <TextView
+            android:id="@+id/tvSouvenirCounter"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="10"
+            android:textColor="@color/ActivityWhiteBackground"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView19"
+            app:layout_constraintStart_toStartOf="@+id/imageView19"
+            app:layout_constraintTop_toTopOf="@+id/imageView19"/>
+
+        <TextView
+            android:id="@+id/tvCoinsCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="20"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/imgCoinMeter"
+            app:layout_constraintStart_toStartOf="@+id/imgCoinMeter"
+            app:layout_constraintTop_toTopOf="@+id/imgCoinMeter"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+</FrameLayout>
+
+    <!--
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_capture_price_ar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.CapturePrizeAR">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            &lt;!&ndash; ARCHITECT VIEW WIKITUDE &ndash;&gt;
+            <com.wikitude.architect.ArchitectView
+                  android:id="@+id/architectView"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
+
+
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                &lt;!&ndash;    OBJETO 2D   &ndash;&gt;
+                <ImageButton
+                    android:id="@+id/ivPrize2D"
+                    android:layout_width="143dp"
+                    android:layout_height="165dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/contentdescription_2d_prize_image"
+                    android:scaleType="fitXY"/>
+            </FrameLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="@dimen/margin_16dp">
+
+
+                &lt;!&ndash; *************
+                INDICADORES
+                ****************** &ndash;&gt;
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:orientation="vertical">
+
+                    &lt;!&ndash; INDICADOR &ndash;&gt;
+                    <FrameLayout
+                        android:id="@+id/framePrizes"
+                        android:layout_width="115dp"
+                        android:layout_height="58dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+                        <ImageView
+                            android:layout_width="115dp"
+                            android:layout_height="58dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/contentdescription_indicator"
+                            android:src="@drawable/img_indicator_prize"/>
+
+                        <TextView
+                            android:id="@+id/tvPrizesEarned"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/margin_20dp"
+                            android:layout_marginStart="@dimen/margin_20dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:gravity="center"
+                            android:shadowColor="@color/GeneralTextColor"
+                            android:textColor="@color/ActivityWhiteBackground"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                    </FrameLayout>
+
+                    &lt;!&ndash; INDICADOR &ndash;&gt;
+                    <FrameLayout
+                        android:id="@+id/frameCoins"
+                        android:layout_width="115dp"
+                        android:layout_height="58dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true">
+
+                        <ImageView
+                            android:layout_width="115dp"
+                            android:layout_height="58dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/contentdescription_indicator"
+                            android:src="@drawable/img_indicator_saved"/>
+
+                        <TextView
+                            android:id="@+id/tvCoinsEarned"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/margin_14dp"
+                            android:layout_marginStart="@dimen/margin_14dp"
+                            android:layout_marginTop="@dimen/margin_8dp"
+                            android:gravity="center"
+                            android:shadowColor="@color/GeneralTextColor"
+                            android:textColor="@color/ActivityWhiteBackground"
+                            android:textSize="16sp"
+                            android:textStyle="bold"/>
+
+                    </FrameLayout>
+                </LinearLayout>
+
+
+                &lt;!&ndash; BARRA &ndash;&gt;
+                <RelativeLayout
+                    android:id="@+id/relBarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <ImageButton
+                        android:id="@+id/btnCoinCounter"
+                        android:layout_width="135dp"
+                        android:layout_height="111dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="@dimen/margin_16dp"
+                        android:layout_marginEnd="@dimen/margin_8dp"
+                        android:layout_marginRight="@dimen/margin_8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/contentdescription_coin_counter"
+                        android:onClick="redeemPrize"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_coin_counter_twenty"/>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+    -->

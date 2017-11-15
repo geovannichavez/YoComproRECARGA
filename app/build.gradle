@@ -32,6 +32,12 @@ repositories {
     }
     mavenCentral()
 
+    google()
+
+    maven {
+        url "https://maven.google.com"
+    }
+
 }
 
 dependencies {
