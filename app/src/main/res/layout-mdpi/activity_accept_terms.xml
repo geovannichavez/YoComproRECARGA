@@ -12,7 +12,6 @@
     <include
         android:id="@+id/include4"
         layout="@layout/custom_white_timemachine_background"
-        android:layout_width="381dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
         android:gravity="center"
         android:text="Hola Aventurer@, me emociona que \n te quieras unir a este viaje. Antes de \n conocernos mejor, debes  estar de acuerdo \n con algunos términos y condiciones."
         android:textColor="@color/gray_textView_color"
@@ -46,7 +46,7 @@
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="234dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView"/>
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -71,13 +71,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:text="CONTINUAR"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageButton2"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        tools:layout_editor_absoluteY="351dp"/>
+        app:layout_constraintTop_toTopOf="@+id/imageButton2"/>
 
 </android.support.constraint.ConstraintLayout>
 

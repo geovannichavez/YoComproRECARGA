@@ -9,8 +9,6 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms">
 
-<<<<<<< HEAD
-=======
     <include
         android:id="@+id/include4"
         layout="@layout/custom_white_timemachine_background"
@@ -81,7 +79,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageButton2"
         app:layout_constraintStart_toStartOf="@+id/imageButton2"
         app:layout_constraintTop_toTopOf="@+id/imageButton2"/>
->>>>>>> d9f9cc81a2a7140abed1ac71555fcf446f453cac
 
 </android.support.constraint.ConstraintLayout>
 

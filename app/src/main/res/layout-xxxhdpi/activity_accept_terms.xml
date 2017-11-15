@@ -9,8 +9,6 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms">
 
-<<<<<<< HEAD
-=======
     <include
         android:id="@+id/include4"
         layout="@layout/custom_white_timemachine_background"
@@ -43,7 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:gravity="center"
-        android:text="Hola Aventurer@, me emociona que te quieras \n unir a este viaje. Antes de conocernos mejor, debes \n estar de acuerdo con algunos términos y condiciones."
+        android:text="Hola Aventurer@, me emociona que te quieras \n unir a este viaje. Antes de conocernos mejor, debes  estar de acuerdo con algunos términos y condiciones."
         android:textColor="@color/gray_textView_color"
         android:textSize="16sp"
         android:textStyle="normal"
@@ -81,7 +79,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageButton2"
         app:layout_constraintStart_toStartOf="@+id/imageButton2"
         app:layout_constraintTop_toTopOf="@+id/imageButton2"/>
->>>>>>> d9f9cc81a2a7140abed1ac71555fcf446f453cac
 
 </android.support.constraint.ConstraintLayout>
 
