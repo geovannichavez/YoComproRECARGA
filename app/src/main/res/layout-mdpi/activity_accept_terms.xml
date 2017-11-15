@@ -28,10 +28,9 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/include4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="@+id/include4"
         app:layout_constraintTop_toTopOf="@+id/include4"
-        app:layout_constraintVertical_bias="0.253"
+        app:layout_constraintVertical_bias="0.233"
         app:srcCompat="@drawable/logo_recargo"/>
 
     <TextView
@@ -41,13 +40,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="Hola Aventurer@, me emociona que te quieras \n unir a este viaje. Antes de conocernos mejor, debes \n estar de acuerdo con algunos términos y condiciones."
+        android:text="Hola Aventurer@, me emociona que \n te quieras unir a este viaje. Antes de \n conocernos mejor, debes  estar de acuerdo \n con algunos términos y condiciones."
         android:textColor="@color/gray_textView_color"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="244dp"/>
+        tools:layout_editor_absoluteY="234dp"/>
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -76,8 +75,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        tools:layout_editor_absoluteY="366dp"/>
+        tools:layout_editor_absoluteY="351dp"/>
 
 </android.support.constraint.ConstraintLayout>
 
