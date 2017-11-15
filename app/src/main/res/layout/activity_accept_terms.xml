@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<<<<<<< HEAD
 
-
-<android.support.constraint.ConstraintLayout
-=======
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,4 +30,3 @@
 =======
 </LinearLayout>
 -->
->>>>>>> ceb51c4740f452f6bde6bd1cce83da95d0c3107e
