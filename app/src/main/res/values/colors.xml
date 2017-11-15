@@ -42,6 +42,7 @@
 
     <color name="white_textView_color">#FFFFFF</color>
     <color name="gray_textView_color">#484848</color>
+    <color name="orange_textView_color">#f7931e</color>
 
 
     <color name="refresh_progress_1">@color/AppGreen</color>
