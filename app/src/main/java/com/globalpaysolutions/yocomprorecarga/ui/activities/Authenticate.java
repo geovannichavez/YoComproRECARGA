@@ -57,7 +57,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
     @Override
     public void navigateHome()
     {
-        Intent home = new Intent(this, Home.class);
+        Intent home = new Intent(this, PointsMap.class);
         startActivity(home);
     }
 

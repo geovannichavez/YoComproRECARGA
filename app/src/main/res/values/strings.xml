@@ -134,6 +134,7 @@
 
     <!--    ERRROR MESSAGES  -->
     <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL…</string>
+    <string name="error_title_sms_await_title">ESPERA UN POCO…</string>
     <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
     <string name="error_content_progress_something_went_wrong_try_again">Algo ha salido mal al obtener los datos de su progreso, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
@@ -233,5 +234,7 @@
     <string name="contentdescription_close_infograpgy">Cerrar dialogo</string>
     <string name="label_title_era_selection">Viaje en el tiempo</string>
 
+    <string name="label_storeitem_price">%1$s RecarCoin</string>
+    <string name="label_sell">VENDER</string>
 
 </resources>

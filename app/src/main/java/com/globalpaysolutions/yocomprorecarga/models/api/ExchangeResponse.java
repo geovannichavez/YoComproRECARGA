@@ -20,7 +20,7 @@ public class ExchangeResponse
     private Tracking tracking;
     @SerializedName("Achievement")
     @Expose
-    private String achievement;
+    private Achievement achievement;
     @SerializedName("Title")
     @Expose
     private String title;
@@ -112,12 +112,12 @@ public class ExchangeResponse
         this.tracking = tracking;
     }
 
-    public String getAchievement()
+    public Achievement getAchievement()
     {
         return achievement;
     }
 
-    public void setAchievement(String achievement)
+    public void setAchievement(Achievement achievement)
     {
         this.achievement = achievement;
     }

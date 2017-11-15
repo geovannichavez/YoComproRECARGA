@@ -9,13 +9,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class WinPrizeResponse
 {
+
     @SerializedName("Title")
     @Expose
     private String title;
     @SerializedName("Description")
     @Expose
     private String description;
-    @SerializedName("logoUrl")
+    @SerializedName("LogoUrl")
     @Expose
     private String logoUrl;
     @SerializedName("HexColor")
@@ -42,6 +43,9 @@ public class WinPrizeResponse
     @SerializedName("tracking")
     @Expose
     private Tracking tracking;
+    @SerializedName("Achievement")
+    @Expose
+    private Achievement achievement;
     @SerializedName("WaitTime")
     @Expose
     private String waitTime;
@@ -155,6 +159,17 @@ public class WinPrizeResponse
     {
         this.tracking = tracking;
     }
+
+    public Achievement getAchievement()
+    {
+        return achievement;
+    }
+
+    public void setAchievement(Achievement achievement)
+    {
+        this.achievement = achievement;
+    }
+
 
     public String getWaitTime()
     {

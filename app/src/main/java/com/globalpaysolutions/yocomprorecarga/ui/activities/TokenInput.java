@@ -150,7 +150,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
             if (p3DCompatible)
             {
-                next = new Intent(this, Home.class);
+                next = new Intent(this, Main.class);
             }
             else
             {

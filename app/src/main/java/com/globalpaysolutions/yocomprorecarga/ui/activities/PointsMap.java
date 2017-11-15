@@ -51,15 +51,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.relex.circleindicator.CircleIndicator;
-
-public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeView
+public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, HomeView
 {
-    private static final String TAG = Home.class.getSimpleName();
+    private static final String TAG = PointsMap.class.getSimpleName();
 
     //Views
-    RelativeLayout ibtnProfile;
-    RelativeLayout ibtnInfo;
     ImageButton btnCloseInfography;
     AlertDialog infographyDialog;
 
@@ -84,10 +80,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_pointsmap);
 
-        ibtnProfile = (RelativeLayout) findViewById(R.id.ibtnProfile);
-        ibtnInfo = (RelativeLayout) findViewById(R.id.ibtnInfo);
         btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
 
         mSalesPointsMarkers = new HashMap<>();
@@ -153,7 +147,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 if(marker.getTag() != null)
                 {
                     String vendorCode = marker.getTag().toString();
-                    Intent requestTopup = new Intent(Home.this, RequestTopup.class);
+                    Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
                     requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
                     startActivity(requestTopup);
                 }
@@ -210,35 +204,13 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     @Override
     public void setClickListeners()
     {
-        try
-        {
-            ibtnProfile.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent profile = new Intent(Home.this, Profile.class);
-                    startActivity(profile);
-                }
-            });
 
-            ibtnInfo.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    mPresenter.displayInfography();
-                }
-            });
-
-        }
-        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     @Override
     public void displayActivateLocationDialog()
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PointsMap.this);
         alertDialog.setTitle(getString(R.string.dialog_title_activate_location));
         alertDialog.setMessage(getString(R.string.dialog_content_activate_location));
         alertDialog.setCancelable(false);
@@ -277,14 +249,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                     if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) &&
                             !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION))
                     {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PointsMap.this);
                         alertDialog.setTitle(getString(R.string.dialog_permissions_title));
                         alertDialog.setMessage(getString(R.string.dialog_permissions_location_content));
                         alertDialog.setPositiveButton(getString(R.string.button_accept), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
-                                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                                ActivityCompat.requestPermissions(PointsMap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
                             }
                         });
                         alertDialog.show();
@@ -351,7 +323,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     {
         try
         {
-            AlertDialog.Builder reportDialog = new AlertDialog.Builder(Home.this);
+            AlertDialog.Builder reportDialog = new AlertDialog.Builder(PointsMap.this);
             reportDialog.setTitle(pStoreReport.getTitle());
             reportDialog.setMessage(pStoreReport.getLine1());
             reportDialog.setPositiveButton(pStoreReport.getAcceptButton(), new DialogInterface.OnClickListener()
@@ -430,14 +402,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
     @Override
     public void swtichMapStyle(boolean isNightTime)
     {
-        try
-        {
-            if(isNightTime)
-                mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.green_lantern_style));
-            else
-                mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.light_green_style));
-        }
-        catch (Exception ex) {  ex.printStackTrace();   }
+
     }
 
     @Override
@@ -450,8 +415,8 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
         try
         {
             //Creates the builder and inflater of dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-            LayoutInflater inflater = Home.this.getLayoutInflater();
+            AlertDialog.Builder builder = new AlertDialog.Builder(PointsMap.this);
+            LayoutInflater inflater = PointsMap.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_tutorial_dialog, null);
 
             //Finds all views once the parent view is inflated
@@ -460,7 +425,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
             Collections.addAll(tutorialArray, slides);
 
-            tutorialPager.setAdapter(new TutorialAdapter(Home.this, tutorialArray));
+            tutorialPager.setAdapter(new TutorialAdapter(PointsMap.this, tutorialArray));
             //indicator.setViewPager(tutorialPager);
 
             if (currentPage == slides.length)
@@ -782,14 +747,14 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
                 {
                     if(Build.VERSION.SDK_INT >= 23)
                     {
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(PointsMap.this);
                         alertDialog.setTitle(getString(R.string.dialog_permissions_title));
                         alertDialog.setMessage(getString(R.string.dialog_permissions_location_content));
                         alertDialog.setPositiveButton(getString(R.string.button_retry), new DialogInterface.OnClickListener()
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
-                                ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
+                                ActivityCompat.requestPermissions(PointsMap.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ACCESS_FINE_LOCATION);
                             }
                         });
                         alertDialog.show();
@@ -804,7 +769,7 @@ public class Home extends AppCompatActivity implements OnMapReadyCallback, HomeV
 
     public void RequestTopup(View view)
     {
-        Intent requestTopup = new Intent(Home.this, RequestTopup.class);
+        Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
         startActivity(requestTopup);
     }
 

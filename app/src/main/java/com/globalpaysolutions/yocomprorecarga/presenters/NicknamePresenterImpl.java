@@ -11,7 +11,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.NicknameListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.INicknamePresenter;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Home;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
@@ -63,7 +63,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
         Intent next = null;
 
         if(!TextUtils.isEmpty(mUserData.getNickname()))
-            next = new Intent(mActivity, Home.class);
+            next = new Intent(mActivity, PointsMap.class);
         else
             next = new Intent(mActivity, Nickname.class);
 

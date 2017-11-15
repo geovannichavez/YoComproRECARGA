@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface ISourvenirsPresenter
 {
     void requestSouvenirs();
+    void showSouvenirDetailsModal(String title, String description, String count, String url);
 }

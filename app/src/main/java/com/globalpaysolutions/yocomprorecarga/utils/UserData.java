@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.globalpaysolutions.yocomprorecarga.models.Country;
+import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 
 /**
  * Created by Josué Chávez on 16/01/2017.
@@ -49,8 +50,13 @@ public class UserData
     private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
     private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
     private static final String KEY_ERA_ID = "usr_age_id";
+
+    //Achievements
     private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
     private static final String KEY_ACHIEVEMENT_DESCRIPTION = "usr_achievement_description";
+    private static final String KEY_ACHIEVEMENT_SCORE = "usr_achievement_score";
+    private static final String KEY_ACHIEVEMENT_LEVEL = "usr_achievement_level";
+    private static final String KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL = "usr_achievement_value_next_level";
 
     //Prizes
     private static final String KEY_LAST_PRIZE_EXCHANGED_TITLE = "usr_last_prize_exchanged_title";
@@ -58,6 +64,9 @@ public class UserData
     private static final String KEY_LAST_PRIZE_EXCHANGED_CODE = "usr_last_prize_exchanged_code";
     private static final String KEY_LAST_PRIZE_EXCHANGED_DIAL = "usr_last_prize_exchanged_dial";
     private static final String KEY_LAST_PRIZE_EXCHANGED_LEVEL = "usr_last_prize_exchanged_level";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_IMGURL = "usr_last_prize_exchanged_img_url";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_HEXCOLOR = "usr_last_prize_exchanged_hex_color";
+
 
     //Device
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
@@ -264,6 +273,18 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveLastPrizeLogoUrl(String url)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_IMGURL, url);
+        mEditor.commit();
+    }
+
+    public void saveLastPrizeExchangedColor(String hexColor)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_HEXCOLOR, hexColor);
+        mEditor.commit();
+    }
+
     public void saveFacebookFullname(String pFullname)
     {
         mEditor.putString(KEY_FACEBOOK_FULLNAME, pFullname);
@@ -294,10 +315,13 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveLastAchievement(String pAchievement, String pDescription)
+    public void saveLastAchievement(Achievement achievement)
     {
-        mEditor.putString(KEY_ACHIEVEMENT_TITLE, pAchievement);
-        mEditor.putString(KEY_ACHIEVEMENT_DESCRIPTION, pDescription);
+        mEditor.putString(KEY_ACHIEVEMENT_TITLE, achievement.getName());
+        mEditor.putString(KEY_ACHIEVEMENT_DESCRIPTION, "");
+        mEditor.putInt(KEY_ACHIEVEMENT_SCORE, achievement.getScore());
+        mEditor.putInt(KEY_ACHIEVEMENT_LEVEL, achievement.getLevel());
+        mEditor.putInt(KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL, achievement.getValueNextLevel());
         mEditor.commit();
     }
 
@@ -458,6 +482,16 @@ public class UserData
         return mPreferences.getInt(KEY_LAST_PRIZE_EXCHANGED_LEVEL, 0);
     }
 
+    public String getLasPrizeLogoUrl()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_IMGURL, "");
+    }
+
+    public String getLasPrizeHexColor()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_HEXCOLOR, "");
+    }
+
     public String getFacebookFullname()
     {
         return mPreferences.getString(KEY_FACEBOOK_FULLNAME, "");
@@ -498,7 +532,7 @@ public class UserData
 
     public int getEraID()
     {
-        return mPreferences.getInt(KEY_ERA_ID, 0);
+        return mPreferences.getInt(KEY_ERA_ID, 1);
     }
 
     public String getLastAchievementTitle()
@@ -509,6 +543,11 @@ public class UserData
     public String getLastAchievementDescription()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_DESCRIPTION, "");
+    }
+
+    public int getSavedSouvenirsCount()
+    {
+        return mPreferences.getInt(KEY_TOTAL_SOUVENIR, 0);
     }
 
 
