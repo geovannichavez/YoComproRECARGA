@@ -20,7 +20,6 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     private static final String TAG = PrizeDetail.class.getSimpleName();
 
     //Views and Layouts
-    Toolbar toolbar;
     ImageView imgPrizeType;
     TextView etPrizeCode;
     TextView lblPrizeTitle;
@@ -36,16 +35,13 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.prizeDetailToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        imgPrizeType = (ImageView) findViewById(R.id.imgPrizeType);
+        imgPrizeType = (ImageView) findViewById(R.id.imgChestPrize);
         //etPrizeCode = (EditText) findViewById(R.id.etPrizeCode);
-        etPrizeCode = (TextView) findViewById(R.id.etPrizeCode);
+        etPrizeCode = (TextView) findViewById(R.id.txtPin);
         lblPrizeTitle = (TextView) findViewById(R.id.lblPrizeTitle);
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
-        lblExchange = (TextView) findViewById(R.id.lblExchange);
+        lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
         mPresenter.loadInitialData();

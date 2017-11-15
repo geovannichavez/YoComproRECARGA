@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.graphics.Bitmap;
+
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.google.android.gms.maps.model.LatLng;
@@ -17,13 +19,14 @@ public interface CapturePrizeView
     void onCoinLongClick();
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogViewModel pMessageModel);
+    void showImageDialog(DialogViewModel dialogModel, int resource);
+    void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);
     void showPrizeColectedDialog(DialogViewModel pDialogModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();
     void switchRecarcoinVisible(boolean pVisible);
     void blinkRecarcoin();
-    void makeVibrate(int pVibrationMs, int pSleepMs);
     void stopVibrate();
     void showToast(String pText);
     void removeBlinkingAnimation();
@@ -31,7 +34,9 @@ public interface CapturePrizeView
     void removeRunnableCallback();
     void deleteModelAR();
 
-    void updateIndicators(String pPrizes, String pCoins);
+
+
+    void updateIndicators(String pPrizes, String pCoins, String pSouvenirs);
     void updatePrizeButton(int pCoins);
 
     void onGoldKeyEntered(String pKey, LatLng pLocation);

@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 public interface IHomePresenter
 {
     void setInitialViewsState();
-    void checkUserDataCompleted();
+    //void checkUserDataCompleted();
     void chekcLocationServiceEnabled();
     void checkPermissions();
     void connnectToLocationService();

@@ -46,7 +46,7 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
     {
         try
         {
-            Intent navigate = new Intent(this, Home.class);
+            Intent navigate = new Intent(this, Main.class);
             startActivity(navigate);
         }
         catch (Exception ex)

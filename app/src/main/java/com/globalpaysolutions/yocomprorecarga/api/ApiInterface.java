@@ -18,6 +18,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
@@ -98,5 +99,9 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @GET(StringsURL.SOUVENIRS)
     Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.STORE_ITEMS)
+    Call<StoreItemsResponse> getStoreItems(@Header("authenticationKey") String pAuthKey);
 
 }

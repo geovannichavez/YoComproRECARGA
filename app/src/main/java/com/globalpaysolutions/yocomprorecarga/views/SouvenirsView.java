@@ -11,4 +11,5 @@ import java.util.List;
 public interface SouvenirsView
 {
     void renderSouvenirs(List<ListSouvenirsByConsumer> souvenirs);
+    void showSouvenirDetails(String title, String description, String count, String url);
 }

@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.graphics.Bitmap;
+
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
@@ -12,8 +14,8 @@ public interface CapturePrizeListener
 {
     void onRetrieveTracking(Tracking pTracking);
     void onTrackingError(int pCodeStatus, Throwable pThrowable);
-    void onExchangeChestSuccess(ExchangeResponse pExchangeResponse);
-    void onExchangeError(int pCodeStatus, Throwable pThrowable);
+    void onOpenChestSuccess(ExchangeResponse pExchangeResponse);
+    void onOpenChestError(int pCodeStatus, Throwable pThrowable);
     void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
     void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable);
 }

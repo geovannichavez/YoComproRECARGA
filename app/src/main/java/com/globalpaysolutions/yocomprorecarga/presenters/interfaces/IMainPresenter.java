@@ -6,5 +6,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface IMainPresenter
 {
+    void checkUserDataCompleted();
     void hideStatusBar();
 }

@@ -79,51 +79,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         this.mView.setClickListeners();
     }
 
-    @Override
-    public void checkUserDataCompleted()
-    {
-        if(!mUserData.hasReadIntro())
-        {
-            Intent intro = new Intent(mActivity, Intro.class);
-            mContext.startActivity(intro);
-        }
-        else if(!mUserData.UserAcceptedTerms())
-        {
-            Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
-            mContext.startActivity(acceptTerms);
-        }
-        else if (!mUserData.isUserAuthenticated())
-        {
-            Intent authenticate = new Intent(mActivity, Authenticate.class);
-            this.addFlags(authenticate);
-            mContext.startActivity(authenticate);
-        }
-        else if(!mUserData.UserGrantedDevicePermissions())
-        {
-            Intent permissions = new Intent(mActivity, Permissions.class);
-            this.addFlags(permissions);
-            mContext.startActivity(permissions);
-        }
-        else if (!mUserData.UserSelectedCountry())
-        {
-            Intent selectCountry = new Intent(mActivity, ValidatePhone.class);
-            this.addFlags(selectCountry);
-            mContext.startActivity(selectCountry);
-        }
-        else if(!mUserData.UserVerifiedPhone())
-        {
-            Intent inputToken = new Intent(mActivity, TokenInput.class);
-            this.addFlags(inputToken);
-            mContext.startActivity(inputToken);
-        }
-        else if(TextUtils.isEmpty(mUserData.getNickname()))
-        {
-            Intent nickname = new Intent(mActivity, Nickname.class);
-            this.addFlags(nickname);
-            mContext.startActivity(nickname);
-        }
 
-    }
 
     @Override
     public void chekcLocationServiceEnabled()
