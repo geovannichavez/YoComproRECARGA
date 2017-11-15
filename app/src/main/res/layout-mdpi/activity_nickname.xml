@@ -112,7 +112,7 @@
         app:layout_constraintEnd_toEndOf="@+id/include4"
         app:layout_constraintStart_toStartOf="@+id/include4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.798"
+        app:layout_constraintVertical_bias="0.98"
         app:srcCompat="@drawable/btn_button_6"/>
 
     <TextView
@@ -130,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="@+id/include4"
         app:layout_constraintStart_toStartOf="@+id/include4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.773"/>
+        app:layout_constraintVertical_bias="0.934"/>
 
 
 </android.support.constraint.ConstraintLayout>
