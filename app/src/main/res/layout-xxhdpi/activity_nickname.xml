@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="397dp"
-        android:layout_height="121dp"
+        android:layout_width="346dp"
+        android:layout_height="96dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -60,7 +60,7 @@
         android:layout_marginTop="8dp"
         android:text="Soy Thomas, el creador de la máquina del tiempo. ¿Que tal si comenzamos con tu nombre para conocernos mejor?"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
