@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RecarGO.iml" filepath="$PROJECT_DIR$/RecarGO.iml" />
-<<<<<<< HEAD
-=======
-      <module fileurl="file://C:\DANIEL\Android\RecarGO\YoComproRECARGA.iml" filepath="C:\DANIEL\Android\RecarGO\YoComproRECARGA.iml" />
->>>>>>> ceb51c4740f452f6bde6bd1cce83da95d0c3107e
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
