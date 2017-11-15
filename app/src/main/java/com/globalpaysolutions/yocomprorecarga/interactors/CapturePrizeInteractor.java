@@ -78,7 +78,8 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         requestBody.setLatitude(pLocation.latitude);
         requestBody.setLongitude(pLocation.longitude);
         requestBody.setChestType(pChestType);
-        requestBody.setAgeID(pEraID);
+        //requestBody.setAgeID(pEraID); TODO: quitar el valor predeterminado
+        requestBody.setAgeID(1);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);
@@ -91,18 +92,18 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 if(response.isSuccessful())
                 {
                     ExchangeResponse exchangeResponse = response.body();
-                    mListener.onExchangeChestSuccess(exchangeResponse);
+                    mListener.onOpenChestSuccess(exchangeResponse);
                 }
                 else
                 {
                     int codeResponse = response.code();
-                    mListener.onExchangeError(codeResponse, null);
+                    mListener.onOpenChestError(codeResponse, null);
                 }
             }
             @Override
             public void onFailure(Call<ExchangeResponse> call, Throwable t)
             {
-                mListener.onExchangeError(0, t);
+                mListener.onOpenChestError(0, t);
             }
         });
 
@@ -134,6 +135,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 {
                     int codeResponse = response.code();
                     mListener.onRedeemPrizeError(codeResponse, null);
+                    Log.e(TAG, response.errorBody().toString());
                 }
             }
 

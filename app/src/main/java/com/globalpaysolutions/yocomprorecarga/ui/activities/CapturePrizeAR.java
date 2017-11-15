@@ -4,20 +4,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.support.v4.content.IntentCompat;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +35,13 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+import com.squareup.picasso.Picasso;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeView
 {
@@ -47,8 +52,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     ProgressDialog progressDialog;
     TextView tvCoinsEarned;
     TextView tvPrizesEarned;
-    ImageButton btnCoinsCounter;
-    ImageButton ivPrize2D;
+    TextView tvSouvenirCounter;
+    TextView tvCoinsCounter;
+    //ImageButton btnCoinsCounter;
+    ImageView ivPrize2D;
     Vibrator mVibrator;
     Toolbar toolbar;
     Toast mToast;
@@ -68,14 +75,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         setContentView(R.layout.activity_capture_price_ar);
         this.architectView = (ArchitectView) this.findViewById(R.id.architectView);
 
-        /*toolbar = (Toolbar) findViewById(R.id.arToolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);*/
-
         tvCoinsEarned = (TextView) findViewById(R.id.tvCoinsEarned);
         tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
-        btnCoinsCounter = (ImageButton) findViewById(R.id.btnCoinCounter);
-        ivPrize2D = (ImageButton) findViewById(R.id.ivPrize2D);
+        tvSouvenirCounter = (TextView) findViewById(R.id.tvSouvenirCounter);
+        tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
+
+        ivPrize2D = (ImageView) findViewById(R.id.ivPrize2D);
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mAnimation = new AlphaAnimation(1, 0);
 
@@ -87,6 +92,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
         this.architectView.onCreate(config);
+
     }
 
     @Override
@@ -190,25 +196,27 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void showGenericDialog(DialogViewModel pMessageModel)
     {
-        createDialog(pMessageModel.getTitle(), pMessageModel.getLine1(), pMessageModel.getAcceptButton());
+        createGenericDialog(pMessageModel.getTitle(), pMessageModel.getLine1());
+    }
+
+    @Override
+    public void showImageDialog(DialogViewModel dialogModel, int resource)
+    {
+        createImageDialog(dialogModel.getTitle(), dialogModel.getLine1(), resource);
     }
 
     @Override
     public void showPrizeColectedDialog(DialogViewModel pDialogModel)
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
-        alertDialog.setTitle(pDialogModel.getTitle());
-        alertDialog.setMessage(pDialogModel.getLine1());
-        alertDialog.setPositiveButton(pDialogModel.getAcceptButton(), new DialogInterface.OnClickListener()
+        createGenericDialogButton(pDialogModel.getTitle(), pDialogModel.getLine1(), pDialogModel.getAcceptButton(), new View.OnClickListener()
         {
-            public void onClick(DialogInterface dialog, int which)
+            @Override
+            public void onClick(View v)
             {
-                dialog.dismiss();
                 Intent prizeDetail = new Intent(CapturePrizeAR.this, PrizeDetail.class);
                 startActivity(prizeDetail);
             }
         });
-        alertDialog.show();
     }
 
     @Override
@@ -258,17 +266,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         mAnimation.setRepeatCount(Animation.INFINITE);
         mAnimation.setRepeatMode(Animation.REVERSE);
         ivPrize2D.startAnimation(mAnimation);
-    }
-
-    @Override
-    public void makeVibrate(int pVibrationMs, int pSleepMs)
-    {
-        //Resets vibrator if it was already vibrating
-        mVibrator.cancel();
-
-        long[] pattern = {0, pVibrationMs, pSleepMs};
-
-        mVibrator.vibrate(pattern, 0);
     }
 
     @Override
@@ -327,20 +324,52 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void updateIndicators(String pPrizes, String pCoins)
+    public void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url)
+    {
+        try
+        {
+            //Creates the builder and inflater of dialog
+            AlertDialog souvenirDialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
+            LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
+
+            TextView tvSouvenirName = (TextView) dialogView.findViewById(R.id.lblSouvenirName);
+            TextView tvSouvenirDesc = (TextView) dialogView.findViewById(R.id.lblSouvenirDescription);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgSouvenirDialog);
+
+            tvSouvenirName.setText(souvenirName);
+            tvSouvenirDesc.setText(souvenirDescription);
+
+            //TODO: Architecture violation - Requests made on Views
+            Picasso.with(this).load(url).into(imgSouvenir);
+
+            souvenirDialog = builder.setView(dialogView).create();
+            souvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            souvenirDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            souvenirDialog.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateIndicators(String pPrizes, String pCoins, String pSouvenirs)
     {
         tvPrizesEarned.setText(pPrizes);
         tvCoinsEarned.setText(pCoins);
+        tvSouvenirCounter.setText(pSouvenirs);
     }
 
     @Override
     public void updatePrizeButton(int pCoins)
     {
         int coinsButton;
-
         coinsButton = R.drawable.img_coin_counter_twenty;
 
-        btnCoinsCounter.setImageResource(coinsButton);
+        tvCoinsCounter.setText(String.valueOf(pCoins));
     }
 
     @Override
@@ -522,7 +551,101 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     *
     */
 
-    public void createDialog(String pTitle, String pMessage, String pButton)
+    public void createImageDialog(String title, String description, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
+            LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(description);
+            imgSouvenir.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void createGenericDialog(String title, String description)
+    {
+        try
+        {
+            AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
+            LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+
+            tvTitle.setText(title);
+            tvDescription.setText(description);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void createGenericDialogButton(String title, String message, String buttonText, View.OnClickListener listener)
+    {
+        try
+        {
+            AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
+            LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_button, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageButton btnGenericDialogButton = (ImageButton) findViewById(R.id.btnGenericDialogButton);
+            TextView tvButtonContent = (TextView) findViewById(R.id.tvButtonContent);
+            btnGenericDialogButton.setOnClickListener(listener);
+
+            tvTitle.setText(title);
+            tvDescription.setText(message);
+
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void createNativeDialog(String pTitle, String pMessage, String pButton)
     {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(CapturePrizeAR.this);
         alertDialog.setTitle(pTitle);
@@ -537,23 +660,16 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         alertDialog.show();
     }
 
-    public int getStatusBarHeight()
-    {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0)
-        {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
 
     public void redeemPrize(View view)
     {
-
         mPresenter.redeemPrize();
-        //Intent prize = new Intent(this, PrizeDetail.class);
-        //startActivity(prize);
+    }
+
+    public void navigateTimeMachine(View view)
+    {
+        Intent timeMachine = new Intent(this, Main.class);
+        startActivity(timeMachine);
     }
 
 

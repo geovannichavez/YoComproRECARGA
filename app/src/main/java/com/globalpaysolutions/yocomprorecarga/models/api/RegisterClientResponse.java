@@ -1,5 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.models.api;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,48 +12,49 @@ import java.util.Map;
 
 public class RegisterClientResponse
 {
+    @SerializedName("result")
+    @Expose
     private Boolean result;
+    @SerializedName("consumerID")
+    @Expose
     private Integer consumerID;
+    @SerializedName("message")
+    @Expose
     private String message;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    @SerializedName("SecondsRemaining")
+    @Expose
+    private String secondsRemaining;
 
-    public Boolean getResult()
-    {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(Boolean result)
-    {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 
-    public Integer getConsumerID()
-    {
+    public Integer getConsumerID() {
         return consumerID;
     }
 
-    public void setConsumerID(Integer consumerID)
-    {
+    public void setConsumerID(Integer consumerID) {
         this.consumerID = consumerID;
     }
 
-    public String getMessage()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public Map<String, Object> getAdditionalProperties()
-    {
-        return this.additionalProperties;
+    public String getSecondsRemaining() {
+        return secondsRemaining;
     }
 
-    public void setAdditionalProperty(String name, Object value)
-    {
-        this.additionalProperties.put(name, value);
+    public void setSecondsRemaining(String secondsRemaining) {
+        this.secondsRemaining = secondsRemaining;
     }
+
 }

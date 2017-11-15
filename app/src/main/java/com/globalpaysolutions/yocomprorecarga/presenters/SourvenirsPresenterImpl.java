@@ -38,6 +38,12 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     }
 
     @Override
+    public void showSouvenirDetailsModal(String title, String description, String count, String url)
+    {
+        mView.showSouvenirDetails(title, description, count, url);
+    }
+
+    @Override
     public void onSuccess(List<ListSouvenirsByConsumer> souvenirs)
     {
         mView.renderSouvenirs(souvenirs);

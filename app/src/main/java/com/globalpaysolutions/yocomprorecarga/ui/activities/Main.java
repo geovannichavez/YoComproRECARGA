@@ -26,6 +26,7 @@ public class Main extends AppCompatActivity implements MainView
 
         mPresenter = new MainPresenterImpl(this, this, this);
         mPresenter.hideStatusBar();
+        mPresenter.checkUserDataCompleted();
     }
 
     @Override
@@ -33,6 +34,12 @@ public class Main extends AppCompatActivity implements MainView
     {
         super.onResume();
         mPresenter.hideStatusBar();
+    }
+
+    public void navigateMap(View view)
+    {
+        Intent map = new Intent(Main.this, PointsMap.class);
+        startActivity(map);
     }
 
     public void navigateAR(View view )
