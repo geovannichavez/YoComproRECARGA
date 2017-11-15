@@ -40,6 +40,8 @@
 
     <color name="gray_bg_text_color">#333333</color>
 
+    <color name="white_textView_color">#FFFFFF</color>
+
 
     <color name="refresh_progress_1">@color/AppGreen</color>
     <color name="refresh_progress_2">@color/ApplicationGreenThemeDark</color>

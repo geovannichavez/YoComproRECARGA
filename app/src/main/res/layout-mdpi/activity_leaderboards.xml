@@ -21,9 +21,8 @@
         android:layout_height="367dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_screen_narrow"/>
@@ -34,9 +33,8 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img_title_leaderboards"/>
@@ -142,7 +140,7 @@
         android:id="@+id/textView14"
         android:layout_width="91dp"
         android:layout_height="16dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="TextView"
@@ -150,7 +148,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/include3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toEndOf="@+id/textView13"/>
 
 
