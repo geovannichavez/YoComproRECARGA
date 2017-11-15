@@ -190,7 +190,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.title_not_enough_coins));
             dialog.setLine1(mContext.getString(R.string.label_not_enough_coins));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showGenericDialog(dialog);
+            mView.showImageDialog(dialog, R.drawable.ic_alert);
         }
         else
         {
