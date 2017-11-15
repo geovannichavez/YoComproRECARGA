@@ -242,5 +242,7 @@
     <string name="lbl_store_item_description">En los barriles de tienda encontrarás souvenirs que son elementos que debes seleccionar poder ganarte los premios mayores.</string>
     <string name="label_locked_era">¡ERA BLOQUEADA!</string>
     <string name="label_locked_era_content">Continúa recolectando más souvenirs o monedas, muy pronto podrás realizar otro viaje y descubrir una nueva era.</string>
+    <string name="label_welcome">Hola Aventurer@, me emociona que   te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos y condiciones.</string>
+    <string name="label_continue">CONTINUAR</string>
 
 </resources>

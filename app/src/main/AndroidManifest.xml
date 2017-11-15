@@ -126,6 +126,7 @@
         </activity>
         <activity
             android:name=".ui.activities.AcceptTerms"
+            android:theme="@style/AppThemeFullScreen"
             android:screenOrientation="portrait">
 
         </activity>
