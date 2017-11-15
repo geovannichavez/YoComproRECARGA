@@ -11,7 +11,7 @@
     <include
         android:id="@+id/include4"
         layout="@layout/custom_white_timemachine_background"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp"/>
 
     <ImageView
@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="148dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="¡Excelente!"
@@ -42,9 +43,9 @@
         android:textSize="21sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.144"
-        tools:layout_editor_absoluteX="142dp"/>
+        app:layout_constraintVertical_bias="0.176"/>
 
     <TextView
         android:id="@+id/textView16"
