@@ -31,9 +31,14 @@ repositories {
         dirs 'libs'
     }
     mavenCentral()
+<<<<<<< HEAD
+
+    google()
+=======
     maven {
         url "https://maven.google.com"
     }
+>>>>>>> ceb51c4740f452f6bde6bd1cce83da95d0c3107e
 }
 
 dependencies {
