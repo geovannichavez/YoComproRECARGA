@@ -42,7 +42,6 @@ public class LeaderboardsPresenterImpl implements ILeaderboardsPresenter, Leader
     public void initialize()
     {
         mView.initializeViews();
-        mView.setLastWinner(String.format(mContext.getString(R.string.label_last_winner), ""));
     }
 
     @Override
@@ -71,8 +70,8 @@ public class LeaderboardsPresenterImpl implements ILeaderboardsPresenter, Leader
             mView.renderLeaderboardData(leaders);
 
             //Sets last winner
-            String data = String.format(mContext.getString(R.string.label_last_winner), response.getLastWinner().getNickname());
-            mView.setLastWinner(data);
+            //String data = String.format(mContext.getString(R.string.label_last_winner), );
+            mView.setLastWinner(response.getLastWinner().getNickname());
         }
         catch (Exception ex) {  ex.printStackTrace();   }
     }

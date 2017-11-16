@@ -9,5 +9,6 @@ import com.globalpaysolutions.yocomprorecarga.interactors.StoreListener;
 public interface IStoreInteractor
 {
     void retrieveStoreItems(StoreListener listener);
+    void purchaseStoreItem(StoreListener listener, int itemID);
     void downloadItemImage(String url, int itemID, StoreListener listener);
 }

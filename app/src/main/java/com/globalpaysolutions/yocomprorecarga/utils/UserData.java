@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
@@ -49,7 +50,6 @@ public class UserData
     private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
     private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
     private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
-    private static final String KEY_ERA_ID = "usr_age_id";
 
     //Achievements
     private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
@@ -85,6 +85,12 @@ public class UserData
     private static final String KEY_SOUVENIR_DESCRIPTION = "usr_souvenir_description";
     private static final String KEY_SOUVENIR_IMG_URL = "usr_souvenir_img_url";
     private static final String KEY_SOUVENIR_QUANTITY_OWNED = "usr_souvenir_quantity_owned";
+    private static final String KEY_SOUVENIR_PRICE = "usr_souvenir_prce";
+
+    //Era
+    private static final String KEY_ERA_ID = "usr_age_id";
+    private static final String KEY_ERA_NAME = "usr_age_name";
+    private static final String KEY_ERA_URL_ICON = "usr_age_url_image";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -325,12 +331,21 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveSouvenirObtained(String pTitle, String pDescription, String pImageUrl, int pQuantityOwned )
+    public void saveSouvenirObtained(String pTitle, String pDescription, String pImageUrl, int pQuantityOwned)
     {
+
         mEditor.putString(KEY_SOUVENIR_TITLE, pTitle);
         mEditor.putString(KEY_SOUVENIR_DESCRIPTION, pDescription);
         mEditor.putString(KEY_SOUVENIR_IMG_URL, pImageUrl);
         mEditor.putInt(KEY_SOUVENIR_QUANTITY_OWNED, pQuantityOwned);
+        mEditor.commit();
+    }
+
+    public void saveEraSelected(int eraID, String eraName, String eraUrl)
+    {
+        mEditor.putInt(KEY_ERA_ID, eraID);
+        mEditor.putString(KEY_ERA_NAME, eraName);
+        mEditor.putString(KEY_ERA_URL_ICON, eraUrl);
         mEditor.commit();
     }
 
@@ -412,7 +427,7 @@ public class UserData
         return mPreferences.getInt(KEY_CONSUMER_ID, 0);
     }
 
-    public int GetConsumerCoins()
+    public int getConsumerCoins()
     {
         return mPreferences.getInt(KEY_TOTAL_WON_COINS, 0);
     }
@@ -535,6 +550,10 @@ public class UserData
         return mPreferences.getInt(KEY_ERA_ID, 1);
     }
 
+    public String getEraName()
+    {
+        return mPreferences.getString(KEY_ERA_NAME, "");
+    }
     public String getLastAchievementTitle()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_TITLE, "");

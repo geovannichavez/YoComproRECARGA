@@ -76,15 +76,14 @@
         app:srcCompat="@drawable/ic_recarcoin_single"/>
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/lblRecarCoinsLeft"
+        android:layout_width="105dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="130,000"
+        android:gravity="center_vertical"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView18"
@@ -133,7 +132,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="TIENDA"
+        android:text="@string/label_store"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
@@ -193,7 +192,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgStoreItem"/>-->
 
     <ImageView
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnBuy"
         android:layout_width="134dp"
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
@@ -212,12 +211,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="COMPRAR"
+        android:text="@string/label_buy"
+        android:textColor="@color/AppGreen"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
-        app:layout_constraintStart_toStartOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/imageButton5"/>
+        app:layout_constraintEnd_toEndOf="@+id/btnBuy"
+        app:layout_constraintStart_toStartOf="@+id/btnBuy"
+        app:layout_constraintTop_toTopOf="@+id/btnBuy"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pagerStoreItems"
@@ -229,4 +229,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btnInfoStoreItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@+id/pagerStoreItems"
+        app:layout_constraintTop_toTopOf="@+id/pagerStoreItems"
+        app:srcCompat="@drawable/ic_question_mark"/>
+
 </android.support.constraint.ConstraintLayout>

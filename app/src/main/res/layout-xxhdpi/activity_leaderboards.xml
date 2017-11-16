@@ -128,13 +128,14 @@
         app:srcCompat="@drawable/ic_last_winner_vmkt"/>
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/tvEraName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
         android:text="Último ganador:"
         android:textColor="@color/white_textView_color"
         android:textStyle="bold"
@@ -144,19 +145,20 @@
         app:layout_constraintVertical_bias="1.0"/>
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="91dp"
-        android:layout_height="16dp"
+        android:id="@+id/tvLastWinner"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
         android:text="TextView"
         android:textColor="@color/white_textView_color"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/include3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
-        app:layout_constraintStart_toEndOf="@+id/textView13"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvEraName"/>
 
 
 </android.support.constraint.ConstraintLayout>

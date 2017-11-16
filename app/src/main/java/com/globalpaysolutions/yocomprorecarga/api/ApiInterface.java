@@ -3,15 +3,20 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
@@ -104,4 +109,15 @@ public interface ApiInterface
     @GET(StringsURL.STORE_ITEMS)
     Call<StoreItemsResponse> getStoreItems(@Header("authenticationKey") String pAuthKey);
 
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.PURCHASE)
+    Call<PurchaseItemResponse> purchaseStoreItem(@Header("authenticationKey") String pAuthKey, @Body PurchaseStoreReqBody request);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.ERA_SELECTION)
+    Call<EraSelectionResponse> selectEra(@Header("authenticationKey") String pAuthKey, @Body EraSelectionReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.ACHIEVEMENTS)
+    Call<AchievementsResponse> getAchievements(@Header("authenticationKey") String pAuthKey);
 }

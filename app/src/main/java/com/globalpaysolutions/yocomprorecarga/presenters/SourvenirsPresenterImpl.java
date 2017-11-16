@@ -8,6 +8,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsListeners;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ISourvenirsPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
 
 import java.util.List;
@@ -29,6 +30,12 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
         this.mContext = context;
         this.mView = view;
         this.mInteractor = new SouvenirsInteractor(mContext);
+    }
+
+    @Override
+    public void initializeViews()
+    {
+        mView.setInitialViewsState(UserData.getInstance(mContext).getEraName());
     }
 
     @Override

@@ -27,8 +27,6 @@ public class Profile extends AppCompatActivity implements ProfileView
     private static final String TAG = Profile.class.getSimpleName();
 
     //Views and layouts
-    Toolbar toolbar;
-    TextView tvName;
     TextView tvNickname;
     CircleImageView ivProfilePicture;
 
@@ -41,9 +39,8 @@ public class Profile extends AppCompatActivity implements ProfileView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        /*tvName = (TextView) findViewById(R.id.tvName);
-        tvNickname = (TextView) findViewById(R.id.tvNickname);
-        ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);*/
+        tvNickname = (TextView) findViewById(R.id.lblNickname);
+        ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);
 
         mPresenter = new ProfilePresenterImpl(this, this, this);
         mPresenter.loadInitialData();
@@ -52,7 +49,6 @@ public class Profile extends AppCompatActivity implements ProfileView
     @Override
     public void loadViewsState(String fullName, String nickname, String photoUrl)
     {
-        /*tvName.setText(fullName);
         tvNickname.setText(nickname);
         if(TextUtils.isEmpty(photoUrl))
         {
@@ -61,7 +57,7 @@ public class Profile extends AppCompatActivity implements ProfileView
         else
         {
             Picasso.with(this).load(photoUrl).into(ivProfilePicture);
-        }*/
+        }
 
         try
         {
@@ -121,6 +117,12 @@ public class Profile extends AppCompatActivity implements ProfileView
     {
         Intent souvenirs = new Intent(this, Souvenirs.class);
         startActivity(souvenirs);
+    }
+
+    public void navigateAchievements(View view)
+    {
+        Intent achievements = new Intent(this, Achievements.class);
+        startActivity(achievements);
     }
 
     public void viewTutorial(View view)

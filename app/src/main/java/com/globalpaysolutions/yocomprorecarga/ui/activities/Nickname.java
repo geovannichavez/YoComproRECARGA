@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +31,9 @@ public class Nickname extends AppCompatActivity implements NicknameView
     private static final String TAG = Nickname.class.getSimpleName();
 
     //Views and Layouts
-    TextView tvExamples;
+    //TextView tvExamples;
     EditText etNickname;
-    Button btnAcceptNick;
+    ImageButton btnAcceptNick;
     CoordinatorLayout coordinatorLayout;
     ProgressDialog progressDialog;
 
@@ -56,15 +57,15 @@ public class Nickname extends AppCompatActivity implements NicknameView
     @Override
     public void initializeViews()
     {
-        tvExamples = (TextView) findViewById(R.id.tvExamples);
+        //tvExamples = (TextView) findViewById(R.id.tvExamples);
         etNickname = (EditText) findViewById(R.id.etNickname);
-        btnAcceptNick = (Button) findViewById(R.id.btnAcceptNick);
+        btnAcceptNick = (ImageButton) findViewById(R.id.btnAcceptNick);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         mValidator = new Validation(this, coordinatorLayout);
 
         //Nickname Examples
-        tvExamples.setText(Arrays.toString(getResources().getStringArray(R.array.array_nickname_examples)).replaceAll("\\[|\\]", ""));
+        //tvExamples.setText(Arrays.toString(getResources().getStringArray(R.array.array_nickname_examples)).replaceAll("\\[|\\]", ""));
 
     }
 

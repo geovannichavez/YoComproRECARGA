@@ -12,4 +12,8 @@ public interface EraSelectionView
 {
     void initialViews();
     void renderEras(List<AgesListModel> eras);
+    void navigateMap();
+    void createImageDialog(String title, String description, int resource);
+    void createLockedEraDialog();
+    void setSelectedEraName(String eraName);
 }

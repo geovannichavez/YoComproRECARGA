@@ -121,17 +121,18 @@
 
         <activity
             android:name=".ui.activities.PointsMap"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.AcceptTerms"
-            android:screenOrientation="portrait">
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.ValidatePhone"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
@@ -143,6 +144,7 @@
         <activity
             android:name=".ui.activities.TokenInput"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
@@ -162,7 +164,8 @@
 
         <activity
             android:name=".ui.activities.Permissions"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.NotificationDetail"
@@ -179,20 +182,23 @@
             android:name=".ui.activities.PrizeDetail"
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
-            android:theme="@style/contextualToolbarTheme">
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
             android:excludeFromRecents="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Authenticate"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Nickname"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Profile"
@@ -236,6 +242,8 @@
             android:name=".ui.activities.Souvenirs"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"/>
+        <activity android:name=".ui.activities.Achievements">
+        </activity>
     </application>
 
 </manifest>

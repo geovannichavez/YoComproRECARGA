@@ -62,7 +62,9 @@
         app:layout_constraintTop_toBottomOf="@+id/textView22"/>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnPermissions"
+        android:onClick="RequestPermissions"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"
@@ -88,10 +90,10 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"/>
+        app:layout_constraintBottom_toBottomOf="@+id/btnPermissions"
+        app:layout_constraintEnd_toEndOf="@+id/btnPermissions"
+        app:layout_constraintStart_toStartOf="@+id/btnPermissions"
+        app:layout_constraintTop_toTopOf="@+id/btnPermissions"/>
 
 
 </android.support.constraint.ConstraintLayout>

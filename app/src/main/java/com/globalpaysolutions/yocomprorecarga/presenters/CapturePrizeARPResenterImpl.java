@@ -1,8 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +26,6 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -413,7 +409,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void onTrackingError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
-        int coins = mUserData.GetConsumerCoins();
+        int coins = mUserData.getConsumerCoins();
         int prizes = mUserData.GetConsumerPrizes();
         int souvenirs = mUserData.getSavedSouvenirsCount();
         int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
@@ -465,6 +461,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                                             pExchangeResponse.getDescription(),
                                             pExchangeResponse.getImgUrl(),
                                             pExchangeResponse.getValue());
+            mUserData.SaveUserTrackingProgess(pExchangeResponse.getTracking().getTotalWinCoins(),
+                    pExchangeResponse.getTracking().getTotalWinPrizes(),
+                    pExchangeResponse.getTracking().getCurrentCoinsProgress(),
+                    pExchangeResponse.getTracking().getTotalSouvenirs(),
+                    pExchangeResponse.getTracking().getAgeID());
             mView.showSouvenirWonDialog(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl());
         }
 

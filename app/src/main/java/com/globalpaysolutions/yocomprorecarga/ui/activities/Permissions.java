@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -15,7 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.views.PermissionsView;
 public class Permissions extends AppCompatActivity implements PermissionsView
 {
     //Views and layouts
-    Button btnPermissions;
+    ImageButton btnPermissions;
 
     //MVP
     PermissionsPresenterImpl mPresenter;
@@ -26,7 +27,7 @@ public class Permissions extends AppCompatActivity implements PermissionsView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
 
-        btnPermissions = (Button) findViewById(R.id.btnPermissions);
+        btnPermissions = (ImageButton) findViewById(R.id.btnPermissions);
 
         mPresenter = new PermissionsPresenterImpl(this, this, this);
     }
