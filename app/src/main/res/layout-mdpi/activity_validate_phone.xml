@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="375dp"
-        android:layout_height="113dp"
+        android:layout_width="305dp"
+        android:layout_height="85dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -55,21 +55,21 @@
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
+        android:layout_width="299dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/label_type_token"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283"
+        app:layout_constraintVertical_bias="0.272"
         tools:text="Si obtienes un gran premio necesitaremos comunicarnos contigo."/>
 
     <ImageView
@@ -142,32 +142,31 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginBottom="248dp"
+        android:layout_marginBottom="212dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Confirma tu número de teléfono."/>
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="22dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="¿Numero Equivocado?"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.371"
+        app:layout_constraintVertical_bias="0.356"
         tools:text="Elige tu país actual."/>
 
     <ImageButton
@@ -181,10 +180,10 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455"
+        app:layout_constraintVertical_bias="0.44"
         app:srcCompat="@drawable/bg_textbox_2"/>
 
 

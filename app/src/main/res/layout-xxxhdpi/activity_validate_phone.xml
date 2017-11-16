@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="375dp"
-        android:layout_height="113dp"
+        android:layout_width="384dp"
+        android:layout_height="125dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -44,7 +44,7 @@
         android:layout_marginTop="8dp"
         android:text="¿COMO NOS PODEMOS CONTACTAR?"
         android:textColor="@color/color_red_recargo"
-        android:textSize="17sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="341dp"
+        android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -63,19 +63,19 @@
         android:layout_marginTop="8dp"
         android:text="@string/label_type_token"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283"
+        app:layout_constraintVertical_bias="0.266"
         tools:text="Si obtienes un gran premio necesitaremos comunicarnos contigo."/>
 
     <ImageView
         android:id="@+id/imageView30"
-        android:layout_width="169dp"
-        android:layout_height="54dp"
+        android:layout_width="198dp"
+        android:layout_height="78dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -90,8 +90,8 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="144dp"
-        android:layout_height="35dp"
+        android:layout_width="160dp"
+        android:layout_height="42dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -106,8 +106,8 @@
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="195dp"
-        android:layout_height="73dp"
+        android:layout_width="222dp"
+        android:layout_height="97dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -130,38 +130,38 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="REGISTRARME"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include4"
         app:layout_constraintStart_toStartOf="@+id/include4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941"/>
+        app:layout_constraintVertical_bias="0.93"/>
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
-        android:layout_marginBottom="248dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="292dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textSize="16dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Confirma tu número de teléfono."/>
 
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="¿Numero Equivocado?"
-        android:textSize="16dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -172,8 +172,8 @@
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="195dp"
-        android:layout_height="72dp"
+        android:layout_width="219dp"
+        android:layout_height="88dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
