@@ -146,11 +146,18 @@
                 android:id="@+id/gvSouvenirs"
                 android:layout_width="189dp"
                 android:layout_height="262dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+
+                android:layout_marginTop="108dp"
                 android:nestedScrollingEnabled="true"
                 android:numColumns="2"
-                tools:layout_editor_absoluteX="63dp"
-
-                tools:layout_editor_absoluteY="133dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.196"
                 tools:listitem="@layout/custom_souvenir_gridview_item"/>
 
         </android.support.constraint.ConstraintLayout>
