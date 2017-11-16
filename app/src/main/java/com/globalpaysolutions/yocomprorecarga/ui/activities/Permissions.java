@@ -27,7 +27,7 @@ public class Permissions extends AppCompatActivity implements PermissionsView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permissions);
 
-        btnPermissions = (ImageButton) findViewById(R.id.btnPermissions);
+        //btnPermissions = (ImageButton) findViewById(R.id.btnPermissions);
 
         mPresenter = new PermissionsPresenterImpl(this, this, this);
     }

@@ -38,7 +38,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     TextView tvWeek;
     TextView tvMonth;
     TextView tvGlobal;
-    //TextView tvLastWinner;
+    TextView tvLastWinner;
     ProgressDialog progressDialog;
     ImageView imgButtonsBar;
 
@@ -56,10 +56,6 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboards);
-        /*toolbar = (Toolbar) findViewById(R.id.toolbarLeaderboards);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         //Layouts
         mLeaderboardListView = (ListView) findViewById(R.id.lvLeaderboard);
@@ -68,7 +64,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
         tvMonth = (TextView) findViewById(R.id.btnMonth);
         tvGlobal = (TextView) findViewById(R.id.btnGlobal);
         imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
-        //tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
+        tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
 
         //Adapters
         mLeaderboardAdapter = new LeadersAdapter(this, R.layout.custom_leaderboard_listview_item);
@@ -143,7 +139,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     @Override
     public void setLastWinner(String data)
     {
-        //tvLastWinner.setText(data);
+        tvLastWinner.setText(data);
     }
 
     @Override

@@ -20,12 +20,13 @@
         android:layout_height="342dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/screen_board_texture_1"
-        tools:layout_editor_absoluteY="68dp"/>
+        app:layout_constraintTop_toTopOf="@+id/include4"
+        app:srcCompat="@drawable/screen_board_texture_1"/>
 
     <ImageView
         android:id="@+id/imageView23"
@@ -47,25 +48,32 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:text="¡Atención!"
         android:textAllCaps="true"
         android:textColor="@color/orange_textView_color"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="106dp"
-        tools:layout_editor_absoluteY="106dp"/>
+        app:layout_constraintEnd_toEndOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/imageView23"/>
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="187dp"
         android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="Tu dispositivo no es compatible con la función de Realidad Aumentada (AR)"
         android:textColor="@color/gray_textView_color"
         android:textSize="10sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textView18"
-        tools:layout_editor_absoluteX="67dp"/>
+        app:layout_constraintEnd_toEndOf="@+id/imageView28"
+        app:layout_constraintStart_toStartOf="@+id/imageView28"
+        app:layout_constraintTop_toBottomOf="@+id/textView18"/>
 
     <ImageView
         android:id="@+id/imageView27"
@@ -73,10 +81,11 @@
         android:layout_height="110dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/img_2d_chest"
-        tools:layout_editor_absoluteY="186dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
+        app:srcCompat="@drawable/img_2d_chest"/>
 
     <TextView
         android:id="@+id/textView20"

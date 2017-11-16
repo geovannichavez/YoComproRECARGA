@@ -34,6 +34,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
 
     //Layouts and Views
     ListView lvEras;
+    TextView lblEraName;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -45,12 +46,14 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
         setContentView(R.layout.activity_era_selection);
 
         lvEras = (ListView) findViewById(R.id.lvEras);
+        lblEraName = (TextView) findViewById(R.id.lblEraName);
 
         mErasAdapter = new ErasAdapter(this, R.layout.custom_era_selection_item);
         mPresenter = new EraSelectionPresenterImpl(this, this, this);
 
         lvEras.setAdapter(mErasAdapter);
 
+        mPresenter.initialize();
         mPresenter.retrieveEras();
     }
 
@@ -160,6 +163,19 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
                     dialog.dismiss();
                 }
             });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setSelectedEraName(String eraName)
+    {
+        try
+        {
+            lblEraName.setText(eraName);
         }
         catch (Exception ex)
         {

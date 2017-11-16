@@ -15,4 +15,5 @@ public interface EraSelectionView
     void navigateMap();
     void createImageDialog(String title, String description, int resource);
     void createLockedEraDialog();
+    void setSelectedEraName(String eraName);
 }

@@ -38,7 +38,7 @@
             app:srcCompat="@drawable/img_screen_timemachine"/>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/lblNickname"
             android:layout_width="293dp"
             android:layout_height="72dp"
             android:layout_marginBottom="496dp"
@@ -46,7 +46,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/bg_nickname"
             android:gravity="center"
-            android:text="ABCDEFGHIJKLMNOPQRS"
+            android:textAllCaps="true"
             android:textColor="@color/color_dark_gray"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
@@ -60,11 +60,12 @@
             android:layout_height="142dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/lblNickname"
             app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:srcCompat="@drawable/img_profile_pic_border"
-            tools:layout_editor_absoluteY="1dp"/>
+            app:layout_constraintStart_toStartOf="@+id/lblNickname"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_profile_pic_border"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfilePicture"
@@ -72,6 +73,7 @@
             android:layout_height="102dp"
             android:layout_centerHorizontal="true"
             android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/img_profile_picture"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
@@ -83,6 +85,7 @@
             android:layout_height="58dp"
             android:layout_marginBottom="608dp"
             android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -94,6 +97,7 @@
             android:layout_width="212dp"
             android:layout_height="70dp"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="230dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:onClick="navigatePrizesHistory"

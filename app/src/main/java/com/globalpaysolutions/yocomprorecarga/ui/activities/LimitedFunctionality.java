@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -13,7 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
 
 public class LimitedFunctionality extends AppCompatActivity implements LimitedFunctionalityView
 {
-    Button btnWhatever;
+    ImageButton btnWhatever;
 
     //MVP
     LimitedFunctionalityPresenterImpl mPresenter;
@@ -24,7 +25,7 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_limited_functionality);
 
-        btnWhatever = (Button) findViewById(R.id.btnWhatever);
+        btnWhatever = (ImageButton) findViewById(R.id.btnWhatever);
 
         mPresenter = new LimitedFunctionalityPresenterImpl(this, this, this);
 

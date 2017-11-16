@@ -550,6 +550,10 @@ public class UserData
         return mPreferences.getInt(KEY_ERA_ID, 1);
     }
 
+    public String getEraName()
+    {
+        return mPreferences.getString(KEY_ERA_NAME, "");
+    }
     public String getLastAchievementTitle()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_TITLE, "");

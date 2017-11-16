@@ -33,6 +33,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     SouvenirsAdapter mSouvenirsAdapter;
     GridView gvSouvenirs;
     AlertDialog mSouvenirDialog;
+    TextView tvEraName;
 
     //Global Variables
 
@@ -44,6 +45,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
 
         //Initialize Views
         gvSouvenirs = (GridView) findViewById(R.id.gvSouvenirs);
+        tvEraName = (TextView) findViewById(R.id.tvEraName);
 
         //Initialize objects
         mPresnter = new SourvenirsPresenterImpl(this, this, this);
@@ -51,7 +53,18 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
 
         gvSouvenirs.setAdapter(mSouvenirsAdapter);
 
+        mPresnter.initializeViews();
         mPresnter.requestSouvenirs();
+    }
+
+    @Override
+    public void setInitialViewsState(String eraName)
+    {
+        try
+        {
+            tvEraName.setText(eraName);
+        }
+        catch (Exception ex) { ex.printStackTrace();}
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ErasListener;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IEraSelectionPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
@@ -31,12 +32,13 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
         this.mContext = context;
         this.mView = view;
         this.mInteractor = new ErasInteractor(mContext);
+        mView.initialViews();
     }
 
     @Override
     public void initialize()
     {
-
+        mView.setSelectedEraName(UserData.getInstance(mContext).getEraName());
     }
 
     @Override

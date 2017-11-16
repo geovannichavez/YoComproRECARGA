@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="148dp"
+        android:layout_marginLeft="14dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="¡Excelente!"
@@ -60,7 +61,6 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="14sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"/>
