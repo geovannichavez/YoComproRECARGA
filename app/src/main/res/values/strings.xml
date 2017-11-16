@@ -244,5 +244,6 @@
     <string name="label_locked_era_content">Continúa recolectando más souvenirs o monedas, muy pronto podrás realizar otro viaje y descubrir una nueva era.</string>
     <string name="label_welcome">Hola Aventurer@, me emociona que   te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos y condiciones.</string>
     <string name="label_continue">CONTINUAR</string>
+    <string name="label_achievements">LOGROS</string>
 
 </resources>

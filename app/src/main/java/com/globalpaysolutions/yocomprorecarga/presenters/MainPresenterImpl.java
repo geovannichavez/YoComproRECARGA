@@ -58,12 +58,12 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(authenticate);
             mContext.startActivity(authenticate);
         }
-        else if(!mUserData.UserGrantedDevicePermissions())
+       /* else if(!mUserData.UserGrantedDevicePermissions())
         {
             Intent permissions = new Intent(mActivity, Permissions.class);
             this.addFlags(permissions);
             mContext.startActivity(permissions);
-        }
+        }*/
         else if (!mUserData.UserSelectedCountry())
         {
             Intent selectCountry = new Intent(mActivity, ValidatePhone.class);

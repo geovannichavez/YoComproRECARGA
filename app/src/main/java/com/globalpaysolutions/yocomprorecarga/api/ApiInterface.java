@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
@@ -116,4 +117,7 @@ public interface ApiInterface
     @POST(StringsURL.ERA_SELECTION)
     Call<EraSelectionResponse> selectEra(@Header("authenticationKey") String pAuthKey, @Body EraSelectionReq request);
 
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.ACHIEVEMENTS)
+    Call<AchievementsResponse> getAchievements(@Header("authenticationKey") String pAuthKey);
 }

@@ -119,6 +119,12 @@ public class Profile extends AppCompatActivity implements ProfileView
         startActivity(souvenirs);
     }
 
+    public void navigateAchievements(View view)
+    {
+        Intent achievements = new Intent(this, Achievements.class);
+        startActivity(achievements);
+    }
+
     public void viewTutorial(View view)
     {
         mPresenter.viewTutorial();
