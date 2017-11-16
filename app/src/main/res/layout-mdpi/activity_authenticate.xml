@@ -51,14 +51,14 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="wrap_content"
+        android:layout_width="303dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="¡Ahora podemos conocernos mejor! \n Para continuar, regístrate o inicia sesión \n con tu cuenta facebook."
+        android:text="¡Ahora podemos conocernos mejor! Para continuar, regístrate o inicia sesión con tu cuenta facebook."
         android:textColor="@color/gray_textView_color"
         android:textSize="14sp"
         android:textStyle="normal"

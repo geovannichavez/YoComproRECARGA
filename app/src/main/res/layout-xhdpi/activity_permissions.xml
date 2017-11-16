@@ -13,17 +13,17 @@
         android:id="@+id/include4"
         layout="@layout/custom_white_timemachine_background"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp"/>
+        tools:layout_editor_absoluteY="0dp"/>
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="298dp"
-        android:layout_height="73dp"
+        android:layout_width="334dp"
+        android:layout_height="105dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_recargo"/>
@@ -51,13 +51,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Deberás conceder permisos a la aplicación para hacer uso de todas las características. Haz clic el siguiente botón."
         android:textColor="@color/gray_textView_color"
-        android:textSize="16sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22"/>
 
