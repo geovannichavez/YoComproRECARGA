@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="375dp"
-        android:layout_height="113dp"
+        android:layout_width="313dp"
+        android:layout_height="91dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -44,18 +44,18 @@
         android:layout_marginTop="8dp"
         android:text="CONFIRMA TU CELULAR"
         android:textColor="@color/color_red_recargo"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.187"/>
+        app:layout_constraintVertical_bias="0.158"/>
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="341dp"
+        android:layout_width="301dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -63,13 +63,13 @@
         android:layout_marginTop="8dp"
         android:text="@string/label_type_token"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283"/>
+        app:layout_constraintVertical_bias="0.236"/>
 
     <ImageView
         android:id="@+id/imageView30"
@@ -81,10 +81,9 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include4"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537"
         app:srcCompat="@drawable/btn_caja_txt"/>
 
     <EditText
@@ -101,7 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/include4"
         app:layout_constraintTop_toTopOf="@+id/include4"
-        app:layout_constraintVertical_bias="0.535"/>
+        />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -149,10 +148,10 @@
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.448"
+        app:layout_constraintVertical_bias="0.423"
         tools:text="Digita tu código"/>
 
     <TextView
@@ -168,10 +167,10 @@
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401"/>
+        app:layout_constraintVertical_bias="0.352"/>
 
     <TextView
         android:id="@+id/textView28"
