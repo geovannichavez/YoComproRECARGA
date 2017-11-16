@@ -5,8 +5,10 @@
     <color name="colorAccent">#FF4081</color>-->
 
 
-    <color name="ApplicationGreenTheme">#66cc00</color>
-    <color name="ApplicationGreenThemeDark">#59af03</color>
+    <!--<color name="ApplicationGreenTheme">#66cc00</color>-->
+    <color name="ApplicationGreenTheme">#DF0024</color>
+    <!--<color name="ApplicationGreenThemeDark">#59af03</color>-->
+    <color name="ApplicationGreenThemeDark">#cc0122</color>
     <color name="ActivityWhiteBackground">#FFFFFF</color>
     <color name="GeneralTextColor">#666666</color>
     <color name="SubtitleTextColor">#999999</color>
@@ -17,7 +19,8 @@
     <color name="SuperUltraLightGray2">#f7f7f7</color>
     <color name="SemiTransparentBlack">#d2000000</color>
 
-    <color name="AppGreen">#66cc00</color>
+    <!--<color name="AppGreen">#66cc00</color>-->
+    <color name="AppGreen">#DF0024</color>
     <color name="SemiTransparentWhite">#CCFFFFFF</color>
 
     <!--Colors Button Effect -->

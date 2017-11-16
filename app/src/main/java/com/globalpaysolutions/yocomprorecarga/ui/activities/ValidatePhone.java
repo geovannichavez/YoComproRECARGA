@@ -42,6 +42,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     //Adapters y Layouts
     EditText etPhoneNumber;
     ImageButton btnSignin;
+    ImageButton btnCountry;
     /*RelativeLayout relSelectCountry;
     LinearLayout lnrPhoneContainer;
     TextView lblSelectedCountry;
@@ -65,6 +66,16 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
         btnSignin = (ImageButton) findViewById(R.id.btnConfirm);
+        btnCountry = (ImageButton) findViewById(R.id.imageButton3);
+        btnCountry.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                showCountries();
+            }
+        });
+
 /*        lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
         lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;

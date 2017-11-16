@@ -58,7 +58,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     TextView tvCoinsCounter;
     //ImageButton btnCoinsCounter;
     ImageButton btnBack;
-    ImageButton btnNavigateTimeMachine;
+    ImageView btnNavigateTimeMachine;
     ImageView ivPrize2D;
     Vibrator mVibrator;
     Toolbar toolbar;
@@ -84,6 +84,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         tvSouvenirCounter = (TextView) findViewById(R.id.tvSouvenirCounter);
         tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnNavigateTimeMachine = (ImageView) findViewById(R.id.btnNavigateTimeMachine);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -98,7 +99,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             @Override
             public void onClick(View v)
             {
-                Intent timemachine = new Intent(CapturePrizeAR.this, Main.class);
+                Intent timemachine = new Intent(CapturePrizeAR.this, EraSelection.class);
                 timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

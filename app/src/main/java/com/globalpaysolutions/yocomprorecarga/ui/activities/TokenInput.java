@@ -38,8 +38,8 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     //Adapters y Layouts
     private EditText etToken;
     private ImageButton btnConfirmToken;
-    private TextView tvPortableNumber;
-    private TextView tvCodeSent;
+/*    private TextView tvPortableNumber;
+    private TextView tvCodeSent;*/
     private TextView tvWrongPhone;
     private ProgressDialog progressDialog;
 
@@ -57,9 +57,9 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
         etToken = (EditText) findViewById(R.id.etToken);
         btnConfirmToken = (ImageButton) findViewById(R.id.btnConfirmToken);
-/*        tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
-        tvCodeSent = (TextView) findViewById(R.id.tvCodeSent);
-        tvWrongPhone = (TextView) findViewById(R.id.tvWrongPhone);*/
+        /*tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
+        tvCodeSent = (TextView) findViewById(R.id.tvCodeSent);*/
+        tvWrongPhone = (TextView) findViewById(R.id.lblWrongNumber);
 
         //Get data from intent
         String userPhone = getIntent().getExtras().getString(Constants.BUNDLE_TOKEN_VALIDATION);
@@ -90,14 +90,14 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     public void initialViewsState()
     {
         btnConfirmToken.setEnabled(false);
-        if (Build.VERSION.SDK_INT >= 24)
+       /* if (Build.VERSION.SDK_INT >= 24)
         {
             tvPortableNumber.setText(Html.fromHtml(getString(R.string.label_portable_phone_number), 1));
         }
         else
         {
             tvPortableNumber.setText(Html.fromHtml(getString(R.string.label_portable_phone_number)));
-        }
+        }*/
         EntriesValidations();
     }
 
@@ -205,7 +205,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
             SpannableString part3 = new SpannableString(getString(R.string.label_portable_phone_number_part2));
 
-            tvPortableNumber.setText(TextUtils.concat(part1, " ", part2, " ", part3));
+            //tvPortableNumber.setText(TextUtils.concat(part1, " ", part2, " ", part3));
         }
         catch (Exception ex)
         {
@@ -223,7 +223,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
             part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phoneNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             SpannableString part3 = new SpannableString(getString(R.string.label_type_token_part2));
 
-            tvCodeSent.setText(TextUtils.concat(part1, " ", part2, " ", part3));
+            //tvCodeSent.setText(TextUtils.concat(part1, " ", part2, " ", part3));
         }
         catch (Exception ex)
         {

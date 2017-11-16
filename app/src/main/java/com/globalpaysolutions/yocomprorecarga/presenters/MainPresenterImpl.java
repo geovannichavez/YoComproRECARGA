@@ -42,12 +42,12 @@ public class MainPresenterImpl implements IMainPresenter
     @Override
     public void checkUserDataCompleted()
     {
-        if(!mUserData.hasReadIntro())
+        /*if(!mUserData.hasReadIntro())
         {
             Intent intro = new Intent(mActivity, Intro.class);
             mContext.startActivity(intro);
         }
-        else if(!mUserData.UserAcceptedTerms())
+        else*/ if(!mUserData.UserAcceptedTerms())
         {
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);
@@ -58,12 +58,12 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(authenticate);
             mContext.startActivity(authenticate);
         }
-       /* else if(!mUserData.UserGrantedDevicePermissions())
+       else if(!mUserData.UserGrantedDevicePermissions())
         {
             Intent permissions = new Intent(mActivity, Permissions.class);
             this.addFlags(permissions);
             mContext.startActivity(permissions);
-        }*/
+        }
         else if (!mUserData.UserSelectedCountry())
         {
             Intent selectCountry = new Intent(mActivity, ValidatePhone.class);

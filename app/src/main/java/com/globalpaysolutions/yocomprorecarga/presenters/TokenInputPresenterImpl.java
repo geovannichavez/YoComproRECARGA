@@ -44,7 +44,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     public void setInitialViewState()
     {
         mView.initialViewsState();
-        mView.setCallcenterContactText();
+        //mView.setCallcenterContactText();
         mView.setClickListeners();
     }
 

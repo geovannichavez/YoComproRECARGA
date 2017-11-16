@@ -6,7 +6,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Main">
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput">
 
     <include
         android:id="@+id/include4"
@@ -153,7 +153,8 @@
         tools:text="Digita tu código"/>
 
     <TextView
-        android:id="@+id/textView27"
+        android:onClick="VerifyToken"
+        android:id="@+id/lblWrongNumber"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
