@@ -99,7 +99,7 @@
         android:layout_height="62dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateTopupRequest"
@@ -107,10 +107,10 @@
         android:src="@drawable/ic_topup_request"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
     <ImageButton
         android:id="@+id/imageButton13"
@@ -125,10 +125,10 @@
         android:src="@drawable/ic_store"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintHorizontal_bias="0.359"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
     <ImageButton
         android:id="@+id/imageButton11"
@@ -143,10 +143,10 @@
         android:src="@drawable/ic_prize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageButton12"
-        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintHorizontal_bias="0.683"
         app:layout_constraintStart_toStartOf="@+id/btnTopupRequest"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
     <ImageButton
         android:id="@+id/imageButton12"
@@ -161,9 +161,9 @@
         android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.987"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
 </android.support.constraint.ConstraintLayout>

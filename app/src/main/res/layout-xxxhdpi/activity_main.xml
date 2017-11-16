@@ -19,21 +19,21 @@
                app:layout_constraintVertical_bias="1.0"/>
 
 
-           <ImageView
-               android:id="@+id/imageView25"
-               android:layout_width="399dp"
-               android:layout_height="159dp"
-               android:layout_marginBottom="500dp"
-               android:layout_marginEnd="8dp"
-               android:layout_marginStart="8dp"
-               android:layout_marginTop="8dp"
-               android:paddingTop="65dp"
-               android:scaleType="fitXY"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               app:srcCompat="@drawable/logo_recargo"/>
+    <ImageView
+        android:id="@+id/imageView25"
+        android:layout_width="392dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="500dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingTop="65dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_recargo"/>
 
 
            <ImageButton
@@ -55,24 +55,24 @@
                app:layout_constraintTop_toBottomOf="@+id/imageView25"
                app:layout_constraintVertical_bias="0.0"/>
 
-           <ImageButton
-               android:id="@+id/btnProfile"
-               android:layout_width="316dp"
-               android:layout_height="118dp"
-               android:layout_marginBottom="8dp"
-               android:layout_marginEnd="8dp"
-               android:layout_marginStart="8dp"
-               android:layout_marginTop="8dp"
-               android:background="?attr/selectableItemBackgroundBorderless"
-               android:onClick="navigateProfile"
-               android:scaleType="fitXY"
-               android:src="@drawable/ic_profile"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintHorizontal_bias="0.493"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintVertical_bias="0.591"/>
+    <ImageButton
+        android:id="@+id/btnProfile"
+        android:layout_width="316dp"
+        android:layout_height="118dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="navigateProfile"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586"/>
 
            <ImageButton
                android:id="@+id/btnTravel"
@@ -125,10 +125,10 @@
         android:src="@drawable/ic_store"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.986"/>
 
     <ImageButton
         android:id="@+id/imageButton11"
@@ -161,10 +161,10 @@
         android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.986"/>
 
         </android.support.constraint.ConstraintLayout>
 

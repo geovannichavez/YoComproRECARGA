@@ -21,7 +21,7 @@
 
     <ImageView
         android:id="@+id/imageView25"
-        android:layout_width="375dp"
+        android:layout_width="370dp"
         android:layout_height="148dp"
         android:layout_marginBottom="500dp"
         android:layout_marginEnd="8dp"
@@ -38,8 +38,8 @@
 
     <ImageButton
         android:id="@+id/btnPlay"
-        android:layout_width="316dp"
-        android:layout_height="135dp"
+        android:layout_width="299dp"
+        android:layout_height="116dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -57,8 +57,8 @@
 
     <ImageButton
         android:id="@+id/btnProfile"
-        android:layout_width="316dp"
-        android:layout_height="118dp"
+        android:layout_width="309dp"
+        android:layout_height="103dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -69,15 +69,15 @@
         android:src="@drawable/ic_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591"/>
+        app:layout_constraintVertical_bias="0.556"/>
 
     <ImageButton
         android:id="@+id/btnTravel"
-        android:layout_width="316dp"
-        android:layout_height="118dp"
+        android:layout_width="309dp"
+        android:layout_height="102dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -88,10 +88,10 @@
         android:src="@drawable/ic_travel"
         app:layout_constraintBottom_toBottomOf="@+id/include4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828"/>
+        app:layout_constraintVertical_bias="0.818"/>
 
     <ImageButton
         android:id="@+id/btnTopupRequest"
@@ -125,10 +125,10 @@
         android:src="@drawable/ic_store"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
     <ImageButton
         android:id="@+id/imageButton11"
@@ -143,10 +143,10 @@
         android:src="@drawable/ic_prize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageButton12"
-        app:layout_constraintHorizontal_bias="0.693"
+        app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toStartOf="@+id/btnTopupRequest"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
     <ImageButton
         android:id="@+id/imageButton12"
@@ -161,9 +161,9 @@
         android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"/>
+        app:layout_constraintVertical_bias="0.984"/>
 
 </android.support.constraint.ConstraintLayout>
