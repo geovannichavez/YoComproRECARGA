@@ -12,56 +12,58 @@ public class Achievement
     @SerializedName("Name")
     @Expose
     private String name;
-
     @SerializedName("Score")
     @Expose
-    private Integer score;
-
+    private int score;
     @SerializedName("Level")
     @Expose
-    private Integer level;
-
+    private int level;
     @SerializedName("ValueNextLevel")
     @Expose
-    private Integer valueNextLevel;
+    private int valueNextLevel;
+    @SerializedName("Prize")
+    @Expose
+    private int prize;
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getScore()
-    {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(Integer score)
-    {
+    public void setScore(int score) {
         this.score = score;
     }
 
-    public Integer getLevel()
-    {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level)
-    {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public Integer getValueNextLevel()
-    {
+    public int getValueNextLevel() {
         return valueNextLevel;
     }
 
-    public void setValueNextLevel(Integer valueNextLevel)
-    {
+    public void setValueNextLevel(int valueNextLevel) {
         this.valueNextLevel = valueNextLevel;
     }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public void setPrize(int prize) {
+        this.prize = prize;
+    }
+
+
 }

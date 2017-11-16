@@ -112,7 +112,11 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     @Override
     public void saveUserTracking(Tracking pTracking)
     {
-        mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(), pTracking.getTotalWinPrizes(), pTracking.getCurrentCoinsProgress(), pTracking.getTotalSouvenirs(), pTracking.getAgeID());
+        mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(),
+                pTracking.getTotalWinPrizes(),
+                pTracking.getCurrentCoinsProgress(),
+                pTracking.getTotalSouvenirs(),
+                pTracking.getAgeID());
     }
 
     @Override

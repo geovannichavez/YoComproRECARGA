@@ -11,66 +11,66 @@ public class Tracking
 {
     @SerializedName("TotalWinCoins")
     @Expose
-    private Integer totalWinCoins;
+    private int totalWinCoins;
     @SerializedName("TotalWinPrizes")
     @Expose
-    private Integer totalWinPrizes;
+    private int totalWinPrizes;
     @SerializedName("CurrentCoinsProgress")
     @Expose
-    private Integer currentCoinsProgress;
+    private int currentCoinsProgress;
     @SerializedName("TotalSouvenirs")
     @Expose
-    private Integer totalSouvenirs;
+    private int totalSouvenirs;
     @SerializedName("AgeID")
     @Expose
-    private Integer ageID;
+    private int ageID;
 
-    public Integer getTotalWinCoins()
+    public int getTotalWinCoins()
     {
         return totalWinCoins;
     }
 
-    public void setTotalWinCoins(Integer totalWinCoins)
+    public void setTotalWinCoins(int totalWinCoins)
     {
         this.totalWinCoins = totalWinCoins;
     }
 
-    public Integer getTotalWinPrizes()
+    public int getTotalWinPrizes()
     {
         return totalWinPrizes;
     }
 
-    public void setTotalWinPrizes(Integer totalWinPrizes)
+    public void setTotalWinPrizes(int totalWinPrizes)
     {
         this.totalWinPrizes = totalWinPrizes;
     }
 
-    public Integer getCurrentCoinsProgress()
+    public int getCurrentCoinsProgress()
     {
         return currentCoinsProgress;
     }
 
-    public void setCurrentCoinsProgress(Integer currentCoinsProgress)
+    public void setCurrentCoinsProgress(int currentCoinsProgress)
     {
         this.currentCoinsProgress = currentCoinsProgress;
     }
 
-    public Integer getTotalSouvenirs()
+    public int getTotalSouvenirs()
     {
         return totalSouvenirs;
     }
 
-    public void setTotalSouvenirs(Integer totalSouvenirs)
+    public void setTotalSouvenirs(int totalSouvenirs)
     {
         this.totalSouvenirs = totalSouvenirs;
     }
 
-    public Integer getAgeID()
+    public int getAgeID()
     {
         return ageID;
     }
 
-    public void setAgeID(Integer ageID)
+    public void setAgeID(int ageID)
     {
         this.ageID = ageID;
     }

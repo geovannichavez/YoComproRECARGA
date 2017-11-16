@@ -6,10 +6,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +57,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     TextView tvSouvenirCounter;
     TextView tvCoinsCounter;
     //ImageButton btnCoinsCounter;
+    ImageButton btnBack;
+    ImageButton btnNavigateTimeMachine;
     ImageView ivPrize2D;
     Vibrator mVibrator;
     Toolbar toolbar;
@@ -79,6 +83,31 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         tvPrizesEarned = (TextView) findViewById(R.id.tvPrizesEarned);
         tvSouvenirCounter = (TextView) findViewById(R.id.tvSouvenirCounter);
         tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+
+        btnNavigateTimeMachine.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent timemachine = new Intent(CapturePrizeAR.this, Main.class);
+                timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                timemachine.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                timemachine.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(timemachine);
+            }
+        });
 
         ivPrize2D = (ImageView) findViewById(R.id.ivPrize2D);
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -593,13 +622,14 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         try
         {
-            AlertDialog dialog;
+            final AlertDialog dialog;
             AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
             LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
 
             TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
             TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
 
             tvTitle.setText(title);
             tvDescription.setText(description);
@@ -608,6 +638,16 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+
         }
         catch (Exception ex)
         {
@@ -671,6 +711,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         Intent timeMachine = new Intent(this, Main.class);
         startActivity(timeMachine);
     }
+
+
 
 
     /*

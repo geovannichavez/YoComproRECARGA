@@ -9,18 +9,15 @@ import com.google.gson.annotations.SerializedName;
 
 public class ExchangeResponse
 {
+
     @SerializedName("Type")
     @Expose
-    private Integer type;
-    @SerializedName("ExchangeCoins")
-    @Expose
-    private Integer exchangeCoins;
-    @SerializedName("tracking")
-    @Expose
-    private Tracking tracking;
-    @SerializedName("Achievement")
-    @Expose
-    private Achievement achievement;
+    private int type;
+
+    /*
+    *
+    * Required for souvenirs
+    * */
     @SerializedName("Title")
     @Expose
     private String title;
@@ -32,8 +29,17 @@ public class ExchangeResponse
     private String imgUrl;
     @SerializedName("Value")
     @Expose
-    private Integer value;
+    private int value;
 
+    @SerializedName("ExchangeCoins")
+    @Expose
+    private int exchangeCoins;
+    @SerializedName("tracking")
+    @Expose
+    private Tracking tracking;
+    @SerializedName("Achievement")
+    @Expose
+    private Achievement achievement;
     @SerializedName("Code")
     @Expose
     private String code;
@@ -41,16 +47,20 @@ public class ExchangeResponse
     @Expose
     private String message;
 
-    public Integer getType()
+    public int getType()
     {
         return type;
     }
 
-    public void setType(Integer type)
+    public void setType(int type)
     {
         this.type = type;
     }
 
+    /*
+    *
+    * Required for Souvenirs
+    */
     public String getTitle()
     {
         return title;
@@ -81,23 +91,22 @@ public class ExchangeResponse
         this.imgUrl = imgUrl;
     }
 
-    public Integer getValue()
+    public int getValue()
     {
         return value;
     }
 
-    public void setValue(Integer value)
+    public void setValue(int value)
     {
         this.value = value;
     }
 
-
-    public Integer getExchangeCoins()
+    public int getExchangeCoins()
     {
         return exchangeCoins;
     }
 
-    public void setExchangeCoins(Integer exchangeCoins)
+    public void setExchangeCoins(int exchangeCoins)
     {
         this.exchangeCoins = exchangeCoins;
     }
