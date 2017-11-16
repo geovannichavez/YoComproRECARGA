@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 {
     //Adapters y Layouts
     EditText etPhoneNumber;
-    Button btnSignin;
+    ImageButton btnSignin;
     RelativeLayout relSelectCountry;
     LinearLayout lnrPhoneContainer;
     ProgressDialog progressDialog;
@@ -63,11 +64,11 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         setContentView(R.layout.activity_validate_phone);
 
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
-        btnSignin = (Button) findViewById(R.id.btnConfirm);
-        lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
+        btnSignin = (ImageButton) findViewById(R.id.btnConfirm);
+/*        lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
         lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
-        lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);
+        lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);*/
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
         presenter.fetchCountries();

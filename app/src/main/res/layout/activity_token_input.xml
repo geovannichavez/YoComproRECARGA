@@ -88,7 +88,7 @@
         app:srcCompat="@drawable/btn_caja_txt"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etNickname"
         android:layout_width="144dp"
         android:layout_height="35dp"
         android:layout_marginBottom="8dp"
@@ -104,7 +104,7 @@
         app:layout_constraintVertical_bias="0.535"/>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnAcceptNick"
         android:layout_width="195dp"
         android:layout_height="73dp"
         android:layout_marginBottom="8dp"

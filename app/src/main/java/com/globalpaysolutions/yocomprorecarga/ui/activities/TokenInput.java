@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -36,7 +37,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 {
     //Adapters y Layouts
     private EditText etToken;
-    private Button btnConfirmToken;
+    private ImageButton btnConfirmToken;
     private TextView tvPortableNumber;
     private TextView tvCodeSent;
     private TextView tvWrongPhone;
@@ -55,10 +56,10 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
         setContentView(R.layout.activity_token_input);
 
         etToken = (EditText) findViewById(R.id.etToken);
-        btnConfirmToken = (Button) findViewById(R.id.btnConfirmToken);
-        tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
+        btnConfirmToken = (ImageButton) findViewById(R.id.btnConfirmToken);
+/*        tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
         tvCodeSent = (TextView) findViewById(R.id.tvCodeSent);
-        tvWrongPhone = (TextView) findViewById(R.id.tvWrongPhone);
+        tvWrongPhone = (TextView) findViewById(R.id.tvWrongPhone);*/
 
         //Get data from intent
         String userPhone = getIntent().getExtras().getString(Constants.BUNDLE_TOKEN_VALIDATION);
