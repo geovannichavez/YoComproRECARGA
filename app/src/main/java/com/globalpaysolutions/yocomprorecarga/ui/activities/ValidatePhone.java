@@ -43,9 +43,10 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     EditText etPhoneNumber;
     ImageButton btnSignin;
     ImageButton btnCountry;
+    TextView lblSelectedCountry;
     /*RelativeLayout relSelectCountry;
     LinearLayout lnrPhoneContainer;
-    TextView lblSelectedCountry;
+
     TextView lblPhoneCode;*/
     ProgressDialog progressDialog;
 
@@ -66,7 +67,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
 
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
         btnSignin = (ImageButton) findViewById(R.id.btnConfirm);
-        btnCountry = (ImageButton) findViewById(R.id.imageButton3);
+        btnCountry = (ImageButton) findViewById(R.id.buttonCountry);
         btnCountry.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -76,8 +77,8 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             }
         });
 
-/*        lblSelectedCountry = (TextView) findViewById(R.id.lblSelectedCountry);
-        lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
+        lblSelectedCountry = (TextView) findViewById(R.id.lblCountry);
+        /*lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
         relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
         lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);*/
 
@@ -238,11 +239,11 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     @Override
     public void setSelectedCountry(Country pSelected)
     {
-        /*lblSelectedCountry.setText(pSelected.getName());
-        lblPhoneCode.setText(String.format(getString(R.string.sign_plus), pSelected.getPhoneCode()));
+        lblSelectedCountry.setText(pSelected.getName());
+        //lblPhoneCode.setText(String.format(getString(R.string.sign_plus), pSelected.getPhoneCode()));
 
-        lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
-        lblSelectedCountry.setTypeface(null, Typeface.BOLD);*/
+        //lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
+        lblSelectedCountry.setTypeface(null, Typeface.BOLD);
         etPhoneNumber.setEnabled(true);
     }
 

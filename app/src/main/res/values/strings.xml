@@ -245,5 +245,10 @@
     <string name="label_welcome">Hola Aventurer@, me emociona que   te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos y condiciones.</string>
     <string name="label_continue">CONTINUAR</string>
     <string name="label_achievements">LOGROS</string>
+    <string name="title_couldnt_exchange_souvenir">No se canjeó el Souvenir</string>
+    <string name="content_couldnt_exchange_souvenir">Algo salió mal y no se pudo canjear tu souvenir. ¡Inténtalo más tarde!</string>
+    <string name="label_enter_pin_to_redeem">Escribe el PIN del premio a canjear</string>
+    <string name="label_type_phone_to_apply_prize">Digita el número celular que se premiará</string>
+    <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro ara canjear tu premio.</string>
 
 </resources>

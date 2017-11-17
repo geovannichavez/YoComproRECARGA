@@ -16,6 +16,17 @@
         <item name="actionModeBackground">@color/dark_recargo_green</item>
     </style>
 
+    <style name="AppThemeYvr" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/yvr_green_color</item>
+        <item name="colorPrimaryDark">@color/yvr_green_color_dark</item>
+        <item name="colorAccent">@color/yvr_green_color</item>
+
+        <!--    TOOLBAR     -->
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeBackground">@color/dark_recargo_green</item>
+    </style>
+
     <style name="AppThemeFullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/ApplicationGreenTheme</item>
@@ -78,6 +89,11 @@
     <style name="contextualDarkToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">@color/ApplicationGreenThemeDark</item>
         <item name="android:textColor">@color/ActivityWhiteBackground</item>
+    </style>
+
+    <style name="contextualDarkToolbarThemeYVR" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorBackground">@color/yvr_green_color</item>
+        <item name="android:textColor">@color/yvr_green_color_dark</item>
     </style>
 
 

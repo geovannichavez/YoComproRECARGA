@@ -31,13 +31,14 @@ public class Store extends AppCompatActivity implements StoreView
     private StorePresenterImpl mPresenter;
 
     //Layouyts and Views
-    ImageView imgStoreItem;
+
     ViewPager pagerStoreItems;
     ImageButton btnLeft;
     ImageButton btnRight;
     TextView lblRecarCoinsLeft;
     ImageView btnBuy;
     ImageButton btnInfoStoreItem;
+    ImageButton btnBack;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -49,13 +50,22 @@ public class Store extends AppCompatActivity implements StoreView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-        imgStoreItem = (ImageView) findViewById(R.id.imgStoreItem);
+
         pagerStoreItems = (ViewPager) findViewById(R.id.pagerStoreItems);
         btnLeft = (ImageButton) findViewById(R.id.btnLeft);
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         lblRecarCoinsLeft = (TextView) findViewById(R.id.lblRecarCoinsLeft);
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
         btnInfoStoreItem = (ImageButton) findViewById(R.id.btnInfoStoreItem);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
 
         mPresenter = new StorePresenterImpl(this, this, this);
         mPresenter.initialValues();

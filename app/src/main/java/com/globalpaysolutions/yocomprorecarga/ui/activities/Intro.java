@@ -34,8 +34,8 @@ public class Intro extends AppCompatActivity implements IntroView
     Integer[] mSlides;
 
     //Layouts and Views
-    Button btnSkip;
-    Button btnNext;
+   /* Button btnSkip;
+    Button btnNext;*/
     ViewPager tutorialPager;
 
 
@@ -48,8 +48,8 @@ public class Intro extends AppCompatActivity implements IntroView
         mPresenter.initializeView();
         mPresenter.setIntroAsRead();
 
-        btnSkip = (Button) findViewById(R.id.btnSkip);
-        btnNext = (Button) findViewById(R.id.btnNext);
+       /* btnSkip = (Button) findViewById(R.id.btnSkip);
+        btnNext = (Button) findViewById(R.id.btnNext);*/
 
     }
 
@@ -59,7 +59,7 @@ public class Intro extends AppCompatActivity implements IntroView
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_intro);
+        //setContentView(R.layout.activity_intro);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Intro extends AppCompatActivity implements IntroView
     @Override
     public void showTutorial()
     {
-        int currentPage = 0;
+        /*int currentPage = 0;
         mSlides = new Integer[]{    R.drawable.img_tuto_0,
                                 R.drawable.img_tuto_1,
                                 R.drawable.img_tuto_2,
@@ -84,7 +84,7 @@ public class Intro extends AppCompatActivity implements IntroView
         {
             //Finds all views once the parent view is inflated
             tutorialPager = (ViewPager) findViewById(R.id.pager);
-            CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+            //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
 
             Collections.addAll(tutorialArray, mSlides);
 
@@ -98,7 +98,7 @@ public class Intro extends AppCompatActivity implements IntroView
             }
             tutorialPager.setCurrentItem(currentPage++, true);
         }
-        catch (Exception ex) {   ex.printStackTrace();   }
+        catch (Exception ex) {   ex.printStackTrace();   }*/
     }
 
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener()
@@ -107,7 +107,7 @@ public class Intro extends AppCompatActivity implements IntroView
         @Override
         public void onPageSelected(int position)
         {
-            // changing the next button text 'NEXT' / 'GOT IT'
+            /*// changing the next button text 'NEXT' / 'GOT IT'
             if (position == mSlides.length - 1)
             {
                 // last page. make button text to GOT IT
@@ -119,7 +119,7 @@ public class Intro extends AppCompatActivity implements IntroView
                 // still pages are left
                 btnNext.setText(getString(R.string.button_next));
                 btnSkip.setVisibility(View.VISIBLE);
-            }
+            }*/
         }
 
         @Override

@@ -13,8 +13,8 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="243dp"
-        android:layout_height="382dp"
+        android:layout_width="333dp"
+        android:layout_height="467dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
@@ -25,12 +25,13 @@
 
     <ImageView
         android:id="@+id/imageView17"
-        android:layout_width="191dp"
-        android:layout_height="58dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:srcCompat="@drawable/bg_title_generic"/>
@@ -41,14 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="424dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView10"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/imageView17"
         app:srcCompat="@drawable/bg_coins_store"/>
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btnBack"
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginLeft="8dp"
@@ -65,8 +66,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView18"
         app:layout_constraintStart_toStartOf="@+id/imageView18"
@@ -75,13 +76,13 @@
 
     <TextView
         android:id="@+id/lblRecarCoinsLeft"
-        android:layout_width="104dp"
+        android:layout_width="102dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView18"
@@ -89,20 +90,25 @@
         app:layout_constraintTop_toTopOf="@+id/imageView18"
         app:layout_constraintVertical_bias="0.38"/>
 
+
+    <!--
+
+        CONTINUAR
+    -->
     <ImageButton
         android:id="@+id/btnLeft"
         android:layout_width="43dp"
         android:layout_height="43dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="centerCrop"
+        android:onClick="backClick"
         app:layout_constraintBottom_toTopOf="@+id/imageView18"
-        app:layout_constraintStart_toStartOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.501"
         app:srcCompat="@drawable/ic_arrow_left"/>
 
     <ImageButton
@@ -110,15 +116,15 @@
         android:layout_width="43dp"
         android:layout_height="43dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="nextClick"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/imageView18"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/imageView10"
-        app:layout_constraintVertical_bias="0.501"
         app:srcCompat="@drawable/ic_right_arrow"/>
 
     <TextView
@@ -129,39 +135,39 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
         android:text="TIENDA"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
         app:layout_constraintEnd_toEndOf="@+id/imageView17"
         app:layout_constraintStart_toStartOf="@+id/imageView17"
         app:layout_constraintTop_toTopOf="@+id/imageView17"
         app:layout_constraintVertical_bias="0.35"/>
 
-    <TextView
-        android:id="@+id/lblStoreItemName"
+    <!--<TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:text="VIP BARRIL"
-        app:layout_constraintEnd_toEndOf="@+id/btnRight"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/textView6"/>
 
     <ImageView
         android:id="@+id/imgStoreItem"
-        android:layout_width="114dp"
-        android:layout_height="150dp"
+        android:layout_width="149dp"
+        android:layout_height="230dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnRight"
-        app:layout_constraintStart_toStartOf="@+id/btnLeft"
-        app:layout_constraintTop_toBottomOf="@+id/lblStoreItemName"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
         app:srcCompat="@drawable/img_store_item"/>
 
     <ImageView
@@ -170,35 +176,36 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnRight"
-        app:layout_constraintHorizontal_bias="0.442"
-        app:layout_constraintStart_toEndOf="@+id/lblStoreItemName"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/imageView17"
         app:srcCompat="@drawable/ic_question_mark"/>
 
     <TextView
-        android:id="@+id/lblStoreItemPrice"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnRight"
-        app:layout_constraintStart_toStartOf="@+id/btnLeft"
+        android:text="10,000 RecarCoins"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
         app:layout_constraintTop_toBottomOf="@+id/imgStoreItem"/>
 
     <ImageView
-        android:id="@+id/btnBuy"
+        android:id="@+id/imageButton5"
         android:layout_width="134dp"
         android:layout_height="43dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="@+id/btnRight"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/btnLeft"
-        app:layout_constraintTop_toBottomOf="@+id/lblStoreItemPrice"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:srcCompat="@drawable/btn_button_4"/>
 
     <TextView
@@ -212,7 +219,59 @@
         android:text="COMPRAR"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/imageButton5"
+        app:layout_constraintTop_toTopOf="@+id/imageButton5"/>-->
+
+    <ImageView
+        android:id="@+id/btnBuy"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="@+id/imageView10"
+        app:srcCompat="@drawable/btn_button_4"/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/label_buy"
+        android:textColor="@color/AppGreen"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btnBuy"
         app:layout_constraintStart_toStartOf="@+id/btnBuy"
         app:layout_constraintTop_toTopOf="@+id/btnBuy"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pagerStoreItems"
+        android:layout_width="228dp"
+        android:layout_height="321dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btnInfoStoreItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="56dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@+id/pagerStoreItems"
+        app:layout_constraintTop_toTopOf="@+id/pagerStoreItems"
+        app:srcCompat="@drawable/ic_question_mark"/>
 </android.support.constraint.ConstraintLayout>

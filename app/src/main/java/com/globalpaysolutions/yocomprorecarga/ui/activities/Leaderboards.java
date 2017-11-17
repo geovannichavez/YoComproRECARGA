@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     TextView tvLastWinner;
     ProgressDialog progressDialog;
     ImageView imgButtonsBar;
+    ImageButton btnBack;
 
     //Adapters
     LeadersAdapter mLeaderboardAdapter;
@@ -65,6 +67,15 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
         tvGlobal = (TextView) findViewById(R.id.btnGlobal);
         imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
         tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
 
         //Adapters
         mLeaderboardAdapter = new LeadersAdapter(this, R.layout.custom_leaderboard_listview_item);

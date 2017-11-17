@@ -56,4 +56,6 @@ public interface CapturePrizeView
     void onBronzeKeyExited(String pKey);
     void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onBronzePointCancelled(DatabaseError pDatabaseError);
+
+    void changeToOpenChest(int pChestType);
 }

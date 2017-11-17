@@ -180,7 +180,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             lnrSelectAmount.setOnClickListener(null);
 
             //Setea el SwipeRefreshLayout
-            mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3, R.color.SubtitleTextColor);
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.yvr_green_color, R.color.yvr_green_color_dark, R.color.refresh_progress_3, R.color.SubtitleTextColor);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
             {
                 @Override

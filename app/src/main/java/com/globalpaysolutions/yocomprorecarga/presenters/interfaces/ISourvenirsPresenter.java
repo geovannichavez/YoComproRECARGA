@@ -8,5 +8,6 @@ public interface ISourvenirsPresenter
 {
     void initializeViews();
     void requestSouvenirs();
-    void showSouvenirDetailsModal(String title, String description, String count, String url);
+    void showSouvenirDetailsModal(String title, String description, String count, String url, int souvID);
+    void exchangeSouvenir(int souvID);
 }

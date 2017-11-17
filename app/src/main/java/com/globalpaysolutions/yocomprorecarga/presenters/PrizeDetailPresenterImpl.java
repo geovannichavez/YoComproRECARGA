@@ -56,10 +56,15 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
     {
         try
         {
-            Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + Constants.SMS_NUMBER_PRIZE_EXCHANGE));
+            /*Intent sendIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + Constants.SMS_NUMBER_PRIZE_EXCHANGE));
             sendIntent.putExtra("sms_body", exchangePin);
-            sendIntent.setType("vnd.android-dir/mms-sms");
-            mView.navigateToSms(sendIntent);
+            sendIntent.setType("vnd.android-dir/mms-sms");*/
+
+            Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+            smsIntent.setType("vnd.android-dir/mms-sms");
+            smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
+            smsIntent.putExtra("sms_body",exchangePin);
+            mView.navigateToSms(smsIntent);
 
         }
         catch (Exception ex)

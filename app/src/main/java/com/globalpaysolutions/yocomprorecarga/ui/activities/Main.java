@@ -72,6 +72,12 @@ public class Main extends AppCompatActivity implements MainView
         startActivity(store);
     }
 
+    public void navigatePrizeRedeem(View view)
+    {
+        Intent prize = new Intent(Main.this, RedeemPrize.class);
+        startActivity(prize);
+    }
+
     @Override
     public void hideStatusBar()
     {

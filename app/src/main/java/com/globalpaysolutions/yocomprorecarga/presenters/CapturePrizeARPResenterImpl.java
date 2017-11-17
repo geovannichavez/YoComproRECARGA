@@ -68,6 +68,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void initialize()
     {
+        //Udpate indicators
+        mView.updatePrizeButton(UserData.getInstance(mContext).getConsumerCoins());
+        String prizes = String.valueOf(UserData.getInstance(mContext).GetConsumerPrizes());
+        String coins = String.valueOf(UserData.getInstance(mContext).getConsumerCoins());
+        String souvs = String.valueOf(UserData.getInstance(mContext).getSavedSouvenirsCount());
+        mView.updateIndicators(prizes, coins, souvs);
+
         this.mView.obtainUserProgress();
         mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext, Constants.ONE_METTER_DISPLACEMENT);
         new initializeGoogleMapsCallback().execute();
@@ -165,6 +172,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
+        mView.changeToOpenChest(pChestType);
         mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
 
@@ -425,7 +433,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onOpenChestSuccess(ExchangeResponse pExchangeResponse)
+    public void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int pChestType)
     {
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
@@ -471,6 +479,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                           pExchangeResponse.getDescription(),
                           pExchangeResponse.getImgUrl(),
                           pExchangeResponse.getValue());
+
+                  String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
+                  String coins = String.valueOf(pExchangeResponse.getTracking().getCurrentCoinsProgress());
+                  String souvs = String.valueOf( pExchangeResponse.getTracking().getTotalSouvenirs());
+                  mView.updateIndicators(prizes, coins, souvs);
+
                   mView.showSouvenirWonDialog(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl());
               }
               else

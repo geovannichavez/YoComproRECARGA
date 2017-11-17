@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     TextView lblPrizeTitle;
     TextView lblPrizeDescription;
     TextView lblExchange;
+    ImageButton btnSms;
 
     //MVP
     PrizeDetailPresenterImpl mPresenter;
@@ -37,11 +39,11 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
 
 
         imgPrizeType = (ImageView) findViewById(R.id.imgChestPrize);
-        //etPrizeCode = (EditText) findViewById(R.id.etPrizeCode);
         etPrizeCode = (TextView) findViewById(R.id.txtPin);
         lblPrizeTitle = (TextView) findViewById(R.id.lblPrizeTitle);
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
         lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
+        btnSms = (ImageButton) findViewById(R.id.btnSms);
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
         mPresenter.loadInitialData();
@@ -54,21 +56,21 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     {
         lblPrizeTitle.setText(data.getString(Constants.BUNDLE_PRIZE_TITLE));
         lblPrizeDescription.setText(data.getString(Constants.BUNDLE_PRIZE_DESCRIPTION));
-        lblExchange.setText(data.getString(Constants.BUNDLE_PRIZE_DIAL));
         etPrizeCode.setText(data.getString(Constants.BUNDLE_PRIZE_CODE));
+
         switch (data.getInt(Constants.BUNDLE_PRIZE_TYPE))
         {
             case 1:
-                imgPrizeType.setImageResource(R.drawable.img_chest_sapphire);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_01);
                 break;
             case 2:
-                imgPrizeType.setImageResource(R.drawable.img_chest_emerald);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_02);
                 break;
             case 3:
-                imgPrizeType.setImageResource(R.drawable.img_chest_ruby);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
                 break;
             default:
-                imgPrizeType.setImageResource(R.drawable.img_chest_sapphire);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
                 break;
         }
 
@@ -91,7 +93,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     {
         try
         {
-            etPrizeCode.setOnClickListener(new View.OnClickListener()
+            btnSms.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
@@ -100,6 +102,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                     mPresenter.createSmsPrizeContent(prizePin);
                 }
             });
+
         }
         catch (Exception ex) {  ex.printStackTrace();   }
     }
@@ -115,5 +118,17 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         {
             ex.printStackTrace();
         }
+    }
+
+    public void navigateTimeMachine(View view)
+    {
+        Intent intent = new Intent(this, EraSelection.class);
+        startActivity(intent);
+    }
+
+    public void navigateMap(View view)
+    {
+        Intent intent = new Intent(this, PointsMap.class);
+        startActivity(intent);
     }
 }

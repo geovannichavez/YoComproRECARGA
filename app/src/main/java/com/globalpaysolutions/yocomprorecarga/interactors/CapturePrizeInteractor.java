@@ -71,15 +71,14 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void openCoinsChest(LatLng pLocation, String pFirebaseID, int pChestType, int pEraID)
+    public void openCoinsChest(LatLng pLocation, String pFirebaseID, final int pChestType, int pEraID)
     {
         ExchangeReqBody requestBody = new ExchangeReqBody();
         requestBody.setLocationID(pFirebaseID);
         requestBody.setLatitude(pLocation.latitude);
         requestBody.setLongitude(pLocation.longitude);
         requestBody.setChestType(pChestType);
-        //requestBody.setAgeID(pEraID); TODO: quitar el valor predeterminado
-        requestBody.setAgeID(1);
+        requestBody.setAgeID(pEraID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);
@@ -92,7 +91,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 if(response.isSuccessful())
                 {
                     ExchangeResponse exchangeResponse = response.body();
-                    mListener.onOpenChestSuccess(exchangeResponse);
+                    mListener.onOpenChestSuccess(exchangeResponse, pChestType);
                 }
                 else
                 {

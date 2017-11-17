@@ -1,7 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,10 +12,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.SourvenirsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvenirsAdapter;
@@ -34,6 +38,8 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     GridView gvSouvenirs;
     AlertDialog mSouvenirDialog;
     TextView tvEraName;
+    ImageButton btnBack;
+    ImageButton btnStore;
 
     //Global Variables
 
@@ -46,6 +52,27 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
         //Initialize Views
         gvSouvenirs = (GridView) findViewById(R.id.gvSouvenirs);
         tvEraName = (TextView) findViewById(R.id.tvEraName);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnStore = (ImageButton) findViewById(R.id.btnStore);
+
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+
+        btnStore.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(Souvenirs.this, Store.class);
+                startActivity(intent);
+            }
+        });
 
         //Initialize objects
         mPresnter = new SourvenirsPresenterImpl(this, this, this);
@@ -76,7 +103,10 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 ListSouvenirsByConsumer souvenir = ((ListSouvenirsByConsumer) parent.getItemAtPosition(position));
-                mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), "", String.valueOf(souvenir.getSouvenirsOwnedByConsumer()), souvenir.getImgUrl());
+                mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), "",
+                        String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
+                        souvenir.getImgUrl(),
+                        souvenir.getSouvenirID());
             }
         });
 
@@ -98,7 +128,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     }
 
     @Override
-    public void showSouvenirDetails(String title, String description, String count, String url)
+    public void showSouvenirDetails(String title, String description, String count, String url, final int souvID)
     {
         try
         {
@@ -110,6 +140,15 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             TextView lblSouvenirNameDialog = (TextView) dialogView.findViewById(R.id.lblSouvenirNameDialog);
             TextView lblSouvenirDialogDescr = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogDescr);
             TextView lblSouvenirDialogQntt = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogQntt);
+            ImageView btnSouvDialgSell = (ImageView) dialogView.findViewById(R.id.btnSouvDialgSell);
+            btnSouvDialgSell.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mPresnter.exchangeSouvenir(souvID);
+                }
+            });
 
             ImageView imgSouvenirDetail = (ImageView) dialogView.findViewById(R.id.imgSouvenirDetail);
 
@@ -131,12 +170,77 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
         }
     }
 
+    @Override
+    public void navigatePrizeDetails()
+    {
+        Intent intent = new Intent(this, PrizeDetail.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void closeSouvenirDialog()
+    {
+        try
+        {
+            if(mSouvenirDialog != null)
+                mSouvenirDialog.dismiss();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void generateImageDialog(DialogViewModel dialog, int resource)
+    {
+        createImageDialog(dialog.getTitle(), dialog.getLine1(), resource);
+    }
+
     public void closeSouvenirDialog(View view)
     {
         try
         {
             if(mSouvenirDialog != null)
                 mSouvenirDialog.dismiss();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void createImageDialog(String title, String description, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(description);
+            imgSouvenir.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
         }
         catch (Exception ex)
         {

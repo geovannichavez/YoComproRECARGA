@@ -235,6 +235,55 @@ var World = {
     },
 
 
+//Funcion para crear modelo Comodin
+createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key) {
+
+    exchanging=false;
+    var modelWildcard = new AR.Model("assets/Comodin.wt3", {
+                                 onLoaded: this.worldLoaded,
+                                 scale: {
+                                 x: 1,
+                                 y: 1,
+                                 z: 1
+                                 }
+                                 });
+
+    var a = new AR.PropertyAnimation(modelWildcard, 'rotate.heading', 90.0, -270, 3000);
+
+    //var a = new AR.PropertyAnimation(modelWildcard, 'rotate.heading', 0,0 , 10);
+
+    a.start(-1);
+    //a.start(1);
+
+
+    var WildcardChestAnim = new AR.ModelAnimation(modelWildcard, "Scene");
+    var indicatorImage = new AR.ImageResource("assets/GoldArrow.png");
+    var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1, {
+                                                 verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
+                                                 });
+    var location = new AR.GeoLocation(latitude,longitude , AR.CONST.UNKNOWN_ALTITUDE);
+    var obj = new AR.GeoObject(location, {
+                               drawables: {
+                               cam: [modelWildcard],
+                               indicator: [indicatorDrawable]
+                               },
+                               onClick : function() {
+                               if(!exchanging)
+                               {
+                               exchanging = true;
+                               WildcardChestAnim.start(1);
+                               setTimeout(function() {
+                                          var architectSdkUrl = "architectsdk://Wildcard//"+key+"//"+latitude+"//"+longitude;
+                                          document.location = architectSdkUrl;
+                                          exchanging = false;
+                                          },3000);
+                               }
+                               }
+                               });
+    actualARObject = obj;
+},
+
+
 
     worldLoaded: function worldLoadedFn()
     {

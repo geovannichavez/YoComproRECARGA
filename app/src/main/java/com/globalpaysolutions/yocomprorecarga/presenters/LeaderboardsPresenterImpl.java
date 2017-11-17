@@ -70,8 +70,8 @@ public class LeaderboardsPresenterImpl implements ILeaderboardsPresenter, Leader
             mView.renderLeaderboardData(leaders);
 
             //Sets last winner
-            //String data = String.format(mContext.getString(R.string.label_last_winner), );
-            mView.setLastWinner(response.getLastWinner().getNickname());
+            String data = String.format(mContext.getString(R.string.label_last_winner), response.getLastWinner().getNickname());
+            mView.setLastWinner(data);
         }
         catch (Exception ex) {  ex.printStackTrace();   }
     }

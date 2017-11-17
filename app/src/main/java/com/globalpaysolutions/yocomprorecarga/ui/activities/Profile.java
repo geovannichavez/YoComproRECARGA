@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class Profile extends AppCompatActivity implements ProfileView
     //Views and layouts
     TextView tvNickname;
     CircleImageView ivProfilePicture;
+    ImageButton btnBack;
 
     //MVP
     ProfilePresenterImpl mPresenter;
@@ -41,6 +43,16 @@ public class Profile extends AppCompatActivity implements ProfileView
 
         tvNickname = (TextView) findViewById(R.id.lblNickname);
         ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
 
         mPresenter = new ProfilePresenterImpl(this, this, this);
         mPresenter.loadInitialData();

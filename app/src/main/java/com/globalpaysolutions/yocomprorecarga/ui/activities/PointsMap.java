@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
@@ -58,6 +59,8 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     //Views
     ImageButton btnCloseInfography;
     AlertDialog infographyDialog;
+    ImageButton btnBackMap;
+    ImageButton btnReqTopupMap;
 
     //Adapters y Layouts
     private GoogleMap mGoogleMap;
@@ -83,6 +86,28 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
         setContentView(R.layout.activity_pointsmap);
 
         btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
+        btnBackMap = (ImageButton) findViewById(R.id.btnBackMap);
+        btnReqTopupMap = (ImageButton) findViewById(R.id.btnReqTopupMap);
+
+        btnBackMap.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+
+        btnReqTopupMap.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(PointsMap.this, RequestTopup.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+            }
+        });
 
         mSalesPointsMarkers = new HashMap<>();
         mVendorPointsMarkers = new HashMap<>();
@@ -97,7 +122,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
         mPresenter.intializeGeolocation();
-        mPresenter.checkFirstTimeInstructions();
+        //mPresenter.checkFirstTimeInstructions();
 
     }
 

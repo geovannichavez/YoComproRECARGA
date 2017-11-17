@@ -51,12 +51,17 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
             row.setTag(currentItem);
         }
 
-        TextView title = (TextView) row.findViewById(R.id.tvAchTitle);
-        TextView description = (TextView) row.findViewById(R.id.tvAchDescription);
-        TextView coinsValue = (TextView) row.findViewById(R.id.tvAchCoinsValue);
+        TextView title = (TextView) row.findViewById(R.id.txtTitle);
+        TextView description = (TextView) row.findViewById(R.id.txtDescription);
+        TextView coinsValue = (TextView) row.findViewById(R.id.txtCoins);
+        TextView actual = (TextView) row.findViewById(R.id.txtActual);
 
         title.setText(currentItem.getName());
-        coinsValue.setText(String.valueOf(currentItem.getScore()));
+        description.setText(currentItem.getDescription());
+        coinsValue.setText(String.valueOf(currentItem.getNextPrize()));
+
+        String strActual = String.format("Actual: %1$s", String.valueOf(currentItem.getScore()));
+        actual.setText(strActual);
 
 
         return  row;

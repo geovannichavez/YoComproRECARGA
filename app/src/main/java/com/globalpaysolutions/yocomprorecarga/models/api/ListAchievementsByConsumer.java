@@ -11,106 +11,90 @@ public class ListAchievementsByConsumer
 {
     @SerializedName("AchievementID")
     @Expose
-    private Integer achievementID;
+    private int achievementID;
     @SerializedName("Name")
     @Expose
     private String name;
-    @SerializedName("FirstLevel")
-    @Expose
-    private Integer firstLevel;
-    @SerializedName("SecondLevel")
-    @Expose
-    private Integer secondLevel;
-    @SerializedName("ThirdLevel")
-    @Expose
-    private Integer thirdLevel;
     @SerializedName("Score")
     @Expose
-    private Integer score;
+    private int score;
     @SerializedName("Level")
     @Expose
-    private Integer level;
+    private int level;
     @SerializedName("Won")
     @Expose
-    private Boolean won;
+    private boolean won;
+    @SerializedName("NextPrize")
+    @Expose
+    private int nextPrize;
+    @SerializedName("NextLevel")
+    @Expose
+    private int nextLevel;
+    @SerializedName("Description")
+    @Expose
+    private String description;
 
-    public Integer getAchievementID()
-    {
+    public int getAchievementID() {
         return achievementID;
     }
 
-    public void setAchievementID(Integer achievementID)
-    {
+    public void setAchievementID(int achievementID) {
         this.achievementID = achievementID;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getFirstLevel()
-    {
-        return firstLevel;
-    }
-
-    public void setFirstLevel(Integer firstLevel)
-    {
-        this.firstLevel = firstLevel;
-    }
-
-    public Integer getSecondLevel()
-    {
-        return secondLevel;
-    }
-
-    public void setSecondLevel(Integer secondLevel)
-    {
-        this.secondLevel = secondLevel;
-    }
-
-    public Integer getThirdLevel()
-    {
-        return thirdLevel;
-    }
-
-    public void setThirdLevel(Integer thirdLevel)
-    {
-        this.thirdLevel = thirdLevel;
-    }
-
-    public Integer getScore()
-    {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(Integer score)
-    {
+    public void setScore(int score) {
         this.score = score;
     }
 
-    public Integer getLevel()
-    {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(Integer level)
-    {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public Boolean getWon()
-    {
+    public boolean isWon() {
         return won;
     }
 
-    public void setWon(Boolean won)
-    {
+    public void setWon(boolean won) {
         this.won = won;
+    }
+
+    public int getNextPrize() {
+        return nextPrize;
+    }
+
+    public void setNextPrize(int nextPrize) {
+        this.nextPrize = nextPrize;
+    }
+
+    public int getNextLevel() {
+        return nextLevel;
+    }
+
+    public void setNextLevel(int nextLevel) {
+        this.nextLevel = nextLevel;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

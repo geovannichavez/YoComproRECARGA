@@ -14,7 +14,7 @@ public interface CapturePrizeListener
 {
     void onRetrieveTracking(Tracking pTracking);
     void onTrackingError(int pCodeStatus, Throwable pThrowable);
-    void onOpenChestSuccess(ExchangeResponse pExchangeResponse);
+    void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int chestType);
     void onOpenChestError(int pCodeStatus, Throwable pThrowable);
     void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
     void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable);

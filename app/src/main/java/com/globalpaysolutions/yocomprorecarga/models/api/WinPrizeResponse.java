@@ -39,7 +39,7 @@ public class WinPrizeResponse
     private String message;
     @SerializedName("PrizeLevel")
     @Expose
-    private Integer prizeLevel;
+    private int prizeLevel;
     @SerializedName("tracking")
     @Expose
     private Tracking tracking;
@@ -140,12 +140,12 @@ public class WinPrizeResponse
         this.message = message;
     }
 
-    public Integer getPrizeLevel()
+    public int getPrizeLevel()
     {
         return prizeLevel;
     }
 
-    public void setPrizeLevel(Integer prizeLevel)
+    public void setPrizeLevel(int prizeLevel)
     {
         this.prizeLevel = prizeLevel;
     }

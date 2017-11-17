@@ -57,6 +57,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     TextView tvSouvenirCounter;
     TextView tvCoinsCounter;
     //ImageButton btnCoinsCounter;
+    ImageButton imgCoinMeter;
     ImageButton btnBack;
     ImageView btnNavigateTimeMachine;
     ImageView ivPrize2D;
@@ -84,6 +85,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         tvSouvenirCounter = (TextView) findViewById(R.id.tvSouvenirCounter);
         tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        imgCoinMeter = (ImageButton) findViewById(R.id.imgCoinMeter);
         btnNavigateTimeMachine = (ImageView) findViewById(R.id.btnNavigateTimeMachine);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -100,12 +102,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             public void onClick(View v)
             {
                 Intent timemachine = new Intent(CapturePrizeAR.this, EraSelection.class);
-                timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+               /* timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 timemachine.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 timemachine.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);*/
                 startActivity(timemachine);
             }
         });
@@ -182,6 +184,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onCoinLongClick()
     {
+
         ivPrize2D.setOnTouchListener(new View.OnTouchListener()
         {
             long then;
@@ -192,6 +195,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             {
                 if (event.getAction() == MotionEvent.ACTION_DOWN)
                 {
+
                     then = System.currentTimeMillis();
 
                     //Stops vibrating and removes animation
@@ -359,14 +363,25 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         try
         {
             //Creates the builder and inflater of dialog
-            AlertDialog souvenirDialog;
+            final AlertDialog souvenirDialog;
             AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
             LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
+            final View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
 
             TextView tvSouvenirName = (TextView) dialogView.findViewById(R.id.lblSouvenirName);
             TextView tvSouvenirDesc = (TextView) dialogView.findViewById(R.id.lblSouvenirDescription);
             ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgSouvenirDialog);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
+            btnGenericDialogButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent souvs = new Intent(CapturePrizeAR.this, Souvenirs.class);
+                    startActivity(souvs);
+                }
+            });
 
             tvSouvenirName.setText(souvenirName);
             tvSouvenirDesc.setText(souvenirDescription);
@@ -378,6 +393,15 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             souvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             souvenirDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             souvenirDialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    souvenirDialog.dismiss();
+                }
+            });
         }
         catch (Exception ex)
         {
@@ -397,9 +421,84 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     public void updatePrizeButton(int pCoins)
     {
         int coinsButton;
-        coinsButton = R.drawable.img_coin_counter_twenty;
+        coinsButton = R.drawable.ic_recarcoin_meter_zero;
 
-        tvCoinsCounter.setText(String.valueOf(pCoins));
+        switch (pCoins)
+        {
+            case 0:
+                coinsButton = R.drawable.ic_recarcoin_meter_zero;
+                break;
+            case 1:
+                coinsButton = R.drawable.ic_recarcoin_meter_1_to_4;
+                break;
+            case 2:
+                coinsButton = R.drawable.ic_recarcoin_meter_1_to_4;
+                break;
+            case 3:
+                coinsButton = R.drawable.ic_recarcoin_meter_1_to_4;
+                break;
+            case 4:
+                coinsButton = R.drawable.ic_recarcoin_meter_1_to_4;
+                break;
+            case 5:
+                coinsButton = R.drawable.ic_recarcoin_meter_5_to_9;
+                break;
+            case 6:
+                coinsButton = R.drawable.ic_recarcoin_meter_5_to_9;
+                break;
+            case 7:
+                coinsButton = R.drawable.ic_recarcoin_meter_5_to_9;
+                break;
+            case 8:
+                coinsButton = R.drawable.ic_recarcoin_meter_5_to_9;
+                break;
+            case 9:
+                coinsButton = R.drawable.ic_recarcoin_meter_5_to_9;
+                break;
+            case 10:
+                coinsButton = R.drawable.ic_recarcoin_meter_10_to_14;
+                break;
+            case 11:
+                coinsButton = R.drawable.ic_recarcoin_meter_10_to_14;
+                break;
+            case 12:
+                coinsButton = R.drawable.ic_recarcoin_meter_10_to_14;
+                break;
+            case 13:
+                coinsButton = R.drawable.ic_recarcoin_meter_10_to_14;
+                break;
+            case 14:
+                coinsButton = R.drawable.ic_recarcoin_meter_10_to_14;
+                break;
+            case 15:
+                coinsButton = R.drawable.ic_recarcoin_meter_15_to_19;
+                break;
+            case 16:
+                coinsButton = R.drawable.ic_recarcoin_meter_15_to_19;
+                break;
+            case 17:
+                coinsButton = R.drawable.ic_recarcoin_meter_15_to_19;
+                break;
+            case 18:
+                coinsButton = R.drawable.ic_recarcoin_meter_15_to_19;
+                break;
+            case 19:
+                coinsButton = R.drawable.ic_recarcoin_meter_15_to_19;
+                break;
+            case 20:
+                coinsButton = R.drawable.ic_recarcoin_meter_20;
+                break;
+            default:
+                coinsButton = R.drawable.ic_recarcoin_meter_zero;
+                break;
+        }
+
+        imgCoinMeter.setImageResource(coinsButton);
+
+        if(pCoins != 20)
+            tvCoinsCounter.setText(String.valueOf(pCoins));
+        else
+            tvCoinsCounter.setText("");
     }
 
     @Override
@@ -423,7 +522,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d);
+        ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d_closed);
     }
 
     @Override
@@ -453,7 +552,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d);
+        ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_closed);
     }
 
     @Override
@@ -489,7 +588,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d);
+        ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_closed);
     }
 
     @Override
@@ -507,6 +606,27 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onBronzePointCancelled(DatabaseError pDatabaseError)
     {
+
+    }
+
+    @Override
+    public void changeToOpenChest(int pChestType)
+    {
+        switch (pChestType)
+        {
+            case Constants.VALUE_CHEST_TYPE_GOLD:
+                ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d_open);
+                break;
+            case Constants.VALUE_CHEST_TYPE_SILVER:
+                ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_closed);
+                break;
+            case Constants.VALUE_CHEST_TYPE_BRONZE:
+                ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_open);
+                break;
+                default:
+                    ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_open);
+                    break;
+        }
 
     }
 
@@ -660,25 +780,35 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         try
         {
-            AlertDialog dialog;
+            final AlertDialog dialog;
             AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
             LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_dialog_generic_button, null);
 
             TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
             TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
-            ImageButton btnGenericDialogButton = (ImageButton) findViewById(R.id.btnGenericDialogButton);
-            TextView tvButtonContent = (TextView) findViewById(R.id.tvButtonContent);
+            ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
+            TextView tvButtonContent = (TextView) dialogView.findViewById(R.id.tvButtonContent);
+            ImageView btnClose = (ImageView) dialogView.findViewById(R.id.btnClose);
             btnGenericDialogButton.setOnClickListener(listener);
 
             tvTitle.setText(title);
             tvDescription.setText(message);
-
+            tvButtonContent.setText(buttonText);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
         }
         catch (Exception ex)
         {

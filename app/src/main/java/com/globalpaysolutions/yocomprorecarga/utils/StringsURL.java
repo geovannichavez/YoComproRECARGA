@@ -80,5 +80,6 @@ public class StringsURL
     public static final String PURCHASE = "Purchase";
     public static final String ERA_SELECTION = "SelectAge";
     public static final String ACHIEVEMENTS = "GetAchievementsByConsumer";
+    public static final String EXCHANGE_SOUVENIR = "ExchangeSouvenir";
 }
 

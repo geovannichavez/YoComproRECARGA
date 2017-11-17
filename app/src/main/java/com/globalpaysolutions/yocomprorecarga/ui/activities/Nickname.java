@@ -33,9 +33,9 @@ public class Nickname extends AppCompatActivity implements NicknameView
     //Views and Layouts
     //TextView tvExamples;
     EditText etNickname;
-    ImageButton btnAcceptNick;
     CoordinatorLayout coordinatorLayout;
     ProgressDialog progressDialog;
+    ImageButton btnAcceptNick;
 
     //Global variables
     Validation mValidator;
@@ -61,6 +61,15 @@ public class Nickname extends AppCompatActivity implements NicknameView
         etNickname = (EditText) findViewById(R.id.etNickname);
         btnAcceptNick = (ImageButton) findViewById(R.id.btnAcceptNick);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+
+        btnAcceptNick.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                validateNickname();
+            }
+        });
 
         mValidator = new Validation(this, coordinatorLayout);
 
@@ -120,7 +129,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
         mSnackbar.show();
     }
 
-    public void validateNickname(View view)
+    public void validateNickname()
     {
         if(checkValidation())
         {

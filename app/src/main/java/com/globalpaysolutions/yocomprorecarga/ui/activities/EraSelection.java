@@ -35,6 +35,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     //Layouts and Views
     ListView lvEras;
     TextView lblEraName;
+    ImageButton btnBack;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -47,6 +48,15 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
 
         lvEras = (ListView) findViewById(R.id.lvEras);
         lblEraName = (TextView) findViewById(R.id.lblEraName);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
 
         mErasAdapter = new ErasAdapter(this, R.layout.custom_era_selection_item);
         mPresenter = new EraSelectionPresenterImpl(this, this, this);

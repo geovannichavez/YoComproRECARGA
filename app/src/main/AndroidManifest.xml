@@ -139,6 +139,7 @@
             android:name=".ui.activities.RequestTopup"
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
+            android:theme="@style/AppThemeYvr"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
@@ -242,7 +243,14 @@
             android:name=".ui.activities.Souvenirs"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"/>
-        <activity android:name=".ui.activities.Achievements">
+        <activity
+            android:name=".ui.activities.Achievements"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity android:name=".ui.activities.RedeemPrize"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 
