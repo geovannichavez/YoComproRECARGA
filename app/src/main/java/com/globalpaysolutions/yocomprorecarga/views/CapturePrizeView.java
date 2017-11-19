@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
@@ -56,6 +57,12 @@ public interface CapturePrizeView
     void onBronzeKeyExited(String pKey);
     void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onBronzePointCancelled(DatabaseError pDatabaseError);
+
+    void onWildcardKeyEntered(String pKey, LatLng pLocation);
+    void onWildcardKeyEntered_2D(String pKey, LatLng pLocation);
+    void onWildcardKeyExited(String pKey);
+    void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData);
+    void onWildcardPointCancelled(DatabaseError pDatabaseError);
 
     void changeToOpenChest(int pChestType);
 }

@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
@@ -231,6 +232,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mFirebaseInteractor.goldPointsQuery(location, Constants.GOLD_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.silverPointsQuery(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.bronzePointsQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.wildcardPointsQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
     }
 
     @Override
@@ -240,6 +242,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mFirebaseInteractor.goldPointsUpdateCriteria(location, Constants.GOLD_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+        mFirebaseInteractor.wildcardPointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
     }
 
     @Override
@@ -388,6 +391,31 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         Log.i(TAG, "Bronze geoquery finished");
     }
 
+    /*
+    *
+    *
+    *   WILDCARD LISTENERS
+    *
+    *
+    * */
+    @Override
+    public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
+    {
+        mView.addWildcardPoint(pKey, pLocation);
+    }
+
+    @Override
+    public void gf_wildcardPoint_onKeyExited(String pKey, boolean p3DCompatible)
+    {
+        mView.removeWildcardPoint(pKey);
+    }
+
+    @Override
+    public void gf_wildcardPoint_onGeoQueryReady()
+    {
+
+    }
+
     // FIREBASE STATIC POINTS
     @Override
     public void fb_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
@@ -455,6 +483,19 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_bronzePoint_onCancelled(DatabaseError databaseError)
     {
         Log.e(TAG, "BronzePoint DatabaseError: OnCancelled Fired!");
+    }
+
+    @Override
+    public void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData)
+    {
+        if(wildcardYCRData != null)
+            mView.addWildcardPointData(pKey, wildcardYCRData.getBrand());
+    }
+
+    @Override
+    public void fb_wildcardPoint_onCancelled(DatabaseError databaseError)
+    {
+
     }
 
     /*

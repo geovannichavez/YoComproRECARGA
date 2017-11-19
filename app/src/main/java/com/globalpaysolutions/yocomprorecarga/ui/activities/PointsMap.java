@@ -76,6 +76,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     private Map<String, Marker> mGoldPointsMarkers;
     private Map<String, Marker> mSilverPointsMarkers;
     private Map<String, Marker> mBronzePointsMarkers;
+    private Map<String, Marker> mWildcardPointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
 
 
@@ -114,6 +115,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
         mGoldPointsMarkers = new HashMap<>();
         mSilverPointsMarkers = new HashMap<>();
         mBronzePointsMarkers = new HashMap<>();
+        mWildcardPointsMarkers = new HashMap<>();
         mSalePointMarkersFirebaseKeys = new HashMap<>();
 
 
@@ -738,6 +740,63 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             Marker marker = mBronzePointsMarkers.get(pKey);
             marker.remove();
             mBronzePointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addWildcardPoint(String pKey, LatLng pLocation)
+    {
+        try
+        {
+            Marker marker = mWildcardPointsMarkers.get(pKey);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_wildcard_point))
+                );
+                mWildcardPointsMarkers.put(pKey, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addWildcardPointData(String pKey, String brand)
+    {
+        try
+        {
+            Marker marker = mWildcardPointsMarkers.get(pKey);
+            marker.setTitle(brand);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeWildcardPoint(String pKey)
+    {
+        try
+        {
+            Marker marker = mWildcardPointsMarkers.get(pKey);
+            marker.remove();
+            mWildcardPointsMarkers.remove(pKey);
         }
         catch (NullPointerException npe)
         {

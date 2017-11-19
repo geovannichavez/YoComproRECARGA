@@ -239,7 +239,7 @@ var World = {
 createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key) {
 
     exchanging=false;
-    var modelWildcard = new AR.Model("assets/Comodin.wt3", {
+    var modelWildcard = new AR.Model("assets/Wildcard.wt3", {
                                  onLoaded: this.worldLoaded,
                                  scale: {
                                  x: 1,

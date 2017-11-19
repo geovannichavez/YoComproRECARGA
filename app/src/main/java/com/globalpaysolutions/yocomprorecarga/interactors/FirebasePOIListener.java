@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
@@ -25,6 +26,11 @@ public interface FirebasePOIListener
     void gf_bronzePoint_onKeyExited(String pKey, boolean p3DCompatible);
     void gf_bronzePoint_onGeoQueryReady();
 
+    //GeoFire WildcardPoints
+    void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible);
+    void gf_wildcardPoint_onKeyExited(String pKey, boolean p3DCompatible);
+    void gf_wildcardPoint_onGeoQueryReady();
+
     /*
     *
     *
@@ -43,4 +49,9 @@ public interface FirebasePOIListener
     // GeoFire BronzePointsData
     void fb_bronzePoint_onDataChange(String pKey, LocationPrizeYCRData pBronzePointData);
     void fb_bronzePoint_onCancelled(DatabaseError databaseError);
+
+    // GeoFire WildcardPointsData
+    void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData);
+    void fb_wildcardPoint_onCancelled(DatabaseError databaseError);
+
 }

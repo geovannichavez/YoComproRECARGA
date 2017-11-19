@@ -14,4 +14,5 @@ public interface ICapturePrizeInteractor
     void openCoinsChest(LatLng pLocation, String pFirebaseID, int pChestType, int pEraID);
     void saveUserTracking(Tracking pTracking);
     void atemptRedeemPrize();
+    void exchangeWildcard(String pFirebaseID, int eraID);
 }

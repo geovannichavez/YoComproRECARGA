@@ -249,6 +249,6 @@
     <string name="content_couldnt_exchange_souvenir">Algo salió mal y no se pudo canjear tu souvenir. ¡Inténtalo más tarde!</string>
     <string name="label_enter_pin_to_redeem">Escribe el PIN del premio a canjear</string>
     <string name="label_type_phone_to_apply_prize">Digita el número celular que se premiará</string>
-    <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro ara canjear tu premio.</string>
+    <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro para canjear tu premio.</string>
 
 </resources>

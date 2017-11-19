@@ -10,6 +10,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
@@ -35,20 +36,27 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private DatabaseReference mRootReference = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference mGoldPoints = mRootReference.child("locationGoldYCR");
     private DatabaseReference mGoldPointsData = mRootReference.child("locationGoldYCRData");
+
     private DatabaseReference mSilverPoints = mRootReference.child("locationSilverYCR");
     private DatabaseReference mSilverPointsData = mRootReference.child("locationSilverYCRData");
+
     private DatabaseReference mBronzePoints = mRootReference.child("locationBronzeYCR");
     private DatabaseReference mBronzePointsData = mRootReference.child("locationBronzeYCRData");
+
+    private DatabaseReference mWildcardPoints = mRootReference.child("locationWildcardYCR");
+    private DatabaseReference mWildcardPointsData = mRootReference.child("locationWildcardYCRData");
 
     //Geofire
     private GeoFire mGoldPointsRef;
     private GeoFire mSilverPointsRef;
     private GeoFire mBronzePointsRef;
+    private GeoFire mWildcardPointsRef;
 
     //GeoFire Queries
     private GeoQuery mGoldPointsQuery;
     private GeoQuery mSilverPointsQuery;
     private GeoQuery mBronzePointsQuery;
+    private GeoQuery mWildcardPointsQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -120,6 +128,34 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     }
 
+    @Override
+    public void wildcardPointsQuery(GeoLocation location, double radius)
+    {
+        //new executeWildcardPointsQuery(location, radius);
+        mWildcardPointsQuery = mWildcardPointsRef.queryAtLocation(location, radius);
+        mWildcardPointsQuery.addGeoQueryEventListener(wildcardPointsListener);
+    }
+
+    @Override
+    public void wildcardPointsUpdateCriteria(GeoLocation pLocation, double pRadius)
+    {
+        try
+        {
+            mWildcardPointsQuery.setLocation(pLocation, pRadius);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    /*
+    *
+    *
+    *   GEOQUERY EVENTS LISTENER
+    *
+    *
+    * */
     private GeoQueryEventListener goldPointsListener = new GeoQueryEventListener()
     {
 
@@ -276,6 +312,58 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     };
 
+    private GeoQueryEventListener wildcardPointsListener = new GeoQueryEventListener()
+    {
+
+        @Override
+        public void onKeyEntered(final String key, GeoLocation location)
+        {
+            mWildcardPointsData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    WildcardYCRData wildcardYCRData = dataSnapshot.getValue(WildcardYCRData.class);
+                    mFirebaseListener.fb_wildcardPoint_onDataChange(key, wildcardYCRData);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    mFirebaseListener.fb_wildcardPoint_onCancelled(databaseError);
+                }
+            });
+
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mFirebaseListener.gf_wildcardPoint_onKeyEntered(key, geoLocation, mUserData.Is3DCompatibleDevice());
+        }
+
+        @Override
+        public void onKeyExited(String key)
+        {
+            mFirebaseListener.gf_wildcardPoint_onKeyExited(key, mUserData.Is3DCompatibleDevice());
+        }
+
+        @Override
+        public void onKeyMoved(String key, GeoLocation location)
+        {
+            Log.i(TAG, "Wildcard: Warning, wildcard point key moved fired!");
+        }
+
+        @Override
+        public void onGeoQueryReady()
+        {
+            mFirebaseListener.gf_wildcardPoint_onGeoQueryReady();
+            Log.i(TAG, "Wildcard: GeoQuery for WildcardPoint ready");
+        }
+
+        @Override
+        public void onGeoQueryError(DatabaseError error)
+        {
+            Log.e(TAG, "WildcardPoint: DatabaseError for WildcardPoint fired");
+        }
+    };
+
 
 
     /*
@@ -296,6 +384,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             mGoldPointsRef = new GeoFire(mGoldPoints);
             mSilverPointsRef = new GeoFire(mSilverPoints);
             mBronzePointsRef = new GeoFire(mBronzePoints);
+            mWildcardPointsRef = new GeoFire(mWildcardPoints);
             return null;
         }
     }
@@ -373,6 +462,33 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             {
                 mBronzePointsQuery = mBronzePointsRef.queryAtLocation(geoLocation, radius);
                 mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private class executeWildcardPointsQuery extends AsyncTask<Void, Void, Void>
+    {
+        GeoLocation geoLocation;
+        double radius;
+
+        executeWildcardPointsQuery(GeoLocation pLocation, double pRadius)
+        {
+            this.geoLocation = pLocation;
+            this.radius = pRadius;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            try
+            {
+                mWildcardPointsQuery = mWildcardPointsRef.queryAtLocation(geoLocation, radius);
+                mWildcardPointsQuery.addGeoQueryEventListener(wildcardPointsListener);
             }
             catch (IllegalArgumentException ex)
             {

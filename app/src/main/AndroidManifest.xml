@@ -184,6 +184,7 @@
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"

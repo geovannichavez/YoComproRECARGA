@@ -32,6 +32,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
@@ -610,6 +611,42 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
+    public void onWildcardKeyEntered(String pKey, LatLng pLocation)
+    {
+        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+    }
+
+    @Override
+    public void onWildcardKeyEntered_2D(String pKey, LatLng pLocation)
+    {
+        ChestData2D data = new ChestData2D();
+        data.setLocation(pLocation);
+        data.setChestType(Constants.VALUE_CHEST_TYPE_WILDCARD);
+
+        mFirbaseObjects.clear();
+        mFirbaseObjects.put(pKey, data);
+        ivPrize2D.setImageResource(R.drawable.img_viking_2d);
+    }
+
+    @Override
+    public void onWildcardKeyExited(String pKey)
+    {
+        this.architectView.callJavascript("deleteObjectGeoFn()");
+    }
+
+    @Override
+    public void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData)
+    {
+        //Nothing to do here
+    }
+
+    @Override
+    public void onWildcardPointCancelled(DatabaseError pDatabaseError)
+    {
+        //Nothing to do here
+    }
+
+    @Override
     public void changeToOpenChest(int pChestType)
     {
         switch (pChestType)
@@ -865,8 +902,15 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 String firebaseID = entry.getKey();
                 ChestData2D chestData = entry.getValue();
 
-                //Atempt to exchange chest
-                mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
+               if(chestData.getChestType() != Constants.VALUE_CHEST_TYPE_WILDCARD)
+               {
+                   //Atempt to exchange chest
+                   mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
+               }
+               /*else
+               {
+                   mPresenter.exchangeWildcard_2D();
+               }*/
             }
             catch (Exception ex)
             {

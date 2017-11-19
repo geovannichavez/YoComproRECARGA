@@ -8,6 +8,9 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -149,5 +152,40 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
             }
         });
 
+    }
+
+    @Override
+    public void exchangeWildcard(String pFirebaseID, int eraID)
+    {
+        ExchangeWildcardReq requestBody = new ExchangeWildcardReq();
+        requestBody.setAgeID(eraID);
+        requestBody.setLocationID(pFirebaseID);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<ExchangeWildcardResponse> call = apiService.exchangeWildcard(mUserData.getUserAuthenticationKey(), requestBody);
+
+        call.enqueue(new Callback<ExchangeWildcardResponse>()
+        {
+            @Override
+            public void onResponse(Call<ExchangeWildcardResponse> call, Response<ExchangeWildcardResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+                   mListener.onExchangeWildcardSuccess(response.body());
+                }
+                else
+                {
+                    int codeResponse = response.code();
+                    mListener.onExchangeWildcardError(codeResponse, null);
+                    Log.e(TAG, response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ExchangeWildcardResponse> call, Throwable t)
+            {
+                mListener.onExchangeWildcardError(0, t);
+            }
+        });
     }
 }

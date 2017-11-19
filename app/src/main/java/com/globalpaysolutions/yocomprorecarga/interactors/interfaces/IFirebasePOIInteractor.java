@@ -15,4 +15,6 @@ public interface IFirebasePOIInteractor
     void silverPointsUpdateCriteria(GeoLocation pLocation, double pRadius);
     void bronzePointsQuery(GeoLocation pLocation, double pRadius);
     void bronzePointsUpdateCriteria(GeoLocation pLocation, double pRadius);
+    void wildcardPointsQuery(GeoLocation location, double radius);
+    void wildcardPointsUpdateCriteria(GeoLocation pLocation, double pRadius);
 }

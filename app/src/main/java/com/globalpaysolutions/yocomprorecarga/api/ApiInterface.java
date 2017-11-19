@@ -12,6 +12,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
@@ -125,5 +127,9 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE_SOUVENIR)
     Call<WinPrizeResponse> exchangeSouvenir(@Header("authenticationKey") String authKey, @Body ExchangeSouvenirReq exchangeSouvenirReq);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE_WILDCARD)
+    Call<ExchangeWildcardResponse> exchangeWildcard(@Header("authenticationKey") String authKey, @Body ExchangeWildcardReq exchangeWildcardReq);
 
 }

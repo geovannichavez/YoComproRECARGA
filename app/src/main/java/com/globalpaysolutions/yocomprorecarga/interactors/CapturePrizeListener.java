@@ -3,6 +3,8 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.graphics.Bitmap;
 
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 
@@ -18,4 +20,6 @@ public interface CapturePrizeListener
     void onOpenChestError(int pCodeStatus, Throwable pThrowable);
     void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
     void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable);
+    void onExchangeWildcardSuccess(ExchangeWildcardResponse response);
+    void onExchangeWildcardError(int codeStatus, Throwable throwable);
 }

@@ -17,9 +17,11 @@ import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -124,6 +126,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mFirebaseInteractor.goldPointsQuery(location, radius);
         this.mFirebaseInteractor.silverPointsQuery(location, radius);
         this.mFirebaseInteractor.bronzePointsQuery(location, radius);
+        this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
     }
 
     @Override
@@ -186,7 +189,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void redeemPrize()
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_redeeming_prize_wait));
         if(mUserData.getCurrentCoinsProgress() < 20)
         {
             mView.hideLoadingDialog();
@@ -198,6 +200,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
+            mView.showLoadingDialog(mContext.getString(R.string.label_redeeming_prize_wait));
             mInteractor.atemptRedeemPrize();
         }
     }
@@ -215,6 +218,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.showToast(mContext.getString(R.string.toast_keep_pressed_three_seconds));
         mView.blinkRecarcoin();
         mView.removeRunnableCallback();
+    }
+
+    @Override
+    public void exchangeWildcard_2D(LatLng pLocation, String pFirebaseID, int pChestType)
+    {
+        mView.changeToOpenChest(pChestType);
+        mInteractor.exchangeWildcard(pFirebaseID, mUserData.getEraID());
     }
 
     @Override
@@ -368,6 +378,56 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.hideArchViewLoadingMessage();
     }
 
+    /*
+    *
+    *
+    *   WILDCARD LISTENER IMPLEMENTATION
+    *
+    */
+
+    @Override
+    public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
+    {
+
+         if (p3DCompatible)
+        {
+            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            {
+                mCurrentChestKey = pKey;
+                mView.onWildcardKeyEntered(pKey, pLocation);
+            }
+        }
+        else
+        {
+            mView.hideArchViewLoadingMessage();
+            mView.onWildcardKeyEntered_2D(pKey, pLocation);
+            mView.switchRecarcoinVisible(true);
+            mView.blinkRecarcoin();
+        }
+    }
+
+    @Override
+    public void gf_wildcardPoint_onKeyExited(String pKey, boolean p3DCompatible)
+    {
+       if(!p3DCompatible)
+        {
+            mView.stopVibrate();
+
+            mView.removeBlinkingAnimation();
+            mView.onWildcardKeyExited(pKey);
+            mView.switchRecarcoinVisible(false);
+
+            //Game UX
+            mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
+        }
+    }
+
+    @Override
+    public void gf_wildcardPoint_onGeoQueryReady()
+    {
+        mView.hideArchViewLoadingMessage();
+    }
+
     @Override
     public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
     {
@@ -402,6 +462,18 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void fb_bronzePoint_onCancelled(DatabaseError databaseError)
     {
         mView.onBronzePointCancelled(databaseError);
+    }
+
+    @Override
+    public void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData)
+    {
+        mView.onWildcardPointDataChange(pKey, wildcardYCRData);
+    }
+
+    @Override
+    public void fb_wildcardPoint_onCancelled(DatabaseError databaseError)
+    {
+        mView.onWildcardPointCancelled(databaseError);
     }
 
     @Override
@@ -495,19 +567,22 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                   mView.showGenericDialog(dialog);
               }
            }
+
+           //Removes Image and updates UI
+           if(!mUserData.Is3DCompatibleDevice())
+           {
+               mView.removeBlinkingAnimation();
+               mView.switchRecarcoinVisible(false);
+           }
        }
        catch (Exception ex)
        {
            ex.printStackTrace();
-           //TODO: Informar usuario
+           dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+           dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+           dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+           mView.showGenericDialog(dialog);
        }
-
-        //Removes Image and updates UI
-        if(!mUserData.Is3DCompatibleDevice())
-        {
-            mView.removeBlinkingAnimation();
-            mView.switchRecarcoinVisible(false);
-        }
     }
 
     @Override
@@ -581,6 +656,76 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         processErrorMessage(pCodeStatus, pThrowable);
     }
 
+    @Override
+    public void onExchangeWildcardSuccess(ExchangeWildcardResponse response)
+    {
+        DialogViewModel dialog = new DialogViewModel();
+
+        try
+        {
+
+            // If it has been open this day, it'll inform
+            if(TextUtils.equals(response.getCode(), "05"))
+            {
+                dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
+                dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
+            }
+            else
+            {
+                //Saves user current tracking
+                if(response.getTracking() != null)
+                    mInteractor.saveUserTracking(response.getTracking());
+
+                //Saves last chest open values
+                //(May be negative if lost the challenge)
+                mUserData.saveLastChestValue(response.getExchangeCoins());
+
+                //If there's an achievement, save it
+                if(response.getAchievement() != null)
+                    mUserData.saveLastAchievement(response.getAchievement());
+
+                //Updates indicator in UIs
+                mView.updateIndicators(String.valueOf(response.getTracking().getTotalWinPrizes()),
+                        String.valueOf(response.getTracking().getTotalWinCoins()),
+                        String.valueOf(response.getTracking().getTotalSouvenirs()));
+                mView.updatePrizeButton(response.getTracking().getCurrentCoinsProgress());
+
+
+                if(response.getType() == 1)
+                {
+
+                }
+                else if (response.getType() == 2)
+                {
+                    dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
+                    dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
+                    dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                    mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple);
+                }
+                else //Quiere decir que es 3??
+                {
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
+
+    }
+
+    @Override
+    public void onExchangeWildcardError(int codeStatus, Throwable throwable)
+    {
+
+    }
 
 
     /*

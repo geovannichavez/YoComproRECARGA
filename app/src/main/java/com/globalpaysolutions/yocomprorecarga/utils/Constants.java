@@ -59,9 +59,11 @@ public class Constants
     public static final int VALUE_CHEST_TYPE_GOLD = 3;
     public static final int VALUE_CHEST_TYPE_SILVER = 2;
     public static final int VALUE_CHEST_TYPE_BRONZE = 1;
+    public static final int VALUE_CHEST_TYPE_WILDCARD = 4;
     public static final String NAME_CHEST_TYPE_GOLD = "Gold";
     public static final String NAME_CHEST_TYPE_SILVER = "Silver";
     public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
+    public static final String NAME_CHEST_TYPE_WILDCARD = "Wildcard";
 
     //URL Map Properties
     public static final String URI_MAP_VALUE_CHEST_TYPE = "chestType";
