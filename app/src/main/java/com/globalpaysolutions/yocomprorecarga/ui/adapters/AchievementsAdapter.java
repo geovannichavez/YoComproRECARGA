@@ -56,7 +56,7 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
         TextView coinsValue = (TextView) row.findViewById(R.id.txtCoins);
         TextView actual = (TextView) row.findViewById(R.id.txtActual);
         ImageView level = (ImageView) row.findViewById(R.id.imgAchvCounter);
-        
+
         switch (currentItem.getLevel())
         {
             case 1:

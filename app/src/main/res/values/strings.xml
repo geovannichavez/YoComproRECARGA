@@ -263,5 +263,6 @@
     <string name="label_loading_wildacrd">¡Aceptaste el reto, espera!</string>
     <string name="label_alreadey_played_challenge_title">¡Hasta mañana podrás!</string>
     <string name="toast_wildcard_out_of_search_range">COMODÍN: Saliste del rango de búsqueda.</string>
+    <string name="title_activate_gift">ACTIVAR REGALO</string>
 
 </resources>

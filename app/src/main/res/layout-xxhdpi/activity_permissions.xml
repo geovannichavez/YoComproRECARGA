@@ -55,8 +55,6 @@
         android:gravity="center"
         android:text="Deberás conceder permisos a la aplicación para hacer uso de todas las características. Haz clic el siguiente botón."
         android:textColor="@color/gray_textView_color"
-        android:textSize="19sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22"/>
