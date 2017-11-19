@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.RequestTopup">
+
+    <!--  CONTENEDOR DEL BACKGROUND, PADRE DE TODAS  -->
+    <LinearLayout
+        android:id="@+id/activity_request_topup"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/bg_white_timemachine"
+        android:fillViewport="true"
+        android:orientation="vertical">
+
+
+        <!--    SEGUNDA CONTENEDORA, TODAS LAS VISTAS ESTAN ADENTRO
+                Para evitar el focus en EditText se
+                ha añadido 'focusable' y 'focusableInTouchMode' -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <!--  TOOLBAR  -->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/requestTopupToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/yvr_green_color"
+                android:elevation="4dp"
+                android:popupTheme="@style/contextualDarkToolbarThemeYVR"
+                app:theme="@style/ToolbarTheme" >
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_marginRight="?attr/actionBarSize"
+                    android:layout_width="fill_parent"
+                    android:layout_height="23dp"
+                    android:src="@drawable/logo_horizontal"/>
+            </android.support.v7.widget.Toolbar>
+
+            <!--  SWIPELAYOUT, ADENTRO ESTA EL SCROLLVIEW  -->
+            <android.support.v4.widget.SwipeRefreshLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/swipe_refresh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true">
+
+                <!--    SCROLLVIEW  -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <!--    DEFINE EL PESO DEL LA LAYOUT,
+                            ADENTRO ESTAN EL RESTO DE VISTAS-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/activity_vertical_margin"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingTop="@dimen/activity_vertical_margin"
+                        android:weightSum="16">
+
+                        <!--    CUARTA SECCION
+                                Contenedor del Código de Vendedor
+                                Peso: 3         -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:layout_marginBottom="@dimen/margin_16dp"
+                            >
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_marginBottom="8dp"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_marginBottom="@dimen/margin_2dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="@string/label_type_vendor_code"
+                                    android:textColor="@color/color_general_text"
+                                    android:textSize="14sp"/>
+                                <ImageView
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_yvr_small"
+                                    android:layout_width="110dp"
+                                    android:layout_height="14dp"/>
+                            </LinearLayout>
+
+                            <EditText
+                                android:id="@+id/etCodeNumber"
+                                android:layout_width="170dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/custom_white_edittext_rounded_corners"
+                                android:digits="0123456789"
+                                android:ellipsize="start"
+                                android:gravity="center"
+                                android:hint="@string/hint_vendor_code"
+                                android:imeOptions="actionDone"
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:textSize="23sp"/>
+                        </LinearLayout>
+
+                        <View style="@style/HorizontalGrayLine"/>
+
+                        <!--    SEGUNDA SECCION
+                                Operadores GridView
+                                Peso: 4         -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="4"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:paddingTop="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/label_select_operator"
+                                android:textColor="@color/color_general_text"
+                                android:textSize="14sp"/>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <GridView
+                                    android:id="@+id/gvOperadores"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:choiceMode="singleChoice"
+                                    android:gravity="center_horizontal"
+                                    android:horizontalSpacing="8dp"
+                                    android:numColumns="2"
+                                    android:scrollbars="none"/>
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <!--    TERCERA SECCION
+                                Contenedor de Monto de Recarga
+                                Peso: 3         -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="12dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/label_select_recharge_amount"
+                                android:textColor="@color/color_general_text"
+                                android:textSize="14sp"
+                                android:id="@+id/textView4"/>
+
+                            <!--<Spinner
+                                android:id="@+id/spMontoRecarga"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"/>-->
+
+
+                            <View style="@style/HorizontalGrayLine"/>
+
+                            <LinearLayout
+                                android:id="@+id/lnrSelectAmount"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+                                android:background="?attr/selectableItemBackground"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/lblSelectedAmount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/spinner_select"
+                                    android:textSize="16sp"/>
+                            </LinearLayout>
+
+                            <View style="@style/HorizontalGrayLine"/>
+
+
+                        </LinearLayout>
+
+                        <!--    PRIMER SECCION
+                                Peso: 2         -->
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="12dp"
+                            android:layout_weight="2"
+                            android:gravity="center"
+
+                            android:layout_width="match_parent"
+                            >
+
+                            <EditText
+                                android:id="@+id/etExplPhone"
+                                android:layout_width="220dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/custom_white_edittext_rounded_corners"
+                                android:digits="-0123456789"
+                                android:ellipsize="start"
+                                android:gravity="center"
+                                android:hint="@string/hint_specify_phone_number"
+                                android:inputType="number|phone"
+                                android:maxLength="9"
+                                android:textColor="@drawable/custom_edittext_color_selector"
+                                android:textSize="25sp"/>
+
+                            <ImageButton
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:scaleType="fitCenter"
+                                android:padding="4dp"
+                                android:background="@drawable/btn_effect_ripple_dark_gray"
+                                android:src="@drawable/ic_contacts"
+                                android:onClick="openContacts"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/ibContacts"/>
+
+                        </LinearLayout>
+
+
+
+
+                        <!--    QUINTA SECCION
+                                Contenedor de Boton
+                                Peso: 4             -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="4"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="12dp"
+                                android:gravity="center"
+                                android:text="@string/label_make_sure_correct_phone"
+                                android:textColor="@color/color_general_text"
+                                android:textSize="14sp"
+                                android:id="@+id/textView3"/>
+
+                            <LinearLayout
+                                android:weightSum="10"
+                                android:gravity="center_horizontal"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <Button
+                                    android:id="@+id/btnEnvar"
+                                    android:layout_width="200dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:background="@drawable/btn_effect_ripple_green_rounded_corners"
+                                    android:clickable="true"
+                                    android:onClick="sendTopupRequest"
+                                    android:text="@string/button_request_topup"
+                                    android:textColor="@color/ActivityWhiteBackground"/>
+
+                                <!--<Button
+                                    android:id="@+id/btnEnvar"
+                                    android:layout_weight="6"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:clickable="true"
+                                    android:onClick="sendTopupRequest"
+                                    android:text="@string/button_request_topup"
+                                    android:textColor="@color/ActivityWhiteBackground"/>-->
+
+                                <!--<Button
+                                    android:id="@+id/btnComprar"
+                                    android:layout_weight="4"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:background="@drawable/btn_effect_ripple_green"
+                                    android:clickable="true"
+                                    android:text="@string/button_buy"
+                                    android:onClick="creditCardPayment"
+                                    android:textColor="@color/ActivityWhiteBackground"/>-->
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/tvStoreLink"
+                                android:textColor="@color/yvr_green_color"
+                                android:textStyle="bold"
+                                android:textSize="12sp"
+                                android:layout_marginTop="12dp"
+                                android:text="@string/label_become_a_vendor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
+
+
+
