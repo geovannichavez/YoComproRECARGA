@@ -154,38 +154,4 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
 
     }
 
-    @Override
-    public void exchangeWildcard(String pFirebaseID, int eraID)
-    {
-        ExchangeWildcardReq requestBody = new ExchangeWildcardReq();
-        requestBody.setAgeID(eraID);
-        requestBody.setLocationID(pFirebaseID);
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ExchangeWildcardResponse> call = apiService.exchangeWildcard(mUserData.getUserAuthenticationKey(), requestBody);
-
-        call.enqueue(new Callback<ExchangeWildcardResponse>()
-        {
-            @Override
-            public void onResponse(Call<ExchangeWildcardResponse> call, Response<ExchangeWildcardResponse> response)
-            {
-                if(response.isSuccessful())
-                {
-                   mListener.onExchangeWildcardSuccess(response.body());
-                }
-                else
-                {
-                    int codeResponse = response.code();
-                    mListener.onExchangeWildcardError(codeResponse, null);
-                    Log.e(TAG, response.errorBody().toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ExchangeWildcardResponse> call, Throwable t)
-            {
-                mListener.onExchangeWildcardError(0, t);
-            }
-        });
-    }
 }

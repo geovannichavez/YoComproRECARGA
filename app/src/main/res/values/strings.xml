@@ -250,5 +250,18 @@
     <string name="label_enter_pin_to_redeem">Escribe el PIN del premio a canjear</string>
     <string name="label_type_phone_to_apply_prize">Digita el número celular que se premiará</string>
     <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro para canjear tu premio.</string>
+    <string name="label_wildcard_explanation">Si aceptas puedes hacerte millonario o acabar completamente arruinado. Si no aceptas no te precupes, puedes continuar jugando y buscando cofres.</string>
+    <string name="title_you_won">¡Es tu día de suerte!</string>
+    <string name="label_you_won">Puedes seguir acumulando o comprar e intercambiar una pieza por un premio.</string>
+    <string name="label_back_to_map">VOLVER AL MAPA</string>
+    <string name="title_you_lost">¡Lo siento mucho, no fue tu día de suerte!</string>
+    <string name="label_you_lost">Inténtalo de nuevo dentro de 24 horas, tal vez mañana logres conseguir un premio.</string>
+    <string name="label_win">¡GANASTE!</string>
+    <string name="label_lost">PERDISTE</string>
+    <string name="label_something_went_wrong_wildcard">Algo ha salido mal al procesar tu reto de ahora. ¡Inténtalo de nuevo!</string>
+    <string name="label_allowed_accept_challenge_once_per_day">¡Sólo puedes aceptar el reto una vez al día! Vuelve mañana e inténtalo de nuevo.</string>
+    <string name="label_loading_wildacrd">¡Aceptaste el reto, espera!</string>
+    <string name="label_alreadey_played_challenge_title">¡Hasta mañana podrás!</string>
+    <string name="toast_wildcard_out_of_search_range">COMODÍN: Saliste del rango de búsqueda.</string>
 
 </resources>

@@ -20,6 +20,4 @@ public interface CapturePrizeListener
     void onOpenChestError(int pCodeStatus, Throwable pThrowable);
     void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
     void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable);
-    void onExchangeWildcardSuccess(ExchangeWildcardResponse response);
-    void onExchangeWildcardError(int codeStatus, Throwable throwable);
 }

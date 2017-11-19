@@ -65,4 +65,7 @@ public interface CapturePrizeView
     void onWildcardPointCancelled(DatabaseError pDatabaseError);
 
     void changeToOpenChest(int pChestType);
+    void navigateToWildcard();
+
+    void navigateToPrizeDetails();
 }

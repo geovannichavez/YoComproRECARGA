@@ -95,6 +95,10 @@ public class UserData
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
 
+    //Last Wildcard touched
+    private static final String KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID = "usr_last_wildcard_touched_firebase_id";
+    private static final String KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE = "usr_last_wildcard_touched_chest_type";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -204,7 +208,8 @@ public class UserData
 
     public void SaveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress, int pSouvenirs, int pEraID)
     {
-        mEditor.putInt(KEY_TOTAL_WON_COINS, pCoins);
+        int coins = (pCoins < 0) ? 0 : pCoins;
+        mEditor.putInt(KEY_TOTAL_WON_COINS, coins);
         mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
@@ -239,7 +244,8 @@ public class UserData
 
     public void saveLastChestValue(int pCoins)
     {
-        mEditor.putInt(KEY_LAST_CHEST_EXCHANGED_VALUE, pCoins);
+        int coins = (pCoins < 0) ? 0 : pCoins;
+        mEditor.putInt(KEY_LAST_CHEST_EXCHANGED_VALUE, coins);
         mEditor.commit();
     }
 
@@ -346,6 +352,13 @@ public class UserData
         mEditor.putInt(KEY_ERA_ID, eraID);
         mEditor.putString(KEY_ERA_NAME, eraName);
         mEditor.putString(KEY_ERA_URL_ICON, eraUrl);
+        mEditor.commit();
+    }
+
+    public void saveLastWildcardTouched(String pFirebaseID, int chestType)
+    {
+        mEditor.putString(KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID, pFirebaseID);
+        mEditor.putInt(KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE, chestType);
         mEditor.commit();
     }
 
@@ -569,6 +582,16 @@ public class UserData
         return mPreferences.getInt(KEY_TOTAL_SOUVENIR, 0);
     }
 
+    public String getLastWildcardTouchedFirebaseId()
+    {
+        return mPreferences.getString(KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID, "");
+    }
+
+    public int getLastWildcardTouchedChestType()
+    {
+        return mPreferences.getInt(KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE, 0);
+    }
+
 
 
 
@@ -604,4 +627,6 @@ public class UserData
         mEditor.remove(KEY_CONSUMER_NICKNAME);
         mEditor.commit();
     }
+
+
 }

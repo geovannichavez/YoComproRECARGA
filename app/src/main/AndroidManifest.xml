@@ -184,7 +184,6 @@
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
@@ -249,9 +248,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-        <activity android:name=".ui.activities.RedeemPrize"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeFullScreen">
+        <activity
+            android:name=".ui.activities.RedeemPrize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity
+            android:name=".ui.activities.Wildcard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 

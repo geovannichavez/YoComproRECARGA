@@ -15,6 +15,9 @@ public class ExchangeWildcardResponse
     @SerializedName("ExchangeCoins")
     @Expose
     private int exchangeCoins;
+    @SerializedName("Title")
+    @Expose
+    private String title;
     @SerializedName("Description")
     @Expose
     private String description;
@@ -47,10 +50,10 @@ public class ExchangeWildcardResponse
     private String code;
     @SerializedName("Message")
     @Expose
-    private String message;
+    private Object message;
     @SerializedName("WaitTime")
     @Expose
-    private String waitTime;
+    private Object waitTime;
 
     public int getType()
     {
@@ -70,6 +73,16 @@ public class ExchangeWildcardResponse
     public void setExchangeCoins(int exchangeCoins)
     {
         this.exchangeCoins = exchangeCoins;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public String getDescription()
@@ -172,24 +185,23 @@ public class ExchangeWildcardResponse
         this.code = code;
     }
 
-    public String getMessage()
+    public Object getMessage()
     {
         return message;
     }
 
-    public void setMessage(String message)
+    public void setMessage(Object message)
     {
         this.message = message;
     }
 
-    public String getWaitTime()
+    public Object getWaitTime()
     {
         return waitTime;
     }
 
-    public void setWaitTime(String waitTime)
+    public void setWaitTime(Object waitTime)
     {
         this.waitTime = waitTime;
     }
-
 }

@@ -6,12 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.provider.ContactsContract;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -667,6 +664,20 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
     }
 
+    @Override
+    public void navigateToWildcard()
+    {
+        Intent wildcard = new Intent(this, Wildcard.class);
+        startActivity(wildcard);
+    }
+
+    @Override
+    public void navigateToPrizeDetails()
+    {
+        Intent prizeDetails = new Intent(this, PrizeDetail.class);
+        startActivity(prizeDetails);
+    }
+
 
     /*
     *
@@ -907,10 +918,11 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                    //Atempt to exchange chest
                    mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
                }
-               /*else
+               else
                {
-                   mPresenter.exchangeWildcard_2D();
-               }*/
+                   //Wildcard touched!
+                   mPresenter.touchWildcard_2D(firebaseID, Constants.VALUE_CHEST_TYPE_WILDCARD);
+               }
             }
             catch (Exception ex)
             {

@@ -221,10 +221,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void exchangeWildcard_2D(LatLng pLocation, String pFirebaseID, int pChestType)
+    public void touchWildcard_2D(String pFirebaseID, int chestType)
     {
-        mView.changeToOpenChest(pChestType);
-        mInteractor.exchangeWildcard(pFirebaseID, mUserData.getEraID());
+        mUserData.saveLastWildcardTouched(pFirebaseID, chestType);
+        mView.navigateToWildcard();
+
     }
 
     @Override
@@ -293,6 +294,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
+        mView.hideArchViewLoadingMessage();
+
         if (p3DCompatible)
         {
             if(!TextUtils.equals(mCurrentChestKey, pKey))
@@ -303,7 +306,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
-            mView.hideArchViewLoadingMessage();
+
             mView.onSilverKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
@@ -339,6 +342,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
+        mView.hideArchViewLoadingMessage();
         if (p3DCompatible)
         {
             if(!TextUtils.equals(mCurrentChestKey, pKey))
@@ -349,7 +353,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
-            mView.hideArchViewLoadingMessage();
             mView.onBronzeKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
@@ -388,7 +391,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-
+        mView.hideArchViewLoadingMessage();
          if (p3DCompatible)
         {
             if(!TextUtils.equals(mCurrentChestKey, pKey))
@@ -399,7 +402,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         else
         {
-            mView.hideArchViewLoadingMessage();
+
             mView.onWildcardKeyEntered_2D(pKey, pLocation);
             mView.switchRecarcoinVisible(true);
             mView.blinkRecarcoin();
@@ -418,7 +421,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.switchRecarcoinVisible(false);
 
             //Game UX
-            mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
+            mView.showToast(mContext.getString(R.string.toast_wildcard_out_of_search_range));
         }
     }
 
@@ -481,7 +484,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.hideLoadingDialog();
         mInteractor.saveUserTracking(pTracking);
-        mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()), String.valueOf(pTracking.getTotalWinCoins()), String.valueOf(pTracking.getTotalSouvenirs()));
+        mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()),
+                String.valueOf(mUserData.getConsumerCoins()),
+                String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
     }
 
@@ -526,7 +531,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                if(!TextUtils.equals(pExchangeResponse.getCode(), "05"))
                {
                    mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()),
-                           String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins()),
+                           String.valueOf(mUserData.getConsumerCoins()),
                            String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs()));
                    mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
 
@@ -553,7 +558,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                           pExchangeResponse.getValue());
 
                   String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
-                  String coins = String.valueOf(pExchangeResponse.getTracking().getCurrentCoinsProgress());
+                  String coins = String.valueOf(mUserData.getConsumerCoins());
                   String souvs = String.valueOf( pExchangeResponse.getTracking().getTotalSouvenirs());
                   mView.updateIndicators(prizes, coins, souvs);
 
@@ -610,7 +615,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             //Saves tracking and updates UI
             mInteractor.saveUserTracking(pResponse.getTracking());
             mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
-                    String.valueOf(pResponse.getTracking().getTotalWinCoins()),
+                    String.valueOf(mUserData.getConsumerCoins()),
                     String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
             mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
 
@@ -628,13 +633,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mUserData.saveLastPrizeLogoUrl(pResponse.getLogoUrl());
             mUserData.saveLastPrizeExchangedColor(pResponse.getHexColor());
 
-            //Shows data on UI
-            dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
-            dialog.setLine1(mContext.getString(R.string.label_click_on_button_to_redeem));
-            dialog.setAcceptButton(mContext.getString(R.string.button_redeem_now));
-            mView.showPrizeColectedDialog(dialog);
-
-            //Deletes 3D model from AR
+            //Navigates to prize details
+            mView.navigateToPrizeDetails();
 
         }
         else
@@ -654,77 +654,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.blinkRecarcoin();
         processErrorMessage(pCodeStatus, pThrowable);
-    }
-
-    @Override
-    public void onExchangeWildcardSuccess(ExchangeWildcardResponse response)
-    {
-        DialogViewModel dialog = new DialogViewModel();
-
-        try
-        {
-
-            // If it has been open this day, it'll inform
-            if(TextUtils.equals(response.getCode(), "05"))
-            {
-                dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
-                dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
-                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-                mView.showGenericDialog(dialog);
-            }
-            else
-            {
-                //Saves user current tracking
-                if(response.getTracking() != null)
-                    mInteractor.saveUserTracking(response.getTracking());
-
-                //Saves last chest open values
-                //(May be negative if lost the challenge)
-                mUserData.saveLastChestValue(response.getExchangeCoins());
-
-                //If there's an achievement, save it
-                if(response.getAchievement() != null)
-                    mUserData.saveLastAchievement(response.getAchievement());
-
-                //Updates indicator in UIs
-                mView.updateIndicators(String.valueOf(response.getTracking().getTotalWinPrizes()),
-                        String.valueOf(response.getTracking().getTotalWinCoins()),
-                        String.valueOf(response.getTracking().getTotalSouvenirs()));
-                mView.updatePrizeButton(response.getTracking().getCurrentCoinsProgress());
-
-
-                if(response.getType() == 1)
-                {
-
-                }
-                else if (response.getType() == 2)
-                {
-                    dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
-                    dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
-                    dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-                    mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple);
-                }
-                else //Quiere decir que es 3??
-                {
-
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-            dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
-            dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
-            mView.showGenericDialog(dialog);
-        }
-
-    }
-
-    @Override
-    public void onExchangeWildcardError(int codeStatus, Throwable throwable)
-    {
-
     }
 
 
