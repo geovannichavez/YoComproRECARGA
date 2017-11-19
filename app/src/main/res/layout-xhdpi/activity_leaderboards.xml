@@ -108,7 +108,7 @@
     <ListView
         android:id="@+id/lvLeaderboard"
         android:layout_width="262dp"
-        android:layout_height="365dp"
+        android:layout_height="360dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/label_type_token"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"

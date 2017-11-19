@@ -81,7 +81,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         requestBody.setLatitude(pLocation.latitude);
         requestBody.setLongitude(pLocation.longitude);
         requestBody.setChestType(pChestType);
-        requestBody.setAgeID(pEraID);
+        requestBody.setAgeID(1);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);

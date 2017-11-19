@@ -99,14 +99,9 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             @Override
             public void onClick(View v)
             {
-                Intent timemachine = new Intent(CapturePrizeAR.this, EraSelection.class);
-               /* timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                timemachine.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                timemachine.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                timemachine.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                timemachine.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);*/
-                startActivity(timemachine);
+                Intent store = new Intent(CapturePrizeAR.this, Store.class);
+                store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(store);
             }
         });
 

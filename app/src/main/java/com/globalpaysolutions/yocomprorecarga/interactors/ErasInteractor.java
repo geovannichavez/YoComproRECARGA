@@ -36,7 +36,7 @@ public class ErasInteractor implements IErasInteractor
     public void eraSelection(int eraID, final ErasListener listener)
     {
         EraSelectionReq request = new EraSelectionReq();
-        request.setAgeID(eraID);
+        request.setAgeID(1); //TODO
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(), request);

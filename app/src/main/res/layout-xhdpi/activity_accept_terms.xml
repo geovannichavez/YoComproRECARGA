@@ -11,16 +11,12 @@
 
     <include
         android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        layout="@layout/custom_white_timemachine_background"/>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="323dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -35,17 +31,18 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="362dp"
+        android:layout_width="319dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/label_welcome"
         android:textColor="@color/gray_textView_color"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"/>
 

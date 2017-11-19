@@ -7,6 +7,7 @@ import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -60,7 +61,9 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent main = new Intent(Souvenirs.this, Profile.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -69,8 +72,9 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(Souvenirs.this, Store.class);
-                startActivity(intent);
+                Intent main = new Intent(Souvenirs.this, Store.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -246,5 +250,18 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Profile.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

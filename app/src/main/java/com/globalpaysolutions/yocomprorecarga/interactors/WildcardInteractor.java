@@ -33,7 +33,7 @@ public class WildcardInteractor implements IWildcardInteractor
     public void exchangeWildcard(String pFirebaseID, int eraID, final WildcardListener listener)
     {
         ExchangeWildcardReq requestBody = new ExchangeWildcardReq();
-        requestBody.setAgeID(eraID);
+        requestBody.setAgeID(1); //TODO
         requestBody.setLocationID(pFirebaseID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

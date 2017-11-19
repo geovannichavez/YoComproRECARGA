@@ -263,7 +263,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageButton
+   <!-- <ImageButton
         android:id="@+id/btnInfoStoreItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -273,5 +273,5 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         app:layout_constraintEnd_toEndOf="@+id/pagerStoreItems"
         app:layout_constraintTop_toTopOf="@+id/pagerStoreItems"
-        app:srcCompat="@drawable/ic_question_mark"/>
+        app:srcCompat="@drawable/ic_question_mark"/>-->
 </android.support.constraint.ConstraintLayout>

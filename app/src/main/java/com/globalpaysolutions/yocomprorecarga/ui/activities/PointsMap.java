@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Interpolator;
@@ -95,7 +96,9 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent main = new Intent(PointsMap.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -945,6 +948,19 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
 
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

@@ -78,7 +78,10 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         try
         {
-            UserData.getInstance(mContext).saveEraSelected(eraSelection.getAgeID(), eraSelection.getName(), eraSelection.getIconImage());
+            UserData.getInstance(mContext).saveEraSelected(
+                    eraSelection.getAgeID(),
+                    eraSelection.getName(),
+                    eraSelection.getIconImage());
             mView.navigateMap();
         }
         catch (Exception ex)

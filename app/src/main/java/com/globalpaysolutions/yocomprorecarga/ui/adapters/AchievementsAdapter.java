@@ -55,6 +55,23 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
         TextView description = (TextView) row.findViewById(R.id.txtDescription);
         TextView coinsValue = (TextView) row.findViewById(R.id.txtCoins);
         TextView actual = (TextView) row.findViewById(R.id.txtActual);
+        ImageView level = (ImageView) row.findViewById(R.id.imgAchvCounter);
+        
+        switch (currentItem.getLevel())
+        {
+            case 1:
+                level.setImageResource(R.drawable.ic_achvs_counter_2);
+                break;
+            case 3:
+                level.setImageResource(R.drawable.ic_achvs_counter_3);
+                break;
+            case 4:
+                level.setImageResource(R.drawable.ic_achvs_counter_4);
+                break;
+            default:
+                level.setImageResource(R.drawable.ic_achvs_counter_1);
+                break;
+        }
 
         title.setText(currentItem.getName());
         description.setText(currentItem.getDescription());

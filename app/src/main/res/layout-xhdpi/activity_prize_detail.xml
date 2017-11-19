@@ -67,13 +67,13 @@
         android:id="@+id/btnSms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
         android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"
         app:layout_constraintStart_toStartOf="@+id/imageView24"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26"
         app:srcCompat="@drawable/btn_sms"/>
 
     <TextView
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:maxLines="2"
         android:text="Haz recolectado tu premio gracias a:"
@@ -113,8 +113,8 @@
 
     <ImageView
         android:id="@+id/imgChestPrize"
-        android:layout_width="121dp"
-        android:layout_height="132dp"
+        android:layout_width="110dp"
+        android:layout_height="111dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -144,11 +144,11 @@
     <TextView
         android:id="@+id/lblPrizeDescription"
         android:layout_width="224dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="3"
         android:text="Para que disfrutez de RecarGO! desde tu nuevo Samsung Galaxy S8, estas de acuerdo?"
         android:textColor="@color/pure_black"
         android:textSize="12sp"

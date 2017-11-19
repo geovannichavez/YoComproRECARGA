@@ -213,7 +213,7 @@ public class UserData
         mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
-        mEditor.putInt(KEY_ERA_ID, pEraID);
+        mEditor.putInt(KEY_ERA_ID, 1); //TODO: Quitar era quemada
         mEditor.commit();
     }
 

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/lblStoreItemName"
@@ -14,6 +15,7 @@
         android:layout_marginTop="44dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        tools:text="BARIIL PRECEDERO"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -42,6 +44,7 @@
         android:layout_marginTop="8dp"
         android:textSize="20sp"
         android:textStyle="bold"
+        tools:text="100 RECARCOINS"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

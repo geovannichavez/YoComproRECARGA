@@ -10,9 +10,7 @@
 
     <include
         android:id="@+id/include4"
-        layout="@layout/custom_timemachine_background"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        layout="@layout/custom_timemachine_background"/>
 
 
     <ImageView
@@ -21,8 +19,9 @@
         android:layout_height="130dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_recargo"/>
@@ -38,8 +37,7 @@
         android:src="@drawable/ic_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/imageView25"/>
 
     <ImageButton
         android:id="@+id/btnProfile"
@@ -72,54 +70,60 @@
         android:id="@+id/btnTopupRequest"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateTopupRequest"
         android:scaleType="fitXY"
         android:src="@drawable/ic_topup_request"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
     <ImageButton
         android:id="@+id/buttonLighbub"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateStore"
         android:scaleType="fitXY"
         android:src="@drawable/ic_store"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPrize"
         app:layout_constraintStart_toEndOf="@+id/btnTopupRequest"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
         />
 
     <ImageButton
         android:id="@+id/buttonPrize"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
         android:onClick="navigatePrizeRedeem"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_prize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintStart_toEndOf="@+id/buttonLighbub"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
     <ImageButton
         android:id="@+id/buttonSettings"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitXY"
         android:src="@drawable/btn_info"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toEndOf="@+id/buttonPrize"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
 </android.support.constraint.ConstraintLayout>

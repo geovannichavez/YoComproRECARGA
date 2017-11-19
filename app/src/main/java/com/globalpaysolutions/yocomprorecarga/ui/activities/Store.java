@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -37,7 +38,7 @@ public class Store extends AppCompatActivity implements StoreView
     ImageButton btnRight;
     TextView lblRecarCoinsLeft;
     ImageView btnBuy;
-    ImageButton btnInfoStoreItem;
+    //ImageButton btnInfoStoreItem;
     ImageButton btnBack;
 
     //Global Variables
@@ -56,14 +57,16 @@ public class Store extends AppCompatActivity implements StoreView
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         lblRecarCoinsLeft = (TextView) findViewById(R.id.lblRecarCoinsLeft);
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
-        btnInfoStoreItem = (ImageButton) findViewById(R.id.btnInfoStoreItem);
+        //btnInfoStoreItem = (ImageButton) findViewById(R.id.btnInfoStoreItem);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent main = new Intent(Store.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -95,14 +98,14 @@ public class Store extends AppCompatActivity implements StoreView
                 }
             });
 
-            btnInfoStoreItem.setOnClickListener(new View.OnClickListener()
+            /*btnInfoStoreItem.setOnClickListener(new View.OnClickListener()
             {
                 @Override
                 public void onClick(View v)
                 {
                     createStoreItemInfoDialog();
                 }
-            });
+            });*/
         }
         catch (Exception ex)
         {
@@ -339,6 +342,19 @@ public class Store extends AppCompatActivity implements StoreView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

@@ -1,11 +1,13 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -36,7 +38,9 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent main = new Intent(RedeemPrize.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -104,5 +108,18 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
