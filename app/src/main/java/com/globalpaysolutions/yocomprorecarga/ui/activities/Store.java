@@ -98,6 +98,8 @@ public class Store extends AppCompatActivity implements StoreView
                 }
             });
 
+            btnLeft.setVisibility(View.GONE);
+
             /*btnInfoStoreItem.setOnClickListener(new View.OnClickListener()
             {
                 @Override

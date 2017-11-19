@@ -108,6 +108,10 @@ dependencies {
 
     //Calligraphy
     //compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    //Firebase Crash Reporting
+    //compile 'com.google.firebase:firebase-crash:11.6.0'
+
 }
 
 //Google Services

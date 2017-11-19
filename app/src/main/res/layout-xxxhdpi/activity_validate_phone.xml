@@ -15,8 +15,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="305dp"
-        android:layout_height="90dp"
+        android:layout_width="341dp"
+        android:layout_height="121dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
@@ -31,26 +31,25 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
         android:text="¿COMO NOS PODEMOS CONTACTAR?"
         android:textColor="@color/color_red_recargo"
-        android:textSize="17sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="299dp"
+        android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:text="Si obtienes un gran premio necesitaremos comunicarnos contigo."
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +57,8 @@
 
     <ImageView
         android:id="@+id/imageView30"
-        android:layout_width="181dp"
-        android:layout_height="59dp"
+        android:layout_width="204dp"
+        android:layout_height="82dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -69,21 +68,21 @@
         app:srcCompat="@drawable/btn_caja_txt"/>
 
     <EditText
-        android:textColor="@color/ActivityWhiteBackground"
-        android:inputType="phone"
-        android:maxLength="9"
-        android:gravity="center"
         android:id="@+id/etConfirmPhone"
         android:layout_width="152dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:digits="-0123456789"
         android:ems="10"
+        android:gravity="center"
+        android:inputType="phone"
+        android:maxLength="9"
+        android:textColor="@color/ActivityWhiteBackground"
         app:layout_constraintBottom_toBottomOf="@+id/imageView30"
         app:layout_constraintEnd_toEndOf="@+id/imageView30"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="@+id/imageView30"/>
 
     <ImageButton
@@ -110,7 +109,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="REGISTRARME"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnConfirm"
         app:layout_constraintEnd_toEndOf="@+id/btnConfirm"
@@ -120,12 +119,12 @@
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Confirma tu número de teléfono."
-        android:textSize="14dp"
+        android:textSize="19dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCountry"
@@ -134,13 +133,13 @@
     <TextView
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
 
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Elige tu país actual."
-        android:textSize="14dp"
+        android:textSize="19dp"
         app:layout_constraintEnd_toEndOf="@+id/textView23"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/textView23"
@@ -149,8 +148,8 @@
 
     <ImageButton
         android:id="@+id/buttonCountry"
-        android:layout_width="180dp"
-        android:layout_height="57dp"
+        android:layout_width="202dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

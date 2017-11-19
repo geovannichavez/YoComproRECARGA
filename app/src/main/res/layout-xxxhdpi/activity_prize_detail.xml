@@ -13,36 +13,36 @@
 
     <ImageButton
         android:id="@+id/btnBackMapPrizeDet"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
         android:onClick="navigateMap"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back_ra"/>
 
     <ImageButton
         android:id="@+id/btnStorePrizeDet"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
         android:onClick="navigateTimeMachine"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_store_ar"/>
 
     <ImageView
         android:id="@+id/imageView24"
-        android:layout_width="330dp"
-        android:layout_height="504dp"
+        android:layout_width="390dp"
+        android:layout_height="579dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
@@ -65,15 +65,16 @@
 
     <ImageButton
         android:id="@+id/btnSms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="222dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="420dp"
         android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/imageView24"
-        app:layout_constraintTop_toBottomOf="@+id/imageView26"
         app:srcCompat="@drawable/btn_sms"/>
 
     <TextView
@@ -96,25 +97,25 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="187dp"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:maxLines="2"
         android:text="Haz recolectado tu premio gracias a:"
         android:textColor="@color/pure_black"
-        android:textSize="13sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/imageView24"
         app:layout_constraintTop_toBottomOf="@+id/imageView26"/>
 
     <ImageView
         android:id="@+id/imgChestPrize"
-        android:layout_width="121dp"
-        android:layout_height="132dp"
+        android:layout_width="110dp"
+        android:layout_height="111dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -126,7 +127,7 @@
     <TextView
         android:id="@+id/lblPrizeTitle"
         android:layout_width="241dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -143,17 +144,16 @@
 
     <TextView
         android:id="@+id/lblPrizeDescription"
-        android:layout_width="224dp"
-        android:layout_height="wrap_content"
+        android:layout_width="252dp"
+        android:layout_height="46dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="5"
         android:text="Para que disfrutez de RecarGO! desde tu nuevo Samsung Galaxy S8, estas de acuerdo?"
         android:textColor="@color/pure_black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="@+id/imageView24"
         app:layout_constraintTop_toBottomOf="@+id/lblPrizeTitle"/>
 
@@ -180,7 +180,7 @@
         android:gravity="center"
         android:text="Copia este PIN y activa tu premio"
         android:textColor="@color/pure_black"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/lblPrizeTitle"
         app:layout_constraintHorizontal_bias="0.82"
@@ -209,7 +209,7 @@
     <TextView
         android:id="@+id/lblExchangeInfo"
         android:layout_width="196dp"
-        android:layout_height="wrap_content"
+        android:layout_height="43dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
@@ -217,7 +217,7 @@
         android:maxLines="2"
         android:text="o puedes enviar un SMS al 323 con el PIN de tu premio"
         android:textColor="@color/pure_black"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"
         app:layout_constraintStart_toStartOf="@+id/imageView24"
         app:layout_constraintTop_toBottomOf="@+id/txtPin"/>

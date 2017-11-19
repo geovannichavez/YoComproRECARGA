@@ -17,8 +17,8 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="309dp"
-        android:layout_height="455dp"
+        android:layout_width="354dp"
+        android:layout_height="547dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
@@ -36,14 +36,14 @@
         android:layout_height="38dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
         android:text="¡RETO COMODIN!"
         android:textColor="@color/color_red_recargo"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toTopOf="@+id/imageView12"/>
 
@@ -96,28 +96,29 @@
         android:id="@+id/imageView41"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="116dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
         app:layout_constraintStart_toStartOf="@+id/imgResult"
         app:layout_constraintTop_toBottomOf="@+id/lblResult"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_recarcoin_single"/>
 
     <TextView
         android:id="@+id/lblCoinsResult"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="32dp"
         android:text="RecarCoins"
+        android:gravity="center"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView41"
         app:layout_constraintStart_toEndOf="@+id/imageView41"
-        app:layout_constraintTop_toBottomOf="@+id/lblResult"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintTop_toBottomOf="@+id/lblResult"/>
 
     <ImageButton
         android:id="@+id/btnAccept"
@@ -125,10 +126,11 @@
         android:layout_height="53dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="100dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/lblCoinsResult"
         app:srcCompat="@drawable/btn_button_5"/>

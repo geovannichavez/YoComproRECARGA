@@ -1,163 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_souvenirs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs">
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs"
+    tools:layout_editor_absoluteY="25dp">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <include layout="@layout/custom_timemachine_background"/>
 
-        <include layout="@layout/custom_timemachine_background"/>
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="381dp"
+        android:layout_height="488dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_screen_narrow"/>
 
-        <android.support.constraint.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/activity_souvenirs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs"
-            tools:layout_editor_absoluteY="25dp">
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="218dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/gvSouvenirs"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_title_souvenirs"/>
 
+    <GridView
+        android:id="@+id/gvSouvenirs"
+        android:layout_width="237dp"
+        android:layout_height="359dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        android:nestedScrollingEnabled="true"
+        android:numColumns="2"
+        app:layout_constraintEnd_toEndOf="parent"
 
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="345dp"
-                android:layout_height="448dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="68dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/bg_screen_narrow"/>
-
-            <ImageView
-                android:id="@+id/imageView14"
-                android:layout_width="201dp"
-                android:layout_height="63dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                app:layout_constraintEnd_toEndOf="@+id/imageView13"
-                app:layout_constraintStart_toStartOf="@+id/imageView13"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/img_title_souvenirs"/>
-
-            <GridView
-                android:id="@+id/gvSouvenirs"
-                android:layout_width="237dp"
-                android:layout_height="327dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="152dp"
-                android:nestedScrollingEnabled="true"
-                android:numColumns="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/custom_souvenir_gridview_item"
-
-                />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        tools:listitem="@layout/custom_souvenir_gridview_item"/>
 
 
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="53dp"
-                android:layout_height="53dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/btn_back"/>
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_back"/>
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="151dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/gvSouvenirs"
-                app:layout_constraintEnd_toEndOf="@+id/imageView14"
-                app:layout_constraintTop_toBottomOf="@+id/imageView14"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/img_subtitle_container"/>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="151dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/gvSouvenirs"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="@+id/imageView13"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/img_subtitle_container"/>
 
-            <TextView
-                android:id="@+id/lblEraName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"/>
+    <TextView
+        android:id="@+id/lblEraName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"/>
 
-            <ImageButton
-                android:id="@+id/btnStore"
-                android:layout_width="162dp"
-                android:layout_height="51dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.544"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView13"
-                app:srcCompat="@drawable/btn_style_3"/>
+    <ImageButton
+        android:id="@+id/btnStore"
+        android:layout_width="187dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        app:srcCompat="@drawable/btn_style_3"/>
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="11dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:text="TIENDA"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/btnStore"
-                app:layout_constraintEnd_toEndOf="@+id/btnStore"
-                app:layout_constraintHorizontal_bias="0.488"
-                app:layout_constraintStart_toStartOf="@+id/btnStore"/>
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TIENDA"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStore"
+        app:layout_constraintEnd_toEndOf="@+id/btnStore"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="@+id/btnStore"/>
 
-            <TextView
-                android:id="@+id/tvEraName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3"/>
+    <TextView
+        android:id="@+id/tvEraName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"/>
 
-        </android.support.constraint.ConstraintLayout>
-    </FrameLayout>
-
-
-</ScrollView>
+</android.support.constraint.ConstraintLayout>

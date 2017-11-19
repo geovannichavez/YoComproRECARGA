@@ -10,18 +10,16 @@
 
     <include
         android:id="@+id/include4"
-        layout="@layout/custom_timemachine_background"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        layout="@layout/custom_timemachine_background"/>
 
 
     <ImageView
         android:id="@+id/imageView25"
-        android:layout_width="343dp"
-        android:layout_height="130dp"
+        android:layout_width="361dp"
+        android:layout_height="104dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,96 +28,101 @@
 
     <ImageButton
         android:id="@+id/btnPlay"
-        android:layout_width="282dp"
-        android:layout_height="106dp"
+        android:layout_width="314dp"
+        android:layout_height="132dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateMap"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_play"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/imageView25"/>
 
     <ImageButton
         android:id="@+id/btnProfile"
-        android:layout_width="287dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="324dp"
+        android:layout_height="134dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateProfile"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_profile"
         app:layout_constraintEnd_toEndOf="@+id/btnPlay"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/btnPlay"
         app:layout_constraintTop_toBottomOf="@+id/btnPlay"/>
 
     <ImageButton
         android:id="@+id/btnTravel"
-        android:layout_width="280dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="323dp"
+        android:layout_height="140dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateEraSelection"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_travel"
         app:layout_constraintEnd_toEndOf="@+id/btnProfile"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btnProfile"
         app:layout_constraintTop_toBottomOf="@+id/btnProfile"/>
 
     <ImageButton
         android:id="@+id/btnTopupRequest"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateTopupRequest"
         android:scaleType="fitXY"
         android:src="@drawable/ic_topup_request"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
     <ImageButton
         android:id="@+id/buttonLighbub"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateStore"
         android:scaleType="fitXY"
         android:src="@drawable/ic_store"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPrize"
         app:layout_constraintStart_toEndOf="@+id/btnTopupRequest"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
         />
 
     <ImageButton
         android:id="@+id/buttonPrize"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
         android:onClick="navigatePrizeRedeem"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_prize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintStart_toEndOf="@+id/buttonLighbub"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
     <ImageButton
         android:id="@+id/buttonSettings"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitXY"
         android:src="@drawable/btn_info"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toEndOf="@+id/buttonPrize"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+        />
 
 </android.support.constraint.ConstraintLayout>
