@@ -45,7 +45,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void purchaseitem(int itemID, double price)
     {
-        if(price < UserData.getInstance(mContext).getConsumerCoins())
+        if(price < UserData.getInstance(mContext).getTotalWonCoins())
         {
             mInteractor.purchaseStoreItem(this, itemID);
         }
@@ -67,7 +67,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void initialValues()
     {
-        mView.setInitialValues(String.valueOf(UserData.getInstance(mContext).getConsumerCoins()));
+        mView.setInitialValues(String.valueOf(UserData.getInstance(mContext).getTotalWonCoins()));
 
     }
 

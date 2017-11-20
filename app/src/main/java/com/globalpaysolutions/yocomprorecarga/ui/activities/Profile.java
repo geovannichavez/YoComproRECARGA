@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -50,7 +51,9 @@ public class Profile extends AppCompatActivity implements ProfileView
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent main = new Intent(Profile.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
             }
         });
 
@@ -140,5 +143,18 @@ public class Profile extends AppCompatActivity implements ProfileView
     public void viewTutorial(View view)
     {
         mPresenter.viewTutorial();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(Profile.this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

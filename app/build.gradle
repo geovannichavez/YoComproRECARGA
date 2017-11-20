@@ -112,6 +112,9 @@ dependencies {
     //Firebase Crash Reporting
     //compile 'com.google.firebase:firebase-crash:11.6.0'
 
+    //Fonts
+    compile 'me.anwarshahriar:calligrapher:1.0'
+
 }
 
 //Google Services

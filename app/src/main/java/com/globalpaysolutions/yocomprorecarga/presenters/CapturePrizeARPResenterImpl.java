@@ -17,7 +17,6 @@ import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
@@ -73,7 +72,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         //Udpate indicators
         mView.updatePrizeButton(UserData.getInstance(mContext).getCurrentCoinsProgress());
         String prizes = String.valueOf(UserData.getInstance(mContext).GetConsumerPrizes());
-        String coins = String.valueOf(UserData.getInstance(mContext).getConsumerCoins());
+        String coins = String.valueOf(UserData.getInstance(mContext).getTotalWonCoins());
         String souvs = String.valueOf(UserData.getInstance(mContext).getSavedSouvenirsCount());
         mView.updateIndicators(prizes, coins, souvs);
 
@@ -194,6 +193,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         mView.changeToOpenChest(pChestType);
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
 
@@ -503,7 +503,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.hideLoadingDialog();
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()),
-                String.valueOf(mUserData.getConsumerCoins()),
+                String.valueOf(mUserData.getTotalWonCoins()),
                 String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
     }
@@ -512,7 +512,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void onTrackingError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
-        int coins = mUserData.getConsumerCoins();
+        int coins = mUserData.getTotalWonCoins();
         int prizes = mUserData.GetConsumerPrizes();
         int souvenirs = mUserData.getSavedSouvenirsCount();
         int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
@@ -549,7 +549,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                if(!TextUtils.equals(pExchangeResponse.getCode(), "05"))
                {
                    mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()),
-                           String.valueOf(mUserData.getConsumerCoins()),
+                           String.valueOf(mUserData.getTotalWonCoins()),
                            String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs()));
                    mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
                    //mView.updatePrizeButton(pExchangeResponse.getExchangeCoins());
@@ -577,7 +577,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                           pExchangeResponse.getValue());
 
                   String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
-                  String coins = String.valueOf(mUserData.getConsumerCoins());
+                  String coins = String.valueOf(mUserData.getTotalWonCoins());
                   String souvs = String.valueOf( pExchangeResponse.getTracking().getTotalSouvenirs());
                   mView.updateIndicators(prizes, coins, souvs);
 
@@ -639,8 +639,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             //Saves tracking and updates UI
             mInteractor.saveUserTracking(pResponse.getTracking());
+
+            //Updates indicators
             mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
-                    String.valueOf(mUserData.getConsumerCoins()),
+                    String.valueOf(mUserData.getTotalWonCoins()),
                     String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
             mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
 

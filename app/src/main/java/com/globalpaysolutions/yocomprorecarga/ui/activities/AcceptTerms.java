@@ -24,6 +24,8 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 {
     private static final String TAG = AcceptTerms.class.getSimpleName();

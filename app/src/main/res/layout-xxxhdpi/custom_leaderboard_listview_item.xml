@@ -31,6 +31,7 @@
 
         <TextView
             android:id="@+id/tvNickname"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/pure_black"/>
@@ -54,5 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/pure_black"/>
+
     </RelativeLayout>
 </LinearLayout>

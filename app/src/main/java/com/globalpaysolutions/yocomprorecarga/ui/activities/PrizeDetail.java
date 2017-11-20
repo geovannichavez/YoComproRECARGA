@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,9 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     TextView lblExchange;
     ImageButton btnSms;
 
+    ImageButton btnBackMapPrizeDet;
+    ImageButton btnStorePrizeDet;
+
     //MVP
     PrizeDetailPresenterImpl mPresenter;
 
@@ -45,6 +49,30 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
         lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
         btnSms = (ImageButton) findViewById(R.id.btnSms);
+
+        btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
+        btnStorePrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
+
+        btnBackMapPrizeDet.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(PrizeDetail.this, PointsMap.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+        btnStorePrizeDet.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(PrizeDetail.this, Store.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
         mPresenter.loadInitialData();
@@ -131,9 +159,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
 
     public void navigateMap(View view)
     {
-        Intent intent = new Intent(this, PointsMap.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+
     }
 
     @Override

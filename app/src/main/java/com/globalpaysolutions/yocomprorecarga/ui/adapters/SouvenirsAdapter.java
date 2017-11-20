@@ -56,6 +56,7 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
 
         TextView lblSouvenirCounter = (TextView) row.findViewById(R.id.lblSouvenirCounter);
         ImageView imgSouvenirItem = (ImageView) row.findViewById(R.id.imgSouvenirItem);
+        View viewLocked = (View) row.findViewById(R.id.viewLocked);
 
         lblSouvenirCounter.setText(String.valueOf(currentItem.getSouvenirsOwnedByConsumer()));
 
@@ -66,6 +67,11 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
 
         Picasso.with(mContext).load(currentItem.getImgUrl()).into(imgSouvenirItem);
 
+
+        if(currentItem.getSouvenirsOwnedByConsumer() <= 0)
+        {
+            viewLocked.setVisibility(View.VISIBLE);
+        }
 
         return  row;
     }

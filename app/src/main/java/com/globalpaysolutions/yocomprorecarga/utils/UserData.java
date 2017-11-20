@@ -440,7 +440,7 @@ public class UserData
         return mPreferences.getInt(KEY_CONSUMER_ID, 0);
     }
 
-    public int getConsumerCoins()
+    public int getTotalWonCoins()
     {
         return mPreferences.getInt(KEY_TOTAL_WON_COINS, 0);
     }
