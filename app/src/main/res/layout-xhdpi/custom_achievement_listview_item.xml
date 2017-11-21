@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView31"
         app:layout_constraintStart_toStartOf="@+id/imageView31"
         app:layout_constraintTop_toTopOf="@+id/imageView31"
-        app:srcCompat="@drawable/ic_achvs_counter_3"/>
+        app:srcCompat="@drawable/ic_achvs_counter_2"/>
 
     <TextView
         android:id="@+id/txtDescription"
@@ -76,19 +76,19 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDescription"/>
 
     <ImageView
-        android:id="@+id/imageView33"
+        android:id="@+id/imgCoins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+        app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageView31"
         app:layout_constraintTop_toBottomOf="@+id/txtActual"
         app:srcCompat="@drawable/ic_prize_on_achievement"/>
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -97,6 +97,17 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView31"
         app:layout_constraintTop_toBottomOf="@+id/txtActual"
         app:srcCompat="@drawable/ic_facebook"/>
+
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/btnShare"
+        android:layout_width="38dp"
+        android:layout_height="29dp"
+        android:visibility="invisible"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@+id/imageView31"
+        app:layout_constraintTop_toBottomOf="@+id/txtActual"/>
 
     <TextView
         android:id="@+id/txtCoins"
@@ -109,11 +120,11 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView33"
-        app:layout_constraintEnd_toEndOf="@+id/imageView33"
+        app:layout_constraintBottom_toBottomOf="@+id/imgCoins"
+        app:layout_constraintEnd_toEndOf="@+id/imgCoins"
         app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="@+id/imageView33"
-        app:layout_constraintTop_toTopOf="@+id/imageView33"
+        app:layout_constraintStart_toStartOf="@+id/imgCoins"
+        app:layout_constraintTop_toTopOf="@+id/imgCoins"
         app:layout_constraintVertical_bias="1.0"
         tools:text="10,000"/>
 

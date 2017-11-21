@@ -15,6 +15,9 @@ public class ListSouvenirsByConsumer
     @SerializedName("Title")
     @Expose
     private String title;
+    @SerializedName("Description")
+    @Expose
+    private String description;
     @SerializedName("AgeID")
     @Expose
     private int ageID;
@@ -28,63 +31,59 @@ public class ListSouvenirsByConsumer
     @Expose
     private int souvenirsOwnedByConsumer;
 
-    public int getSouvenirID()
-    {
+    public int getSouvenirID() {
         return souvenirID;
     }
 
-    public void setSouvenirID(int souvenirID)
-    {
+    public void setSouvenirID(int souvenirID) {
         this.souvenirID = souvenirID;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public int getAgeID()
-    {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getAgeID() {
         return ageID;
     }
 
-    public void setAgeID(int ageID)
-    {
+    public void setAgeID(int ageID) {
         this.ageID = ageID;
     }
 
-    public String getImgUrl()
-    {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(String imgUrl)
-    {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 
-    public int getLevel()
-    {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(int level)
-    {
+    public void setLevel(int level) {
         this.level = level;
     }
 
-    public int getSouvenirsOwnedByConsumer()
-    {
+    public int getSouvenirsOwnedByConsumer() {
         return souvenirsOwnedByConsumer;
     }
 
-    public void setSouvenirsOwnedByConsumer(int souvenirsOwnedByConsumer)
-    {
+    public void setSouvenirsOwnedByConsumer(int souvenirsOwnedByConsumer) {
         this.souvenirsOwnedByConsumer = souvenirsOwnedByConsumer;
     }
 }

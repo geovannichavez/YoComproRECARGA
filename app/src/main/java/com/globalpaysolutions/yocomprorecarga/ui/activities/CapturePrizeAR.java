@@ -336,9 +336,71 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         try
         {
-            this.architectView.callJavascript("deleteObjectGeoFn()");
+            this.architectView.callJavascript("World.deleteObjectGeo()");
         }
         catch (Exception ex) {  ex.printStackTrace();   }
+    }
+
+    @Override
+    public void showNewAchievementDialog(String name, String level, String prize, String score, int resource, final boolean navigatePrize)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(CapturePrizeAR.this);
+            LayoutInflater inflater = CapturePrizeAR.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_achievement_dialog, null);
+
+            TextView lblReward = (TextView) dialogView.findViewById(R.id.lblReward);
+            TextView lblAchievementName = (TextView) dialogView.findViewById(R.id.lblAchievementName);
+            ImageView imgAchievement = (ImageView) dialogView.findViewById(R.id.imgAchievement);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnAchievemtsNav = (ImageButton) dialogView.findViewById(R.id.btnAchievemtsNav);
+
+            lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins",prize));
+            lblAchievementName.setText(String.format("Has logrado el nivel %1$s  de %2$s",level, name ));
+            imgAchievement.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if(navigatePrize)
+                    {
+                        Intent store = new Intent(CapturePrizeAR.this, PrizeDetail.class);
+                        store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(store);
+                        finish();
+                    }
+                    else
+                    {
+                        dialog.dismiss();
+                    }
+
+                }
+            });
+            btnAchievemtsNav.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent store = new Intent(CapturePrizeAR.this, Achievements.class);
+                    store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(store);
+                    finish();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -353,7 +415,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             final View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
 
             TextView tvSouvenirName = (TextView) dialogView.findViewById(R.id.lblSouvenirName);
-            TextView tvSouvenirDesc = (TextView) dialogView.findViewById(R.id.lblSouvenirDescription);
+            //(TextView tvSouvenirDesc = (TextView) dialogView.findViewById(R.id.lblSouvenirDescription);
             ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgSouvenirDialog);
             ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
             ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
@@ -368,8 +430,8 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 }
             });
 
-            tvSouvenirName.setText(souvenirName);
-            tvSouvenirDesc.setText(souvenirDescription);
+            tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), souvenirName));
+            //tvSouvenirDesc.setText(souvenirDescription);
 
             //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
@@ -495,7 +557,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onGoldKeyExited(String pKey)
     {
-        this.architectView.callJavascript("deleteObjectGeoFn()");
+        this.architectView.callJavascript("World.deleteObjectGeo()");
     }
 
     @Override
@@ -543,7 +605,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onSilverKeyExited(String pKey)
     {
-        this.architectView.callJavascript("deleteObjectGeoFn()");
+        this.architectView.callJavascript("World.deleteObjectGeo()");
     }
 
     @Override
@@ -579,7 +641,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onBronzeKeyExited(String pKey)
     {
-        this.architectView.callJavascript("deleteObjectGeoFn()");
+        this.architectView.callJavascript("World.deleteObjectGeo()");
     }
 
     @Override
@@ -615,7 +677,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void onWildcardKeyExited(String pKey)
     {
-        this.architectView.callJavascript("deleteObjectGeoFn()");
+        this.architectView.callJavascript("World.deleteObjectGeo()");
     }
 
     @Override

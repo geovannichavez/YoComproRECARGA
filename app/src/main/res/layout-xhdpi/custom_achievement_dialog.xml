@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
@@ -35,24 +34,25 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:text="¡Felicidades!"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
+        android:text="¡Felicidades, lo lograste!"
         android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"/>
 
     <ImageView
-        android:id="@+id/imgSouvenirDialog"
-        android:layout_width="122dp"
-        android:layout_height="118dp"
+        android:id="@+id/imgAchievement"
+        android:layout_width="104dp"
+        android:layout_height="94dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -61,12 +61,12 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/lblSouvenirName"
+        app:layout_constraintTop_toBottomOf="@+id/lblAchievementName"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/item_souvenir"/>
+        app:srcCompat="@drawable/ic_achvs_counter_2"/>
 
     <ImageButton
-        android:id="@+id/btnGenericDialogButton"
+        android:id="@+id/btnAchievemtsNav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -87,40 +87,42 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="IR A MI COLECCIÓN"
+        android:text="IR A LOGROS"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textAllCaps="true"
-        app:layout_constraintBottom_toBottomOf="@+id/btnGenericDialogButton"
-        app:layout_constraintEnd_toEndOf="@+id/btnGenericDialogButton"
-        app:layout_constraintStart_toStartOf="@+id/btnGenericDialogButton"
-        app:layout_constraintTop_toTopOf="@+id/btnGenericDialogButton"/>
+        app:layout_constraintBottom_toBottomOf="@+id/btnAchievemtsNav"
+        app:layout_constraintEnd_toEndOf="@+id/btnAchievemtsNav"
+        app:layout_constraintStart_toStartOf="@+id/btnAchievemtsNav"
+        app:layout_constraintTop_toTopOf="@+id/btnAchievemtsNav"/>
 
     <TextView
-        android:id="@+id/lblSouvenirName"
-        android:layout_width="wrap_content"
+        android:id="@+id/lblAchievementName"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:text="@string/label_congrats_souvenir_name"
+        android:maxLines="2"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:text="Haz logrado el nivel 1 de Ganador de Premios"/>
 
     <TextView
-        android:id="@+id/lblSouvenirDescription"
+        android:id="@+id/lblReward"
         android:layout_width="182dp"
         android:layout_height="54dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@string/label_thanks_valuable_thing"
-        android:textSize="12sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        tools:text="Tu recompensa es de 100 RecarCoins"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imgSouvenirDialog"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/imgAchievement"/>
 </android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -46,6 +47,9 @@ public class Achievements extends AppCompatActivity implements AchievementsView
             @Override
             public void onClick(View v)
             {
+                Intent main = new Intent(Achievements.this, Profile.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
                 finish();
             }
         });
@@ -57,6 +61,7 @@ public class Achievements extends AppCompatActivity implements AchievementsView
             {
                 Intent intent = new Intent(Achievements.this, PointsMap.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -91,5 +96,19 @@ public class Achievements extends AppCompatActivity implements AchievementsView
     public void showGenericImgDialog(String title, String content, int resource)
     {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(Achievements.this, Profile.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

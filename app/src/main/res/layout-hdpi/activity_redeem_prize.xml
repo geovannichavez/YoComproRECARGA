@@ -58,6 +58,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:textAllCaps="true"
         android:maxLines="2"
         android:text="@string/label_enter_pin_to_redeem"
 
@@ -104,6 +105,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:maxLines="2"
+        android:textAllCaps="true"
         android:text="@string/label_type_phone_to_apply_prize"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView34"

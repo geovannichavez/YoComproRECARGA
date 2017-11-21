@@ -59,6 +59,7 @@ public class UserData
     private static final String KEY_ACHIEVEMENT_SCORE = "usr_achievement_score";
     private static final String KEY_ACHIEVEMENT_LEVEL = "usr_achievement_level";
     private static final String KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL = "usr_achievement_value_next_level";
+    private static final String KEY_ACHIEVEMENT_PRIZE = "usr_achievement_prize";
 
     //Prizes
     private static final String KEY_LAST_PRIZE_EXCHANGED_TITLE = "usr_last_prize_exchanged_title";
@@ -343,6 +344,7 @@ public class UserData
         mEditor.putInt(KEY_ACHIEVEMENT_SCORE, achievement.getScore());
         mEditor.putInt(KEY_ACHIEVEMENT_LEVEL, achievement.getLevel());
         mEditor.putInt(KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL, achievement.getValueNextLevel());
+        mEditor.putInt(KEY_ACHIEVEMENT_PRIZE, achievement.getPrize());
         mEditor.commit();
     }
 
@@ -611,7 +613,21 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_SEEN_INTRO, false);
     }
 
+    public Achievement getLastAchievement()
+    {
+        Achievement achievement = new Achievement();
+        try
+        {
+            achievement.setLevel(mPreferences.getInt(KEY_ACHIEVEMENT_LEVEL, 0));
+            achievement.setName(mPreferences.getString(KEY_ERA_NAME, ""));
+            achievement.setPrize(mPreferences.getInt(KEY_ACHIEVEMENT_LEVEL, 0));
+            achievement.setScore(mPreferences.getInt(KEY_ACHIEVEMENT_SCORE, 0));
+            achievement.setValueNextLevel(mPreferences.getInt(KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL, 0));
+        }
+        catch (Exception ex) { ex.printStackTrace();}
 
+        return  achievement;
+    }
 
 
     /*

@@ -156,6 +156,57 @@ public class Store extends AppCompatActivity implements StoreView
     }
 
     @Override
+    public void showNewAchievementDialog(String name, String level, String prize, String score, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_achievement_dialog, null);
+
+            TextView lblReward = (TextView) dialogView.findViewById(R.id.lblReward);
+            TextView lblAchievementName = (TextView) dialogView.findViewById(R.id.lblAchievementName);
+            ImageView imgAchievement = (ImageView) dialogView.findViewById(R.id.imgAchievement);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnAchievemtsNav = (ImageButton) dialogView.findViewById(R.id.btnAchievemtsNav);
+
+            lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins",prize));
+            lblAchievementName.setText(String.format("Haz logrado el nivel %1$s  de %2$s",level, name ));
+            imgAchievement.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+            btnAchievemtsNav.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent store = new Intent(Store.this, Achievements.class);
+                    store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(store);
+                    finish();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void createImageDialog(String title, String description, int resource)
     {
         try

@@ -6,7 +6,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Main">
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone">
 
     <include
         android:id="@+id/include4"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="¿COMO NOS PODEMOS CONTACTAR?"
+        android:text="@string/label_how_to_contact"
         android:textColor="@color/color_red_recargo"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -48,14 +48,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/label_type_token"
+        android:text="@string/label_we_may_need_comunicate"
         android:textAlignment="center"
-        android:textSize="17sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22"
-        tools:text="Si obtienes un gran premio necesitaremos comunicarnos contigo."/>
+        />
 
     <ImageView
         android:id="@+id/imageView30"

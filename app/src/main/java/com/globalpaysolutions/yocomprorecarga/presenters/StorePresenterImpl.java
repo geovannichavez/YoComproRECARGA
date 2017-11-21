@@ -119,6 +119,28 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
                    response.getImgUrl(),
                    response.getValue());
            mView.showSouvenirWonDialog(response.getTitle(), response.getDescription(), response.getImgUrl());
+
+           if(response.getAchievement() != null)
+           {
+               UserData.getInstance(mContext).saveLastAchievement(response.getAchievement());
+
+               String name = response.getAchievement().getName();
+               String level = String.valueOf(response.getAchievement().getLevel());
+               String prize = String.valueOf(response.getAchievement().getPrize());
+               String score = String.valueOf(response.getAchievement().getScore());
+
+               int resource;
+               if (response.getAchievement().getLevel() == 1)
+                   resource = R.drawable.ic_achvs_counter_1;
+               else if (response.getAchievement().getLevel() == 2)
+                   resource = R.drawable.ic_achvs_counter_2;
+               else if (response.getAchievement().getLevel() == 3)
+                   resource = R.drawable.ic_achvs_counter_3;
+               else
+                   resource = R.drawable.ic_achvs_counter_0;
+
+               mView.showNewAchievementDialog(name, level, prize, score, resource);
+           }
        }
        catch (Exception ex)
        {

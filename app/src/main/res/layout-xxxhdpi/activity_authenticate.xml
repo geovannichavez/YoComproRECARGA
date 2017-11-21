@@ -55,7 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="¡Ahora podemos conocernos mejor! Para continuar, regístrate o inicia sesión con tu cuenta facebook."
+        android:text="@string/label_new_login_with_facebook_"
         android:textColor="@color/gray_textView_color"
         android:textSize="18sp"
         android:textStyle="normal"

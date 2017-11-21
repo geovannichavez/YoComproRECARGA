@@ -54,6 +54,7 @@ public class Profile extends AppCompatActivity implements ProfileView
                 Intent main = new Intent(Profile.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -119,25 +120,33 @@ public class Profile extends AppCompatActivity implements ProfileView
     public void navigateLeaderboards(View view)
     {
         Intent leaderboards = new Intent(this, Leaderboards.class);
+        leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(leaderboards);
+        finish();
     }
 
     public void navigatePrizesHistory(View view)
     {
         Intent history = new Intent(this, PrizesHistory.class);
+        history.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(history);
+        finish();
     }
 
     public void navigateSouvenirs(View view)
     {
         Intent souvenirs = new Intent(this, Souvenirs.class);
+        souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(souvenirs);
+        finish();
     }
 
     public void navigateAchievements(View view)
     {
         Intent achievements = new Intent(this, Achievements.class);
+        achievements.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(achievements);
+        finish();
     }
 
     public void viewTutorial(View view)
@@ -153,6 +162,7 @@ public class Profile extends AppCompatActivity implements ProfileView
             Intent main = new Intent(Profile.this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

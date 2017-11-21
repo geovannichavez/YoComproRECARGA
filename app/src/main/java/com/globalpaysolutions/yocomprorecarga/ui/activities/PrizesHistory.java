@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -61,6 +62,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
             {
                 Intent intent = new Intent(PrizesHistory.this, RedeemPrize.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -69,6 +71,9 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
             @Override
             public void onClick(View v)
             {
+                Intent main = new Intent(PrizesHistory.this, Profile.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
                 finish();
             }
         });
@@ -199,5 +204,19 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
             }
         });
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(PrizesHistory.this, Profile.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

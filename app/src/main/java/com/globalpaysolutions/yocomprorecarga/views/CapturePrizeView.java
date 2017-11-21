@@ -1,7 +1,5 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
-import android.graphics.Bitmap;
-
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
@@ -22,7 +20,6 @@ public interface CapturePrizeView
     void showGenericDialog(DialogViewModel pMessageModel);
     void showImageDialog(DialogViewModel dialogModel, int resource);
     void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);
-    //void showPrizeColectedDialog(DialogViewModel pDialogModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();
@@ -34,6 +31,7 @@ public interface CapturePrizeView
     void on2DChestTouch(int pAwait);
     void removeRunnableCallback();
     void deleteModelAR();
+    void showNewAchievementDialog(String name, String level, String prize, String score, int resource, boolean navigatePrize);
 
 
 

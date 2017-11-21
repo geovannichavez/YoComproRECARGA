@@ -64,7 +64,7 @@
     <string name="label_loading_exchanging_chest">¡Abriendo cofre, espera!</string>
     <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
     <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo cofre una vez al día.</string>
-    <string name="label_chest_open_succesfully">¡Has abierto un cofre y obtuviste %1$s nuevas monedas! ¡Sigue buscando más cofres!</string>
+    <string name="label_chest_open_succesfully">Lo has hecho muy bien, lograste conseguir %1$s. ¡Vamos continúa buscando más!</string>
     <string name="label_indicator_prizes">PREMIOS</string>
     <string name="label_indicator_saved">ACUMULADO</string>
     <string name="cant_redeem_title">¡No tan Rápido!</string>
@@ -241,14 +241,14 @@
     <string name="label_quantity_recarcoins">%1$s RecarCoins</string>
     <string name="lbl_store_item_description">En los barriles de tienda encontrarás souvenirs que son elementos que debes seleccionar poder ganarte los premios mayores.</string>
     <string name="label_locked_era">¡ERA BLOQUEADA!</string>
-    <string name="label_locked_era_content">Continúa recolectando más souvenirs o monedas, muy pronto podrás realizar otro viaje y descubrir una nueva era.</string>
-    <string name="label_welcome">Hola Aventurer@, me emociona que   te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos y condiciones.</string>
+    <string name="label_locked_era_content">Continúa recolectando más suvenires o monedas, muy pronto podrás realizar otro viaje para descubrir una nueva era.</string>
+    <string name="label_welcome">Hola Aventurer@, me emociona que te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos.</string>
     <string name="label_continue">CONTINUAR</string>
     <string name="label_achievements">LOGROS</string>
     <string name="title_couldnt_exchange_souvenir">No se canjeó el Souvenir</string>
     <string name="content_couldnt_exchange_souvenir">Algo salió mal y no se pudo canjear tu souvenir. ¡Inténtalo más tarde!</string>
-    <string name="label_enter_pin_to_redeem">Escribe el PIN del premio a canjear</string>
-    <string name="label_type_phone_to_apply_prize">Digita el número celular que se premiará</string>
+    <string name="label_enter_pin_to_redeem">PIN del Regalo</string>
+    <string name="label_type_phone_to_apply_prize">Número de celular</string>
     <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro para canjear tu premio.</string>
     <string name="label_wildcard_explanation">Si aceptas puedes hacerte millonario o acabar completamente arruinado. Si no aceptas no te precupes, puedes continuar jugando y buscando cofres.</string>
     <string name="title_you_won">¡Es tu día de suerte!</string>
@@ -265,11 +265,21 @@
     <string name="toast_wildcard_out_of_search_range">COMODÍN: Saliste del rango de búsqueda.</string>
     <string name="title_activate_gift">ACTIVAR REGALO</string>
     <string name="label_shall_we_begin">¿Iniciamos la aventura?</string>
-    <string name="label_intro_intro">Bienvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historia humana.</string>
-    <string name="label_click_to_intro">Toca para instrucciones</string>
-    <string name="label_intro_2">Ayuda a su dueño Alberto Fermi en sus viajes, encontrando muchas riquezas en distintas eras del tiempo</string>
-    <string name="label_intro_3">Recuerda que podrás canjear una recompensa diaria totalmente gratis, solo debes reunir suficientes monedas.</string>
-    <string name="label_intro_4">Las monedas están escondidas a tus alrededores en contenedores que debes abrir.</string>
-    <string name="label_intro_5">Mantente alerta pues podrás encontrar piezas de nucho valor, útiles en los próximos viajes.</string>
+    <string name="label_intro_intro">Bienvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historia.</string>
+    <string name="label_click_to_intro">Toca al centro para iniciar.</string>
+    <string name="label_intro_2">Ayuda a su dueño Albert Fermi en sus viajes, recolectando muchas riquezas en distintas eras del tiempo. </string>
+    <string name="label_intro_3">Recuerda que podrás canjear una recompensa diaria gratis, solo debes reunir suficientes RecarCoins. </string>
+    <string name="label_intro_4">Las RecarCoins las encontrarás dentro de los contenedores ubicados a tu alrededor. </string>
+    <string name="label_intro_5">Mantente alerta pues podrás encontrar piezas de mucho valor, útiles en los próximos viajes. </string>
+    <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con tu cuenta de Facebook para continuar</string>
+    <string name="label_we_may_need_comunicate">Si obtienes un gran premio necesitaremos comunicarnos contigo</string>
+    <string name="label_how_to_contact">¿CÓMO NOS PODREMOS CONTACTAR?</string>
+    <string name="label_welcome_aventurer">¡BIENVENIDO AVENTURERO!</string>
+    <string name="label_ask_nickname">Soy Albert, el creador de la máquina del tiempo. ¿Qué tal si comenzamos con tu nombre para conocernos mejor?</string>
+    <string name="label_sorry_not_compatible_part1">¡Lo siento tu celular no acepta la versión 3D!</string>
+    <string name="label_sorry_not_compatible_part2">¡Pero no te preocupes que aún puedes jugar con la versión 2D!</string>
+    <string name="label_congrats_souvenir_name">Lograste encontrar %1$s.</string>
+    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí!¡Mereces una recompensa!</string>
+    <string name="label_just_earned">Acabas de ganar gracias a Claro:</string>
 
 </resources>

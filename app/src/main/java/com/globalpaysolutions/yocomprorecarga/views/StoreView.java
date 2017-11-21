@@ -17,5 +17,6 @@ public interface StoreView
     void setInitialValues(String currentCoins);
     void renderStoreItems(List<ListGameStoreResponse> items);
     void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);
+    void showNewAchievementDialog(String name, String level, String prize, String score, int resource);
     void createImageDialog(String title, String description, int resource);
 }

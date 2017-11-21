@@ -101,7 +101,7 @@
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:maxLines="2"
-        android:text="Haz recolectado tu premio gracias a:"
+        android:text="@string/label_just_earned"
         android:textColor="@color/pure_black"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"

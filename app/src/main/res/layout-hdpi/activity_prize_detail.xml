@@ -98,14 +98,14 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="187dp"
+        android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:maxLines="2"
-        android:text="Haz recolectado tu premio gracias a:"
+        android:text="@string/label_just_earned"
         android:textColor="@color/pure_black"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"

@@ -305,12 +305,16 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         if(!p3DCompatible)
         {
             mView.stopVibrate();
-            mView.onGoldKeyExited(pKey);
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
 
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
+        }
+        else
+        {
+            //mView.deleteModelAR();
+            mView.onGoldKeyExited(pKey);
         }
     }
 
@@ -354,11 +358,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
 
             mView.removeBlinkingAnimation();
-            mView.onSilverKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
 
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
+        }
+        else
+        {
+            //mView.deleteModelAR();
+            mView.onSilverKeyExited(pKey);
         }
     }
 
@@ -396,11 +404,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
 
             mView.removeBlinkingAnimation();
-            mView.onBronzeKeyExited(pKey);
             mView.switchRecarcoinVisible(false);
 
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
+        }
+        else
+        {
+            //mView.deleteModelAR();
+            mView.onBronzeKeyExited(pKey);
         }
     }
 
@@ -446,12 +458,17 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
 
             mView.removeBlinkingAnimation();
-            mView.onWildcardKeyExited(pKey);
+
             mView.switchRecarcoinVisible(false);
 
             //Game UX
             mView.showToast(mContext.getString(R.string.toast_wildcard_out_of_search_range));
         }
+        else
+       {
+           //mView.deleteModelAR();
+           mView.onWildcardKeyExited(pKey);
+       }
     }
 
     @Override
@@ -571,12 +588,32 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                            String.valueOf(mUserData.getTotalWonCoins()),
                            String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs()));
                    mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
-                   //mView.updatePrizeButton(pExchangeResponse.getExchangeCoins());
 
                    dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
                    dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
                    dialog.setAcceptButton(mContext.getString(R.string.button_accept));
                    mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple);
+
+                   //Checks for achievemnts and creates dialog
+                   if(pExchangeResponse.getAchievement() != null)
+                   {
+                       String name = pExchangeResponse.getAchievement().getName();
+                       String level = String.valueOf(pExchangeResponse.getAchievement().getLevel());
+                       String prize = String.valueOf(pExchangeResponse.getAchievement().getPrize());
+                       String score = String.valueOf(pExchangeResponse.getAchievement().getScore());
+
+                       int resource;
+                       if(pExchangeResponse.getAchievement().getLevel() == 1)
+                            resource = R.drawable.ic_achvs_counter_1;
+                       else if (pExchangeResponse.getAchievement().getLevel() == 2)
+                           resource = R.drawable.ic_achvs_counter_2;
+                       else if (pExchangeResponse.getAchievement().getLevel() == 3)
+                           resource = R.drawable.ic_achvs_counter_3;
+                       else
+                           resource = R.drawable.ic_achvs_counter_0;
+
+                        mView.showNewAchievementDialog(name, level, prize, score, resource, false);
+                   }
                }
                else
                {
@@ -588,39 +625,62 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            }
            else
            {
-              if(!TextUtils.equals(pExchangeResponse.getCode(), "05"))
-              {
-                  mUserData.saveSouvenirObtained( pExchangeResponse.getTitle(),
-                          pExchangeResponse.getDescription(),
-                          pExchangeResponse.getImgUrl(),
-                          pExchangeResponse.getValue());
+               if (!TextUtils.equals(pExchangeResponse.getCode(), "05"))
+               {
+                   mUserData.saveSouvenirObtained(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl(), pExchangeResponse.getValue());
 
-                  String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
-                  String coins = String.valueOf(mUserData.getTotalWonCoins());
-                  String souvs = String.valueOf( pExchangeResponse.getTracking().getTotalSouvenirs());
-                  mView.updateIndicators(prizes, coins, souvs);
+                   String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
+                   String coins = String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins());
+                   String souvs = String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs());
+                   mView.updateIndicators(prizes, coins, souvs);
 
-                  mView.showSouvenirWonDialog(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl());
-              }
-              else
-              {
-                  dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
-                  dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
-                  dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-                  mView.showGenericDialog(dialog);
-              }
+                   mView.showSouvenirWonDialog(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl());
+
+                   //Checks for achievemnts and creates dialog
+                   if (pExchangeResponse.getAchievement() != null)
+                   {
+                       String name = pExchangeResponse.getAchievement().getName();
+                       String level = String.valueOf(pExchangeResponse.getAchievement().getLevel());
+                       String prize = String.valueOf(pExchangeResponse.getAchievement().getPrize());
+                       String score = String.valueOf(pExchangeResponse.getAchievement().getScore());
+
+                       int resource;
+                       if (pExchangeResponse.getAchievement().getLevel() == 1)
+                           resource = R.drawable.ic_achvs_counter_1;
+                       else if (pExchangeResponse.getAchievement().getLevel() == 2)
+                           resource = R.drawable.ic_achvs_counter_2;
+                       else if (pExchangeResponse.getAchievement().getLevel() == 3)
+                           resource = R.drawable.ic_achvs_counter_3;
+                       else
+                           resource = R.drawable.ic_achvs_counter_0;
+
+                       mView.showNewAchievementDialog(name, level, prize, score, resource, false);
+                   }
+               }
+               else
+               {
+                   dialog.setTitle(mContext.getString(R.string.label_alreadey_open_chest_title));
+                   dialog.setLine1(mContext.getString(R.string.label_allowed_open_chest_once_per_day));
+                   dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                   mView.showGenericDialog(dialog);
+               }
            }
 
            //Removes Image and updates UI
-           if(!mUserData.Is3DCompatibleDevice())
+           if (!mUserData.Is3DCompatibleDevice())
            {
                mView.removeBlinkingAnimation();
                mView.switchRecarcoinVisible(false);
+           }
+           else
+           {
+               mView.deleteModelAR();
            }
        }
        catch (Exception ex)
        {
            ex.printStackTrace();
+           Log.e(TAG, "Happened from handling data for onOpenChestSuccess");
            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
            dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
            dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
@@ -667,11 +727,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
             mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
 
-            if(pResponse.getAchievement() != null)
-            {
-                mUserData.saveLastAchievement(pResponse.getAchievement());
-            }
-
             //Saves last saved prize
             mUserData.saveLastPrizeTitle(pResponse.getTitle());
             mUserData.saveLastPrizeDescription(pResponse.getDescription());
@@ -681,9 +736,33 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mUserData.saveLastPrizeLogoUrl(pResponse.getLogoUrl());
             mUserData.saveLastPrizeExchangedColor(pResponse.getHexColor());
 
-            //Navigates to prize details
-            mView.navigateToPrizeDetails();
+            if(pResponse.getAchievement() != null)
+            {
+                mUserData.saveLastAchievement(pResponse.getAchievement());
 
+                String name = pResponse.getAchievement().getName();
+                String level = String.valueOf(pResponse.getAchievement().getLevel());
+                String prize = String.valueOf(pResponse.getAchievement().getPrize());
+                String score = String.valueOf(pResponse.getAchievement().getScore());
+
+                int resource;
+                if (pResponse.getAchievement().getLevel() == 1)
+                    resource = R.drawable.ic_achvs_counter_1;
+                else if (pResponse.getAchievement().getLevel() == 2)
+                    resource = R.drawable.ic_achvs_counter_2;
+                else if (pResponse.getAchievement().getLevel() == 3)
+                    resource = R.drawable.ic_achvs_counter_3;
+                else
+                    resource = R.drawable.ic_achvs_counter_0;
+
+                mView.showNewAchievementDialog(name, level, prize, score, resource, true); //Tells if clicking 'Close' is takin user to PrizeDetails
+            }
+            else
+            {
+
+                //Navigates to prize details
+                mView.navigateToPrizeDetails();
+            }
         }
         else
         {

@@ -883,7 +883,9 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             {
                 //Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
                 Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
+                prizeCaptureAR.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(prizeCaptureAR);
+                finish();
             }
             catch (Exception ex)
             {

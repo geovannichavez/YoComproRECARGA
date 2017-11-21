@@ -64,6 +64,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 Intent main = new Intent(Souvenirs.this, Profile.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -75,6 +76,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 Intent main = new Intent(Souvenirs.this, Store.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -107,7 +109,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 ListSouvenirsByConsumer souvenir = ((ListSouvenirsByConsumer) parent.getItemAtPosition(position));
-                mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), "",
+                mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
                         String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
                         souvenir.getImgUrl(),
                         souvenir.getSouvenirID());
@@ -167,6 +169,59 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             mSouvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             mSouvenirDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             mSouvenirDialog.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showNewAchievementDialog(String name, String level, String prize, String score, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_achievement_dialog, null);
+
+            TextView lblReward = (TextView) dialogView.findViewById(R.id.lblReward);
+            TextView lblAchievementName = (TextView) dialogView.findViewById(R.id.lblAchievementName);
+            ImageView imgAchievement = (ImageView) dialogView.findViewById(R.id.imgAchievement);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnAchievemtsNav = (ImageButton) dialogView.findViewById(R.id.btnAchievemtsNav);
+
+            lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins",prize));
+            lblAchievementName.setText(String.format("Has logrado el nivel %1$s  de %2$s",level, name ));
+            imgAchievement.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(Souvenirs.this, PrizeDetail.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            btnAchievemtsNav.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent store = new Intent(Souvenirs.this, Achievements.class);
+                    store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(store);
+                    finish();
+                }
+            });
         }
         catch (Exception ex)
         {
@@ -260,6 +315,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             Intent main = new Intent(this, Profile.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

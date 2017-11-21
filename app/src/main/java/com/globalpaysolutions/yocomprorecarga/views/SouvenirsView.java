@@ -14,6 +14,7 @@ public interface SouvenirsView
     void setInitialViewsState(String eraName);
     void renderSouvenirs(List<ListSouvenirsByConsumer> souvenirs);
     void showSouvenirDetails(String title, String description, String count, String url, int souvID);
+    void showNewAchievementDialog(String name, String level, String prize, String score, int resource);
     void navigatePrizeDetails();
     void closeSouvenirDialog();
     void generateImageDialog(DialogViewModel dialog, int resource);

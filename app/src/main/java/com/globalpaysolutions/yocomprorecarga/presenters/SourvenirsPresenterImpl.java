@@ -7,8 +7,6 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsListeners;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
-import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ISourvenirsPresenter;
@@ -86,11 +84,6 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
                         redeemPrize.getTracking().getTotalSouvenirs(),
                         redeemPrize.getTracking().getAgeID());
 
-                if (redeemPrize.getAchievement() != null)
-                {
-                    UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
-                }
-
                 //Saves last saved prize
                 UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
                 UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
@@ -100,8 +93,27 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
                 UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
                 UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
 
-                //Navigates to prize details
-                mView.navigatePrizeDetails();
+                if (redeemPrize.getAchievement() != null)
+                {
+                    UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
+
+                    String name = redeemPrize.getAchievement().getName();
+                    String level = String.valueOf(redeemPrize.getAchievement().getLevel());
+                    String prize = String.valueOf(redeemPrize.getAchievement().getPrize());
+                    String score = String.valueOf(redeemPrize.getAchievement().getScore());
+
+                    int resource;
+                    if (redeemPrize.getAchievement().getLevel() == 1)
+                        resource = R.drawable.ic_achvs_counter_1;
+                    else if (redeemPrize.getAchievement().getLevel() == 2)
+                        resource = R.drawable.ic_achvs_counter_2;
+                    else if (redeemPrize.getAchievement().getLevel() == 3)
+                        resource = R.drawable.ic_achvs_counter_3;
+                    else
+                        resource = R.drawable.ic_achvs_counter_0;
+
+                    mView.showNewAchievementDialog(name, level, prize, score, resource);
+                }
             }
             else
             {
