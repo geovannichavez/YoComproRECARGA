@@ -63,6 +63,7 @@ public class PermissionsPresenterImpl implements IPermissions
             }
             else
             {
+                mUserData.HasGrantedDevicePermissions(false);
                 ActivityCompat.requestPermissions(mActivity, new String[]{CAMERA, READ_SMS, ACCESS_FINE_LOCATION,}, Constants.REQUEST_PERMISSION_CODE);
             }
         }
