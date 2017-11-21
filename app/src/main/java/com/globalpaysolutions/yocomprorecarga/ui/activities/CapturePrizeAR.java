@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -90,7 +91,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             @Override
             public void onClick(View v)
             {
-                finish();
+                Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
+                store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(store);
+                finish();//TODO: Verificar si deberia de hacerse
             }
         });
 
@@ -102,6 +106,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 Intent store = new Intent(CapturePrizeAR.this, Store.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
+                finish();//TODO: Verificar si deberia de hacerse
             }
         });
 
@@ -152,7 +157,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onPOIClick()
+    public void on3DChestClick()
     {
         try
         {
@@ -192,7 +197,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                     then = System.currentTimeMillis();
 
                     //Stops vibrating and removes animation
-                    mPresenter.handleCoinTouch();
+                    mPresenter.handle2DCoinTouch();
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP)
                 {
@@ -230,20 +235,6 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     public void showImageDialog(DialogViewModel dialogModel, int resource)
     {
         createImageDialog(dialogModel.getTitle(), dialogModel.getLine1(), resource);
-    }
-
-    @Override
-    public void showPrizeColectedDialog(DialogViewModel pDialogModel)
-    {
-        createGenericDialogButton(pDialogModel.getTitle(), pDialogModel.getLine1(), pDialogModel.getAcceptButton(), new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent prizeDetail = new Intent(CapturePrizeAR.this, PrizeDetail.class);
-                startActivity(prizeDetail);
-            }
-        });
     }
 
     @Override
@@ -327,7 +318,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onChestTouch(int pAwait)
+    public void on2DChestTouch(int pAwait)
     {
         mVibrator.cancel();
         removeBlinkingAnimation();
@@ -373,6 +364,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 {
                     Intent souvs = new Intent(CapturePrizeAR.this, Souvenirs.class);
                     startActivity(souvs);
+                    finish();
                 }
             });
 
@@ -664,6 +656,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         Intent wildcard = new Intent(this, Wildcard.class);
         startActivity(wildcard);
+        finish();
     }
 
     @Override
@@ -671,6 +664,20 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         Intent prizeDetails = new Intent(this, PrizeDetail.class);
         startActivity(prizeDetails);
+        finish();
+    }
+
+    @Override
+    public void setEnabledChestImage(boolean enabled)
+    {
+        try
+        {
+            ivPrize2D.setEnabled(enabled);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
 
@@ -707,6 +714,10 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     protected void onStop()
     {
         super.onStop();
+
+        //Detach Firebae listeners
+        mPresenter.detachFirebaseListeners();
+
         try
         {
 
@@ -884,6 +895,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     {
         Intent timeMachine = new Intent(this, Main.class);
         startActivity(timeMachine);
+        finish();
     }
 
 
@@ -926,5 +938,18 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
         }
     };
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
+            store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(store);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

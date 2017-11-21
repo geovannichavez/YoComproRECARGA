@@ -16,15 +16,12 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
-import me.anwarshahriar.calligrapher.Calligrapher;
 
 public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 {

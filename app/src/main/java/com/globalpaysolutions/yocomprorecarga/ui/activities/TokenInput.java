@@ -147,8 +147,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     {
         try
         {
-            Intent next = null;
-
+/*
             if (p3DCompatible)
             {
                 next = new Intent(this, Main.class);
@@ -156,7 +155,9 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
             else
             {
                 next = new Intent(this, LimitedFunctionality.class);
-            }
+            }*/
+
+            Intent next = new Intent(this, Main.class);
 
             next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

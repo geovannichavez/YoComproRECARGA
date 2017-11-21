@@ -72,15 +72,19 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="27dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/baloo_regular"
         android:text="@string/label_continue"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAcceptTerms"
         app:layout_constraintEnd_toEndOf="@+id/btnAcceptTerms"
         app:layout_constraintStart_toStartOf="@+id/btnAcceptTerms"
-        app:layout_constraintTop_toTopOf="@+id/btnAcceptTerms"/>
+        app:layout_constraintTop_toTopOf="@+id/btnAcceptTerms"
+        app:layout_constraintVertical_bias="0.0"/>
 
 </android.support.constraint.ConstraintLayout>
 

@@ -55,6 +55,7 @@
         android:textColor="@color/orange_textView_color"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintEnd_toEndOf="@+id/textView19"
         app:layout_constraintStart_toStartOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="@+id/imageView28"/>
@@ -139,6 +140,7 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintBottom_toBottomOf="@+id/btnWhatever"
         app:layout_constraintEnd_toEndOf="@+id/btnWhatever"
         app:layout_constraintStart_toStartOf="@+id/btnWhatever"

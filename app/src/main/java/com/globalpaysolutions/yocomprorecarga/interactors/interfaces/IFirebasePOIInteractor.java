@@ -17,4 +17,5 @@ public interface IFirebasePOIInteractor
     void bronzePointsUpdateCriteria(GeoLocation pLocation, double pRadius);
     void wildcardPointsQuery(GeoLocation location, double radius);
     void wildcardPointsUpdateCriteria(GeoLocation pLocation, double pRadius);
+    void detachFirebaseListeners();
 }

@@ -233,7 +233,8 @@ public class Store extends AppCompatActivity implements StoreView
             mCurrentItem = position;
 
             // changing the next button text 'NEXT' / 'GOT IT'
-            if (position == mStoreItems.size() - 1)
+            if (position == mStoreItems.size())
+            //if (position == mStoreItems.size() - 1)
             {
                 // last page. make button text to GOT IT
                 //btnLeft.setText(getString(R.string.button_start));
@@ -242,11 +243,12 @@ public class Store extends AppCompatActivity implements StoreView
             else if (position == 0)
             {
                 btnLeft.setVisibility(View.GONE);
+                btnRight.setVisibility(View.VISIBLE);
             }
             else
             {
                 // still pages are left
-                btnRight.setVisibility(View.VISIBLE);
+                btnRight.setVisibility(View.GONE);
                 btnLeft.setVisibility(View.VISIBLE);
             }
         }

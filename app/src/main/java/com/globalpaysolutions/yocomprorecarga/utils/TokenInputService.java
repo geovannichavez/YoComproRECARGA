@@ -89,7 +89,9 @@ public class TokenInputService extends IntentService
 
                         //NAVIGATE HOME
 
-                        Intent next = null;
+                        Intent next = new Intent(getApplicationContext(), PointsMap.class);
+
+                        /*Intent next = null;
 
                         if(is3Dcompatible)
                         {
@@ -98,7 +100,7 @@ public class TokenInputService extends IntentService
                         else
                         {
                             next = new Intent(getApplicationContext(), LimitedFunctionality.class);
-                        }
+                        }*/
 
                         next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

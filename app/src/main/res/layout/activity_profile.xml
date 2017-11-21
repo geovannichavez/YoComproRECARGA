@@ -48,6 +48,7 @@
             android:textAllCaps="true"
             android:textColor="@color/color_dark_gray"
             android:textStyle="bold"
+            android:fontFamily="@font/baloo_regular"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
             app:layout_constraintHorizontal_bias="0.507"

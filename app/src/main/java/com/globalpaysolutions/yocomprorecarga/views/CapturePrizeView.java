@@ -16,13 +16,13 @@ public interface CapturePrizeView
 {
     void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy);
     void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy);
-    void onPOIClick();
+    void on3DChestClick();
     void onCoinLongClick();
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogViewModel pMessageModel);
     void showImageDialog(DialogViewModel dialogModel, int resource);
     void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);
-    void showPrizeColectedDialog(DialogViewModel pDialogModel);
+    //void showPrizeColectedDialog(DialogViewModel pDialogModel);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();
@@ -31,7 +31,7 @@ public interface CapturePrizeView
     void stopVibrate();
     void showToast(String pText);
     void removeBlinkingAnimation();
-    void onChestTouch(int pAwait);
+    void on2DChestTouch(int pAwait);
     void removeRunnableCallback();
     void deleteModelAR();
 
@@ -68,4 +68,5 @@ public interface CapturePrizeView
     void navigateToWildcard();
 
     void navigateToPrizeDetails();
+    void setEnabledChestImage(boolean enabled);
 }

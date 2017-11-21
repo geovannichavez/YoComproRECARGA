@@ -16,8 +16,6 @@ import com.globalpaysolutions.yocomprorecarga.views.AchievementsView;
 
 import java.util.List;
 
-import me.anwarshahriar.calligrapher.Calligrapher;
-
 public class Achievements extends AppCompatActivity implements AchievementsView
 {
     private static final String TAG = Achievements.class.getSimpleName();

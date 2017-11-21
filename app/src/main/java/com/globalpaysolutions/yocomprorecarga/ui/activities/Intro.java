@@ -1,158 +1,184 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
-import com.globalpaysolutions.yocomprorecarga.presenters.IntroPresenterImpl;
-import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
-import com.globalpaysolutions.yocomprorecarga.views.IntroView;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import me.relex.circleindicator.CircleIndicator;
-
-public class Intro extends AppCompatActivity implements IntroView
+public class Intro extends AppCompatActivity
 {
-    private static final String TAG = Intro.class.getSimpleName();
 
-    //MVP
-    IntroPresenterImpl mPresenter;
+    TextView tvDescription;
+    ImageView imgTimemachine;
+    ImageView imgCounter;
+    ImageView imgBag;
 
-    //Global variables
-    Integer[] mSlides;
+    ImageView imgTable;
+    ImageView imgBarrell;
 
-    //Layouts and Views
-   /* Button btnSkip;
-    Button btnNext;*/
-    ViewPager tutorialPager;
+    ImageButton btnFinishIntro;
+
+
+    int mCounter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_intro);
 
-        mPresenter = new IntroPresenterImpl(this, this, this);
-        mPresenter.initializeView();
-        mPresenter.setIntroAsRead();
+        mCounter = 0;
 
-       /* btnSkip = (Button) findViewById(R.id.btnSkip);
-        btnNext = (Button) findViewById(R.id.btnNext);*/
+        tvDescription = (TextView) findViewById(R.id.tvDescription);
+        imgTimemachine = (ImageView) findViewById(R.id.imgTimemachine);
+        imgCounter = (ImageView) findViewById(R.id.imgCounter);
+        imgBarrell = (ImageView) findViewById(R.id.imgBarrell);
+        imgBag = (ImageView) findViewById(R.id.imgBag);
+        imgTable = (ImageView) findViewById(R.id.imgTable);
+        btnFinishIntro = (ImageButton) findViewById(R.id.btnFinishIntro);
 
-    }
+        imgTimemachine.setImageResource(R.drawable.img_shadow_timemachine);
+        imgCounter.setImageResource(R.drawable.img_shadow_counter);
+        imgBarrell.setImageResource(R.drawable.img_shadow_barrell);
+        imgBag.setImageResource(R.drawable.img_shadow_bag);
+        imgTable.setImageResource(R.drawable.img_shadow_table);
 
-    @Override
-    public void initialViewsState()
-    {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        tvDescription.setText(R.string.label_click_to_intro);
 
-        //setContentView(R.layout.activity_intro);
-    }
+        btnFinishIntro.setEnabled(false);
+        btnFinishIntro.setClickable(false);
+        btnFinishIntro.setVisibility(View.INVISIBLE);
 
-    @Override
-    public void navigateTermsConditions()
-    {
-        Intent termsConditions = new Intent(Intro.this, AcceptTerms.class);
-        startActivity(termsConditions);
-    }
+        imgTable.setVisibility(View.INVISIBLE);
+        imgBarrell.setVisibility(View.INVISIBLE);
 
-    @Override
-    public void showTutorial()
-    {
-        /*int currentPage = 0;
-        mSlides = new Integer[]{    R.drawable.img_tuto_0,
-                                R.drawable.img_tuto_1,
-                                R.drawable.img_tuto_2,
-                                R.drawable.img_tuto_3,
-                                R.drawable.img_tuto_4   };
-        ArrayList<Integer> tutorialArray = new ArrayList<>();
+        imgTable.setEnabled(false);
+        imgTable.setClickable(false);
 
-        try
+        imgBarrell.setEnabled(false);
+        imgBag.setClickable(false);
+
+        imgTimemachine.setOnClickListener(new View.OnClickListener()
         {
-            //Finds all views once the parent view is inflated
-            tutorialPager = (ViewPager) findViewById(R.id.pager);
-            //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-
-            Collections.addAll(tutorialArray, mSlides);
-
-            tutorialPager.setAdapter(new TutorialAdapter(Intro.this, tutorialArray));
-            tutorialPager.addOnPageChangeListener(viewPagerPageChangeListener);
-            indicator.setViewPager(tutorialPager);
-
-            if (currentPage == mSlides.length)
+            @Override
+            public void onClick(View v)
             {
-                currentPage = 0;
+                mCounter = mCounter + 1;
+
+                imgTimemachine.setImageResource(R.drawable.img_color_timemeachine);
+                tvDescription.setText(getString(R.string.label_intro_intro));
+
+                if (mCounter > 1)
+                {
+                    tvDescription.setText(R.string.label_intro_2);
+                    imgTimemachine.setImageResource(R.drawable.img_shadow_timemachine);
+                    imgCounter.setImageResource(R.drawable.img_color_counter);
+                    imgTimemachine.setEnabled(false);
+                    imgTimemachine.setClickable(false);
+                }
             }
-            tutorialPager.setCurrentItem(currentPage++, true);
-        }
-        catch (Exception ex) {   ex.printStackTrace();   }*/
-    }
+        });
 
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener()
-    {
-
-        @Override
-        public void onPageSelected(int position)
+        imgCounter.setOnClickListener(new View.OnClickListener()
         {
-            /*// changing the next button text 'NEXT' / 'GOT IT'
-            if (position == mSlides.length - 1)
+            @Override
+            public void onClick(View v)
             {
-                // last page. make button text to GOT IT
-                btnNext.setText(getString(R.string.button_start));
-                btnSkip.setVisibility(View.GONE);
+                tvDescription.setText(R.string.label_intro_3);
+                imgCounter.setImageResource(R.drawable.img_shadow_counter);
+                imgBag.setImageResource(R.drawable.img_color_bag);
+                imgCounter.setEnabled(false);
+                imgCounter.setClickable(false);
             }
-            else
+        });
+
+        imgBag.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
             {
-                // still pages are left
-                btnNext.setText(getString(R.string.button_next));
-                btnSkip.setVisibility(View.VISIBLE);
-            }*/
-        }
+                tvDescription.setText(R.string.label_intro_4);
+                imgTable.setImageResource(R.drawable.img_color_table);
+                //Changes transition
+                imgTimemachine.setVisibility(View.INVISIBLE);
+                imgCounter.setVisibility(View.INVISIBLE);
+                imgBag.setVisibility(View.INVISIBLE);
 
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2)
+                imgTable.setEnabled(true);
+                imgBarrell.setEnabled(true);
+                imgTable.setVisibility(View.VISIBLE);
+                imgBarrell.setVisibility(View.VISIBLE);
+                imgBag.setEnabled(false);
+                imgBag.setClickable(false);
+            }
+        });
+
+        imgTable.setOnClickListener(new View.OnClickListener()
         {
+            @Override
+            public void onClick(View v)
+            {
+                tvDescription.setText(R.string.label_intro_5);
+                imgTable.setImageResource(R.drawable.img_shadow_table);
+                imgBarrell.setImageResource(R.drawable.img_color_barrell);
+                imgTable.setEnabled(false);
+                imgTable.setClickable(false);
+            }
+        });
 
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int arg0)
+        imgBarrell.setOnClickListener(new View.OnClickListener()
         {
+            @Override
+            public void onClick(View v)
+            {
+                imgBarrell.setImageResource(R.drawable.img_shadow_barrell);
+                imgBarrell.setEnabled(false);
+                imgBarrell.setClickable(false);
 
-        }
-    };
+                btnFinishIntro.setVisibility(View.VISIBLE);
+                btnFinishIntro.setEnabled(true);
+                btnFinishIntro.setClickable(true);
+                tvDescription.setText(R.string.label_shall_we_begin);
+            }
+        });
 
-    public void skipClick(View view)
-    {
-        mPresenter.navigateNext();
-    }
-
-    public void nextClick(View view)
-    {
-        try
+        btnFinishIntro.setOnClickListener(new View.OnClickListener()
         {
-            int current = tutorialPager.getCurrentItem() + 1;
-            if (current < mSlides.length)
-                tutorialPager.setCurrentItem(current);
-            else
-                mPresenter.navigateNext();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+            @Override
+            public void onClick(View v)
+            {
+
+                if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
+                {
+                    Intent intent = new Intent(Intro.this, Main.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent inputToken = new Intent(Intro.this, AcceptTerms.class);
+                    inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+
+                    UserData.getInstance(Intro.this).hasSeenIntro(true);
+
+                    startActivity(inputToken);
+                }
+
+            }
+        });
+
     }
 }

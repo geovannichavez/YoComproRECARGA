@@ -7,7 +7,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
@@ -25,13 +24,6 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Intro;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
@@ -496,6 +488,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_wildcardPoint_onCancelled(DatabaseError databaseError)
     {
 
+    }
+
+    @Override
+    public void detachFirebaseListeners()
+    {
+        mFirebaseInteractor.detachFirebaseListeners();
     }
 
     /*

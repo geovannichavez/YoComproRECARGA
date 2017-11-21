@@ -54,4 +54,5 @@ public interface FirebasePOIListener
     void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData);
     void fb_wildcardPoint_onCancelled(DatabaseError databaseError);
 
+    void detachFirebaseListeners();
 }

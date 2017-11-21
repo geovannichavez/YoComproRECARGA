@@ -264,5 +264,12 @@
     <string name="label_alreadey_played_challenge_title">¡Hasta mañana podrás!</string>
     <string name="toast_wildcard_out_of_search_range">COMODÍN: Saliste del rango de búsqueda.</string>
     <string name="title_activate_gift">ACTIVAR REGALO</string>
+    <string name="label_shall_we_begin">¿Iniciamos la aventura?</string>
+    <string name="label_intro_intro">Bienvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historia humana.</string>
+    <string name="label_click_to_intro">Toca para instrucciones</string>
+    <string name="label_intro_2">Ayuda a su dueño Alberto Fermi en sus viajes, encontrando muchas riquezas en distintas eras del tiempo</string>
+    <string name="label_intro_3">Recuerda que podrás canjear una recompensa diaria totalmente gratis, solo debes reunir suficientes monedas.</string>
+    <string name="label_intro_4">Las monedas están escondidas a tus alrededores en contenedores que debes abrir.</string>
+    <string name="label_intro_5">Mantente alerta pues podrás encontrar piezas de nucho valor, útiles en los próximos viajes.</string>
 
 </resources>

@@ -11,29 +11,29 @@ public class ListSouvenirsByConsumer
 {
     @SerializedName("SouvenirID")
     @Expose
-    private Integer souvenirID;
+    private int souvenirID;
     @SerializedName("Title")
     @Expose
     private String title;
     @SerializedName("AgeID")
     @Expose
-    private Integer ageID;
+    private int ageID;
     @SerializedName("ImgUrl")
     @Expose
     private String imgUrl;
     @SerializedName("Level")
     @Expose
-    private Integer level;
+    private int level;
     @SerializedName("SouvenirsOwnedByConsumer")
     @Expose
-    private Integer souvenirsOwnedByConsumer;
+    private int souvenirsOwnedByConsumer;
 
-    public Integer getSouvenirID()
+    public int getSouvenirID()
     {
         return souvenirID;
     }
 
-    public void setSouvenirID(Integer souvenirID)
+    public void setSouvenirID(int souvenirID)
     {
         this.souvenirID = souvenirID;
     }
@@ -48,12 +48,12 @@ public class ListSouvenirsByConsumer
         this.title = title;
     }
 
-    public Integer getAgeID()
+    public int getAgeID()
     {
         return ageID;
     }
 
-    public void setAgeID(Integer ageID)
+    public void setAgeID(int ageID)
     {
         this.ageID = ageID;
     }
@@ -68,22 +68,22 @@ public class ListSouvenirsByConsumer
         this.imgUrl = imgUrl;
     }
 
-    public Integer getLevel()
+    public int getLevel()
     {
         return level;
     }
 
-    public void setLevel(Integer level)
+    public void setLevel(int level)
     {
         this.level = level;
     }
 
-    public Integer getSouvenirsOwnedByConsumer()
+    public int getSouvenirsOwnedByConsumer()
     {
         return souvenirsOwnedByConsumer;
     }
 
-    public void setSouvenirsOwnedByConsumer(Integer souvenirsOwnedByConsumer)
+    public void setSouvenirsOwnedByConsumer(int souvenirsOwnedByConsumer)
     {
         this.souvenirsOwnedByConsumer = souvenirsOwnedByConsumer;
     }

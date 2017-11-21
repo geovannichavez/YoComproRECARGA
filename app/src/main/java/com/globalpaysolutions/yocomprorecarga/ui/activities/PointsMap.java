@@ -99,6 +99,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
                 Intent main = new Intent(PointsMap.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -110,6 +111,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
                 Intent intent = new Intent(PointsMap.this, RequestTopup.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -216,6 +218,12 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
 
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        mPresenter.detachFirebaseListeners();
+    }
 
     @Override
     public void renderMap()
@@ -958,6 +966,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             Intent main = new Intent(this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

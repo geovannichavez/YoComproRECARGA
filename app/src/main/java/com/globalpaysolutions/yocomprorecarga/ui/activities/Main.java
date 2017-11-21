@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
@@ -13,7 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.views.MainView;
 public class Main extends AppCompatActivity implements MainView
 {
     //Layouts and Views
-
+ImageButton buttonSettings;
 
     //MVP
     MainPresenterImpl mPresenter;
@@ -23,6 +24,18 @@ public class Main extends AppCompatActivity implements MainView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+
+        buttonSettings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intro = new Intent(Main.this, Intro.class);
+                startActivity(intro);
+            }
+        });
 
         mPresenter = new MainPresenterImpl(this, this, this);
         mPresenter.hideStatusBar();
@@ -38,8 +51,7 @@ public class Main extends AppCompatActivity implements MainView
 
     public void navigateMap(View view)
     {
-        Intent map = new Intent(Main.this, PointsMap.class);
-        startActivity(map);
+        mPresenter.checkFunctionalityLimitedShown();
     }
 
     public void navigateAR(View view )

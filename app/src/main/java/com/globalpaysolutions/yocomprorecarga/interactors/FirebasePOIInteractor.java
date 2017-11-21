@@ -68,7 +68,18 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void initializePOIGeolocation()
     {
-        new initializeGeolocation().execute();
+        try
+        {
+            mGoldPointsRef = new GeoFire(mGoldPoints);
+            mSilverPointsRef = new GeoFire(mSilverPoints);
+            mBronzePointsRef = new GeoFire(mBronzePoints);
+            mWildcardPointsRef = new GeoFire(mWildcardPoints);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
     }
 
     @Override
@@ -131,7 +142,6 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void wildcardPointsQuery(GeoLocation location, double radius)
     {
-        //new executeWildcardPointsQuery(location, radius);
         mWildcardPointsQuery = mWildcardPointsRef.queryAtLocation(location, radius);
         mWildcardPointsQuery.addGeoQueryEventListener(wildcardPointsListener);
     }
@@ -146,6 +156,22 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void detachFirebaseListeners()
+    {
+        try
+        {
+            mGoldPointsQuery.removeGeoQueryEventListener(goldPointsListener);
+            mSilverPointsQuery.removeGeoQueryEventListener(silverPointsListener);
+            mBronzePointsQuery.removeGeoQueryEventListener(bronzePointsListener);
+            mWildcardPointsQuery.removeGeoQueryEventListener(wildcardPointsListener);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not detach GeoQuery Event Listeners");
         }
     }
 

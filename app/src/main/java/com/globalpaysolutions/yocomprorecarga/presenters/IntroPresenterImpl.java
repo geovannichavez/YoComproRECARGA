@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IIntroPresenter;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Intro;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.IntroView;
 

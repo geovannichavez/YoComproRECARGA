@@ -41,6 +41,7 @@
         android:textColor="@color/color_red_recargo"
         android:textSize="21sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintEnd_toEndOf="@+id/include4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
@@ -92,6 +93,7 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintBottom_toBottomOf="@+id/btnPermissions"
         app:layout_constraintEnd_toEndOf="@+id/btnPermissions"
         app:layout_constraintStart_toStartOf="@+id/btnPermissions"

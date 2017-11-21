@@ -83,6 +83,7 @@ public class LimitedFunctionalityPresenterImpl implements ILimitedFunctionality
     @Override
     public void navigateNext()
     {
+        UserData.getInstance(mContext).setHasConfirmedLimitedFunctionality(true);
         mView.navigateNextActivity();
     }
 }

@@ -219,8 +219,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-        <activity android:name=".ui.activities.Intro">
-        </activity>
         <activity
             android:name=".ui.activities.EraSelection"
             android:screenOrientation="portrait"
@@ -257,6 +255,12 @@
             android:name=".ui.activities.Wildcard"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity
+            android:name=".ui.activities.Intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+
         </activity>
     </application>
 

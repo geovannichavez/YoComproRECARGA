@@ -39,6 +39,7 @@
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="¡Excelente!"
+        android:fontFamily="@font/baloo_regular"
         android:textAllCaps="true"
         android:textColor="@color/color_red_recargo"
         android:textSize="21sp"

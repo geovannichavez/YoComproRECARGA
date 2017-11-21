@@ -42,6 +42,8 @@ public class UserData
     private static final String KEY_HAS_AUTHENTICATED = "usr_has_authenticated";
     private static final String KEY_AUTHENTICATION_KEY = "usr_authentication_key";
     private static final String KEY_HAS_READ_INTRO = "usr_has_read_intro";
+    private static final String KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY = "usr_has_confirmed_limited_functionalty";
+    private static final String KEY_HAS_SEEN_INTRO = "usr_has_seen_intro";
 
     //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
@@ -200,6 +202,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void setHasConfirmedLimitedFunctionality(boolean confirmed)
+    {
+        mEditor.putBoolean(KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY, confirmed);
+        mEditor.commit();
+    }
+
     public void SaveDeviceID(String pDeviceID)
     {
         mEditor.putString(KEY_UNIQUE_DEVICE_ID, pDeviceID);
@@ -208,8 +216,9 @@ public class UserData
 
     public void SaveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress, int pSouvenirs, int pEraID)
     {
-        int coins = (pCoins < 0) ? 0 : pCoins;
-        mEditor.putInt(KEY_TOTAL_WON_COINS, coins);
+        //int coins = (pCoins < 0) ? 0 : pCoins;
+        //mEditor.putInt(KEY_TOTAL_WON_COINS, coins);
+        mEditor.putInt(KEY_TOTAL_WON_COINS, pCoins);
         mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
@@ -408,6 +417,11 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_AUTHENTICATED, false);
     }
 
+    public boolean isUserConfirmedLimitedFunctionality()
+    {
+        return mPreferences.getBoolean(KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY, false);
+    }
+
     public String getUserPhone()
     {
         return mPreferences.getString(KEY_CONSUMER_PHONE, "");
@@ -592,6 +606,11 @@ public class UserData
         return mPreferences.getInt(KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE, 0);
     }
 
+    public boolean getHasSeenIntroValue()
+    {
+        return mPreferences.getBoolean(KEY_HAS_SEEN_INTRO, false);
+    }
+
 
 
 
@@ -629,4 +648,9 @@ public class UserData
     }
 
 
+    public void hasSeenIntro(boolean seen)
+    {
+        mEditor.putBoolean(KEY_HAS_SEEN_INTRO, seen);
+        mEditor.commit();
+    }
 }

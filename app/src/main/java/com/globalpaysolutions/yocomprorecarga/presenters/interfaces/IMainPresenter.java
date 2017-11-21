@@ -8,4 +8,5 @@ public interface IMainPresenter
 {
     void checkUserDataCompleted();
     void hideStatusBar();
+    void checkFunctionalityLimitedShown();
 }

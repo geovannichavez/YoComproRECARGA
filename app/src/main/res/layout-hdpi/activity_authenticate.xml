@@ -42,6 +42,7 @@
         android:textColor="@color/color_red_recargo"
         android:textSize="21sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"/>

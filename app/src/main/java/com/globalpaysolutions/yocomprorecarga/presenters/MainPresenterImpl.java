@@ -10,8 +10,10 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresent
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Intro;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -42,12 +44,12 @@ public class MainPresenterImpl implements IMainPresenter
     @Override
     public void checkUserDataCompleted()
     {
-        /*if(!mUserData.hasReadIntro())
+        if(!mUserData.getHasSeenIntroValue())
         {
             Intent intro = new Intent(mActivity, Intro.class);
             mContext.startActivity(intro);
         }
-        else*/ if(!mUserData.UserAcceptedTerms())
+        else if(!mUserData.UserAcceptedTerms())
         {
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);
@@ -89,6 +91,32 @@ public class MainPresenterImpl implements IMainPresenter
     public void hideStatusBar()
     {
         mView.hideStatusBar();
+    }
+
+    @Override
+    public void checkFunctionalityLimitedShown()
+    {
+        if(!mUserData.Is3DCompatibleDevice())
+        {
+            if(!mUserData.isUserConfirmedLimitedFunctionality())
+            {
+                Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
+                this.addFlags(functionality);
+                mContext.startActivity(functionality);
+            }
+            else
+            {
+                Intent map = new Intent(mActivity, PointsMap.class);
+                this.addFlags(map);
+                mContext.startActivity(map);
+            }
+        }
+        else
+        {
+            Intent map = new Intent(mActivity, PointsMap.class);
+            this.addFlags(map);
+            mContext.startActivity(map);
+        }
     }
 
     private void addFlags(Intent pIntent)

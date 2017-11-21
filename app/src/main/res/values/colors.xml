@@ -69,4 +69,6 @@
     <!-- GREEEN THEME -->
     <color name="yvr_green_color">#66cc00</color>
     <color name="yvr_green_color_dark">#59af03</color>
+
+    <color name="color_title_recargo">#2b343f</color>
 </resources>

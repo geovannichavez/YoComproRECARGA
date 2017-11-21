@@ -54,6 +54,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
     private boolean m3Dcompatible;
     private static String mCurrentChestKey;
+    private boolean mIsRunning;
 
     public CapturePrizeARPResenterImpl(Context pContext, AppCompatActivity pActivity, CapturePrizeView pView)
     {
@@ -64,6 +65,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mView = pView;
         this.mUserData = UserData.getInstance(mContext);
         this.mInteractor = new CapturePrizeInteractor(mContext, this);
+        mIsRunning = false;
     }
 
     @Override
@@ -93,7 +95,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         if (m3Dcompatible)
         {
-            mView.onPOIClick();
+            mView.on3DChestClick();
         }
         else
         {
@@ -143,6 +145,14 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
+            synchronized (this)
+            {
+                if (mIsRunning)
+                    return;
+            }
+
+            mIsRunning = true;
+
             Map<String, String> urlMap = getURLMap(pArchitectURL);
             String firebaseID = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
             String chestType = urlMap.get(Constants.URI_MAP_VALUE_CHEST_TYPE);
@@ -224,10 +234,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void handleCoinTouch()
+    public void handle2DCoinTouch()
     {
         mView.stopVibrate();
-        mView.onChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
+        mView.setEnabledChestImage(false);
+        mView.on2DChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
     }
 
     @Override
@@ -498,6 +509,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void detachFirebaseListeners()
+    {
+        mFirebaseInteractor.detachFirebaseListeners();
+    }
+
+    @Override
     public void onRetrieveTracking(Tracking pTracking)
     {
         mView.hideLoadingDialog();
@@ -532,6 +549,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
+        mView.setEnabledChestImage(true);
+        mIsRunning = false;
 
        try
        {
@@ -619,7 +638,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void onOpenChestError(int pCodeStatus, Throwable pThrowable)
     {
         mView.hideLoadingDialog();
+        mView.setEnabledChestImage(true);
         processErrorMessage(pCodeStatus, pThrowable);
+        mIsRunning = false;
 
         if(!mUserData.Is3DCompatibleDevice())
         {
