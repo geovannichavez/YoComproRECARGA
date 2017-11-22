@@ -18,9 +18,9 @@
 
     <style name="AppThemeYvr" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/yvr_green_color</item>
+        <item name="colorPrimary">@color/color_yovendorecarga_green</item>
         <item name="colorPrimaryDark">@color/yvr_green_color_dark</item>
-        <item name="colorAccent">@color/yvr_green_color</item>
+        <item name="colorAccent">@color/color_yovendorecarga_green_dark</item>
 
         <!--    TOOLBAR     -->
         <item name="windowActionModeOverlay">true</item>

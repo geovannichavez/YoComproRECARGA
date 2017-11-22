@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface AchievementsView
 {
+    void showLoadingDialog(String label);
+    void hideLoadingDialog();
     void renderAchievements(List<ListAchievementsByConsumer> achieves);
     void showGenericImgDialog(String title, String content, int resource);
 }

@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
     EditText etPhone;
     ImageButton btnActivate;
     ImageButton btnBack;
+    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -108,6 +110,39 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 
             }
         });
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(label);
+            mProgressDialog.show();
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

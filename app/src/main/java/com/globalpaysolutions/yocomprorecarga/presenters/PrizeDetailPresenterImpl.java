@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPrizeDetailPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -43,6 +44,10 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
         data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
         data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
         mView.updateViews(data);
+
+        if(TextUtils.equals(mUserData.getAchievementFromSouvenirExchange(), Constants.ACHIEVEMENT_FROM_SOUVENIR_SALE))
+            mView.showAchievementDialog();
+
     }
 
     @Override

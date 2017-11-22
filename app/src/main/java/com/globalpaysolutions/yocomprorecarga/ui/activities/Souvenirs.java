@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -41,6 +42,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     TextView tvEraName;
     ImageButton btnBack;
     ImageButton btnStore;
+    ProgressDialog mProgressDialog;
 
     //Global Variables
 
@@ -88,6 +90,39 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
 
         mPresnter.initializeViews();
         mPresnter.requestSouvenirs();
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(label);
+            mProgressDialog.show();
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

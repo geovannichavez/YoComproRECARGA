@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -40,6 +41,7 @@ public class Store extends AppCompatActivity implements StoreView
     ImageView btnBuy;
     //ImageButton btnInfoStoreItem;
     ImageButton btnBack;
+    ProgressDialog mProgressDialog;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -73,6 +75,32 @@ public class Store extends AppCompatActivity implements StoreView
         mPresenter = new StorePresenterImpl(this, this, this);
         mPresenter.initialValues();
         mPresenter.retrieveStoreItems();
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage(label);
+        mProgressDialog.show();
+        //mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

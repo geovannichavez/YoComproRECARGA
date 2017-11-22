@@ -1,7 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.hardware.usb.UsbRequest;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsInteractor;
@@ -10,6 +12,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ISourvenirsPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
 
@@ -43,6 +46,7 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     @Override
     public void requestSouvenirs()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.requestUserSouvenirs(this);
     }
 
@@ -55,19 +59,21 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     @Override
     public void exchangeSouvenir(int souvID)
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.atemptExchangeSouv(this, souvID);
     }
 
     @Override
     public void onSuccess(List<ListSouvenirsByConsumer> souvenirs)
     {
+        mView.hideLoadingDialog();;
         mView.renderSouvenirs(souvenirs);
     }
 
     @Override
     public void onError(int codeStatus, Throwable throwable)
     {
-
+mView.hideLoadingDialog();
     }
 
     @Override
@@ -75,55 +81,41 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     {
         try
         {
+            mView.hideLoadingDialog();
+
+            //Saves last saved prize
+            UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
+            UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
+            UserData.getInstance(mContext).saveLastPrizeCode(redeemPrize.getCode());
+            UserData.getInstance(mContext).saveLastPrizeDial(redeemPrize.getDial());
+            UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
+            UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
+            UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
+
+            //Saves tracking and updates UI
             if(redeemPrize.getTracking() != null)
+            UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
+                    redeemPrize.getTracking().getTotalWinPrizes(),
+                    redeemPrize.getTracking().getCurrentCoinsProgress(),
+                    redeemPrize.getTracking().getTotalSouvenirs(),
+                    redeemPrize.getTracking().getAgeID());
+
+            //If there is a new achievement
+            if (redeemPrize.getAchievement() != null)
             {
-                //Saves tracking and updates UI
-                UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
-                        redeemPrize.getTracking().getTotalWinPrizes(),
-                        redeemPrize.getTracking().getCurrentCoinsProgress(),
-                        redeemPrize.getTracking().getTotalSouvenirs(),
-                        redeemPrize.getTracking().getAgeID());
-
-                //Saves last saved prize
-                UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
-                UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
-                UserData.getInstance(mContext).saveLastPrizeCode(redeemPrize.getCode());
-                UserData.getInstance(mContext).saveLastPrizeDial(redeemPrize.getDial());
-                UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
-                UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
-                UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
-
-                if (redeemPrize.getAchievement() != null)
-                {
-                    UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
-
-                    String name = redeemPrize.getAchievement().getName();
-                    String level = String.valueOf(redeemPrize.getAchievement().getLevel());
-                    String prize = String.valueOf(redeemPrize.getAchievement().getPrize());
-                    String score = String.valueOf(redeemPrize.getAchievement().getScore());
-
-                    int resource;
-                    if (redeemPrize.getAchievement().getLevel() == 1)
-                        resource = R.drawable.ic_achvs_counter_1;
-                    else if (redeemPrize.getAchievement().getLevel() == 2)
-                        resource = R.drawable.ic_achvs_counter_2;
-                    else if (redeemPrize.getAchievement().getLevel() == 3)
-                        resource = R.drawable.ic_achvs_counter_3;
-                    else
-                        resource = R.drawable.ic_achvs_counter_0;
-
-                    mView.showNewAchievementDialog(name, level, prize, score, resource);
-                }
+                UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
+                UserData.getInstance(mContext).saveAchievementFromSouvenir(Constants.ACHIEVEMENT_FROM_SOUVENIR_SALE);
             }
-            else
-            {
-                mView.closeSouvenirDialog();
-                DialogViewModel dialog = new DialogViewModel();
-                dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
-                dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));
-                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-                mView.generateImageDialog(dialog, R.drawable.ic_alert);
-            }
+
+            mView.navigatePrizeDetails();
+
+           /* mView.closeSouvenirDialog();
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
+            dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.generateImageDialog(dialog, R.drawable.ic_alert);*/
+
         }
         catch (Exception ex)
         {
@@ -134,6 +126,7 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     @Override
     public void onExchangeSouvError(int codeResponse, Throwable throwable)
     {
+        mView.hideLoadingDialog();
         mView.closeSouvenirDialog();
         DialogViewModel dialog = new DialogViewModel();
         dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));

@@ -60,6 +60,7 @@ public class UserData
     private static final String KEY_ACHIEVEMENT_LEVEL = "usr_achievement_level";
     private static final String KEY_ACHIEVEMENT_VALUE_NEXT_LEVEL = "usr_achievement_value_next_level";
     private static final String KEY_ACHIEVEMENT_PRIZE = "usr_achievement_prize";
+    private static final String KEY_ACHIEVEMENT_FROM_SOUVENIR_EXCHANGE = "usr_achievement_from_souvenir_exchange";
 
     //Prizes
     private static final String KEY_LAST_PRIZE_EXCHANGED_TITLE = "usr_last_prize_exchanged_title";
@@ -373,6 +374,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveAchievementFromSouvenir(String fromSouvenirKey)
+    {
+        mEditor.putString(KEY_ACHIEVEMENT_FROM_SOUVENIR_EXCHANGE, fromSouvenirKey);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -627,6 +634,11 @@ public class UserData
         catch (Exception ex) { ex.printStackTrace();}
 
         return  achievement;
+    }
+
+    public String getAchievementFromSouvenirExchange()
+    {
+        return mPreferences.getString(KEY_ACHIEVEMENT_FROM_SOUVENIR_EXCHANGE, "");
     }
 
 

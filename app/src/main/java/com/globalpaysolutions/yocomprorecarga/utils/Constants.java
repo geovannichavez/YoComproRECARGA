@@ -96,4 +96,6 @@ public class Constants
     public static final int CHEST_COINS_TYPE = 1;
     public static final int CHEST_SOUVENIR_TYPE = 2;
 
+    public static final String ACHIEVEMENT_FROM_SOUVENIR_SALE = "achievement_from_souvenir_sale";
+
 }

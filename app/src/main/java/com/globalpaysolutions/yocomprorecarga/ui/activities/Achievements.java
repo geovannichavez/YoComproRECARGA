@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class Achievements extends AppCompatActivity implements AchievementsView
     AchievementsAdapter mAdapter;
     ImageButton btnBack;
     ImageButton btnPlay;
+    ProgressDialog mProgressDialog;
 
     //Layouts and Views
     ListView lvAchievements;
@@ -71,6 +73,39 @@ public class Achievements extends AppCompatActivity implements AchievementsView
         lvAchievements.setAdapter(mAdapter);
 
         mPresenter.retrieveAchievements();
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(label);
+            mProgressDialog.show();
+            //mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

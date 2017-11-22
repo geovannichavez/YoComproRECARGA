@@ -44,6 +44,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void retrieveEras()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.retrieveEras(this);
     }
 
@@ -52,6 +53,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         if (ageID.getStatus() > 0)
         {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             mInteractor.eraSelection(ageID.getAgeID(), this);
         }
         else
@@ -64,13 +66,14 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void onRetrieveSuccess(List<AgesListModel> eras)
     {
+        mView.hideLoadingDialog();
         mView.renderEras(eras);
     }
 
     @Override
     public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
     {
-
+        mView.hideLoadingDialog();
     }
 
     @Override
@@ -78,6 +81,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         try
         {
+            mView.hideLoadingDialog();
             UserData.getInstance(mContext).saveEraSelected(
                     eraSelection.getAgeID(),
                     eraSelection.getName(),
@@ -93,6 +97,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void onEraSelectionError(int pCodeStatus, Throwable pThrowable)
     {
+        mView.hideLoadingDialog();
         mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
     }
 }

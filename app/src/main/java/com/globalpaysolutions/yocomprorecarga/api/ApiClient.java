@@ -30,8 +30,8 @@ public class ApiClient
     }
 
     private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .readTimeout(40, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(42, TimeUnit.SECONDS)
+            .writeTimeout(42, TimeUnit.SECONDS)
             .connectTimeout(40, TimeUnit.SECONDS)
             .build();
 }

@@ -223,6 +223,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="ACTIVAR AHORA"
+        android:textColor="@color/yvr_green_color"
         android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnActivate"

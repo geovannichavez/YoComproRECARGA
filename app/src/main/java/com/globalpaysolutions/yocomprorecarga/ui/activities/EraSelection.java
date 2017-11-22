@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -36,6 +37,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     ListView lvEras;
     TextView lblEraName;
     ImageButton btnBack;
+    ProgressDialog mProgressDialog;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -65,6 +67,39 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
 
         mPresenter.initialize();
         mPresenter.retrieveEras();
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(label);
+            mProgressDialog.show();
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

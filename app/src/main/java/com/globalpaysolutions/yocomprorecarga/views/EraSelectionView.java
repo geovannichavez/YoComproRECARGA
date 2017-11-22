@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface EraSelectionView
 {
+    void showLoadingDialog(String label);
+    void hideLoadingDialog();
     void initialViews();
     void renderEras(List<AgesListModel> eras);
     void navigateMap();

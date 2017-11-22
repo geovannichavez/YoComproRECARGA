@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.AchievementsInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.AchievementsListener;
 import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
@@ -31,6 +32,7 @@ public class AchievementsPresenterImpl implements IAchievementsPresenter, Achiev
     @Override
     public void retrieveAchievements()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.retrieveAchievements(this);
     }
 
@@ -39,6 +41,7 @@ public class AchievementsPresenterImpl implements IAchievementsPresenter, Achiev
     {
         try
         {
+            mView.hideLoadingDialog();
             mView.renderAchievements(response.getListAchievementsByConsumer());
         }
         catch (Exception ex)
@@ -50,6 +53,6 @@ public class AchievementsPresenterImpl implements IAchievementsPresenter, Achiev
     @Override
     public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
     {
-
+        mView.hideLoadingDialog();
     }
 }

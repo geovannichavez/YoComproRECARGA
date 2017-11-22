@@ -1,12 +1,17 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
 
 public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
@@ -142,6 +148,75 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         try
         {
             startActivity(sms);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showAchievementDialog()
+    {
+        UserData.getInstance(PrizeDetail.this).saveAchievementFromSouvenir("");
+
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(PrizeDetail.this);
+            LayoutInflater inflater = PrizeDetail.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_achievement_dialog, null);
+
+            TextView lblReward = (TextView) dialogView.findViewById(R.id.lblReward);
+            TextView lblAchievementName = (TextView) dialogView.findViewById(R.id.lblAchievementName);
+            ImageView imgAchievement = (ImageView) dialogView.findViewById(R.id.imgAchievement);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnAchievemtsNav = (ImageButton) dialogView.findViewById(R.id.btnAchievemtsNav);
+
+            String coinsPrize =  String.valueOf(UserData.getInstance(this).getLastAchievement().getPrize());
+            String level = String.valueOf(UserData.getInstance(this).getLastAchievement().getLevel());
+            String name = String.valueOf(UserData.getInstance(this).getLastAchievement().getName());
+
+            //Prepares resources
+            int resource;
+            if (UserData.getInstance(this).getLastAchievement().getLevel() == 1)
+                resource = R.drawable.ic_achvs_counter_1;
+            else if (UserData.getInstance(this).getLastAchievement().getLevel() == 2)
+                resource = R.drawable.ic_achvs_counter_2;
+            else if (UserData.getInstance(this).getLastAchievement().getLevel() == 3)
+                resource = R.drawable.ic_achvs_counter_3;
+            else
+                resource = R.drawable.ic_achvs_counter_0;
+
+
+            lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins", coinsPrize));
+            lblAchievementName.setText(String.format("Has logrado el nivel %1$s  de %2$s",level, name ));
+            imgAchievement.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+            btnAchievemtsNav.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent store = new Intent(PrizeDetail.this, Achievements.class);
+                    store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(store);
+                    finish();
+                }
+            });
         }
         catch (Exception ex)
         {

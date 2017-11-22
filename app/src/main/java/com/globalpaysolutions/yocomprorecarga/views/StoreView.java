@@ -14,6 +14,8 @@ import java.util.List;
 
 public interface StoreView
 {
+    void showLoadingDialog(String label);
+    void hideLoadingDialog();
     void setInitialValues(String currentCoins);
     void renderStoreItems(List<ListGameStoreResponse> items);
     void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);

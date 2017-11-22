@@ -229,6 +229,7 @@
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:textColor="@color/yvr_green_color"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/btnActivate"
         app:layout_constraintEnd_toEndOf="@+id/btnActivate"

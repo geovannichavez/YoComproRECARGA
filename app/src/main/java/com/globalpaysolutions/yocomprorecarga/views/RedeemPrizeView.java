@@ -7,4 +7,6 @@ package com.globalpaysolutions.yocomprorecarga.views;
 public interface RedeemPrizeView
 {
     void initializeViews();
+    void showLoadingDialog(String label);
+    void hideLoadingDialog();
 }

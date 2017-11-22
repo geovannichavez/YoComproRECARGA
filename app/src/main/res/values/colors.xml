@@ -71,4 +71,7 @@
     <color name="yvr_green_color_dark">#738e0b</color>
 
     <color name="color_title_recargo">#2b343f</color>
+
+    <color name="color_yovendorecarga_green">#66cc00</color>
+    <color name="color_yovendorecarga_green_dark">#59af03</color>
 </resources>

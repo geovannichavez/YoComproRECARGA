@@ -16,4 +16,5 @@ public interface PrizeDetailView
     void showGenericDialog(DialogViewModel dialogViewModel);
     void setClickListeners();
     void navigateToSms(Intent sms);
+    void showAchievementDialog();
 }

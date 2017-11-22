@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface SouvenirsView
 {
+    void showLoadingDialog(String label);
+    void hideLoadingDialog();
     void setInitialViewsState(String eraName);
     void renderSouvenirs(List<ListSouvenirsByConsumer> souvenirs);
     void showSouvenirDetails(String title, String description, String count, String url, int souvID);
