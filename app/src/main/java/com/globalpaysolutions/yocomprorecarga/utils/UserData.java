@@ -44,6 +44,7 @@ public class UserData
     private static final String KEY_HAS_READ_INTRO = "usr_has_read_intro";
     private static final String KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY = "usr_has_confirmed_limited_functionalty";
     private static final String KEY_HAS_SEEN_INTRO = "usr_has_seen_intro";
+    private static final String KEY_HAS_SELECTED_ERA = "usr_has_selected_era";
 
     //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
@@ -380,6 +381,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void hasSelectedEra(boolean hasSelected)
+    {
+        mEditor.putBoolean(KEY_HAS_SELECTED_ERA, hasSelected);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -639,6 +646,11 @@ public class UserData
     public String getAchievementFromSouvenirExchange()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_FROM_SOUVENIR_EXCHANGE, "");
+    }
+
+    public boolean chechUserHasSelectedEra()
+    {
+        return mPreferences.getBoolean(KEY_HAS_SELECTED_ERA, false);
     }
 
 

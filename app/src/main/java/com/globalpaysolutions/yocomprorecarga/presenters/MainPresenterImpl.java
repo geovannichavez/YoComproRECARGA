@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.EraSelection;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Intro;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
@@ -16,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
 
@@ -96,13 +98,30 @@ public class MainPresenterImpl implements IMainPresenter
     @Override
     public void checkFunctionalityLimitedShown()
     {
-        if(!mUserData.Is3DCompatibleDevice())
+        //Checks if user has not selected era
+        if(!mUserData.chechUserHasSelectedEra())
         {
-            if(!mUserData.isUserConfirmedLimitedFunctionality())
+            Intent eraSelection = new Intent(mActivity, EraSelection.class);
+            this.addFlags(eraSelection);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
+            mContext.startActivity(eraSelection);
+        }
+        else
+        {
+            if(!mUserData.Is3DCompatibleDevice())
             {
-                Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
-                this.addFlags(functionality);
-                mContext.startActivity(functionality);
+                if(!mUserData.isUserConfirmedLimitedFunctionality())
+                {
+                    Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
+                    this.addFlags(functionality);
+                    mContext.startActivity(functionality);
+                }
+                else
+                {
+                    Intent map = new Intent(mActivity, PointsMap.class);
+                    this.addFlags(map);
+                    mContext.startActivity(map);
+                }
             }
             else
             {
@@ -111,12 +130,7 @@ public class MainPresenterImpl implements IMainPresenter
                 mContext.startActivity(map);
             }
         }
-        else
-        {
-            Intent map = new Intent(mActivity, PointsMap.class);
-            this.addFlags(map);
-            mContext.startActivity(map);
-        }
+
     }
 
     private void addFlags(Intent pIntent)

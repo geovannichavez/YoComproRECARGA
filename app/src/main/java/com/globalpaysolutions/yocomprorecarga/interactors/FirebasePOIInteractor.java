@@ -85,7 +85,9 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void goldPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeGoldPointsQuery(pLocation, pRadius).execute();
+        //new executeGoldPointsQuery(pLocation, pRadius).execute();
+        mGoldPointsQuery = mGoldPointsRef.queryAtLocation(pLocation, pRadius);
+        mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);
     }
 
     @Override
@@ -104,7 +106,9 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void silverPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeSilverPointsQuery(pLocation, pRadius).execute();
+        //new executeSilverPointsQuery(pLocation, pRadius).execute();
+        mSilverPointsQuery = mSilverPointsRef.queryAtLocation(pLocation, pRadius);
+        mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);
     }
 
     @Override
@@ -123,7 +127,9 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void bronzePointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeBronzePointsQuery(pLocation, pRadius).execute();
+        //new executeBronzePointsQuery(pLocation, pRadius).execute();
+        mBronzePointsQuery = mBronzePointsRef.queryAtLocation(pLocation, pRadius);
+        mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
     }
 
     @Override

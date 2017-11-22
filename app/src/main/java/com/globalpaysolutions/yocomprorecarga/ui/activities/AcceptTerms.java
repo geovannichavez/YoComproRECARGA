@@ -83,7 +83,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         try
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(getString(R.string.title_terms_and_conditions));
+//            alert.setTitle(getString(R.string.title_terms_and_conditions));
 
             LayoutInflater inflater = AcceptTerms.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_terms_conditions_dialog, null);

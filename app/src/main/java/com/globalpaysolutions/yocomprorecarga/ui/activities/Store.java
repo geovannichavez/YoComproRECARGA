@@ -69,6 +69,7 @@ public class Store extends AppCompatActivity implements StoreView
                 Intent main = new Intent(Store.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -273,6 +274,12 @@ public class Store extends AppCompatActivity implements StoreView
         }
     }
 
+    @Override
+    public void updateViews(String coinsLeft)
+    {
+        lblRecarCoinsLeft.setText(coinsLeft);
+    }
+
     private void createStoreItemInfoDialog()
     {
         try
@@ -435,6 +442,7 @@ public class Store extends AppCompatActivity implements StoreView
             Intent main = new Intent(this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

@@ -1,13 +1,13 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -16,12 +16,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.EraSelectionPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.ErasAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
 import java.util.List;
@@ -42,11 +42,16 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     //Global Variables
     ErasAdapter mErasAdapter;
 
+    String mDestiny;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_era_selection);
+
+        //Get extras
+        mDestiny = getIntent().getStringExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY);
 
         lvEras = (ListView) findViewById(R.id.lvEras);
         lblEraName = (TextView) findViewById(R.id.lblEraName);
@@ -56,6 +61,9 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
             @Override
             public void onClick(View v)
             {
+                Intent main = new Intent(EraSelection.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
                 finish();
             }
         });
@@ -118,7 +126,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 AgesListModel currentItem = ((AgesListModel) parent.getItemAtPosition(position));
-                mPresenter.switchEra(currentItem);
+                mPresenter.switchEra(currentItem, mDestiny);
             }
         });
 
@@ -142,6 +150,15 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     {
         Intent pointsMap = new Intent(this, PointsMap.class);
         startActivity(pointsMap);
+    }
+
+    @Override
+    public void forwardToStore()
+    {
+        Intent store = new Intent(EraSelection.this, Store.class);
+        store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(store);
+        finish();
     }
 
     @Override
@@ -226,5 +243,19 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(EraSelection.this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

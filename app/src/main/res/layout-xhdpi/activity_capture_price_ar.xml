@@ -207,8 +207,8 @@
 
                 <ImageView
                     android:id="@+id/ivPrize2D"
-                    android:layout_width="234dp"
-                    android:layout_height="235dp"
+                    android:layout_width="280dp"
+                    android:layout_height="280dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"

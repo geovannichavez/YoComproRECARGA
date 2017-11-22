@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
 
 public class Main extends AppCompatActivity implements MainView
@@ -80,8 +82,18 @@ ImageButton buttonSettings;
 
     public void navigateStore(View view)
     {
-        Intent store = new Intent(Main.this, Store.class);
-        startActivity(store);
+        if(!UserData.getInstance(this).chechUserHasSelectedEra())
+        {
+            Intent eraSelection = new Intent(Main.this, EraSelection.class);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_STORE);
+            startActivity(eraSelection);
+            finish();
+        }
+        else
+        {
+            Intent store = new Intent(Main.this, Store.class);
+            startActivity(store);
+        }
     }
 
     public void navigatePrizeRedeem(View view)

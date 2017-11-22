@@ -39,12 +39,14 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void retrieveStoreItems()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.retrieveStoreItems(this);
     }
 
     @Override
     public void purchaseitem(int itemID, double price)
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         if(price < UserData.getInstance(mContext).getTotalWonCoins())
         {
             mInteractor.purchaseStoreItem(this, itemID);
@@ -74,6 +76,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void onSuccess(List<ListGameStoreResponse> storeItems)
     {
+        mView.hideLoadingDialog();
         try
         {
             if(storeItems.size() > 0)
@@ -93,14 +96,16 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void onError(int codeStatus, Throwable throwable)
     {
-
+        mView.hideLoadingDialog();
+        mView.createImageDialog(mContext.getString(R.string.title_store_items_error),
+                mContext.getString(R.string.label_store_items_error),
+                R.drawable.ic_alert);
     }
 
     @Override
     public void onImageSuccess(Bitmap bitmap, int itemID)
     {
         mImagesMap.put(itemID, bitmap);
-        //mView.drawItemBitmap(bitmap);
     }
 
     @Override
@@ -112,13 +117,27 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void onPurchaseSuccess(PurchaseItemResponse response)
     {
+        mView.hideLoadingDialog();
+
        try
        {
            UserData.getInstance(mContext).saveSouvenirObtained( response.getTitle(),
                    response.getDescription(),
                    response.getImgUrl(),
                    response.getValue());
+
+           //Updates user tracking
+           if(response.getTracking() != null)
+               UserData.getInstance(mContext).SaveUserTrackingProgess(response.getTracking().getTotalWinCoins(),
+                       response.getTracking().getTotalWinPrizes(),
+                       response.getTracking().getCurrentCoinsProgress(),
+                       response.getTracking().getTotalSouvenirs(),
+                       response.getTracking().getAgeID());
+
+           mView.updateViews(String.valueOf(UserData.getInstance(mContext).getTotalWonCoins()));
            mView.showSouvenirWonDialog(response.getTitle(), response.getDescription(), response.getImgUrl());
+
+
 
            if(response.getAchievement() != null)
            {
@@ -151,6 +170,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void onPurchaseError(int codeStatus, Throwable throwable)
     {
+        mView.hideLoadingDialog();
         mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
                 mContext.getString(R.string.error_content_progress_something_went_wrong_try_again),
                 R.drawable.ic_alert);

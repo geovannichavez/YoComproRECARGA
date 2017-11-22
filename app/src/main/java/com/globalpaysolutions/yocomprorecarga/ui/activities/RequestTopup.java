@@ -20,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -180,7 +182,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             lnrSelectAmount.setOnClickListener(null);
 
             //Setea el SwipeRefreshLayout
-            mSwipeRefreshLayout.setColorSchemeResources(R.color.yvr_green_color, R.color.yvr_green_color_dark, R.color.refresh_progress_3, R.color.SubtitleTextColor);
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.color_yovendorecarga_green, R.color.color_yovendorecarga_green_dark, R.color.refresh_progress_3, R.color.SubtitleTextColor);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
             {
                 @Override
@@ -560,6 +562,35 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
 
         return valid;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Intent main = new Intent(this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
+                finish();
+                break;
+        }
+        return true;
     }
 
 }

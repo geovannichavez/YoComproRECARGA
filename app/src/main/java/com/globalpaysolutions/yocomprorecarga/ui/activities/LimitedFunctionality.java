@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -48,11 +49,27 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
         try
         {
             Intent navigate = new Intent(this, PointsMap.class);
+            navigate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(navigate);
+            finish();
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent navigate = new Intent(this, Main.class);
+            navigate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(navigate);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

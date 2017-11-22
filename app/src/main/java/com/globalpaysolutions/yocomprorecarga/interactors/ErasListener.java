@@ -13,6 +13,6 @@ public interface ErasListener
 {
     void onRetrieveSuccess(List<AgesListModel> eras);
     void onRetrieveError(int pCodeStatus, Throwable pThrowable);
-    void onEraSelectionSuccess(EraSelectionResponse eraSelection);
+    void onEraSelectionSuccess(EraSelectionResponse eraSelection, String destiny);
     void onEraSelectionError(int pCodeStatus, Throwable pThrowable);
 }

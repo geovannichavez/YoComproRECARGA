@@ -1,7 +1,10 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasInteractor;
@@ -9,7 +12,9 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ErasListener;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IEraSelectionPresenter;
-import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
@@ -26,11 +31,13 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     private Context mContext;
     private EraSelectionView mView;
     private ErasInteractor mInteractor;
+    private AppCompatActivity mActivity;
 
     public EraSelectionPresenterImpl(Context context, AppCompatActivity activity, EraSelectionView view)
     {
         this.mContext = context;
         this.mView = view;
+        this.mActivity = activity;
         this.mInteractor = new ErasInteractor(mContext);
         mView.initialViews();
     }
@@ -38,7 +45,12 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void initialize()
     {
-        mView.setSelectedEraName(UserData.getInstance(mContext).getEraName());
+        String eraSelected = UserData.getInstance(mContext).getEraName();
+
+        if(!TextUtils.equals(eraSelected, ""))
+            mView.setSelectedEraName(eraSelected);
+        else
+            mView.setSelectedEraName(mContext.getString(R.string.label_unknown_era));
     }
 
     @Override
@@ -49,12 +61,12 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void switchEra(AgesListModel ageID)
+    public void switchEra(AgesListModel ageID, String destiny)
     {
         if (ageID.getStatus() > 0)
         {
             mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-            mInteractor.eraSelection(ageID.getAgeID(), this);
+            mInteractor.eraSelection(ageID.getAgeID(), this, destiny);
         }
         else
         {
@@ -77,16 +89,49 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void onEraSelectionSuccess(EraSelectionResponse eraSelection)
+    public void onEraSelectionSuccess(EraSelectionResponse eraSelection, String destiny)
     {
         try
         {
             mView.hideLoadingDialog();
+
+            //Sets selected era
+            UserData.getInstance(mContext).hasSelectedEra(true);
+
             UserData.getInstance(mContext).saveEraSelected(
                     eraSelection.getAgeID(),
                     eraSelection.getName(),
                     eraSelection.getIconImage());
-            mView.navigateMap();
+            if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
+            {
+                mView.forwardToStore();
+            }
+            else
+            {
+                //Navigates to map. Checks user compatibility
+                if(!UserData.getInstance(mContext).Is3DCompatibleDevice())
+                {
+                    if(!UserData.getInstance(mContext).isUserConfirmedLimitedFunctionality())
+                    {
+                        Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
+                        this.addFlags(functionality);
+                        mContext.startActivity(functionality);
+                    }
+                    else
+                    {
+                        Intent map = new Intent(mActivity, PointsMap.class);
+                        this.addFlags(map);
+                        mContext.startActivity(map);
+                    }
+                }
+                else
+                {
+                    Intent map = new Intent(mActivity, PointsMap.class);
+                    this.addFlags(map);
+                    mContext.startActivity(map);
+                }
+            }
+
         }
         catch (Exception ex)
         {
@@ -99,5 +144,15 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         mView.hideLoadingDialog();
         mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+    }
+
+    private void addFlags(Intent pIntent)
+    {
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }

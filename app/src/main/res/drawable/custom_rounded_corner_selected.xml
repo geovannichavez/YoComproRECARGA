@@ -9,7 +9,7 @@
     <!-- view border color and width -->
     <stroke
         android:width="3dp"
-        android:color="@color/yvr_green_color" >
+        android:color="@color/color_yovendorecarga_green" >
     </stroke>
 
     <!-- Here is the corner radius -->

@@ -309,7 +309,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.switchRecarcoinVisible(false);
 
             //Game UX
-            mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
+            //mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
         else
         {
@@ -361,7 +361,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.switchRecarcoinVisible(false);
 
             //Game UX
-            mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
+            //mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
         }
         else
         {
@@ -407,7 +407,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.switchRecarcoinVisible(false);
 
             //Game UX
-            mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
+            //mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
         else
         {
@@ -462,7 +462,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.switchRecarcoinVisible(false);
 
             //Game UX
-            mView.showToast(mContext.getString(R.string.toast_wildcard_out_of_search_range));
+            //mView.showToast(mContext.getString(R.string.toast_wildcard_out_of_search_range));
         }
         else
        {

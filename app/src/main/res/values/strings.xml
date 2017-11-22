@@ -250,7 +250,7 @@
     <string name="label_enter_pin_to_redeem">PIN del Regalo</string>
     <string name="label_type_phone_to_apply_prize">Número de celular</string>
     <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro para canjear tu premio.</string>
-    <string name="label_wildcard_explanation">Si aceptas puedes hacerte millonario o acabar completamente arruinado. Si no aceptas no te precupes, puedes continuar jugando y buscando cofres.</string>
+    <string name="label_wildcard_explanation">Si aceptas puedes hacerte millonario o acabar completamente arruinado. Si no aceptas no te preocupes puedes continuar jugando y buscando cofres.</string>
     <string name="title_you_won">¡Es tu día de suerte!</string>
     <string name="label_you_won">Puedes seguir acumulando o comprar e intercambiar una pieza por un premio.</string>
     <string name="label_back_to_map">VOLVER AL MAPA</string>
@@ -281,5 +281,16 @@
     <string name="label_congrats_souvenir_name">Lograste encontrar %1$s.</string>
     <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí!¡Mereces una recompensa!</string>
     <string name="label_just_earned">Acabas de ganar gracias a Claro:</string>
+    <string name="title_initial_wildcard">¡Pongamos a prueba tu suerte!</string>
+    <string name="title_await_please">Espera un momento</string>
+    <string name="title_store_items_error">No se cargaron artículos</string>
+    <string name="label_store_items_error">No se cargaron los artículos de la tienda. Vuelve a intentarlo.</string>
+    <string name="label_unknown_era">Desconocido</string>
+
+    <string name="label_type_token_part4"><s>Intentar otra vez</s></string>
+    <string name="lbl_confirm_number">CONFIRMA TU CELULAR</string>
+    <string name="lbl_if_dont_get_sms">Si no recibes el SMS de confirmación, por favor comunícate con nosotros por Whatsapp al número 7768-1443 para auidarte</string>
+    <string name="lbl_write_your_code">Digita tu código</string>
+    <string name="lbl_btn_verify_cellphone">VERIFICAR</string>
 
 </resources>

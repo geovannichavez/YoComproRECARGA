@@ -44,10 +44,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     ImageButton btnSignin;
     ImageButton btnCountry;
     TextView lblSelectedCountry;
-    /*RelativeLayout relSelectCountry;
-    LinearLayout lnrPhoneContainer;
 
-    TextView lblPhoneCode;*/
     ProgressDialog progressDialog;
 
     //MVP
@@ -78,9 +75,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         });
 
         lblSelectedCountry = (TextView) findViewById(R.id.lblCountry);
-        /*lblPhoneCode = (TextView) findViewById(R.id.lblPhoneCode);
-        relSelectCountry = (RelativeLayout) findViewById(R.id.relSelectCountry) ;
-        lnrPhoneContainer = (LinearLayout) findViewById(R.id.lnrPhoneContainer);*/
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
         presenter.fetchCountries();
@@ -89,20 +83,12 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         {
             presenter.setSelectedCountry(null);
             presenter.setTypedPhone();
+            btnSignin.setEnabled(true);
         }
         else
         {
             presenter.setInitialViewState();
         }
-
-        /*relSelectCountry.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                showCountries();
-            }
-        });*/
 
 
         EntriesValidations();
@@ -128,7 +114,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     {
         etPhoneNumber.setEnabled(false);
         btnSignin.setEnabled(false);
-        //lnrPhoneContainer.setVisibility(View.GONE);
     }
 
     @Override
@@ -136,7 +121,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     {
         etPhoneNumber.setEnabled(true);
         btnSignin.setEnabled(false);
-        //lnrPhoneContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -165,7 +149,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     }
 
     @Override
-    public void showErrorMessage(ErrorResponseViewModel pErrorMessage)
+    public void showGenericMessage(ErrorResponseViewModel pErrorMessage)
     {
         CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());
     }
@@ -223,7 +207,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
                 {
                     presenter.setSelectedCountry(selectedCountry);
                     presenter.savePreselectedCountry(selectedCountry);
-                    //lnrPhoneContainer.setVisibility(View.VISIBLE);
                 }
                 else
                 {
@@ -240,9 +223,6 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     public void setSelectedCountry(Country pSelected)
     {
         lblSelectedCountry.setText(pSelected.getName());
-        //lblPhoneCode.setText(String.format(getString(R.string.sign_plus), pSelected.getPhoneCode()));
-
-        //lblSelectedCountry.setTextColor(ContextCompat.getColor(this, R.color.AppGreen));
         lblSelectedCountry.setTypeface(null, Typeface.BOLD);
         etPhoneNumber.setEnabled(true);
     }

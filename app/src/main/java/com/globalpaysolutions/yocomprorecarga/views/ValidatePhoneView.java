@@ -16,7 +16,7 @@ public interface ValidatePhoneView
     void setTypedPhone(String phone);
     void showLoading();
     void hideLoading();
-    void showErrorMessage(ErrorResponseViewModel pErrorMessage);
+    void showGenericMessage(ErrorResponseViewModel pErrorMessage);
     void renderCountries(Countries pCountries);
     void navigateTokenInput(RegisterClientResponse pResponse);
     void setSelectedCountry(Country pSelected);

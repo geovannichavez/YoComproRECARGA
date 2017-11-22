@@ -159,13 +159,14 @@
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
+        android:layout_width="130dp"
+        android:layout_height="58dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="52dp"
         android:maxLines="3"
+        android:gravity="center_vertical"
         android:text="@string/label_must_be_claro_client"
         android:textSize="12sp"
         android:textStyle="bold"

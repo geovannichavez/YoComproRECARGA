@@ -5,7 +5,6 @@ import android.content.Context;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IErasInteractor;
-import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
@@ -33,7 +32,7 @@ public class ErasInteractor implements IErasInteractor
     }
 
     @Override
-    public void eraSelection(int eraID, final ErasListener listener)
+    public void eraSelection(int eraID, final ErasListener listener, final String destiny)
     {
         EraSelectionReq request = new EraSelectionReq();
         request.setAgeID(1); //TODO
@@ -49,7 +48,7 @@ public class ErasInteractor implements IErasInteractor
                 if (response.isSuccessful())
                 {
                     EraSelectionResponse eraSelection = response.body();
-                    listener.onEraSelectionSuccess(eraSelection);
+                    listener.onEraSelectionSuccess(eraSelection, destiny);
                 }
                 else
                 {

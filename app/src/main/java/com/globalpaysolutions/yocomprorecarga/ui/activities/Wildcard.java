@@ -81,6 +81,9 @@ public class Wildcard extends AppCompatActivity implements WildcardView
     public void initialViewsState()
     {
         bg_wildcard.setImageResource(R.drawable.bg_red_recargo_theme);
+        lblTitle.setText(R.string.title_initial_wildcard);
+        lblDescription.setText(R.string.label_wildcard_explanation);
+
     }
 
     @Override
@@ -134,7 +137,9 @@ public class Wildcard extends AppCompatActivity implements WildcardView
     public void navigateToPrizeDetail()
     {
         Intent prize = new Intent(this, PrizeDetail.class);
+        prize.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(prize);
+        finish();
     }
 
     @Override
@@ -172,6 +177,9 @@ public class Wildcard extends AppCompatActivity implements WildcardView
                 @Override
                 public void onClick(View v)
                 {
+                    Intent main = new Intent(Wildcard.this, PointsMap.class);
+                    main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(main);
                     finish();
                 }
             });
@@ -244,7 +252,10 @@ public class Wildcard extends AppCompatActivity implements WildcardView
                 @Override
                 public void onClick(View v)
                 {
-                    dialog.dismiss();
+                    Intent main = new Intent(Wildcard.this, PointsMap.class);
+                    main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(main);
+                    finish();
                 }
             });
         }
@@ -262,6 +273,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
             Intent main = new Intent(this, PointsMap.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

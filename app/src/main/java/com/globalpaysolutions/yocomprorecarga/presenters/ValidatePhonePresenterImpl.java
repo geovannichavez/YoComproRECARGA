@@ -3,7 +3,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneInteractor;
@@ -11,14 +10,12 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ValidatePhoneListener;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.net.SocketTimeoutException;
-import java.util.UUID;
 
 /**
  * Created by Josué Chávez on 13/01/2017.
@@ -123,10 +120,22 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void onRequestPhoneValResult(RegisterClientResponse pResponse)
+    public void onRequestPhoneValResult(RegisterClientResponse pResponse, int codeStatus)
     {
+
         this.View.hideLoading();
-        this.View.navigateTokenInput(pResponse);
+        if(codeStatus == 201)
+        {
+            ErrorResponseViewModel dialog = new ErrorResponseViewModel();
+            dialog.setTitle(context.getString(R.string.title_await_please));
+            dialog.setLine1(pResponse.getSecondsRemaining());
+            dialog.setAcceptButton(context.getString(R.string.button_accept));
+            this.View.showGenericMessage(dialog);
+        }
+        else
+        {
+            this.View.navigateTokenInput(pResponse);
+        }
 
     }
 
@@ -147,7 +156,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
                     errorResponse.setTitle(Titulo);
                     errorResponse.setLine1(Linea1);
                     errorResponse.setAcceptButton(Button);
-                    this.View.showErrorMessage(errorResponse);
+                    this.View.showGenericMessage(errorResponse);
 
                 }
                 else
@@ -159,7 +168,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
                     errorResponse.setTitle(Titulo);
                     errorResponse.setLine1(Linea1);
                     errorResponse.setAcceptButton(Button);
-                    this.View.showErrorMessage(errorResponse);
+                    this.View.showGenericMessage(errorResponse);
                 }
             }
             else
@@ -177,7 +186,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
                 errorResponse.setTitle(Titulo);
                 errorResponse.setLine1(Linea1);
                 errorResponse.setAcceptButton(Button);
-                this.View.showErrorMessage(errorResponse);
+                this.View.showGenericMessage(errorResponse);
             }
         }
         catch (Exception ex)

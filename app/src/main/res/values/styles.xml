@@ -19,7 +19,7 @@
     <style name="AppThemeYvr" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color_yovendorecarga_green</item>
-        <item name="colorPrimaryDark">@color/yvr_green_color_dark</item>
+        <item name="colorPrimaryDark">@color/color_yovendorecarga_green_dark</item>
         <item name="colorAccent">@color/color_yovendorecarga_green_dark</item>
 
         <!--    TOOLBAR     -->
@@ -92,8 +92,8 @@
     </style>
 
     <style name="contextualDarkToolbarThemeYVR" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/yvr_green_color</item>
-        <item name="android:textColor">@color/yvr_green_color_dark</item>
+        <item name="android:colorBackground">@color/color_yovendorecarga_green</item>
+        <item name="android:textColor">@color/color_yovendorecarga_green_dark</item>
     </style>
 
 
