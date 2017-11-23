@@ -38,7 +38,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="CONFIRMA TU CELULAR"
+        android:text="@string/lbl_confirm_number"
         android:textColor="@color/color_red_recargo"
         android:textSize="19sp"
         android:textStyle="bold"
@@ -65,13 +65,12 @@
         android:id="@+id/ImageViewToken"
         android:layout_width="212dp"
         android:layout_height="73dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblWrongNumber"
-        app:srcCompat="@drawable/btn_caja_txt"/>
+        app:srcCompat="@drawable/btn_caja_txt"
+        tools:layout_editor_absoluteY="284dp"/>
 
     <EditText
         android:id="@+id/etToken"
@@ -117,8 +116,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="VERIFICAR"
-        android:textSize="18sp"
+        android:text="@string/lbl_btn_verify_cellphone"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnConfirmToken"
         app:layout_constraintEnd_toEndOf="@+id/btnConfirmToken"
@@ -129,47 +128,44 @@
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Digita tu código"
+        android:layout_marginBottom="16dp"
+        android:text="@string/lbl_write_your_code"
         android:textSize="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/ImageViewToken"
+        app:layout_constraintBottom_toTopOf="@+id/etToken"
         app:layout_constraintEnd_toEndOf="@+id/ImageViewToken"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="@+id/ImageViewToken"
-        app:layout_constraintTop_toBottomOf="@+id/lblWrongNumber"
-        />
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ImageViewToken"/>
 
     <TextView
         android:id="@+id/lblWrongNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/label_type_token_part3"
+        android:layout_marginBottom="20dp"
+        android:text="@string/label_type_token_part4"
         android:textColor="@color/color_red_recargo"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView28"
         app:layout_constraintEnd_toEndOf="@+id/textView23"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/textView23"
-        app:layout_constraintTop_toBottomOf="@+id/textView23"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView23"/>
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="334dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Si tu número es portado, no recibirás un SMS de confirmación. Por favor, comunícate con nosotros por Whatsapp al número 7768-1443 para ayudarte."
+        android:layout_marginBottom="20dp"
+        android:text="@string/lbl_if_dont_get_sms"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmToken"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 
     <!-- <include
