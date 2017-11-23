@@ -82,5 +82,6 @@ public class StringsURL
     public static final String ACHIEVEMENTS = "GetAchievementsByConsumer";
     public static final String EXCHANGE_SOUVENIR = "ExchangeSouvenir";
     public static final String EXCHANGE_WILDCARD = "ExchangeWildcard";
+    public static final String ACTIVATE_PRIZE = "ActivatePrize";
 }
 

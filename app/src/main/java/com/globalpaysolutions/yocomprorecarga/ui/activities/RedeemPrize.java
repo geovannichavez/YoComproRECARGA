@@ -3,27 +3,38 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.presenters.RedeemPrizeInteractorImpl;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
 public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 {
 
     EditText etPhone;
+    EditText etPin;
     ImageButton btnActivate;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
+    RedeemPrizeInteractorImpl mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,7 +42,11 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redeem_prize);
 
+        mPresenter = new RedeemPrizeInteractorImpl(this, this, this);
+
         etPhone = (EditText) findViewById(R.id.etPhone);
+        etPin = (EditText) findViewById(R.id.etPin);
+
         btnActivate = (ImageButton) findViewById(R.id.btnActivate);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
 
@@ -43,6 +58,17 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                 Intent main = new Intent(RedeemPrize.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+            }
+        });
+
+        btnActivate.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String pin = etPin.getText().toString();
+                String phone = etPin.getText().toString();
+                mPresenter.attemptActivatePrize(phone, pin);
             }
         });
 
@@ -138,6 +164,48 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             {
                 mProgressDialog.dismiss();
             }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createImageDialog(DialogViewModel dialogModel, int resource)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(dialogModel.getTitle());
+            tvDescription.setText(dialogModel.getLine1());
+            imgSouvenir.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent main = new Intent(RedeemPrize.this, Main.class);
+                    main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(main);
+                    finish();
+                }
+            });
         }
         catch (Exception ex)
         {

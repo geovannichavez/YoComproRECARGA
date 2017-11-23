@@ -4,6 +4,8 @@ import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
@@ -131,5 +133,9 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE_WILDCARD)
     Call<ExchangeWildcardResponse> exchangeWildcard(@Header("authenticationKey") String authKey, @Body ExchangeWildcardReq exchangeWildcardReq);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.ACTIVATE_PRIZE)
+    Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey, @Body ActivatePrizeReq activatePrizeReq);
 
 }

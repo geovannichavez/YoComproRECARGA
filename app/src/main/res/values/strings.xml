@@ -292,5 +292,10 @@
     <string name="lbl_if_dont_get_sms">Si no recibes el SMS de confirmación, por favor comunícate con nosotros por Whatsapp al número 7768-1443 para auidarte</string>
     <string name="lbl_write_your_code">Digita tu código</string>
     <string name="lbl_btn_verify_cellphone">VERIFICAR</string>
+    <string name="title_redeem_prize_success">Regalo Activado con éxito</string>
+    <string name="title_redeem_prize_error">El código es incorrecto</string>
+
+    <string name="label_claro_prize_activated">Has activado un regalo claro exitosamente.</string>
+    <string name="label_reedem_error">Revisa el código que ingresaste y el número que se va a usar</string>
 
 </resources>
