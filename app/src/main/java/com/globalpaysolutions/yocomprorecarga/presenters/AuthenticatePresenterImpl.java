@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.AccessToken;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
@@ -125,6 +126,10 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             String profileId = (!TextUtils.isEmpty(profile.getId())) ? profile.getId() : "NotFound";
             String middlename = (!TextUtils.isEmpty(profile.getMiddleName())) ? profile.getMiddleName() : "NotFound";
             String name = (!TextUtils.isEmpty(profile.getName())) ? profile.getName() : "NotFound";
+
+            //Saves user email in CrashLytics
+            Crashlytics.setUserEmail(pEmail);
+            Crashlytics.setUserName(name);
 
             //REGISTER CONSUMER
             facebookConsumer.setFirstName(firstname);

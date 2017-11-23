@@ -31,7 +31,7 @@ public class NicknameInteractor implements INicknameInteractor
     @Override
     public void validateNickname(String nickname)
     {
-        NicknameReqBody requestBody = new NicknameReqBody();
+        final NicknameReqBody requestBody = new NicknameReqBody();
         requestBody.setNickname(nickname);
         UserData userData = UserData.getInstance(mContext);
 
@@ -46,7 +46,8 @@ public class NicknameInteractor implements INicknameInteractor
                 if(response.isSuccessful())
                 {
                     SimpleResultResponse resultResponse = response.body();
-                    mListener.onValidateNicknameSuccess(resultResponse);
+                    mListener.onValidateNicknameSuccess(resultResponse, requestBody.getNickname());
+
                 }
                 else
                 {

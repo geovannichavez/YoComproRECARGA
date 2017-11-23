@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreListener;
@@ -46,9 +47,9 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void purchaseitem(int itemID, double price)
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         if(price < UserData.getInstance(mContext).getTotalWonCoins())
         {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             mInteractor.purchaseStoreItem(this, itemID);
         }
         else
@@ -164,6 +165,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
        catch (Exception ex)
        {
            ex.printStackTrace();
+           Crashlytics.logException(ex);
        }
     }
 

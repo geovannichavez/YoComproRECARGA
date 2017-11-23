@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.CapturePrizeInteractor;
@@ -196,6 +197,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         catch (Exception ex)
         {
             ex.printStackTrace();
+            Crashlytics.logException(ex);
         }
     }
 
@@ -680,6 +682,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
        catch (Exception ex)
        {
            ex.printStackTrace();
+           Crashlytics.logException(ex);
            Log.e(TAG, "Happened from handling data for onOpenChestSuccess");
            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
            dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));

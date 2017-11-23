@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.NicknameInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.NicknameListener;
@@ -12,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.INicknamePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Main;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
@@ -57,9 +57,12 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     }
 
     @Override
-    public void onValidateNicknameSuccess(SimpleResultResponse resultResponse)
+    public void onValidateNicknameSuccess(SimpleResultResponse resultResponse, String choosenNickname)
     {
         mView.hideLoading();
+
+        //Saves user identifier
+        Crashlytics.setUserIdentifier(choosenNickname);
 
         Intent next = null;
 

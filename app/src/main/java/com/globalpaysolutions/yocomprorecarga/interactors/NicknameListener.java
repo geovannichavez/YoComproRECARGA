@@ -8,6 +8,6 @@ import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 
 public interface NicknameListener
 {
-    void onValidateNicknameSuccess(SimpleResultResponse pResultResponse);
+    void onValidateNicknameSuccess(SimpleResultResponse pResultResponse, String choosenNickname);
     void onError(int pCodeStatus, Throwable pThrowable);
 }

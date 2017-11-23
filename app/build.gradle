@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 24
@@ -43,7 +43,6 @@ repositories {
     maven {
         url "https://maven.google.com"
     }
-
 }
 
 dependencies {
@@ -55,13 +54,13 @@ dependencies {
     compile(name: 'wikitudesdk', ext: 'aar')
 
     //Google Maps
-    compile 'com.google.android.gms:play-services-maps:10.0.1'
+    compile 'com.google.android.gms:play-services-maps:11.6.0'
 
     //Google Location API
-    compile 'com.google.android.gms:play-services-location:10.0.1'
+    compile 'com.google.android.gms:play-services-location:11.6.0'
 
     //Google GCM
-    compile 'com.google.android.gms:play-services-gcm:10.0.1'
+    compile 'com.google.android.gms:play-services-gcm:11.6.0'
 
     //Google Maps Utilities
     compile 'com.google.maps.android:android-maps-utils:0.5+'
@@ -77,10 +76,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     //Firebase
-    compile 'com.google.firebase:firebase-database:10.0.0'
+    compile 'com.google.firebase:firebase-database:11.6.0'
 
     //Firebase Auth
-    compile 'com.google.firebase:firebase-auth:10.0.0'
+    compile 'com.google.firebase:firebase-auth:11.6.0'
 
     //GeoFire
     compile 'com.firebase:geofire-android:2.1.1'
@@ -114,6 +113,13 @@ dependencies {
 
     //Fonts
     //compile 'me.anwarshahriar:calligrapher:1.0'
+
+    //Crashlytics
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    compile 'com.google.firebase:firebase-core:11.4.2'
 
 }
 

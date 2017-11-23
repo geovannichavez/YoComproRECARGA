@@ -96,13 +96,13 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         switch (data.getInt(Constants.BUNDLE_PRIZE_TYPE))
         {
             case 1:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_01);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
                 break;
             case 2:
                 imgPrizeType.setImageResource(R.drawable.img_prize_chest_02);
                 break;
             case 3:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
+                imgPrizeType.setImageResource(R.drawable.img_prize_chest_01);
                 break;
             default:
                 imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
