@@ -70,10 +70,11 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     {
         try
         {
-            mGoldPointsRef = new GeoFire(mGoldPoints);
+            /*mGoldPointsRef = new GeoFire(mGoldPoints);
             mSilverPointsRef = new GeoFire(mSilverPoints);
             mBronzePointsRef = new GeoFire(mBronzePoints);
-            mWildcardPointsRef = new GeoFire(mWildcardPoints);
+            mWildcardPointsRef = new GeoFire(mWildcardPoints);*/
+            new initializeGeolocation().execute();
         }
         catch (Exception ex)
         {

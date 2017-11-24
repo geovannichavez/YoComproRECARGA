@@ -99,6 +99,8 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
                 break;
             case 4:
                 level.setImageResource(R.drawable.ic_achvs_counter_3);
+                actual.setVisibility(View.INVISIBLE);
+                imgCoins.setVisibility(View.INVISIBLE);
                 break;
             default:
                 level.setImageResource(R.drawable.ic_achvs_counter_0);
@@ -142,14 +144,13 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
         description.setText(currentItem.getDescription());
         coinsValue.setText(String.valueOf(currentItem.getNextPrize()));
 
-        if(currentItem.getNextPrize() == 0)
+        /*if(currentItem.getNextPrize() == 0)
         {
             imgCoins.setVisibility(View.INVISIBLE);
             coinsValue.setText("");
-        }
+        }*/
 
-
-        String strActual = String.format("Actual: %1$s. Siguiente: %2$s", score, next);
+        String strActual = String.format("Progreso: %1$s/%2$s", score, next);
         actual.setText(strActual);
 
 

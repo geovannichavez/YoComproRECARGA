@@ -8,9 +8,6 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
-import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
-import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -74,7 +71,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void openCoinsChest(LatLng pLocation, String pFirebaseID, final int pChestType, int pEraID)
+    public void openCoinsChest(LatLng pLocation, final String pFirebaseID, final int pChestType, int pEraID)
     {
         ExchangeReqBody requestBody = new ExchangeReqBody();
         requestBody.setLocationID(pFirebaseID);
@@ -94,7 +91,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 if(response.isSuccessful())
                 {
                     ExchangeResponse exchangeResponse = response.body();
-                    mListener.onOpenChestSuccess(exchangeResponse, pChestType);
+                    mListener.onOpenChestSuccess(exchangeResponse, pChestType, pFirebaseID);
                 }
                 else
                 {

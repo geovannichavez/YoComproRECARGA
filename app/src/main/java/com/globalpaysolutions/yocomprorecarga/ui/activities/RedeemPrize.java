@@ -67,7 +67,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             public void onClick(View v)
             {
                 String pin = etPin.getText().toString();
-                String phone = etPin.getText().toString();
+                String phone = etPhone.getText().toString();
                 mPresenter.attemptActivatePrize(phone, pin);
             }
         });

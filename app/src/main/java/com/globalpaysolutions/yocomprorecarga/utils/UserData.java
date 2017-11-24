@@ -53,6 +53,7 @@ public class UserData
     private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
     private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
     private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
+    private static final String KEY_LAST_CHEST_ID = "usr_last_chest_exchanged";
 
     //Achievements
     private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
@@ -387,6 +388,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveLastExchangedChestID(String lastExchanged)
+    {
+        mEditor.putString(KEY_LAST_CHEST_ID, lastExchanged);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -651,6 +658,11 @@ public class UserData
     public boolean chechUserHasSelectedEra()
     {
         return mPreferences.getBoolean(KEY_HAS_SELECTED_ERA, false);
+    }
+
+    public String getLastExchangedChestID()
+    {
+        return mPreferences.getString(KEY_LAST_CHEST_ID, "");
     }
 
 

@@ -80,6 +80,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.updateIndicators(prizes, coins, souvs);
 
         this.mView.obtainUserProgress();
+
         mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext, Constants.ONE_METTER_DISPLACEMENT);
         new initializeGoogleMapsCallback().execute();
 
@@ -123,12 +124,20 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void prizePointsQuery(LatLng pLocation)
     {
-        double radius = (mUserData.Is3DCompatibleDevice()) ? Constants.AR_POI_RADIOS_KM : Constants.RECARSTOP_2D_RADIUS_KM;
-        GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-        this.mFirebaseInteractor.goldPointsQuery(location, radius);
-        this.mFirebaseInteractor.silverPointsQuery(location, radius);
-        this.mFirebaseInteractor.bronzePointsQuery(location, radius);
-        this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
+        try
+        {
+            double radius = (mUserData.Is3DCompatibleDevice()) ? Constants.AR_POI_RADIOS_KM : Constants.RECARSTOP_2D_RADIUS_KM;
+            GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+            this.mFirebaseInteractor.goldPointsQuery(location, radius);
+            this.mFirebaseInteractor.silverPointsQuery(location, radius);
+            this.mFirebaseInteractor.bronzePointsQuery(location, radius);
+            this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     @Override
@@ -283,22 +292,23 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.hideArchViewLoadingMessage();
-        if (p3DCompatible)
+        if(!TextUtils.equals(mUserData.getLastExchangedChestID(), pKey))
         {
-            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            if (p3DCompatible)
             {
-                mCurrentChestKey = pKey;
-                mView.onGoldKeyEntered(pKey, pLocation);
+                if(!TextUtils.equals(mCurrentChestKey, pKey))
+                {
+                    mCurrentChestKey = pKey;
+                    mView.onGoldKeyEntered(pKey, pLocation);
+                }
+            }
+            else
+            {
+                mView.onGoldKeyEntered_2D(pKey, pLocation);
+                mView.switchRecarcoinVisible(true);
+                mView.blinkRecarcoin();
             }
         }
-        else
-        {
-            mView.onGoldKeyEntered_2D(pKey, pLocation);
-            mView.switchRecarcoinVisible(true);
-            mView.blinkRecarcoin();
-        }
-
     }
 
     @Override
@@ -309,13 +319,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
-
-            //Game UX
-            //mView.showToast(mContext.getString(R.string.toast_gold_out_of_search_range));
         }
         else
         {
-            //mView.deleteModelAR();
             mView.onGoldKeyExited(pKey);
         }
     }
@@ -323,31 +329,30 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_goldPoint_onGeoQueryReady()
     {
-        mView.hideArchViewLoadingMessage();
+
     }
 
     @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.hideArchViewLoadingMessage();
-
-        if (p3DCompatible)
+        //If last exchanged chest, do not draw
+        if(!TextUtils.equals(mUserData.getLastExchangedChestID(), pKey))
         {
-            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            if (p3DCompatible)
             {
-                mCurrentChestKey = pKey;
-                mView.onSilverKeyEntered(pKey, pLocation);
+                if(!TextUtils.equals(mCurrentChestKey, pKey))
+                {
+                    mCurrentChestKey = pKey;
+                    mView.onSilverKeyEntered(pKey, pLocation);
+                }
+            }
+            else
+            {
+                mView.onSilverKeyEntered_2D(pKey, pLocation);
+                mView.switchRecarcoinVisible(true);
+                mView.blinkRecarcoin();
             }
         }
-        else
-        {
-
-            mView.onSilverKeyEntered_2D(pKey, pLocation);
-            mView.switchRecarcoinVisible(true);
-            mView.blinkRecarcoin();
-            //mView.makeVibrate(Constants.ONRADIUS_VIBRATION_TIME_MILLISECONDS, Constants.ONRADIUS_VIBRATION_SLEEP_MILLISECONDS);
-        }
-
     }
 
     @Override
@@ -361,13 +366,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
-
-            //Game UX
-            //mView.showToast(mContext.getString(R.string.toast_silver_out_of_search_range));
         }
         else
         {
-            //mView.deleteModelAR();
             mView.onSilverKeyExited(pKey);
         }
     }
@@ -375,26 +376,28 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_silverPoint_onGeoQueryReady()
     {
-        mView.hideArchViewLoadingMessage();
+
     }
 
     @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.hideArchViewLoadingMessage();
-        if (p3DCompatible)
+        if(!TextUtils.equals(mUserData.getLastExchangedChestID(), pKey))
         {
-            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            if (p3DCompatible)
             {
-                mCurrentChestKey = pKey;
-                mView.onBronzeKeyEntered(pKey, pLocation);
+                if(!TextUtils.equals(mCurrentChestKey, pKey))
+                {
+                    mCurrentChestKey = pKey;
+                    mView.onBronzeKeyEntered(pKey, pLocation);
+                }
             }
-        }
-        else
-        {
-            mView.onBronzeKeyEntered_2D(pKey, pLocation);
-            mView.switchRecarcoinVisible(true);
-            mView.blinkRecarcoin();
+            else
+            {
+                mView.onBronzeKeyEntered_2D(pKey, pLocation);
+                mView.switchRecarcoinVisible(true);
+                mView.blinkRecarcoin();
+            }
         }
     }
 
@@ -407,13 +410,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
-
-            //Game UX
-            //mView.showToast(mContext.getString(R.string.toast_bronze_out_of_search_range));
         }
         else
         {
-            //mView.deleteModelAR();
             mView.onBronzeKeyExited(pKey);
         }
     }
@@ -421,7 +420,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_bronzePoint_onGeoQueryReady()
     {
-        mView.hideArchViewLoadingMessage();
+
     }
 
     /*
@@ -434,21 +433,24 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.hideArchViewLoadingMessage();
-         if (p3DCompatible)
+        if(!TextUtils.equals(mUserData.getLastExchangedChestID(), pKey))
         {
-            if(!TextUtils.equals(mCurrentChestKey, pKey))
+            mView.hideArchViewLoadingMessage();
+            if (p3DCompatible)
             {
-                mCurrentChestKey = pKey;
-                mView.onWildcardKeyEntered(pKey, pLocation);
+                if(!TextUtils.equals(mCurrentChestKey, pKey))
+                {
+                    mCurrentChestKey = pKey;
+                    mView.onWildcardKeyEntered(pKey, pLocation);
+                }
             }
-        }
-        else
-        {
+            else
+            {
 
-            mView.onWildcardKeyEntered_2D(pKey, pLocation);
-            mView.switchRecarcoinVisible(true);
-            mView.blinkRecarcoin();
+                mView.onWildcardKeyEntered_2D(pKey, pLocation);
+                mView.switchRecarcoinVisible(true);
+                mView.blinkRecarcoin();
+            }
         }
     }
 
@@ -462,13 +464,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
 
             mView.switchRecarcoinVisible(false);
-
-            //Game UX
-            //mView.showToast(mContext.getString(R.string.toast_wildcard_out_of_search_range));
         }
         else
        {
-           //mView.deleteModelAR();
            mView.onWildcardKeyExited(pKey);
        }
     }
@@ -476,7 +474,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_wildcardPoint_onGeoQueryReady()
     {
-        mView.hideArchViewLoadingMessage();
+
     }
 
     @Override
@@ -564,12 +562,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int pChestType)
+    public void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int pChestType, String firebaseID)
     {
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
         mView.setEnabledChestImage(true);
         mIsRunning = false;
+
+        //Saves last exchanged chest's FirebaseID
+        mUserData.saveLastExchangedChestID(firebaseID);
 
        try
        {

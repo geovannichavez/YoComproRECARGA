@@ -56,17 +56,17 @@ public class MainPresenterImpl implements IMainPresenter
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
             mContext.startActivity(acceptTerms);
         }
+        else if(!mUserData.UserGrantedDevicePermissions())
+        {
+            Intent permissions = new Intent(mActivity, Permissions.class);
+            this.addFlags(permissions);
+            mContext.startActivity(permissions);
+        }
         else if (!mUserData.isUserAuthenticated())
         {
             Intent authenticate = new Intent(mActivity, Authenticate.class);
             this.addFlags(authenticate);
             mContext.startActivity(authenticate);
-        }
-       else if(!mUserData.UserGrantedDevicePermissions())
-        {
-            Intent permissions = new Intent(mActivity, Permissions.class);
-            this.addFlags(permissions);
-            mContext.startActivity(permissions);
         }
         else if (!mUserData.UserSelectedCountry())
         {

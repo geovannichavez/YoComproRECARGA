@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPermissions;
@@ -24,6 +25,8 @@ import static android.Manifest.permission.RECEIVE_SMS;
 
 public class PermissionsPresenterImpl implements IPermissions
 {
+    private static final String TAG = PermissionsPresenterImpl.class.getSimpleName();
+
     private Context mContext;
     private AppCompatActivity mActivity;
     private UserData mUserData;
@@ -70,6 +73,7 @@ public class PermissionsPresenterImpl implements IPermissions
         catch (Exception ex)
         {
             ex.printStackTrace();
+            Log.e(TAG, ex.getMessage());
         }
 
     }

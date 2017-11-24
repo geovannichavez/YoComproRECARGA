@@ -10,6 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.RedeemPrizeListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRedeemPrizeInteractor;
+import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
 /**
@@ -32,8 +33,15 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
     @Override
     public void attemptActivatePrize(String phone, String pin)
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.atemptRedeemPrize(phone, pin, this);
+        Validation validator = new Validation(mContext);
+
+        if(!TextUtils.equals(phone, "") && validator.isPhoneNumber(phone))
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+
+            phone = phone.replace("-", "");
+            mInteractor.atemptRedeemPrize(pin, phone, this);
+        }
     }
 
     @Override

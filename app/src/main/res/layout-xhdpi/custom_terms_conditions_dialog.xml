@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="match_parent"
-              android:background="@color/ActivityWhiteBackground"
-              android:orientation="vertical"
-              android:gravity="center"
-              android:paddingEnd="@dimen/margin_4dp"
-              android:paddingLeft="@dimen/margin_4dp"
-              android:paddingRight="@dimen/margin_4dp"
-              android:paddingStart="@dimen/margin_4dp">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="fill_parent"
+             android:layout_height="match_parent"
+             android:background="@color/ActivityWhiteBackground"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:paddingTop="@dimen/margin_6dp"
+             android:paddingEnd="@dimen/margin_4dp"
+             android:paddingLeft="@dimen/margin_4dp"
+             android:paddingRight="@dimen/margin_4dp"
+             android:paddingStart="@dimen/margin_4dp">
 
     <WebView
         android:id="@+id/wvTermsAndConditions"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"/>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="260dp"/>
+
+</FrameLayout>

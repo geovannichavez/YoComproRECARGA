@@ -41,17 +41,29 @@ public class Validation
         mCoordinatorLayout  = pCoordinatorLayout;
     }
 
+    public Validation(Context pContext)
+    {
+        mContext = pContext;
+    }
+
     /*
     *
     *   PHONE NUMBER
     *
     */
-    public boolean isPhoneNumber(EditText pEditText, boolean pRequired)
+    public boolean isPhoneNumberContent(EditText pEditText, boolean pRequired)
     {
         String requiredMsg = mContext.getResources().getString(R.string.validation_required_phone_message);
         String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_phone_message);
         return IsValid(pEditText, PHONE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
+
+    public boolean isPhoneNumber(String phone)
+    {
+        String text = phone.trim();
+        return Pattern.matches(PHONE_REGEX, text);
+    }
+
 
     public void setPhoneInutFormatter(final EditText pEditText)
     {

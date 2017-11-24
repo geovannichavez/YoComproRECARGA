@@ -125,11 +125,9 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
 
 
         mPresenter = new HomePresenterImpl(this, this, this);
-        //mPresenter.checkUserDataCompleted();
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
         mPresenter.intializeGeolocation();
-        //mPresenter.checkFirstTimeInstructions();
 
     }
 

@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
@@ -31,6 +33,8 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
     //TextView tvTermsAndConditions;
     AcceptTermsPresenterImpl presenter;
 
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,16 +46,6 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         presenter.setFirstTimeSettings();
 
         btnAccept = (ImageButton) findViewById(R.id.btnAcceptTerms);
-        //tvTermsAndConditions = (TextView) findViewById(R.id.tvTermsAndConditions);
-
-        /*tvTermsAndConditions.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                presenter.viewTerms();
-            }
-        });*/
 
     }
 
@@ -83,12 +77,13 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
         try
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-//            alert.setTitle(getString(R.string.title_terms_and_conditions));
 
             LayoutInflater inflater = AcceptTerms.this.getLayoutInflater();
             View dialogView = inflater.inflate(R.layout.custom_terms_conditions_dialog, null);
 
             WebView wv = (WebView) dialogView.findViewById(R.id.wvTermsAndConditions);
+            progressBar = (ProgressBar) dialogView.findViewById(R.id.progressBar);
+
             wv.getSettings().setJavaScriptEnabled(true);
             wv.getSettings().setUseWideViewPort(true);
             wv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -102,6 +97,18 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
                 {
                     view.loadUrl(url);
                     return true;
+                }
+
+                @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon)
+                {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onPageFinished(WebView view, String url)
+                {
+                    progressBar.setVisibility(View.GONE);
                 }
             });
 

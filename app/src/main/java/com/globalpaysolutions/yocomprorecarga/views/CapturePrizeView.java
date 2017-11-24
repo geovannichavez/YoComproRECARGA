@@ -14,6 +14,7 @@ public interface CapturePrizeView
 {
     void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy);
     void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy);
+
     void on3DChestClick();
     void onCoinLongClick();
     void hideArchViewLoadingMessage();

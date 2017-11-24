@@ -701,7 +701,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d_open);
                 break;
             case Constants.VALUE_CHEST_TYPE_SILVER:
-                ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_closed);
+                ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_open);
                 break;
             case Constants.VALUE_CHEST_TYPE_BRONZE:
                 ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_open);
