@@ -25,12 +25,10 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
-import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
@@ -44,7 +42,6 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -785,12 +782,13 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addWildcardPointData(String pKey, String brand)
+    public void addWildcardPointData(String pKey, String brand, String title, String message)
     {
         try
         {
             Marker marker = mWildcardPointsMarkers.get(pKey);
-            marker.setTitle(brand);
+            marker.setTitle(title);
+            marker.setSnippet(message);
         }
         catch (Exception ex)
         {

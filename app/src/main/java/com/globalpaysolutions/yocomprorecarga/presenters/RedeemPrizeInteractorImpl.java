@@ -49,19 +49,19 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
     {
         mView.hideLoadingDialog();
 
-        if(!TextUtils.equals(response.getInternalCode(), "00"))
+        if(TextUtils.equals(response.getCode(), "00"))
         {
             DialogViewModel dialogModel = new DialogViewModel();
             dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_success));
             dialogModel.setLine1(mContext.getString(R.string.label_claro_prize_activated));
             dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));
 
-            mView.createImageDialog(dialogModel, R.drawable.ic_alert);
+            mView.createPrizeSuccessDialog(dialogModel);
         }
         else
         {
             DialogViewModel dialogModel = new DialogViewModel();
-            dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_success));
+            dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_error));
             dialogModel.setLine1(mContext.getString(R.string.label_reedem_error));
 
             dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));

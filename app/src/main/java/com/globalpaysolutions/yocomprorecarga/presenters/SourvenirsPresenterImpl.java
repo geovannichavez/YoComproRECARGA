@@ -73,7 +73,7 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     @Override
     public void onError(int codeStatus, Throwable throwable)
     {
-mView.hideLoadingDialog();
+        mView.hideLoadingDialog();
     }
 
     @Override
@@ -82,7 +82,6 @@ mView.hideLoadingDialog();
         try
         {
             mView.hideLoadingDialog();
-
             //Saves last saved prize
             UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
             UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
@@ -94,11 +93,11 @@ mView.hideLoadingDialog();
 
             //Saves tracking and updates UI
             if(redeemPrize.getTracking() != null)
-            UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
-                    redeemPrize.getTracking().getTotalWinPrizes(),
-                    redeemPrize.getTracking().getCurrentCoinsProgress(),
-                    redeemPrize.getTracking().getTotalSouvenirs(),
-                    redeemPrize.getTracking().getAgeID());
+                UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
+                        redeemPrize.getTracking().getTotalWinPrizes(),
+                        redeemPrize.getTracking().getCurrentCoinsProgress(),
+                        redeemPrize.getTracking().getTotalSouvenirs(),
+                        redeemPrize.getTracking().getAgeID());
 
             //If there is a new achievement
             if (redeemPrize.getAchievement() != null)
@@ -108,14 +107,6 @@ mView.hideLoadingDialog();
             }
 
             mView.navigatePrizeDetails();
-
-           /* mView.closeSouvenirDialog();
-            DialogViewModel dialog = new DialogViewModel();
-            dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
-            dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));
-            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.generateImageDialog(dialog, R.drawable.ic_alert);*/
-
         }
         catch (Exception ex)
         {
@@ -129,8 +120,10 @@ mView.hideLoadingDialog();
         mView.hideLoadingDialog();
         mView.closeSouvenirDialog();
         DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
-        dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));
+        /*dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
+        dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));*/
+        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
         dialog.setAcceptButton(mContext.getString(R.string.button_accept));
         mView.generateImageDialog(dialog, R.drawable.ic_alert);
     }

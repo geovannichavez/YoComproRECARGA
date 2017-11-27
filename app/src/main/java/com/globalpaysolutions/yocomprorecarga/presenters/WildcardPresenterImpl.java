@@ -120,7 +120,8 @@ public class WildcardPresenterImpl implements IWildcardPresenter, WildcardListen
         mView.dismissLoadingDialog();
         DialogViewModel dialog = new DialogViewModel();
         dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        dialog.setLine1(mContext.getString(R.string.label_something_went_wrong_wildcard));
+        //dialog.setLine1(mContext.getString(R.string.label_something_went_wrong_wildcard));
+        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
         dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
         mView.showCloseableDialog(dialog, R.drawable.ic_alert);
     }

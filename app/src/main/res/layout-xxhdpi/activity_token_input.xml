@@ -131,7 +131,7 @@
         android:layout_height="25dp"
         android:layout_marginBottom="16dp"
         android:text="@string/lbl_write_your_code"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etToken"
         app:layout_constraintEnd_toEndOf="@+id/ImageViewToken"
         app:layout_constraintHorizontal_bias="0.505"

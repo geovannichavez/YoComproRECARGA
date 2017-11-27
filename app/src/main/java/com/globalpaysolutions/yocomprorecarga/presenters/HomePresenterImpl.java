@@ -480,8 +480,10 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData)
     {
+        String title = mContext.getString(R.string.title_wildcard_pointer);
+        String message = mContext.getString(R.string.label_wildcard_pointer);
         if(wildcardYCRData != null)
-            mView.addWildcardPointData(pKey, wildcardYCRData.getBrand());
+            mView.addWildcardPointData(pKey, wildcardYCRData.getBrand(), title, message);
     }
 
     @Override

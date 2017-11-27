@@ -232,9 +232,9 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void showImageDialog(DialogViewModel dialogModel, int resource)
+    public void showImageDialog(DialogViewModel dialogModel, int resource, boolean closeActivity)
     {
-        createImageDialog(dialogModel.getTitle(), dialogModel.getLine1(), resource);
+        createImageDialog(dialogModel.getTitle(), dialogModel.getLine1(), resource, closeActivity);
     }
 
     @Override
@@ -817,7 +817,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     *
     */
 
-    public void createImageDialog(String title, String description, int resource)
+    public void createImageDialog(String title, String description, int resource, final boolean closeAcivity)
     {
         try
         {
@@ -845,7 +845,17 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
                 @Override
                 public void onClick(View v)
                 {
-                    dialog.dismiss();
+                    if(closeAcivity)
+                    {
+                        Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
+                        store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(store);
+                        finish();
+                    }
+                    else
+                    {
+                        dialog.dismiss();
+                    }
                 }
             });
         }

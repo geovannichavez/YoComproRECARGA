@@ -127,7 +127,17 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
             {
                 if(pCodeStatus == 406)
                 {
-                    mView.createSnackbar(mContext.getString(R.string.validation_nickname_already_exists));
+                    errorResponse.setTitle(mContext.getString(R.string.title_dialog_nickname_already_exists));
+                    errorResponse.setLine1(mContext.getString(R.string.validation_nickname_already_exists));
+                    errorResponse.setAcceptButton(mContext.getString(R.string.button_accept));
+                    this.mView.showGenericMessage(errorResponse);
+                }
+                else if(pCodeStatus == 403)
+                {
+                    errorResponse.setTitle(mContext.getString(R.string.title_dialog_invalid_nickname));
+                    errorResponse.setLine1(mContext.getString(R.string.label_dialog_invalid_nickname));
+                    errorResponse.setAcceptButton(mContext.getString(R.string.button_accept));
+                    this.mView.showGenericMessage(errorResponse);
                 }
                 else
                 {

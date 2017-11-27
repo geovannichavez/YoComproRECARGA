@@ -133,9 +133,11 @@
 
 
     <!--    ERRROR MESSAGES  -->
-    <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL…</string>
+    <!--<string name="error_title_something_went_wrong">ALGO HA SALIDO MAL…</string>-->
+    <string name="error_title_something_went_wrong">Ups!…</string>
     <string name="error_title_sms_await_title">ESPERA UN POCO…</string>
-    <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+    <!--<string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>-->
+    <string name="error_content_something_went_wrong_try_again">¡Revisa tu conexión!</string>
     <string name="error_content_progress_something_went_wrong_try_again">Algo ha salido mal al obtener los datos de su progreso, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
     <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
@@ -287,15 +289,23 @@
     <string name="label_store_items_error">No se cargaron los artículos de la tienda. Vuelve a intentarlo.</string>
     <string name="label_unknown_era">Desconocido</string>
 
-    <string name="label_type_token_part4"><s>Intentar otra vez</s></string>
+    <string name="label_type_token_part4"><u>Intentar otra vez</u></string>
     <string name="lbl_confirm_number">CONFIRMA TU CELULAR</string>
-    <string name="lbl_if_dont_get_sms">Si no recibes el SMS de confirmación, por favor comunícate con nosotros por Whatsapp al número 7768-1443 para auidarte</string>
+    <string name="lbl_if_dont_get_sms">Si no recibes el SMS de confirmación, por favor comunícate con nosotros por WhatsApp al número 7768–1443 para ayudarte</string>
     <string name="lbl_write_your_code">Digita tu código</string>
     <string name="lbl_btn_verify_cellphone">VERIFICAR</string>
     <string name="title_redeem_prize_success">Regalo Activado con éxito</string>
-    <string name="title_redeem_prize_error">El código es incorrecto</string>
+    <!--<string name="title_redeem_prize_error">El código es incorrecto</string>-->
 
-    <string name="label_claro_prize_activated">Has activado un regalo claro exitosamente.</string>
+    <string name="title_redeem_prize_error">No se activó tu regalo</string>
+    <!--<string name="title_redeem_prize_error">El código es incorrecto</string>-->
+
+    <string name="label_claro_prize_activated">Has activado un regalo Claro exitosamente.</string>
     <string name="label_reedem_error">Revisa el código que ingresaste y el número que se va a usar</string>
+    <string name="title_wildcard_pointer">¡Suerte!</string>
+    <string name="label_wildcard_pointer">Averigua el secreto</string>
+    <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
+    <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta un nickname diferente</string>
+    <string name="title_dialog_nickname_already_exists">Nickname en uso</string>
 
 </resources>

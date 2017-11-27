@@ -9,43 +9,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class ActivatePrizeResponse
 {
-    @SerializedName("HttpCode")
+    @SerializedName("Code")
     @Expose
-    private Integer httpCode;
-    @SerializedName("InternalCode")
-    @Expose
-    private String internalCode;
+    private String code;
     @SerializedName("Message")
     @Expose
     private String message;
 
-    public Integer getHttpCode()
-    {
-        return httpCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setHttpCode(Integer httpCode)
-    {
-        this.httpCode = httpCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getInternalCode()
-    {
-        return internalCode;
-    }
-
-    public void setInternalCode(String internalCode)
-    {
-        this.internalCode = internalCode;
-    }
-
-    public String getMessage()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 }

@@ -53,11 +53,12 @@
     <TextView
         android:id="@+id/tvDialogMessage"
         android:layout_width="209dp"
-        android:layout_height="wrap_content"
+        android:layout_height="54dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="124dp"
         android:gravity="center"
+        android:maxLines="3"
         android:text="Felicidades, has ganado el la mejor puntuacion de toda la historia. ten en cuenta que puede llegar a ser un texto largo"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -69,12 +70,15 @@
     <ImageView
         android:id="@+id/imgDialogImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="114dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
-        app:srcCompat="@drawable/img_recarcoin_multiple"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvDialogMessage"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/img_prize_chest_01"/>
 </android.support.constraint.ConstraintLayout>

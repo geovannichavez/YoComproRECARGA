@@ -19,7 +19,7 @@ public interface CapturePrizeView
     void onCoinLongClick();
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogViewModel pMessageModel);
-    void showImageDialog(DialogViewModel dialogModel, int resource);
+    void showImageDialog(DialogViewModel dialogModel, int resource, boolean closeActivity);
     void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();

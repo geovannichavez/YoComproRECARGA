@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.IntentCompat;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Intro extends AppCompatActivity
 {
@@ -32,6 +35,12 @@ public class Intro extends AppCompatActivity
 
 
     int mCounter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
 
     @Override

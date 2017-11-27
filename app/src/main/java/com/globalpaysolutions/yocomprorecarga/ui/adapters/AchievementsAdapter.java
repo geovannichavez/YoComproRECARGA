@@ -86,27 +86,6 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
             }
         });
 
-        switch (currentItem.getLevel())
-        {
-            case 0:
-                level.setImageResource(R.drawable.ic_achvs_counter_0);
-                break;
-            case 1:
-                level.setImageResource(R.drawable.ic_achvs_counter_1);
-                break;
-            case 3:
-                level.setImageResource(R.drawable.ic_achvs_counter_2);
-                break;
-            case 4:
-                level.setImageResource(R.drawable.ic_achvs_counter_3);
-                actual.setVisibility(View.INVISIBLE);
-                imgCoins.setVisibility(View.INVISIBLE);
-                break;
-            default:
-                level.setImageResource(R.drawable.ic_achvs_counter_0);
-                break;
-        }
-
         if (ShareDialog.canShow(ShareLinkContent.class))
         {
             ShareLinkContent shareContent = new ShareLinkContent.Builder()
@@ -144,15 +123,33 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
         description.setText(currentItem.getDescription());
         coinsValue.setText(String.valueOf(currentItem.getNextPrize()));
 
-        /*if(currentItem.getNextPrize() == 0)
-        {
-            imgCoins.setVisibility(View.INVISIBLE);
-            coinsValue.setText("");
-        }*/
-
         String strActual = String.format("Progreso: %1$s/%2$s", score, next);
         actual.setText(strActual);
 
+        switch (currentItem.getLevel())
+        {
+            case 0:
+                level.setImageResource(R.drawable.ic_achvs_counter_0);
+                btnFacebook.setEnabled(false);
+                btnShare.setEnabled(false);
+                btnFacebook.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                level.setImageResource(R.drawable.ic_achvs_counter_1);
+                break;
+            case 2:
+                level.setImageResource(R.drawable.ic_achvs_counter_2);
+                break;
+            case 3:
+                level.setImageResource(R.drawable.ic_achvs_counter_3);
+                actual.setVisibility(View.INVISIBLE);
+                imgCoins.setVisibility(View.INVISIBLE);
+                coinsValue.setVisibility(View.INVISIBLE);
+                break;
+            default:
+                level.setImageResource(R.drawable.ic_achvs_counter_0);
+                break;
+        }
 
         return  row;
     }

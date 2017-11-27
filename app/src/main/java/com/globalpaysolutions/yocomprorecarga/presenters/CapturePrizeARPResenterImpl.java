@@ -235,7 +235,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.title_not_enough_coins));
             dialog.setLine1(mContext.getString(R.string.label_not_enough_coins));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showImageDialog(dialog, R.drawable.ic_alert);
+            mView.showImageDialog(dialog, R.drawable.ic_alert, false);
         }
         else
         {
@@ -555,6 +555,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         DialogViewModel dialog = new DialogViewModel();
         dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        //dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
         dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
         dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
         mView.showGenericDialog(dialog);
@@ -595,7 +596,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                    dialog.setTitle(mContext.getString(R.string.label_congratulations_title));
                    dialog.setLine1(String.format(mContext.getString(R.string.label_chest_open_succesfully), String.valueOf(mUserData.getLastChestExchangedValue())));
                    dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-                   mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple);
+                   mView.showImageDialog(dialog, R.drawable.img_recarcoin_multiple, true); //boolean value, flag for closing activity or not
 
                    //Checks for achievemnts and creates dialog
                    if(pExchangeResponse.getAchievement() != null)
@@ -720,10 +721,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
 
-        if(pResponse.getWaitTime() == null || pResponse.getTracking() != null)
+        //if(pResponse.getWaitTime() == null || pResponse.getTracking() != null)
+        if(TextUtils.equals(pResponse.getResponseCode(), "00"))
         {
             //Saves tracking and updates UI
-            mInteractor.saveUserTracking(pResponse.getTracking());
+            if(pResponse.getTracking() != null)
+                mInteractor.saveUserTracking(pResponse.getTracking());
 
             //Updates indicators
             mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
@@ -774,7 +777,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
             dialog.setLine1(String.format(mContext.getString(R.string.redeem_prize_interval), mUserData.getAwaitTimePending()));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showImageDialog(dialog, R.drawable.ic_alert);
+            mView.showImageDialog(dialog, R.drawable.ic_alert, false);
         }
 
 

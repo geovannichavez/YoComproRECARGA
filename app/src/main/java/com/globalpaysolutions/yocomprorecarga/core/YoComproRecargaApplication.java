@@ -9,6 +9,8 @@ import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedH
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;
 import com.onesignal.OneSignal;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 /**
  * Created by Josué Chávez on 22/03/2017.
  */
@@ -45,6 +47,11 @@ public class YoComproRecargaApplication extends Application
                 .setDefaultFontPath("fonts/baloo_regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());*/
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/baloo_regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
     }
 
     @Override
