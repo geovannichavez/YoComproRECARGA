@@ -50,6 +50,8 @@
             android:textAllCaps="true"
             android:textColor="@color/color_dark_gray"
             android:textStyle="bold"
+            tools:text="GJSUE"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
             app:layout_constraintStart_toStartOf="@+id/imageView5"

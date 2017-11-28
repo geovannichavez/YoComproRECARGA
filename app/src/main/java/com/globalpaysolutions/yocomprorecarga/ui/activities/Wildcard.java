@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.WildcardPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.WildcardView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Wildcard extends AppCompatActivity implements WildcardView
 {
     WildcardPresenterImpl mPresenter;
@@ -36,6 +39,12 @@ public class Wildcard extends AppCompatActivity implements WildcardView
     ProgressDialog progressDialog;
     TextView lblAcceptChallenge;
     ImageView bg_wildcard;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

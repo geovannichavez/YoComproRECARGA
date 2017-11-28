@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.AuthenticatePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Authenticate extends AppCompatActivity implements AuthenticateView
 {
     private static final String TAG = Authenticate.class.getSimpleName();
@@ -24,6 +27,12 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
 
     //MVP
     private AuthenticatePresenterImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

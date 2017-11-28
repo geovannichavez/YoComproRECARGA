@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +26,8 @@ import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class PrizesHistory extends AppCompatActivity implements PrizesHistoryView
 {
     private static final String TAG = PrizesHistory.class.getSimpleName();
@@ -43,14 +46,16 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     PrizesHistoryPresenterImpl mPresenter;
 
     @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prizes_history);
-        /*toolbar = (Toolbar) findViewById(R.id.toolbarPrizesHistory);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);

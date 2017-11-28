@@ -48,6 +48,7 @@
         android:text="Soy Thomas, el creador de la máquina del tiempo. ¿Que tal si comenzamos con tu nombre para conocernos mejor?"
         android:textAlignment="center"
         android:textSize="20sp"
+        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toBottomOf="@+id/textView22"/>

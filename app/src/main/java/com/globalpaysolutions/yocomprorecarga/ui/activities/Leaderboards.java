@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
@@ -29,6 +30,8 @@ import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
 
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Leaderboards extends AppCompatActivity implements LeaderboardsView
 {
     private static final String TAG = Leaderboards.class.getSimpleName();
@@ -54,6 +57,12 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
 
     //Global Variables
 
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -165,11 +165,14 @@
         android:id="@+id/textView14"
         android:layout_width="188dp"
         android:layout_height="56dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="28dp"
         android:maxLines="3"
         android:text="@string/label_must_be_claro_client"
         android:textSize="14sp"
         android:textStyle="bold"
+        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintStart_toEndOf="@+id/imageView38"
         app:layout_constraintTop_toBottomOf="@+id/imageView37"/>
 

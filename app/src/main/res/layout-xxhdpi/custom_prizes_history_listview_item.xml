@@ -44,8 +44,9 @@
                 android:gravity="center_horizontal"
                 android:maxLines="5"
                 android:text="Nevagcion Ilimitada 1 Sem."
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/pure_black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -56,6 +57,7 @@
                 android:gravity="center_horizontal"
                 android:text="Nevega ilimitado por 7 dias "
                 android:textColor="@color/pure_black"
+                fontPath="fonts/lato_semibold.ttf"
                 android:textSize="12sp"
                 android:maxLines="5"/>
         </LinearLayout>

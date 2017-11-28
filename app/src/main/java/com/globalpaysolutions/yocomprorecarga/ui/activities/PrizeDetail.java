@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -24,6 +25,8 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
 {
     private static final String TAG = PrizeDetail.class.getSimpleName();
@@ -41,6 +44,12 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
 
     //MVP
     PrizeDetailPresenterImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -50,6 +51,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, HomeView
 {
     private static final String TAG = PointsMap.class.getSimpleName();
@@ -77,6 +80,11 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     private Map<String, Marker> mWildcardPointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
 
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

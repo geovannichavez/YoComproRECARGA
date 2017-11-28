@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RedeemPrizeInteractorImpl;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 {
 
@@ -35,6 +38,12 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     RedeemPrizeInteractorImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

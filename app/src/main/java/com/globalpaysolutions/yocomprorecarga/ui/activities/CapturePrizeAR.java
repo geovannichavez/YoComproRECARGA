@@ -44,6 +44,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeView
 {
     private static final String TAG = CapturePrizeAR.class.getSimpleName();
@@ -71,6 +73,12 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

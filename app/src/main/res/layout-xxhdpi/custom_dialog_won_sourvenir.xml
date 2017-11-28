@@ -119,6 +119,7 @@
         android:gravity="center"
         android:text="@string/label_thanks_valuable_thing"
         android:textSize="12sp"
+        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imgSouvenirDialog"/>

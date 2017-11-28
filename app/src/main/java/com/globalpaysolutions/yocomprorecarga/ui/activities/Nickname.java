@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,6 +27,8 @@ import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
 
 import java.util.Arrays;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Nickname extends AppCompatActivity implements NicknameView
 {
     private static final String TAG = Nickname.class.getSimpleName();
@@ -44,6 +47,12 @@ public class Nickname extends AppCompatActivity implements NicknameView
     NicknamePresenterImpl mPresenter;
 
     @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -57,7 +66,6 @@ public class Nickname extends AppCompatActivity implements NicknameView
     @Override
     public void initializeViews()
     {
-        //tvExamples = (TextView) findViewById(R.id.tvExamples);
         etNickname = (EditText) findViewById(R.id.etNickname);
         btnAcceptNick = (ImageButton) findViewById(R.id.btnAcceptNick);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
@@ -72,10 +80,6 @@ public class Nickname extends AppCompatActivity implements NicknameView
         });
 
         mValidator = new Validation(this, coordinatorLayout);
-
-        //Nickname Examples
-        //tvExamples.setText(Arrays.toString(getResources().getStringArray(R.array.array_nickname_examples)).replaceAll("\\[|\\]", ""));
-
     }
 
     @Override

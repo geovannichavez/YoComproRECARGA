@@ -58,6 +58,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="124dp"
         android:gravity="center"
+        fontPath="fonts/lato_semibold.ttf"
         android:text="Felicidades, has ganado el la mejor puntuacion de toda la historia. ten en cuenta que puede llegar a ser un texto largo"
         android:textSize="14sp"
         android:textStyle="bold"

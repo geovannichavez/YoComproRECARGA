@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.PermissionsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.PermissionsView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Permissions extends AppCompatActivity implements PermissionsView
 {
     //Views and layouts
@@ -22,6 +25,12 @@ public class Permissions extends AppCompatActivity implements PermissionsView
 
     //MVP
     PermissionsPresenterImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

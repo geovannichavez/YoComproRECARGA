@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
@@ -59,6 +59,7 @@
         android:text="@string/label_new_login_with_facebook_"
         android:textColor="@color/gray_textView_color"
         android:textSize="16sp"
+        fontPath="fonts/lato_semibold.ttf"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

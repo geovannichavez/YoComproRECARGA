@@ -33,6 +33,8 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class TokenInput extends AppCompatActivity implements TokenInputView
 {
     //Adapters y Layouts
@@ -48,6 +50,12 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
     //Objetos globales
     UserData mUserData;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

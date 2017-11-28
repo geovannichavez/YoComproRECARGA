@@ -61,6 +61,7 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="14sp"
         android:textStyle="normal"
+        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"

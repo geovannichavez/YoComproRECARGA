@@ -82,9 +82,6 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
         {
             if(storeItems.size() > 0)
             {
-                //TODO: Quitar estos comentarios
-                /*mStoreItems = storeItems;
-                mInteractor.downloadItemImage(storeItems.get(0).getImgUrl(), storeItems.get(0).getStoreID(), this);*/
                 mView.renderStoreItems(storeItems);
             }
         }
@@ -98,9 +95,8 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     public void onError(int codeStatus, Throwable throwable)
     {
         mView.hideLoadingDialog();
-        //mView.createImageDialog(mContext.getString(R.string.title_store_items_error), mContext.getString(R.string.label_store_items_error), R.drawable.ic_alert);
         mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                mContext.getString(R.string.error_content_progress_something_went_wrong_try_again),
+                mContext.getString(R.string.error_content_something_went_wrong_try_again),
                 R.drawable.ic_alert);
     }
 
@@ -175,7 +171,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     {
         mView.hideLoadingDialog();
         mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                mContext.getString(R.string.error_content_progress_something_went_wrong_try_again),
+                mContext.getString(R.string.error_content_something_went_wrong_try_again),
                 R.drawable.ic_alert);
     }
 }

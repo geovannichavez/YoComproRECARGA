@@ -49,6 +49,7 @@
 
     <TextView
         android:id="@+id/textView23"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="361dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -94,15 +95,15 @@
         tools:text="57008"/>
 
     <ImageButton
-        android:background="?attr/selectableItemBackgroundBorderless"
         android:id="@+id/btnConfirmToken"
         android:layout_width="212dp"
         android:layout_height="76dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="VerifyToken"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include4"
         app:layout_constraintHorizontal_bias="0.502"
@@ -127,11 +128,12 @@
 
     <TextView
         android:id="@+id/textView26"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginBottom="12dp"
         android:text="@string/lbl_write_your_code"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ImageViewToken"
         app:layout_constraintEnd_toEndOf="@+id/ImageViewToken"
         app:layout_constraintHorizontal_bias="0.493"
@@ -141,6 +143,7 @@
 
     <TextView
         android:id="@+id/lblWrongNumber"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -156,6 +159,7 @@
 
     <TextView
         android:id="@+id/textView28"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="334dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"

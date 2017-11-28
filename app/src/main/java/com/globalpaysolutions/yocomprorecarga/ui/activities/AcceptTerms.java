@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,6 +25,8 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 {
@@ -34,6 +37,12 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
     AcceptTermsPresenterImpl presenter;
 
     ProgressBar progressBar;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

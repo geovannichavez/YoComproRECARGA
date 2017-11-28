@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,6 +29,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Souvenirs extends AppCompatActivity implements SouvenirsView
 {
     private static final String TAG = Souvenirs.class.getSimpleName();
@@ -45,6 +48,12 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     ProgressDialog mProgressDialog;
 
     //Global Variables
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

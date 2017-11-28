@@ -1,17 +1,18 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.LimitedFunctionalityPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LimitedFunctionality extends AppCompatActivity implements LimitedFunctionalityView
 {
@@ -19,6 +20,12 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
 
     //MVP
     LimitedFunctionalityPresenterImpl mPresenter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,7 +37,6 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
 
         mPresenter = new LimitedFunctionalityPresenterImpl(this, this, this);
 
-        //mPresenter.enlistMissingComponents();
 
         btnWhatever.setOnClickListener(new View.OnClickListener()
         {

@@ -61,6 +61,7 @@
         android:gravity="center"
         android:text="Felicidades, has ganado el la mejor puntuacion de toda la historia. ten en cuenta que puede llegar a ser un texto largo"
         android:textSize="14sp"
+        fontPath="fonts/lato_semibold.ttf"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.494"

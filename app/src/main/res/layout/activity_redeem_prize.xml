@@ -164,6 +164,7 @@
         android:layout_marginTop="12dp"
         android:maxLines="3"
         android:text="@string/label_must_be_claro_client"
+        fontPath="fonts/lato_semibold.ttf"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageView38"

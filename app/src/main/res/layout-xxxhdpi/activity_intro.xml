@@ -37,7 +37,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center_horizontal"
         android:text="Biemvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historua humana."
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/ActivityWhiteBackground"
         app:layout_constraintEnd_toEndOf="parent"

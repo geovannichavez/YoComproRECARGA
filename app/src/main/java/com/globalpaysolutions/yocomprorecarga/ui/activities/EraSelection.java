@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,8 @@ import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class EraSelection extends AppCompatActivity implements EraSelectionView
 {
     private static final String TAG = EraSelection.class.getSimpleName();
@@ -43,6 +46,12 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     ErasAdapter mErasAdapter;
 
     String mDestiny;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

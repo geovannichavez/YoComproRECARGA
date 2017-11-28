@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -27,6 +28,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Store extends AppCompatActivity implements StoreView
 {
     //MVP
@@ -39,13 +42,18 @@ public class Store extends AppCompatActivity implements StoreView
     ImageButton btnRight;
     TextView lblRecarCoinsLeft;
     ImageView btnBuy;
-    //ImageButton btnInfoStoreItem;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
     int mCurrentItem;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,7 +67,6 @@ public class Store extends AppCompatActivity implements StoreView
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         lblRecarCoinsLeft = (TextView) findViewById(R.id.lblRecarCoinsLeft);
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
-        //btnInfoStoreItem = (ImageButton) findViewById(R.id.btnInfoStoreItem);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -128,15 +135,6 @@ public class Store extends AppCompatActivity implements StoreView
             });
 
             btnLeft.setVisibility(View.GONE);
-
-            /*btnInfoStoreItem.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    createStoreItemInfoDialog();
-                }
-            });*/
         }
         catch (Exception ex)
         {

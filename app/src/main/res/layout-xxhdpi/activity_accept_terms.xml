@@ -41,6 +41,7 @@
         android:textColor="@color/gray_textView_color"
         android:textSize="20sp"
         android:textStyle="normal"
+        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"

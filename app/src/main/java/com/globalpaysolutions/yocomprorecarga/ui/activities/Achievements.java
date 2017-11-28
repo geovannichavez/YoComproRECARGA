@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.globalpaysolutions.yocomprorecarga.views.AchievementsView;
 
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class Achievements extends AppCompatActivity implements AchievementsView
 {
     private static final String TAG = Achievements.class.getSimpleName();
@@ -33,6 +36,12 @@ public class Achievements extends AppCompatActivity implements AchievementsView
 
     //Layouts and Views
     ListView lvAchievements;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
