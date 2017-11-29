@@ -24,6 +24,9 @@ public class Tracking
     @SerializedName("AgeID")
     @Expose
     private int ageID;
+    @SerializedName("Nickname")
+    @Expose
+    private String nickname;
 
     public int getTotalWinCoins()
     {
@@ -74,4 +77,15 @@ public class Tracking
     {
         this.ageID = ageID;
     }
+
+    public String getNickname()
+    {
+        return nickname;
+    }
+
+    public void setNickname(String nickname)
+    {
+        this.nickname = nickname;
+    }
+
 }

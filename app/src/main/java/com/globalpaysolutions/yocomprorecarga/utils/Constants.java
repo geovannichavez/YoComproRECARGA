@@ -12,11 +12,15 @@ public class Constants
 
     //Firebase
     public static final double SALES_POINTS_RADIUS_KM = 2;
-    public static final double VENDOR_RADIUS_KM = 5;
+    //public static final double VENDOR_RADIUS_KM = 5;
+    public static final double VENDOR_RADIUS_KM = 1;
     public static final double PRIZES_STOP_RADIUS_KM = 2;
-    public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.5;
-    public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 1;
-    public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
+    //public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.5;
+    public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.350;
+    //public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 1;
+    public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 0.5;
+    //public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
+    public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 0.75;
 
 
     //Permissions
@@ -37,7 +41,8 @@ public class Constants
     public static final String WIKITUDE_LICENSE_KEY = "SAX0HsmTOzZpdSvk58FmNHXXd0q+7L6sNhNSLmSIvfNaekRFhWEvk/cmJcuLZyGadQnS7PDerr+Hwt9IvV2I8o/eeYWP6cP8uhptpfHGRFDNtJBIbCg5CH6yuWLjaX1qZvPk/MGeQPT3/sHc+7n8hCtr5SSxN9XXeGgdOkFk+iNTYWx0ZWRfXxnRfdUk3sUaSDwbJOHacO6lfT/v+HR5zwARDj3kkzbP8WcwI1N5B1pWFGh+xxuWG7qArGGwIoVDipIw1mRJ6Kdm2rx7TQrSS9GVb3nXlmJS0f+AS5HFKyrCAcUya3Ka2ZU4rJAjr6N7rhGvsR5T9vKr2OEjcgLD4KBhM3XWlBk2JU2uZ0QMLvyekIm5pGSTZJnxsIFYjtRGlORQwPJEmiPK5umuVizS7QF/kDvQXkkvLGs4ZMXw5eZcIFsQ+IikY4dJgNOqKtR1I5mc1IqrjPCE8ez+vZlW+HkDiBRV7Dh2afm8GXxn1P4NqEOEholNKKRjsxp3GMbN/gAx1yHgyXhSUphMrLys4/EiPzXpF9zzg+d8GsotNDRFaMWz27hMe1noX/18VQSpR1MD4mgT3jemajKEREu+yNVRXcLK67OgkezZr1IVj2xdvAxtOdgLfw0tmeYiHMYrXbtwG+/A4CrGx1c5krGtXzm+jnT3Uq2DkYqwyyWFUm6RYGnip5oSwDzk/rnRoJTFgF2VGlbeKvZQ0CqoBlXY2eCjJIoKaRcIoDsuOWSd7gjCcuB8GM6I46nCN6yMBgzINtyTCbhwfWeucIPe2tUaS+vb+dF9GvH6RG24tXrW69o=";
 
     //Wikitude: AR-POI
-    public static final double AR_POI_RADIOS_KM = 0.015; //15 meters
+    //public static final double AR_POI_RADIOS_KM = 0.015; //15 meters
+    public static final double AR_POI_RADIOS_KM = 0.017; //17 meters
     //public static final double AR_POI_RADIOS_KM = 0.030; //30 meters
     //public static final double AR_POI_RADIOS_KM = 0.03; //30 meters
     //public static final double AR_POI_RADIOS_KM = 0.02; //20 meters
@@ -47,7 +52,8 @@ public class Constants
     //RecarGO 2D
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.006;
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.035; //35 meters
-    public static final double RECARSTOP_2D_RADIUS_KM = 0.02; //20 meters
+    //public static final double RECARSTOP_2D_RADIUS_KM = 0.02; //20 meters
+    public static final double RECARSTOP_2D_RADIUS_KM = 0.015; //15 meters
     public static final int ONRADIUS_VIBRATION_TIME_MILLISECONDS = 100;
     public static final int ONRADIUS_VIBRATION_SLEEP_MILLISECONDS = 500;
     public static final int OUT_RADIUS_VIBRATION_TIME_MILLISECONDS = 130;

@@ -169,10 +169,17 @@ public class Intro extends AppCompatActivity
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent main = new Intent(this, Main.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(main);
-            finish();
+           if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
+           {
+               Intent main = new Intent(this, Main.class);
+               main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+               startActivity(main);
+               finish();
+           }
+           else
+           {
+               finish();
+           }
             return true;
         }
         return super.onKeyDown(keyCode, event);

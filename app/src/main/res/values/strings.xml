@@ -69,8 +69,10 @@
     <string name="label_indicator_saved">ACUMULADO</string>
     <string name="cant_redeem_title">¡No tan Rápido!</string>
     <string name="redeem_prize_interval">¡Solo te faltan %1$s hora(s) para canjear tu premio! ¡No te canses de jugar, buena suerte!</string>
+    <string name="exchange_souvenir_interval">Te faltan %1$s hora(s) para canjear tu souvenir ¡No te canses de jugar, buena suerte!</string>
     <string name="title_not_enough_coins">Sin Monedas...</string>
     <string name="label_not_enough_coins">No tienes suficientes monedas para canjear un premio. ¡Abre más cofres y conseguirás monedas!</string>
+    <string name="label_not_enough_coins_store">No tienes suficientes monedas para comprar de la tienda. ¡Abre más cofres y conseguirás monedas!</string>
     <string name="label_redeeming_prize_wait">¡Canjeando premio, espera!</string>
     <string name="label_click_on_button_to_redeem">¡Haz click en el botón \"Ver Premio\" para saber qué ganaste!</string>
 
@@ -307,5 +309,9 @@
     <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
     <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta un nickname diferente</string>
     <string name="title_dialog_nickname_already_exists">Nickname en uso</string>
+    <string name="title_no_prizes_yet">¡Aún no has logrado ningún premio!</string>
+    <string name="label_no_prizes_yet">Busca cofres y recolecta suficientes monedas para canjeralos</string>
+    <string name="title_era_selection">VIAJAR</string>
+    <string name="title_leaderboards">Tabla de Líderes</string>
 
 </resources>

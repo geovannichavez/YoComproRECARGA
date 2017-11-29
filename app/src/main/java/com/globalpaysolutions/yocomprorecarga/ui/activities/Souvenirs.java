@@ -109,7 +109,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setMessage(label);
             mProgressDialog.show();
-            mProgressDialog.setCancelable(false);
+            //mProgressDialog.setCancelable(false);
             mProgressDialog.setCanceledOnTouchOutside(false);
         }
         catch (Exception ex)
@@ -153,10 +153,13 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 ListSouvenirsByConsumer souvenir = ((ListSouvenirsByConsumer) parent.getItemAtPosition(position));
-                mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
-                        String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
-                        souvenir.getImgUrl(),
-                        souvenir.getSouvenirID());
+                if(souvenir.getSouvenirsOwnedByConsumer() > 0)
+                {
+                    mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
+                            String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
+                            souvenir.getImgUrl(),
+                            souvenir.getSouvenirID());
+                }
             }
         });
 

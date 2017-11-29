@@ -113,6 +113,7 @@
         android:text="REGISTRARME"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="@font/baloo_regular"
         app:layout_constraintBottom_toBottomOf="@+id/btnConfirm"
         app:layout_constraintEnd_toEndOf="@+id/btnConfirm"
         app:layout_constraintStart_toStartOf="@+id/btnConfirm"

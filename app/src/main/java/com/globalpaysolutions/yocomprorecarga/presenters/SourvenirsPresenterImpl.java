@@ -81,32 +81,44 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     {
         try
         {
-            mView.hideLoadingDialog();
-            //Saves last saved prize
-            UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
-            UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
-            UserData.getInstance(mContext).saveLastPrizeCode(redeemPrize.getCode());
-            UserData.getInstance(mContext).saveLastPrizeDial(redeemPrize.getDial());
-            UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
-            UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
-            UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
-
-            //Saves tracking and updates UI
-            if(redeemPrize.getTracking() != null)
-                UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
-                        redeemPrize.getTracking().getTotalWinPrizes(),
-                        redeemPrize.getTracking().getCurrentCoinsProgress(),
-                        redeemPrize.getTracking().getTotalSouvenirs(),
-                        redeemPrize.getTracking().getAgeID());
-
-            //If there is a new achievement
-            if (redeemPrize.getAchievement() != null)
+            if(!TextUtils.equals(redeemPrize.getResponseCode(), "02"))
             {
-                UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
-                UserData.getInstance(mContext).saveAchievementFromSouvenir(Constants.ACHIEVEMENT_FROM_SOUVENIR_SALE);
-            }
+                mView.hideLoadingDialog();
+                //Saves last saved prize
+                UserData.getInstance(mContext).saveLastPrizeTitle(redeemPrize.getTitle());
+                UserData.getInstance(mContext).saveLastPrizeDescription(redeemPrize.getDescription());
+                UserData.getInstance(mContext).saveLastPrizeCode(redeemPrize.getCode());
+                UserData.getInstance(mContext).saveLastPrizeDial(redeemPrize.getDial());
+                UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
+                UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
+                UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
 
-            mView.navigatePrizeDetails();
+                //Saves tracking and updates UI
+                if(redeemPrize.getTracking() != null)
+                    UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
+                            redeemPrize.getTracking().getTotalWinPrizes(),
+                            redeemPrize.getTracking().getCurrentCoinsProgress(),
+                            redeemPrize.getTracking().getTotalSouvenirs(),
+                            redeemPrize.getTracking().getAgeID());
+
+                //If there is a new achievement
+                if (redeemPrize.getAchievement() != null)
+                {
+                    UserData.getInstance(mContext).saveLastAchievement(redeemPrize.getAchievement());
+                    UserData.getInstance(mContext).saveAchievementFromSouvenir(Constants.ACHIEVEMENT_FROM_SOUVENIR_SALE);
+                }
+
+                mView.navigatePrizeDetails();
+            }
+            else
+            {
+                mView.hideLoadingDialog();
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
+                dialog.setLine1(String.format(mContext.getString(R.string.exchange_souvenir_interval), redeemPrize.getWaitTime()));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.generateImageDialog(dialog, R.drawable.ic_alert);
+            }
         }
         catch (Exception ex)
         {
@@ -120,10 +132,8 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
         mView.hideLoadingDialog();
         mView.closeSouvenirDialog();
         DialogViewModel dialog = new DialogViewModel();
-        /*dialog.setTitle(mContext.getString(R.string.title_couldnt_exchange_souvenir));
-        dialog.setLine1(mContext.getString(R.string.content_couldnt_exchange_souvenir));*/
         dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+        dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
         dialog.setAcceptButton(mContext.getString(R.string.button_accept));
         mView.generateImageDialog(dialog, R.drawable.ic_alert);
     }

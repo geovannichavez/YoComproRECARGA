@@ -535,6 +535,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void onRetrieveTracking(Tracking pTracking)
     {
         mView.hideLoadingDialog();
+
+        //Saves updated nickname
+        mUserData.saveNickname(pTracking.getNickname());
+
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()),
                 String.valueOf(mUserData.getTotalWonCoins()),
@@ -687,7 +691,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            Crashlytics.logException(ex);
            Log.e(TAG, "Happened from handling data for onOpenChestSuccess");
            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-           dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+           dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
            dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
            mView.showGenericDialog(dialog);
 
@@ -786,6 +790,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable)
     {
+        mView.hideLoadingDialog();
         mView.blinkRecarcoin();
         processErrorMessage(pCodeStatus, pThrowable);
     }

@@ -55,7 +55,7 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
         else
         {
             mView.createImageDialog(mContext.getString(R.string.title_not_enough_coins),
-                    mContext.getString(R.string.title_not_enough_coins),
+                    mContext.getString(R.string.label_not_enough_coins_store),
                     R.drawable.ic_alert);
         }
 

@@ -125,7 +125,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
         {
             bg_wildcard.setImageResource(R.drawable.bg_dark_recargo_theme);
             lblTitle.setText(R.string.title_you_lost);
-            lblTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            lblTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
 
             lblDescription.setText(R.string.label_you_lost);
             lblCoinsResult.setText(String.format(getString(R.string.label_quantity_recarcoins), coins));

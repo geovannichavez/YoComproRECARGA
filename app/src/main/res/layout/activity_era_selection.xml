@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="@+id/include2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.321"
-        app:srcCompat="@drawable/img_title_era_selection"/>
+        app:srcCompat="@drawable/bg_title_generic"/>
 
     <ListView
         android:id="@+id/lvEras"

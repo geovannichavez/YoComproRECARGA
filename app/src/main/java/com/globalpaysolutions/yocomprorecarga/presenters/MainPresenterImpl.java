@@ -49,11 +49,13 @@ public class MainPresenterImpl implements IMainPresenter
         if(!mUserData.getHasSeenIntroValue())
         {
             Intent intro = new Intent(mActivity, Intro.class);
+            this.addFlags(intro);
             mContext.startActivity(intro);
         }
         else if(!mUserData.UserAcceptedTerms())
         {
             Intent acceptTerms = new Intent(mActivity, AcceptTerms.class);
+            this.addFlags(acceptTerms);
             mContext.startActivity(acceptTerms);
         }
         else if(!mUserData.UserGrantedDevicePermissions())

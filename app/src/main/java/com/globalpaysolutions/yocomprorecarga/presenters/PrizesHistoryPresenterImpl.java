@@ -53,32 +53,38 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     public void onRetrievePrizesSuccess(PrizesHistoryResponse response)
     {
         List<Prize> prizeList = new ArrayList<>();
+        mView.hideLoadingDialog();
 
-        try
+        if(response.getData().size() > 0)
         {
-            for(PrizeData item : response.getData())
+            try
             {
-                Prize prize = new Prize();
-                prize.setCode(item.getCode());
-                prize.setDate(item.getRegDate());
-                prize.setDescription(item.getDescription());
-                prize.setExchangeMethod(item.getDialNumberOrPlace());
-                prize.setLevel(item.getLevel());
-                prize.setTitle(item.getTitle());
-                prizeList.add(prize);
+                for (PrizeData item : response.getData())
+                {
+                    Prize prize = new Prize();
+                    prize.setCode(item.getCode());
+                    prize.setDate(item.getRegDate());
+                    prize.setDescription(item.getDescription());
+                    prize.setExchangeMethod(item.getDialNumberOrPlace());
+                    prize.setLevel(item.getLevel());
+                    prize.setTitle(item.getTitle());
+                    prizeList.add(prize);
+                }
+                mView.renderPrizes(prizeList);
             }
-
-            mView.hideLoadingDialog();
-            mView.renderPrizes(prizeList);
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                DialogViewModel model = new DialogViewModel();
+                model.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                model.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+                model.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(model);
+            }
         }
-        catch (Exception ex)
+        else
         {
-            ex.printStackTrace();
-            DialogViewModel model = new DialogViewModel();
-            model.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-            model.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
-            model.setAcceptButton(mContext.getString(R.string.button_accept));
-            mView.showGenericDialog(model);
+            mView.showNoPrizesText();
         }
     }
 

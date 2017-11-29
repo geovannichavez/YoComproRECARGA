@@ -211,4 +211,42 @@
         app:layout_constraintVertical_bias="0.0"/>
 
 
+    <TextView
+        android:id="@+id/tvNoPrizesYetTitle"
+        android:layout_width="207dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="2"
+        android:text="@string/title_no_prizes_yet"
+        android:textAllCaps="true"
+        android:textColor="@color/color_red_recargo"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/imageView13"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="@+id/imageView13"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14"/>
+
+    <TextView
+        android:id="@+id/tvNoPrizesYetContent"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="@string/label_no_prizes_yet"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/tvNoPrizesYetTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvNoPrizesYetTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoPrizesYetTitle"/>
+
+
 </android.support.constraint.ConstraintLayout>

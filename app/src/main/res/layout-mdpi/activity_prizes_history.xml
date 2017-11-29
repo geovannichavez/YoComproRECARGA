@@ -10,12 +10,14 @@
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory"
     tools:layout_editor_absoluteY="25dp">
 
-    <include layout="@layout/custom_timemachine_background"/>
+    <include
+        layout="@layout/custom_timemachine_background"
+        android:layout_height="480dp"/>
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="278dp"
-        android:layout_height="387dp"
+        android:layout_width="310dp"
+        android:layout_height="340dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
@@ -27,26 +29,25 @@
 
     <ImageView
         android:id="@+id/imageView14"
-        android:layout_width="207dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="197dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img_title_prizes"/>
 
     <ListView
         android:id="@+id/lvHistory"
-        android:layout_width="204dp"
-        android:layout_height="315dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="108dp"
+        android:layout_width="192dp"
+        android:layout_height="288dp"
+        android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/custom_prizes_history_listview_item"/>
@@ -67,16 +68,16 @@
 
     <ImageButton
         android:id="@+id/btnActivatePrize"
-        android:layout_width="169dp"
-        android:layout_height="58dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="135dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView13"
         app:srcCompat="@drawable/btn_button_3"/>
 
@@ -85,56 +86,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="ACTIVAR PREMIO"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnActivatePrize"
         app:layout_constraintEnd_toEndOf="@+id/btnActivatePrize"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/btnActivatePrize"
         app:layout_constraintTop_toTopOf="@+id/btnActivatePrize"
-        app:layout_constraintVertical_bias="0.0"/>
-
-    <TextView
-        android:id="@+id/tvNoPrizesYetTitle"
-        android:layout_width="207dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:maxLines="2"
-        android:text="@string/title_no_prizes_yet"
-        android:textAllCaps="true"
-        android:textColor="@color/color_red_recargo"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"/>
-
-    <TextView
-        android:id="@+id/tvNoPrizesYetContent"
-        android:layout_width="203dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:maxLines="3"
-        android:text="@string/label_no_prizes_yet"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/tvNoPrizesYetTitle"
-        app:layout_constraintStart_toStartOf="@+id/tvNoPrizesYetTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvNoPrizesYetTitle"/>
+        app:layout_constraintVertical_bias="0.285"/>
 
 
 </android.support.constraint.ConstraintLayout>

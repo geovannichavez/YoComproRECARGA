@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -23,6 +24,8 @@ import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterI
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     ProgressDialog progressDialog;
     ImageButton btnActivatePrize;
     ImageButton btnBack;
+    TextView tvNoPrizesYetTitle;
+    TextView tvNoPrizesYetContent;
 
     //Adapters
     PrizesAdapter mPrizesAdapter;
@@ -59,6 +64,9 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
 
         btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
+        tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
+
 
         btnActivatePrize.setOnClickListener(new View.OnClickListener()
         {
@@ -104,6 +112,10 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     @Override
     public void initializeViews()
     {
+        mHistoryListview.setVisibility(View.VISIBLE);
+        tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
+        tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
+
        mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
         {
             @Override
@@ -186,6 +198,14 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     public void showGenericDialog(DialogViewModel dialogModel)
     {
         createDialog(dialogModel.getTitle(), dialogModel.getLine1(), dialogModel.getAcceptButton());
+    }
+
+    @Override
+    public void showNoPrizesText()
+    {
+        tvNoPrizesYetTitle.setVisibility(View.VISIBLE);
+        tvNoPrizesYetContent.setVisibility(View.VISIBLE);
+        mHistoryListview.setVisibility(View.INVISIBLE);
     }
 
     /*
