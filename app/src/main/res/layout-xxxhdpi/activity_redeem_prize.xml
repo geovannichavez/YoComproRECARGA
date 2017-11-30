@@ -197,6 +197,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="@string/title_activate_gift"
+        android:textColor="@color/color_red_recargo"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView39"

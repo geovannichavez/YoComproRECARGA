@@ -101,6 +101,7 @@
         android:layout_width="277dp"
         android:layout_height="312dp"
         android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
         android:layout_marginTop="172dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imgTimemachine"

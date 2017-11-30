@@ -47,7 +47,7 @@
             android:fontFamily="@font/baloo_regular"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="@color/color_dark_gray"
+            android:textColor="@color/color_red_recargo"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"

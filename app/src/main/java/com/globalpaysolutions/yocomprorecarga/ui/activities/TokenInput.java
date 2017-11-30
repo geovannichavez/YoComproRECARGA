@@ -66,8 +66,6 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
 
         etToken = (EditText) findViewById(R.id.etToken);
         btnConfirmToken = (ImageButton) findViewById(R.id.btnConfirmToken);
-        /*tvPortableNumber = (TextView) findViewById(R.id.tvPortableNumber);
-        tvCodeSent = (TextView) findViewById(R.id.tvCodeSent);*/
         tvWrongPhone = (TextView) findViewById(R.id.lblWrongNumber);
 
         //Get data from intent
@@ -100,14 +98,6 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     public void initialViewsState()
     {
         btnConfirmToken.setEnabled(false);
-       /* if (Build.VERSION.SDK_INT >= 24)
-        {
-            tvPortableNumber.setText(Html.fromHtml(getString(R.string.label_portable_phone_number), 1));
-        }
-        else
-        {
-            tvPortableNumber.setText(Html.fromHtml(getString(R.string.label_portable_phone_number)));
-        }*/
         EntriesValidations();
     }
 

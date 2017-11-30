@@ -78,6 +78,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 Intent intent = new Intent(PrizeDetail.this, PointsMap.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+                finish();
             }
         });
         btnStorePrizeDet.setOnClickListener(new View.OnClickListener()
@@ -89,6 +90,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 Intent intent = new Intent(PrizeDetail.this, Store.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 

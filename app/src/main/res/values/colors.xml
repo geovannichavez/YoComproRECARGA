@@ -63,14 +63,16 @@
     <color name="color_dark_gray_pressed">#999999</color>
     <color name="color_dark_gray">#666666</color>
 
-    <color name="color_red_recargo">#DF0024</color>
-    <color name="color_red_soft_recargo">#ff2f50</color>
+    <!--    RECARGO -->
+    <color name="color_red_recargo">#ca212c</color>
+    <color name="color_red_soft_recargo">#ac1c25</color>
+    <color name="color_title_recargo">#2b343f</color>
+    <color name="color_paragraph_recargo">#191e25</color>
 
     <!-- GREEEN THEME -->
     <color name="yvr_green_color">#88a80d</color>
     <color name="yvr_green_color_dark">#738e0b</color>
 
-    <color name="color_title_recargo">#2b343f</color>
 
     <color name="color_yovendorecarga_green">#66cc00</color>
     <color name="color_yovendorecarga_green_dark">#59af03</color>

@@ -132,6 +132,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_regular"
         android:text="@string/title_era_selection"
+        android:textColor="@color/color_red_recargo"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="@+id/imageView14"

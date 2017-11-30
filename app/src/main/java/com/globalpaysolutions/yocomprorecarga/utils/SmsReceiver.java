@@ -38,7 +38,7 @@ public class SmsReceiver extends BroadcastReceiver
                         String arr[] = message.split(" ", 2);
                         String firstWord = arr[0];
 
-                        if (!firstWord.equals("YoComproRecarga"))
+                        if (!firstWord.equals("RecarGO!"))
                         {
                             return;
                         }

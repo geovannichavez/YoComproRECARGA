@@ -48,7 +48,7 @@
             android:background="@drawable/bg_nickname"
             android:gravity="center"
             android:textAllCaps="true"
-            android:textColor="@color/color_dark_gray"
+            android:textColor="@color/color_red_recargo"
             android:textStyle="bold"
             tools:text="GJSUE"
             android:textSize="20sp"

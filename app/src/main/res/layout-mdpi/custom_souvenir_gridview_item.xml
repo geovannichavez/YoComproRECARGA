@@ -44,6 +44,7 @@
         android:layout_height="19dp"
         android:layout_marginBottom="5dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_souvenir_counter"/>
@@ -53,6 +54,7 @@
         android:layout_width="27dp"
         android:layout_height="24dp"
         android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

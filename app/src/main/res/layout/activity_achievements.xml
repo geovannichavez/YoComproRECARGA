@@ -76,6 +76,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_regular"
         android:text="@string/label_achievements"
+        android:textColor="@color/color_red_recargo"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="26sp"

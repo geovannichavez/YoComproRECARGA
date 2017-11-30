@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Main;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
 import com.onesignal.OneSignal;
@@ -89,7 +90,7 @@ public class TokenInputService extends IntentService
 
                         //NAVIGATE HOME
 
-                        Intent next = new Intent(getApplicationContext(), PointsMap.class);
+                        Intent next = new Intent(getApplicationContext(), Main.class);
 
                         /*Intent next = null;
 

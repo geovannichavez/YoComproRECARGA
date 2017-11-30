@@ -66,7 +66,7 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     @Override
     public void onSuccess(List<ListSouvenirsByConsumer> souvenirs)
     {
-        mView.hideLoadingDialog();;
+        mView.hideLoadingDialog();
         mView.renderSouvenirs(souvenirs);
     }
 

@@ -77,6 +77,7 @@
         android:layout_width="147dp"
         android:layout_height="211dp"
         android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
         android:layout_marginTop="144dp"
         app:layout_constraintStart_toStartOf="@+id/imgCounter"
         app:layout_constraintTop_toTopOf="@+id/imgTimemachine"

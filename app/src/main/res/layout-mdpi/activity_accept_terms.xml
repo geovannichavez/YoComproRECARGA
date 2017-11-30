@@ -77,22 +77,3 @@
         app:layout_constraintTop_toTopOf="@+id/btnAcceptTerms"/>
 
 </android.support.constraint.ConstraintLayout>
-
-<!--
-<LinearLayout
->>>>>>> ceb51c4740f452f6bde6bd1cce83da95d0c3107e
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms">
-
-
-
-</android.support.constraint.ConstraintLayout>
-
-<<<<<<< HEAD
-=======
-</LinearLayout>
--->

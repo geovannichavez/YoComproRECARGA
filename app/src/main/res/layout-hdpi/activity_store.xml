@@ -139,6 +139,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
+        android:textColor="@color/color_red_recargo"
         android:text="TIENDA"
         android:textSize="24sp"
         android:textStyle="bold"

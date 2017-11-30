@@ -739,6 +739,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     public void navigateToPrizeDetails()
     {
         Intent prizeDetails = new Intent(this, PrizeDetail.class);
+        prizeDetails.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(prizeDetails);
         finish();
     }
