@@ -2,6 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -139,6 +144,7 @@ public class Intro extends AppCompatActivity
         @Override
         public void onClick(View v)
         {
+            ButtonAnimator.getInstance(Intro.this).animateButton(v);
             if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
             {
                 Intent intent = new Intent(Intro.this, Main.class);

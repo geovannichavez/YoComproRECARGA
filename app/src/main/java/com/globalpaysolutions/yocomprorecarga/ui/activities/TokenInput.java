@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
@@ -85,6 +86,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     {
         try
         {
+            ButtonAnimator.getInstance(TokenInput.this).animateButton(view);
             String token = etToken.getText().toString();
             mPresenter.sendValidationToken(token);
         }

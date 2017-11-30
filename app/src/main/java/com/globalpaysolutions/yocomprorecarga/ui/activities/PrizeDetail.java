@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
@@ -73,6 +74,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                 Intent intent = new Intent(PrizeDetail.this, PointsMap.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -83,6 +85,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                 Intent intent = new Intent(PrizeDetail.this, Store.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -142,6 +145,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                     String prizePin = etPrizeCode.getText().toString();
                     mPresenter.createSmsPrizeContent(prizePin);
                 }
@@ -212,6 +216,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                     dialog.dismiss();
                 }
             });
@@ -220,6 +225,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                     Intent store = new Intent(PrizeDetail.this, Achievements.class);
                     store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(store);
@@ -236,9 +242,11 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     public void navigateTimeMachine(View view)
     {
         //Actually it has to navigate to 'Store'
+        ButtonAnimator.getInstance(PrizeDetail.this).animateButton(view);
         Intent intent = new Intent(this, Store.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+        finish();
     }
 
     public void navigateMap(View view)
@@ -254,6 +262,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
             Intent intent = new Intent(this, PointsMap.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

@@ -24,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.SourvenirsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvenirsAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
 import com.squareup.picasso.Picasso;
 
@@ -72,6 +73,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                 Intent main = new Intent(Souvenirs.this, Profile.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -199,6 +201,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     mPresnter.exchangeSouvenir(souvID);
                 }
             });
@@ -253,6 +256,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     Intent intent = new Intent(Souvenirs.this, PrizeDetail.class);
                     startActivity(intent);
                     finish();
@@ -263,6 +267,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     Intent store = new Intent(Souvenirs.this, Achievements.class);
                     store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(store);
@@ -307,6 +312,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
     {
         try
         {
+            ButtonAnimator.getInstance(Souvenirs.this).animateButton(view);
             if(mSouvenirDialog != null)
                 mSouvenirDialog.dismiss();
         }
@@ -344,6 +350,7 @@ public class Souvenirs extends AppCompatActivity implements SouvenirsView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     dialog.dismiss();
                 }
             });

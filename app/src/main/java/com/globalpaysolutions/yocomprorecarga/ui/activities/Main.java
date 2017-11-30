@@ -2,6 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
@@ -34,6 +39,7 @@ ImageButton buttonSettings;
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Main.this).animateButton(v);
                 Intent intro = new Intent(Main.this, Intro.class);
                 startActivity(intro);
             }
@@ -53,6 +59,7 @@ ImageButton buttonSettings;
 
     public void navigateMap(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         mPresenter.checkFunctionalityLimitedShown();
     }
 
@@ -64,24 +71,28 @@ ImageButton buttonSettings;
 
     public void navigateProfile(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         Intent profile = new Intent(Main.this, Profile.class);
         startActivity(profile);
     }
 
     public void navigateEraSelection(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         Intent eraSelection = new Intent(Main.this, EraSelection.class);
         startActivity(eraSelection);
     }
 
     public void navigateTopupRequest(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         Intent topupRequest = new Intent(Main.this, RequestTopup.class);
         startActivity(topupRequest);
     }
 
     public void navigateStore(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         if(!UserData.getInstance(this).chechUserHasSelectedEra())
         {
             Intent eraSelection = new Intent(Main.this, EraSelection.class);
@@ -98,6 +109,7 @@ ImageButton buttonSettings;
 
     public void navigatePrizeRedeem(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         Intent prize = new Intent(Main.this, RedeemPrize.class);
         startActivity(prize);
     }
@@ -129,4 +141,5 @@ ImageButton buttonSettings;
     {
 
     }
+
 }

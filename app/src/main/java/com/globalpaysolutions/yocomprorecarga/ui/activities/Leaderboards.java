@@ -4,6 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +28,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.Leader;
 import com.globalpaysolutions.yocomprorecarga.presenters.LeaderboardsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.LeadersAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
@@ -84,6 +89,7 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Leaderboards.this).animateButton(v);
                 Intent main = new Intent(Leaderboards.this, Profile.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -246,10 +252,6 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
     @Override
     public void swithTextColor(TextView textView)
     {
-       /* tvToday.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
-        tvWeek.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
-        tvGlobal.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
-        tvMonth.setTextColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));*/
         textView.setTextColor(ContextCompat.getColor(this, R.color.dark_recargo_green));
     }
 
@@ -295,6 +297,5 @@ public class Leaderboards extends AppCompatActivity implements LeaderboardsView
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 }

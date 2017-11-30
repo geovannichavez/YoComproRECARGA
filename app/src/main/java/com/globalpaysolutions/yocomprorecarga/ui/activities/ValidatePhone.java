@@ -31,7 +31,9 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePhonePresenter;
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
 import java.util.ArrayList;
@@ -78,6 +80,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(ValidatePhone.this).animateButton(v);
                 showCountries();
             }
         });
@@ -106,6 +109,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     {
         try
         {
+            ButtonAnimator.getInstance(ValidatePhone.this).animateButton(view);
             String phoneNumber = etPhoneNumber.getText().toString();
             phoneNumber = phoneNumber.replace("-", "");
 

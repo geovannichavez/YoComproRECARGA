@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.EraSelectionPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.ErasAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
@@ -70,6 +74,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(EraSelection.this).animateButton(v);
                 Intent main = new Intent(EraSelection.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);

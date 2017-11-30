@@ -31,6 +31,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
@@ -101,6 +102,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PointsMap.this).animateButton(v);
                 Intent main = new Intent(PointsMap.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -113,6 +115,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PointsMap.this).animateButton(v);
                 Intent intent = new Intent(PointsMap.this, RequestTopup.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
@@ -868,12 +871,14 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
 
     public void RequestTopup(View view)
     {
+        ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
         Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
         startActivity(requestTopup);
     }
 
     public void CapturePrize(View view)
     {
+        ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
             if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))

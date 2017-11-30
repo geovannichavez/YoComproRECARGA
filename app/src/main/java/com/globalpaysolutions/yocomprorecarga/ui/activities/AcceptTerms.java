@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +27,7 @@ import android.widget.ProgressBar;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -60,6 +65,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
 
     public void acceptTerms(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         presenter.generateWebDialog();
     }
 

@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -32,6 +35,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -99,6 +103,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(CapturePrizeAR.this).animateButton(v);
                 Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
@@ -111,6 +116,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(CapturePrizeAR.this).animateButton(v);
                 Intent store = new Intent(CapturePrizeAR.this, Store.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
@@ -973,6 +979,7 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
     public void navigateTimeMachine(View view)
     {
+        ButtonAnimator.getInstance(this).animateButton(view);
         Intent timeMachine = new Intent(this, Main.class);
         startActivity(timeMachine);
         finish();

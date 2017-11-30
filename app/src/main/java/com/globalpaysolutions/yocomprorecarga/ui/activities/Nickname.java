@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.NicknamePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
 
@@ -75,6 +76,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Nickname.this).animateButton(v);
                 validateNickname();
             }
         });
@@ -169,4 +171,6 @@ public class Nickname extends AppCompatActivity implements NicknameView
         });
         alertDialog.show();
     }
+
+
 }

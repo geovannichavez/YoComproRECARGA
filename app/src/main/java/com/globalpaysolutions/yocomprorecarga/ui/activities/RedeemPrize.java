@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RedeemPrizeInteractorImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -64,6 +65,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(RedeemPrize.this).animateButton(v);
                 Intent main = new Intent(RedeemPrize.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -75,6 +77,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(RedeemPrize.this).animateButton(v);
                 String pin = etPin.getText().toString();
                 String phone = etPhone.getText().toString();
                 mPresenter.attemptActivatePrize(phone, pin);
@@ -209,6 +212,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(RedeemPrize.this).animateButton(v);
                     Intent main = new Intent(RedeemPrize.this, Main.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(main);
@@ -249,6 +253,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(RedeemPrize.this).animateButton(v);
                     Intent main = new Intent(RedeemPrize.this, Main.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(main);

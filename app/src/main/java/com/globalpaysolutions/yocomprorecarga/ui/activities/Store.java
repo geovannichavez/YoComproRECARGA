@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.StorePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.StoreAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 import com.squareup.picasso.Picasso;
 
@@ -73,6 +74,7 @@ public class Store extends AppCompatActivity implements StoreView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Store.this).animateButton(v);
                 Intent main = new Intent(Store.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -122,6 +124,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     if(mStoreItems != null)
                     {
                         if(mStoreItems.size() > 0)
@@ -177,6 +180,7 @@ public class Store extends AppCompatActivity implements StoreView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Store.this).animateButton(v);
                 navigateSouvenirs();
             }
         });
@@ -212,6 +216,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     dialog.dismiss();
                 }
             });
@@ -220,6 +225,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     Intent store = new Intent(Store.this, Achievements.class);
                     store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(store);
@@ -262,6 +268,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     dialog.dismiss();
                 }
             });
@@ -299,6 +306,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     dialog.dismiss();
                 }
             });
@@ -354,6 +362,7 @@ public class Store extends AppCompatActivity implements StoreView
     {
         try
         {
+            ButtonAnimator.getInstance(Store.this).animateButton(view);
             int current = pagerStoreItems.getCurrentItem() + 1;
             if (current < mStoreItems.size())
                 pagerStoreItems.setCurrentItem(current);
@@ -370,6 +379,7 @@ public class Store extends AppCompatActivity implements StoreView
     {
         try
         {
+            ButtonAnimator.getInstance(Store.this).animateButton(view);
             int current = pagerStoreItems.getCurrentItem() - 1;
             if (current < mStoreItems.size())
                 pagerStoreItems.setCurrentItem(current);
@@ -420,6 +430,7 @@ public class Store extends AppCompatActivity implements StoreView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Store.this).animateButton(v);
                     souvenirDialog.dismiss();
                 }
             });

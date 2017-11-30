@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.WildcardPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.WildcardView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -68,6 +69,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Wildcard.this).animateButton(v);
                 mPresenter.acceptChallenge();
             }
         });
@@ -76,6 +78,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Wildcard.this).animateButton(v);
                 Intent main = new Intent(Wildcard.this, PointsMap.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -186,6 +189,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Wildcard.this).animateButton(v);
                     Intent main = new Intent(Wildcard.this, PointsMap.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(main);
@@ -261,6 +265,7 @@ public class Wildcard extends AppCompatActivity implements WildcardView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.getInstance(Wildcard.this).animateButton(v);
                     Intent main = new Intent(Wildcard.this, PointsMap.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(main);

@@ -313,5 +313,11 @@
     <string name="label_no_prizes_yet">Busca cofres y recolecta suficientes monedas para canjeralos</string>
     <string name="title_era_selection">VIAJAR</string>
     <string name="title_leaderboards">Tabla de Líderes</string>
+    <string name="title_prizes">Premios</string>
+    <string name="title_souvenirs_collection">Colección</string>
+    <string name="label_prizes_button">PREMIOS</string>
+    <string name="label_collection_button">COLECCIÓN</string>
+    <string name="label_achievements_button">LOGROS</string>
+    <string name="label_leaders_button">LÍDERES</string>
 
 </resources>

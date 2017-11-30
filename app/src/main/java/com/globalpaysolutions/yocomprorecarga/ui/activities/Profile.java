@@ -3,6 +3,11 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -13,7 +18,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +66,7 @@ public class Profile extends AppCompatActivity implements ProfileView
             @Override
             public void onClick(View v)
             {
+                animateButton(v);
                 Intent main = new Intent(Profile.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -135,6 +143,7 @@ public class Profile extends AppCompatActivity implements ProfileView
 
     public void navigatePrizesHistory(View view)
     {
+        animateButton(view);
         Intent history = new Intent(this, PrizesHistory.class);
         history.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(history);
@@ -143,6 +152,7 @@ public class Profile extends AppCompatActivity implements ProfileView
 
     public void navigateSouvenirs(View view)
     {
+        animateButton(view);
         Intent souvenirs = new Intent(this, Souvenirs.class);
         souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(souvenirs);
@@ -151,6 +161,7 @@ public class Profile extends AppCompatActivity implements ProfileView
 
     public void navigateAchievements(View view)
     {
+        animateButton(view);
         Intent achievements = new Intent(this, Achievements.class);
         achievements.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(achievements);
@@ -174,5 +185,27 @@ public class Profile extends AppCompatActivity implements ProfileView
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void animateButton(View view)
+    {
+        try
+        {
+            ImageButton button = (ImageButton) findViewById(view.getId());
+
+            Drawable drawableNormal = button.getDrawable();
+            Drawable drawablePressed = button.getDrawable().getConstantState().newDrawable();
+            drawablePressed.mutate();
+            drawablePressed.setColorFilter(Color.argb(50, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
+
+            StateListDrawable listDrawable = new StateListDrawable();
+            listDrawable.addState(new int[] {android.R.attr.state_pressed}, drawablePressed);
+            listDrawable.addState(new int[] {}, drawableNormal);
+            button.setImageDrawable(listDrawable);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

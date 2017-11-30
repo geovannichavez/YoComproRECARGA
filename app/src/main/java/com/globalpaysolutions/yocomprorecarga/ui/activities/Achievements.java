@@ -3,6 +3,10 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,6 +19,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.AchievementsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.AchievementsAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.AchievementsView;
 
 import java.util.List;
@@ -58,6 +63,7 @@ public class Achievements extends AppCompatActivity implements AchievementsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Achievements.this).animateButton(v);
                 Intent main = new Intent(Achievements.this, Profile.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
@@ -70,6 +76,7 @@ public class Achievements extends AppCompatActivity implements AchievementsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(Achievements.this).animateButton(v);
                 Intent intent = new Intent(Achievements.this, PointsMap.class);
                 startActivity(intent);
                 finish();
@@ -155,4 +162,5 @@ public class Achievements extends AppCompatActivity implements AchievementsView
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

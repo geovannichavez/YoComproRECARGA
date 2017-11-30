@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.Prize;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 
@@ -73,6 +74,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PrizesHistory.this).animateButton(v);
                 Intent intent = new Intent(PrizesHistory.this, RedeemPrize.class);
                 startActivity(intent);
                 finish();
@@ -84,6 +86,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(PrizesHistory.this).animateButton(v);
                 Intent main = new Intent(PrizesHistory.this, Profile.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);

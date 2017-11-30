@@ -2,6 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -10,6 +14,7 @@ import android.widget.ImageButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.LimitedFunctionalityPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -43,6 +48,7 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(LimitedFunctionality.this).animateButton(v);
                 mPresenter.navigateNext();
             }
         });
@@ -78,4 +84,5 @@ public class LimitedFunctionality extends AppCompatActivity implements LimitedFu
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

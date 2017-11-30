@@ -4,9 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.facebook.login.widget.LoginButton;
@@ -134,6 +140,5 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
         });
         alertDialog.show();
     }
-
 
 }
