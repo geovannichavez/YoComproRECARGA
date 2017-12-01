@@ -103,7 +103,7 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView5"
-            app:srcCompat="@drawable/btn_my_prizes"/>
+            />
 
         <ImageButton
             android:id="@+id/btnSouvenirs"
@@ -118,7 +118,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/imageButton6"
-            app:srcCompat="@drawable/btn_collections"/>
+             />
 
         <ImageButton
             android:id="@+id/imageButton8"
@@ -133,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
             app:layout_constraintTop_toBottomOf="@+id/btnSouvenirs"
-            app:srcCompat="@drawable/btn_achievements"/>
+               />
 
         <ImageButton
             android:id="@+id/imageButton9"
@@ -147,8 +147,7 @@
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton8"
-            app:srcCompat="@drawable/btn_leaderboards"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageButton8" />
 
 
     </android.support.constraint.ConstraintLayout>

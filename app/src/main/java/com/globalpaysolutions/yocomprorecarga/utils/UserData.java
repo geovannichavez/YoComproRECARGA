@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 
+import java.nio.charset.MalformedInputException;
+
 /**
  * Created by Josué Chávez on 16/01/2017.
  */
@@ -45,6 +47,7 @@ public class UserData
     private static final String KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY = "usr_has_confirmed_limited_functionalty";
     private static final String KEY_HAS_SEEN_INTRO = "usr_has_seen_intro";
     private static final String KEY_HAS_SELECTED_ERA = "usr_has_selected_era";
+    private static final String KEY_HAS_SET_NICKNAME = "usr_has_set_nickname";
 
     //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
@@ -394,6 +397,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void hasSetNickname(boolean hasSetNickname)
+    {
+        mEditor.putBoolean(KEY_HAS_SET_NICKNAME, hasSetNickname);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -663,6 +672,11 @@ public class UserData
     public String getLastExchangedChestID()
     {
         return mPreferences.getString(KEY_LAST_CHEST_ID, "");
+    }
+
+    public boolean checkSetNickname()
+    {
+        return mPreferences.getBoolean(KEY_HAS_SET_NICKNAME, false);
     }
 
 

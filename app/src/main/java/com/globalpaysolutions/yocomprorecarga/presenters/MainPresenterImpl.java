@@ -82,7 +82,7 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(inputToken);
             mContext.startActivity(inputToken);
         }
-        else if(TextUtils.isEmpty(mUserData.getNickname()))
+        else if(!mUserData.checkSetNickname())
         {
             Intent nickname = new Intent(mActivity, Nickname.class);
             this.addFlags(nickname);

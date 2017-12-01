@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,8 +76,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         //Udpate indicators
         mView.updatePrizeButton(UserData.getInstance(mContext).getCurrentCoinsProgress());
         String prizes = String.valueOf(UserData.getInstance(mContext).GetConsumerPrizes());
-        String coins = String.valueOf(UserData.getInstance(mContext).getTotalWonCoins());
         String souvs = String.valueOf(UserData.getInstance(mContext).getSavedSouvenirsCount());
+        int coins = UserData.getInstance(mContext).getTotalWonCoins();
+
         mView.updateIndicators(prizes, coins, souvs);
 
         this.mView.obtainUserProgress();
@@ -541,7 +543,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()),
-                String.valueOf(mUserData.getTotalWonCoins()),
+                mUserData.getTotalWonCoins(),
                 String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
     }
@@ -554,7 +556,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         int prizes = mUserData.GetConsumerPrizes();
         int souvenirs = mUserData.getSavedSouvenirsCount();
         int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
-        mView.updateIndicators(String.valueOf(prizes), String.valueOf(coins), String.valueOf(souvenirs));
+        mView.updateIndicators(String.valueOf(prizes), coins, String.valueOf(souvenirs));
         mView.updatePrizeButton(coinsProgress);
 
         DialogViewModel dialog = new DialogViewModel();
@@ -593,7 +595,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                if(!TextUtils.equals(pExchangeResponse.getCode(), "05"))
                {
                    mView.updateIndicators(String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes()),
-                           String.valueOf(mUserData.getTotalWonCoins()),
+                           mUserData.getTotalWonCoins(),
                            String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs()));
                    mView.updatePrizeButton(pExchangeResponse.getTracking().getCurrentCoinsProgress());
 
@@ -638,7 +640,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                    mUserData.saveSouvenirObtained(pExchangeResponse.getTitle(), pExchangeResponse.getDescription(), pExchangeResponse.getImgUrl(), pExchangeResponse.getValue());
 
                    String prizes = String.valueOf(pExchangeResponse.getTracking().getTotalWinPrizes());
-                   String coins = String.valueOf(pExchangeResponse.getTracking().getTotalWinCoins());
+                   int coins = pExchangeResponse.getTracking().getTotalWinCoins();
                    String souvs = String.valueOf(pExchangeResponse.getTracking().getTotalSouvenirs());
                    mView.updateIndicators(prizes, coins, souvs);
 
@@ -734,7 +736,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             //Updates indicators
             mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
-                    String.valueOf(mUserData.getTotalWonCoins()),
+                    mUserData.getTotalWonCoins(),
                     String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
             mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
 

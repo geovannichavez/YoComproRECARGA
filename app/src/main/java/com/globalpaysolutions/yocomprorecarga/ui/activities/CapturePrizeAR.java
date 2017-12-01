@@ -37,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRDat
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +46,7 @@ import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -471,10 +473,14 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     }
 
     @Override
-    public void updateIndicators(String pPrizes, String pCoins, String pSouvenirs)
+    public void updateIndicators(String pPrizes, int pCoins, String pSouvenirs)
     {
+        //Formats coins
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String totalWinCoins = formatter.format(pCoins);
+
         tvPrizesEarned.setText(pPrizes);
-        tvCoinsEarned.setText(pCoins);
+        tvCoinsEarned.setText(totalWinCoins);
         tvSouvenirCounter.setText(pSouvenirs);
     }
 

@@ -155,18 +155,18 @@
         </activity>
 
         <!-- SMS Receiver -->
-        <receiver
+        <!--<receiver
             android:name=".utils.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="99999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
-        </receiver>
+        </receiver>-->
 
         <!-- Intent service -->
-        <service
+        <!--<service
             android:name=".utils.TokenInputService"
-            android:exported="false"/>
+            android:exported="false"/>-->
 
         <activity
             android:name=".ui.activities.Permissions"
@@ -175,6 +175,7 @@
         </activity>
         <activity
             android:name=".ui.activities.NotificationDetail"
+            android:theme="@style/AppThemeFullScreen"
             android:excludeFromRecents="true"
             android:exported="false"
             android:screenOrientation="portrait">

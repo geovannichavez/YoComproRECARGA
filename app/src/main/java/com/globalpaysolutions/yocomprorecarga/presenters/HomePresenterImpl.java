@@ -162,7 +162,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void displayInfography()
     {
-        mView.showInfographyDialog();
+        //mView.showInfographyDialog();
     }
 
     @Override
@@ -172,7 +172,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             if(!mUserData.getSimpleInstructionsShowed())
             {
-                mView.showInfographyDialog();
+                //mView.showInfographyDialog();
                 mUserData.saveSimpleInstructionsSetting(true);
             }
         }

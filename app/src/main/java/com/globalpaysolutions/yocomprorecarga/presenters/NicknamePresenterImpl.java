@@ -45,6 +45,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     @Override
     public void initialize()
     {
+        mUserData.hasSetNickname(false);
         mView.initializeViews();
     }
 
@@ -52,6 +53,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     public void sendNickname(String nickname)
     {
         mView.showLoading(mContext.getString(R.string.label_loading_please_wait));
+        mUserData.hasSetNickname(false);
         mInteractor.validateNickname(nickname);
         mUserData.saveNickname(nickname.toLowerCase());
     }
@@ -64,13 +66,16 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
         //Saves user identifier
         Crashlytics.setUserIdentifier(choosenNickname);
 
-        Intent next = null;
+        /*Intent next = null;
 
         if(!TextUtils.isEmpty(mUserData.getNickname()))
             next = new Intent(mActivity, Main.class);
         else
-            next = new Intent(mActivity, Nickname.class);
+            next = new Intent(mActivity, Nickname.class);*/
 
+        mUserData.hasSetNickname(true);
+
+        Intent next = new Intent(mActivity, Main.class);
         mView.navigateNext(next);
 
     }
@@ -80,6 +85,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     {
         mView.hideLoading();
         handleError(pCodeStatus, pThrowable);
+        mUserData.hasSetNickname(false);
         mUserData.deleteNickname();
     }
 

@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IStorePresen
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,7 +71,9 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     @Override
     public void initialValues()
     {
-        mView.setInitialValues(String.valueOf(UserData.getInstance(mContext).getTotalWonCoins()));
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        String totalWinCoins = formatter.format(UserData.getInstance(mContext).getTotalWonCoins());
+        mView.setInitialValues(totalWinCoins);
 
     }
 
@@ -132,7 +135,11 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
                        response.getTracking().getTotalSouvenirs(),
                        response.getTracking().getAgeID());
 
-           mView.updateViews(String.valueOf(UserData.getInstance(mContext).getTotalWonCoins()));
+           //Formats coins left
+           DecimalFormat formatter = new DecimalFormat("#,###,###");
+           String totalWinCoins = formatter.format(UserData.getInstance(mContext).getTotalWonCoins());
+
+           mView.updateViews(totalWinCoins);
            mView.showSouvenirWonDialog(response.getTitle(), response.getDescription(), response.getImgUrl());
 
 

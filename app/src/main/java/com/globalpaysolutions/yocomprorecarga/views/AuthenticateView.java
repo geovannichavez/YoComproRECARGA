@@ -15,4 +15,5 @@ public interface AuthenticateView
     void hideLoadingDialog();
     void showGenericDialog(DialogViewModel messageModel);
     void showGenericToast(String text);
+    void enableLoginFacebookButton(boolean enabled);
 }

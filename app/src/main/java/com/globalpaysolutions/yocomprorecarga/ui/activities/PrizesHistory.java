@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImp
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 
@@ -119,7 +121,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
         tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
         tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
 
-       mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
+       /*mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event)
@@ -142,7 +144,20 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
                 v.onTouchEvent(event);
                 return true;
             }
-        });
+        });*/
+
+       mHistoryListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+       {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+           {
+               Prize currentItem = ((Prize) parent.getItemAtPosition(position));
+               Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+               smsIntent.setType("vnd.android-dir/mms-sms");
+               smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
+               smsIntent.putExtra("sms_body",currentItem.getCode());
+           }
+       });
     }
 
     @Override

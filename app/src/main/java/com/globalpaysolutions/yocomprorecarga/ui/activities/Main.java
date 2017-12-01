@@ -21,7 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.views.MainView;
 public class Main extends AppCompatActivity implements MainView
 {
     //Layouts and Views
-ImageButton buttonSettings;
+    ImageButton buttonSettings;
 
     //MVP
     MainPresenterImpl mPresenter;

@@ -21,6 +21,9 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IAuthenticatePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.onesignal.OneSignal;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -38,6 +41,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     private UserData mUserData;
     private AuthenticateView mView;
     private AuthenticateInteractor mInteractor;
+    private AppCompatActivity mActivity;
 
 
     public AuthenticatePresenterImpl(Context pContext, AuthenticateView pView, AppCompatActivity pActivity)
@@ -46,6 +50,29 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         this.mUserData = UserData.getInstance(mContext);
         this.mView = pView;
         this.mInteractor = new AuthenticateInteractor(mContext);
+        this.mActivity = pActivity;
+    }
+
+    @Override
+    public void checkPlayServices()
+    {
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(mActivity);
+        if (result != ConnectionResult.SUCCESS)
+        {
+            //Any random request code
+            int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
+
+            if (googleAPI.isUserResolvableError(result))
+            {
+                googleAPI.getErrorDialog(mActivity, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                mView.enableLoginFacebookButton(false);
+            }
+            else
+            {
+                mView.enableLoginFacebookButton(true);
+            }
+        }
     }
 
     @Override
@@ -130,6 +157,9 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             //Saves user email in CrashLytics
             Crashlytics.setUserEmail(pEmail);
             Crashlytics.setUserName(name);
+
+            //Registers user at OneSignal
+            //OneSignal.sendTag("userid", profile.getId());
 
             //REGISTER CONSUMER
             facebookConsumer.setFirstName(firstname);

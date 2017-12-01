@@ -36,7 +36,7 @@ public interface CapturePrizeView
 
 
 
-    void updateIndicators(String pPrizes, String pCoins, String pSouvenirs);
+    void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
     void updatePrizeButton(int pCoins);
 
     void onGoldKeyEntered(String pKey, LatLng pLocation);

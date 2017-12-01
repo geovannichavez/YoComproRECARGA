@@ -11,6 +11,7 @@ import com.facebook.login.widget.LoginButton;
 
 public interface IAuthenticatePresenter
 {
+    void checkPlayServices();
     void setupFacebookAuth(LoginButton pLoginButton);
     void onActivityResult(int pRequestCode, int pResultCode, Intent pData);
 }

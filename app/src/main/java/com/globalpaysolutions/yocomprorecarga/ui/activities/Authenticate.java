@@ -52,6 +52,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
         //Initialization
         mPresenter = new AuthenticatePresenterImpl(this, this, this);
 
+        mPresenter.checkPlayServices();
         mPresenter.setupFacebookAuth(btnLogin);
     }
 
@@ -116,6 +117,12 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
     public void showGenericToast(String text)
     {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void enableLoginFacebookButton(boolean enabled)
+    {
+        btnLogin.setEnabled(enabled);
     }
 
     /*

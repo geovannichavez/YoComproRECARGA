@@ -56,7 +56,7 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
 
         TextView lblSouvenirCounter = (TextView) row.findViewById(R.id.lblSouvenirCounter);
         ImageView imgSouvenirItem = (ImageView) row.findViewById(R.id.imgSouvenirItem);
-        View viewLocked = (View) row.findViewById(R.id.viewLocked);
+        View viewLocked = row.findViewById(R.id.viewLocked);
 
         lblSouvenirCounter.setText(String.valueOf(currentItem.getSouvenirsOwnedByConsumer()));
 

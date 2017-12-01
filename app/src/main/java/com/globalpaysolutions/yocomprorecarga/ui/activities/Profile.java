@@ -135,6 +135,7 @@ public class Profile extends AppCompatActivity implements ProfileView
 
     public void navigateLeaderboards(View view)
     {
+        animateButton(view);
         Intent leaderboards = new Intent(this, Leaderboards.class);
         leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(leaderboards);

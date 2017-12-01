@@ -452,36 +452,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     @Override
     public void showInfographyDialog()
     {
-        int currentPage = 0;
-        Integer[] slides = {R.drawable.img_tuto_0,R.drawable.img_tuto_1,R.drawable.img_tuto_2, R.drawable.img_tuto_3, R.drawable.img_tuto_4};
-        ArrayList<Integer> tutorialArray = new ArrayList<>();
 
-        try
-        {
-            //Creates the builder and inflater of dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(PointsMap.this);
-            LayoutInflater inflater = PointsMap.this.getLayoutInflater();
-            View dialogView = inflater.inflate(R.layout.custom_tutorial_dialog, null);
-
-            //Finds all views once the parent view is inflated
-            ViewPager tutorialPager = (ViewPager) dialogView.findViewById(R.id.pager);
-            //CircleIndicator indicator = (CircleIndicator) dialogView.findViewById(R.id.indicator);
-
-            Collections.addAll(tutorialArray, slides);
-
-            tutorialPager.setAdapter(new TutorialAdapter(PointsMap.this, tutorialArray));
-            //indicator.setViewPager(tutorialPager);
-
-            if (currentPage == slides.length)
-            {
-                currentPage = 0;
-            }
-            tutorialPager.setCurrentItem(currentPage++, true);
-
-            infographyDialog = builder.setView(dialogView).create();
-            infographyDialog.show();
-        }
-        catch (Exception ex) {   ex.printStackTrace();   }
     }
 
     @Override

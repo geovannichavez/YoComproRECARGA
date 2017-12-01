@@ -1,16 +1,21 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.NotificationDetailPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.NotificationDetailView;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class NotificationDetail extends AppCompatActivity implements NotificationDetailView
 {
@@ -19,11 +24,16 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
     //Layouts and Views
     private TextView tvNotifTitle;
     private TextView tvNotifBody;
-    private Button btnAcceptNotif;
+    private ImageButton btnAcceptNotif;
 
     //MVP
     private NotificationDetailPresenterImpl mPresenter;
 
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,7 +46,7 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
 
         tvNotifTitle = (TextView) findViewById(R.id.tvNotifTitle);
         tvNotifBody = (TextView) findViewById(R.id.tvNotifBody);
-        btnAcceptNotif = (Button) findViewById(R.id.btnAcceptNotif);
+        btnAcceptNotif = (ImageButton) findViewById(R.id.btnAcceptNotif);
 
         mPresenter = new NotificationDetailPresenterImpl(this, this, this);
         mPresenter.processNotification(title, body);
@@ -46,6 +56,7 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.getInstance(NotificationDetail.this).animateButton(v);
                 mPresenter.finishActivity();
             }
         });
