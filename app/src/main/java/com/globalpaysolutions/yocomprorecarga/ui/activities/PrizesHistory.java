@@ -156,6 +156,7 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
                smsIntent.setType("vnd.android-dir/mms-sms");
                smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
                smsIntent.putExtra("sms_body",currentItem.getCode());
+               startActivity(smsIntent);
            }
        });
     }

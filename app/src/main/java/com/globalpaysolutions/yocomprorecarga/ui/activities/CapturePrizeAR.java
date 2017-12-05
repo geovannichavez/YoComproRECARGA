@@ -44,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.squareup.picasso.Picasso;
 import com.wikitude.architect.ArchitectStartupConfiguration;
 import com.wikitude.architect.ArchitectView;
+import com.wikitude.common.camera.CameraSettings;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -137,6 +138,9 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
 
         final ArchitectStartupConfiguration config = new ArchitectStartupConfiguration();
         config.setLicenseKey(Constants.WIKITUDE_LICENSE_KEY);
+        //config.setCameraFocusMode(CameraSettings.CameraFocusMode.OFF);
+        config.setCameraResolution(CameraSettings.CameraResolution.AUTO);
+        config.setCameraPosition(CameraSettings.CameraPosition.BACK);
         this.architectView.onCreate(config);
 
     }

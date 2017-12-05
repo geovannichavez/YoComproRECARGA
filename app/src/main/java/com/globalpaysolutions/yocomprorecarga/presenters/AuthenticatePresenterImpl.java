@@ -220,12 +220,26 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         mUserData.saveNickname(pResponse.getNickname());
         mUserData.hasAuthenticated(true);
 
-        if(mUserData.getUserPhone() == null || TextUtils.isEmpty(mUserData.getUserPhone()))
-            mView.navigateValidatePhone();
-        else if(mUserData.getNickname() == null || TextUtils.isEmpty(mUserData.getNickname()))
-            mView.navigateSetNickname();
+        //Saves if user has nickname
+        if(pResponse.getNickname() != null || !TextUtils.equals(pResponse.getNickname(), ""))
+            mUserData.hasSetNickname(true);
         else
+            mUserData.hasSetNickname(false);
+
+
+        if(mUserData.getUserPhone() == null || TextUtils.isEmpty(mUserData.getUserPhone()))
+        {
+            mView.navigateValidatePhone();
+        }
+        else if(mUserData.getNickname() == null || TextUtils.isEmpty(mUserData.getNickname()))
+        {
+            mView.navigateSetNickname();
+        }
+        else
+        {
             mView.navigateHome();
+        }
+
 
     }
 

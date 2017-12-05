@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
@@ -82,8 +83,9 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(inputToken);
             mContext.startActivity(inputToken);
         }
-        else if(!mUserData.checkSetNickname())
+        else if(TextUtils.isEmpty(mUserData.getNickname()))
         {
+            Log.i(TAG, "Nick: String value returned empty string");
             Intent nickname = new Intent(mActivity, Nickname.class);
             this.addFlags(nickname);
             mContext.startActivity(nickname);

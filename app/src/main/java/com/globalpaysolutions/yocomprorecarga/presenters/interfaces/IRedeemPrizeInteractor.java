@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IRedeemPrizeInteractor
 {
     void attemptActivatePrize(String phone, String pin);
+    void presetPinCode();
 }

@@ -167,7 +167,9 @@
     <string name="validation_required_amount">Debe seleccionar un monto</string>
     <string name="validation_not_valid_vendor_code">El código de vendedor no es válido</string>
     <string name="validation_required_vendor_code">El código de vendedor es requerido</string>
+    <string name="validation_title_required">Requerido</string>
     <string name="validation_required_nickname">El nickname es requerido.</string>
+    <string name="validation_title_invalid_nickname">Nick</string>
     <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
 
 
@@ -192,7 +194,7 @@
     <string name="title_nickname">NICKNAME (APODO)</string>
     <string name="label_content_nickname">Elige un nombre de usuario (apodo) para identificarte. Este nombre se mostrará en las tablas de Rankings y otros contenidos de uso público. Ejemplos:</string>
     <string name="hint_nickname">Nickname</string>
-    <string name="validation_nickname_already_exists">Este nickname ya está en uso, usa uno diferente.</string>
+    <string name="validation_nickname_already_exists">Este nombre ya está en uso, usa uno diferente.</string>
     <string-array name="array_nickname_examples">
         <item>Pepe43</item>
         <item>jose.luis</item>
@@ -278,7 +280,7 @@
     <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con tu cuenta de Facebook para continuar</string>
     <string name="label_we_may_need_comunicate">Si obtienes un gran premio necesitaremos comunicarnos contigo</string>
     <string name="label_how_to_contact">¿CÓMO NOS PODREMOS CONTACTAR?</string>
-    <string name="label_welcome_aventurer">¡BIENVENIDO AVENTURERO!</string>
+    <string name="label_welcome_aventurer">¡INGRESA TU NICKNAME!</string>
     <string name="label_ask_nickname">Soy Albert, el creador de la máquina del tiempo. ¿Qué tal si comenzamos con tu nombre para conocernos mejor?</string>
     <string name="label_sorry_not_compatible_part1">¡Lo siento tu celular no acepta la versión 3D!</string>
     <string name="label_sorry_not_compatible_part2">¡Pero no te preocupes que aún puedes jugar con la versión 2D!</string>
@@ -306,9 +308,9 @@
     <string name="label_reedem_error">Revisa el código que ingresaste y el número que se va a usar</string>
     <string name="title_wildcard_pointer">¡Suerte!</string>
     <string name="label_wildcard_pointer">Averigua el secreto</string>
-    <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
-    <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta un nickname diferente</string>
-    <string name="title_dialog_nickname_already_exists">Nickname en uso</string>
+    <string name="title_dialog_invalid_nickname">Nombre Inválido</string>
+    <string name="label_dialog_invalid_nickname">Este nombre no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
     <string name="title_no_prizes_yet">¡Aún no has logrado ningún premio!</string>
     <string name="label_no_prizes_yet">Busca cofres y recolecta suficientes monedas para canjeralos</string>
     <string name="title_era_selection">VIAJAR</string>
@@ -319,5 +321,7 @@
     <string name="label_collection_button">COLECCIÓN</string>
     <string name="label_achievements_button">LOGROS</string>
     <string name="label_leaders_button">LÍDERES</string>
+    <string name="title_invalid_pin">Código Inválido</string>
+    <string name="label_pin_already_activated">El código ingresado es inválido. Este PIN ya fue utilizado.</string>
 
 </resources>

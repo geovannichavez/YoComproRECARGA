@@ -10,7 +10,9 @@
 
     <include
         android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"/>
+        layout="@layout/custom_white_timemachine_background"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="0dp"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -98,12 +100,16 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="Signin"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/include4"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/btn_button_6"/>
 
     <TextView

@@ -143,7 +143,7 @@ public class Validation
     *
     *
     */
-    public boolean isValidNickname(EditText pEdittext, boolean pRequired)
+    public boolean isValidNicknameSnackbar(EditText pEdittext, boolean pRequired)
     {
         String requiredMsg = mContext.getResources().getString(R.string.validation_required_nickname);
         String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_nickname);
@@ -174,6 +174,29 @@ public class Validation
         }
 
         return true;
+    }
+
+
+    public enum ValidNickname
+    {
+        VALID,
+        REQUIRED,
+        NOT_VALID
+    }
+
+    public ValidNickname checkNickname(EditText editText, boolean required)
+    {
+        String text = editText.getText().toString().trim();
+        if (required && !HasText(editText))
+        {
+            return ValidNickname.REQUIRED;
+        }
+
+        if (required && !Pattern.matches(NICKNAME_REGEX, text))
+        {
+            return ValidNickname.NOT_VALID;
+        }
+        return ValidNickname.VALID;
     }
 
     private boolean HasText(EditText pEditText)

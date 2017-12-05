@@ -10,6 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.RedeemPrizeListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRedeemPrizeInteractor;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
@@ -45,6 +46,17 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
     }
 
     @Override
+    public void presetPinCode()
+    {
+        try
+        {
+            String prizeCode = UserData.getInstance(mContext).getLastPrizeCode();
+            mView.setPrizeCode(prizeCode);
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
+    }
+
+    @Override
     public void onSuccess(ActivatePrizeResponse response)
     {
         mView.hideLoadingDialog();
@@ -57,6 +69,13 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
             dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));
 
             mView.createPrizeSuccessDialog(dialogModel);
+        }
+        else if(TextUtils.equals(response.getCode(), "-03"))
+        {
+            DialogViewModel dialogModel = new DialogViewModel();
+            dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_error));
+            dialogModel.setLine1(mContext.getString(R.string.label_pin_already_activated));
+            dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));
         }
         else
         {
@@ -76,7 +95,7 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
     {
         mView.hideLoadingDialog();
         DialogViewModel dialogModel = new DialogViewModel();
-        dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_success));
+        dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_error));
         dialogModel.setLine1(mContext.getString(R.string.label_reedem_error));
 
         dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));

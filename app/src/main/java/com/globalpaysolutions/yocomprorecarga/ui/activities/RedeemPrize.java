@@ -26,6 +26,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RedeemPrizeInteractorImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -53,6 +54,11 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
         setContentView(R.layout.activity_redeem_prize);
 
         mPresenter = new RedeemPrizeInteractorImpl(this, this, this);
+
+        if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
+        {
+            mPresenter.presetPinCode();
+        }
 
         etPhone = (EditText) findViewById(R.id.etPhone);
         etPin = (EditText) findViewById(R.id.etPin);
@@ -260,6 +266,19 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                     finish();
                 }
             });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPrizeCode(String prizeCode)
+    {
+        try
+        {
+            etPin.setText(prizeCode);
         }
         catch (Exception ex)
         {

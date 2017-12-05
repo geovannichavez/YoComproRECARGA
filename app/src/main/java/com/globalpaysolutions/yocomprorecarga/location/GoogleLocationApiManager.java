@@ -30,8 +30,10 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
 {
     private static final String TAG = GoogleLocationApiManager.class.getSimpleName();
 
-    private static final int LOCATION_REQUEST_INTERVAL = 6000;
-    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 3000;
+    private static final int TWELVE_SECS = 1000 * 12;
+
+    private static final int LOCATION_REQUEST_INTERVAL = 8000;
+    private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
     private static final int LOCATION_REQUEST_PRIORITY = LocationRequest.PRIORITY_HIGH_ACCURACY;
 
     private Context mContext;
@@ -48,12 +50,7 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     public GoogleLocationApiManager(AppCompatActivity pActivity, Context pContext, float displacementMetters)
     {
         this.mContext = pContext;
-        this.mGoogleApiClient = new GoogleApiClient.Builder(pActivity)
-                                            .enableAutoManage(pActivity, this)
-                                            .addApi(LocationServices.API)
-                                            .addConnectionCallbacks(this)
-                                            .addOnConnectionFailedListener(this)
-                                            .build();
+        this.mGoogleApiClient = new GoogleApiClient.Builder(pActivity).enableAutoManage(pActivity, this).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
 
         this.mLocationRequest = new LocationRequest();
         this.mLocationRequest.setInterval(LOCATION_REQUEST_INTERVAL);
@@ -61,15 +58,16 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
         this.mLocationRequest.setPriority(LOCATION_REQUEST_PRIORITY);
         this.mLocationRequest.setSmallestDisplacement(displacementMetters);
 
-        this.mLocationSettingsRequestBuilder = new LocationSettingsRequest.Builder().addLocationRequest(this.mLocationRequest);
+        this.mLocationSettingsRequestBuilder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(this.mLocationRequest);
     }
 
 
     @Override
     public void onConnected(@Nullable Bundle bundle)
     {
-        if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             Log.d(TAG, "onConnected: permissions not granted");
             return;
@@ -131,7 +129,11 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
 
         if (locationCallback != null)
         {
-            locationCallback.onLocationChanged(location);
+            if (isBetterLocation(location, mLastKnownLocation))
+            {
+                Log.i(TAG, "New better location");
+                locationCallback.onLocationChanged(location);
+            }
         }
     }
 
@@ -174,5 +176,75 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     {
         this.mLocationRequest.setSmallestDisplacement(displacementMeters);
     }*/
+
+
+    /**
+     * Determines whether one Location reading is better than the current Location fix
+     *
+     * @param location            The new Location that you want to evaluate
+     * @param currentBestLocation The current Location fix, to which you want to compare the new one
+     */
+    private boolean isBetterLocation(Location location, Location currentBestLocation)
+    {
+        if (currentBestLocation == null)
+        {
+            // A new location is always better than no location
+            return true;
+        }
+
+        // Check whether the new location fix is newer or older
+        long timeDelta = location.getTime() - currentBestLocation.getTime();
+        boolean isSignificantlyNewer = timeDelta > TWELVE_SECS;
+        boolean isSignificantlyOlder = timeDelta < -TWELVE_SECS;
+        boolean isNewer = timeDelta > 0;
+
+        // If it's been more than twelve seconds since the current location, use the new location
+        // because the user has likely moved
+        if (isSignificantlyNewer)
+        {
+            return true;
+            // If the new location is more than twelve seconds older, it must be worse
+        }
+        else if (isSignificantlyOlder)
+        {
+            return false;
+        }
+
+        // Check whether the new location fix is more or less accurate
+        int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
+        boolean isLessAccurate = accuracyDelta > 0;
+        boolean isMoreAccurate = accuracyDelta < 0;
+        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+
+        // Check if the old and new location are from the same provider
+        boolean isFromSameProvider = isSameProvider(location.getProvider(), currentBestLocation.getProvider());
+
+        // Determine location quality using a combination of timeliness and accuracy
+        if (isMoreAccurate)
+        {
+            return true;
+        }
+        else if (isNewer && !isLessAccurate)
+        {
+            return true;
+        }
+        else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks whether two providers are the same
+     */
+    private boolean isSameProvider(String provider1, String provider2)
+    {
+        if (provider1 == null)
+        {
+            return provider2 == null;
+        }
+        return provider1.equals(provider2);
+    }
 
 }

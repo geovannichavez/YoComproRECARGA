@@ -83,6 +83,7 @@ public class Constants
     public static final String BUNDLE_PRIZE_DIAL = "bundle_data_prize_dial";
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
+    public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
 
     //General bundle keys
     public static final String BUNDLE_TOKEN_VALIDATION = "bundle_data_usr_phone_validation";

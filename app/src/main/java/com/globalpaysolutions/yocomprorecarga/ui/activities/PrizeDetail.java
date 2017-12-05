@@ -4,16 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +38,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
     ImageButton btnSms;
 
     ImageButton btnBackMapPrizeDet;
-    ImageButton btnStorePrizeDet;
+    ImageButton btnRedeemPrizeDet;
 
     //MVP
     PrizeDetailPresenterImpl mPresenter;
@@ -67,7 +64,7 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
         btnSms = (ImageButton) findViewById(R.id.btnSms);
 
         btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
-        btnStorePrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
+        btnRedeemPrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
 
         btnBackMapPrizeDet.setOnClickListener(new View.OnClickListener()
         {
@@ -81,13 +78,14 @@ public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
                 finish();
             }
         });
-        btnStorePrizeDet.setOnClickListener(new View.OnClickListener()
+        btnRedeemPrizeDet.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
-                Intent intent = new Intent(PrizeDetail.this, Store.class);
+                Intent intent = new Intent(PrizeDetail.this, RedeemPrize.class);
+                intent.putExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, true);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();

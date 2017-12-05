@@ -81,7 +81,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
             }
         });
 
-        mValidator = new Validation(this, coordinatorLayout);
+        mValidator = new Validation(this);
     }
 
     @Override
@@ -154,7 +154,27 @@ public class Nickname extends AppCompatActivity implements NicknameView
 
     private boolean checkValidation()
     {
-        return (mValidator.isValidNickname(etNickname, true));
+        boolean result;
+
+        switch (mValidator.checkNickname(etNickname, true))
+        {
+            case REQUIRED:
+                result = false;
+                createDialog(getString(R.string.validation_title_required), getString(R.string.validation_required_nickname), getString(R.string.button_accept));
+                break;
+            case VALID:
+                result = true;
+                break;
+            case NOT_VALID:
+                result = false;
+                createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_nickname), getString(R.string.button_accept));
+                break;
+                default:
+                    result = false;
+                    break;
+        }
+
+        return result;
     }
 
     private void createDialog(String pTitle, String pMessage, String pButton)

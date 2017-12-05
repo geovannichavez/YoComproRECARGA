@@ -225,13 +225,6 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    protected void onStop()
-    {
-        super.onStop();
-        mPresenter.detachFirebaseListeners();
-    }
-
-    @Override
     public void renderMap()
     {
         try
@@ -891,10 +884,17 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     /*
     * **********************************
     *
-    *   ACTIVITY
+    *   ACTIVITY LIFECYCLES
     *
     * **********************************
     */
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        mPresenter.detachFirebaseListeners();
+    }
 
 
     /*
