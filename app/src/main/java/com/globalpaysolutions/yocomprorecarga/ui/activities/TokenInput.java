@@ -164,7 +164,7 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
             next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             next.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(next);
         }
         catch (Exception ex)

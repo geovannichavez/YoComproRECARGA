@@ -30,7 +30,8 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
 {
     private static final String TAG = GoogleLocationApiManager.class.getSimpleName();
 
-    private static final int TWELVE_SECS = 1000 * 12;
+    //private static final int TWELVE_SECS = 1000 * 20
+    private static final int TWELVE_SECS = 1000 * 60 * 2;
 
     private static final int LOCATION_REQUEST_INTERVAL = 8000;
     private static final int LOCATION_REQUEST_FASTEST_INTERVAL = 5000;
@@ -125,12 +126,13 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     public void onLocationChanged(Location location)
     {
         Log.d(TAG, "onLocationChanged: hit");
-        mLastKnownLocation = location;
 
         if (locationCallback != null)
         {
             if (isBetterLocation(location, mLastKnownLocation))
             {
+                mLastKnownLocation = location;
+
                 Log.i(TAG, "New better location");
                 locationCallback.onLocationChanged(location);
             }
@@ -214,7 +216,7 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
         int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
         boolean isLessAccurate = accuracyDelta > 0;
         boolean isMoreAccurate = accuracyDelta < 0;
-        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+        boolean isSignificantlyLessAccurate = accuracyDelta > 17;
 
         // Check if the old and new location are from the same provider
         boolean isFromSameProvider = isSameProvider(location.getProvider(), currentBestLocation.getProvider());

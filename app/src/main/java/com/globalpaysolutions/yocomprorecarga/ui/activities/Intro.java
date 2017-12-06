@@ -160,7 +160,7 @@ public class Intro extends AppCompatActivity
                 inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 UserData.getInstance(Intro.this).hasSeenIntro(true);
 

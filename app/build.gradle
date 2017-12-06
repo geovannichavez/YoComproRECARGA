@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 15
         versionName "1.02"
 
@@ -19,14 +19,9 @@ android {
 
     }
     buildTypes {
-        /*build{
-            minifyEnabled false
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }*/
         release {
             minifyEnabled true
-            /*useProguard true*/
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -48,8 +43,8 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
 
     compile(name: 'wikitudesdk', ext: 'aar')
 
@@ -88,7 +83,7 @@ dependencies {
     compile 'com.onesignal:OneSignal:3.+@aar'
 
     //Chrome TabView
-    compile 'com.android.support:customtabs:24.2.1'
+    compile 'com.android.support:customtabs:26.1.0'
 
     //Facebook SDK
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'

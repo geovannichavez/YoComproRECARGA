@@ -273,8 +273,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onLocationChanged(Location location)
     {
-        mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-        mCurrentLocation = location;
+        try
+        {
+            mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+            mCurrentLocation = location;
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     @Override

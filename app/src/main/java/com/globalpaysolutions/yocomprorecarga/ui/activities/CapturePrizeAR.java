@@ -163,17 +163,31 @@ public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeVie
     @Override
     public void updateUserLocation(double pLatitude, double pLongitude, double pAccuracy)
     {
-        LatLng location = new LatLng(pLatitude, pLongitude);
-        this.mPresenter.updatePrizePntCriteria(location);
-        this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        try
+        {
+            LatLng location = new LatLng(pLatitude, pLongitude);
+            this.mPresenter.updatePrizePntCriteria(location);
+            this.architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     @Override
     public void locationManagerConnected(double pLatitude, double pLongitude, double pAccuracy)
     {
-        LatLng location = new LatLng(pLatitude, pLongitude);
-        this.mPresenter.prizePointsQuery(location);
-        architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        try
+        {
+            LatLng location = new LatLng(pLatitude, pLongitude);
+            this.mPresenter.prizePointsQuery(location);
+            architectView.setLocation(pLatitude, pLongitude, pAccuracy);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.getMessage());
+        }
     }
 
     @Override

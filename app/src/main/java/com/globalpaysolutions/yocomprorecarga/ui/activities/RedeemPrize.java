@@ -55,16 +55,16 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 
         mPresenter = new RedeemPrizeInteractorImpl(this, this, this);
 
-        if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
-        {
-            mPresenter.presetPinCode();
-        }
-
         etPhone = (EditText) findViewById(R.id.etPhone);
         etPin = (EditText) findViewById(R.id.etPin);
 
         btnActivate = (ImageButton) findViewById(R.id.btnActivate);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+
+        if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
+        {
+            mPresenter.presetPinCode();
+        }
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -279,6 +279,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
         try
         {
             etPin.setText(prizeCode);
+            etPhone.requestFocus();
         }
         catch (Exception ex)
         {

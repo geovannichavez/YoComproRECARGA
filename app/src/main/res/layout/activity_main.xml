@@ -10,9 +10,7 @@
 
     <include
         android:id="@+id/include4"
-        layout="@layout/custom_timemachine_background"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        layout="@layout/custom_timemachine_background" />
 
 
     <ImageView
