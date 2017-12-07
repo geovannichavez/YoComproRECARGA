@@ -142,14 +142,14 @@
 
     <TextView
         android:id="@+id/lblPrizeDescription"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="224dp"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
-        android:maxLines="3"
-        android:text="Para que disfrutez de RecarGO! desde tu nuevo Samsung Galaxy S8, estas de acuerdo?"
-        fontPath="fonts/lato_semibold.ttf"
+        android:maxLines="4"
+        tools:text="Ganaste 10 minutos para llamar a Estados Unidos y Canadá (Válido por 24 horas). Válido para líneas Claro."
         android:textColor="@color/pure_black"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView24"

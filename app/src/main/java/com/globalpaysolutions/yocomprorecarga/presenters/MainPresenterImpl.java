@@ -94,12 +94,6 @@ public class MainPresenterImpl implements IMainPresenter
     }
 
     @Override
-    public void hideStatusBar()
-    {
-        mView.hideStatusBar();
-    }
-
-    @Override
     public void checkFunctionalityLimitedShown()
     {
         //Checks if user has not selected era

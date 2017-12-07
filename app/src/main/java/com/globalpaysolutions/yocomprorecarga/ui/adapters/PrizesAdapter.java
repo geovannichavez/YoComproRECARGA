@@ -22,8 +22,8 @@ public class PrizesAdapter extends ArrayAdapter<Prize>
 {
     private static final String TAG = LeadersAdapter.class.getSimpleName();
 
-    Context mContext;
-    int mAdapterResource;
+    private Context mContext;
+    private int mAdapterResource;
 
     public PrizesAdapter(Context context, int resource)
     {
@@ -54,13 +54,13 @@ public class PrizesAdapter extends ArrayAdapter<Prize>
         switch (currentItem.getLevel())
         {
             case 1:
-                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_third));
+                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_first));
                 break;
             case 2:
                 icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_second));
                 break;
             case 3:
-                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_first));
+                icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_third));
                 break;
             default:
                 Log.i(TAG, "No icon provided for prize");

@@ -75,6 +75,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                 Intent main = new Intent(RedeemPrize.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -295,6 +296,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             Intent main = new Intent(this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

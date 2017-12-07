@@ -6,7 +6,6 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 public interface MainView
 {
-    void hideStatusBar();
     void navigateStore();
     void navigateSettings();
 }

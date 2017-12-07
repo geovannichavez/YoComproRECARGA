@@ -46,7 +46,7 @@ public class Main extends AppCompatActivity implements MainView
         });
 
         mPresenter = new MainPresenterImpl(this, this, this);
-        mPresenter.hideStatusBar();
+        //mPresenter.hideStatusBar();
         mPresenter.checkUserDataCompleted();
     }
 
@@ -54,7 +54,6 @@ public class Main extends AppCompatActivity implements MainView
     protected void onResume()
     {
         super.onResume();
-        mPresenter.hideStatusBar();
     }
 
     public void navigateMap(View view)
@@ -73,21 +72,27 @@ public class Main extends AppCompatActivity implements MainView
     {
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent profile = new Intent(Main.this, Profile.class);
+        profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(profile);
+        finish();
     }
 
     public void navigateEraSelection(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent eraSelection = new Intent(Main.this, EraSelection.class);
+        eraSelection.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(eraSelection);
+        finish();
     }
 
     public void navigateTopupRequest(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent topupRequest = new Intent(Main.this, RequestTopup.class);
+        topupRequest.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(topupRequest);
+        finish();
     }
 
     public void navigateStore(View view)
@@ -103,7 +108,9 @@ public class Main extends AppCompatActivity implements MainView
         else
         {
             Intent store = new Intent(Main.this, Store.class);
+            store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(store);
+            finish();
         }
     }
 
@@ -111,23 +118,9 @@ public class Main extends AppCompatActivity implements MainView
     {
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent prize = new Intent(Main.this, RedeemPrize.class);
+        prize.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(prize);
-    }
-
-    @Override
-    public void hideStatusBar()
-    {
-        try
-        {
-            View decorView = getWindow().getDecorView();
-            int ui = View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(ui);
-
-            //Hide actionbar
-            ActionBar actionBar = getActionBar();
-            actionBar.hide();
-        }
-        catch (Exception ex) { ex.printStackTrace(); }
+        finish();
     }
 
     @Override
