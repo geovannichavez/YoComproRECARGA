@@ -77,13 +77,14 @@
         android:layout_height="62dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateTopupRequest"
         android:scaleType="fitXY"
         android:src="@drawable/ic_topup_request"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
 
     <ImageButton
         android:id="@+id/buttonLighbub"
@@ -92,6 +93,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateStore"
         android:scaleType="fitXY"
@@ -100,7 +102,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonPrize"
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toEndOf="@+id/btnTopupRequest"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
 
     <ImageButton
         android:id="@+id/buttonPrize"
@@ -109,6 +111,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigatePrizeRedeem"
         android:scaleType="fitXY"
@@ -116,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintStart_toEndOf="@+id/buttonLighbub"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
 
     <ImageButton
         android:id="@+id/buttonSettings"
@@ -124,11 +127,12 @@
         android:layout_height="62dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitXY"
         android:src="@drawable/btn_info"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
 
 </android.support.constraint.ConstraintLayout>

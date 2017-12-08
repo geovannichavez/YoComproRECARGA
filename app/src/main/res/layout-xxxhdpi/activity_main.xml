@@ -69,15 +69,18 @@
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateTopupRequest"
         android:scaleType="fitXY"
         android:src="@drawable/ic_topup_request"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
+        app:layout_constraintVertical_bias="1.0"/>
 
     <ImageButton
         android:id="@+id/buttonLighbub"
@@ -86,6 +89,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateStore"
         android:scaleType="fitXY"
@@ -93,7 +97,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonPrize"
         app:layout_constraintStart_toEndOf="@+id/btnTopupRequest"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
+        app:layout_constraintVertical_bias="1.0"/>
 
     <ImageButton
         android:id="@+id/buttonPrize"
@@ -102,6 +107,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigatePrizeRedeem"
         android:scaleType="fitXY"
@@ -109,7 +115,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
         app:layout_constraintStart_toEndOf="@+id/buttonLighbub"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
+        app:layout_constraintVertical_bias="1.0"/>
 
     <ImageButton
         android:id="@+id/buttonSettings"
@@ -117,7 +124,7 @@
         android:layout_height="85dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitXY"
         android:src="@drawable/btn_info"
@@ -125,6 +132,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toEndOf="@+id/buttonPrize"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
+        app:layout_constraintVertical_bias="1.0"/>
 
 </android.support.constraint.ConstraintLayout>
