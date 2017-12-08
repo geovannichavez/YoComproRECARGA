@@ -94,12 +94,6 @@ public class MainPresenterImpl implements IMainPresenter
     }
 
     @Override
-    public void hideStatusBar()
-    {
-        mView.hideStatusBar();
-    }
-
-    @Override
     public void checkFunctionalityLimitedShown()
     {
         //Checks if user has not selected era
@@ -144,6 +138,6 @@ public class MainPresenterImpl implements IMainPresenter
         pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }

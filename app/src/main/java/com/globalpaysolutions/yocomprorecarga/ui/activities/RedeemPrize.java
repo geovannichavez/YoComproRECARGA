@@ -55,16 +55,16 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
 
         mPresenter = new RedeemPrizeInteractorImpl(this, this, this);
 
-        if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
-        {
-            mPresenter.presetPinCode();
-        }
-
         etPhone = (EditText) findViewById(R.id.etPhone);
         etPin = (EditText) findViewById(R.id.etPin);
 
         btnActivate = (ImageButton) findViewById(R.id.btnActivate);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+
+        if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
+        {
+            mPresenter.presetPinCode();
+        }
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -75,6 +75,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
                 Intent main = new Intent(RedeemPrize.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
+                finish();
             }
         });
 
@@ -279,6 +280,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
         try
         {
             etPin.setText(prizeCode);
+            etPhone.requestFocus();
         }
         catch (Exception ex)
         {
@@ -294,6 +296,7 @@ public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
             Intent main = new Intent(this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
+            finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);

@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableWrapper;
 import android.graphics.drawable.StateListDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -53,11 +56,12 @@ public class ButtonAnimator
             listDrawable.addState(new int[] {android.R.attr.state_pressed}, drawablePressed);
             listDrawable.addState(new int[] {}, drawableNormal);
             image.setImageDrawable(listDrawable);
-
         }
         catch (Exception ex)
         {
             ex.printStackTrace();
         }
      }
+
+
 }

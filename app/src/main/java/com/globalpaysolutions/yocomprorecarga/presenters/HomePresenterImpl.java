@@ -60,7 +60,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mInteractor = new HomeInteractor(mContext, this);
         mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
 
-        this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext, Constants.TEN_METTERS_DISPLACEMENT);
+        this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext, Constants.FOUR_METTERS_DISPLACEMENT);
         this.mGoogleLocationApiManager.setLocationCallback(this);
 
     }
@@ -490,7 +490,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)

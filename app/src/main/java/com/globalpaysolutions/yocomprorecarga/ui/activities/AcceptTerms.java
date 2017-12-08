@@ -152,7 +152,7 @@ public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
                     accept.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     accept.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     accept.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                    accept.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(accept);
                 }
             });

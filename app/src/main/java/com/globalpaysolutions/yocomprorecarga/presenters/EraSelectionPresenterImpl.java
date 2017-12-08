@@ -153,6 +153,6 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
         pIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }

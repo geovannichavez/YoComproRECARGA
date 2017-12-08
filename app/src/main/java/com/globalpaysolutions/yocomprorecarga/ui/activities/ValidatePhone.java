@@ -190,7 +190,7 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
         inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         inputToken.putExtra(Constants.BUNDLE_TOKEN_VALIDATION, phone);
         startActivity(inputToken);
     }

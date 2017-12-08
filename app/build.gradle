@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 15
-        versionName "1.02"
+        versionName "1.03"
 
         //OneSignal
         manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
@@ -19,14 +19,9 @@ android {
 
     }
     buildTypes {
-        /*build{
-            minifyEnabled false
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }*/
         release {
             minifyEnabled true
-            /*useProguard true*/
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -88,7 +83,7 @@ dependencies {
     compile 'com.onesignal:OneSignal:3.+@aar'
 
     //Chrome TabView
-    compile 'com.android.support:customtabs:24.2.1'
+    compile 'com.android.support:customtabs:26.1.0'
 
     //Facebook SDK
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'

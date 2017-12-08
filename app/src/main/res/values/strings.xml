@@ -273,10 +273,11 @@
     <string name="label_shall_we_begin">¿Iniciamos la aventura?</string>
     <string name="label_intro_intro">Bienvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historia.</string>
     <string name="label_click_to_intro">Toca al centro para iniciar.</string>
-    <string name="label_intro_2">Ayuda a su dueño Albert Fermi en sus viajes, recolectando muchas riquezas en distintas eras del tiempo. </string>
-    <string name="label_intro_3">Recuerda que podrás canjear una recompensa diaria gratis, solo debes reunir suficientes RecarCoins. </string>
-    <string name="label_intro_4">Las RecarCoins las encontrarás dentro de los contenedores ubicados a tu alrededor. </string>
-    <string name="label_intro_5">Mantente alerta pues podrás encontrar piezas de mucho valor, útiles en los próximos viajes. </string>
+    <string name="label_intro_2">Ayuda a su dueño Albert Fermi en sus viajes, recuerda recolectar 20 monedas para canjearlas por un premio diario.</string>
+    <string name="label_intro_3">En cada Era encontrarás souvenirs escondidos en algunos cofres o puedes comprarlos en la tienda de cada era.</string>
+    <string name="label_intro_3_1">Son tesoros que puedes canjear por premios. No te quedes sin souvenirs pues no podrás avanzar a la siguiente era.</string>
+    <string name="label_intro_4">Las monedas RecarCoins las encontrarás en los contenedores que visualizarás en el mapa. \n\n Con ellas podrás comprar en la tienda, obteniendo más souvenirs. La suerte decide cuántas monedas tendrás.</string>
+    <string name="label_intro_5">Todos los días puedes canjear premios con tus 20 RecarCoins o con souvenirs repetidos. \n\n Tus premios se mantendrán vigentes hasta activar el código. Atento al canjear, ya que puedes obtener premios increíbles.</string>
     <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con tu cuenta de Facebook para continuar</string>
     <string name="label_we_may_need_comunicate">Si obtienes un gran premio necesitaremos comunicarnos contigo</string>
     <string name="label_how_to_contact">¿CÓMO NOS PODREMOS CONTACTAR?</string>

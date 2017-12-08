@@ -7,7 +7,8 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 public class Constants
 {
     //Google Location Manager
-    public static final int TEN_METTERS_DISPLACEMENT = 10;
+    //public static final int TEN_METTERS_DISPLACEMENT = 10;
+    public static final int FOUR_METTERS_DISPLACEMENT = 4;
     public static final int ONE_METTER_DISPLACEMENT = 1;
 
     //Firebase

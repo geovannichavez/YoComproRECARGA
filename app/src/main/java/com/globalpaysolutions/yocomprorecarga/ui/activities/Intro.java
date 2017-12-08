@@ -104,6 +104,9 @@ public class Intro extends AppCompatActivity
                         imgBag.setImageResource(R.drawable.img_color_bag);
                         break;
                     case 4:
+                        tvDescription.setText(R.string.label_intro_3_1);
+                        break;
+                    case 5:
                         tvDescription.setText(R.string.label_intro_4);
                         imgTable.setImageResource(R.drawable.img_color_table);
                         //Changes transition
@@ -114,12 +117,12 @@ public class Intro extends AppCompatActivity
                         imgTable.setVisibility(View.VISIBLE);
                         imgBarrell.setVisibility(View.VISIBLE);
                         break;
-                    case 5:
+                    case 6:
                         tvDescription.setText(R.string.label_intro_5);
                         imgTable.setImageResource(R.drawable.img_shadow_table);
                         imgBarrell.setImageResource(R.drawable.img_color_barrell);
                         break;
-                    case 6 :
+                    case 7 :
                         imgBarrell.setImageResource(R.drawable.img_shadow_barrell);
 
                         btnFinishIntro.setVisibility(View.VISIBLE);
@@ -160,7 +163,7 @@ public class Intro extends AppCompatActivity
                 inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 UserData.getInstance(Intro.this).hasSeenIntro(true);
 

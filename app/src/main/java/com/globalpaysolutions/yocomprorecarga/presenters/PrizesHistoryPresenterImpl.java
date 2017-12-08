@@ -91,6 +91,7 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     @Override
     public void onRetrievePrizesError(int code, Throwable throwable)
     {
+        mView.hideLoadingDialog();
         processErrorMessage(code, throwable);
     }
 

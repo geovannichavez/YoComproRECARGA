@@ -68,7 +68,7 @@ public class Permissions extends AppCompatActivity implements PermissionsView
             authenticate.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             authenticate.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             authenticate.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            authenticate.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+            authenticate.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(authenticate);
         }
         catch (Exception ex)
