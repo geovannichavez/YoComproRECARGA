@@ -183,7 +183,8 @@ public class HomeInteractor implements IHomeInteractor
                 public void onDataChange(DataSnapshot dataSnapshot)
                 {
                     SalePointData salePoint = dataSnapshot.getValue(SalePointData.class);
-                    mHomeListener.fb_salePoint_onDataChange(key, salePoint);
+                    if(salePoint != null)
+                        mHomeListener.fb_salePoint_onDataChange(key, salePoint);
                 }
 
                 @Override
@@ -233,7 +234,8 @@ public class HomeInteractor implements IHomeInteractor
                 public void onDataChange(DataSnapshot dataSnapshot)
                 {
                     VendorPointData vendorPoint = dataSnapshot.getValue(VendorPointData.class);
-                    mHomeListener.fb_vendorPoint_onDataChange(key, vendorPoint);
+                    if(vendorPoint != null)
+                        mHomeListener.fb_vendorPoint_onDataChange(key, vendorPoint);
                 }
 
                 @Override

@@ -161,6 +161,16 @@ public class ValidatePhone extends AppCompatActivity implements ValidatePhoneVie
     }
 
     @Override
+    public void onPause()
+    {
+        super.onPause();
+        if (progressDialog != null && progressDialog.isShowing())
+            progressDialog.dismiss();
+
+        progressDialog = null;
+    }
+
+    @Override
     public void showGenericMessage(ErrorResponseViewModel pErrorMessage)
     {
         CreateDialog(pErrorMessage.getTitle(), pErrorMessage.getLine1(), pErrorMessage.getAcceptButton());

@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.Prize;
@@ -65,6 +67,8 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prizes_history);
 
+        //Layouts
+        mHistoryListview = (ListView) findViewById(R.id.lvHistory);
         btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
@@ -99,9 +103,6 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
         //Presenter
         mPresenter = new PrizesHistoryPresenterImpl(this, this);
 
-        //Layouts
-        mHistoryListview = (ListView) findViewById(R.id.lvHistory);
-
         //Initialize views
         mPresenter.initialize();
 
@@ -117,48 +118,31 @@ public class PrizesHistory extends AppCompatActivity implements PrizesHistoryVie
     @Override
     public void initializeViews()
     {
-        mHistoryListview.setVisibility(View.VISIBLE);
-        tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
-        tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
-
-       /*mHistoryListview.setOnTouchListener(new ListView.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                int action = event.getAction();
-                switch (action)
-                {
-                    case MotionEvent.ACTION_DOWN:
-                        // Disallow ScrollView to intercept touch events.
-                        v.getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        // Allow ScrollView to intercept touch events.
-                        v.getParent().requestDisallowInterceptTouchEvent(false);
-                        break;
-                }
-
-                // Handle ListView touch events.
-                v.onTouchEvent(event);
-                return true;
-            }
-        });*/
-
-       mHistoryListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+       try
        {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+           mHistoryListview.setVisibility(View.VISIBLE);
+           tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
+           tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
+
+           mHistoryListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
            {
-               Prize currentItem = ((Prize) parent.getItemAtPosition(position));
-               Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-               smsIntent.setType("vnd.android-dir/mms-sms");
-               smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
-               smsIntent.putExtra("sms_body",currentItem.getCode());
-               startActivity(smsIntent);
-           }
-       });
+               @Override
+               public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+               {
+                   Prize currentItem = ((Prize) parent.getItemAtPosition(position));
+                   Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                   smsIntent.setType("vnd.android-dir/mms-sms");
+                   smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
+                   smsIntent.putExtra("sms_body",currentItem.getCode());
+                   startActivity(smsIntent);
+               }
+           });
+       }
+       catch (Exception ex)
+       {
+           Log.e(TAG, ex.getMessage());
+           Crashlytics.logException(ex);
+       }
     }
 
     @Override

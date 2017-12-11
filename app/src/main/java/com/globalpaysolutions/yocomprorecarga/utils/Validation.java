@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 
 import java.util.regex.Pattern;
@@ -221,12 +222,24 @@ public class Validation
 
     private void createSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
     {
-        Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
-        View snackbarView = mSnackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(mContext,  R.color.materia_error_700));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(Color.WHITE);
-        mSnackbar.show();
+        try
+        {
+            if(pCoordinatorLayout != null)
+            {
+                Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
+                View snackbarView = mSnackbar.getView();
+                snackbarView.setBackgroundColor(ContextCompat.getColor(mContext,  R.color.materia_error_700));
+                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.WHITE);
+                mSnackbar.show();
+            }
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.logException(ex);
+        }
+
+
     }
 
 }
