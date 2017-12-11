@@ -123,43 +123,47 @@
 
     <TextView
         android:id="@+id/textView26"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/lbl_write_your_code"
-        fontPath="fonts/lato_semibold.ttf"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/etToken"
         app:layout_constraintEnd_toEndOf="@+id/ImageViewToken"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ImageViewToken"/>
+        app:layout_constraintStart_toStartOf="@+id/ImageViewToken"
+        app:layout_constraintTop_toBottomOf="@+id/textView23"/>
 
     <TextView
         android:id="@+id/lblWrongNumber"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
         android:text="@string/label_type_token_part4"
         android:textColor="@color/color_red_recargo"
         android:textSize="12sp"
-        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintBottom_toTopOf="@+id/textView28"
         app:layout_constraintEnd_toEndOf="@+id/textView23"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView23"/>
+        app:layout_constraintStart_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/etToken"
+        app:layout_constraintVertical_bias="0.018"/>
 
     <TextView
         android:id="@+id/textView28"
+        fontPath="fonts/lato_semibold.ttf"
         android:layout_width="282dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="@string/lbl_if_dont_get_sms"
         android:textAlignment="center"
-        fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintBottom_toTopOf="@+id/btnConfirmToken"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

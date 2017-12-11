@@ -138,6 +138,7 @@
         fontPath="fonts/lato_semibold.ttf"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/label_type_token_part4"
         android:textColor="@color/color_red_recargo"
         android:textSize="12sp"
@@ -146,7 +147,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView23"/>
+        app:layout_constraintStart_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/etToken"/>
 
     <TextView
         android:id="@+id/textView28"
