@@ -28,8 +28,8 @@
 
     <ImageButton
         android:id="@+id/btnPlay"
-        android:layout_width="282dp"
-        android:layout_height="106dp"
+        android:layout_width="285dp"
+        android:layout_height="112dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateMap"
         android:scaleType="fitCenter"
@@ -40,8 +40,8 @@
 
     <ImageButton
         android:id="@+id/btnProfile"
-        android:layout_width="287dp"
-        android:layout_height="94dp"
+        android:layout_width="294dp"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateProfile"
@@ -54,8 +54,8 @@
 
     <ImageButton
         android:id="@+id/btnTravel"
-        android:layout_width="280dp"
-        android:layout_height="96dp"
+        android:layout_width="291dp"
+        android:layout_height="110dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateEraSelection"
         android:scaleType="fitCenter"
