@@ -187,7 +187,9 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
                     String vendorCode = marker.getTag().toString();
                     Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
                     requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
+                    requestTopup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(requestTopup);
+                    finish();
                 }
                 else
                 {
