@@ -27,6 +27,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterI
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 
@@ -36,7 +37,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class PrizesHistory extends AppCompatActivity implements PrizesHistoryView
+public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryView
 {
     private static final String TAG = PrizesHistory.class.getSimpleName();
 

@@ -8,9 +8,11 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Main">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_timemachine_background" />
+    <ImageView
+        android:id="@+id/bgTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"/>
 
 
     <ImageView

@@ -20,12 +20,13 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class PrizeDetail extends AppCompatActivity implements PrizeDetailView
+public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
 {
     private static final String TAG = PrizeDetail.class.getSimpleName();
 

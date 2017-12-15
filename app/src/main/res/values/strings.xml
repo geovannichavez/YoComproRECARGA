@@ -324,5 +324,6 @@
     <string name="label_leaders_button">LÍDERES</string>
     <string name="title_invalid_pin">Código Inválido</string>
     <string name="label_pin_already_activated">El código ingresado es inválido. Este PIN ya fue utilizado.</string>
+    <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
 
 </resources>

@@ -19,11 +19,12 @@ import com.facebook.login.widget.LoginButton;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.AuthenticatePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Authenticate extends AppCompatActivity implements AuthenticateView
+public class Authenticate extends ImmersiveActivity implements AuthenticateView
 {
     private static final String TAG = Authenticate.class.getSimpleName();
 

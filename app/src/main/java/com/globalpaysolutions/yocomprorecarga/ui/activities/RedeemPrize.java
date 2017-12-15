@@ -27,11 +27,12 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RedeemPrizeInteractorImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class RedeemPrize extends AppCompatActivity implements RedeemPrizeView
+public class RedeemPrize extends ImmersiveActivity implements RedeemPrizeView
 {
 
     EditText etPhone;

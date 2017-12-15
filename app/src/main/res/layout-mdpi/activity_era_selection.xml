@@ -9,10 +9,13 @@
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.EraSelection"
     tools:layout_editor_absoluteY="25dp">
 
-    <include
-        android:id="@+id/include2"
-        layout="@layout/custom_timemachine_background"
-       />
+
+    <ImageView
+        android:id="@+id/bgTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"/>
+    
 
     <ImageView
         android:id="@+id/imageView19"
@@ -22,10 +25,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/include2"
-        app:layout_constraintEnd_toEndOf="@+id/include2"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTimemachine"
+        app:layout_constraintEnd_toEndOf="@+id/bgTimemachine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include2"
+        app:layout_constraintTop_toTopOf="@+id/bgTimemachine"
         app:layout_constraintVertical_bias="0.316"
         app:srcCompat="@drawable/bg_timemachine_screen_3"/>
 
@@ -34,11 +37,11 @@
         android:layout_width="177dp"
         android:layout_height="51dp"
         android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="@+id/include2"
+        app:layout_constraintEnd_toEndOf="@+id/bgTimemachine"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/include2"
+        app:layout_constraintStart_toStartOf="@+id/bgTimemachine"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_title_generic"/>
 

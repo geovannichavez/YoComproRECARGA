@@ -37,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRDat
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -53,7 +54,7 @@ import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class CapturePrizeAR extends AppCompatActivity implements CapturePrizeView
+public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeView
 {
     private static final String TAG = CapturePrizeAR.class.getSimpleName();
     private ArchitectView architectView;

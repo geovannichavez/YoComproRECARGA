@@ -28,12 +28,13 @@ import android.widget.ProgressBar;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class AcceptTerms extends AppCompatActivity implements AcceptTermsView
+public class AcceptTerms extends ImmersiveActivity implements AcceptTermsView
 {
     private static final String TAG = AcceptTerms.class.getSimpleName();
 

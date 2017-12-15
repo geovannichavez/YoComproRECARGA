@@ -15,11 +15,12 @@ import android.widget.Toast;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.PermissionsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.PermissionsView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Permissions extends AppCompatActivity implements PermissionsView
+public class Permissions extends ImmersiveActivity implements PermissionsView
 {
     //Views and layouts
     ImageButton btnPermissions;

@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.NicknamePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
 
@@ -30,7 +31,7 @@ import java.util.Arrays;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Nickname extends AppCompatActivity implements NicknameView
+public class Nickname extends ImmersiveActivity implements NicknameView
 {
     private static final String TAG = Nickname.class.getSimpleName();
 

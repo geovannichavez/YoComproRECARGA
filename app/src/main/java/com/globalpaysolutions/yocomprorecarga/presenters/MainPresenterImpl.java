@@ -45,6 +45,12 @@ public class MainPresenterImpl implements IMainPresenter
 
 
     @Override
+    public void setBackground()
+    {
+        mView.setBackground();
+    }
+
+    @Override
     public void checkUserDataCompleted()
     {
         if(!mUserData.getHasSeenIntroValue())

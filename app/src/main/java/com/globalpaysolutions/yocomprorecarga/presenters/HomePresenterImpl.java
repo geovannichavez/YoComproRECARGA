@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -25,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointDat
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -162,8 +162,16 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void intializeGeolocation()
     {
-        mInteractor.initializeGeolocation();
-        mFirebaseInteractor.initializePOIGeolocation();
+        //Checks if mock locations are active
+
+        boolean active = MockLocationUtility.isMockSettingsON(mContext);
+
+        if(! active )
+        {
+            mInteractor.initializeGeolocation();
+            mFirebaseInteractor.initializePOIGeolocation();
+        }
+
     }
 
     @Override
@@ -228,13 +236,30 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void onLocationChanged(Location location)
     {
-        mView.updateUserLocationOnMap(location);
+        //Checks if location received is fake
+        if(!MockLocationUtility.isMockLocation(location, mContext))
+        {
+            //Checks apps blacklist
+            if(MockLocationUtility.isMockAppInstalled(mContext) == 0 )
+                mView.updateUserLocationOnMap(location);
+            else
+                mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+        }
+
     }
 
     @Override
     public void onLocationApiManagerConnected(Location location)
     {
-        mView.setInitialUserLocation(location);
+        //Checks if location received is fake
+        if(!MockLocationUtility.isMockLocation(location, mContext))
+        {
+            //Checks apps in blaclist
+            if(MockLocationUtility.isMockAppInstalled(mContext) == 0)
+                mView.setInitialUserLocation(location);
+            else
+                mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+        }
     }
 
 
@@ -543,4 +568,5 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             ex.printStackTrace();
         }
     }
+
 }

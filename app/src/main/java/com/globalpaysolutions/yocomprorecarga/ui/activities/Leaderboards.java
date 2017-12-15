@@ -30,6 +30,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.LeaderboardsPresenterIm
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.LeadersAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
 
@@ -37,7 +38,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Leaderboards extends AppCompatActivity implements LeaderboardsView
+public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
 {
     private static final String TAG = Leaderboards.class.getSimpleName();
 

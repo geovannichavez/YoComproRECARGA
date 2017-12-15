@@ -27,13 +27,15 @@ import com.globalpaysolutions.yocomprorecarga.presenters.EraSelectionPresenterIm
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.ErasAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class EraSelection extends AppCompatActivity implements EraSelectionView
+public class EraSelection extends ImmersiveActivity implements EraSelectionView
 {
     private static final String TAG = EraSelection.class.getSimpleName();
 
@@ -45,6 +47,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
     TextView lblEraName;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
+    ImageView bgTimemachine;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -69,6 +72,7 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
         lvEras = (ListView) findViewById(R.id.lvEras);
         lblEraName = (TextView) findViewById(R.id.lblEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -89,6 +93,12 @@ public class EraSelection extends AppCompatActivity implements EraSelectionView
 
         mPresenter.initialize();
         mPresenter.retrieveEras();
+    }
+
+    @Override
+    public void setBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 
     @Override

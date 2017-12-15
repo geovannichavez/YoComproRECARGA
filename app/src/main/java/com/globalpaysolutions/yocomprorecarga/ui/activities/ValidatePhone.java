@@ -33,6 +33,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IValidatePho
 import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 
@@ -42,7 +43,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class ValidatePhone extends AppCompatActivity implements ValidatePhoneView
+public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneView
 {
     //Adapters y Layouts
     EditText etPhoneNumber;

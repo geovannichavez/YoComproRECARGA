@@ -20,13 +20,14 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsu
 import com.globalpaysolutions.yocomprorecarga.presenters.AchievementsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.AchievementsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AchievementsView;
 
 import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Achievements extends AppCompatActivity implements AchievementsView
+public class Achievements extends ImmersiveActivity implements AchievementsView
 {
     private static final String TAG = Achievements.class.getSimpleName();
 

@@ -31,12 +31,13 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class TokenInput extends AppCompatActivity implements TokenInputView
+public class TokenInput extends ImmersiveActivity implements TokenInputView
 {
     //Adapters y Layouts
     private EditText etToken;

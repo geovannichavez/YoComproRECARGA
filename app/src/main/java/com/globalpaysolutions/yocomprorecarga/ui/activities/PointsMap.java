@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
@@ -35,6 +36,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,7 +56,7 @@ import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, HomeView
+public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, HomeView
 {
     private static final String TAG = PointsMap.class.getSimpleName();
 
@@ -63,6 +65,7 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
     AlertDialog infographyDialog;
     ImageButton btnBackMap;
     ImageButton btnReqTopupMap;
+    Toast mToast;
 
     //Adapters y Layouts
     private GoogleMap mGoogleMap;
@@ -790,6 +793,17 @@ public class PointsMap extends AppCompatActivity implements OnMapReadyCallback, 
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void showToast(String string)
+    {
+        if(mToast != null)
+        {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(PointsMap.this, string, Toast.LENGTH_LONG);
+        mToast.show();
     }
 
     @Override

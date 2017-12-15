@@ -19,11 +19,12 @@ import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Intro extends AppCompatActivity
+public class Intro extends ImmersiveActivity
 {
     private static final String TAG = Intro.class.getSimpleName();
 

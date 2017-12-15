@@ -50,4 +50,5 @@ public interface HomeView
     void addWildcardPointData(String pKey, String brand, String title, String message);
     void removeWildcardPoint(String pKey);
 
+    void showToast(String string);
 }

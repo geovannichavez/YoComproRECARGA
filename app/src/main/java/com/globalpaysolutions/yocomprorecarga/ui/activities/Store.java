@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.StorePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.StoreAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +32,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Store extends AppCompatActivity implements StoreView
+public class Store extends ImmersiveActivity implements StoreView
 {
     //MVP
     private StorePresenterImpl mPresenter;

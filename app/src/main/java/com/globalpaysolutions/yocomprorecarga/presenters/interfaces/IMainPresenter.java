@@ -6,6 +6,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface IMainPresenter
 {
+    void setBackground();
     void checkUserDataCompleted();
     void checkFunctionalityLimitedShown();
 }

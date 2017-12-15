@@ -10,18 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
+import com.squareup.picasso.Picasso;
 
-public class Main extends AppCompatActivity implements MainView
+public class Main extends ImmersiveActivity implements MainView
 {
     //Layouts and Views
     ImageButton buttonSettings;
+    ImageView bgTimemachine;
 
     //MVP
     MainPresenterImpl mPresenter;
@@ -33,6 +37,7 @@ public class Main extends AppCompatActivity implements MainView
         setContentView(R.layout.activity_main);
 
         buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         buttonSettings.setOnClickListener(new View.OnClickListener()
         {
@@ -46,7 +51,7 @@ public class Main extends AppCompatActivity implements MainView
         });
 
         mPresenter = new MainPresenterImpl(this, this, this);
-        //mPresenter.hideStatusBar();
+        mPresenter.setBackground();
         mPresenter.checkUserDataCompleted();
     }
 
@@ -121,6 +126,12 @@ public class Main extends AppCompatActivity implements MainView
         prize.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(prize);
         finish();
+    }
+
+    @Override
+    public void setBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 
     @Override

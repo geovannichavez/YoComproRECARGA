@@ -15,11 +15,12 @@ import android.widget.ImageButton;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.LimitedFunctionalityPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class LimitedFunctionality extends AppCompatActivity implements LimitedFunctionalityView
+public class LimitedFunctionality extends ImmersiveActivity implements LimitedFunctionalityView
 {
     ImageButton btnWhatever;
 

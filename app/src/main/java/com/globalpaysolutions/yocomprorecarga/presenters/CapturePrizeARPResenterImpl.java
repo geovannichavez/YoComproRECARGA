@@ -24,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeY
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -31,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -275,8 +275,20 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
-            mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-            mCurrentLocation = location;
+           // Validates location from property
+           if(!MockLocationUtility.isMockLocation(location, mContext))
+           {
+               //Check apps blacklist
+               if(MockLocationUtility.isMockAppInstalled(mContext) > 0)
+               {
+                   mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                   mCurrentLocation = location;
+               }
+               else
+               {
+                   mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+               }
+           }
         }
         catch (Exception ex)
         {
@@ -289,8 +301,20 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
-            mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-            mCurrentLocation = location;
+            //Checks if location is fake
+            if(!MockLocationUtility.isMockLocation(location, mContext))
+            {
+                //Checks apps in blacklist
+                if(MockLocationUtility.isMockAppInstalled(mContext) == 0)
+                {
+                    mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                    mCurrentLocation = location;
+                }
+                else
+                {
+                    mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                }
+            }
         }
         catch (Exception ex)
         {

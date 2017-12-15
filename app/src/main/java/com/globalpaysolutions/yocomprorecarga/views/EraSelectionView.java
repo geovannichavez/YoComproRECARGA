@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface EraSelectionView
 {
+    void setBackground();
     void showLoadingDialog(String label);
     void hideLoadingDialog();
     void initialViews();

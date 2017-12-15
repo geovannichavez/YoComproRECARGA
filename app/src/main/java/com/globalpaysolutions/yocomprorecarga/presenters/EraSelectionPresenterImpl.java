@@ -47,6 +47,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         String eraSelected = UserData.getInstance(mContext).getEraName();
 
+        mView.setBackground();
+
         if(!TextUtils.equals(eraSelected, ""))
             mView.setSelectedEraName(eraSelected);
         else

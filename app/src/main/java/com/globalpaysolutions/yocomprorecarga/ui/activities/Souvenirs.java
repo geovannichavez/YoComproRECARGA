@@ -25,6 +25,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer
 import com.globalpaysolutions.yocomprorecarga.presenters.SourvenirsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvenirsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +33,7 @@ import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Souvenirs extends AppCompatActivity implements SouvenirsView
+public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 {
     private static final String TAG = Souvenirs.class.getSimpleName();
 

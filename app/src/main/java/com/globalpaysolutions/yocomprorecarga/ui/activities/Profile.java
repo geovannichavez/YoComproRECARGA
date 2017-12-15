@@ -27,13 +27,14 @@ import android.widget.Toast;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.ProfilePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.ProfileView;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Profile extends AppCompatActivity implements ProfileView
+public class Profile extends ImmersiveActivity implements ProfileView
 {
     private static final String TAG = Profile.class.getSimpleName();
 

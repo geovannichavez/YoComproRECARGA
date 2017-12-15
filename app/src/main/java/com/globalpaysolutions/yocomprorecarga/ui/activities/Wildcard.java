@@ -21,11 +21,12 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.WildcardPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.WildcardView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Wildcard extends AppCompatActivity implements WildcardView
+public class Wildcard extends ImmersiveActivity implements WildcardView
 {
     WildcardPresenterImpl mPresenter;
 
