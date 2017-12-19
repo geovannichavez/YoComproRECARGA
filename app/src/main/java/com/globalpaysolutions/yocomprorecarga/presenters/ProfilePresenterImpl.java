@@ -32,6 +32,12 @@ public class ProfilePresenterImpl implements IProfilePresenter
     }
 
     @Override
+    public void loadBackground()
+    {
+        mView.setBackground();
+    }
+
+    @Override
     public void loadInitialData()
     {
         Profile profile = Profile.getCurrentProfile();

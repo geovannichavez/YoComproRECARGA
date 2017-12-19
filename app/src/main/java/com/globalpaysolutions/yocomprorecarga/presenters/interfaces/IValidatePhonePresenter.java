@@ -15,4 +15,5 @@ public interface IValidatePhonePresenter
     void saveUserGeneralData(String pPhone, int pConsumerID);
     void setSelectedCountry(Country pCountry);
     void setTypedPhone();
+    void loadBackground();
 }

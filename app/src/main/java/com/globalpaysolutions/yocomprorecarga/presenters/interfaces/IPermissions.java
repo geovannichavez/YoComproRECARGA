@@ -8,4 +8,6 @@ public interface IPermissions
 {
     void checkPermission();
     void onPermissionsResult(int pRequestCode, String pPermissions[], int[] pGrantResults);
+
+    void loadBackground();
 }

@@ -33,6 +33,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
     ProgressDialog progressDialog;
     ImageView imgButtonsBar;
     ImageButton btnBack;
+    ImageView bgTimemachine;
 
     //Adapters
     LeadersAdapter mLeaderboardAdapter;
@@ -85,6 +87,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
         imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
         tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -110,6 +113,8 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
     @Override
     public void initializeViews()
     {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+
         //Sets click listeners
         tvToday.setOnClickListener(new View.OnClickListener()
         {

@@ -77,4 +77,10 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
            ex.printStackTrace();
         }
     }
+
+    @Override
+    public void setBackground()
+    {
+        mView.loadBackground();
+    }
 }

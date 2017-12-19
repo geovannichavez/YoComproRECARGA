@@ -9,4 +9,5 @@ public interface IPrizeDetailPresenter
     void loadInitialData();
     void setClickListeners();
     void createSmsPrizeContent(String exchangePin);
+    void setBackground();
 }

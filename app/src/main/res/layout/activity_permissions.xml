@@ -9,11 +9,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"/>
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -42,7 +43,7 @@
         android:textColor="@color/color_red_recargo"
         android:textSize="21sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
 

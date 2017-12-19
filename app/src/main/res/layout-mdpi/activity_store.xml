@@ -7,21 +7,24 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Store">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/custom_timemachine_background"/>
+
+    <ImageView
+        android:id="@+id/bgTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="254dp"
         android:layout_height="419dp"
         android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="@+id/bgTimemachine"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/include"
-        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintStart_toStartOf="@+id/bgTimemachine"
+        app:layout_constraintTop_toTopOf="@+id/bgTimemachine"
         app:srcCompat="@drawable/bg_timemachine_screen_3"/>
 
     <ImageView
@@ -34,7 +37,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintTop_toTopOf="@+id/bgTimemachine"
         app:srcCompat="@drawable/bg_title_generic"/>
 
     <ImageView

@@ -51,7 +51,7 @@ public class Main extends ImmersiveActivity implements MainView
         });
 
         mPresenter = new MainPresenterImpl(this, this, this);
-        mPresenter.setBackground();
+        //mPresenter.setBackground();
         mPresenter.checkUserDataCompleted();
     }
 
@@ -131,7 +131,7 @@ public class Main extends ImmersiveActivity implements MainView
     @Override
     public void setBackground()
     {
-        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+        Picasso.with(this).load(R.drawable.bg_time_machine).priority(Picasso.Priority.HIGH).into(bgTimemachine);
     }
 
     @Override

@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +52,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
     ImageButton btnSignin;
     ImageButton btnCountry;
     TextView lblSelectedCountry;
-
+    ImageView bgWhiteTimemachine;
     ProgressDialog progressDialog;
 
     //MVP
@@ -76,6 +78,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
         btnSignin = (ImageButton) findViewById(R.id.btnConfirm);
         btnCountry = (ImageButton) findViewById(R.id.buttonCountry);
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
         btnCountry.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -89,6 +92,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
         lblSelectedCountry = (TextView) findViewById(R.id.lblCountry);
 
         presenter = new ValidatePhonePresenterImpl(this, this, this);
+        presenter.loadBackground();
         presenter.fetchCountries();
 
         if(getIntent().getBooleanExtra(Constants.BUNDLE_PHONE_RETYPE, false))
@@ -248,6 +252,12 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
         lblSelectedCountry.setText(pSelected.getName());
         lblSelectedCountry.setTypeface(null, Typeface.BOLD);
         etPhoneNumber.setEnabled(true);
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
     }
 
 

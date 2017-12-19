@@ -105,4 +105,10 @@ public class PermissionsPresenterImpl implements IPermissions
                 break;
         }
     }
+
+    @Override
+    public void loadBackground()
+    {
+        mView.loadBackground();
+    }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -14,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.NotificationDetailPrese
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.NotificationDetailView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -25,6 +27,7 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
     private TextView tvNotifTitle;
     private TextView tvNotifBody;
     private ImageButton btnAcceptNotif;
+    private ImageView bgTimemachine;
 
     //MVP
     private NotificationDetailPresenterImpl mPresenter;
@@ -47,8 +50,10 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
         tvNotifTitle = (TextView) findViewById(R.id.tvNotifTitle);
         tvNotifBody = (TextView) findViewById(R.id.tvNotifBody);
         btnAcceptNotif = (ImageButton) findViewById(R.id.btnAcceptNotif);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         mPresenter = new NotificationDetailPresenterImpl(this, this, this);
+        mPresenter.loadBackground();
         mPresenter.processNotification(title, body);
 
         btnAcceptNotif.setOnClickListener(new View.OnClickListener()
@@ -82,5 +87,11 @@ public class NotificationDetail extends AppCompatActivity implements Notificatio
     {
         Log.i(TAG, "User read notification content");
         this.finish();
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 }

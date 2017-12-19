@@ -9,7 +9,11 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizeDetail">
 
-    <include layout="@layout/custom_orange_background" />
+    <ImageView
+        android:id="@+id/bgOrange"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"/>
 
     <ImageButton
         android:id="@+id/btnBackMapPrizeDet"

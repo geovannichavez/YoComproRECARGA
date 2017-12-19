@@ -12,9 +12,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 public interface PrizeDetailView
 {
     void updateViews(Bundle data);
-    void showGenericToast(String message);
-    void showGenericDialog(DialogViewModel dialogViewModel);
     void setClickListeners();
     void navigateToSms(Intent sms);
     void showAchievementDialog();
+    void loadBackground();
 }

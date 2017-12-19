@@ -34,15 +34,15 @@ public interface HomeView
     void moveVendorPoint(String pKey, LatLng pLocation);
     void removeVendorPoint(String pKey);
 
-    void addGoldPoint(String pKey, LatLng pLocation);
+    void addGoldPoint(String pKey, LatLng pLocation, String pMarkerUrl);
     void addGoldPointData(String pKey, String pTitle, String pSnippet);
     void removeGoldPoint(String pKey);
 
-    void addSilverPoint(String pKey, LatLng pLocation);
+    void addSilverPoint(String pKey, LatLng pLocation, String pMarkerUrl);
     void addSilverPointData(String pKey, String pTitle, String pSnippet);
     void removeSilverPoint(String pKey);
 
-    void addBronzePoint(String pKey, LatLng pLocation);
+    void addBronzePoint(String pKey, LatLng pLocation, String pMarkerUrl);
     void addBronzePointData(String pKey, String pTitle, String pSnippet);
     void removeBronzePoint(String pKey);
 

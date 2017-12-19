@@ -20,4 +20,5 @@ public interface ValidatePhoneView
     void renderCountries(Countries pCountries);
     void navigateTokenInput(RegisterClientResponse pResponse);
     void setSelectedCountry(Country pSelected);
+    void loadBackground();
 }

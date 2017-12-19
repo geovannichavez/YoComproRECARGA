@@ -8,11 +8,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="0dp"/>
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -24,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include4"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/logo_recargo"/>
 
     <TextView
@@ -105,9 +106,9 @@
         android:onClick="Signin"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/include4"
+        app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
         app:layout_constraintTop_toBottomOf="@+id/imageView30"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/btn_button_6"/>
@@ -135,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Confirma tu número de teléfono."
-        android:textSize="16dp"
+        android:textSize="16sp"
         fontPath="fonts/lato_semibold.ttf"
         app:layout_constraintBottom_toTopOf="@+id/imageView30"
         app:layout_constraintEnd_toEndOf="@+id/imageView30"
@@ -153,7 +154,7 @@
         android:layout_marginTop="8dp"
         fontPath="fonts/lato_semibold.ttf"
         android:text="Elige tu país actual."
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/buttonCountry"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/buttonCountry"

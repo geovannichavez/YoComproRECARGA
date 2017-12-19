@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -49,6 +51,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     ImageButton btnBack;
     TextView tvNoPrizesYetTitle;
     TextView tvNoPrizesYetContent;
+    ImageView bgTimemachine;
 
     //Adapters
     PrizesAdapter mPrizesAdapter;
@@ -74,7 +77,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
         tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
-
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         btnActivatePrize.setOnClickListener(new View.OnClickListener()
         {
@@ -121,6 +124,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     {
        try
        {
+           Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+
            mHistoryListview.setVisibility(View.VISIBLE);
            tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
            tvNoPrizesYetContent.setVisibility(View.INVISIBLE);

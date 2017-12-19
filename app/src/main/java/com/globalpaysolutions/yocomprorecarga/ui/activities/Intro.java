@@ -21,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -32,6 +33,8 @@ public class Intro extends ImmersiveActivity
     ImageView imgTimemachine;
     ImageView imgCounter;
     ImageView imgBag;
+
+    ImageView bgIntro;
 
     ImageView imgTable;
     ImageView imgBarrell;
@@ -56,6 +59,7 @@ public class Intro extends ImmersiveActivity
         setContentView(R.layout.activity_intro);
 
         mCounter = 0;
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_intro_background));
 
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         imgTimemachine = (ImageView) findViewById(R.id.imgTimemachine);
@@ -65,6 +69,7 @@ public class Intro extends ImmersiveActivity
         imgTable = (ImageView) findViewById(R.id.imgTable);
         btnFinishIntro = (ImageButton) findViewById(R.id.btnFinishIntro);
         mActivityIntro = (ConstraintLayout) findViewById(R.id.activity_intro);
+        bgIntro = (ImageView) findViewById(R.id.bgIntro);
 
         imgTimemachine.setImageResource(R.drawable.img_shadow_timemachine);
         imgCounter.setImageResource(R.drawable.img_shadow_counter);
@@ -80,6 +85,9 @@ public class Intro extends ImmersiveActivity
 
         imgTable.setVisibility(View.INVISIBLE);
         imgBarrell.setVisibility(View.INVISIBLE);
+
+        //Sets background
+        Picasso.with(this).load(R.drawable.bg_intro).into(bgIntro);
 
         mActivityIntro.setOnClickListener(new View.OnClickListener()
         {

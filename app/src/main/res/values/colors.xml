@@ -76,4 +76,8 @@
 
     <color name="color_yovendorecarga_green">#66cc00</color>
     <color name="color_yovendorecarga_green_dark">#59af03</color>
+
+    <color name="color_timemachine_background">#1d2226</color>
+    <color name="color_white_timemachine_background">#e6e5e5</color>
+    <color name="color_intro_background">#191c20</color>
 </resources>

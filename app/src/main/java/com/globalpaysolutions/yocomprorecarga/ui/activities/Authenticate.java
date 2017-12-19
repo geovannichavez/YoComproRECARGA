@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.login.widget.LoginButton;
@@ -21,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.AuthenticatePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -31,6 +33,7 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
     //Views and Layouts
     ProgressDialog progressDialog;
     LoginButton btnLogin;
+    ImageView bgWhiteTimemachine;
 
     //MVP
     private AuthenticatePresenterImpl mPresenter;
@@ -49,6 +52,9 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
 
         //Views
         btnLogin = (LoginButton) findViewById(R.id.btnLogin);
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
+
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
 
         //Initialization
         mPresenter = new AuthenticatePresenterImpl(this, this, this);

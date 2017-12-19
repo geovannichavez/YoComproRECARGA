@@ -10,4 +10,6 @@ public interface INotificationDetailPresenter
 {
     void processNotification(String pTitle, String pBody);
     void finishActivity();
+
+    void loadBackground();
 }

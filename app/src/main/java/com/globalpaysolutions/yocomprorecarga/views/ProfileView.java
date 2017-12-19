@@ -12,4 +12,5 @@ public interface ProfileView
     void generateToast(String text);
     void showGenericDialog(DialogViewModel model);
     void launchChromeView(String url);
+    void setBackground();
 }

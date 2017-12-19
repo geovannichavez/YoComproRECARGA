@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -17,6 +18,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.PermissionsPresenterImp
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.PermissionsView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -24,6 +26,7 @@ public class Permissions extends ImmersiveActivity implements PermissionsView
 {
     //Views and layouts
     ImageButton btnPermissions;
+    ImageView bgWhiteTimemachine;
 
     //MVP
     PermissionsPresenterImpl mPresenter;
@@ -41,8 +44,10 @@ public class Permissions extends ImmersiveActivity implements PermissionsView
         setContentView(R.layout.activity_permissions);
 
         btnPermissions = (ImageButton) findViewById(R.id.btnPermissions);
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
         mPresenter = new PermissionsPresenterImpl(this, this, this);
+        mPresenter.loadBackground();
     }
 
     public void RequestPermissions(View view)
@@ -82,5 +87,11 @@ public class Permissions extends ImmersiveActivity implements PermissionsView
     public void generateToast(String pContent)
     {
         Toast.makeText(Permissions.this, pContent, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
     }
 }

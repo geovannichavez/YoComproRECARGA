@@ -8,4 +8,6 @@ public interface ILimitedFunctionality
 {
     void enlistMissingComponents();
     void navigateNext();
+
+    void loadBackground();
 }

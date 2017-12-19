@@ -42,6 +42,7 @@ public class Profile extends ImmersiveActivity implements ProfileView
     TextView tvNickname;
     CircleImageView ivProfilePicture;
     ImageButton btnBack;
+    ImageView bgTimemachine;
 
     //MVP
     ProfilePresenterImpl mPresenter;
@@ -61,6 +62,7 @@ public class Profile extends ImmersiveActivity implements ProfileView
         tvNickname = (TextView) findViewById(R.id.lblNickname);
         ivProfilePicture = (CircleImageView) findViewById(R.id.ivProfilePicture);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -76,6 +78,7 @@ public class Profile extends ImmersiveActivity implements ProfileView
         });
 
         mPresenter = new ProfilePresenterImpl(this, this, this);
+        mPresenter.loadBackground();
         mPresenter.loadInitialData();
     }
 
@@ -132,6 +135,12 @@ public class Profile extends ImmersiveActivity implements ProfileView
             ex.printStackTrace();
             Log.e(TAG, "Something went wrong launching Chrome View");
         }
+    }
+
+    @Override
+    public void setBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 
     public void navigateLeaderboards(View view)

@@ -8,10 +8,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-        />
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -97,7 +99,7 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="Signin"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/include4"
+        app:layout_constraintBottom_toBottomOf="@+id/bgWhiteTimemachine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Confirma tu número de teléfono."
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCountry"

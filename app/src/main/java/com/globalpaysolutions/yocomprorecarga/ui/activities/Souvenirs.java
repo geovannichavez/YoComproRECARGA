@@ -47,6 +47,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
     TextView tvEraName;
     ImageButton btnBack;
     ImageButton btnStore;
+    ImageView bgTimemachine;
     ProgressDialog mProgressDialog;
 
     //Global Variables
@@ -68,6 +69,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
         tvEraName = (TextView) findViewById(R.id.tvEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnStore = (ImageButton) findViewById(R.id.btnStore);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -142,6 +144,8 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
     {
         try
         {
+            Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+
             tvEraName.setText(eraName);
         }
         catch (Exception ex) { ex.printStackTrace();}
@@ -245,7 +249,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 
             lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins",prize));
             lblAchievementName.setText(String.format("Has logrado el nivel %1$s  de %2$s",level, name ));
-            imgAchievement.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgAchievement);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -339,7 +343,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 
             tvTitle.setText(title);
             tvDescription.setText(description);
-            imgSouvenir.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgSouvenir);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

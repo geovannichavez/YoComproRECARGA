@@ -23,6 +23,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -30,6 +31,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.AcceptTermsPresenterImp
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AcceptTermsView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -39,7 +41,7 @@ public class AcceptTerms extends ImmersiveActivity implements AcceptTermsView
     private static final String TAG = AcceptTerms.class.getSimpleName();
 
     ImageButton btnAccept;
-    //TextView tvTermsAndConditions;
+    ImageView bgWhiteTimemachine;
     AcceptTermsPresenterImpl presenter;
 
     ProgressBar progressBar;
@@ -55,6 +57,10 @@ public class AcceptTerms extends ImmersiveActivity implements AcceptTermsView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_terms);
+
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
+
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
 
         presenter = new AcceptTermsPresenterImpl(this, this, this);
         presenter.checkDeviceComponents();

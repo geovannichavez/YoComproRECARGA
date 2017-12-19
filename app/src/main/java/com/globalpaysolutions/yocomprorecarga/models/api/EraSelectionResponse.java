@@ -13,23 +13,32 @@ public class EraSelectionResponse
 {
     @SerializedName("AgeID")
     @Expose
-    private Integer ageID;
+    private int ageID;
     @SerializedName("Name")
     @Expose
     private String name;
     @SerializedName("IconImage")
     @Expose
     private String iconImage;
-    @SerializedName("ImageCollection")
+    @SerializedName("MarkerG")
     @Expose
-    private List<ImageCollection> imageCollection = null;
+    private String markerG;
+    @SerializedName("MarkerS")
+    @Expose
+    private String markerS;
+    @SerializedName("MarkerB")
+    @Expose
+    private String markerB;
+    @SerializedName("MarkerW")
+    @Expose
+    private String markerW;
 
-    public Integer getAgeID()
+    public int getAgeID()
     {
         return ageID;
     }
 
-    public void setAgeID(Integer ageID)
+    public void setAgeID(int ageID)
     {
         this.ageID = ageID;
     }
@@ -54,13 +63,44 @@ public class EraSelectionResponse
         this.iconImage = iconImage;
     }
 
-    public List<ImageCollection> getImageCollection()
+    public String getMarkerG()
     {
-        return imageCollection;
+        return markerG;
     }
 
-    public void setImageCollection(List<ImageCollection> imageCollection)
+    public void setMarkerG(String markerG)
     {
-        this.imageCollection = imageCollection;
+        this.markerG = markerG;
     }
+
+    public String getMarkerS()
+    {
+        return markerS;
+    }
+
+    public void setMarkerS(String markerS)
+    {
+        this.markerS = markerS;
+    }
+
+    public String getMarkerB()
+    {
+        return markerB;
+    }
+
+    public void setMarkerB(String markerB)
+    {
+        this.markerB = markerB;
+    }
+
+    public String getMarkerW()
+    {
+        return markerW;
+    }
+
+    public void setMarkerW(String markerW)
+    {
+        this.markerW = markerW;
+    }
+
 }

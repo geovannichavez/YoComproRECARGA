@@ -3,25 +3,21 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
-import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.AchievementsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.AchievementsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AchievementsView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,6 +35,7 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
     ImageButton btnBack;
     ImageButton btnPlay;
     ProgressDialog mProgressDialog;
+    ImageView bgTimemachine;
 
     //Layouts and Views
     ListView lvAchievements;
@@ -58,6 +55,7 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
         lvAchievements = (ListView) findViewById(R.id.lvAchievements);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnPlay = (ImageButton) findViewById(R.id.btnPlay);
+        bgTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -86,6 +84,8 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
 
         mPresenter = new AchievementsPresenterImpl(this, this, this);
         mAdapter = new AchievementsAdapter(this, R.layout.custom_achievement_listview_item);
+
+        mPresenter.loadBackground();
 
         lvAchievements.setAdapter(mAdapter);
 
@@ -148,6 +148,12 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
     public void showGenericImgDialog(String title, String content, int resource)
     {
 
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 
     @Override

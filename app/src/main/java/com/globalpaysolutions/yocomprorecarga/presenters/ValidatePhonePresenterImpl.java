@@ -106,6 +106,12 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
+    public void loadBackground()
+    {
+        View.loadBackground();
+    }
+
+    @Override
     public void onError(int pCodeStatus, Throwable pThrowable)
     {
         this.View.hideLoading();

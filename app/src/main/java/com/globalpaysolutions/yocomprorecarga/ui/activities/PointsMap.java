@@ -6,8 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,13 +18,10 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
@@ -31,12 +31,12 @@ import android.widget.Toast;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
-import com.globalpaysolutions.yocomprorecarga.ui.adapters.TutorialAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.PicassoMarker;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -48,9 +48,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -564,20 +564,27 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addGoldPoint(String pKey, LatLng pLocation)
+    public void addGoldPoint(String pKey, LatLng pLocation, String pMarkerUrl)
     {
         try
         {
             Marker marker = mGoldPointsMarkers.get(pKey);
+
             if(marker != null)
             {
                 Log.i(TAG, String.format("Marker for key %1$s was already inserted", pKey));
             }
             else
             {
+                /*marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation).icon(null));
+                PicassoMarker picassoMarker = new PicassoMarker(marker);
+                Picasso.with(PointsMap.this).load(pMarkerUrl).into(picassoMarker);*/
+                //new MarkerFetcher(marker, pMarkerUrl).execute();
+
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point))
                 );
+
                 mGoldPointsMarkers.put(pKey, marker);
             }
         }
@@ -622,7 +629,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addSilverPoint(String pKey, LatLng pLocation)
+    public void addSilverPoint(String pKey, LatLng pLocation, String pMarkerUrl)
     {
         try
         {
@@ -633,6 +640,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
+                /*marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation).icon(null));
+                PicassoMarker picassoMarker = new PicassoMarker(marker);
+                Picasso.with(PointsMap.this).load(pMarkerUrl).into(picassoMarker);*/
+                //new MarkerFetcher(marker, pMarkerUrl).execute();
+
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_silver_point))
                 );
@@ -680,7 +692,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addBronzePoint(String pKey, LatLng pLocation)
+    public void addBronzePoint(String pKey, LatLng pLocation, String pMarkerUrl)
     {
         try
         {
@@ -691,9 +703,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
+                /*marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation).icon(null));
+                PicassoMarker picassoMarker = new PicassoMarker(marker);
+                Picasso.with(PointsMap.this).load(pMarkerUrl).into(picassoMarker);*/
+                //new MarkerFetcher(marker, pMarkerUrl).execute();
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_bronze_point))
                 );
+
                 mBronzePointsMarkers.put(pKey, marker);
             }
         }
@@ -968,6 +985,47 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public static class MarkerFetcher extends AsyncTask<Void,Void,Void>
+    {
+        Bitmap mBitmap;
+        Marker mMarker;
+        String mUrl;
+
+        public MarkerFetcher(Marker marker, String url)
+        {
+            this.mMarker = marker;
+            this.mUrl = url;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            URL url ;
+            try
+            {
+                url = new URL(mUrl);
+                mBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            mMarker.setIcon(BitmapDescriptorFactory.fromBitmap(mBitmap));
+        }
     }
 
 }

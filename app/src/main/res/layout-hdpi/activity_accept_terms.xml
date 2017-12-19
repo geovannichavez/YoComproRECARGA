@@ -9,10 +9,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-  />
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,8 +24,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="116dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/include4"
-        app:layout_constraintTop_toTopOf="@+id/include4"
+        app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/logo_recargo"/>
 
     <TextView
@@ -55,7 +57,7 @@
         android:gravity="center"
         android:onClick="acceptTerms"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/include4"
+        app:layout_constraintBottom_toBottomOf="@+id/bgWhiteTimemachine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"

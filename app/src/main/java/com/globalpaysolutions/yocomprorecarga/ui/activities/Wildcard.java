@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.WildcardPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.WildcardView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -93,7 +94,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     @Override
     public void initialViewsState()
     {
-        bg_wildcard.setImageResource(R.drawable.bg_red_recargo_theme);
+        Picasso.with(this).load(R.drawable.bg_red_recargo_theme).into(bg_wildcard);
         lblTitle.setText(R.string.title_initial_wildcard);
         lblDescription.setText(R.string.label_wildcard_explanation);
 
@@ -104,7 +105,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     {
         try
         {
-            bg_wildcard.setImageResource(R.drawable.bg_dark_recargo_theme);
+            Picasso.with(this).load(R.drawable.bg_dark_recargo_theme).into(bg_wildcard);
 
             lblTitle.setText(R.string.title_you_won);
             lblDescription.setText(R.string.label_you_won);
@@ -114,7 +115,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
             lblAcceptChallenge.setVisibility(View.INVISIBLE);
             btnAccept.setEnabled(false);
             tvDeclineTxt.setText(R.string.label_back_to_map);
-            imgResult.setImageResource(R.drawable.ic_wildcard_winner);
+            Picasso.with(this).load(R.drawable.ic_wildcard_winner).into(imgResult);
         }
         catch (Exception ex)
         {
@@ -127,7 +128,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     {
         try
         {
-            bg_wildcard.setImageResource(R.drawable.bg_dark_recargo_theme);
+            Picasso.with(this).load(R.drawable.bg_dark_recargo_theme).into(bg_wildcard);
             lblTitle.setText(R.string.title_you_lost);
             lblTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
 
@@ -138,7 +139,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
             btnAccept.setVisibility(View.INVISIBLE);
             btnAccept.setEnabled(false);
             tvDeclineTxt.setText(R.string.label_back_to_map);
-            imgResult.setImageResource(R.drawable.ic_wildcard_loser);
+            Picasso.with(this).load(R.drawable.ic_wildcard_loser).into(imgResult);
         }
         catch (Exception ex)
         {
@@ -178,7 +179,8 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
 
             tvTitle.setText(dialogModel.getTitle());
             tvDescription.setText(dialogModel.getLine1());
-            imgSouvenir.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgSouvenir);
+
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -255,6 +257,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
             tvTitle.setText(title);
             tvDescription.setText(description);
             imgSouvenir.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgSouvenir);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -132,12 +132,12 @@
         <activity
             android:name=".ui.activities.AcceptTerms"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppWhiteThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.ValidatePhone"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"
+            android:theme="@style/AppWhiteThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
@@ -150,7 +150,7 @@
         <activity
             android:name=".ui.activities.TokenInput"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"
+            android:theme="@style/AppWhiteThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
         </activity>
 
@@ -171,7 +171,7 @@
         <activity
             android:name=".ui.activities.Permissions"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppWhiteThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.NotificationDetail"
@@ -208,12 +208,12 @@
         <activity
             android:name=".ui.activities.Authenticate"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppWhiteThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Nickname"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen">
+            android:theme="@style/AppWhiteThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.Profile"
@@ -269,6 +269,7 @@
             android:name=".ui.activities.Wildcard"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+
         </activity>
         <activity
             android:name=".ui.activities.Intro"

@@ -11,18 +11,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.LimitedFunctionalityPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.LimitedFunctionalityView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LimitedFunctionality extends ImmersiveActivity implements LimitedFunctionalityView
 {
     ImageButton btnWhatever;
+    ImageView bgOrange;
 
     //MVP
     LimitedFunctionalityPresenterImpl mPresenter;
@@ -40,9 +43,10 @@ public class LimitedFunctionality extends ImmersiveActivity implements LimitedFu
         setContentView(R.layout.activity_limited_functionality);
 
         btnWhatever = (ImageButton) findViewById(R.id.btnWhatever);
+        bgOrange = (ImageView) findViewById(R.id.bgOrange);
 
         mPresenter = new LimitedFunctionalityPresenterImpl(this, this, this);
-
+        //mPresenter.loadBackground();
 
         btnWhatever.setOnClickListener(new View.OnClickListener()
         {
@@ -70,6 +74,12 @@ public class LimitedFunctionality extends ImmersiveActivity implements LimitedFu
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_orange).into(bgOrange);
     }
 
     @Override

@@ -86,4 +86,10 @@ public class LimitedFunctionalityPresenterImpl implements ILimitedFunctionality
         UserData.getInstance(mContext).setHasConfirmedLimitedFunctionality(true);
         mView.navigateNextActivity();
     }
+
+    @Override
+    public void loadBackground()
+    {
+        mView.loadBackground();
+    }
 }

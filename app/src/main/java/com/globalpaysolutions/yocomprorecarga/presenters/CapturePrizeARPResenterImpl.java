@@ -275,18 +275,21 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
-           // Validates location from property
-           if(!MockLocationUtility.isMockLocation(location, mContext))
+           if(location != null)
            {
-               //Check apps blacklist
-               if(MockLocationUtility.isMockAppInstalled(mContext) > 0)
+               // Validates location from property
+               if(!MockLocationUtility.isMockLocation(location, mContext))
                {
-                   mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-                   mCurrentLocation = location;
-               }
-               else
-               {
-                   mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                   //Check apps blacklist
+                   if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
+                   {
+                       mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                       mCurrentLocation = location;
+                   }
+                   else
+                   {
+                       mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                   }
                }
            }
         }
@@ -301,18 +304,21 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
-            //Checks if location is fake
-            if(!MockLocationUtility.isMockLocation(location, mContext))
+            if(location != null)
             {
-                //Checks apps in blacklist
-                if(MockLocationUtility.isMockAppInstalled(mContext) == 0)
+                //Checks if location is fake
+                if(!MockLocationUtility.isMockLocation(location, mContext))
                 {
-                    mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-                    mCurrentLocation = location;
-                }
-                else
-                {
-                    mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                    //Checks apps in blacklist
+                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
+                    {
+                        mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                        mCurrentLocation = location;
+                    }
+                    else
+                    {
+                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                    }
                 }
             }
         }

@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -37,6 +38,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     TextView lblPrizeDescription;
     TextView lblExchange;
     ImageButton btnSms;
+    ImageView bgOrange;
 
     ImageButton btnBackMapPrizeDet;
     ImageButton btnRedeemPrizeDet;
@@ -63,6 +65,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
         lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
         btnSms = (ImageButton) findViewById(R.id.btnSms);
+        bgOrange = (ImageView) findViewById(R.id.bgOrange);
 
         btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
         btnRedeemPrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
@@ -94,6 +97,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         });
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
+        mPresenter.setBackground();
         mPresenter.loadInitialData();
         mPresenter.setClickListeners();
 
@@ -121,18 +125,6 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
                 imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
                 break;
         }
-
-    }
-
-    @Override
-    public void showGenericToast(String message)
-    {
-
-    }
-
-    @Override
-    public void showGenericDialog(DialogViewModel dialogViewModel)
-    {
 
     }
 
@@ -205,7 +197,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
 
             lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins", coinsPrize));
             lblAchievementName.setText(String.format("Has logrado el nivel %1$s  de %2$s",level, name ));
-            imgAchievement.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgAchievement);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -238,6 +230,12 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void loadBackground()
+    {
+        Picasso.with(this).load(R.drawable.bg_orange).into(bgOrange);
     }
 
     public void navigateTimeMachine(View view)

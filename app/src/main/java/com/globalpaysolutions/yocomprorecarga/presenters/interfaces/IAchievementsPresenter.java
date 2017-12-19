@@ -9,4 +9,6 @@ import com.globalpaysolutions.yocomprorecarga.interactors.AchievementsListener;
 public interface IAchievementsPresenter
 {
     void retrieveAchievements();
+
+    void loadBackground();
 }

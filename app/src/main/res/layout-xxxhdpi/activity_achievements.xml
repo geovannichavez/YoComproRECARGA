@@ -7,9 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Achievements">
 
-    <include
-        android:id="@+id/include5"
-        layout="@layout/custom_timemachine_background" />
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -20,7 +23,7 @@
         android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include5"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/bg_screen_narrow"/>
 
     <ImageView
@@ -47,7 +50,7 @@
         android:layout_marginStart="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/include5"
+        app:layout_constraintBottom_toBottomOf="@+id/bgWhiteTimemachine"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/imageView2"

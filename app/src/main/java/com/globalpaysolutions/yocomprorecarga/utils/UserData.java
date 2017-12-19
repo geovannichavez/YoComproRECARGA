@@ -100,6 +100,10 @@ public class UserData
     private static final String KEY_ERA_ID = "usr_age_id";
     private static final String KEY_ERA_NAME = "usr_age_name";
     private static final String KEY_ERA_URL_ICON = "usr_age_url_image";
+    private static final String KEY_ERA_MARKER_GOLD = "usr_era_marker_gold";
+    private static final String KEY_ERA_MARKER_SILVER = "usr_era_marker_silver";
+    private static final String KEY_ERA_MARKER_BRONZE = "usr_era_marker_bronze";
+    private static final String KEY_ERA_MARKER_WILDCARD = "usr_era_marker_wildcard";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -230,6 +234,7 @@ public class UserData
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
         mEditor.putInt(KEY_ERA_ID, 1); //TODO: Quitar era quemada
+        //mEditor.putInt(KEY_ERA_ID, pEraID); //TODO: Quitar era quemada
         mEditor.commit();
     }
 
@@ -364,12 +369,24 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveEraSelected(int eraID, String eraName, String eraUrl)
+    public void saveEraSelected(int eraID, String eraName, String eraUrl, String markerGold, String markerSilver,
+                                String markerBronze, String markerWildcard)
     {
-        mEditor.putInt(KEY_ERA_ID, eraID);
-        mEditor.putString(KEY_ERA_NAME, eraName);
-        mEditor.putString(KEY_ERA_URL_ICON, eraUrl);
-        mEditor.commit();
+        try
+        {
+            mEditor.putInt(KEY_ERA_ID, eraID);
+            mEditor.putString(KEY_ERA_NAME, eraName);
+            mEditor.putString(KEY_ERA_URL_ICON, eraUrl);
+            mEditor.putString(KEY_ERA_MARKER_GOLD, markerGold);
+            mEditor.putString(KEY_ERA_MARKER_SILVER, markerSilver);
+            mEditor.putString(KEY_ERA_MARKER_BRONZE, markerBronze);
+            mEditor.putString(KEY_ERA_MARKER_WILDCARD, markerWildcard);
+            mEditor.commit();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     public void saveLastWildcardTouched(String pFirebaseID, int chestType)
@@ -679,6 +696,25 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_SET_NICKNAME, false);
     }
 
+    public String getGoldMarker()
+    {
+        return mPreferences.getString(KEY_ERA_MARKER_GOLD, "");
+    }
+
+    public String getSilverMarker()
+    {
+        return mPreferences.getString(KEY_ERA_MARKER_SILVER, "");
+    }
+
+    public String getBronzeMarker()
+    {
+        return mPreferences.getString(KEY_ERA_MARKER_BRONZE, "");
+    }
+
+    public String getWildcardMarker()
+    {
+        return mPreferences.getString(KEY_ERA_MARKER_WILDCARD, "");
+    }
 
     /*
     * ********************

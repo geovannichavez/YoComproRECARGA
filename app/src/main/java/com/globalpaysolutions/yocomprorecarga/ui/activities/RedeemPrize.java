@@ -29,6 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.RedeemPrizeView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -39,6 +40,7 @@ public class RedeemPrize extends ImmersiveActivity implements RedeemPrizeView
     EditText etPin;
     ImageButton btnActivate;
     ImageButton btnBack;
+    ImageView bgTimemachine;
     ProgressDialog mProgressDialog;
     RedeemPrizeInteractorImpl mPresenter;
 
@@ -61,6 +63,7 @@ public class RedeemPrize extends ImmersiveActivity implements RedeemPrizeView
 
         btnActivate = (ImageButton) findViewById(R.id.btnActivate);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         if(getIntent().getBooleanExtra(Constants.BUNDLE_PRE_SET_LAST_PRIZE_CODE, false))
         {
@@ -98,6 +101,8 @@ public class RedeemPrize extends ImmersiveActivity implements RedeemPrizeView
     @Override
     public void initializeViews()
     {
+        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+
         etPhone.addTextChangedListener(new TextWatcher()
         {
 
@@ -208,7 +213,8 @@ public class RedeemPrize extends ImmersiveActivity implements RedeemPrizeView
 
             tvTitle.setText(dialogModel.getTitle());
             tvDescription.setText(dialogModel.getLine1());
-            imgSouvenir.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgSouvenir);
+            //imgSouvenir.setImageResource(resource);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

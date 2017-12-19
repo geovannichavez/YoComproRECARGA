@@ -10,4 +10,6 @@ public interface PermissionsView
 {
     void navegateNextActivity();
     void generateToast(String pContent);
+
+    void loadBackground();
 }

@@ -7,4 +7,6 @@ package com.globalpaysolutions.yocomprorecarga.views;
 public interface LimitedFunctionalityView
 {
     void navigateNextActivity();
+
+    void loadBackground();
 }

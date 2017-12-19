@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IWildcardInteractor;
@@ -34,6 +35,7 @@ public class WildcardInteractor implements IWildcardInteractor
     {
         ExchangeWildcardReq requestBody = new ExchangeWildcardReq();
         requestBody.setAgeID(1); //TODO
+        //requestBody.setAgeID(eraID);
         requestBody.setLocationID(pFirebaseID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -67,12 +69,19 @@ public class WildcardInteractor implements IWildcardInteractor
     @Override
     public void saveUserTracking(Tracking tracking)
     {
-        UserData.getInstance(mContext).SaveUserTrackingProgess(
-                tracking.getTotalWinCoins(),
-                tracking.getTotalWinPrizes(),
-                tracking.getCurrentCoinsProgress(),
-                tracking.getTotalSouvenirs(),
-                tracking.getAgeID());
+        try
+        {
+            UserData.getInstance(mContext).SaveUserTrackingProgess(
+                    tracking.getTotalWinCoins(),
+                    tracking.getTotalWinPrizes(),
+                    tracking.getCurrentCoinsProgress(),
+                    tracking.getTotalSouvenirs(),
+                    tracking.getAgeID());
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.logException(ex);
+        }
     }
 
 }

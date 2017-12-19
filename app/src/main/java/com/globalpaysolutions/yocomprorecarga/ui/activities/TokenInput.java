@@ -24,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -34,6 +35,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
+import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -42,10 +44,9 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
     //Adapters y Layouts
     private EditText etToken;
     private ImageButton btnConfirmToken;
-/*    private TextView tvPortableNumber;
-    private TextView tvCodeSent;*/
     private TextView tvWrongPhone;
     private ProgressDialog progressDialog;
+    private ImageView bgWhiteTimemachine;
 
     //MVP
     TokenInputPresenterImpl mPresenter;
@@ -68,6 +69,7 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
         etToken = (EditText) findViewById(R.id.etToken);
         btnConfirmToken = (ImageButton) findViewById(R.id.btnConfirmToken);
         tvWrongPhone = (TextView) findViewById(R.id.lblWrongNumber);
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
         //Get data from intent
         String userPhone = getIntent().getExtras().getString(Constants.BUNDLE_TOKEN_VALIDATION);
@@ -98,6 +100,7 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
     @Override
     public void initialViewsState()
     {
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
         btnConfirmToken.setEnabled(false);
         EntriesValidations();
     }
@@ -148,15 +151,6 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
     {
         try
         {
-/*
-            if (p3DCompatible)
-            {
-                next = new Intent(this, Main.class);
-            }
-            else
-            {
-                next = new Intent(this, LimitedFunctionality.class);
-            }*/
 
             Intent next = new Intent(this, Main.class);
 
@@ -206,8 +200,6 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
             part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phone.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             SpannableString part3 = new SpannableString(getString(R.string.label_portable_phone_number_part2));
-
-            //tvPortableNumber.setText(TextUtils.concat(part1, " ", part2, " ", part3));
         }
         catch (Exception ex)
         {
@@ -225,7 +217,6 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
             part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phoneNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             SpannableString part3 = new SpannableString(getString(R.string.label_type_token_part2));
 
-            //tvCodeSent.setText(TextUtils.concat(part1, " ", part2, " ", part3));
         }
         catch (Exception ex)
         {

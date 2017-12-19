@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 
@@ -41,6 +43,7 @@ public class Nickname extends ImmersiveActivity implements NicknameView
     CoordinatorLayout coordinatorLayout;
     ProgressDialog progressDialog;
     ImageButton btnAcceptNick;
+    ImageView bgWhiteTimemachine;
 
     //Global variables
     Validation mValidator;
@@ -60,6 +63,7 @@ public class Nickname extends ImmersiveActivity implements NicknameView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nickname);
 
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
         mPresenter = new NicknamePresenterImpl(this, this, this);
         mPresenter.initialize();
@@ -68,6 +72,7 @@ public class Nickname extends ImmersiveActivity implements NicknameView
     @Override
     public void initializeViews()
     {
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
         etNickname = (EditText) findViewById(R.id.etNickname);
         btnAcceptNick = (ImageButton) findViewById(R.id.btnAcceptNick);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);

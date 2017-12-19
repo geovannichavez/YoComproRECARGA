@@ -8,16 +8,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"
-        android:layout_height="517dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"/>
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -29,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include4"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/logo_recargo"/>
 
     <TextView
@@ -106,9 +102,9 @@
         android:scaleType="fitXY"
         android:onClick="VerifyToken"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/include4"
+        app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/btn_button_6"/>
 
     <TextView
@@ -179,7 +175,7 @@
 
 
     <!-- <include
-         android:id="@+id/include4"
+         android:id="@+id/bgWhiteTimemachine"
          layout="@layout/custom_white_timemachine_background"
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +196,7 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.482"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="@+id/include4"
+         app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
          app:layout_constraintVertical_bias="0.0"
          app:srcCompat="@drawable/logo_recargo"/>
 
@@ -250,7 +246,7 @@
          android:layout_marginStart="8dp"
          android:layout_marginTop="8dp"
          app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="@+id/include4"
+         app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
          app:layout_constraintHorizontal_bias="0.503"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"
@@ -268,8 +264,8 @@
          android:inputType="textPersonName"
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="@+id/include4"
-         app:layout_constraintTop_toTopOf="@+id/include4"
+         app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
+         app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
          />
 
      <ImageButton
@@ -283,9 +279,9 @@
          android:layout_marginTop="8dp"
          android:scaleType="fitXY"
          app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="@+id/include4"
+         app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
          app:layout_constraintHorizontal_bias="0.502"
-         app:layout_constraintStart_toStartOf="@+id/include4"
+         app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintVertical_bias="0.956"
          app:srcCompat="@drawable/btn_button_6"/>
@@ -302,8 +298,8 @@
          android:textSize="18sp"
          android:textStyle="bold"
          app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="@+id/include4"
-         app:layout_constraintStart_toStartOf="@+id/include4"
+         app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
+         app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintVertical_bias="0.92"/>
 

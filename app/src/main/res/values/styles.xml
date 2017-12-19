@@ -37,6 +37,24 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:windowBackground">@color/color_timemachine_background</item>
+        <item name="android:colorBackground">@color/color_timemachine_background</item>
+    </style>
+
+    <style name="AppWhiteThemeFullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/ApplicationGreenTheme</item>
+        <item name="colorPrimaryDark">@color/ApplicationGreenThemeDark</item>
+        <item name="colorAccent">@color/ApplicationGreenTheme</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:windowBackground">@color/color_white_timemachine_background</item>
+        <item name="android:colorBackground">@color/color_white_timemachine_background</item>
     </style>
 
     <style name="AppThemeTrans" parent="AppTheme">

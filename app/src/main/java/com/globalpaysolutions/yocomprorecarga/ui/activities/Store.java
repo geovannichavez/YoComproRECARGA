@@ -46,6 +46,7 @@ public class Store extends ImmersiveActivity implements StoreView
     ImageView btnBuy;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
+    ImageView bgTimemachine;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -63,13 +64,13 @@ public class Store extends ImmersiveActivity implements StoreView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-
         pagerStoreItems = (ViewPager) findViewById(R.id.pagerStoreItems);
         btnLeft = (ImageButton) findViewById(R.id.btnLeft);
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         lblRecarCoinsLeft = (TextView) findViewById(R.id.lblRecarCoinsLeft);
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -94,7 +95,6 @@ public class Store extends ImmersiveActivity implements StoreView
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage(label);
         mProgressDialog.show();
-        //mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
     }
 
@@ -119,6 +119,8 @@ public class Store extends ImmersiveActivity implements StoreView
     {
         try
         {
+            Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+
             lblRecarCoinsLeft.setText(currentCoins);
             btnBuy.setOnClickListener(new View.OnClickListener()
             {
@@ -205,7 +207,7 @@ public class Store extends ImmersiveActivity implements StoreView
 
             lblReward.setText(String.format("Tu recompensa es de %1$s RecarCoins",prize));
             lblAchievementName.setText(String.format("Haz logrado el nivel %1$s  de %2$s",level, name ));
-            imgAchievement.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgAchievement);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -257,7 +259,7 @@ public class Store extends ImmersiveActivity implements StoreView
 
             tvTitle.setText(title);
             tvDescription.setText(description);
-            imgSouvenir.setImageResource(resource);
+            Picasso.with(this).load(resource).into(imgSouvenir);
 
             dialog = builder.setView(dialogView).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

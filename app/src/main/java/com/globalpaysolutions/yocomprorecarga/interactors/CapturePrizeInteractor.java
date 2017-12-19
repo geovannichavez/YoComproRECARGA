@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
@@ -111,11 +112,18 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     @Override
     public void saveUserTracking(Tracking pTracking)
     {
-        mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(),
-                pTracking.getTotalWinPrizes(),
-                pTracking.getCurrentCoinsProgress(),
-                pTracking.getTotalSouvenirs(),
-                pTracking.getAgeID());
+        try
+        {
+            mUserData.SaveUserTrackingProgess(pTracking.getTotalWinCoins(),
+                    pTracking.getTotalWinPrizes(),
+                    pTracking.getCurrentCoinsProgress(),
+                    pTracking.getTotalSouvenirs(),
+                    pTracking.getAgeID());
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.logException(ex);
+        }
     }
 
     @Override

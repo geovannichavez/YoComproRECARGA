@@ -34,4 +34,10 @@ public class NotificationDetailPresenterImpl implements INotificationDetailPrese
     {
         mView.finishActivity();
     }
+
+    @Override
+    public void loadBackground()
+    {
+        mView.loadBackground();
+    }
 }

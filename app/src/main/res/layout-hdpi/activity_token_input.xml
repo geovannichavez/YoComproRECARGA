@@ -7,9 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput">
 
-    <include
-        android:id="@+id/include4"
-        layout="@layout/custom_white_timemachine_background"/>
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -21,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include4"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/logo_recargo"/>
 
     <TextView
@@ -60,7 +63,7 @@
         android:layout_width="169dp"
         android:layout_height="52dp"
         android:layout_marginTop="44dp"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -100,9 +103,9 @@
         android:scaleType="fitXY"
         android:onClick="VerifyToken"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/include4"
+        app:layout_constraintEnd_toEndOf="@+id/bgWhiteTimemachine"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/include4"
+        app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
         app:srcCompat="@drawable/btn_button_6"/>
 
     <TextView

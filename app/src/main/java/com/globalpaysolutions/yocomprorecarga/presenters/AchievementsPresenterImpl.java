@@ -37,6 +37,12 @@ public class AchievementsPresenterImpl implements IAchievementsPresenter, Achiev
     }
 
     @Override
+    public void loadBackground()
+    {
+        mView.loadBackground();
+    }
+
+    @Override
     public void onRetrieveSuccess(AchievementsResponse response)
     {
         try

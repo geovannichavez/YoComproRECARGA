@@ -8,4 +8,6 @@ public interface NotificationDetailView
 {
     void renderNotification(String pTitle, String pMessage);
     void finishActivity();
+
+    void loadBackground();
 }
