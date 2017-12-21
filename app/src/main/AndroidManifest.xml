@@ -277,6 +277,20 @@
             android:theme="@style/AppThemeFullScreen">
 
         </activity>
+
+        <!--    AppsFlyer Receiver-->
+        <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
+                <intent-filter>
+                     <action android:name="com.android.vending.INSTALL_REFERRER" />
+                 </intent-filter>
+        </receiver>
+        <!--    Multiple Broadcast Receiver -->
+        <!--<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+             <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+             </intent-filter>
+        </receiver>-->
+
     </application>
 
 </manifest>

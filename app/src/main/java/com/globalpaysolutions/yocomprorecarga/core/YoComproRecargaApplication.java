@@ -1,9 +1,11 @@
 package com.globalpaysolutions.yocomprorecarga.core;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.res.Configuration;
+import android.util.Log;
 
+import com.appsflyer.AppsFlyerConversionListener;
+import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;
@@ -19,7 +21,10 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class YoComproRecargaApplication extends Application
 {
+    private static final String TAG = YoComproRecargaApplication.class.getSimpleName();
     private static YoComproRecargaApplication appSingleton;
+    private static final String AF_DEV_KEY = "gSWLH9Wr3aDR5pHzFQHEo4";
+
     public static YoComproRecargaApplication getInstance()
     {
         return appSingleton;
@@ -36,6 +41,38 @@ public class YoComproRecargaApplication extends Application
     {
         super.onCreate();
         appSingleton = this;
+
+        //AppsFlyer
+        AppsFlyerConversionListener conversionDataListener = new AppsFlyerConversionListener()
+        {
+            @Override
+            public void onInstallConversionDataLoaded(Map<String, String> map)
+            {
+                Log.i(TAG, "onInstallConversionDataLoaded fired");
+            }
+
+            @Override
+            public void onInstallConversionFailure(String s)
+            {
+                Log.i(TAG, "onInstallConversionFailure fired");
+            }
+
+            @Override
+            public void onAppOpenAttribution(Map<String, String> map)
+            {
+                Log.i(TAG, "onAppOpenAttribution fired");
+            }
+
+            @Override
+            public void onAttributionFailure(String s)
+            {
+                Log.i(TAG, "onAttributionFailure fired");
+            }
+        };
+
+        AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionDataListener, getApplicationContext());
+        AppsFlyerLib.getInstance().startTracking(this);
+        AppsFlyerLib.getInstance().setDebugLog(true);
 
         //OneSignal Required Code
         OneSignal.startInit(this)
