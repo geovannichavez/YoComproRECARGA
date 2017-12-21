@@ -200,15 +200,13 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     @Override
     public void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile)
     {
-        //TODO: quitar el toast
-        //mView.showGenericToast("Profile changed");
+
     }
 
     @Override
     public void onCurrentAccessTokenChanged(AccessToken pOldAccessToken, AccessToken pCurrentAccessToken)
     {
-        //TODO: quitar el toast
-        //mView.showGenericToast("Access token changed");
+
     }
 
     @Override

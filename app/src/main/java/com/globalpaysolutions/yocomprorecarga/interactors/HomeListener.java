@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.graphics.Bitmap;
+
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -48,6 +50,11 @@ public interface HomeListener
     // GeoFire VendorPointsData
     void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData);
     void fb_vendorPoint_onCancelled(DatabaseError databaseError);
+
+    void onGoldMarkerLoaded(Bitmap bitmap);
+    void onSilverMarkerLoaded(Bitmap bitmap);
+    void onBronzeMarkerLoaded(Bitmap bitmap);
+    void onWildcardMarkerLoaded(Bitmap bitmap);
 
 
 }

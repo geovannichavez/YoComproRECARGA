@@ -12,7 +12,7 @@
         <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" tools:node="remove" />
         <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" tools:node="remove" />
         <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" tools:node="remove"/>
-        <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" tools:node="remove" />
+        <uses-permission android:name="com.huawei.android.launcher.pACCESS_WIFI_STATEACCESS_WIFI_STATEermission.READ_SETTINGS" tools:node="remove" />
         <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" tools:node="remove" />
     -->
     <uses-sdk
@@ -175,10 +175,10 @@
         </activity>
         <activity
             android:name=".ui.activities.NotificationDetail"
-            android:theme="@style/AppThemeFullScreen"
             android:excludeFromRecents="true"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
         <activity
             android:name=".ui.activities.CapturePrizeAR"

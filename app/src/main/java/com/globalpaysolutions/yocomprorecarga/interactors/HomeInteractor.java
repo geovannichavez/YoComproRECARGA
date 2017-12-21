@@ -1,6 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -9,11 +12,9 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
-import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
-import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -24,7 +25,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
+
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -161,6 +170,159 @@ public class HomeInteractor implements IHomeInteractor
                 mHomeListener.onError(0, t);
             }
         });
+    }
+
+    @Override
+    public Bitmap fetchBitmap(String url)
+    {
+        Bitmap bitmap = null;
+        try
+        {
+            bitmap = new FetchMarker().execute(url).get();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ExecutionException e)
+        {
+            e.printStackTrace();
+        }
+        return  bitmap;
+    }
+
+    @Override
+    public void fetchGoldMarker(String url)
+    {
+        Picasso.with(mContext).load(url).into(new Target()
+        {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+            {
+                mHomeListener.onGoldMarkerLoaded(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable)
+            {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable)
+            {
+
+            }
+        });
+    }
+
+    @Override
+    public void fetchSilverMarker(String url)
+    {
+        Picasso.with(mContext).load(url).into(new Target()
+        {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+            {
+                mHomeListener.onSilverMarkerLoaded(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable)
+            {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable)
+            {
+
+            }
+        });
+    }
+
+    @Override
+    public void fetchBronzeMarker(String url)
+    {
+        Picasso.with(mContext).load(url).into(new Target()
+        {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+            {
+                mHomeListener.onBronzeMarkerLoaded(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable)
+            {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable)
+            {
+
+            }
+        });
+    }
+
+    @Override
+    public void fetchWildcardMarker(String url)
+    {
+        Picasso.with(mContext).load(url).into(new Target()
+        {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+            {
+                mHomeListener.onWildcardMarkerLoaded(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable)
+            {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable)
+            {
+
+            }
+        });
+    }
+
+    public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
+    {
+        Bitmap mBitmap;
+
+        @Override
+        protected Bitmap doInBackground(String... strings)
+        {
+            try
+            {
+                URL bitmapUrl = new URL(strings[0]);
+                HttpURLConnection connection = (HttpURLConnection) bitmapUrl.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                //mBitmap = BitmapFactory.decodeStream(input);
+                Bitmap bitmap = BitmapFactory.decodeStream(input);
+                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                mBitmap = null;
+            }
+            return mBitmap;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
     }
 
 

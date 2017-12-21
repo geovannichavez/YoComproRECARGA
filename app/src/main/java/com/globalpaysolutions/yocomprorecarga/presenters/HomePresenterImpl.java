@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.EraMarker;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -32,7 +34,11 @@ import com.google.firebase.database.DatabaseError;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
@@ -51,6 +57,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
     private GoogleLocationApiManager mGoogleLocationApiManager;
 
+    private Map<String, Bitmap> mMarkerMap;
+
     public HomePresenterImpl(HomeView pView, AppCompatActivity pActivity, Context pContext)
     {
         mView = pView;
@@ -63,6 +71,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext, Constants.FOUR_METTERS_DISPLACEMENT);
         this.mGoogleLocationApiManager.setLocationCallback(this);
 
+        this.mMarkerMap = new HashMap<>();
     }
 
     @Override
@@ -159,18 +168,61 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         }
     }
 
+
     @Override
     public void intializeGeolocation()
     {
-        //Checks if mock locations are active
-
-        boolean active = MockLocationUtility.isMockSettingsON(mContext);
-
-        if(! active )
+        try
         {
-            mInteractor.initializeGeolocation();
-            mFirebaseInteractor.initializePOIGeolocation();
+            //Checks if mock locations are active
+            if(!MockLocationUtility.isMockSettingsON(mContext))
+            {
+                List<EraMarker> markersList = new ArrayList<>();
+                int counter = 0;
+
+                EraMarker gold = new EraMarker();
+                gold.setEraName(Constants.NAME_CHEST_TYPE_GOLD);
+                gold.setMarkerUrl(mUserData.getGoldMarker());
+                markersList.add(gold);
+
+                EraMarker silver = new EraMarker();
+                silver.setEraName(Constants.NAME_CHEST_TYPE_SILVER);
+                silver.setMarkerUrl(mUserData.getSilverMarker());
+                markersList.add(silver);
+
+                EraMarker bronze = new EraMarker();
+                bronze.setEraName(Constants.NAME_CHEST_TYPE_BRONZE);
+                bronze.setMarkerUrl(mUserData.getBronzeMarker());
+                markersList.add(bronze);
+
+                EraMarker wildcard = new EraMarker();
+                wildcard.setEraName(Constants.NAME_CHEST_TYPE_WILDCARD);
+                wildcard.setMarkerUrl(mUserData.getWildcardMarker());
+                markersList.add(wildcard);
+
+                //Fetches all bitmaps for markers
+                for (EraMarker marker : markersList)
+                {
+                    Bitmap bitmap = mInteractor.fetchBitmap(marker.getMarkerUrl());
+                    mMarkerMap.put(marker.getEraName(), bitmap);
+                    counter = counter + 1;
+                }
+
+                //When they're complete, then starts to query all chests locations
+                if(counter >= 4)
+                {
+                    mView.getMarkerBitmaps(mMarkerMap);
+                    mInteractor.initializeGeolocation();
+                    mFirebaseInteractor.initializePOIGeolocation();
+
+                }
+            }
         }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
 
     }
 
@@ -455,6 +507,58 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
     {
 
+    }
+
+    @Override
+    public void onGoldMarkerLoaded(Bitmap bitmap)
+    {
+        try
+        {
+            mMarkerMap.put(Constants.NAME_CHEST_TYPE_GOLD, bitmap);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onSilverMarkerLoaded(Bitmap bitmap)
+    {
+        try
+        {
+            mMarkerMap.put(Constants.NAME_CHEST_TYPE_SILVER, bitmap);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBronzeMarkerLoaded(Bitmap bitmap)
+    {
+        try
+        {
+            mMarkerMap.put(Constants.NAME_CHEST_TYPE_BRONZE, bitmap);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onWildcardMarkerLoaded(Bitmap bitmap)
+    {
+        try
+        {
+            mMarkerMap.put(Constants.NAME_CHEST_TYPE_WILDCARD, bitmap);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     //  FIREBASE GOLD POINTS

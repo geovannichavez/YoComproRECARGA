@@ -381,7 +381,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             ex.printStackTrace();
             //TODO: Quitar toast
-            Toast.makeText(this, "_debug info: " + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+             //Toast.makeText(this, "_debug info: " + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

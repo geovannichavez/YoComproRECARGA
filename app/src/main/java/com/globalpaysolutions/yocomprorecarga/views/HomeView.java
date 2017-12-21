@@ -1,9 +1,12 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.graphics.Bitmap;
 import android.location.Location;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.Map;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
@@ -24,6 +27,7 @@ public interface HomeView
     void hideLoadingDialog();
     void swtichMapStyle(boolean isNightTime);
     void showInfographyDialog();
+    void getMarkerBitmaps(Map<String, Bitmap> markerMap);
 
     void addSalePoint(String pKey, LatLng pLocation);
     void addSalePointData(String pKey, String pTitle, String pSnippet);
@@ -51,4 +55,5 @@ public interface HomeView
     void removeWildcardPoint(String pKey);
 
     void showToast(String string);
+
 }
