@@ -177,7 +177,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             //Checks if mock locations are active
             if(!MockLocationUtility.isMockSettingsON(mContext))
             {
-                List<EraMarker> markersList = new ArrayList<>();
+                /*List<EraMarker> markersList = new ArrayList<>();
                 int counter = 0;
 
                 EraMarker gold = new EraMarker();
@@ -215,7 +215,11 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     mInteractor.initializeGeolocation();
                     mFirebaseInteractor.initializePOIGeolocation();
 
-                }
+                }*/
+
+                mView.getMarkerBitmaps(mMarkerMap);
+                mInteractor.initializeGeolocation();
+                mFirebaseInteractor.initializePOIGeolocation();
             }
         }
         catch (Exception ex)
@@ -507,58 +511,6 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
     {
 
-    }
-
-    @Override
-    public void onGoldMarkerLoaded(Bitmap bitmap)
-    {
-        try
-        {
-            mMarkerMap.put(Constants.NAME_CHEST_TYPE_GOLD, bitmap);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onSilverMarkerLoaded(Bitmap bitmap)
-    {
-        try
-        {
-            mMarkerMap.put(Constants.NAME_CHEST_TYPE_SILVER, bitmap);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onBronzeMarkerLoaded(Bitmap bitmap)
-    {
-        try
-        {
-            mMarkerMap.put(Constants.NAME_CHEST_TYPE_BRONZE, bitmap);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onWildcardMarkerLoaded(Bitmap bitmap)
-    {
-        try
-        {
-            mMarkerMap.put(Constants.NAME_CHEST_TYPE_WILDCARD, bitmap);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
     }
 
     //  FIREBASE GOLD POINTS

@@ -51,10 +51,6 @@ public interface HomeListener
     void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData);
     void fb_vendorPoint_onCancelled(DatabaseError databaseError);
 
-    void onGoldMarkerLoaded(Bitmap bitmap);
-    void onSilverMarkerLoaded(Bitmap bitmap);
-    void onBronzeMarkerLoaded(Bitmap bitmap);
-    void onWildcardMarkerLoaded(Bitmap bitmap);
 
 
 }

@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
-import com.appsflyer.AppsFlyerConversionListener;
-import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;

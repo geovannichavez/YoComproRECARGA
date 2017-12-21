@@ -17,8 +17,4 @@ public interface IHomeInteractor
     void vendorPointsUpdateCriteria(GeoLocation pLocation);
     void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
     Bitmap fetchBitmap(String url);
-    void fetchGoldMarker(String url);
-    void fetchSilverMarker(String url);
-    void fetchBronzeMarker(String url);
-    void fetchWildcardMarker(String url);
 }
