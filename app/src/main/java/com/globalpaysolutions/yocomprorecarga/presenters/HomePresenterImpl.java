@@ -177,7 +177,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             //Checks if mock locations are active
             if(!MockLocationUtility.isMockSettingsON(mContext))
             {
-                /*List<EraMarker> markersList = new ArrayList<>();
+                List<EraMarker> markersList = new ArrayList<>();
                 int counter = 0;
 
                 EraMarker gold = new EraMarker();
@@ -215,11 +215,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     mInteractor.initializeGeolocation();
                     mFirebaseInteractor.initializePOIGeolocation();
 
-                }*/
-
-                mView.getMarkerBitmaps(mMarkerMap);
-                mInteractor.initializeGeolocation();
-                mFirebaseInteractor.initializePOIGeolocation();
+                }
             }
         }
         catch (Exception ex)

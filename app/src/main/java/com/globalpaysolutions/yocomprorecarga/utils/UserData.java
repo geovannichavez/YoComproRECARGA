@@ -233,8 +233,8 @@ public class UserData
         mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
         mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
-        mEditor.putInt(KEY_ERA_ID, 1); //TODO: Quitar era quemada
-        //mEditor.putInt(KEY_ERA_ID, pEraID);
+        //mEditor.putInt(KEY_ERA_ID, 1); //TODO: Quitar era quemada
+        mEditor.putInt(KEY_ERA_ID, pEraID);
         mEditor.commit();
     }
 
@@ -369,21 +369,7 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveEraSelected(int eraID, String eraName, String eraUrl)
-    {
-        try
-        {
-            mEditor.putInt(KEY_ERA_ID, eraID);
-            mEditor.putString(KEY_ERA_NAME, eraName);
-            mEditor.putString(KEY_ERA_URL_ICON, eraUrl);
-            mEditor.commit();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-    /*public void saveEraSelected(int eraID, String eraName, String eraUrl, String markerGold, String markerSilver,
+    public void saveEraSelected(int eraID, String eraName, String eraUrl, String markerGold, String markerSilver,
                                 String markerBronze, String markerWildcard)
     {
         try
@@ -401,7 +387,7 @@ public class UserData
         {
             ex.printStackTrace();
         }
-    }*/
+    }
 
     public void saveLastWildcardTouched(String pFirebaseID, int chestType)
     {

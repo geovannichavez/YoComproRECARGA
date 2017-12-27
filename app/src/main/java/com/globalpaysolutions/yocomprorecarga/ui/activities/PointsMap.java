@@ -590,15 +590,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
+                Bitmap goldMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_GOLD);
 
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point))
-                );
-
-                /*Bitmap goldMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_GOLD);
-
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(goldMarker)));*/
+                        .icon(BitmapDescriptorFactory.fromBitmap(goldMarker)));
 
                 mGoldPointsMarkers.put(pKey, marker);
             }
@@ -655,14 +650,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_silver_point))
-                );
-
-                /*Bitmap silverMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_SILVER);
+                Bitmap silverMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_SILVER);
 
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(silverMarker)));*/
+                        .icon(BitmapDescriptorFactory.fromBitmap(silverMarker)));
+
                 mSilverPointsMarkers.put(pKey, marker);
             }
         }
@@ -718,14 +710,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_bronze_point))
-                );
-
-                /*Bitmap bronzeMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_BRONZE);
+                Bitmap bronzeMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_BRONZE);
 
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(bronzeMarker)));*/
+                        .icon(BitmapDescriptorFactory.fromBitmap(bronzeMarker)));
                 mBronzePointsMarkers.put(pKey, marker);
             }
         }
@@ -781,14 +769,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_wildcard_point))
-                );
-
-                /*Bitmap wildcardMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_WILDCARD);
+                Bitmap wildcardMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_WILDCARD);
 
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(wildcardMarker)));*/
+                        .icon(BitmapDescriptorFactory.fromBitmap(wildcardMarker)));
                 mWildcardPointsMarkers.put(pKey, marker);
             }
         }

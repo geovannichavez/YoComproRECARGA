@@ -100,19 +100,15 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             //Sets selected era
             UserData.getInstance(mContext).hasSelectedEra(true);
 
-            /*UserData.getInstance(mContext).saveEraSelected(
+            UserData.getInstance(mContext).saveEraSelected(
                     eraSelection.getAgeID(),
                     eraSelection.getName(),
                     eraSelection.getIconImage(),
                     eraSelection.getMarkerG(),
                     eraSelection.getMarkerS(),
                     eraSelection.getMarkerB(),
-                    eraSelection.getMarkerW());*/
+                    eraSelection.getMarkerW());
 
-            UserData.getInstance(mContext).saveEraSelected(
-                    eraSelection.getAgeID(),
-                    eraSelection.getName(),
-                    eraSelection.getIconImage());
             if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
             {
                 mView.forwardToStore();
