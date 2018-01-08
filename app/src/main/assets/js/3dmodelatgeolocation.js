@@ -1,5 +1,5 @@
 var exchanging = false;
-var actualARObject;
+//var actualARObject;
 
 var World = {
 
@@ -21,15 +21,15 @@ deleteObjectGeo: function deleteObjectGeoFn() {
 },
 
 destroyObjectGeo: function destroyObjectGeoFn() {
-    actualARObject.destroy();
+    //actualARObject.destroy();
 },
 
 
 //Funcion para crear modelo Bronze
-createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,longitude, key) {
+createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,longitude, key,age) {
 
     exchanging=false;
-    var modelBronze = new AR.Model("assets/BronzeChest.wt3", {
+    var modelBronze = new AR.Model("assets/"+age+"/BronzeChest.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,
@@ -37,6 +37,7 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                   z: 1
                                   }
                                   });
+
 
     var a = new AR.PropertyAnimation(modelBronze, 'rotate.heading', 90.0, -270.0, 5000);
     a.start(-1);
@@ -62,18 +63,20 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                           var architectSdkUrl = "architectsdk://Bronze//" + key + "//" + latitude + "//" + longitude;
                                           document.location = architectSdkUrl;
                                           exchanging = false;
-                                          },2300);
+                                          },2400);
                                 }
                                 }
                                 });
-    actualARObject = obj;
+    //actualARObject = obj;
 },
 
 //Funcion para crear modelo Silver
-createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,longitude, key) {
-
+//createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,longitude, key) {
+createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,longitude, key,age) {
     exchanging=false;
-    var modelSilver = new AR.Model("assets/SilverChest.wt3", {
+    var modelSilver = new AR.Model("assets/"+age+"/SilverChest.wt3", {
+    //var modelSilver = new AR.Model("http://admin.yovendorecarga.com/Uploads/recargo/model/plata.wt3", {
+
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,
@@ -106,18 +109,19 @@ createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,lon
                                           var architectSdkUrl = "architectsdk://Silver//" + key + "//" + latitude + "//" + longitude;
                                           document.location = architectSdkUrl;
                                           exchanging = false;
-                                          },2300);
+                                          },2400);
                                }
                                }
                                });
-    actualARObject = obj;
+    //actualARObject = obj;
     },
 
 //Funcion para crear modelo Gold
-createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitude, key) {
-
+//createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitude, key) {
+createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitude, key,age) {
     exchanging=false;
-    var modelGold = new AR.Model("assets/GoldChest.wt3", {
+    //var modelGold = new AR.Model("http://admin.yovendorecarga.com/Uploads/recargo/model/oro.wt3", {
+    var modelGold = new AR.Model("assets/"+age+"/GoldChest.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,
@@ -151,18 +155,19 @@ createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitu
                                           var architectSdkUrl = "architectsdk://Gold//" + key + "//" + latitude + "//" + longitude;
                                           document.location = architectSdkUrl;
                                           exchanging = false;
-                                          },2300);
+                                          },2400);
                                }
                                }
                                });
-    actualARObject = obj;
+    //actualARObject = obj;
 },
 
 //Funcion para crear modelo Comodin
-createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key) {
+//createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key) {
+createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key,age) {
 
     exchanging=false;
-    var modelWildcard = new AR.Model("assets/Wildcard.wt3", {
+    var modelWildcard = new AR.Model("assets/"+age+"/Wildcard.wt3", {
                                  onLoaded: this.worldLoaded,
                                  scale: {
                                  x: 1,
@@ -203,7 +208,7 @@ createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude
                                }
                                }
                                });
-    actualARObject = obj;
+    //actualARObject = obj;
 },
 
 worldLoaded: function worldLoadedFn() {
@@ -215,4 +220,3 @@ worldLoaded: function worldLoadedFn() {
 
 World.init();
 AR.context.onLocationChanged = World.locationChanged;
-

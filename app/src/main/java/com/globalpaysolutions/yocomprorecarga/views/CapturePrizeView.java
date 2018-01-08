@@ -39,31 +39,31 @@ public interface CapturePrizeView
     void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
     void updatePrizeButton(int pCoins);
 
-    void onGoldKeyEntered(String pKey, LatLng pLocation);
+    void onGoldKeyEntered(String pKey, LatLng pLocation, String pAge);
     void onGoldKeyExited(String pKey);
-    void onGoldKeyEntered_2D(String pKey, LatLng pLocation);
+    void onGoldKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onGoldPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onGoldPointCancelled(DatabaseError pDatabaseError);
 
-    void onSilverKeyEntered(String pKey, LatLng pLocation);
-    void onSilverKeyEntered_2D(String pKey, LatLng pLocation);
+    void onSilverKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onSilverKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onSilverKeyExited(String pKey);
     void onSilverPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onSilverPointCancelled(DatabaseError pDatabaseError);
 
-    void onBronzeKeyEntered(String pKey, LatLng pLocation);
-    void onBronzeKeyEntered_2D(String pKey, LatLng pLocation);
+    void onBronzeKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onBronzeKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onBronzeKeyExited(String pKey);
     void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onBronzePointCancelled(DatabaseError pDatabaseError);
 
-    void onWildcardKeyEntered(String pKey, LatLng pLocation);
-    void onWildcardKeyEntered_2D(String pKey, LatLng pLocation);
+    void onWildcardKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onWildcardKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onWildcardKeyExited(String pKey);
     void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData);
     void onWildcardPointCancelled(DatabaseError pDatabaseError);
 
-    void changeToOpenChest(int pChestType);
+    void changeToOpenChest(int pChestType, int pEraID);
     void navigateToWildcard();
 
     void navigateToPrizeDetails();
