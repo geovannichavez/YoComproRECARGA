@@ -96,6 +96,19 @@
         app:layout_constraintStart_toStartOf="@+id/btnGenericDialogButton"
         app:layout_constraintTop_toTopOf="@+id/btnGenericDialogButton"/>
 
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/btnShareSouvenir"
+        android:layout_width="188dp"
+        android:layout_height="62dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGenericDialogButton"
+        app:layout_constraintEnd_toEndOf="@+id/btnGenericDialogButton"
+        app:layout_constraintStart_toStartOf="@+id/btnGenericDialogButton"
+        app:layout_constraintTop_toTopOf="@+id/btnGenericDialogButton"/>
+
+
+
     <TextView
         android:id="@+id/lblSouvenirName"
         android:layout_width="wrap_content"

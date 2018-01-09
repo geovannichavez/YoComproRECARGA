@@ -35,7 +35,6 @@ public interface CapturePrizeView
     void showNewAchievementDialog(String name, String level, String prize, String score, int resource, boolean navigatePrize);
 
 
-
     void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
     void updatePrizeButton(int pCoins);
 

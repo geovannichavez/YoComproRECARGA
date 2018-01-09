@@ -22,4 +22,5 @@ public interface StoreView
     void showNewAchievementDialog(String name, String level, String prize, String score, int resource);
     void createImageDialog(String title, String description, int resource);
     void updateViews(String coinsLeft);
+    void showFacebookShareDialog();
 }

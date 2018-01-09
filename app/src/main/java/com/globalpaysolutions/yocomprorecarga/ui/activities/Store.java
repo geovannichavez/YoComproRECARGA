@@ -288,6 +288,12 @@ public class Store extends ImmersiveActivity implements StoreView
         lblRecarCoinsLeft.setText(coinsLeft);
     }
 
+    @Override
+    public void showFacebookShareDialog()
+    {
+
+    }
+
     private void createStoreItemInfoDialog()
     {
         try

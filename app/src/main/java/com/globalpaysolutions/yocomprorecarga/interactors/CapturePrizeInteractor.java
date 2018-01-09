@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.support.coreui.BuildConfig;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -11,6 +12,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -80,6 +82,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         requestBody.setLongitude(pLocation.longitude);
         requestBody.setChestType(pChestType);
         requestBody.setAgeID(1);
+
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);

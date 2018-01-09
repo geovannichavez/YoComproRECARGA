@@ -1,19 +1,17 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,6 +27,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
+import com.facebook.share.widget.ShareDialog;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
@@ -38,7 +44,6 @@ import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenter
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -65,7 +70,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     TextView tvPrizesEarned;
     TextView tvSouvenirCounter;
     TextView tvCoinsCounter;
-    //ImageButton btnCoinsCounter;
     ImageButton imgCoinMeter;
     ImageButton btnBack;
     ImageView btnNavigateTimeMachine;
@@ -78,6 +82,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     Animation mAnimation;
     Handler mHandler;
     HashMap<String, ChestData2D> mFirbaseObjects;
+    CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
@@ -450,9 +455,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             final View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
 
             TextView tvSouvenirName = (TextView) dialogView.findViewById(R.id.lblSouvenirName);
-            //(TextView tvSouvenirDesc = (TextView) dialogView.findViewById(R.id.lblSouvenirDescription);
             ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgSouvenirDialog);
             ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ShareButton btnShareSouvenir = (ShareButton) dialogView.findViewById(R.id.btnShareSouvenir);
             ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
             btnGenericDialogButton.setOnClickListener(new View.OnClickListener()
             {
@@ -466,15 +471,16 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             });
 
             tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), souvenirName));
-            //tvSouvenirDesc.setText(souvenirDescription);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
 
             souvenirDialog = builder.setView(dialogView).create();
             souvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             souvenirDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             souvenirDialog.show();
+
+            //Shares on Facebook dialog
+            showFacebookDialog(btnShareSouvenir, souvenirName);
 
             btnClose.setOnClickListener(new View.OnClickListener()
             {
@@ -1011,6 +1017,50 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         finish();
     }
 
+    private void showFacebookDialog(ShareButton shareButton, String souvenir)
+    {
+        try
+        {
+            shareButton.performClick();
+
+            if (ShareDialog.canShow(ShareLinkContent.class))
+            {
+                ShareLinkContent shareContent = new ShareLinkContent.Builder()
+                        .setContentUrl(Uri.parse("http://recar-go.com/Share/ShareEarnedSouvenir"))
+                        .setQuote(String.format("Acabo de encontrar un %1$s en RecarGO!", souvenir))
+                        //.setShareHashtag(new ShareHashtag.Builder().setHashtag("EncontreSouvenir").build())
+                        .build();
+                shareButton.setShareContent(shareContent);
+            }
+
+            //Share
+            ShareDialog shareDialog = new ShareDialog((Activity) this);
+            shareDialog.registerCallback(mCallbackManager, new FacebookCallback<Sharer.Result>()
+            {
+                @Override
+                public void onSuccess(Sharer.Result result)
+                {
+
+                }
+
+                @Override
+                public void onCancel()
+                {
+
+                }
+
+                @Override
+                public void onError(FacebookException error)
+                {
+
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
 
 
