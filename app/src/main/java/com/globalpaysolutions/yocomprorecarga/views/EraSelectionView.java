@@ -20,4 +20,5 @@ public interface EraSelectionView
     void createImageDialog(String title, String description, int resource);
     void createLockedEraDialog();
     void setSelectedEraName(String eraName);
+    void showGenericDialog(String title, String message);
 }

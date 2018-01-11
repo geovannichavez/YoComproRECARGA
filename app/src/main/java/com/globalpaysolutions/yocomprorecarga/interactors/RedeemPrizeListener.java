@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 public interface RedeemPrizeListener
 {
     void onSuccess(ActivatePrizeResponse response);
-    void onError(int statusCode, Throwable throwable);
+    void onError(int statusCode, Throwable throwable, String requiredVersion);
 }

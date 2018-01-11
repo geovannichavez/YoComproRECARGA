@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
-import android.hardware.usb.UsbRequest;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
@@ -71,9 +70,20 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     }
 
     @Override
-    public void onError(int codeStatus, Throwable throwable)
+    public void onError(int codeStatus, Throwable throwable, String requiredVersion)
     {
-        mView.hideLoadingDialog();
+        try
+        {
+            mView.hideLoadingDialog();
+
+            if(codeStatus == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String content = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+                mView.showGenericDialog(title, content);
+            }
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     @Override
@@ -127,14 +137,24 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     }
 
     @Override
-    public void onExchangeSouvError(int codeResponse, Throwable throwable)
+    public void onExchangeSouvError(int codeResponse, Throwable throwable, String requiredVersion)
     {
         mView.hideLoadingDialog();
-        mView.closeSouvenirDialog();
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
-        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-        mView.generateImageDialog(dialog, R.drawable.ic_alert);
+
+        if(codeResponse == 426)
+        {
+            String title = mContext.getString(R.string.title_update_required);
+            String message = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+            mView.showGenericDialog(title, message);
+        }
+        else
+        {
+            mView.closeSouvenirDialog();
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.generateImageDialog(dialog, R.drawable.ic_alert);
+        }
     }
 }

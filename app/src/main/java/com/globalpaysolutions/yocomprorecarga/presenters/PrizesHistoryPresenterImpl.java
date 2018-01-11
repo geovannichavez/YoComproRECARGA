@@ -89,10 +89,10 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     }
 
     @Override
-    public void onRetrievePrizesError(int code, Throwable throwable)
+    public void onRetrievePrizesError(int code, Throwable throwable, String requiredVersion)
     {
         mView.hideLoadingDialog();
-        processErrorMessage(code, throwable);
+        processErrorMessage(code, throwable, requiredVersion);
     }
 
      /*
@@ -103,7 +103,7 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     *
     */
 
-    private void processErrorMessage(int pCodeStatus, Throwable pThrowable)
+    private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         DialogViewModel errorResponse = new DialogViewModel();
 
@@ -140,6 +140,12 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
                 {
                     Titulo = mContext.getString(R.string.error_title_vendor_not_found);
                     Linea1 = mContext.getString(R.string.error_content_vendor_not_found_line);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else if (pCodeStatus == 426)
+                {
+                    Titulo = mContext.getString(R.string.title_update_required);
+                    Linea1 = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
                     Button = mContext.getString(R.string.button_accept);
                 }
                 else

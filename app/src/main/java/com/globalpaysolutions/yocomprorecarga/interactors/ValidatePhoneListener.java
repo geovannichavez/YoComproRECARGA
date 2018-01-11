@@ -10,7 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 
 public interface ValidatePhoneListener
 {
-    void onError(int pCodeStatus, Throwable pThrowable);
+    void onError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
     void onGetCountriesSuccess(Countries pCountries);
-    void onRequestPhoneValResult(RegisterClientResponse pResponse, int codeStatus);
+    void onRequestPhoneValResult(RegisterClientResponse pResponse, int codeStatus );
 }

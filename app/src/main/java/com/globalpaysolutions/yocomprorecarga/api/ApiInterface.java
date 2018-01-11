@@ -68,7 +68,9 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REGISTER_PHONE_CONSUMER)
-    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey, @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
+    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey, @Header("AppVersion") String pAppVersion,
+                                                  @Header("Platform") String pPlatform,
+                                                  @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
@@ -76,15 +78,20 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE)
-    Call<ExchangeResponse> exchangeChest(@Header("authenticationKey") String pAuthKey, @Body ExchangeReqBody pExchangeCoin);
+    Call<ExchangeResponse> exchangeChest(@Header("authenticationKey") String pAuthKey, @Body ExchangeReqBody pExchangeCoin,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.TRACKING)
-    Call<Tracking> getConsumerTracking(@Header("authenticationKey") String pAuthKey);
+    Call<Tracking> getConsumerTracking(@Header("authenticationKey") String pAuthKey,
+                                       @Header("AppVersion") String pAppVersion,
+                                       @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.AUTHENTICATE_CONSUMER)
-    Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticaReqBody pAuthenticateBody);
+    Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticaReqBody pAuthenticateBody, @Header("AppVersion") String pAppVersion,
+                                                    @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_NICKNAME)
@@ -92,7 +99,9 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REDEEM_PRIZE)
-    Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey);
+    Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey,
+                                       @Header("AppVersion") String pAppVersion,
+                                       @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.LEADERBOARDS)
@@ -100,42 +109,67 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.PRIZES_HISTORY)
-    Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey);
+    Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey,
+                                                     @Header("AppVersion") String pAppVersion,
+                                                     @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_ERAS)
-    Call<AgesResponse> retrieveAges(@Header("authenticationKey") String pAuthKey);
+    Call<AgesResponse> retrieveAges(@Header("authenticationKey") String pAuthKey,
+                                    @Header("AppVersion") String pAppVersion,
+                                    @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.SOUVENIRS)
-    Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey);
+    Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.STORE_ITEMS)
-    Call<StoreItemsResponse> getStoreItems(@Header("authenticationKey") String pAuthKey);
+    Call<StoreItemsResponse> getStoreItems(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.PURCHASE)
-    Call<PurchaseItemResponse> purchaseStoreItem(@Header("authenticationKey") String pAuthKey, @Body PurchaseStoreReqBody request);
+    Call<PurchaseItemResponse> purchaseStoreItem(@Header("authenticationKey") String pAuthKey,
+                                                 @Header("AppVersion") String pAppVersion,
+                                                 @Header("Platform") String pPlatform,
+                                                 @Body PurchaseStoreReqBody request);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.ERA_SELECTION)
-    Call<EraSelectionResponse> selectEra(@Header("authenticationKey") String pAuthKey, @Body EraSelectionReq request);
+    Call<EraSelectionResponse> selectEra(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform,
+                                         @Body EraSelectionReq request);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.ACHIEVEMENTS)
-    Call<AchievementsResponse> getAchievements(@Header("authenticationKey") String pAuthKey);
+    Call<AchievementsResponse> getAchievements(@Header("authenticationKey") String pAuthKey,
+                                               @Header("AppVersion") String pAppVersion,
+                                               @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE_SOUVENIR)
-    Call<WinPrizeResponse> exchangeSouvenir(@Header("authenticationKey") String authKey, @Body ExchangeSouvenirReq exchangeSouvenirReq);
+    Call<WinPrizeResponse> exchangeSouvenir(@Header("authenticationKey") String authKey,
+                                            @Header("AppVersion") String pAppVersion,
+                                            @Header("Platform") String pPlatform,
+                                            @Body ExchangeSouvenirReq exchangeSouvenirReq);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.EXCHANGE_WILDCARD)
-    Call<ExchangeWildcardResponse> exchangeWildcard(@Header("authenticationKey") String authKey, @Body ExchangeWildcardReq exchangeWildcardReq);
+    Call<ExchangeWildcardResponse> exchangeWildcard(@Header("authenticationKey") String authKey,
+                                                    @Header("AppVersion") String pAppVersion,
+                                                    @Header("Platform") String pPlatform,
+                                                    @Body ExchangeWildcardReq exchangeWildcardReq);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.ACTIVATE_PRIZE)
-    Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey, @Body ActivatePrizeReq activatePrizeReq);
+    Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey,
+                                              @Header("AppVersion") String pAppVersion,
+                                              @Header("Platform") String pPlatform,
+                                              @Body ActivatePrizeReq activatePrizeReq);
 
 }

@@ -4,13 +4,19 @@ import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IWildcardInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +45,9 @@ public class WildcardInteractor implements IWildcardInteractor
         requestBody.setLocationID(pFirebaseID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ExchangeWildcardResponse> call = apiService.exchangeWildcard(UserData.getInstance(mContext).getUserAuthenticationKey(), requestBody);
+        final Call<ExchangeWildcardResponse> call = apiService.exchangeWildcard(UserData.getInstance(mContext).getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM,
+                requestBody);
 
         call.enqueue(new Callback<ExchangeWildcardResponse>()
         {
@@ -52,16 +60,32 @@ public class WildcardInteractor implements IWildcardInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    listener.onExchangeWildcardError(codeResponse, null);
-                    Log.e(TAG, response.errorBody().toString());
+                    try
+                    {
+                        int codeResponse = response.code();
+
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            listener.onExchangeWildcardError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            listener.onExchangeWildcardError(codeResponse, null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ExchangeWildcardResponse> call, Throwable t)
             {
-                listener.onExchangeWildcardError(0, t);
+                listener.onExchangeWildcardError(0, t, null);
             }
         });
     }

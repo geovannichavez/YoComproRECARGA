@@ -57,8 +57,22 @@ public class AchievementsPresenterImpl implements IAchievementsPresenter, Achiev
     }
 
     @Override
-    public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
+    public void onRetrieveError(int pCodeStatus, Throwable pThrowable, String requiredVersion)
     {
-        mView.hideLoadingDialog();
+       try
+       {
+           mView.hideLoadingDialog();
+
+           if(pCodeStatus == 426)
+           {
+               String title = mContext.getString(R.string.title_update_required);
+               String message = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+               mView.showGenericDialog(title, message);
+           }
+       }
+       catch (Exception ex)
+       {
+           ex.printStackTrace();
+       }
     }
 }

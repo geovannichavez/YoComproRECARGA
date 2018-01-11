@@ -586,22 +586,40 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onTrackingError(int pCodeStatus, Throwable pThrowable)
+    public void onTrackingError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
-        mView.hideLoadingDialog();
-        int coins = mUserData.getTotalWonCoins();
-        int prizes = mUserData.GetConsumerPrizes();
-        int souvenirs = mUserData.getSavedSouvenirsCount();
-        int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
-        mView.updateIndicators(String.valueOf(prizes), coins, String.valueOf(souvenirs));
-        mView.updatePrizeButton(coinsProgress);
+        try
+        {
+            mView.hideLoadingDialog();
 
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        //dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
-        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
-        dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
-        mView.showGenericDialog(dialog);
+            if(pCodeStatus == 426)
+            {
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.title_update_required));
+                dialog.setLine1(String.format(mContext.getString(R.string.content_update_required), pRequiredVersion));
+                dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
+            }
+            else
+            {
+                int coins = mUserData.getTotalWonCoins();
+                int prizes = mUserData.GetConsumerPrizes();
+                int souvenirs = mUserData.getSavedSouvenirsCount();
+                int coinsProgress = mUserData.GetUserCurrentCoinsProgress();
+                mView.updateIndicators(String.valueOf(prizes), coins, String.valueOf(souvenirs));
+                mView.updatePrizeButton(coinsProgress);
+
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+                dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
     }
 
@@ -743,17 +761,25 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onOpenChestError(int pCodeStatus, Throwable pThrowable)
+    public void onOpenChestError(int pCodeStatus, Throwable pThrowable, String requiredVersion)
     {
-        mView.hideLoadingDialog();
-        mView.setEnabledChestImage(true);
-        processErrorMessage(pCodeStatus, pThrowable);
-        mIsRunning = false;
-
-        if(!mUserData.Is3DCompatibleDevice())
+        try
         {
-            this.mView.obtainUserProgress();
-            mView.switchRecarcoinVisible(false);
+            mView.hideLoadingDialog();
+            mView.setEnabledChestImage(true);
+            processErrorMessage(pCodeStatus, pThrowable, requiredVersion);
+            mIsRunning = false;
+
+            if(!mUserData.Is3DCompatibleDevice())
+            {
+                this.mView.obtainUserProgress();
+                mView.switchRecarcoinVisible(false);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 
@@ -827,11 +853,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable)
+    public void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable, String requiredVersion)
     {
         mView.hideLoadingDialog();
         mView.blinkRecarcoin();
-        processErrorMessage(pCodeStatus, pThrowable);
+        processErrorMessage(pCodeStatus, pThrowable, requiredVersion);
     }
 
 
@@ -854,7 +880,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         return map;
     }
 
-    private void processErrorMessage(int pCodeStatus, Throwable pThrowable)
+    private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String requiredVersion)
     {
         DialogViewModel errorResponse = new DialogViewModel();
 
@@ -891,6 +917,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 {
                     Titulo = mContext.getString(R.string.error_title_vendor_not_found);
                     Linea1 = mContext.getString(R.string.error_content_vendor_not_found_line);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else if (pCodeStatus == 426)
+                {
+                    Titulo = mContext.getString(R.string.title_update_required);
+                    Linea1 = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
                     Button = mContext.getString(R.string.button_accept);
                 }
                 else

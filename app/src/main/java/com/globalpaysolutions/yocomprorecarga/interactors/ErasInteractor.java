@@ -2,13 +2,19 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 
+import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IErasInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +45,8 @@ public class ErasInteractor implements IErasInteractor
         request.setAgeID(1); //TODO
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(), request);
+        final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM, request);
 
         call.enqueue(new Callback<EraSelectionResponse>()
         {
@@ -53,15 +60,32 @@ public class ErasInteractor implements IErasInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    listener.onEraSelectionError(codeResponse, null);
+                    try
+                    {
+                        int codeResponse = response.code();
+
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            listener.onEraSelectionError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            listener.onEraSelectionError(codeResponse, null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<EraSelectionResponse> call, Throwable t)
             {
-                listener.onEraSelectionError(0, t);
+                listener.onEraSelectionError(0, t, null);
             }
         });
     }
@@ -70,7 +94,8 @@ public class ErasInteractor implements IErasInteractor
     public void retrieveEras(final ErasListener listener)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<AgesResponse> call = apiService.retrieveAges(mUserData.getUserAuthenticationKey());
+        final Call<AgesResponse> call = apiService.retrieveAges(mUserData.getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM);
 
         call.enqueue(new Callback<AgesResponse>()
         {
@@ -84,15 +109,31 @@ public class ErasInteractor implements IErasInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    listener.onRetrieveError(codeResponse, null);
+                    try
+                    {
+                        int codeResponse = response.code();
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            listener.onRetrieveError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            listener.onRetrieveError(codeResponse, null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<AgesResponse> call, Throwable t)
             {
-                listener.onRetrieveError(0, t);
+                listener.onRetrieveError(0, t, null);
             }
         });
     }

@@ -111,4 +111,5 @@ public class Constants
 
     public static final String ACHIEVEMENT_FROM_SOUVENIR_SALE = "achievement_from_souvenir_sale";
 
+    public static String PLATFORM = "ANDROID";
 }

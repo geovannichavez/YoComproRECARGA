@@ -3,14 +3,21 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
 import com.globalpaysolutions.yocomprorecarga.presenters.AchievementsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.AchievementsAdapter;
@@ -148,6 +155,44 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
     public void showGenericImgDialog(String title, String content, int resource)
     {
 
+    }
+
+    @Override
+    public void showGenericDialog(String title, String content)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Achievements.this);
+            LayoutInflater inflater = Achievements.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(content);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

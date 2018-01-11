@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 public interface NicknameListener
 {
     void onValidateNicknameSuccess(SimpleResultResponse pResultResponse, String choosenNickname);
-    void onError(int pCodeStatus, Throwable pThrowable);
+    void onError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
 }

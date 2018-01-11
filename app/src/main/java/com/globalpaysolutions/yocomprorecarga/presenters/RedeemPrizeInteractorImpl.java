@@ -91,15 +91,32 @@ public class RedeemPrizeInteractorImpl implements IRedeemPrizeInteractor, Redeem
     }
 
     @Override
-    public void onError(int statusCode, Throwable throwable)
+    public void onError(int statusCode, Throwable throwable, String requiredVersion)
     {
-        mView.hideLoadingDialog();
-        DialogViewModel dialogModel = new DialogViewModel();
-        dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_error));
-        dialogModel.setLine1(mContext.getString(R.string.label_reedem_error));
+        try
+        {
+            mView.hideLoadingDialog();
 
-        dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));
+            if(statusCode == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String message = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+                mView.showGenericDialog(title, message);
+            }
+            else
+            {
+                DialogViewModel dialogModel = new DialogViewModel();
+                dialogModel.setTitle(mContext.getString(R.string.title_redeem_prize_error));
+                dialogModel.setLine1(mContext.getString(R.string.label_reedem_error));
 
-        mView.createImageDialog(dialogModel, R.drawable.ic_alert);
+                dialogModel.setAcceptButton(mContext.getString(R.string.button_accept));
+
+                mView.createImageDialog(dialogModel, R.drawable.ic_alert);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

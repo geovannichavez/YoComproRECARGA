@@ -14,4 +14,5 @@ public interface RedeemPrizeView
     void createImageDialog(DialogViewModel dialog, int resource);
     void createPrizeSuccessDialog(DialogViewModel dialogModel);
     void setPrizeCode(String prizeCode);
+    void showGenericDialog(String title, String message);
 }

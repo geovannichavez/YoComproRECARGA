@@ -4,15 +4,21 @@ import android.content.Context;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +46,8 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     public void retrieveConsumerTracking()
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<Tracking> call = apiService.getConsumerTracking(mUserData.getUserAuthenticationKey());
+        final Call<Tracking> call = apiService.getConsumerTracking(mUserData.getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM);
 
         call.enqueue(new Callback<Tracking>()
         {
@@ -57,15 +64,30 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    mListener.onTrackingError(codeResponse, null);
+                    try
+                    {
+                        if(response.code() == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            mListener.onTrackingError(response.code(), null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            mListener.onTrackingError(response.code(), null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<Tracking> call, Throwable t)
             {
-                mListener.onTrackingError(0, t);
+                mListener.onTrackingError(0, t, null);
             }
         });
 
@@ -82,7 +104,8 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         requestBody.setAgeID(1);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody);
+        final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody,
+                BuildConfig.VERSION_NAME, Constants.PLATFORM);
 
         call.enqueue(new Callback<ExchangeResponse>()
         {
@@ -96,14 +119,32 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    mListener.onOpenChestError(codeResponse, null);
+                   try
+                   {
+                       int codeResponse = response.code();
+
+                       if(codeResponse == 426)
+                       {
+                           Gson gson = new Gson();
+                           SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                           mListener.onOpenChestError(codeResponse, null, errorResponse.getInternalCode());
+                       }
+                       else
+                       {
+                           mListener.onOpenChestError(codeResponse, null, null);
+                       }
+
+                   }
+                   catch (Exception ex)
+                   {
+                       ex.printStackTrace();
+                   }
                 }
             }
             @Override
             public void onFailure(Call<ExchangeResponse> call, Throwable t)
             {
-                mListener.onOpenChestError(0, t);
+                mListener.onOpenChestError(0, t, null);
             }
         });
 
@@ -130,7 +171,8 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     public void atemptRedeemPrize()
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<WinPrizeResponse> call = apiService.redeemPrize(mUserData.getUserAuthenticationKey());
+        final Call<WinPrizeResponse> call = apiService.redeemPrize(mUserData.getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM);
 
         call.enqueue(new Callback<WinPrizeResponse>()
         {
@@ -144,16 +186,33 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    mListener.onRedeemPrizeError(codeResponse, null);
-                    Log.e(TAG, response.errorBody().toString());
+                    try
+                    {
+                        int codeResponse = response.code();
+
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            mListener.onRedeemPrizeError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            mListener.onRedeemPrizeError(codeResponse, null, null);
+                            Log.e(TAG, response.errorBody().toString());
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<WinPrizeResponse> call, Throwable t)
             {
-                mListener.onRedeemPrizeError(0, t);
+                mListener.onRedeemPrizeError(0, t, null);
             }
         });
 

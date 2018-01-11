@@ -2,11 +2,17 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 
+import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IPrizesHistoryInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +41,8 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
     public void retrievePrizesHistory()
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<PrizesHistoryResponse> call = apiService.retrievePrizsHistory(mUserData.getUserAuthenticationKey());
+        final Call<PrizesHistoryResponse> call = apiService.retrievePrizsHistory(mUserData.getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM);
 
         call.enqueue(new Callback<PrizesHistoryResponse>()
         {
@@ -44,21 +51,36 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
             {
                 if (response.isSuccessful())
                 {
-
                     PrizesHistoryResponse prizesHistory = response.body();
                     mListener.onRetrievePrizesSuccess(prizesHistory);
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    mListener.onRetrievePrizesError(codeResponse, null);
+                    try
+                    {
+                        int codeResponse = response.code();
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            mListener.onRetrievePrizesError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            mListener.onRetrievePrizesError(codeResponse, null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<PrizesHistoryResponse> call, Throwable t)
             {
-                mListener.onRetrievePrizesError(0, t);
+                mListener.onRetrievePrizesError(0, t, null);
             }
         });
     }

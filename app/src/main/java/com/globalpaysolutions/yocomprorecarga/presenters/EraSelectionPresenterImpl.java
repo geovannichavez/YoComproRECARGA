@@ -2,7 +2,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
@@ -85,9 +84,15 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
+    public void onRetrieveError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         mView.hideLoadingDialog();
+        if(pCodeStatus == 426)
+        {
+            String title = mContext.getString(R.string.title_update_required);
+            String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
+            mView.showGenericDialog(title, message);
+        }
     }
 
     @Override
@@ -151,10 +156,27 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable)
+    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
-        mView.hideLoadingDialog();
-        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+        try
+        {
+            mView.hideLoadingDialog();
+            if(pCodeStatus == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
+                mView.showGenericDialog(title, message);
+            }
+            else
+            {
+                mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     private void addFlags(Intent pIntent)

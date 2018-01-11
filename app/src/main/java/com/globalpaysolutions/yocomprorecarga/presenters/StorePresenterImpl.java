@@ -13,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IStorePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
-import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -96,12 +95,23 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     }
 
     @Override
-    public void onError(int codeStatus, Throwable throwable)
+    public void onError(int codeStatus, Throwable throwable, String requiredVersion)
     {
         mView.hideLoadingDialog();
-        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                mContext.getString(R.string.error_content_something_went_wrong_try_again),
-                R.drawable.ic_alert);
+        if(codeStatus == 426)
+        {
+            String title = mContext.getString(R.string.title_update_required);
+            String content = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+            String button = mContext.getString(R.string.button_accept);
+            mView.createGenericDialog(title, content);
+        }
+        else
+        {
+            mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                    mContext.getString(R.string.error_content_something_went_wrong_try_again),
+                    R.drawable.ic_alert);
+        }
+
     }
 
     @Override
@@ -175,11 +185,29 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     }
 
     @Override
-    public void onPurchaseError(int codeStatus, Throwable throwable)
+    public void onPurchaseError(int codeStatus, Throwable throwable, String requiredVersion)
     {
-        mView.hideLoadingDialog();
-        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                mContext.getString(R.string.error_content_something_went_wrong_try_again),
-                R.drawable.ic_alert);
+        try
+        {
+            mView.hideLoadingDialog();
+
+            if(codeStatus == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String content = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+                String button = mContext.getString(R.string.button_accept);
+                mView.createGenericDialog(title, content);
+            }
+            else
+            {
+                mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                        mContext.getString(R.string.error_content_something_went_wrong_try_again),
+                        R.drawable.ic_alert);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }
