@@ -9,4 +9,5 @@ public interface MainView
     void setBackground();
     void navigateStore();
     void navigateSettings();
+    void showTutorial();
 }

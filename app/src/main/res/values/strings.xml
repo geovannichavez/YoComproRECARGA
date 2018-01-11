@@ -325,5 +325,19 @@
     <string name="title_invalid_pin">Código Inválido</string>
     <string name="label_pin_already_activated">El código ingresado es inválido. Este PIN ya fue utilizado.</string>
     <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
+    <string name="showcase_title_play">Jugar</string>
+    <string name="showcase_content_play">Inicia la aventura</string>
+    <string name="showcase_title_profile">Perfil</string>
+    <string name="showcase_content_profile">Repasa el estado de tu juego</string>
+    <string name="showcase_title_travel">Viajar</string>
+    <string name="showcase_content_travel">Selecciona la Era a la que deseas viajar</string>
+    <string name="showcase_title_topup_request">YoComproRecarga</string>
+    <string name="showcase_content_topup_request">Solicita Recargas a Vendedores de YoVendoRecarga</string>
+    <string name="showcase_title_store">Tienda</string>
+    <string name="showcase_content_store">En la tienda puedes comprar los Souvenir que te faltan para completar tu colección</string>
+    <string name="showcase_content_prize">Canjea tu PIN y obtiene tu regalo de Claro</string>
+    <string name="showcase_title_prize">Activar Premios</string>
+    <string name="showcase_title_tutorial">Tutorial</string>
+    <string name="showcase_content_tutorial">Mira el tutorial</string>
 
 </resources>

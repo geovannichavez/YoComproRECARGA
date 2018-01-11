@@ -96,6 +96,11 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(nickname);
             mContext.startActivity(nickname);
         }
+        
+        if(!mUserData.showcaseMainSeen())
+        {
+            mView.showTutorial();
+        }
 
     }
 
@@ -136,6 +141,13 @@ public class MainPresenterImpl implements IMainPresenter
         }
 
     }
+
+    @Override
+    public void showcaseSeen(boolean seen)
+    {
+        mUserData.setShowcaseMainSeen(seen);
+    }
+
 
     private void addFlags(Intent pIntent)
     {

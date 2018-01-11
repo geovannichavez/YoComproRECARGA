@@ -1,34 +1,47 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
 import com.squareup.picasso.Picasso;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Main extends ImmersiveActivity implements MainView
 {
     //Layouts and Views
     ImageButton buttonSettings;
     ImageView bgTimemachine;
+    ShowcaseView mShowcaseView;
 
     //MVP
     MainPresenterImpl mPresenter;
+
+    //Global
+    private int mShowcaseCounter;
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +51,8 @@ public class Main extends ImmersiveActivity implements MainView
 
         buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+
+        mShowcaseCounter = 0;
 
         buttonSettings.setOnClickListener(new View.OnClickListener()
         {
@@ -144,6 +159,111 @@ public class Main extends ImmersiveActivity implements MainView
     public void navigateSettings()
     {
 
+    }
+
+    @Override
+    public void showTutorial()
+    {
+        try
+        {
+            final Target play = new ViewTarget(findViewById(R.id.btnPlay));
+            final Target profile = new ViewTarget(findViewById(R.id.btnProfile));
+            final Target travel = new ViewTarget(findViewById(R.id.btnTravel));
+            final Target topupRequest = new ViewTarget(findViewById(R.id.btnTopupRequest));
+            final Target lightBulb = new ViewTarget(findViewById(R.id.buttonLighbub));
+            final Target prize = new ViewTarget(findViewById(R.id.buttonPrize));
+            final Target info = new ViewTarget(findViewById(R.id.buttonSettings));
+
+            ShowcaseTextPainter painter = new ShowcaseTextPainter(this);
+
+            mShowcaseView = new ShowcaseView.Builder(this)
+                    .setTarget(play)
+                    .blockAllTouches()
+                    .setContentTitle(R.string.showcase_title_play)
+                    .setContentTitlePaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_TITLE))
+                    .setContentTextPaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_CONTENT))
+                    .setContentText(R.string.showcase_content_play)
+                    .setStyle(R.style.showcaseview_theme).setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            switch (mShowcaseCounter)
+                            {
+                                case 0:
+                                    //Profile
+                                    mShowcaseView.setShowcase(profile, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_profile));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_profile));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.BELOW_SHOWCASE);
+                                    break;
+                                case 1:
+                                    //Travel
+                                    mShowcaseView.setShowcase(travel, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_travel));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_travel));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 2:
+                                    //Topup Request
+                                    mShowcaseView.setShowcase(topupRequest, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_topup_request));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_topup_request));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+
+                                    break;
+                                case 3:
+                                    //Store
+                                    mShowcaseView.setShowcase(lightBulb, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_store));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_store));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+
+                                    break;
+                                case 4:
+                                    //Prize
+                                    RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(
+                                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                                            ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                    // This aligns button to the bottom left side of screen
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+                                    // Set margins to the button, we add 16dp margins here
+                                    int margin = ((Number) (getResources().getDisplayMetrics().density * 16)).intValue();
+                                    lps.setMargins(margin, margin, margin, margin);
+
+                                    mShowcaseView.setShowcase(prize, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_prize));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_prize));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    mShowcaseView.setButtonPosition(lps);
+                                    break;
+                                case 5:
+                                    //Tutorial
+                                    mShowcaseView.setShowcase(info, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_tutorial));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_tutorial));
+                                    mShowcaseView.setButtonText(getString(R.string.button_accept));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 6:
+                                    //Dismiss
+                                    mPresenter.showcaseSeen(true);
+                                    mShowcaseView.hide();
+                                    break;
+                            }
+
+                            mShowcaseCounter++;
+                        }
+                    })
+                    .build();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
 }
