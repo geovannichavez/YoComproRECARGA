@@ -29,21 +29,9 @@ public class Intro extends ImmersiveActivity
 {
     private static final String TAG = Intro.class.getSimpleName();
 
-    TextView tvDescription;
-    ImageView imgTimemachine;
-    ImageView imgCounter;
-    ImageView imgBag;
-
-    ImageView bgIntro;
-
-    ImageView imgTable;
-    ImageView imgBarrell;
-
-    ImageButton btnFinishIntro;
+    private int mCounter;
     ConstraintLayout mActivityIntro;
-
-
-    int mCounter;
+    ImageView bgIntro;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -51,103 +39,73 @@ public class Intro extends ImmersiveActivity
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        mCounter = 0;
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_intro_background));
 
-        tvDescription = (TextView) findViewById(R.id.tvDescription);
-        imgTimemachine = (ImageView) findViewById(R.id.imgTimemachine);
-        imgCounter = (ImageView) findViewById(R.id.imgCounter);
-        imgBarrell = (ImageView) findViewById(R.id.imgBarrell);
-        imgBag = (ImageView) findViewById(R.id.imgBag);
-        imgTable = (ImageView) findViewById(R.id.imgTable);
-        btnFinishIntro = (ImageButton) findViewById(R.id.btnFinishIntro);
         mActivityIntro = (ConstraintLayout) findViewById(R.id.activity_intro);
         bgIntro = (ImageView) findViewById(R.id.bgIntro);
+        mCounter = 0;
 
-        imgTimemachine.setImageResource(R.drawable.img_shadow_timemachine);
-        imgCounter.setImageResource(R.drawable.img_shadow_counter);
-        imgBarrell.setImageResource(R.drawable.img_shadow_barrell);
-        imgBag.setImageResource(R.drawable.img_shadow_bag);
-        imgTable.setImageResource(R.drawable.img_shadow_table);
-
-        tvDescription.setText(R.string.label_click_to_intro);
-
-        btnFinishIntro.setEnabled(false);
-        btnFinishIntro.setClickable(false);
-        btnFinishIntro.setVisibility(View.INVISIBLE);
-
-        imgTable.setVisibility(View.INVISIBLE);
-        imgBarrell.setVisibility(View.INVISIBLE);
-
-        //Sets background
-        Picasso.with(this).load(R.drawable.bg_intro).into(bgIntro);
+        //Sets initial image on ImageView
+        Picasso.with(this).load(R.drawable.img_intro_1).into(bgIntro);
 
         mActivityIntro.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
+            public void onClick(View view)
             {
-                mCounter = mCounter + 1;
-
                 switch (mCounter)
                 {
                     case 1:
-                        imgTimemachine.setImageResource(R.drawable.img_color_timemeachine);
-                        tvDescription.setText(getString(R.string.label_intro_intro));
+                        Picasso.with(Intro.this).load(R.drawable.img_intro_1).into(bgIntro);
                         break;
                     case 2:
-                        tvDescription.setText(R.string.label_intro_2);
-                        imgTimemachine.setImageResource(R.drawable.img_shadow_timemachine);
-                        imgCounter.setImageResource(R.drawable.img_color_counter);
+                        Picasso.with(Intro.this).load(R.drawable.img_intro_2).into(bgIntro);
                         break;
                     case 3:
-                        tvDescription.setText(R.string.label_intro_3);
-                        imgCounter.setImageResource(R.drawable.img_shadow_counter);
-                        imgBag.setImageResource(R.drawable.img_color_bag);
+                        Picasso.with(Intro.this).load(R.drawable.img_intro_3).into(bgIntro);
                         break;
                     case 4:
-                        tvDescription.setText(R.string.label_intro_3_1);
+                        Picasso.with(Intro.this).load(R.drawable.img_intro_4).into(bgIntro);
                         break;
                     case 5:
-                        tvDescription.setText(R.string.label_intro_4);
-                        imgTable.setImageResource(R.drawable.img_color_table);
-                        //Changes transition
-                        imgTimemachine.setVisibility(View.INVISIBLE);
-                        imgCounter.setVisibility(View.INVISIBLE);
-                        imgBag.setVisibility(View.INVISIBLE);
-
-                        imgTable.setVisibility(View.VISIBLE);
-                        imgBarrell.setVisibility(View.VISIBLE);
+                        Picasso.with(Intro.this).load(R.drawable.img_intro_5).into(bgIntro);
                         break;
                     case 6:
-                        tvDescription.setText(R.string.label_intro_5);
-                        imgTable.setImageResource(R.drawable.img_shadow_table);
-                        imgBarrell.setImageResource(R.drawable.img_color_barrell);
-                        break;
-                    case 7 :
-                        imgBarrell.setImageResource(R.drawable.img_shadow_barrell);
+                        if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
+                        {
+                            Intent intent = new Intent(Intro.this, Main.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            Intent inputToken = new Intent(Intro.this, AcceptTerms.class);
+                            inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                        btnFinishIntro.setVisibility(View.VISIBLE);
-                        btnFinishIntro.setEnabled(true);
-                        btnFinishIntro.setClickable(true);
-                        tvDescription.setText(R.string.label_shall_we_begin);
+                            UserData.getInstance(Intro.this).hasSeenIntro(true);
 
-                        btnFinishIntro.setOnClickListener(startClickListener);
-                        break;
-                    default:
-                        Log.i(TAG, "Completed intro");
+                            startActivity(inputToken);
+                            finish();
+                        }
                         break;
                 }
+                mCounter++;
             }
-
         });
+
+
     }
 
 
@@ -156,29 +114,7 @@ public class Intro extends ImmersiveActivity
         @Override
         public void onClick(View v)
         {
-            ButtonAnimator.getInstance(Intro.this).animateButton(v);
-            if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
-            {
-                Intent intent = new Intent(Intro.this, Main.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                finish();
-            }
-            else
-            {
-                Intent inputToken = new Intent(Intro.this, AcceptTerms.class);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                UserData.getInstance(Intro.this).hasSeenIntro(true);
-
-                startActivity(inputToken);
-                finish();
-            }
         }
     };
 
