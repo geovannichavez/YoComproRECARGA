@@ -55,5 +55,5 @@ public interface HomeView
     void removeWildcardPoint(String pKey);
 
     void showToast(String string);
-
+    void startShowcase();
 }

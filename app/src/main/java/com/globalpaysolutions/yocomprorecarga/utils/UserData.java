@@ -114,6 +114,7 @@ public class UserData
 
     //Showcase View
     private static final String KEY_SHOWCASE_FIRSTTIME_MAIN = "key_showcase_firsttime_main";
+    private static final String KEY_SHOWCASE_FIRSTTIME_MAP = "key_showcase_firsttime_map";
 
     private UserData(Context pContext)
     {
@@ -440,6 +441,12 @@ public class UserData
     public void setShowcaseMainSeen(boolean seen)
     {
         mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_MAIN, seen);
+        mEditor.commit();
+    }
+
+    public void setShowcaseMapSeen()
+    {
+        mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_MAP, true);
         mEditor.commit();
     }
 
@@ -782,5 +789,10 @@ public class UserData
     {
         mEditor.putBoolean(KEY_HAS_SEEN_INTRO, seen);
         mEditor.commit();
+    }
+
+    public boolean showcaseMapSeen()
+    {
+        return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_MAP, false);
     }
 }

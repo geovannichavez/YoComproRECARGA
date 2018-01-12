@@ -28,6 +28,9 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
@@ -37,6 +40,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.PicassoMarker;
+import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -76,6 +80,8 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
 
     //Global Variables
     final private int REQUEST_ACCESS_FINE_LOCATION = 3;
+    private ShowcaseView mShowcaseView;
+    private int mShowcaseCounter;
     private Map<String, Marker> mSalesPointsMarkers;
     private Map<String, Marker> mVendorPointsMarkers;
     private Map<String, Marker> mGoldPointsMarkers;
@@ -841,6 +847,70 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         }
         mToast = Toast.makeText(PointsMap.this, string, Toast.LENGTH_LONG);
         mToast.show();
+    }
+
+    @Override
+    public void startShowcase()
+    {
+        try
+        {
+            final Target back = new ViewTarget(findViewById(R.id.btnBackMap));
+            final Target requestTopup = new ViewTarget(findViewById(R.id.btnReqTopupMap));
+            final Target pin = new ViewTarget(findViewById(R.id.layoutShowcasePin));
+            final Target go = new ViewTarget(findViewById(R.id.btnLaunchAR));
+
+            ShowcaseTextPainter painter = new ShowcaseTextPainter(this);
+
+            mShowcaseView = new ShowcaseView.Builder(this)
+                    .setTarget(back)
+                    .blockAllTouches()
+                    .setContentTitle(R.string.showcase_title_back)
+                    .setContentTitlePaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_TITLE))
+                    .setContentTextPaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_CONTENT))
+                    .setContentText(R.string.showcase_content_back)
+                    .setStyle(R.style.showcaseview_theme).setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            switch (mShowcaseCounter)
+                            {
+                                case 0:
+                                    //YCR
+                                    mShowcaseView.setShowcase(requestTopup, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_topup_request));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_topup_request));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 1:
+                                    //Map
+                                    mShowcaseView.setShowcase(pin, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_pin));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_pin));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 2:
+                                    //GO!
+                                    mShowcaseView.setShowcase(go, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_go));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_go));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 3:
+                                    //Dismiss
+                                    mPresenter.showcaseMapSeen();
+                                    mShowcaseView.hide();
+                                    break;
+                            }
+
+                            mShowcaseCounter++;
+                        }
+                    }).build();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override

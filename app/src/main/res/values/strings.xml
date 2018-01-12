@@ -339,5 +339,11 @@
     <string name="showcase_title_prize">Activar Premios</string>
     <string name="showcase_title_tutorial">Tutorial</string>
     <string name="showcase_content_tutorial">Mira el tutorial</string>
+    <string name="showcase_title_back">Atrás</string>
+    <string name="showcase_content_back">Regresa al menú principal</string>
+    <string name="showcase_title_pin">Contenedores de monedas</string>
+    <string name="showcase_content_pin">Busca contenedores de monedas como Cofres, arcas, etc. que se encuentren más cercanos a tu ubicación</string>
+    <string name="showcase_title_go">GO!</string>
+    <string name="showcase_content_go">Cuando te encuentres cerca de un contenedor presiona GO! para visualizarlo en Realidad Aumentada</string>
 
 </resources>

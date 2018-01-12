@@ -96,7 +96,7 @@ public class MainPresenterImpl implements IMainPresenter
             this.addFlags(nickname);
             mContext.startActivity(nickname);
         }
-        
+
         if(!mUserData.showcaseMainSeen())
         {
             mView.showTutorial();
