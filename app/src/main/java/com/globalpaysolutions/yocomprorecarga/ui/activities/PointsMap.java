@@ -862,12 +862,12 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             ShowcaseTextPainter painter = new ShowcaseTextPainter(this);
 
             mShowcaseView = new ShowcaseView.Builder(this)
-                    .setTarget(back)
+                    .setTarget(pin)
                     .blockAllTouches()
-                    .setContentTitle(R.string.showcase_title_back)
+                    .setContentTitle(R.string.showcase_title_pin)
                     .setContentTitlePaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_TITLE))
                     .setContentTextPaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_CONTENT))
-                    .setContentText(R.string.showcase_content_back)
+                    .setContentText(R.string.showcase_content_pin)
                     .setStyle(R.style.showcaseview_theme).setOnClickListener(new View.OnClickListener()
                     {
                         @Override
@@ -876,25 +876,26 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                             switch (mShowcaseCounter)
                             {
                                 case 0:
-                                    //YCR
-                                    mShowcaseView.setShowcase(requestTopup, true);
-                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_topup_request));
-                                    mShowcaseView.setContentText(getString(R.string.showcase_content_topup_request));
-                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
-                                    break;
-                                case 1:
-                                    //Map
-                                    mShowcaseView.setShowcase(pin, true);
-                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_pin));
-                                    mShowcaseView.setContentText(getString(R.string.showcase_content_pin));
-                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
-                                    break;
-                                case 2:
                                     //GO!
                                     mShowcaseView.setShowcase(go, true);
                                     mShowcaseView.setContentTitle(getString(R.string.showcase_title_go));
                                     mShowcaseView.setContentText(getString(R.string.showcase_content_go));
                                     mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 1:
+                                    //Back
+                                    mShowcaseView.setShowcase(back, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_back));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_back));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 2:
+                                    //YCR
+                                    mShowcaseView.setShowcase(requestTopup, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_topup_request));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_topup_request));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    mShowcaseView.setButtonText(getString(R.string.button_accept));
                                     break;
                                 case 3:
                                     //Dismiss
@@ -906,6 +907,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                             mShowcaseCounter++;
                         }
                     }).build();
+            mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
         }
         catch (Exception ex)
         {

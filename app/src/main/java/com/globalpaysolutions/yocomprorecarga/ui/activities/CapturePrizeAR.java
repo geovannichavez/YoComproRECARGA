@@ -5,30 +5,31 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
@@ -38,7 +39,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenter
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -78,6 +79,8 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     Animation mAnimation;
     Handler mHandler;
     HashMap<String, ChestData2D> mFirbaseObjects;
+    ShowcaseView mShowcaseView;
+    private int mShowcaseCounter;
 
     //MVP
     CapturePrizeARPResenterImpl mPresenter;
@@ -775,6 +778,112 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         try
         {
             ivPrize2D.setEnabled(enabled);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void startShowcaseAR(final boolean accelormeterDevice)
+    {
+        try
+        {
+            final Target coins = new ViewTarget(findViewById(R.id.tvCoinsEarned));
+            final Target prizes = new ViewTarget(findViewById(R.id.tvPrizesEarned));
+            final Target souvenirs = new ViewTarget(findViewById(R.id.tvSouvenirCounter));
+            final Target chest = new ViewTarget(findViewById(R.id.laoutChest));
+            final Target coinsCounter = new ViewTarget(findViewById(R.id.imgCoinMeter));
+            final Target back = new ViewTarget(findViewById(R.id.btnBack));
+            final Target store = new ViewTarget(findViewById(R.id.btnNavigateTimeMachine));
+
+            ShowcaseTextPainter painter = new ShowcaseTextPainter(this);
+
+            mShowcaseView = new ShowcaseView.Builder(this)
+                    .setTarget(coins)
+                    .blockAllTouches()
+                    .setContentTitle(R.string.showcase_title_coins)
+                    .setContentTitlePaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_TITLE))
+                    .setContentTextPaint(painter.createShowcaseTextPaint().get(Constants.SHOWCASE_PAINT_CONTENT))
+                    .setContentText(R.string.showcase_content_coins)
+                    .setStyle(R.style.showcaseview_theme).setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View view)
+                        {
+                            switch (mShowcaseCounter)
+                            {
+                                case 0:
+                                    //Prizes
+                                    mShowcaseView.setShowcase(prizes, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_prizes_earned));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_prizes_earned));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.BELOW_SHOWCASE);
+                                    break;
+                                case 1:
+                                    //Souvenirs
+                                    mShowcaseView.setShowcase(souvenirs, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_souvenirs));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_souvenirs));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.BELOW_SHOWCASE);
+                                    break;
+                                case 2:
+                                    //AR
+                                    mShowcaseView.setShowcase(chest, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_ra));
+
+                                    String contentText = (accelormeterDevice) ? getString(R.string.showcase_content_ra) : getString(R.string.showcase_content_ra_2d);
+                                    mShowcaseView.setContentText(contentText);
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 3:
+                                    //Coins Counter
+                                    mShowcaseView.setShowcase(coinsCounter, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_coins_counter));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_coins_counter));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 4:
+                                    //Back
+                                    mShowcaseView.setShowcase(back, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_back_map));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_back_map));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    break;
+                                case 5:
+                                    //Store
+
+                                    RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(
+                                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                                            ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                    // This aligns button to the bottom left side of screen
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+                                    // Set margins to the button, we add 16dp margins here
+                                    int margin = ((Number) (getResources().getDisplayMetrics().density * 16)).intValue();
+                                    lps.setMargins(margin, margin, margin, margin);
+
+                                    mShowcaseView.setShowcase(store, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_go_store));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_go_store));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    mShowcaseView.setButtonPosition(lps);
+                                    mShowcaseView.setButtonText(getString(R.string.button_accept));
+                                    break;
+                                case 6:
+                                    //Finish
+                                    mPresenter.showcaseARSeen();
+                                    mShowcaseView.hide();
+                                    break;
+                            }
+
+                            mShowcaseCounter++;
+                        }
+                    }).build();
+            mShowcaseView.forceTextPosition(ShowcaseView.BELOW_SHOWCASE);
         }
         catch (Exception ex)
         {

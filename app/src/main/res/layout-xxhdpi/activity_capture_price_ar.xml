@@ -1,184 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_capture_price_ar"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.wikitude.architect.ArchitectView
-        android:id="@+id/architectView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-    <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.CapturePrizeAR">
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="95dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_recarcoins_counter"/>
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="95dp"
-            android:layout_height="37dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView19"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toEndOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_prizes_counter"/>
-
-        <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="95dp"
-            android:layout_height="39dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_souvenir_counter_map"/>
-
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="65dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/btn_back_ra"/>
-
-        <ImageButton
-            android:id="@+id/imgCoinMeter"
-            android:layout_width="165dp"
-            android:layout_height="98dp"
-            android:layout_marginBottom="16dp"
-            android:onClick="redeemPrize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitXY"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_recarcoin_meter_zero"/>
-
-        <ImageView
-            android:id="@+id/btnNavigateTimeMachine"
-            android:layout_width="65dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:onClick="navigateTimeMachine"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_timemachine_map"/>
-
-        <ImageView
-            android:id="@+id/ivPrize2D"
-            android:layout_width="234dp"
-            android:layout_height="235dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/imgCoinMeter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"
-            app:layout_constraintVertical_bias="0.822"
-            app:srcCompat="@drawable/img_bronze_closed_chest"/>
-
-        <TextView
-            android:id="@+id/tvCoinsEarned"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="38dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="900,000"
-            android:textColor="@color/ActivityWhiteBackground"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintStart_toStartOf="@+id/imageView7"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            app:layout_constraintVertical_bias="0.75"/>
-
-        <TextView
-            android:id="@+id/tvPrizesEarned"
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="5003"
-            android:textColor="@color/ActivityWhiteBackground"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-            app:layout_constraintStart_toStartOf="@+id/imageView11"
-            app:layout_constraintTop_toTopOf="@+id/imageView11"/>
-
-        <TextView
-            android:id="@+id/tvSouvenirCounter"
-            android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="10"
-            android:textColor="@color/ActivityWhiteBackground"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView19"
-            app:layout_constraintStart_toStartOf="@+id/imageView19"
-            app:layout_constraintTop_toTopOf="@+id/imageView19"/>
-
-        <TextView
-            android:id="@+id/tvCoinsCounter"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:gravity="center"
-            android:text="20"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imgCoinMeter"
-            app:layout_constraintStart_toStartOf="@+id/imgCoinMeter"
-            app:layout_constraintTop_toTopOf="@+id/imgCoinMeter"/>
-    </android.support.constraint.ConstraintLayout>
-
-
-</FrameLayout>
--->
 
 
     <LinearLayout
@@ -378,6 +198,20 @@
                     app:layout_constraintEnd_toEndOf="@+id/imgCoinMeter"
                     app:layout_constraintStart_toStartOf="@+id/imgCoinMeter"
                     app:layout_constraintTop_toTopOf="@+id/imgCoinMeter"/>
+
+                <FrameLayout
+                    android:id="@+id/laoutChest"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </android.support.constraint.ConstraintLayout>
 
         </FrameLayout>

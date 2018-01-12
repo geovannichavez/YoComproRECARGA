@@ -345,5 +345,20 @@
     <string name="showcase_content_pin">Busca contenedores de monedas como Cofres, arcas, etc. que se encuentren más cercanos a tu ubicación</string>
     <string name="showcase_title_go">GO!</string>
     <string name="showcase_content_go">Cuando te encuentres cerca de un contenedor presiona GO! para visualizarlo en Realidad Aumentada</string>
+    <string name="showcase_title_coins">Marcador RecarCoins</string>
+    <string name="showcase_content_coins">Aquí puedes ver cuantas RecarCoins has recolectado en el viaje</string>
+    <string name="showcase_title_prizes_earned">Premios Claro</string>
+    <string name="showcase_content_prizes_earned">Esta es la cantidad de Premios de Claro que has canjeado</string>
+    <string name="showcase_title_souvenirs">Souvenirs</string>
+    <string name="showcase_content_souvenirs">Esta es la cantidad de Souvenir que has coleccionado</string>
+    <string name="showcase_title_ra">Contenedor de monedas</string>
+    <string name="showcase_content_ra">Visualiza el contenedor por medio de la Realidad Aumentada. Las flechas te ayudarán a guiarte. Seguidamente, presiónalo cuando lo encuentres.</string>
+    <string name="showcase_content_ra_2d">Visualiza el contenedor aquí. Cuando estés en el rango de ubicación aparecerá. Seguidamente, presiónalo cuando aparezca.</string>
+    <string name="showcase_title_coins_counter">Contador de monedas</string>
+    <string name="showcase_content_coins_counter">Tu contador de RecarCoins te muestra la cantidad que posees para canjear el siguiente premio, recuerda que necesitas 20 RecarCoins para cada premio.</string>
+    <string name="showcase_title_back_map">Regresa al mapa</string>
+    <string name="showcase_content_back_map">Regresa al Mapa cuando necesites mejorar tu ubicación</string>
+    <string name="showcase_title_go_store">Tienda</string>
+    <string name="showcase_content_go_store">Accede a la tienda de Souvenirs</string>
 
 </resources>

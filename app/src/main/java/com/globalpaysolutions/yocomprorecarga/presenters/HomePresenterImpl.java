@@ -80,7 +80,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         this.mView.renderMap();
         this.mView.setClickListeners();
 
-        if(!mUserData.showcaseMapSeen())
+        //TODO
+        if(mUserData.showcaseMapSeen())
         {
             mView.startShowcase();
         }
