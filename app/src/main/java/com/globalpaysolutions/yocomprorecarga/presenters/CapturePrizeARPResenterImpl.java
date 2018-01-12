@@ -591,8 +591,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
 
-        //todo
-        if(mUserData.showcaseARSeen())
+        if(!mUserData.showcaseARSeen())
         {
             mView.startShowcaseAR(m3Dcompatible);
         }
