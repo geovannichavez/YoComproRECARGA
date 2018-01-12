@@ -112,6 +112,11 @@ public class UserData
     private static final String KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID = "usr_last_wildcard_touched_firebase_id";
     private static final String KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE = "usr_last_wildcard_touched_chest_type";
 
+    //Showcase View
+    private static final String KEY_SHOWCASE_FIRSTTIME_MAIN = "key_showcase_firsttime_main";
+    private static final String KEY_SHOWCASE_FIRSTTIME_MAP = "key_showcase_firsttime_map";
+    private static final String KEY_SHOWCASE_FIRSTTIME_AR = "key_showcase_firsttime_ar";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -420,6 +425,24 @@ public class UserData
         mEditor.commit();
     }
 
+    public void setShowcaseMainSeen(boolean seen)
+    {
+        mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_MAIN, seen);
+        mEditor.commit();
+    }
+
+    public void setShowcaseMapSeen()
+    {
+        mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_MAP, true);
+        mEditor.commit();
+    }
+
+    public void setShowcaseARSeen()
+    {
+        mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_AR, true);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -716,6 +739,11 @@ public class UserData
         return mPreferences.getString(KEY_ERA_MARKER_WILDCARD, "");
     }
 
+    public boolean showcaseMainSeen()
+    {
+        return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_MAIN, false);
+    }
+
     /*
     * ********************
     *
@@ -754,5 +782,16 @@ public class UserData
     {
         mEditor.putBoolean(KEY_HAS_SEEN_INTRO, seen);
         mEditor.commit();
+    }
+
+    public boolean showcaseMapSeen()
+    {
+        return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_MAP, false);
+    }
+
+
+    public boolean showcaseARSeen()
+    {
+        return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_AR, false);
     }
 }

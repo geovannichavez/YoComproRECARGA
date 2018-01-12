@@ -9,4 +9,5 @@ public interface IMainPresenter
     void setBackground();
     void checkUserDataCompleted();
     void checkFunctionalityLimitedShown();
+    void showcaseSeen(boolean seen);
 }

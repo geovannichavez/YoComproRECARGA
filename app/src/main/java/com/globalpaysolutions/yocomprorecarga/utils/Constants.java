@@ -111,4 +111,7 @@ public class Constants
 
     public static final String ACHIEVEMENT_FROM_SOUVENIR_SALE = "achievement_from_souvenir_sale";
 
+    //Showcase View
+    public static final Integer SHOWCASE_PAINT_TITLE = 0;
+    public static final Integer SHOWCASE_PAINT_CONTENT = 1;
 }

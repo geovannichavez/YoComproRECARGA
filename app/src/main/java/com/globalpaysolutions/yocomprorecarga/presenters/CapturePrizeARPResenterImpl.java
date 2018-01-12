@@ -106,6 +106,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
         }
+
     }
 
     @Override
@@ -268,6 +269,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mUserData.saveLastWildcardTouched(pFirebaseID, chestType);
         mView.navigateToWildcard();
 
+    }
+
+    @Override
+    public void showcaseARSeen()
+    {
+        mUserData.setShowcaseARSeen();
     }
 
     @Override
@@ -583,6 +590,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 mUserData.getTotalWonCoins(),
                 String.valueOf(pTracking.getTotalSouvenirs()));
         mView.updatePrizeButton(pTracking.getCurrentCoinsProgress());
+
+        if(!mUserData.showcaseARSeen())
+        {
+            mView.startShowcaseAR(m3Dcompatible);
+        }
     }
 
     @Override

@@ -129,6 +129,9 @@ dependencies {
     //AppsFlyer
     compile 'com.appsflyer:af-android-sdk:4+@aar'
 
+    //ShowcaseView
+    compile 'com.github.amlcurran.showcaseview:library:5.4.3'
+
 }
 
 //Google Services

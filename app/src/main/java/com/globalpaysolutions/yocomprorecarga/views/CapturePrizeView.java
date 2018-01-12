@@ -68,4 +68,5 @@ public interface CapturePrizeView
 
     void navigateToPrizeDetails();
     void setEnabledChestImage(boolean enabled);
+    void startShowcaseAR(boolean accelormeterDevice);
 }
