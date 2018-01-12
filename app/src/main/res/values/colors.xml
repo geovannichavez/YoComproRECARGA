@@ -79,5 +79,8 @@
 
     <color name="color_timemachine_background">#1d2226</color>
     <color name="color_white_timemachine_background">#e6e5e5</color>
-    <color name="color_intro_background">#191c20</color>
+
+    <!--<color name="color_intro_background">#191c20</color>-->
+    <color name="color_intro_background">#acada9</color>
+
 </resources>
