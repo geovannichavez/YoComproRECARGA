@@ -92,8 +92,9 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     }
 
     @Override
-    public void initialViewsState()
+    public void initialViewsState(String urlMain)
     {
+        Picasso.with(this).load(urlMain).into(imgResult);
         Picasso.with(this).load(R.drawable.bg_red_recargo_theme).into(bg_wildcard);
         lblTitle.setText(R.string.title_initial_wildcard);
         lblDescription.setText(R.string.label_wildcard_explanation);
@@ -101,11 +102,11 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     }
 
     @Override
-    public void changeWinnerView(String coins)
+    public void changeWinnerView(String coins, String urlWin)
     {
         try
         {
-            Picasso.with(this).load(R.drawable.bg_dark_recargo_theme).into(bg_wildcard);
+            Picasso.with(this).load(urlWin).into(bg_wildcard);
 
             lblTitle.setText(R.string.title_you_won);
             lblDescription.setText(R.string.label_you_won);
@@ -115,7 +116,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
             lblAcceptChallenge.setVisibility(View.INVISIBLE);
             btnAccept.setEnabled(false);
             tvDeclineTxt.setText(R.string.label_back_to_map);
-            Picasso.with(this).load(R.drawable.ic_wildcard_winner).into(imgResult);
+            Picasso.with(this).load(urlWin).into(imgResult);
         }
         catch (Exception ex)
         {
@@ -124,7 +125,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     }
 
     @Override
-    public void changeLoserView(String coins)
+    public void changeLoserView(String coins, String urlLose)
     {
         try
         {
@@ -139,7 +140,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
             btnAccept.setVisibility(View.INVISIBLE);
             btnAccept.setEnabled(false);
             tvDeclineTxt.setText(R.string.label_back_to_map);
-            Picasso.with(this).load(R.drawable.ic_wildcard_loser).into(imgResult);
+            Picasso.with(this).load(urlLose).into(imgResult);
         }
         catch (Exception ex)
         {

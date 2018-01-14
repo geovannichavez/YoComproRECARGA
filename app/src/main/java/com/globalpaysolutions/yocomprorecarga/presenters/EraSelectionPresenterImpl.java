@@ -109,6 +109,9 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     eraSelection.getMarkerB(),
                     eraSelection.getMarkerW());
 
+            //Saves images for wildcard
+            UserData.getInstance(mContext).saveEraWildcard(eraSelection.getWildcardWin(), eraSelection.getWildcardLose(), eraSelection.getWildcardMain());
+
             if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
             {
                 mView.forwardToStore();

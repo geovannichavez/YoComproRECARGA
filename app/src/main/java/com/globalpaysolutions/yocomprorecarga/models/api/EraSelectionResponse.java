@@ -32,6 +32,15 @@ public class EraSelectionResponse
     @SerializedName("MarkerW")
     @Expose
     private String markerW;
+    @SerializedName("WildcardMain")
+    @Expose
+    private String wildcardMain;
+    @SerializedName("WildcardWin")
+    @Expose
+    private String wildcardWin;
+    @SerializedName("WildcardLose")
+    @Expose
+    private String wildcardLose;
 
     public int getAgeID()
     {
@@ -101,6 +110,36 @@ public class EraSelectionResponse
     public void setMarkerW(String markerW)
     {
         this.markerW = markerW;
+    }
+
+    public String getWildcardMain()
+    {
+        return wildcardMain;
+    }
+
+    public void setWildcardMain(String wildcardMain)
+    {
+        this.wildcardMain = wildcardMain;
+    }
+
+    public String getWildcardWin()
+    {
+        return wildcardWin;
+    }
+
+    public void setWildcardWin(String wildcardWin)
+    {
+        this.wildcardWin = wildcardWin;
+    }
+
+    public String getWildcardLose()
+    {
+        return wildcardLose;
+    }
+
+    public void setWildcardLose(String wildcardLose)
+    {
+        this.wildcardLose = wildcardLose;
     }
 
 }

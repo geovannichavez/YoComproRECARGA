@@ -104,6 +104,9 @@ public class UserData
     private static final String KEY_ERA_MARKER_SILVER = "usr_era_marker_silver";
     private static final String KEY_ERA_MARKER_BRONZE = "usr_era_marker_bronze";
     private static final String KEY_ERA_MARKER_WILDCARD = "usr_era_marker_wildcard";
+    private static final String KEY_ERA_WILDCARD_WIN = "key_era_wildcard_win";
+    private static final String KEY_ERA_WILDCARD_LOSE = "key_era_wildcard_lose";
+    private static final String KEY_ERA_WILDCARD_MAIN = "key_era_wildcard_main";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -387,6 +390,14 @@ public class UserData
         {
             ex.printStackTrace();
         }
+    }
+
+    public void saveEraWildcard(String urlWin, String urlLose, String urlMain)
+    {
+        mEditor.putString(KEY_ERA_WILDCARD_WIN, urlWin);
+        mEditor.putString(KEY_ERA_WILDCARD_LOSE, urlLose);
+        mEditor.putString(KEY_ERA_WILDCARD_MAIN, urlMain);
+        mEditor.commit();
     }
 
     public void saveLastWildcardTouched(String pFirebaseID, int chestType)
@@ -714,6 +725,21 @@ public class UserData
     public String getWildcardMarker()
     {
         return mPreferences.getString(KEY_ERA_MARKER_WILDCARD, "");
+    }
+
+    public String getEraWildcardWin()
+    {
+        return mPreferences.getString(KEY_ERA_WILDCARD_WIN, "");
+    }
+
+    public String getEraWildcardLose()
+    {
+        return mPreferences.getString(KEY_ERA_WILDCARD_LOSE, "");
+    }
+
+    public String getEraWildcardMain()
+    {
+        return mPreferences.getString(KEY_ERA_WILDCARD_MAIN, "");
     }
 
     /*
