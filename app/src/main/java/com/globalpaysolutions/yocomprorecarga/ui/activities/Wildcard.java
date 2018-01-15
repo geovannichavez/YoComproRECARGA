@@ -106,7 +106,7 @@ public class Wildcard extends ImmersiveActivity implements WildcardView
     {
         try
         {
-            Picasso.with(this).load(urlWin).into(bg_wildcard);
+            Picasso.with(this).load(R.drawable.bg_dark_recargo_theme).into(bg_wildcard);
 
             lblTitle.setText(R.string.title_you_won);
             lblDescription.setText(R.string.label_you_won);
