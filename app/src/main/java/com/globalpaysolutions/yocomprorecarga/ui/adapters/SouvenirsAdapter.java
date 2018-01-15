@@ -67,9 +67,10 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
 
         Picasso.with(mContext).load(currentItem.getImgUrl()).into(imgSouvenirItem);
 
-        int owneduser = currentItem.getSouvenirsOwnedByConsumer();
+        //int owneduser = currentItem.getSouvenirsOwnedByConsumer();
+        int unlocked = currentItem.getUnlocked();
 
-        if(owneduser == 0)
+        if(unlocked == 0)
             viewLocked.setVisibility(View.VISIBLE);
         else
             viewLocked.setVisibility(View.GONE);

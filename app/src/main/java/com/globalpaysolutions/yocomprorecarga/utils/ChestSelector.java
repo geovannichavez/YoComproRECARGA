@@ -1,9 +1,13 @@
 package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 
+import com.globalpaysolutions.yocomprorecarga.R;
+
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 /**
@@ -44,20 +48,16 @@ public class ChestSelector
             switch (eraID)
             {
                 case 1: //Vikings
-                    drawableClosed = mContext.getResources().getIdentifier("img_gold_chest_2d_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_gold_chest_2d_closed");
+                    drawableOpen = getDrawableId("img_gold_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_gold_chest_2d_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
                 case 2: //Western
-                    drawableClosed = mContext.getResources().getIdentifier("img_02_gold_chest_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_02_gold_chest_closed");
+                    drawableOpen = getDrawableId("img_02_gold_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_02_gold_chest_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-
-                default: //Vikings
-                    Log.i(TAG, "No resources provided or not selected era");
                     break;
             }
         }
@@ -83,20 +83,17 @@ public class ChestSelector
             {
                 case 1:
 
-                    drawableClosed = mContext.getResources().getIdentifier("img_silver_chest_2d_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_silver_chest_2d_closed");
+                    drawableOpen = getDrawableId("img_silver_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_silver_chest_2d_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
 
                 case 2:
-                    drawableClosed = mContext.getResources().getIdentifier("img_02_silver_chest_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_02_silver_chest_closed");
+                    drawableOpen = getDrawableId("img_02_silver_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_02_silver_chest_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                default:
-                    Log.i(TAG, "No resources provided or not selected era");
                     break;
             }
         }
@@ -122,17 +119,18 @@ public class ChestSelector
             {
                 case 1:
 
-                    drawableClosed = mContext.getResources().getIdentifier("img_bronze_chest_2d_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_bronze_chest_2d_closed");
+                    drawableOpen = getDrawableId("img_bronze_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_bronze_chest_2d_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
 
                 case 2:
-                    drawableClosed = mContext.getResources().getIdentifier("img_02_bronze_chest_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_02_bronze_chest_closed");
+                    drawableOpen = getDrawableId("img_02_bronze_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_02_bronze_chest_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
             }
         }
         catch (Exception ex)
@@ -155,23 +153,16 @@ public class ChestSelector
             {
                 case 1:
                     resourceMap.clear();
-                    drawableClosed = mContext.getResources().getIdentifier("img_wildcard_chest_2d_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_wildcard_chest_2d_closed");
+                    drawableOpen = getDrawableId("img_wildcard_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_wildcard_chest_2d_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
 
                 case 2:
-                    drawableClosed = mContext.getResources().getIdentifier("img_wildcard_chest_2d_closed", "drawable", mContext.getPackageName());
+                    drawableClosed = getDrawableId("img_02_wildcard_chest_closed");
+                    drawableOpen = getDrawableId("img_02_wildcard_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_wildcard_chest_2d_open", "drawable", mContext.getPackageName());
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-
-                default:
-                    drawableClosed = mContext.getResources().getIdentifier("img_wildcard_chest_2d_closed", "drawable", mContext.getPackageName());
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    drawableOpen = mContext.getResources().getIdentifier("img_wildcard_chest_2d_open", "drawable", mContext.getPackageName());
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
             }
@@ -182,5 +173,23 @@ public class ChestSelector
         }
 
         return resourceMap;
+    }
+
+    private int getDrawableId(String resourceName)
+    {
+        int drawableId = 0;
+
+        try
+        {
+            Class res = R.drawable.class;
+            Field field = res.getField(resourceName);
+            drawableId = field.getInt(null);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "Failure to get drawable id.", e);
+        }
+
+        return drawableId;
     }
 }

@@ -325,5 +325,7 @@
     <string name="title_invalid_pin">Código Inválido</string>
     <string name="label_pin_already_activated">El código ingresado es inválido. Este PIN ya fue utilizado.</string>
     <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
+    <string name="error_title_not_enough_souvs">¡No tienes suficientes souvenirs!</string>
+    <string name="error_label_not_enough_souvs">Debes recolectar al menos %1$s souvenirs para cambiar de Era. ¡Sigue abriendo cofres!</string>
 
 </resources>

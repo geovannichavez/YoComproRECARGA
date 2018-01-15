@@ -30,6 +30,9 @@ public class ListSouvenirsByConsumer
     @SerializedName("SouvenirsOwnedByConsumer")
     @Expose
     private int souvenirsOwnedByConsumer;
+    @SerializedName("Unlocked")
+    @Expose
+    private int unlocked;
 
     public int getSouvenirID() {
         return souvenirID;
@@ -85,5 +88,13 @@ public class ListSouvenirsByConsumer
 
     public void setSouvenirsOwnedByConsumer(int souvenirsOwnedByConsumer) {
         this.souvenirsOwnedByConsumer = souvenirsOwnedByConsumer;
+    }
+
+    public int getUnlocked() {
+        return unlocked;
+    }
+
+    public void setUnlocked(int unlocked) {
+        this.unlocked = unlocked;
     }
 }
