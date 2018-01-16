@@ -75,11 +75,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme"
         android:vmSafeMode="true"
-        tools:replace="android:allowBackup"
-        >
+        tools:replace="android:allowBackup">
 
         <!-- Google Maps API Key -->
         <meta-data
@@ -155,18 +153,23 @@
         </activity>
 
         <!-- SMS Receiver -->
-        <!--<receiver
+        <!--
+        <receiver
             android:name=".utils.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="99999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
+
 
         <!-- Intent service -->
-        <!--<service
+        <!--
+            <service
             android:name=".utils.TokenInputService"
-            android:exported="false"/>-->
+            android:exported="false"/>
+        -->
 
         <activity
             android:name=".ui.activities.Permissions"
@@ -185,19 +188,20 @@
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
-
         <activity
             android:name=".ui.activities.PrizeDetail"
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
@@ -269,28 +273,35 @@
             android:name=".ui.activities.Wildcard"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.Intro"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
 
-        <!--    AppsFlyer Receiver-->
-        <receiver android:name="com.appsflyer.SingleInstallBroadcastReceiver" android:exported="true">
-                <intent-filter>
-                     <action android:name="com.android.vending.INSTALL_REFERRER" />
-                 </intent-filter>
+        <!-- AppsFlyer Receiver -->
+        <receiver
+            android:name="com.appsflyer.SingleInstallBroadcastReceiver"
+            android:exported="true">
+                
+            <intent-filter>
+                         
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+                     
+            </intent-filter>
         </receiver>
-        <!--    Multiple Broadcast Receiver -->
-        <!--<receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+        <!-- Multiple Broadcast Receiver -->
+        <!--
+        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
              <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
              </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
 
+        <activity android:name=".ui.activities.Combos">
+        </activity>
     </application>
 
 </manifest>

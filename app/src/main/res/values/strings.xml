@@ -318,6 +318,7 @@
     <string name="title_leaderboards">Tabla de Líderes</string>
     <string name="title_prizes">Premios</string>
     <string name="title_souvenirs_collection">Colección</string>
+    <string name="title_combos_collection">Combos</string>
     <string name="label_prizes_button">PREMIOS</string>
     <string name="label_collection_button">COLECCIÓN</string>
     <string name="label_achievements_button">LOGROS</string>
