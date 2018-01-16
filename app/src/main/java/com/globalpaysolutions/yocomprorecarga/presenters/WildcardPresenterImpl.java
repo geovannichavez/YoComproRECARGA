@@ -33,7 +33,7 @@ public class WildcardPresenterImpl implements IWildcardPresenter, WildcardListen
     @Override
     public void initializeViews()
     {
-        mView.initialViewsState();
+        mView.initialViewsState(UserData.getInstance(mContext).getEraWildcardMain());
     }
 
     @Override
@@ -81,14 +81,14 @@ public class WildcardPresenterImpl implements IWildcardPresenter, WildcardListen
                 {
                     //Substracts coins from user's score
                     String substraction = String.valueOf(response.getExchangeCoins());
-                    mView.changeLoserView(substraction);
+                    mView.changeLoserView(substraction, UserData.getInstance(mContext).getEraWildcardLose());
 
                 }
                 else if (response.getType() == 2)
                 {
                     //Sums coins on user's score
                     String adding = String.valueOf(response.getExchangeCoins());
-                    mView.changeWinnerView(adding);
+                    mView.changeWinnerView(adding, UserData.getInstance(mContext).getEraWildcardWin());
                 }
                 else //Quiere decir que es 3??
                 {

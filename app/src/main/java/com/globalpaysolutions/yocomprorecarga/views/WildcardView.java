@@ -8,9 +8,9 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 
 public interface WildcardView
 {
-    void initialViewsState();
-    void changeWinnerView(String coins);
-    void changeLoserView(String coins);
+    void initialViewsState(String urlMain);
+    void changeWinnerView(String coins, String urlWin);
+    void changeLoserView(String coins, String urlLoser);
     void navigateToPrizeDetail();
     void showImageDialog(DialogViewModel dialogModel, int resource);
     void showCloseableDialog(DialogViewModel dialogModel, int resource);

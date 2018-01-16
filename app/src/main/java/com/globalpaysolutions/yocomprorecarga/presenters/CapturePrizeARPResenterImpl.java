@@ -216,7 +216,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
-        mView.changeToOpenChest(pChestType);
+        mView.changeToOpenChest(pChestType, mUserData.getEraID());
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
@@ -345,12 +345,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onGoldKeyEntered(pKey, pLocation);
+                    mView.onGoldKeyEntered(pKey, pLocation, mUserData.getEraName());
                 }
             }
             else
             {
-                mView.onGoldKeyEntered_2D(pKey, pLocation);
+                mView.onGoldKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
                 mView.switchRecarcoinVisible(true);
                 mView.blinkRecarcoin();
             }
@@ -389,12 +389,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onSilverKeyEntered(pKey, pLocation);
+                    mView.onSilverKeyEntered(pKey, pLocation, mUserData.getEraName());
                 }
             }
             else
             {
-                mView.onSilverKeyEntered_2D(pKey, pLocation);
+                mView.onSilverKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
                 mView.switchRecarcoinVisible(true);
                 mView.blinkRecarcoin();
             }
@@ -435,12 +435,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onBronzeKeyEntered(pKey, pLocation);
+                    mView.onBronzeKeyEntered(pKey, pLocation, mUserData.getEraName());
                 }
             }
             else
             {
-                mView.onBronzeKeyEntered_2D(pKey, pLocation);
+                mView.onBronzeKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
                 mView.switchRecarcoinVisible(true);
                 mView.blinkRecarcoin();
             }
@@ -487,13 +487,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onWildcardKeyEntered(pKey, pLocation);
+                    mView.onWildcardKeyEntered(pKey, pLocation, mUserData.getEraName() );
                 }
             }
             else
             {
 
-                mView.onWildcardKeyEntered_2D(pKey, pLocation);
+                mView.onWildcardKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
                 mView.switchRecarcoinVisible(true);
                 mView.blinkRecarcoin();
             }

@@ -109,6 +109,10 @@ public class Constants
     public static final int CHEST_COINS_TYPE = 1;
     public static final int CHEST_SOUVENIR_TYPE = 2;
 
+    //Chest states
+    public static final String CHEST_STATE_OPEN = "open";
+    public static final String CHEST_STATE_CLOSED = "closed";
+
     public static final String ACHIEVEMENT_FROM_SOUVENIR_SALE = "achievement_from_souvenir_sale";
 
     //Showcase View

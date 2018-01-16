@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 
@@ -14,5 +15,5 @@ public interface ErasListener
     void onRetrieveSuccess(List<AgesListModel> eras);
     void onRetrieveError(int pCodeStatus, Throwable pThrowable);
     void onEraSelectionSuccess(EraSelectionResponse eraSelection, String destiny);
-    void onEraSelectionError(int pCodeStatus, Throwable pThrowable);
+    void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse);
 }

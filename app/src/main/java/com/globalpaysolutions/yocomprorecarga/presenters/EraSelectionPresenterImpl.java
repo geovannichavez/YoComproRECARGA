@@ -2,13 +2,13 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasListener;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IEraSelectionPresenter;
@@ -109,6 +109,9 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     eraSelection.getMarkerB(),
                     eraSelection.getMarkerW());
 
+            //Saves images for wildcard
+            UserData.getInstance(mContext).saveEraWildcard(eraSelection.getWildcardWin(), eraSelection.getWildcardLose(), eraSelection.getWildcardMain());
+
             if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
             {
                 mView.forwardToStore();
@@ -147,10 +150,27 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable)
+    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse)
     {
         mView.hideLoadingDialog();
-        mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+
+        if(pCodeStatus == 400)
+        {
+            if(simpleResponse != null)
+            {
+                if (TextUtils.equals(simpleResponse.getInternalCode(), "01"))
+                {
+                    String title = mContext.getString(R.string.error_title_not_enough_souvs);
+                    String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
+                    mView.createImageDialog(title, message, R.drawable.ic_alert);
+                }
+            }
+        }
+        else
+        {
+            mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+        }
+
     }
 
     private void addFlags(Intent pIntent)

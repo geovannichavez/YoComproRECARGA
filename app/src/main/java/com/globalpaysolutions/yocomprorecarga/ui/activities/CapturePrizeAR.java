@@ -37,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeY
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.ChestSelector;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
@@ -591,9 +592,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onGoldKeyEntered(String pKey, LatLng pLocation)
+    public void onGoldKeyEntered(String pKey, LatLng pLocation, String pAge)
     {
-        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
     }
 
     @Override
@@ -603,7 +604,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onGoldKeyEntered_2D(String pKey, LatLng pLocation)
+    public void onGoldKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID)
     {
         ChestData2D data = new ChestData2D();
         data.setLocation(pLocation);
@@ -611,7 +612,10 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d_closed);
+
+        //Gets resource according to era selected
+        int resourceID = ChestSelector.getInstance(this).getGoldResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+        Picasso.with(this).load(resourceID).into(ivPrize2D);
     }
 
     @Override
@@ -627,13 +631,13 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onSilverKeyEntered(String pKey, LatLng pLocation)
+    public void onSilverKeyEntered(String pKey, LatLng pLocation, String pAge)
     {
-        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
     }
 
     @Override
-    public void onSilverKeyEntered_2D(String pKey, LatLng pLocation)
+    public void onSilverKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID)
     {
         ChestData2D data = new ChestData2D();
         data.setLocation(pLocation);
@@ -641,7 +645,10 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_closed);
+
+        //Gets resource according to era selected
+        int resourceID = ChestSelector.getInstance(this).getSilverResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+        Picasso.with(this).load(resourceID).into(ivPrize2D);
     }
 
     @Override
@@ -663,13 +670,13 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onBronzeKeyEntered(String pKey, LatLng pLocation)
+    public void onBronzeKeyEntered(String pKey, LatLng pLocation, String pAge)
     {
-        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '"+ pAge  + "')");
     }
 
     @Override
-    public void onBronzeKeyEntered_2D(String pKey, LatLng pLocation)
+    public void onBronzeKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID)
     {
         ChestData2D data = new ChestData2D();
         data.setLocation(pLocation);
@@ -677,7 +684,10 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_closed);
+
+        //Gets resource according to era selected
+        int resourceID = ChestSelector.getInstance(this).getBronzeResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+        Picasso.with(this).load(resourceID).into(ivPrize2D);
     }
 
     @Override
@@ -699,13 +709,13 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onWildcardKeyEntered(String pKey, LatLng pLocation)
+    public void onWildcardKeyEntered(String pKey, LatLng pLocation, String pAge)
     {
-        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "')");
+        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey+ ", " + pAge + "')");
     }
 
     @Override
-    public void onWildcardKeyEntered_2D(String pKey, LatLng pLocation)
+    public void onWildcardKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID)
     {
         ChestData2D data = new ChestData2D();
         data.setLocation(pLocation);
@@ -713,7 +723,10 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         mFirbaseObjects.clear();
         mFirbaseObjects.put(pKey, data);
-        ivPrize2D.setImageResource(R.drawable.img_viking_2d);
+
+        //Gets resource according to era selected
+        int resourceID = ChestSelector.getInstance(this).getWildcardResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+        Picasso.with(this).load(resourceID).into(ivPrize2D);
     }
 
     @Override
@@ -735,22 +748,25 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void changeToOpenChest(int pChestType)
+    public void changeToOpenChest(int pChestType, int pEraID)
     {
+        int resourceID = 0;
+
         switch (pChestType)
         {
             case Constants.VALUE_CHEST_TYPE_GOLD:
-                ivPrize2D.setImageResource(R.drawable.img_gold_chest_2d_open);
+
+                resourceID = ChestSelector.getInstance(this).getGoldResource(pEraID).get(Constants.CHEST_STATE_OPEN);
+                Picasso.with(this).load(resourceID).into(ivPrize2D);
                 break;
             case Constants.VALUE_CHEST_TYPE_SILVER:
-                ivPrize2D.setImageResource(R.drawable.img_silver_chest_2d_open);
+                resourceID = ChestSelector.getInstance(this).getSilverResource(pEraID).get(Constants.CHEST_STATE_OPEN);
+                Picasso.with(this).load(resourceID).into(ivPrize2D);
                 break;
             case Constants.VALUE_CHEST_TYPE_BRONZE:
-                ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_open);
+                resourceID = ChestSelector.getInstance(this).getBronzeResource(pEraID).get(Constants.CHEST_STATE_OPEN);
+                Picasso.with(this).load(resourceID).into(ivPrize2D);
                 break;
-                default:
-                    ivPrize2D.setImageResource(R.drawable.img_bronze_chest_2d_open);
-                    break;
         }
 
     }

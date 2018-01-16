@@ -5,10 +5,14 @@ import android.content.Context;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IErasInteractor;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +40,6 @@ public class ErasInteractor implements IErasInteractor
     {
         EraSelectionReq request = new EraSelectionReq();
         request.setAgeID(eraID);
-        //request.setAgeID(1); //TODO
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(), request);
@@ -54,14 +57,31 @@ public class ErasInteractor implements IErasInteractor
                 else
                 {
                     int codeResponse = response.code();
-                    listener.onEraSelectionError(codeResponse, null);
+
+                    if(codeResponse == 400)
+                    {
+                       try
+                       {
+                           Gson gson = new Gson();
+                           SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                           listener.onEraSelectionError(codeResponse, null, errorResponse);
+                       }
+                       catch (IOException ex)
+                       {
+                           ex.printStackTrace();
+                       }
+                    }
+                    else
+                    {
+                        listener.onEraSelectionError(codeResponse, null, null);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<EraSelectionResponse> call, Throwable t)
             {
-                listener.onEraSelectionError(0, t);
+                listener.onEraSelectionError(0, t, null );
             }
         });
     }

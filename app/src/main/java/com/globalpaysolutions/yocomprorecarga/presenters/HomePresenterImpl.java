@@ -510,7 +510,6 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData)
     {
         if(pSalePointData != null)
-            //TODO: Quitar el parámetro del metodo
             mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), pSalePointData.getVendorCode());
     }
 

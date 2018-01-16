@@ -360,5 +360,7 @@
     <string name="showcase_content_back_map">Regresa al Mapa cuando necesites mejorar tu ubicación</string>
     <string name="showcase_title_go_store">Tienda</string>
     <string name="showcase_content_go_store">Accede a la tienda de Souvenirs</string>
+    <string name="error_title_not_enough_souvs">¡No tienes suficientes souvenirs!</string>
+    <string name="error_label_not_enough_souvs">Debes recolectar al menos %1$s souvenirs para cambiar de Era. ¡Sigue abriendo cofres!</string>
 
 </resources>

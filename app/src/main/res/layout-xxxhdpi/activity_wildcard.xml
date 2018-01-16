@@ -78,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/lblDescription"
-        app:srcCompat="@drawable/ic_wildcard_intro"/>
+         />
 
     <TextView
         android:id="@+id/lblResult"
