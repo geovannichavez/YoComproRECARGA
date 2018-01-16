@@ -16,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.AuthenticateInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.AuthenticateListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.FacebookConsumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IAuthenticatePresenter;
@@ -23,7 +24,6 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.onesignal.OneSignal;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -242,12 +242,12 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     }
 
     @Override
-    public void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable)
+    public void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         mInteractor.logoutFacebookUser();
         mInteractor.logoutFirebaseUser();
         mView.hideLoadingDialog();
-        this.processErrorMessage(pCodeStatus, pThrowable);
+        this.processErrorMessage(pCodeStatus, pThrowable, pRequiredVersion);
     }
 
     /*
@@ -258,7 +258,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     *
     */
 
-    private void processErrorMessage(int pCodeStatus, Throwable pThrowable)
+    private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         DialogViewModel errorResponse = new DialogViewModel();
 
@@ -295,6 +295,13 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
                 {
                     Titulo = mContext.getString(R.string.error_title_vendor_not_found);
                     Linea1 = mContext.getString(R.string.error_content_vendor_not_found_line);
+                    Button = mContext.getString(R.string.button_accept);
+                }
+                else if(pCodeStatus == 426)
+                {
+
+                    Titulo = mContext.getString(R.string.title_update_required);
+                    Linea1 = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
                     Button = mContext.getString(R.string.button_accept);
                 }
                 else

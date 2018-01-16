@@ -362,5 +362,8 @@
     <string name="showcase_content_go_store">Accede a la tienda de Souvenirs</string>
     <string name="error_title_not_enough_souvs">¡No tienes suficientes souvenirs!</string>
     <string name="error_label_not_enough_souvs">Debes recolectar al menos %1$s souvenirs para cambiar de Era. ¡Sigue abriendo cofres!</string>
+    <string name="title_update_required">¡Actualiza tu aplicación!</string>
+    <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
+
 
 </resources>

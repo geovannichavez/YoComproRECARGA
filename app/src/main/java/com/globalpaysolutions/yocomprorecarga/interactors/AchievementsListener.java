@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
 public interface AchievementsListener
 {
     void onRetrieveSuccess(AchievementsResponse response);
-    void onRetrieveError(int pCodeStatus, Throwable pThrowable);
+    void onRetrieveError(int pCodeStatus, Throwable pThrowable, String requiredVersion);
 }

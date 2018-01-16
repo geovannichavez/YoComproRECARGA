@@ -11,9 +11,9 @@ import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 public interface CapturePrizeListener
 {
     void onRetrieveTracking(Tracking pTracking);
-    void onTrackingError(int pCodeStatus, Throwable pThrowable);
+    void onTrackingError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
     void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int chestType, String firebaseID);
-    void onOpenChestError(int pCodeStatus, Throwable pThrowable);
+    void onOpenChestError(int pCodeStatus, Throwable pThrowable, String requiredVersion);
     void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
-    void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable);
+    void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable, String requiredVersion);
 }

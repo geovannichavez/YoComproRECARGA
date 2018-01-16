@@ -115,14 +115,31 @@ public class WildcardPresenterImpl implements IWildcardPresenter, WildcardListen
     }
 
     @Override
-    public void onExchangeWildcardError(int codeStatus, Throwable throwable)
+    public void onExchangeWildcardError(int codeStatus, Throwable throwable, String requiredVersion)
     {
-        mView.dismissLoadingDialog();
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        //dialog.setLine1(mContext.getString(R.string.label_something_went_wrong_wildcard));
-        dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
-        dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
-        mView.showCloseableDialog(dialog, R.drawable.ic_alert);
+        try
+        {
+            mView.dismissLoadingDialog();
+
+            if(codeStatus == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String content = String.format(mContext.getString(R.string.content_update_required), requiredVersion);
+                mView.showGenericDialog(title, content);
+            }
+            else
+            {
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                //dialog.setLine1(mContext.getString(R.string.label_something_went_wrong_wildcard));
+                dialog.setLine1(mContext.getString(R.string.error_content_progress_something_went_wrong_try_again));
+                dialog.setAcceptButton(mContext.getResources().getString(R.string.button_accept));
+                mView.showCloseableDialog(dialog, R.drawable.ic_alert);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 }

@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 public interface PrizesHistoryListener
 {
     void onRetrievePrizesSuccess(PrizesHistoryResponse response);
-    void onRetrievePrizesError(int code, Throwable throwable);
+    void onRetrievePrizesError(int code, Throwable throwable, String requiredVersion);
 }

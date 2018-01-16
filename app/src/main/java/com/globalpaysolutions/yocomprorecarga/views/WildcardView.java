@@ -16,4 +16,5 @@ public interface WildcardView
     void showCloseableDialog(DialogViewModel dialogModel, int resource);
     void showLoadingDialog(String label);
     void dismissLoadingDialog();
+    void showGenericDialog(String title, String content);
 }

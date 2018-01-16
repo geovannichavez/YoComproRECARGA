@@ -20,4 +20,5 @@ public interface SouvenirsView
     void navigatePrizeDetails();
     void closeSouvenirDialog();
     void generateImageDialog(DialogViewModel dialog, int resource);
+    void showGenericDialog(String title, String content);
 }

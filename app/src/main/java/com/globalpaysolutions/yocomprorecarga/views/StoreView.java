@@ -1,10 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
-import android.graphics.Bitmap;
-import android.view.View;
-
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
 
 import java.util.List;
 
@@ -22,4 +18,5 @@ public interface StoreView
     void showNewAchievementDialog(String name, String level, String prize, String score, int resource);
     void createImageDialog(String title, String description, int resource);
     void updateViews(String coinsLeft);
+    void createGenericDialog(String title, String content);
 }

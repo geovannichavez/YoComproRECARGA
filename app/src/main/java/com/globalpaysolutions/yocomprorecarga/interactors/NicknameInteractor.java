@@ -47,19 +47,18 @@ public class NicknameInteractor implements INicknameInteractor
                 {
                     SimpleResultResponse resultResponse = response.body();
                     mListener.onValidateNicknameSuccess(resultResponse, requestBody.getNickname());
-
                 }
                 else
                 {
                     int codeResponse = response.code();
-                    mListener.onError(codeResponse, null);
+                    mListener.onError(codeResponse, null, null);
 
                 }
             }
             @Override
             public void onFailure(Call<SimpleResultResponse> call, Throwable t)
             {
-                mListener.onError(0, t);
+                mListener.onError(0, t, null);
             }
         });
     }

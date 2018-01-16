@@ -14,5 +14,6 @@ public interface AchievementsView
     void hideLoadingDialog();
     void renderAchievements(List<ListAchievementsByConsumer> achieves);
     void showGenericImgDialog(String title, String content, int resource);
+    void showGenericDialog(String title, String content);
     void loadBackground();
 }

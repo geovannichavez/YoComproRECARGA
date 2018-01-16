@@ -85,9 +85,15 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void onRetrieveError(int pCodeStatus, Throwable pThrowable)
+    public void onRetrieveError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         mView.hideLoadingDialog();
+        if(pCodeStatus == 426)
+        {
+            String title = mContext.getString(R.string.title_update_required);
+            String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
+            mView.showGenericDialog(title, message);
+        }
     }
 
     @Override
@@ -149,28 +155,39 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
         }
     }
 
-    @Override
-    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse)
+    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse, String pRequiredVersion)
     {
-        mView.hideLoadingDialog();
-
-        if(pCodeStatus == 400)
+        try
         {
-            if(simpleResponse != null)
+            mView.hideLoadingDialog();
+            if(pCodeStatus == 426)
             {
-                if (TextUtils.equals(simpleResponse.getInternalCode(), "01"))
+                String title = mContext.getString(R.string.title_update_required);
+                String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
+                mView.showGenericDialog(title, message);
+            }
+            else if(pCodeStatus == 400)
+            {
+                if(simpleResponse != null)
                 {
-                    String title = mContext.getString(R.string.error_title_not_enough_souvs);
-                    String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
-                    mView.createImageDialog(title, message, R.drawable.ic_alert);
+                    if (TextUtils.equals(simpleResponse.getInternalCode(), "01"))
+                    {
+                        String title = mContext.getString(R.string.error_title_not_enough_souvs);
+                        String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
+                        mView.createImageDialog(title, message, R.drawable.ic_alert);
+                    }
                 }
             }
+            else
+            {
+                mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong), mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+            ex.printStackTrace();
         }
-
     }
 
     private void addFlags(Intent pIntent)

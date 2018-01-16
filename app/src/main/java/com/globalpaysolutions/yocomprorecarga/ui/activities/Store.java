@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -286,6 +284,44 @@ public class Store extends ImmersiveActivity implements StoreView
     public void updateViews(String coinsLeft)
     {
         lblRecarCoinsLeft.setText(coinsLeft);
+    }
+
+    @Override
+    public void createGenericDialog(String title, String content)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Store.this);
+            LayoutInflater inflater = Store.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(content);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     private void createStoreItemInfoDialog()

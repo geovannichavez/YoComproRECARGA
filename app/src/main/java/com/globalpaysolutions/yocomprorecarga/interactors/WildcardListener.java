@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardRespons
 public interface WildcardListener
 {
     void onExchangeWildcardSuccess(ExchangeWildcardResponse response);
-    void onExchangeWildcardError(int codeStatus, Throwable throwable);
+    void onExchangeWildcardError(int codeStatus, Throwable throwable, String requiredVersion);
 }

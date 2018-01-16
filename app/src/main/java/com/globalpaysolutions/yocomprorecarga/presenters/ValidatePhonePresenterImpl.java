@@ -112,10 +112,10 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void onError(int pCodeStatus, Throwable pThrowable)
+    public void onError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         this.View.hideLoading();
-        ProcessErrorMessage(pCodeStatus, pThrowable);
+        ProcessErrorMessage(pCodeStatus, pThrowable, pRequiredVersion);
     }
 
     @Override
@@ -126,7 +126,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
     }
 
     @Override
-    public void onRequestPhoneValResult(RegisterClientResponse pResponse, int codeStatus)
+    public void onRequestPhoneValResult(RegisterClientResponse pResponse, int codeStatus )
     {
 
         this.View.hideLoading();
@@ -145,7 +145,7 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
 
     }
 
-    private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
+    private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         ErrorResponseViewModel errorResponse = new ErrorResponseViewModel();
 
@@ -179,20 +179,27 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
             }
             else
             {
-                String Titulo = context.getString(R.string.error_title_something_went_wrong);
-                String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
-                String Button = context.getString(R.string.button_accept);
 
-                /*if(pCodeStatus == 500 && !TextUtils.equals(pSecondsRemaining, ""))
+                if(pCodeStatus == 426)
                 {
-                    Titulo = context.getString(R.string.error_title_sms_await_title);
-                    Linea1 = pSecondsRemaining;
-                }*/
+                    ErrorResponseViewModel dialog = new ErrorResponseViewModel();
+                    dialog.setTitle(context.getString(R.string.title_update_required));
+                    dialog.setLine1(String.format(context.getString(R.string.content_update_required), pRequiredVersion));
+                    dialog.setAcceptButton(context.getString(R.string.button_accept));
+                    this.View.showGenericMessage(dialog);
+                }
+                else
+                {
+                    String Titulo = context.getString(R.string.error_title_something_went_wrong);
+                    String Linea1 = context.getString(R.string.error_content_something_went_wrong_try_again);
+                    String Button = context.getString(R.string.button_accept);
 
-                errorResponse.setTitle(Titulo);
-                errorResponse.setLine1(Linea1);
-                errorResponse.setAcceptButton(Button);
-                this.View.showGenericMessage(errorResponse);
+                    errorResponse.setTitle(Titulo);
+                    errorResponse.setLine1(Linea1);
+                    errorResponse.setAcceptButton(Button);
+                    this.View.showGenericMessage(errorResponse);
+                }
+
             }
         }
         catch (Exception ex)

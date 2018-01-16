@@ -3,7 +3,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 
 import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -13,7 +12,6 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.INicknamePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Main;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.Nickname;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
 
@@ -81,10 +79,10 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     }
 
     @Override
-    public void onError(int pCodeStatus, Throwable pThrowable)
+    public void onError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         mView.hideLoading();
-        handleError(pCodeStatus, pThrowable);
+        handleError(pCodeStatus, pThrowable, pRequiredVersion);
         mUserData.hasSetNickname(false);
         mUserData.deleteNickname();
     }
@@ -97,7 +95,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
     *
     */
 
-    private void handleError(int pCodeStatus, Throwable pThrowable)
+    private void handleError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
         DialogViewModel errorResponse = new DialogViewModel();
 

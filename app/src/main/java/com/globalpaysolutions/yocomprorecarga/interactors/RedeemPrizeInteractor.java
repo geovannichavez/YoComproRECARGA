@@ -2,13 +2,18 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 
+import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IRedeemPrizeInteractor;
-import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +40,8 @@ public class RedeemPrizeInteractor implements IRedeemPrizeInteractor
         requestBody.setPIN(pinCode);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ActivatePrizeResponse> call = apiService.activatePrize(UserData.getInstance(mContext).getUserAuthenticationKey(), requestBody);
+        final Call<ActivatePrizeResponse> call = apiService.activatePrize(UserData.getInstance(mContext).getUserAuthenticationKey(),
+                BuildConfig.VERSION_NAME, Constants.PLATFORM, requestBody);
 
         call.enqueue(new Callback<ActivatePrizeResponse>()
         {
@@ -51,15 +57,31 @@ public class RedeemPrizeInteractor implements IRedeemPrizeInteractor
                 }
                 else
                 {
-                    int codeResponse = response.code();
-                    listener.onError(codeResponse, null);
+                    try
+                    {
+                        int codeResponse = response.code();
+                        if(codeResponse == 426)
+                        {
+                            Gson gson = new Gson();
+                            SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                            listener.onError(codeResponse, null, errorResponse.getInternalCode());
+                        }
+                        else
+                        {
+                            listener.onError(codeResponse, null, null);
+                        }
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ActivatePrizeResponse> call, Throwable t)
             {
-                listener.onError(9, t);
+                listener.onError(9, t, null);
             }
         });
 

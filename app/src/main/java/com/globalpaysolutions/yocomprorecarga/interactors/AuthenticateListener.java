@@ -25,5 +25,5 @@ public interface AuthenticateListener
     void onCurrentAccessTokenChanged(AccessToken pOldAccessToken, AccessToken pCurrentAccessToken);
 
     void onAuthenticateConsumerSuccess(AuthenticateResponse pResponse);
-    void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable);
+    void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
 }

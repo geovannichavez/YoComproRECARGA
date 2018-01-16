@@ -313,6 +313,44 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
         createImageDialog(dialog.getTitle(), dialog.getLine1(), resource);
     }
 
+    @Override
+    public void showGenericDialog(String title, String content)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Souvenirs.this);
+            LayoutInflater inflater = Souvenirs.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(content);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     public void closeSouvenirDialog(View view)
     {
         try
