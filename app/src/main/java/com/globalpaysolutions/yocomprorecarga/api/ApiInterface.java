@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
@@ -171,5 +172,9 @@ public interface ApiInterface
                                               @Header("AppVersion") String pAppVersion,
                                               @Header("Platform") String pPlatform,
                                               @Body ActivatePrizeReq activatePrizeReq);
-
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_COMBOS)
+    Call<CombosResponse> getCombos(@Header("authenticationKey") String userAuthenticationKey,
+                                   @Header("AppVersion") String versionName,
+                                   @Header("Platform")String platform);
 }

@@ -132,6 +132,9 @@ dependencies {
     //ShowcaseView
     compile 'com.github.amlcurran.showcaseview:library:5.4.3'
 
+    //RecyclerView
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+
 }
 
 //Google Services

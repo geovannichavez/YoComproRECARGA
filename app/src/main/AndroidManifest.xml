@@ -245,11 +245,7 @@
             android:name=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.Store"
@@ -300,7 +296,16 @@
         </receiver>
         -->
 
-        <activity android:name=".ui.activities.Combos">
+        <activity
+            android:name=".ui.activities.Combos"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
         </activity>
     </application>
 

@@ -57,6 +57,8 @@ public class StringsURL
 
     public static final String STORE_ITEMS = "StoreItems";
 
+    public static final String GET_COMBOS = "GetCombos";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 
@@ -83,5 +85,6 @@ public class StringsURL
     public static final String EXCHANGE_SOUVENIR = "ExchangeSouvenir";
     public static final String EXCHANGE_WILDCARD = "ExchangeWildcard";
     public static final String ACTIVATE_PRIZE = "ActivatePrize";
+
 }
 

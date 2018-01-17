@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_title_generic"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lvCombos"
         android:layout_width="208dp"
         android:layout_height="304dp"
