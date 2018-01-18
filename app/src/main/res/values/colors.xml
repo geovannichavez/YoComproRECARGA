@@ -82,5 +82,6 @@
 
     <!--<color name="color_intro_background">#191c20</color>-->
     <color name="color_intro_background">#acada9</color>
+    <color name="color_orange_background">#e45d2b</color>
 
 </resources>

@@ -58,6 +58,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_detail);
 
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_orange_background));
 
         imgPrizeType = (ImageView) findViewById(R.id.imgChestPrize);
         etPrizeCode = (TextView) findViewById(R.id.txtPin);
