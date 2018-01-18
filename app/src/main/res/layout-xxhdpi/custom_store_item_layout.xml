@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="228dp"
     android:layout_height="309dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    tools:layout_editor_absoluteY="25dp">
 
     <TextView
         android:id="@+id/lblStoreItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textAllCaps="true"
-        android:textSize="20sp"
+        android:textSize="19sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imgStoreItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="BARRIL COSTOSO"/>
 
     <ImageView
         android:id="@+id/imgStoreItem"
-        android:layout_width="141dp"
-        android:layout_height="192dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="149dp"
+        android:layout_height="168dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblBarrelDescription"
         app:srcCompat="@drawable/img_store_item"/>
 
 
@@ -48,11 +44,26 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textAllCaps="true"
-        android:textSize="20sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgStoreItem"
         tools:text="10,000 RecarCoins"/>
+
+    <TextView
+        android:id="@+id/lblBarrelDescription"
+        android:layout_width="207dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:maxLines="3"
+        tools:text="Este barril es barato, te ofrece la posibilidad de ganarte souvenirs comunes con posibilidades de raros."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblStoreItemName"/>
 </android.support.constraint.ConstraintLayout>

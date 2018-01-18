@@ -44,11 +44,13 @@ public class StoreAdapter extends PagerAdapter
         ImageView image = (ImageView) layout.findViewById(R.id.imgStoreItem);
         TextView lblStoreItemName = (TextView) layout.findViewById(R.id.lblStoreItemName);
         TextView lblStoreItemPrice = (TextView) layout.findViewById(R.id.lblStoreItemPrice);
+        TextView lblBarrelDescription = (TextView) layout.findViewById(R.id.lblBarrelDescription);
 
         Picasso.with(mContext).load(mStoreItems.get(position).getImgUrl()).into(image);
 
         lblStoreItemName.setText(mStoreItems.get(position).getName());
         lblStoreItemPrice.setText(String.format("%1$s RecarCoins", format(mStoreItems.get(position).getValue())));
+        lblBarrelDescription.setText(mStoreItems.get(position).getDescription());
         view.addView(layout, 0);
         return layout;
     }

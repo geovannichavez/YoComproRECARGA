@@ -138,6 +138,7 @@ public class Store extends ImmersiveActivity implements StoreView
                 }
             });
 
+            //Button hidden on first page
             btnLeft.setVisibility(View.GONE);
         }
         catch (Exception ex)
@@ -363,33 +364,29 @@ public class Store extends ImmersiveActivity implements StoreView
         {
             mCurrentItem = position;
 
-            // changing the next button text 'NEXT' / 'GOT IT'
-            if (position == mStoreItems.size())
-            //if (position == mStoreItems.size() - 1)
+            // Last page, make right button invisible
+            if (position == mStoreItems.size() - 1)
             {
-                // last page. make button text to GOT IT
-                //btnLeft.setText(getString(R.string.button_start));
+
                 btnRight.setVisibility(View.GONE);
             }
-            else if (position == 0)
+            else if(position == 0)
             {
+                // First page, make left button invisible
                 btnLeft.setVisibility(View.GONE);
-                btnRight.setVisibility(View.VISIBLE);
             }
             else
             {
-                // still pages are left
-                btnRight.setVisibility(View.GONE);
+                // Makes both button visible as long as are pages left
+                btnRight.setVisibility(View.VISIBLE);
                 btnLeft.setVisibility(View.VISIBLE);
             }
         }
-
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2)
         {
 
         }
-
         @Override
         public void onPageScrollStateChanged(int arg0)
         {
