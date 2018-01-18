@@ -12,6 +12,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeComboReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
@@ -176,5 +177,12 @@ public interface ApiInterface
     @GET(StringsURL.GET_COMBOS)
     Call<CombosResponse> getCombos(@Header("authenticationKey") String userAuthenticationKey,
                                    @Header("AppVersion") String versionName,
-                                   @Header("Platform")String platform);
+                                   @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE_COMBOS)
+    Call<WinPrizeResponse> exchangeCombo(@Header("authenticationKey") String userAuthenticationKey,
+                                         @Header("AppVersion") String versionName,
+                                         @Header("Platform") String platform,
+                                         @Body ExchangeComboReq exchangeCombo);
 }

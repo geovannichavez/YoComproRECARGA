@@ -207,7 +207,13 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
                 public void onClick(View v)
                 {
                     ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
-                    mPresnter.exchangeSouvenir(souvID);
+                    //mPresnter.exchangeSouvenir(souvID);
+
+                    ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
+                    Intent combos = new Intent(Souvenirs.this, Combos.class);
+                    combos.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(combos);
+                    finish();
                 }
             });
 

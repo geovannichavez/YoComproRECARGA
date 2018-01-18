@@ -59,6 +59,8 @@ public class StringsURL
 
     public static final String GET_COMBOS = "GetCombos";
 
+    public static final String EXCHANGE_COMBOS = "ExchangeCombo";
+
     //FIREBASE
     private static final String URL_FIREBASE = "https://yocomprorecarga-development.firebaseio.com/";
 

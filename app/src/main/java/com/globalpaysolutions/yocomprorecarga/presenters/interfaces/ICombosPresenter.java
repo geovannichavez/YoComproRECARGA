@@ -8,4 +8,5 @@ public interface ICombosPresenter
 {
     void initialize();
     void retrieveCombos();
+    void exhangeCombo(int comboID);
 }

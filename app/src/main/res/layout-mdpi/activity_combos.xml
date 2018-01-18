@@ -119,7 +119,7 @@
         android:fontFamily="@font/baloo_regular"
         android:textAllCaps="true"
         android:textSize="20sp"
-        android:text="@string/title_souvenirs_collection"
+        android:text="@string/title_combos_collection"
         android:textColor="@color/color_red_recargo"
         app:layout_constraintBottom_toBottomOf="@+id/imageView14"
         app:layout_constraintEnd_toEndOf="@+id/imageView14"

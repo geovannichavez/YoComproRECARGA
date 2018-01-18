@@ -318,7 +318,7 @@
     <string name="title_leaderboards">Tabla de Líderes</string>
     <string name="title_prizes">Premios</string>
     <string name="title_souvenirs_collection">Colección</string>
-    <string name="title_combos_collection">Combos</string>
+    <string name="title_combos_collection">COMBOS</string>
     <string name="label_prizes_button">PREMIOS</string>
     <string name="label_collection_button">COLECCIÓN</string>
     <string name="label_achievements_button">LOGROS</string>
@@ -361,10 +361,11 @@
     <string name="showcase_content_back_map">Regresa al Mapa cuando necesites mejorar tu ubicación</string>
     <string name="showcase_title_go_store">Tienda</string>
     <string name="showcase_content_go_store">Accede a la tienda de Souvenirs</string>
-    <string name="error_title_not_enough_souvs">¡No tienes suficientes souvenirs!</string>
+    <string name="error_title_not_enough_souvs">¡Faltan souvenirs!</string>
     <string name="error_label_not_enough_souvs">Debes recolectar al menos %1$s souvenirs para cambiar de Era. ¡Sigue abriendo cofres!</string>
     <string name="title_update_required">¡Actualiza tu aplicación!</string>
     <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
+    <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
 
 
 </resources>

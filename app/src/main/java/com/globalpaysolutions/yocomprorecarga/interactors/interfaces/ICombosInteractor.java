@@ -9,5 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.interactors.CombosListener;
 public interface ICombosInteractor
 {
     void retrieveCombos(CombosListener listener);
-    void exchangeCombo();
+    void exchangeCombo(CombosListener listener, int comboID);
 }
