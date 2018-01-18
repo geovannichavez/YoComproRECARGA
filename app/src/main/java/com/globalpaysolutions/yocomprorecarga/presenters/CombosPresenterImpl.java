@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.CombosInteractor;
@@ -50,13 +51,24 @@ public class CombosPresenterImpl implements ICombosPresenter, CombosListener
     }
 
     @Override
-    public void exhangeCombo(int comboID)
+    public void exhangeCombo(final int comboID)
     {
         try
         {
-            //mView.showExchangeConfirmDialog();
-            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-            mInteractor.exchangeCombo(this, comboID);
+            DialogViewModel confirm = new DialogViewModel();
+            confirm.setTitle(mContext.getString(R.string.title_confirm_combo_exchange));
+            confirm.setLine1(mContext.getString(R.string.content_confirm_combo_exchange));
+            confirm.setAcceptButton(mContext.getString(R.string.button_exchange));
+            mView.showExchangeConfirmDialog(confirm, R.drawable.ic_alert, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+                    mInteractor.exchangeCombo(CombosPresenterImpl.this, comboID);
+                    mView.hideConfirmDialog();
+                }
+            });
         }
         catch (Exception ex)
         {

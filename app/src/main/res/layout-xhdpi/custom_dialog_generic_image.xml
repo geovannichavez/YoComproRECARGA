@@ -74,8 +74,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="228dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/tvDialogMessage"
+        app:layout_constraintStart_toStartOf="@+id/tvDialogMessage"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:srcCompat="@drawable/img_recarcoin_multiple"/>
 </android.support.constraint.ConstraintLayout>

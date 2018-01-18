@@ -366,6 +366,9 @@
     <string name="title_update_required">¡Actualiza tu aplicación!</string>
     <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
     <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
+    <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
+    <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>
+    <string name="button_exchange">CANJEAR</string>
 
 
 </resources>
