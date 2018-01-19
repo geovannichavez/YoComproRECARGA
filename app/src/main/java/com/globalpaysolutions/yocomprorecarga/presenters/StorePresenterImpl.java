@@ -3,11 +3,13 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.StoreListener;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IStorePresenter;
@@ -46,12 +48,25 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     }
 
     @Override
-    public void purchaseitem(int itemID, double price)
+    public void purchaseitem(final int itemID, double price)
     {
         if(price < UserData.getInstance(mContext).getTotalWonCoins())
         {
-            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-            mInteractor.purchaseStoreItem(this, itemID);
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_buy_barrell_confirm_dialog));
+            dialog.setLine1(mContext.getString(R.string.content_buy_barrell_confirm_text));
+            dialog.setAcceptButton(mContext.getString(R.string.button_buy));
+
+            mView.showConfirmDialog(dialog, R.drawable.ic_alert, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.hideConfirmDialog();
+                    mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+                    mInteractor.purchaseStoreItem(StorePresenterImpl.this, itemID);
+                }
+            });
         }
         else
         {

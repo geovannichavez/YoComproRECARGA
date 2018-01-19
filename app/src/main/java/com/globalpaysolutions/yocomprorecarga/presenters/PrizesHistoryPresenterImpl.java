@@ -1,6 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.PrizesHistoryInteractor;
@@ -10,6 +13,7 @@ import com.globalpaysolutions.yocomprorecarga.models.Prize;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPrizesHistoryPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 
 import java.io.IOException;
@@ -47,6 +51,30 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.retrievePrizesHistory();
+    }
+
+    @Override
+    public void copyCodeToClipboard(String code)
+    {
+        try
+        {
+            ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+            if(clipboard != null)
+            {
+                ClipData clip = ClipData.newPlainText("PrizeCode", code);
+                clipboard.setPrimaryClip(clip);
+
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.title_copied_to_clipboard));
+                dialog.setLine1(String.format(mContext.getString(R.string.content_copied_to_clipboard), Constants.SMS_NUMBER_PRIZE_EXCHANGE));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Excecption on copyCodeToClipboard: " + ex.getMessage());
+        }
     }
 
     @Override

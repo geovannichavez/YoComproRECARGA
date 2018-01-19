@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.StorePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.StoreAdapter;
@@ -32,11 +34,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Store extends ImmersiveActivity implements StoreView
 {
+    private static final String TAG = Store.class.getSimpleName();
+
     //MVP
     private StorePresenterImpl mPresenter;
 
     //Layouyts and Views
-
     ViewPager pagerStoreItems;
     ImageButton btnLeft;
     ImageButton btnRight;
@@ -45,6 +48,7 @@ public class Store extends ImmersiveActivity implements StoreView
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
+    AlertDialog mConfirmDialog;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -325,6 +329,65 @@ public class Store extends ImmersiveActivity implements StoreView
         }
     }
 
+    @Override
+    public void showConfirmDialog(DialogViewModel dialogContent, int resource, View.OnClickListener onClickListener)
+    {
+        try
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_confirm_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.lblTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.lblContent);
+            TextView tvButtonContent = (TextView) dialogView.findViewById(R.id.tvButtonContent);
+            ImageView imgDialogImage = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
+
+            btnGenericDialogButton.setOnClickListener(onClickListener);
+
+            tvTitle.setText(dialogContent.getTitle());
+            tvDescription.setText(dialogContent.getLine1());
+            tvButtonContent.setText(dialogContent.getAcceptButton());
+            Picasso.with(this).load(resource).into(imgDialogImage);
+
+            mConfirmDialog = builder.setView(dialogView).create();
+            mConfirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mConfirmDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            mConfirmDialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mConfirmDialog.dismiss();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "showConfirmDialog: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void hideConfirmDialog()
+    {
+        try
+        {
+            if (mConfirmDialog != null && mConfirmDialog.isShowing())
+            {
+                mConfirmDialog.cancel();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error trying to dismiss 'mConfirmDialog': " + ex.getMessage());
+        }
+    }
+
     private void createStoreItemInfoDialog()
     {
         try
@@ -367,13 +430,14 @@ public class Store extends ImmersiveActivity implements StoreView
             // Last page, make right button invisible
             if (position == mStoreItems.size() - 1)
             {
-
                 btnRight.setVisibility(View.GONE);
+                btnLeft.setVisibility(View.VISIBLE);
             }
             else if(position == 0)
             {
                 // First page, make left button invisible
                 btnLeft.setVisibility(View.GONE);
+                btnRight.setVisibility(View.VISIBLE);
             }
             else
             {

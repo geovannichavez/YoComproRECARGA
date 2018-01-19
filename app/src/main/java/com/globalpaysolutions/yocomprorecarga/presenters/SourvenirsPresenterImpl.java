@@ -50,9 +50,24 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
     }
 
     @Override
-    public void showSouvenirDetailsModal(String title, String description, String count, String url, int souvID)
+    public void showSouvenirDetailsModal(String title, String description, String count, String url, int souvID, int souvLevel)
     {
-        mView.showSouvenirDetails(title, description, count, url, souvID);
+        int resourceLevel = 0;
+
+        switch (souvLevel)
+        {
+            case 1:
+                resourceLevel = R.drawable.ic_souvenir_counter_01;
+                break;
+            case 2:
+                resourceLevel = R.drawable.ic_souvenir_counter_02;
+                break;
+            case 3:
+                resourceLevel = R.drawable.ic_souvenir_counter_03;
+                break;
+        }
+
+        mView.showSouvenirDetails(title, description, count, url, souvID, resourceLevel);
     }
 
     @Override

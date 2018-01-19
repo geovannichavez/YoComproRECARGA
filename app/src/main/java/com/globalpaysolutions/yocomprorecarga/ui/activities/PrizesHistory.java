@@ -1,16 +1,15 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -23,17 +22,13 @@ import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.Prize;
-import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -136,11 +131,20 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                {
                    Prize currentItem = ((Prize) parent.getItemAtPosition(position));
-                   Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                   smsIntent.setType("vnd.android-dir/mms-sms");
-                   smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
-                   smsIntent.putExtra("sms_body",currentItem.getCode());
-                   startActivity(smsIntent);
+
+                   try
+                   {
+                       Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                       smsIntent.setType("vnd.android-dir/mms-sms");
+                       smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
+                       smsIntent.putExtra("sms_body",currentItem.getCode());
+                       startActivity(smsIntent);
+                   }
+                   catch (ActivityNotFoundException anf)
+                   {
+                       Log.e(TAG, anf.getLocalizedMessage());
+                       mPresenter.copyCodeToClipboard(currentItem.getCode());
+                   }
                }
            });
        }

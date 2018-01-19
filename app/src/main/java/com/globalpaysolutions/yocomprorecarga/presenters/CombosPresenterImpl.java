@@ -51,13 +51,13 @@ public class CombosPresenterImpl implements ICombosPresenter, CombosListener
     }
 
     @Override
-    public void exhangeCombo(final int comboID)
+    public void exhangeCombo(final int comboID, String comboDescription)
     {
         try
         {
             DialogViewModel confirm = new DialogViewModel();
             confirm.setTitle(mContext.getString(R.string.title_confirm_combo_exchange));
-            confirm.setLine1(mContext.getString(R.string.content_confirm_combo_exchange));
+            confirm.setLine1(String.format(mContext.getString(R.string.content_confirm_combo_exchange), comboDescription));
             confirm.setAcceptButton(mContext.getString(R.string.button_exchange));
             mView.showExchangeConfirmDialog(confirm, R.drawable.ic_alert, new View.OnClickListener()
             {

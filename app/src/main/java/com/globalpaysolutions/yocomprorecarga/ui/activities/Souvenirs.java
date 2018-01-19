@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -165,7 +163,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
                     mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
                             String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
                             souvenir.getImgUrl(),
-                            souvenir.getSouvenirID());
+                            souvenir.getSouvenirID(), souvenir.getLevel());
                 }
             }
         });
@@ -188,7 +186,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
     }
 
     @Override
-    public void showSouvenirDetails(String title, String description, String count, String url, final int souvID)
+    public void showSouvenirDetails(String title, String description, String count, String url, final int souvID, int counterResource)
     {
         try
         {
@@ -201,6 +199,8 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
             TextView lblSouvenirDialogDescr = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogDescr);
             TextView lblSouvenirDialogQntt = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogQntt);
             ImageView btnSouvDialgSell = (ImageView) dialogView.findViewById(R.id.btnSouvDialgSell);
+            ImageView imgSouvCounter = (ImageView) dialogView.findViewById(R.id.imgSouvCounter);
+
             btnSouvDialgSell.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -225,6 +225,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 
             //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenirDetail);
+            Picasso.with(this).load(counterResource).into(imgSouvCounter);
 
             mSouvenirDialog = builder.setView(dialogView).create();
             mSouvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

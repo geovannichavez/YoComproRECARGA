@@ -166,7 +166,7 @@ public class Combos extends AppCompatActivity implements CombosView
                 public void onClick(View view, int position)
                 {
                     Combo combo = combos.get(position);
-                    mPresenter.exhangeCombo(combo.getComboID());
+                    mPresenter.exhangeCombo(combo.getComboID(), combo.getDescription());
                 }
 
                 @Override

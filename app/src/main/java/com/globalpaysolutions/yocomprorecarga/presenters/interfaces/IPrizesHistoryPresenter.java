@@ -8,4 +8,5 @@ public interface IPrizesHistoryPresenter
 {
     void initialize();
     void retrievePrizes();
+    void copyCodeToClipboard(String code);
 }

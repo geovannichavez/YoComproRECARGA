@@ -29,8 +29,8 @@ destroyObjectGeo: function destroyObjectGeoFn() {
 createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,longitude, key,age) {
 
     exchanging=false;
-    //var modelBronze = new AR.Model("assets/"+age+"/BronzeChest.wt3", {
-    var modelBronze = new AR.Model("assets/"+age+"/Wildcard.wt3", {
+    var modelBronze = new AR.Model("assets/"+age+"/BronzeChest.wt3", {
+    //var modelBronze = new AR.Model("assets/"+age+"/Wildcard.wt3", {
                                   onLoaded: this.worldLoaded,
                                   scale: {
                                   x: 1,

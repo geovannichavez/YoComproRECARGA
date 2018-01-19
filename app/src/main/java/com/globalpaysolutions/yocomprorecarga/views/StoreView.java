@@ -1,5 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.view.View;
+
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 
 import java.util.List;
@@ -19,4 +22,6 @@ public interface StoreView
     void createImageDialog(String title, String description, int resource);
     void updateViews(String coinsLeft);
     void createGenericDialog(String title, String content);
+    void showConfirmDialog(DialogViewModel dialogContent, int resource, View.OnClickListener onClickListener);
+    void hideConfirmDialog();
 }

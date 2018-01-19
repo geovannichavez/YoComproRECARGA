@@ -367,8 +367,12 @@
     <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
     <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
     <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
-    <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>
+    <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear el combo %1$s por un premio?</string>
     <string name="button_exchange">CANJEAR</string>
+    <string name="title_buy_barrell_confirm_dialog">¿Comprar barril?</string>
+    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este barril?</string>
+    <string name="title_copied_to_clipboard">Código copiado</string>
+    <string name="content_copied_to_clipboard">Pega y envía gratis el código por SMS para canjear tu premio al %1$s</string>
 
 
 </resources>

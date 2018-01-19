@@ -57,6 +57,7 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
         TextView lblSouvenirCounter = (TextView) row.findViewById(R.id.lblSouvenirCounter);
         ImageView imgSouvenirItem = (ImageView) row.findViewById(R.id.imgSouvenirItem);
         ImageView imgBackground = (ImageView) row.findViewById(R.id.imgBackground);
+        ImageView imgSouvCounter = (ImageView) row.findViewById(R.id.imgSouvCounter);
 
         View viewLocked = row.findViewById(R.id.viewLocked);
 
@@ -74,12 +75,19 @@ public class SouvenirsAdapter extends ArrayAdapter<ListSouvenirsByConsumer>
         {
             case 1:
                 Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(imgBackground);
+                Picasso.with(mContext).load(R.drawable.ic_souvenir_counter_01).into(imgSouvCounter);
                 break;
             case 2:
                 Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(imgBackground);
+                Picasso.with(mContext).load(R.drawable.ic_souvenir_counter_02).into(imgSouvCounter);
                 break;
             case 3:
                 Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(imgBackground);
+                Picasso.with(mContext).load(R.drawable.ic_souvenir_counter_03).into(imgSouvCounter);
+                break;
+            case 4:
+                Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(imgBackground);
+                Picasso.with(mContext).load(R.drawable.ic_souvenir_counter_03).into(imgSouvCounter);
                 break;
         }
 
