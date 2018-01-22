@@ -59,24 +59,23 @@ public class Intro extends ImmersiveActivity
             @Override
             public void onClick(View view)
             {
+                mCounter = mCounter + 1;
+
                 switch (mCounter)
                 {
                     case 1:
-                        Picasso.with(Intro.this).load(R.drawable.img_intro_1).into(bgIntro);
-                        break;
-                    case 2:
                         Picasso.with(Intro.this).load(R.drawable.img_intro_2).into(bgIntro);
                         break;
-                    case 3:
+                    case 2:
                         Picasso.with(Intro.this).load(R.drawable.img_intro_3).into(bgIntro);
                         break;
-                    case 4:
+                    case 3:
                         Picasso.with(Intro.this).load(R.drawable.img_intro_4).into(bgIntro);
                         break;
-                    case 5:
+                    case 4:
                         Picasso.with(Intro.this).load(R.drawable.img_intro_5).into(bgIntro);
                         break;
-                    case 6:
+                    case 5:
                         if(UserData.getInstance(Intro.this).getHasSeenIntroValue())
                         {
                             Intent intent = new Intent(Intro.this, Main.class);
@@ -101,7 +100,6 @@ public class Intro extends ImmersiveActivity
                         }
                         break;
                 }
-                mCounter++;
             }
         });
 
