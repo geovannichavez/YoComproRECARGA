@@ -368,7 +368,9 @@
     <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
     <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
     <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>
+    <string name="content_confirm_combo_exchange_2">¿Estás seguro que deseas canjear el combo \"%1$s\" por un premio?</string>
     <string name="button_exchange">CANJEAR</string>
+    <string name="label_exchange">Canjear</string>
 
 
 </resources>
