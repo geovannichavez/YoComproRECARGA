@@ -154,13 +154,13 @@ public class Combos extends AppCompatActivity implements CombosView
     {
         try
         {
-            mAdapter = new CombosAdapter(this, combos);
+            mAdapter = new CombosAdapter(this, combos, mPresenter);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, mRecyclerView, new RecyclerClickListener()
+            /*mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, mRecyclerView, new RecyclerClickListener()
             {
                 @Override
                 public void onClick(View view, int position)
@@ -173,7 +173,7 @@ public class Combos extends AppCompatActivity implements CombosView
                 public void onLongClick(View view, int position) {
 
                 }
-            }));
+            }));*/
 
             mAdapter.notifyDataSetChanged();
 

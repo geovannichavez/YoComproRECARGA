@@ -57,7 +57,8 @@ public class CombosPresenterImpl implements ICombosPresenter, CombosListener
         {
             DialogViewModel confirm = new DialogViewModel();
             confirm.setTitle(mContext.getString(R.string.title_confirm_combo_exchange));
-            confirm.setLine1(String.format(mContext.getString(R.string.content_confirm_combo_exchange), comboDescription));
+            //confirm.setLine1(mContext.getString(R.string.content_confirm_combo_exchange));
+            confirm.setLine1(String.format(mContext.getString(R.string.content_confirm_combo_exchange_2), comboDescription));
             confirm.setAcceptButton(mContext.getString(R.string.button_exchange));
             mView.showExchangeConfirmDialog(confirm, R.drawable.ic_alert, new View.OnClickListener()
             {
