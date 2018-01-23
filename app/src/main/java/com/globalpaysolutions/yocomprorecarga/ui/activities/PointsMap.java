@@ -23,9 +23,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -162,6 +164,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
 
         mPresenter.setMapStyle();
+        mPresenter.startShowcase();
 
         /*mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener()
         {
@@ -891,10 +894,23 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                                     break;
                                 case 2:
                                     //YCR
+                                    RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(
+                                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                                            ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                    // This aligns button to the bottom left side of screen
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                                    lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+                                    // Set margins to the button, we add 16dp margins here
+                                    int margin = ((Number) (getResources().getDisplayMetrics().density * 16)).intValue();
+                                    lps.setMargins(margin, margin, margin, margin);
+
                                     mShowcaseView.setShowcase(requestTopup, true);
                                     mShowcaseView.setContentTitle(getString(R.string.showcase_title_topup_request));
                                     mShowcaseView.setContentText(getString(R.string.showcase_content_topup_request));
                                     mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
+                                    mShowcaseView.setButtonPosition(lps);
                                     mShowcaseView.setButtonText(getString(R.string.button_accept));
                                     break;
                                 case 3:

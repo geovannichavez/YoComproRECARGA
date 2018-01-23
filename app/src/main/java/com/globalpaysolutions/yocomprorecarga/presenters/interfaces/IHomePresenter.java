@@ -31,5 +31,6 @@ public interface IHomePresenter
     void prizePointsQuery(LatLng pLocation);
     void updatePrizePntCriteria(LatLng pLocation);
 
+    void startShowcase();
     void showcaseMapSeen();
 }
