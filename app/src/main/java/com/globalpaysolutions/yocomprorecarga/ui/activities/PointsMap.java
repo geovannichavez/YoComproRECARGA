@@ -139,7 +139,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mPresenter = new HomePresenterImpl(this, this, this);
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
-        mPresenter.intializeGeolocation();
+        //mPresenter.intializeGeolocation();
 
     }
 
@@ -326,6 +326,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     {
         try
         {
+            mPresenter.intializeGeolocation();
             Log.d(TAG, "setInitialUserLocation");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
