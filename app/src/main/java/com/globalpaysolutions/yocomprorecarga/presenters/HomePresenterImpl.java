@@ -79,11 +79,6 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         this.mView.renderMap();
         this.mView.setClickListeners();
-
-        if(!mUserData.showcaseMapSeen())
-        {
-            mView.startShowcase();
-        }
     }
 
 
@@ -277,6 +272,15 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.wildcardPointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+    }
+
+    @Override
+    public void startShowcase()
+    {
+        if(!mUserData.showcaseMapSeen())
+        {
+            mView.startShowcase();
+        }
     }
 
     @Override
