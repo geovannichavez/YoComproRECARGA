@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -214,7 +215,6 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     mView.getMarkerBitmaps(mMarkerMap);
                     mInteractor.initializeGeolocation();
                     mFirebaseInteractor.initializePOIGeolocation();
-
                 }
             }
         }
@@ -222,8 +222,6 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             ex.printStackTrace();
         }
-
-
     }
 
     @Override
