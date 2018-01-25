@@ -71,6 +71,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     AlertDialog infographyDialog;
     ImageButton btnBackMap;
     ImageButton btnReqTopupMap;
+    ImageButton btnLaunchAR;
     Toast mToast;
 
     //Adapters y Layouts
@@ -105,9 +106,12 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pointsmap);
 
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_map_background));
+
         btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
         btnBackMap = (ImageButton) findViewById(R.id.btnBackMap);
         btnReqTopupMap = (ImageButton) findViewById(R.id.btnReqTopupMap);
+        //btnLaunchAR = (ImageButton) findViewById(R.id.btnLaunchAR);
 
         btnBackMap.setOnClickListener(new View.OnClickListener()
         {

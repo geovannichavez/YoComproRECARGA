@@ -56,4 +56,5 @@ public interface HomeView
 
     void showToast(String string);
     void startShowcase();
+
 }
