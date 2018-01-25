@@ -281,7 +281,8 @@
         </activity>
 
         <!-- AppsFlyer Receiver -->
-        <receiver
+
+        <!--<receiver
             android:name="com.appsflyer.SingleInstallBroadcastReceiver"
             android:exported="true">
                 
@@ -290,15 +291,24 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
                      
             </intent-filter>
-        </receiver>
+        </receiver>-->
+
         <!-- Multiple Broadcast Receiver -->
-        <!--
         <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
              <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
              </intent-filter>
         </receiver>
-        -->
+
+        <receiver
+            android:name="com.globalpaysolutions.yocomprorecarga.utils.InstallReceiver"
+            android:permission="android.permission.INSTALL_PACKAGES"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
 
         <activity
             android:name=".ui.activities.Combos"

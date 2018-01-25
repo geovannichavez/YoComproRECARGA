@@ -1,9 +1,14 @@
 package com.globalpaysolutions.yocomprorecarga.core;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.util.Log;
 
+import com.adjust.sdk.Adjust;
+import com.adjust.sdk.AdjustConfig;
+import com.adjust.sdk.LogLevel;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -41,6 +46,18 @@ public class YoComproRecargaApplication extends Application
     {
         super.onCreate();
         appSingleton = this;
+
+        //Adjust SDK
+        String appToken = "cjt3sm3usbnk";
+        String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+        //String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
+
+        AdjustConfig config = new AdjustConfig(this, appToken, environment, true);
+        config.setLogLevel(LogLevel.DEBUG);
+
+        Adjust.onCreate(config);
+
+        registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
 
         //AppsFlyer
         AppsFlyerConversionListener conversionDataListener = new AppsFlyerConversionListener()
@@ -103,5 +120,51 @@ public class YoComproRecargaApplication extends Application
     public void onTerminate()
     {
         super.onTerminate();
+    }
+
+    private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks
+    {
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle bundle)
+        {
+
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity)
+        {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity)
+        {
+            Adjust.onResume();
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity)
+        {
+            Adjust.onPause();
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity)
+        {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle bundle)
+        {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity)
+        {
+
+        }
     }
 }
