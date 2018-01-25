@@ -49,6 +49,8 @@ public class YoComproRecargaApplication extends Application
 
         //Adjust SDK
         String appToken = "cjt3sm3usbnk";
+
+        //TODO: Cambiar a ENVIRONMENT_PRODUCTION antes de publicar
         String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         //String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
 
