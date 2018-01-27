@@ -120,6 +120,9 @@ public class UserData
     private static final String KEY_SHOWCASE_FIRSTTIME_MAP = "key_showcase_firsttime_map";
     private static final String KEY_SHOWCASE_FIRSTTIME_AR = "key_showcase_firsttime_ar";
 
+    //Countdown
+    private static final String KEY_COUNTDOWN_START_TIME = "key_countdown_start_time";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -451,6 +454,13 @@ public class UserData
     {
         mEditor.putBoolean(KEY_SHOWCASE_FIRSTTIME_AR, true);
         mEditor.commit();
+    }
+
+    public void saveStartTime(long startTime)
+    {
+        mEditor.putLong(KEY_COUNTDOWN_START_TIME, startTime);
+        mEditor.commit();
+
     }
 
     /*
@@ -820,4 +830,6 @@ public class UserData
     {
         return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_AR, false);
     }
+
+
 }

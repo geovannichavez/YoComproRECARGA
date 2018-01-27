@@ -118,6 +118,7 @@ public class Constants
     //Showcase View
     public static final Integer SHOWCASE_PAINT_TITLE = 0;
     public static final Integer SHOWCASE_PAINT_CONTENT = 1;
+    public static final String INTENT_EXTRA_COUNTDOWN = "prize_countdown_extra";
 
     public static String PLATFORM = "ANDROID";
 
