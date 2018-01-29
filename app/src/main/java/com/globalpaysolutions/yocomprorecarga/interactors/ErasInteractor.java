@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -45,7 +47,7 @@ public class ErasInteractor implements IErasInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<EraSelectionResponse> call = apiService.selectEra(mUserData.getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM, request);
+                getVersionName(), Constants.PLATFORM, request);
 
         call.enqueue(new Callback<EraSelectionResponse>()
         {
@@ -108,7 +110,7 @@ public class ErasInteractor implements IErasInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<AgesResponse> call = apiService.retrieveAges(mUserData.getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<AgesResponse>()
         {
@@ -149,5 +151,22 @@ public class ErasInteractor implements IErasInteractor
                 listener.onRetrieveError(0, t, null);
             }
         });
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

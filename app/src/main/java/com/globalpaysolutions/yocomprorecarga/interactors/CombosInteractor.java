@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.support.coreui.BuildConfig;
 import android.util.Log;
 
@@ -41,7 +42,7 @@ public class CombosInteractor implements ICombosInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<CombosResponse> call = apiService.getCombos(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<CombosResponse>()
         {
@@ -90,7 +91,7 @@ public class CombosInteractor implements ICombosInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<WinPrizeResponse> call = apiService.exchangeCombo(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM, exchangeCombo);
+                getVersionName(), Constants.PLATFORM, exchangeCombo);
 
         call.enqueue(new Callback<WinPrizeResponse>()
         {
@@ -139,5 +140,22 @@ public class CombosInteractor implements ICombosInteractor
             }
         });
 
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

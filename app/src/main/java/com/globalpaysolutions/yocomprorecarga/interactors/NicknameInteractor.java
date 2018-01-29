@@ -1,12 +1,15 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.INicknameInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import retrofit2.Call;
@@ -19,6 +22,7 @@ import retrofit2.Response;
 
 public class NicknameInteractor implements INicknameInteractor
 {
+    private static final String TAG = NicknameInteractor.class.getSimpleName();
     private NicknameListener mListener;
     private Context mContext;
 
@@ -36,7 +40,8 @@ public class NicknameInteractor implements INicknameInteractor
         UserData userData = UserData.getInstance(mContext);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleResultResponse> call = apiService.registerNickname(userData.getUserAuthenticationKey(), requestBody);
+        final Call<SimpleResultResponse> call = apiService.registerNickname(userData.getUserAuthenticationKey(), requestBody,
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<SimpleResultResponse>()
         {
@@ -61,5 +66,24 @@ public class NicknameInteractor implements INicknameInteractor
                 mListener.onError(0, t, null);
             }
         });
+
+
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

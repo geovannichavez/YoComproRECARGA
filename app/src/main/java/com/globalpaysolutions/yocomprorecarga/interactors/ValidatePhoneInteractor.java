@@ -1,7 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.support.coreui.BuildConfig;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
@@ -26,6 +28,8 @@ import retrofit2.Response;
 
 public class ValidatePhoneInteractor implements IValidatePhoneInteractor
 {
+    private static final String TAG = ValidatePhoneInteractor.class.getSimpleName();
+
     private Context mContext;
     private UserData mUserData;
 
@@ -78,7 +82,7 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<RegisterClientResponse> call = apiService.registerConsumer(mUserData.getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM, registerConsumerBody);
+                getVersionName(), Constants.PLATFORM, registerConsumerBody);
 
         call.enqueue(new Callback<RegisterClientResponse>()
         {
@@ -134,4 +138,20 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     }
 
 
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
+    }
 }
