@@ -375,6 +375,8 @@
     <string name="content_confirm_combo_exchange_2">¿Estás seguro que deseas canjear el combo \"%1$s\" por un premio?</string>
     <string name="button_exchange">CANJEAR</string>
     <string name="label_exchange">Canjear</string>
+    <string name="title_notification_countdown_finished">¡Ya puedes canjear tus premios!</string>
+    <string name="label_notification_countdown_finished">Tu tiempo de espera para canjear premios ha finalizado ¡ya puedes volver a canjear tus premios!</string>
 
 
 </resources>

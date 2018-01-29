@@ -281,7 +281,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     @Override
     public void onDestroy()
     {
-        mPresenter.stopCountdownService();
+        //mPresenter.stopCountdownService();
         super.onDestroy();
     }
 
