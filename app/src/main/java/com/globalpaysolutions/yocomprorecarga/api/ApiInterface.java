@@ -97,7 +97,10 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_NICKNAME)
-    Call<SimpleResultResponse> registerNickname(@Header("authenticationKey") String pAuthKey, @Body NicknameReqBody pNicknameRequest);
+    Call<SimpleResultResponse> registerNickname(@Header("authenticationKey") String pAuthKey,
+                                                @Body NicknameReqBody pNicknameRequest,
+                                                @Header("AppVersion") String pAppVersion,
+                                                @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REDEEM_PRIZE)
@@ -173,6 +176,7 @@ public interface ApiInterface
                                               @Header("AppVersion") String pAppVersion,
                                               @Header("Platform") String pPlatform,
                                               @Body ActivatePrizeReq activatePrizeReq);
+
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_COMBOS)
     Call<CombosResponse> getCombos(@Header("authenticationKey") String userAuthenticationKey,

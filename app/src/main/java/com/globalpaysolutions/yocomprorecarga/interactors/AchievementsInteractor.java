@@ -1,7 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.support.coreui.BuildConfig;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
@@ -25,6 +27,7 @@ import retrofit2.Response;
 
 public class AchievementsInteractor implements IAchievementsInteractor
 {
+    private static final String TAG = AchievementsInteractor.class.getSimpleName();
     private Context mContext;
 
     public AchievementsInteractor(Context context)
@@ -38,7 +41,7 @@ public class AchievementsInteractor implements IAchievementsInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<AchievementsResponse> call = apiService.getAchievements(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<AchievementsResponse>()
         {
@@ -78,5 +81,22 @@ public class AchievementsInteractor implements IAchievementsInteractor
             }
 
         });
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

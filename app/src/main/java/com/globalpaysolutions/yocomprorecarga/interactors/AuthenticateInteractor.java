@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.coreui.BuildConfig;
@@ -239,7 +240,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<AuthenticateResponse> call = apiService.authenticateConsumer(requestBody,
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<AuthenticateResponse>()
         {
@@ -282,5 +283,22 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
                 pListener.onAuthenticateConsumerError(0, t, null);
             }
         });
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -25,6 +27,7 @@ import retrofit2.Response;
 
 public class RedeemPrizeInteractor implements IRedeemPrizeInteractor
 {
+    private static final String TAG = RedeemPrizeInteractor.class.getSimpleName();
     private Context mContext;
 
     public RedeemPrizeInteractor(Context context)
@@ -41,7 +44,7 @@ public class RedeemPrizeInteractor implements IRedeemPrizeInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ActivatePrizeResponse> call = apiService.activatePrize(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM, requestBody);
+                getVersionName(), Constants.PLATFORM, requestBody);
 
         call.enqueue(new Callback<ActivatePrizeResponse>()
         {
@@ -85,5 +88,22 @@ public class RedeemPrizeInteractor implements IRedeemPrizeInteractor
             }
         });
 
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

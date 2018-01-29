@@ -1,6 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -42,7 +44,7 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<PrizesHistoryResponse> call = apiService.retrievePrizsHistory(mUserData.getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<PrizesHistoryResponse>()
         {
@@ -83,5 +85,22 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
                 mListener.onRetrievePrizesError(0, t, null);
             }
         });
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

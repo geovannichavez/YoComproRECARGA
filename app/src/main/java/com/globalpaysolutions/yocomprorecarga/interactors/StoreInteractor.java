@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -44,7 +45,7 @@ public class StoreInteractor implements IStoreInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<StoreItemsResponse> call = apiService.getStoreItems(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM);
+                getVersionName(), Constants.PLATFORM);
 
         call.enqueue(new Callback<StoreItemsResponse>()
         {
@@ -101,7 +102,7 @@ public class StoreInteractor implements IStoreInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<PurchaseItemResponse> call = apiService.purchaseStoreItem(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM, request);
+                getVersionName(), Constants.PLATFORM, request);
 
         call.enqueue(new Callback<PurchaseItemResponse>()
         {
@@ -167,5 +168,22 @@ public class StoreInteractor implements IStoreInteractor
 
             }
         });
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 }

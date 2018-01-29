@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -45,7 +46,7 @@ public class WildcardInteractor implements IWildcardInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeWildcardResponse> call = apiService.exchangeWildcard(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                BuildConfig.VERSION_NAME, Constants.PLATFORM,
+                getVersionName(), Constants.PLATFORM,
                 requestBody);
 
         call.enqueue(new Callback<ExchangeWildcardResponse>()
@@ -105,6 +106,23 @@ public class WildcardInteractor implements IWildcardInteractor
         {
             Crashlytics.logException(ex);
         }
+    }
+
+    private String getVersionName()
+    {
+        String version = "";
+        try
+        {
+            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            version = pInfo.versionName;//Version Name
+            Log.i(TAG, "Version name: " + version);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+        }
+
+        return version;
     }
 
 }
