@@ -117,33 +117,33 @@ public class CombosAdapter extends RecyclerView.Adapter<CombosAdapter.ComboViewH
                     Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(holder.bgSouv1);
                     break;
                 case 2:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(holder.bgSouv1);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(holder.bgSouv2);
                     break;
                 case 3:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(holder.bgSouv1);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(holder.bgSouv3);
                     break;
             }
 
             switch (levelSouv2)
             {
                 case 1:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(holder.bgSouv2);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(holder.bgSouv1);
                     break;
                 case 2:
                     Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(holder.bgSouv2);
                     break;
                 case 3:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(holder.bgSouv2);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(holder.bgSouv3);
                     break;
             }
 
             switch (levelSouv3)
             {
                 case 1:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(holder.bgSouv3);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_01).into(holder.bgSouv1);
                     break;
                 case 2:
-                    Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(holder.bgSouv3);
+                    Picasso.with(mContext).load(R.drawable.bg_souvenir_02).into(holder.bgSouv2);
                     break;
                 case 3:
                     Picasso.with(mContext).load(R.drawable.bg_souvenir_03).into(holder.bgSouv3);
