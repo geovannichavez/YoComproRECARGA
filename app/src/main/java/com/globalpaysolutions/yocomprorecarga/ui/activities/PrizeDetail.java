@@ -260,28 +260,24 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     public void onResume()
     {
         super.onResume();
-        mPresenter.registerCountdownReciver();
     }
 
     @Override
     public void onPause()
     {
         super.onPause();
-        mPresenter.unregisterCountdownReciver();
 
     }
 
     @Override
     public void onStop()
     {
-        mPresenter.unregisterCountdownReciver();
         super.onStop();
     }
 
     @Override
     public void onDestroy()
     {
-        //mPresenter.stopCountdownService();
         super.onDestroy();
     }
 

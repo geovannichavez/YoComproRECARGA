@@ -12,7 +12,5 @@ public interface IPrizeDetailPresenter
     void setBackground();
 
     void startCountdownService();
-    void registerCountdownReciver();
-    void unregisterCountdownReciver();
     void stopCountdownService();
 }

@@ -25,9 +25,9 @@ public class CountdownService extends Service
 {
     private static final String TAG = CountdownService.class.getSimpleName();
 
-    public static final String COUNTDOWN_BR = "com.globalpaysolutions.yocomprorecarga.services.countdown_br";
+    public static final String COUNTDOWN_BROADCAST = "com.globalpaysolutions.yocomprorecarga.services.countdown_broadcast";
 
-    Intent mBroadcastIntent = new Intent(COUNTDOWN_BR);
+    Intent mBroadcastIntent = new Intent(COUNTDOWN_BROADCAST);
     CountDownTimer mCountdownTimer = null;
 
     @Override

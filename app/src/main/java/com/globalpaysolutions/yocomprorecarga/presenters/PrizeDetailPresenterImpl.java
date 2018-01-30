@@ -3,15 +3,12 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPrizeDetailPresenter;
-import com.globalpaysolutions.yocomprorecarga.services.CountdownReceiver;
 import com.globalpaysolutions.yocomprorecarga.services.CountdownService;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -107,36 +104,6 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
         catch (Exception ex)
         {
             Log.e(TAG, "CountdownService could not be started: " + ex.getMessage());
-        }
-    }
-
-    @Override
-    public void registerCountdownReciver()
-    {
-        try
-        {
-            mCountdownReceiver = new CountdownReceiver();
-            mContext.registerReceiver(mCountdownReceiver, new IntentFilter(CountdownService.COUNTDOWN_BR));
-
-            Log.i(TAG, "CountdownBroadcastReceiver registered");
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "CountdownBroadcastReceiver could not be registered: " + ex.getMessage());
-        }
-    }
-
-    @Override
-    public void unregisterCountdownReciver()
-    {
-        try
-        {
-            mContext.unregisterReceiver(mCountdownReceiver);
-            Log.i(TAG, "CountdownBroadcastReceiver unregistered succesfully");
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "CountdownBroadcastReceiver could not be unregistered: " + ex.getMessage());
         }
     }
 

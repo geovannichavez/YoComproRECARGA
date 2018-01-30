@@ -120,7 +120,8 @@ public class Constants
     public static final Integer SHOWCASE_PAINT_CONTENT = 1;
     public static final String INTENT_EXTRA_COUNTDOWN = "prize_countdown_extra";
     public static final String NOTIFICATION_ID_COUNTDOWN = "notification_id_countdown";
-    public static final long PRIZE_EXCHANGE_TIME_REQUIRED = 1000 * 60 * 10 * 2;
+    public static final long PRIZE_EXCHANGE_TIME_REQUIRED = 1000 * 60 * 60 * 10;
+    //public static final long PRIZE_EXCHANGE_TIME_REQUIRED = 1000 * 18;
 
     public static String PLATFORM = "ANDROID";
 
