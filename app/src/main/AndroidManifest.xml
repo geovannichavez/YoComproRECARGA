@@ -115,7 +115,7 @@
         </activity>
 
         <service
-            android:name=".utils.OneSignalNotificationExtender"
+            android:name=".services.OneSignalNotificationExtender"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.onesignal.NotificationExtender"/>

@@ -1,4 +1,4 @@
-package com.globalpaysolutions.yocomprorecarga.utils;
+package com.globalpaysolutions.yocomprorecarga.services;
 
 import android.app.AlertDialog;
 import android.app.IntentService;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Vibrator;
-import android.support.v4.content.IntentCompat;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -15,8 +14,8 @@ import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Main;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;

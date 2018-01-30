@@ -332,8 +332,8 @@
     <string name="showcase_content_profile">Repasa el estado de tu juego</string>
     <string name="showcase_title_travel">Viajar</string>
     <string name="showcase_content_travel">Selecciona la Era a la que deseas viajar</string>
-    <string name="showcase_title_topup_request">YoComproRecarga</string>
-    <string name="showcase_content_topup_request">Solicita Recargas a Vendedores de YoVendoRecarga</string>
+    <string name="showcase_title_topup_request">YoComproRecarga.com</string>
+    <string name="showcase_content_topup_request">Solicita Recargas a Vendedores de YoVendoRecarga.com</string>
     <string name="showcase_title_store">Tienda</string>
     <string name="showcase_content_store">En la tienda puedes comprar los Souvenir que te faltan para completar tu colección</string>
     <string name="showcase_content_prize">Canjea tu PIN y obtén tu regalo de Claro</string>

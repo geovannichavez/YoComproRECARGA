@@ -1,4 +1,4 @@
-package com.globalpaysolutions.yocomprorecarga.utils;
+package com.globalpaysolutions.yocomprorecarga.services;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

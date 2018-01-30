@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.services.TokenInputService;
 
 /**
  * Created by Josué Chávez on 19/01/2017.
