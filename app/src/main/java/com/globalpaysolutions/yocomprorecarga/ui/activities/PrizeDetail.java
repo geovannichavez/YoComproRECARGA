@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -101,6 +102,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         mPresenter.setBackground();
         mPresenter.loadInitialData();
         mPresenter.setClickListeners();
+        mPresenter.startCountdownService();
 
     }
 
@@ -252,6 +254,31 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     public void navigateMap(View view)
     {
 
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+
+    }
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
     }
 
     @Override

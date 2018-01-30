@@ -1,13 +1,15 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPrizeDetailPresenter;
+import com.globalpaysolutions.yocomprorecarga.services.CountdownService;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
@@ -25,6 +27,7 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
     private PrizeDetailView mView;
 
     private UserData mUserData;
+    private BroadcastReceiver mCountdownReceiver;
 
     public PrizeDetailPresenterImpl(Context context, AppCompatActivity activity, PrizeDetailView view)
     {
@@ -82,5 +85,40 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
     public void setBackground()
     {
         mView.loadBackground();
+    }
+
+    @Override
+    public void startCountdownService()
+    {
+        try
+        {
+            //Starts countdown service
+            Intent countdownService = new Intent(mContext, CountdownService.class);
+            mContext.startService(countdownService);
+
+            //Saves start time
+            UserData.getInstance(mContext).saveStartTime(System.currentTimeMillis());
+
+            Log.i(TAG, "CountdownService started.");
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "CountdownService could not be started: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void stopCountdownService()
+    {
+        try
+        {
+            mContext.stopService(new Intent(mContext, CountdownService.class));
+
+            Log.i(TAG, "CountdownService has been stopped.");
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "CountdownService could not be stopped");
+        }
     }
 }

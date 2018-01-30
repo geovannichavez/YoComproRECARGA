@@ -10,4 +10,7 @@ public interface IPrizeDetailPresenter
     void setClickListeners();
     void createSmsPrizeContent(String exchangePin);
     void setBackground();
+
+    void startCountdownService();
+    void stopCountdownService();
 }
