@@ -2,11 +2,11 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
@@ -34,6 +34,7 @@ public class MainPresenterImpl implements IMainPresenter
     private MainView mView;
     private UserData mUserData;
     private AppCompatActivity mActivity;
+    private FirebasePOIInteractor mFirebaseInteractor;
 
     public MainPresenterImpl(Context context, AppCompatActivity activity, MainView view)
     {
@@ -41,6 +42,7 @@ public class MainPresenterImpl implements IMainPresenter
         this.mView = view;
         this.mActivity = activity;
         this.mUserData = UserData.getInstance(mContext);
+        this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, null);
     }
 
 
@@ -102,6 +104,7 @@ public class MainPresenterImpl implements IMainPresenter
             mView.showTutorial();
         }
 
+        this.mFirebaseInteractor.initializePOIGeolocation();
     }
 
     @Override
@@ -146,6 +149,12 @@ public class MainPresenterImpl implements IMainPresenter
     public void showcaseSeen(boolean seen)
     {
         mUserData.setShowcaseMainSeen(seen);
+    }
+
+    @Override
+    public void downloadMarkers()
+    {
+
     }
 
 

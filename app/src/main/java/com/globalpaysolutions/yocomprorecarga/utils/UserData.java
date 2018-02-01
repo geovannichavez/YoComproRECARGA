@@ -123,6 +123,9 @@ public class UserData
     //Countdown
     private static final String KEY_COUNTDOWN_START_TIME = "key_countdown_start_time";
 
+    //Other App Settings
+    private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -460,7 +463,12 @@ public class UserData
     {
         mEditor.putLong(KEY_COUNTDOWN_START_TIME, startTime);
         mEditor.commit();
+    }
 
+    public void updateMarkersCount(int count)
+    {
+        mEditor.putInt(KEY_APP_MARKERS_COUNT, count);
+        mEditor.commit();
     }
 
     /*
@@ -778,6 +786,11 @@ public class UserData
     {
         return mPreferences.getString(KEY_ERA_WILDCARD_MAIN, "");
 
+    }
+
+    public int getMarkersCount()
+    {
+        return mPreferences.getInt(KEY_APP_MARKERS_COUNT, 0);
     }
 
     /*

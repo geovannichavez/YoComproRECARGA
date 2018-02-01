@@ -10,4 +10,5 @@ public interface IMainPresenter
     void checkUserDataCompleted();
     void checkFunctionalityLimitedShown();
     void showcaseSeen(boolean seen);
+    void downloadMarkers();
 }

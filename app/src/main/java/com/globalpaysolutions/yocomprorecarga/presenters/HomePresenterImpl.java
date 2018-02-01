@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.AsyncTask;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -19,7 +20,6 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.EraMarker;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -33,12 +33,13 @@ import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -178,44 +179,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             //Checks if mock locations are active
             if(!MockLocationUtility.isMockSettingsON(mContext))
             {
-                List<EraMarker> markersList = new ArrayList<>();
-                int counter = 0;
-
-                EraMarker gold = new EraMarker();
-                gold.setEraName(Constants.NAME_CHEST_TYPE_GOLD);
-                gold.setMarkerUrl(mUserData.getGoldMarker());
-                markersList.add(gold);
-
-                EraMarker silver = new EraMarker();
-                silver.setEraName(Constants.NAME_CHEST_TYPE_SILVER);
-                silver.setMarkerUrl(mUserData.getSilverMarker());
-                markersList.add(silver);
-
-                EraMarker bronze = new EraMarker();
-                bronze.setEraName(Constants.NAME_CHEST_TYPE_BRONZE);
-                bronze.setMarkerUrl(mUserData.getBronzeMarker());
-                markersList.add(bronze);
-
-                EraMarker wildcard = new EraMarker();
-                wildcard.setEraName(Constants.NAME_CHEST_TYPE_WILDCARD);
-                wildcard.setMarkerUrl(mUserData.getWildcardMarker());
-                markersList.add(wildcard);
-
-                //Fetches all bitmaps for markers
-                for (EraMarker marker : markersList)
-                {
-                    Bitmap bitmap = mInteractor.fetchBitmap(marker.getMarkerUrl());
-                    mMarkerMap.put(marker.getEraName(), bitmap);
-                    counter = counter + 1;
-                }
-
-                //When they're complete, then starts to query all chests locations
-                if(counter >= 4)
-                {
-                    mView.getMarkerBitmaps(mMarkerMap);
-                    mInteractor.initializeGeolocation();
-                    mFirebaseInteractor.initializePOIGeolocation();
-                }
+                mView.getMarkerBitmaps(mMarkerMap);
+                mInteractor.initializeGeolocation();
+                mFirebaseInteractor.initializePOIGeolocation();
             }
         }
         catch (Exception ex)
@@ -418,7 +384,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.addGoldPoint(pKey, pLocation, mUserData.getGoldMarker());
+        Bitmap goldMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_GOLD);
+        mView.addGoldPoint(pKey, pLocation, goldMarker);
     }
 
     @Override
@@ -436,7 +403,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        mView.addSilverPoint(pKey, pLocation, mUserData.getSilverMarker());
+        Bitmap silverMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_SILVER);
+        mView.addSilverPoint(pKey, pLocation, silverMarker);
     }
 
     @Override
@@ -454,7 +422,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        mView.addBronzePoint(pKey, pLocation, mUserData.getBronzeMarker());
+        Bitmap bronzeBitmap = retrieveBitmap(Constants.NAME_CHEST_TYPE_BRONZE);
+        mView.addBronzePoint(pKey, pLocation, bronzeBitmap);
     }
 
     @Override
@@ -599,6 +568,31 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    }
+
+    private Bitmap retrieveBitmap(String chestName)
+    {
+        Bitmap bitmap = null;
+
+        try
+        {
+            File f = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/" + chestName + ".png");
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
+        }
+        catch (FileNotFoundException e)
+        {
+            Log.e(TAG, "FileNotFoundException: " + e.getLocalizedMessage());
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error retrieving bitmap: " + ex.getMessage());
+        }
+
+        return bitmap;
+
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
