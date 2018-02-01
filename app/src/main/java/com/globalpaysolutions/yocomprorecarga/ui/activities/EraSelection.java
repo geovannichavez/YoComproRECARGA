@@ -4,12 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,6 +24,8 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.ErasAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 import com.squareup.picasso.Picasso;
 
@@ -149,6 +147,11 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                //Validates version and era selection
+                double version = Double.valueOf(VersionName.getVersionName(EraSelection.this, TAG));
+                if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION)
+                    UserData.getInstance(EraSelection.this).secondEraSelectedFlag();
+
                 AgesListModel currentItem = ((AgesListModel) parent.getItemAtPosition(position));
                 mPresenter.switchEra(currentItem, mDestiny);
             }

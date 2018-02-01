@@ -125,4 +125,6 @@ public class Constants
 
     public static String PLATFORM = "ANDROID";
 
+    //TODO: Cambiar cuando sea nueva era
+    public static double MULTIPLE_ERA_REQUIRED_SELECTION_VERSION = 1.14;
 }

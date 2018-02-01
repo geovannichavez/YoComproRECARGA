@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
 
 /**
@@ -107,6 +109,8 @@ public class MainPresenterImpl implements IMainPresenter
     @Override
     public void checkFunctionalityLimitedShown()
     {
+        double version = Double.valueOf(VersionName.getVersionName(mContext, TAG));
+
         //Checks if user has not selected era
         if(!mUserData.chechUserHasSelectedEra())
         {
@@ -117,6 +121,7 @@ public class MainPresenterImpl implements IMainPresenter
         }
         else
         {
+            //If not compatible with 3D mode
             if(!mUserData.Is3DCompatibleDevice())
             {
                 if(!mUserData.isUserConfirmedLimitedFunctionality())
@@ -127,16 +132,38 @@ public class MainPresenterImpl implements IMainPresenter
                 }
                 else
                 {
-                    Intent map = new Intent(mActivity, PointsMap.class);
-                    this.addFlags(map);
-                    mContext.startActivity(map);
+                    //If version is greater than 1.14 and has not selected new era
+                    if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION && !mUserData.getSecondEraSelectedFlag()) //TODO
+                    {
+                        Intent eraSelection = new Intent(mActivity, EraSelection.class);
+                        this.addFlags(eraSelection);
+                        eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
+                        mContext.startActivity(eraSelection);
+                    }
+                    else
+                    {
+                        Intent map = new Intent(mActivity, PointsMap.class);
+                        this.addFlags(map);
+                        mContext.startActivity(map);
+                    }
                 }
             }
             else
             {
-                Intent map = new Intent(mActivity, PointsMap.class);
-                this.addFlags(map);
-                mContext.startActivity(map);
+                //If version is greater than 1.14 and has not selected new era
+                if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION && !mUserData.getSecondEraSelectedFlag()) //TODO
+                {
+                    Intent eraSelection = new Intent(mActivity, EraSelection.class);
+                    this.addFlags(eraSelection);
+                    eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
+                    mContext.startActivity(eraSelection);
+                }
+                else
+                {
+                    Intent map = new Intent(mActivity, PointsMap.class);
+                    this.addFlags(map);
+                    mContext.startActivity(map);
+                }
             }
         }
 

@@ -2,12 +2,9 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
-
-import java.nio.charset.MalformedInputException;
 
 /**
  * Created by Josué Chávez on 16/01/2017.
@@ -122,6 +119,9 @@ public class UserData
 
     //Countdown
     private static final String KEY_COUNTDOWN_START_TIME = "key_countdown_start_time";
+
+
+    private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
 
     private UserData(Context pContext)
     {
@@ -423,6 +423,12 @@ public class UserData
     public void hasSelectedEra(boolean hasSelected)
     {
         mEditor.putBoolean(KEY_HAS_SELECTED_ERA, hasSelected);
+        mEditor.commit();
+    }
+
+    public void secondEraSelectedFlag()
+    {
+        mEditor.putBoolean(KEY_SECOND_ERA_UPDATE_ERA_SELECTED, true);
         mEditor.commit();
     }
 
@@ -777,7 +783,11 @@ public class UserData
     public String getEraWildcardMain()
     {
         return mPreferences.getString(KEY_ERA_WILDCARD_MAIN, "");
+    }
 
+    public boolean getSecondEraSelectedFlag()
+    {
+        return mPreferences.getBoolean(KEY_SECOND_ERA_UPDATE_ERA_SELECTED, false);
     }
 
     /*

@@ -11,7 +11,6 @@ import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
-import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
