@@ -50,7 +50,7 @@ public interface HomeView
     void addBronzePointData(String pKey, String pTitle, String pSnippet);
     void removeBronzePoint(String pKey);
 
-    void addWildcardPoint(String pKey, LatLng pLocation);
+    void addWildcardPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
     void addWildcardPointData(String pKey, String brand, String title, String message);
     void removeWildcardPoint(String pKey);
 

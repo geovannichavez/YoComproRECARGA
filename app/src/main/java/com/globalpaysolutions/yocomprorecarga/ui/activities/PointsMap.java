@@ -602,8 +602,15 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+
+                //If bitmaps comes null, then use the resource
+                if(pMarkerBmp != null)
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+                else
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point)));
+
 
                 mGoldPointsMarkers.put(pKey, marker);
             }
@@ -660,8 +667,13 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+                //If bitmaps comes null, then use the resource
+                if(pMarkerBmp != null)
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+                else
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_silver_point)));
 
                 mSilverPointsMarkers.put(pKey, marker);
             }
@@ -718,9 +730,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
             else
             {
+                //If bitmaps comes null, then use the resource
+                if(pMarkerBmp != null)
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+                else
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_bronze_point)));
 
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
                 mBronzePointsMarkers.put(pKey, marker);
             }
         }
@@ -765,7 +782,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addWildcardPoint(String pKey, LatLng pLocation)
+    public void addWildcardPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp)
     {
         try
         {
@@ -778,9 +795,13 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 Bitmap wildcardMarker = mBitmapMarkers.get(Constants.NAME_CHEST_TYPE_WILDCARD);
 
-                marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                        .icon(BitmapDescriptorFactory.fromBitmap(wildcardMarker)));
-                mWildcardPointsMarkers.put(pKey, marker);
+                //If bitmaps comes null, then use the resource
+                if(pMarkerBmp != null)
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
+                else
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point)));
             }
         }
         catch (Exception ex)

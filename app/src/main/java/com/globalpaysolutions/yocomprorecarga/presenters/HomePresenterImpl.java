@@ -448,7 +448,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        mView.addWildcardPoint(pKey, pLocation);
+        Bitmap wildcardBitmap = retrieveBitmap(Constants.NAME_CHEST_TYPE_WILDCARD);
+        mView.addWildcardPoint(pKey, pLocation, wildcardBitmap);
     }
 
     @Override
