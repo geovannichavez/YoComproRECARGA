@@ -2,9 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IErasInteractor;
@@ -17,7 +18,12 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
+import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,11 +38,13 @@ public class ErasInteractor implements IErasInteractor
 
     private Context mContext;
     private UserData mUserData;
+    private static int mBitmapExecutions;
 
     public ErasInteractor(Context context)
     {
         this.mContext = context;
         this.mUserData = UserData.getInstance(mContext);
+        mBitmapExecutions = 0;
     }
 
     @Override
@@ -168,5 +176,75 @@ public class ErasInteractor implements IErasInteractor
         }
 
         return version;
+    }
+
+    @Override
+    public void fetchBitmap(String url, ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny)
+    {
+        try
+        {
+            new FetchMarker(listener, markerName, eraSelection, destiny).execute(url).get();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ExecutionException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
+    {
+        EraSelectionResponse mResponse;
+        Bitmap mBitmap;
+        ErasListener mListener;
+        String mName;
+        String mDestiny;
+        int mValue;
+
+        private FetchMarker(ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny)
+        {
+            mListener = listener;
+            mName = markerName;
+            mResponse = eraSelection;
+            mDestiny = destiny;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings)
+        {
+            try
+            {
+                URL bitmapUrl = new URL(strings[0]);
+                HttpURLConnection connection = (HttpURLConnection) bitmapUrl.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(input);
+                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                mBitmap = null;
+            }
+            return mBitmap;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap)
+        {
+            mBitmapExecutions = mBitmapExecutions + 1;
+            mListener.onRetrieveBitmapSuccess(bitmap, mName, mResponse, mDestiny, mBitmapExecutions);
+        }
+
     }
 }

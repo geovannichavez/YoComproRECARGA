@@ -123,6 +123,13 @@ public class Constants
     public static final long PRIZE_EXCHANGE_TIME_REQUIRED = 1000 * 60 * 60 * 10;
     //public static final long PRIZE_EXCHANGE_TIME_REQUIRED = 1000 * 18;
 
+    //GeoFire References data
+    public static final String BUNDLE_GEOFIRE_GOLD_REFERENCE = "bundle_geofire_gold_reference" ;
+    public static final String BUNDLE_GEOFIRE_SILVER_REFERENCE = "bundle_geofire_silver_reference";
+    public static final String BUNDLE_GEOFIRE_BRONZE_REFERENCE = "bundle_geofire_bronze_reference";
+    public static final String BUNDLE_GEOFIRE_WILDCARD_REFERENCE = "bundle_geofire_wildcard_reference";
+
+
     public static String PLATFORM = "ANDROID";
 
     //TODO: Cambiar cuando sea nueva era

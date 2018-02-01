@@ -120,7 +120,8 @@ public class UserData
     //Countdown
     private static final String KEY_COUNTDOWN_START_TIME = "key_countdown_start_time";
 
-
+    //Other App Settings
+    private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
 
     private UserData(Context pContext)
@@ -466,7 +467,12 @@ public class UserData
     {
         mEditor.putLong(KEY_COUNTDOWN_START_TIME, startTime);
         mEditor.commit();
+    }
 
+    public void updateMarkersCount(int count)
+    {
+        mEditor.putInt(KEY_APP_MARKERS_COUNT, count);
+        mEditor.commit();
     }
 
     /*
@@ -788,6 +794,11 @@ public class UserData
     public boolean getSecondEraSelectedFlag()
     {
         return mPreferences.getBoolean(KEY_SECOND_ERA_UPDATE_ERA_SELECTED, false);
+    }
+
+    public int getMarkersCount()
+    {
+        return mPreferences.getInt(KEY_APP_MARKERS_COUNT, 0);
     }
 
     /*

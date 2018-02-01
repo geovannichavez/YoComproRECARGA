@@ -38,19 +38,19 @@ public interface HomeView
     void moveVendorPoint(String pKey, LatLng pLocation);
     void removeVendorPoint(String pKey);
 
-    void addGoldPoint(String pKey, LatLng pLocation, String pMarkerUrl);
+    void addGoldPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
     void addGoldPointData(String pKey, String pTitle, String pSnippet);
     void removeGoldPoint(String pKey);
 
-    void addSilverPoint(String pKey, LatLng pLocation, String pMarkerUrl);
+    void addSilverPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
     void addSilverPointData(String pKey, String pTitle, String pSnippet);
     void removeSilverPoint(String pKey);
 
-    void addBronzePoint(String pKey, LatLng pLocation, String pMarkerUrl);
+    void addBronzePoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
     void addBronzePointData(String pKey, String pTitle, String pSnippet);
     void removeBronzePoint(String pKey);
 
-    void addWildcardPoint(String pKey, LatLng pLocation);
+    void addWildcardPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
     void addWildcardPointData(String pKey, String brand, String title, String message);
     void removeWildcardPoint(String pKey);
 

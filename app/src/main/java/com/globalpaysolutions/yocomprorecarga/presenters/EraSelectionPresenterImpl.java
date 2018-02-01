@@ -2,12 +2,16 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasListener;
+import com.globalpaysolutions.yocomprorecarga.models.EraMarker;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
@@ -18,6 +22,10 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +40,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     private EraSelectionView mView;
     private ErasInteractor mInteractor;
     private AppCompatActivity mActivity;
+    private int markerCounter = 0;
+    private List<EraMarker> mMarkers;
 
     public EraSelectionPresenterImpl(Context context, AppCompatActivity activity, EraSelectionView view)
     {
@@ -101,6 +111,87 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         try
         {
+            mMarkers = new ArrayList<>();
+
+            EraMarker gold = new EraMarker();
+            gold.setEraName(Constants.NAME_CHEST_TYPE_GOLD);
+            gold.setMarkerUrl(eraSelection.getMarkerG());
+            mMarkers.add(gold);
+
+            EraMarker silver = new EraMarker();
+            silver.setEraName(Constants.NAME_CHEST_TYPE_SILVER);
+            silver.setMarkerUrl(eraSelection.getMarkerS());
+            mMarkers.add(silver);
+
+            EraMarker bronze = new EraMarker();
+            bronze.setEraName(Constants.NAME_CHEST_TYPE_BRONZE);
+            bronze.setMarkerUrl(eraSelection.getMarkerB());
+            mMarkers.add(bronze);
+
+            EraMarker wildcard = new EraMarker();
+            wildcard.setEraName(Constants.NAME_CHEST_TYPE_WILDCARD);
+            wildcard.setMarkerUrl(eraSelection.getMarkerW());
+            mMarkers.add(wildcard);
+
+            for (final EraMarker marker: mMarkers)
+            {
+                mInteractor.fetchBitmap(marker.getMarkerUrl(), this, marker.getEraName(), eraSelection, destiny);
+                markerCounter = markerCounter + 1;
+            }
+
+            /*if(markerCounter >= markers.size())
+            {
+
+            }*/
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse, String pRequiredVersion)
+    {
+        try
+        {
+            mView.hideLoadingDialog();
+            if(pCodeStatus == 426)
+            {
+                String title = mContext.getString(R.string.title_update_required);
+                String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
+                mView.showGenericDialog(title, message);
+            }
+            else if(pCodeStatus == 400)
+            {
+                if(simpleResponse != null)
+                {
+                    if (TextUtils.equals(simpleResponse.getInternalCode(), "01"))
+                    {
+                        String title = mContext.getString(R.string.error_title_not_enough_souvs);
+                        String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
+                        mView.createImageDialog(title, message, R.drawable.ic_alert);
+                    }
+                }
+            }
+            else
+            {
+                mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
+                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRetrieveBitmapSuccess(Bitmap bitmap, String name, EraSelectionResponse eraSelection, String destiny, int value)
+    {
+        saveBitmap(bitmap, name);
+
+        if(value >= mMarkers.size())
+        {
             mView.hideLoadingDialog();
 
             //Sets selected era
@@ -147,46 +238,31 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     mContext.startActivity(map);
                 }
             }
-
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
         }
     }
 
-    public void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse, String pRequiredVersion)
+    private void saveBitmap(Bitmap bitmap, String name)
     {
+        File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
+
+        if(!file1.exists())
+            file1.mkdirs();
+
+        OutputStream outStream = null;
+        File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
         try
         {
-            mView.hideLoadingDialog();
-            if(pCodeStatus == 426)
-            {
-                String title = mContext.getString(R.string.title_update_required);
-                String message = String.format(mContext.getString(R.string.content_update_required), pRequiredVersion);
-                mView.showGenericDialog(title, message);
-            }
-            else if(pCodeStatus == 400)
-            {
-                if(simpleResponse != null)
-                {
-                    if (TextUtils.equals(simpleResponse.getInternalCode(), "01"))
-                    {
-                        String title = mContext.getString(R.string.error_title_not_enough_souvs);
-                        String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
-                        mView.createImageDialog(title, message, R.drawable.ic_alert);
-                    }
-                }
-            }
-            else
-            {
-                mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
-            }
+            outStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.close();
+
+
+
+            Log.i(TAG, "Bitmap saved!");
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            ex.printStackTrace();
+            Log.e(TAG, "Error while saving bitmap: " + e.getMessage());
         }
     }
 

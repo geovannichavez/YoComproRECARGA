@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
+import com.globalpaysolutions.yocomprorecarga.utils.GeofireSingleton;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -45,17 +45,12 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private DatabaseReference mWildcardPoints = mRootReference.child("locationWildcardYCR");
     private DatabaseReference mWildcardPointsData = mRootReference.child("locationWildcardYCRData");
 
-    //Geofire
-    private GeoFire mGoldPointsRef;
-    private GeoFire mSilverPointsRef;
-    private GeoFire mBronzePointsRef;
-    private GeoFire mWildcardPointsRef;
 
     //GeoFire Queries
-    private GeoQuery mGoldPointsQuery;
-    private GeoQuery mSilverPointsQuery;
-    private GeoQuery mBronzePointsQuery;
-    private GeoQuery mWildcardPointsQuery;
+    private static GeoQuery mGoldPointsQuery;
+    private static GeoQuery mSilverPointsQuery;
+    private static GeoQuery mBronzePointsQuery;
+    private static GeoQuery mWildcardPointsQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -69,11 +64,8 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     {
         try
         {
-            /*mGoldPointsRef = new GeoFire(mGoldPoints);
-            mSilverPointsRef = new GeoFire(mSilverPoints);
-            mBronzePointsRef = new GeoFire(mBronzePoints);
-            mWildcardPointsRef = new GeoFire(mWildcardPoints);*/
-            new initializeGeolocation().execute();
+            GeofireSingleton.getInstance().initializeReferences(mGoldPoints, mSilverPoints,
+                    mBronzePoints, mWildcardPoints);
         }
         catch (Exception ex)
         {
@@ -85,9 +77,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void goldPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeGoldPointsQuery(pLocation, pRadius).execute();
-        /*mGoldPointsQuery = mGoldPointsRef.queryAtLocation(pLocation, pRadius);
-        mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);*/
+        new ExecuteGoldPointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -106,9 +96,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void silverPointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeSilverPointsQuery(pLocation, pRadius).execute();
-        /*mSilverPointsQuery = mSilverPointsRef.queryAtLocation(pLocation, pRadius);
-        mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);*/
+        new ExecuteSilverPointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -127,9 +115,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void bronzePointsQuery(GeoLocation pLocation, double pRadius)
     {
-        new executeBronzePointsQuery(pLocation, pRadius).execute();
-        /*mBronzePointsQuery = mBronzePointsRef.queryAtLocation(pLocation, pRadius);
-        mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);*/
+        new ExecuteBronzePointsQuery(pLocation, pRadius).execute();
     }
 
     @Override
@@ -148,7 +134,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void wildcardPointsQuery(GeoLocation location, double radius)
     {
-        mWildcardPointsQuery = mWildcardPointsRef.queryAtLocation(location, radius);
+        mWildcardPointsQuery = GeofireSingleton.getInstance().getWildcardPointsRef().queryAtLocation(location, radius);
         mWildcardPointsQuery.addGeoQueryEventListener(wildcardPointsListener);
     }
 
@@ -406,27 +392,13 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     *
     *******************************************************
     */
-    private class initializeGeolocation extends AsyncTask<Void, Void, Void>
-    {
 
-        @Override
-        protected Void doInBackground(Void... params)
-        {
-            //GeoFire
-            mGoldPointsRef = new GeoFire(mGoldPoints);
-            mSilverPointsRef = new GeoFire(mSilverPoints);
-            mBronzePointsRef = new GeoFire(mBronzePoints);
-            mWildcardPointsRef = new GeoFire(mWildcardPoints);
-            return null;
-        }
-    }
-
-    private class executeGoldPointsQuery extends AsyncTask<Void, Void, Void>
+    private class ExecuteGoldPointsQuery extends AsyncTask<Void, Void, Void>
     {
         GeoLocation geoLocation;
         double radius;
 
-        executeGoldPointsQuery(GeoLocation pLocation, double pRadius)
+        ExecuteGoldPointsQuery(GeoLocation pLocation, double pRadius)
         {
             this.geoLocation = pLocation;
             this.radius = pRadius;
@@ -437,7 +409,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         {
             try
             {
-                mGoldPointsQuery = mGoldPointsRef.queryAtLocation(geoLocation, radius);
+                mGoldPointsQuery = GeofireSingleton.getInstance().getGoldPointReference().queryAtLocation(geoLocation, radius);
                 mGoldPointsQuery.addGeoQueryEventListener(goldPointsListener);
             }
             catch (IllegalArgumentException ex)
@@ -448,12 +420,12 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     }
 
-    private class executeSilverPointsQuery extends AsyncTask<Void, Void, Void>
+    private class ExecuteSilverPointsQuery extends AsyncTask<Void, Void, Void>
     {
         GeoLocation geoLocation;
         double radius;
 
-        executeSilverPointsQuery(GeoLocation pLocation, double pRadius)
+        ExecuteSilverPointsQuery(GeoLocation pLocation, double pRadius)
         {
             this.geoLocation = pLocation;
             this.radius = pRadius;
@@ -464,7 +436,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         {
             try
             {
-                mSilverPointsQuery = mSilverPointsRef.queryAtLocation(geoLocation, radius);
+                mSilverPointsQuery = GeofireSingleton.getInstance().getSilverPointReference().queryAtLocation(geoLocation, radius);
                 mSilverPointsQuery.addGeoQueryEventListener(silverPointsListener);
             }
             catch (IllegalArgumentException ex)
@@ -476,12 +448,12 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     }
 
-    private class executeBronzePointsQuery extends AsyncTask<Void, Void, Void>
+    private class ExecuteBronzePointsQuery extends AsyncTask<Void, Void, Void>
     {
         GeoLocation geoLocation;
         double radius;
 
-        executeBronzePointsQuery(GeoLocation pLocation, double pRadius)
+        ExecuteBronzePointsQuery(GeoLocation pLocation, double pRadius)
         {
             this.geoLocation = pLocation;
             this.radius = pRadius;
@@ -492,7 +464,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         {
             try
             {
-                mBronzePointsQuery = mBronzePointsRef.queryAtLocation(geoLocation, radius);
+                mBronzePointsQuery = GeofireSingleton.getInstance().getBronzePointReference().queryAtLocation(geoLocation, radius);
                 mBronzePointsQuery.addGeoQueryEventListener(bronzePointsListener);
             }
             catch (IllegalArgumentException ex)
@@ -503,12 +475,12 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     }
 
-    private class executeWildcardPointsQuery extends AsyncTask<Void, Void, Void>
+    private class ExecuteWildcardPointsQuery extends AsyncTask<Void, Void, Void>
     {
         GeoLocation geoLocation;
         double radius;
 
-        executeWildcardPointsQuery(GeoLocation pLocation, double pRadius)
+        ExecuteWildcardPointsQuery(GeoLocation pLocation, double pRadius)
         {
             this.geoLocation = pLocation;
             this.radius = pRadius;
@@ -519,7 +491,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         {
             try
             {
-                mWildcardPointsQuery = mWildcardPointsRef.queryAtLocation(geoLocation, radius);
+                mWildcardPointsQuery = GeofireSingleton.getInstance().getWildcardPointsRef().queryAtLocation(geoLocation, radius);
                 mWildcardPointsQuery.addGeoQueryEventListener(wildcardPointsListener);
             }
             catch (IllegalArgumentException ex)
