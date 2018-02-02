@@ -107,6 +107,7 @@ public class UserData
     private static final String KEY_ERA_WILDCARD_WIN = "key_era_wildcard_win";
     private static final String KEY_ERA_WILDCARD_LOSE = "key_era_wildcard_lose";
     private static final String KEY_ERA_WILDCARD_MAIN = "key_era_wildcard_main";
+    private static final String KEY_ERA_PRIZE_IMAGE = "key_era_prize_image";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -377,7 +378,7 @@ public class UserData
     }
 
     public void saveEraSelected(int eraID, String eraName, String eraUrl, String markerGold, String markerSilver,
-                                String markerBronze, String markerWildcard)
+                                String markerBronze, String markerWildcard, String prizeImage)
     {
         try
         {
@@ -388,6 +389,7 @@ public class UserData
             mEditor.putString(KEY_ERA_MARKER_SILVER, markerSilver);
             mEditor.putString(KEY_ERA_MARKER_BRONZE, markerBronze);
             mEditor.putString(KEY_ERA_MARKER_WILDCARD, markerWildcard);
+            mEditor.putString(KEY_ERA_PRIZE_IMAGE, prizeImage);
             mEditor.commit();
         }
         catch (Exception ex)

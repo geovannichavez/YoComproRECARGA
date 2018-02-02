@@ -41,6 +41,9 @@ public class EraSelectionResponse
     @SerializedName("WildcardLose")
     @Expose
     private String wildcardLose;
+    @SerializedName("PrizeImage")
+    @Expose
+    private String prizeImage;
 
     public int getAgeID()
     {
@@ -142,4 +145,13 @@ public class EraSelectionResponse
         this.wildcardLose = wildcardLose;
     }
 
+    public String getPrizeImage()
+    {
+        return prizeImage;
+    }
+
+    public void setPrizeImage(String prizeImage)
+    {
+        this.prizeImage = prizeImage;
+    }
 }

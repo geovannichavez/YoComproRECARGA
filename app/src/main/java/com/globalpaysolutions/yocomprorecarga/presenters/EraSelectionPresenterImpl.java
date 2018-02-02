@@ -113,7 +113,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     eraSelection.getMarkerG(),
                     eraSelection.getMarkerS(),
                     eraSelection.getMarkerB(),
-                    eraSelection.getMarkerW());
+                    eraSelection.getMarkerW(),
+                    eraSelection.getPrizeImage());
 
             //Saves images for wildcard
             UserData.getInstance(mContext).saveEraWildcard(eraSelection.getWildcardWin(), eraSelection.getWildcardLose(), eraSelection.getWildcardMain());
