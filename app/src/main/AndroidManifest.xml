@@ -188,20 +188,17 @@
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            -->
         </activity>
         <activity
             android:name=".ui.activities.PrizeDetail"
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
@@ -268,6 +265,7 @@
             android:name=".ui.activities.RedeemPrize"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+
         </activity>
         <activity
             android:name=".ui.activities.Wildcard"

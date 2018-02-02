@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,26 +108,17 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     @Override
     public void updateViews(Bundle data)
     {
-        lblPrizeTitle.setText(data.getString(Constants.BUNDLE_PRIZE_TITLE));
-        lblPrizeDescription.setText(data.getString(Constants.BUNDLE_PRIZE_DESCRIPTION));
-        etPrizeCode.setText(data.getString(Constants.BUNDLE_PRIZE_CODE));
-
-        switch (data.getInt(Constants.BUNDLE_PRIZE_TYPE))
+        try
         {
-            case 1:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
-                break;
-            case 2:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_02);
-                break;
-            case 3:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_01);
-                break;
-            default:
-                imgPrizeType.setImageResource(R.drawable.img_prize_chest_03);
-                break;
+            lblPrizeTitle.setText(data.getString(Constants.BUNDLE_PRIZE_TITLE));
+            lblPrizeDescription.setText(data.getString(Constants.BUNDLE_PRIZE_DESCRIPTION));
+            etPrizeCode.setText(data.getString(Constants.BUNDLE_PRIZE_CODE));
+            Picasso.with(this).load(data.getString(Constants.BUNDLE_PRIZE_IMAGE)).into(imgPrizeType);
         }
-
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error loading views: " + ex.getMessage());
+        }
     }
 
     @Override

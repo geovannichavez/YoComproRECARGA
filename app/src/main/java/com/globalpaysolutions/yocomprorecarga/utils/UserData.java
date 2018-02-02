@@ -603,6 +603,11 @@ public class UserData
         return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_DIAL, "");
     }
 
+    public String getLastPrizeEraImage()
+    {
+        return mPreferences.getString(KEY_ERA_PRIZE_IMAGE, "");
+    }
+
     public int getLastPrizeLevel()
     {
         return mPreferences.getInt(KEY_LAST_PRIZE_EXCHANGED_LEVEL, 0);
