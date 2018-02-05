@@ -377,6 +377,7 @@
     <string name="label_exchange">Canjear</string>
     <string name="title_notification_countdown_finished">¡Ya puedes canjear tus premios!</string>
     <string name="label_notification_countdown_finished">Tu tiempo de espera para canjear premios ha finalizado ¡ya puedes volver a canjear tus premios!</string>
+    <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
 
 
 </resources>

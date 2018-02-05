@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -66,8 +67,10 @@ public class Main extends ImmersiveActivity implements MainView
         });
 
         mPresenter = new MainPresenterImpl(this, this, this);
-        //mPresenter.setBackground();
         mPresenter.checkUserDataCompleted();
+
+        mPresenter.checkPermissions();
+
     }
 
     @Override
@@ -264,6 +267,12 @@ public class Main extends ImmersiveActivity implements MainView
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
+    {
+        mPresenter.onPermissionsResult(requestCode, permissions, grantResults);
     }
 
 }

@@ -11,4 +11,6 @@ public interface IMainPresenter
     void checkFunctionalityLimitedShown();
     void showcaseSeen(boolean seen);
     void downloadMarkers();
+    void checkPermissions();
+    void onPermissionsResult(int requestCode, String permissions[], int[] grantResults);
 }
