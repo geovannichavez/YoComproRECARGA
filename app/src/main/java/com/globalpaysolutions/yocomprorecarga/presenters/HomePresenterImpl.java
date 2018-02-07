@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
@@ -22,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
@@ -205,14 +207,14 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
-    public void vendorPointsQuery(LatLng pLocation)
+    public void vendorsPointsQuery(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
         mInteractor.vendorPointsQuery(location);
     }
 
     @Override
-    public void updateVendorePntCriteria(LatLng pLocation)
+    public void updateVendorsPntCriteria(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
         mInteractor.vendorPointsUpdateCriteria(location);
@@ -236,6 +238,35 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mFirebaseInteractor.silverPointsUpdateCriteria(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.bronzePointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.wildcardPointsUpdateCriteria(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+    }
+
+    @Override
+    public void playersPointsQuery(LatLng location)
+    {
+        GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+        mInteractor.playersPointsQuery(geoLocation);
+    }
+
+    @Override
+    public void updatePlayersPntCriteria(LatLng location)
+    {
+        GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+        mInteractor.playersPointsUpdateCriteria(geoLocation);
+    }
+
+    @Override
+    public void writeCurrentPlayerLocation(LatLng location)
+    {
+        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+        {
+            GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+            mInteractor.insertCurrentPlayerData(geoLocation, UserData.getInstance(mContext).getFacebookProfileId());
+        }
+        else
+        {
+            mInteractor.deletePlayerLocation(UserData.getInstance(mContext).getFacebookProfileId());
+        }
+
     }
 
     @Override
@@ -381,6 +412,47 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
     }
 
+
+    /*
+    *
+    *
+    *   GEOFIRE PLAYERS POINTS
+    *
+    * */
+    @Override
+    public void gf_playerPoint_onKeyEntered(String key, LatLng location)
+    {
+        if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            mView.addPlayerPoint(key, location);
+    }
+
+    @Override
+    public void gf_playerPoint_onKeyExited(String key)
+    {
+        mView.removePlayerPoint(key);
+    }
+
+    @Override
+    public void gf_playerPoint_onKeyMoved(String key, LatLng location)
+    {
+        mView.movePlayerPoint(key, location);
+    }
+
+    @Override
+    public void gf_playerPoint_onGeoQueryReady()
+    {
+
+    }
+
+    @Override
+    public void gf_playerPoint_onGeoQueryError(DatabaseError pError)
+    {
+
+    }
+
+
+
+
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
@@ -489,6 +561,39 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onCancelled(DatabaseError databaseError)
     {
 
+    }
+
+    @Override
+    public void fb_playerPoint_onDataChange(String key, PlayerPointData playerPointData)
+    {
+        if(playerPointData != null)
+        {
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            {
+                String snippet = mContext.getString(R.string.label_player_code_snippet);
+                mView.addPlayerPointData(key, playerPointData.getNickname(), snippet);
+            }
+        }
+    }
+
+    @Override
+    public void fb_playerPoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "Error on dataChange for PlayerData: " + databaseError.getDetails());
+    }
+
+    @Override
+    public void fb_currentPlayerDataInserted(String key, GeoLocation location)
+    {
+        try
+        {
+            //If data is inserted, then inserts respetive GeoFire location
+            mInteractor.insertCurrentPlayerLocation(key, location);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error trying to insert current player data: " + ex.getMessage());
+        }
     }
 
     //  FIREBASE GOLD POINTS

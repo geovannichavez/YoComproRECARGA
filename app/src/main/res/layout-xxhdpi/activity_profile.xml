@@ -218,7 +218,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/baloo_regular"
             android:gravity="center"
-            android:text="@string/label_leaders_button"
+            android:text="@string/label_challenges_button"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
             app:layout_constraintEnd_toEndOf="@+id/imageButton9"

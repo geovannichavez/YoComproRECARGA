@@ -137,12 +137,21 @@ public class Main extends ImmersiveActivity implements MainView
         }
     }
 
-    public void navigatePrizeRedeem(View view)
+    /*public void navigatePrizeRedeem(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent prize = new Intent(Main.this, RedeemPrize.class);
         prize.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(prize);
+        finish();
+    }*/
+
+    public void navigateLeaderboards(View view)
+    {
+        ButtonAnimator.getInstance(this).animateButton(view);
+        Intent leaderboards = new Intent(Main.this, Leaderboards.class);
+        leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(leaderboards);
         finish();
     }
 
@@ -224,7 +233,7 @@ public class Main extends ImmersiveActivity implements MainView
 
                                     break;
                                 case 4:
-                                    //Prize
+                                    //Leaderboards
                                     RelativeLayout.LayoutParams lps = new RelativeLayout.LayoutParams(
                                             ViewGroup.LayoutParams.WRAP_CONTENT,
                                             ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -238,8 +247,8 @@ public class Main extends ImmersiveActivity implements MainView
                                     lps.setMargins(margin, margin, margin, margin);
 
                                     mShowcaseView.setShowcase(prize, true);
-                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_prize));
-                                    mShowcaseView.setContentText(getString(R.string.showcase_content_prize));
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_leaderboards));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_leaderboards));
                                     mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
                                     mShowcaseView.setButtonPosition(lps);
                                     break;

@@ -45,6 +45,9 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private DatabaseReference mWildcardPoints = mRootReference.child("locationWildcardYCR");
     private DatabaseReference mWildcardPointsData = mRootReference.child("locationWildcardYCRData");
 
+    private DatabaseReference mPlayerRecarGO = mRootReference.child("locationPlayerRecargo");
+    private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
+
 
     //GeoFire Queries
     private static GeoQuery mGoldPointsQuery;

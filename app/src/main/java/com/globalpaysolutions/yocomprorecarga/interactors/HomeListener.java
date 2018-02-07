@@ -1,9 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
-import android.graphics.Bitmap;
-
+import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.google.android.gms.maps.model.LatLng;
@@ -35,6 +34,12 @@ public interface HomeListener
     void gf_vendorPoint_onGeoQueryReady();
     void gf_vendorPoint_onGeoQueryError(DatabaseError pError);
 
+    //GeoFire PlayerPoints
+    void gf_playerPoint_onKeyEntered(String key, LatLng location);
+    void gf_playerPoint_onKeyExited(String key);
+    void gf_playerPoint_onKeyMoved(String key, LatLng location);
+    void gf_playerPoint_onGeoQueryReady();
+    void gf_playerPoint_onGeoQueryError(DatabaseError pError);
 
 
     /*
@@ -51,6 +56,9 @@ public interface HomeListener
     void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData);
     void fb_vendorPoint_onCancelled(DatabaseError databaseError);
 
+    void fb_playerPoint_onDataChange(String key, PlayerPointData playerPointData);
+    void fb_playerPoint_onCancelled(DatabaseError databaseError);
 
+    void fb_currentPlayerDataInserted(String key, GeoLocation location);
 
 }

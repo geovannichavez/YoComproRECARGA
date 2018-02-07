@@ -89,6 +89,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     private Map<String, Marker> mSilverPointsMarkers;
     private Map<String, Marker> mBronzePointsMarkers;
     private Map<String, Marker> mWildcardPointsMarkers;
+    private Map<String, Marker> mPlayerPointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
     private Map<String, Bitmap> mBitmapMarkers;
 
@@ -144,12 +145,12 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mBronzePointsMarkers = new HashMap<>();
         mWildcardPointsMarkers = new HashMap<>();
         mSalePointMarkersFirebaseKeys = new HashMap<>();
+        mPlayerPointsMarkers = new HashMap<>();
         mBitmapMarkers = new HashMap<>();
 
         mPresenter = new HomePresenterImpl(this, this, this);
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
-        //mPresenter.intializeGeolocation();
 
     }
 
@@ -344,10 +345,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(17).build();
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-            mPresenter.vendorPointsQuery(currentLocation);
+            mPresenter.vendorsPointsQuery(currentLocation);
             mPresenter.salesPointsQuery(currentLocation);
             mPresenter.prizePointsQuery(currentLocation);
-
+            mPresenter.playersPointsQuery(currentLocation);
+            mPresenter.writeCurrentPlayerLocation(currentLocation);
         }
         catch (Exception ex)
         {
@@ -365,7 +367,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
-            mPresenter.updateVendorePntCriteria(currentLocation);
+            mPresenter.updateVendorsPntCriteria(currentLocation);
+            //mPresenter.writeCurrentPlayerLocation(currentLocation); //Updates current user location
+            mPresenter.updatePrizePntCriteria(currentLocation); //TODO: No se había implementado este metodo
+            mPresenter.updatePlayersPntCriteria(currentLocation);
         }
         catch (Exception ex)
         {
@@ -567,7 +572,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         {
             ex.printStackTrace();
         }
-
     }
 
     @Override
@@ -833,6 +837,84 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             Marker marker = mWildcardPointsMarkers.get(pKey);
             marker.remove();
             mWildcardPointsMarkers.remove(pKey);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addPlayerPoint(String key, LatLng location)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", key));
+                animateMarkerTo(marker, location);
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_account))
+                );
+                mPlayerPointsMarkers.put(key, marker);
+            }
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addPlayerPointData(String key, String title, String snippet)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            marker.setSnippet(snippet);
+            marker.setTitle(title);
+            marker.setTag(snippet);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void movePlayerPoint(String key, LatLng location)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            animateMarkerTo(marker, location);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removePlayerPoint(String key)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            marker.remove();
+            mPlayerPointsMarkers.remove(key);
         }
         catch (NullPointerException npe)
         {

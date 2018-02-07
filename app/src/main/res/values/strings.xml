@@ -54,6 +54,7 @@
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
     <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
+    <string name="label_player_code_snippet">¡Otro jugador de RecarGO!</string>
     <string name="title_success_dialog_store_report">REPORTE ENVIADO</string>
     <string name="dialog_content_report_sent">Su reporte ha sido enviado exitosamente. ¡Muchas gracias por ayudarnos con información!</string>
     <string name="yvr_vendor_marker_title">¡YoVendoRecarga! Click aquí</string>
@@ -378,6 +379,9 @@
     <string name="title_notification_countdown_finished">¡Ya puedes canjear tus premios!</string>
     <string name="label_notification_countdown_finished">Tu tiempo de espera para canjear premios ha finalizado ¡ya puedes volver a canjear tus premios!</string>
     <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
+    <string name="showcase_title_leaderboards">Tabla de líderes</string>
+    <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
+    <string name="label_challenges_button">MIS RETOS</string>
 
 
 </resources>

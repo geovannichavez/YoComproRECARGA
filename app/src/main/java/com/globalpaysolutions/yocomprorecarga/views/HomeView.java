@@ -54,7 +54,13 @@ public interface HomeView
     void addWildcardPointData(String pKey, String brand, String title, String message);
     void removeWildcardPoint(String pKey);
 
+    void addPlayerPoint(String key, LatLng location);
+    void addPlayerPointData(String key, String title, String snippet);
+    void movePlayerPoint(String key, LatLng location);
+    void removePlayerPoint(String key);
+
     void showToast(String string);
     void startShowcase();
+
 
 }

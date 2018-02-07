@@ -25,11 +25,18 @@ public interface IHomePresenter
     void salesPointsQuery(LatLng pLocation);
     void updateSalePntCriteria(LatLng pLocation);
 
-    void vendorPointsQuery(LatLng pLocation);
-    void updateVendorePntCriteria(LatLng pLocation);
+    void vendorsPointsQuery(LatLng pLocation);
+    void updateVendorsPntCriteria(LatLng pLocation);
 
     void prizePointsQuery(LatLng pLocation);
-    void updatePrizePntCriteria(LatLng pLocation);
+    void updatePrizePntCriteria(LatLng pLocation); //
+
+    //Other players
+    void playersPointsQuery(LatLng location);
+    void updatePlayersPntCriteria(LatLng location);
+
+    //Current player
+    void writeCurrentPlayerLocation(LatLng location);
 
     void startShowcase();
     void showcaseMapSeen();

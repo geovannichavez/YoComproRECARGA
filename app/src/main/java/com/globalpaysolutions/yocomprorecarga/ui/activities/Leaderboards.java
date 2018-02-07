@@ -94,7 +94,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
             public void onClick(View v)
             {
                 ButtonAnimator.getInstance(Leaderboards.this).animateButton(v);
-                Intent main = new Intent(Leaderboards.this, Profile.class);
+                Intent main = new Intent(Leaderboards.this, Main.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
                 finish();
@@ -295,7 +295,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent main = new Intent(Leaderboards.this, Profile.class);
+            Intent main = new Intent(Leaderboards.this, Main.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
             finish();

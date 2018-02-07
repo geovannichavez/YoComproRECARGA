@@ -32,6 +32,7 @@ public class UserData
     private static final String KEY_CONSUMER_EMAIL = "usr_email";
     private static final String KEY_CONSUMER_NICKNAME = "usr_nickname";
     private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
+    private static final String KEY_CONSUMER_LOCATION_VISIBLE = "key_consumer_location_visible";
 
     //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
@@ -475,6 +476,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void currentPlayerLocationVisible(boolean visible)
+    {
+        mEditor.putBoolean(KEY_CONSUMER_LOCATION_VISIBLE, visible);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -715,6 +722,11 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_SEEN_INTRO, false);
     }
 
+    public String getFacebookProfileId()
+    {
+        return mPreferences.getString(KEY_FACEBOOK_PROFILE_ID, "");
+    }
+
     public Achievement getLastAchievement()
     {
         Achievement achievement = new Achievement();
@@ -801,6 +813,7 @@ public class UserData
         return mPreferences.getInt(KEY_APP_MARKERS_COUNT, 0);
     }
 
+
     /*
     * ********************
     *
@@ -853,4 +866,8 @@ public class UserData
     }
 
 
+    public boolean checkCurrentLocationVisible()
+    {
+        return mPreferences.getBoolean(KEY_CONSUMER_LOCATION_VISIBLE, false); //TODO: Cambiar valor default
+    }
 }

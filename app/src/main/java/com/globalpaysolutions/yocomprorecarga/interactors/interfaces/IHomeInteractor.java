@@ -1,6 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors.interfaces;
 
-import android.graphics.Bitmap;
+import android.location.Location;
 
 import com.firebase.geofire.GeoLocation;
 
@@ -15,6 +15,11 @@ public interface IHomeInteractor
     void salesPointsUpdateCriteria(GeoLocation pLocation);
     void vendorPointsQuery(GeoLocation pLocation);
     void vendorPointsUpdateCriteria(GeoLocation pLocation);
+    void playersPointsQuery(GeoLocation location);
+    void playersPointsUpdateCriteria(GeoLocation location);
+    void insertCurrentPlayerData(GeoLocation location, String facebookID);
+    void insertCurrentPlayerLocation(String key, GeoLocation location);
+    void deletePlayerLocation(String key);
+
     void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
-    Bitmap fetchBitmap(String url);
 }

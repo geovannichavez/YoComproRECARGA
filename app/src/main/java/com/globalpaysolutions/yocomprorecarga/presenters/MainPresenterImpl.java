@@ -2,16 +2,13 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
@@ -35,8 +32,6 @@ import java.util.List;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
-import static android.Manifest.permission.READ_SMS;
-import static android.Manifest.permission.RECEIVE_SMS;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
