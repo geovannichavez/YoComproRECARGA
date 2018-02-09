@@ -387,6 +387,8 @@
     <string name="label_challenge_termini">Reto de:</string>
     <string name="label_challenge_bet">Apuesta:</string>
     <string name="label_challenge_result">Resultado</string>
+    <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
+    <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
 
 
 </resources>

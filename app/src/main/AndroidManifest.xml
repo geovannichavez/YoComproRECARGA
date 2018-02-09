@@ -45,6 +45,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
     <!--
     APPLICATION: Specifications below.
         tools:replace="android:allowBackup": Overrides the default value of this option. Must set new value.
@@ -307,6 +308,8 @@
         <service android:name=".services.CountdownService"/>
 
         <activity android:name=".ui.activities.Challenges">
+        </activity>
+        <activity android:name=".ui.activities.PlayChallenge">
         </activity>
     </application>
 
