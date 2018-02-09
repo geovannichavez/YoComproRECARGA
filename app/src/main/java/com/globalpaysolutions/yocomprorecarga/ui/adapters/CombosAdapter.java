@@ -96,13 +96,13 @@ public class CombosAdapter extends RecyclerView.Adapter<CombosAdapter.ComboViewH
             holder.lblPrizeDescription.setText(combo.getPrizeDescription());
 
             //Sets locked view ON or OFF
-            if(combo.getSouvenir().get(0).getExchangeable() == 1)
+            if(combo.getSouvenir().get(0).getExchangeable() > 0)
                 holder.viewLocked1.setVisibility(View.GONE);
 
-            if(combo.getSouvenir().get(1).getExchangeable() == 1)
+            if(combo.getSouvenir().get(1).getExchangeable() > 0)
                 holder.viewLocked2.setVisibility(View.GONE);
 
-            if(combo.getSouvenir().get(2).getExchangeable() == 1)
+            if(combo.getSouvenir().get(2).getExchangeable() > 0)
                 holder.viewLocked3.setVisibility(View.GONE);
 
 
