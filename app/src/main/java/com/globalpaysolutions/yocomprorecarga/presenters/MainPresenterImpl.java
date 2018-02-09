@@ -3,11 +3,15 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
@@ -24,6 +28,16 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_SMS;
+import static android.Manifest.permission.RECEIVE_SMS;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Created by Josué Chávez on 06/11/2017.
@@ -183,6 +197,63 @@ public class MainPresenterImpl implements IMainPresenter
     public void downloadMarkers()
     {
 
+    }
+
+    @Override
+    public void checkPermissions()
+    {
+        try
+        {
+            List<String> permissionsList = new ArrayList<>();
+
+            int cameraPermissionResult = ContextCompat.checkSelfPermission(mContext, CAMERA);
+            int fineLocationPermissionResult = ContextCompat.checkSelfPermission(mContext, ACCESS_FINE_LOCATION);
+            int coarseLocationPermissionResult = ContextCompat.checkSelfPermission(mContext, ACCESS_COARSE_LOCATION);
+            int writePermissionResult = ContextCompat.checkSelfPermission(mContext, WRITE_EXTERNAL_STORAGE);
+
+
+            if(cameraPermissionResult != PackageManager.PERMISSION_GRANTED)
+                permissionsList.add(CAMERA);
+
+            if (fineLocationPermissionResult != PackageManager.PERMISSION_GRANTED)
+                permissionsList.add(ACCESS_FINE_LOCATION);
+
+            if (coarseLocationPermissionResult != PackageManager.PERMISSION_GRANTED)
+                permissionsList.add(ACCESS_COARSE_LOCATION);
+
+            if (writePermissionResult != PackageManager.PERMISSION_GRANTED)
+                permissionsList.add(WRITE_EXTERNAL_STORAGE);
+
+            String[] permission = permissionsList.toArray(new String[0]);
+            ActivityCompat.requestPermissions(mActivity, permission, Constants.REQUEST_PERMISSION_CODE);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error while checking permissions: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        try
+        {
+            switch (requestCode)
+            {
+                case Constants.REQUEST_PERMISSION_CODE:
+
+                    if (grantResults.length > 0)
+                    {
+                        Log.i(TAG, "Permissions granted: " + String.valueOf(grantResults.length));
+                    }
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "onPermissionsResult: " + ex.getMessage());
+        }
     }
 
 
