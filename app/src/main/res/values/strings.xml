@@ -382,6 +382,11 @@
     <string name="showcase_title_leaderboards">Tabla de líderes</string>
     <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
     <string name="label_challenges_button">MIS RETOS</string>
+    <string name="title_challenges">Historial de Retos</string>
+    <string name="label_switch_activate_location">Activar Ubicación</string>
+    <string name="label_challenge_termini">Reto de:</string>
+    <string name="label_challenge_bet">Apuesta:</string>
+    <string name="label_challenge_result">Resultado</string>
 
 
 </resources>

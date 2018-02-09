@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.globalpaysolutions.yocomprorecarga"> <!-- Permisos de OneSignal -->
-
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="24"/>
@@ -45,7 +44,7 @@
         android:required="true"/>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!--
     APPLICATION: Specifications below.
         tools:replace="android:allowBackup": Overrides the default value of this option. Must set new value.
@@ -185,7 +184,6 @@
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
@@ -220,7 +218,6 @@
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.EraSelection"
@@ -267,7 +264,9 @@
 
         <!-- AppsFlyer Receiver -->
 
-        <!--<receiver
+
+        <!--
+        <receiver
             android:name="com.appsflyer.SingleInstallBroadcastReceiver"
             android:exported="true">
                 
@@ -276,34 +275,39 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
                      
             </intent-filter>
-        </receiver>-->
+        </receiver>
+        -->
+
 
         <!-- Multiple Broadcast Receiver -->
-        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
-             <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-             </intent-filter>
-        </receiver>
-
         <receiver
-            android:name="com.globalpaysolutions.yocomprorecarga.utils.InstallReceiver"
-            android:permission="android.permission.INSTALL_PACKAGES"
-            android:exported="true" >
+            android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+            android:exported="true">
+             
             <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
+                    
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+                 
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".utils.InstallReceiver"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".ui.activities.Combos"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen" />
+            android:theme="@style/AppThemeFullScreen"/>
 
-        <service
-            android:name=".services.CountdownService"  />
+        <service android:name=".services.CountdownService"/>
 
-
+        <activity android:name=".ui.activities.Challenges">
+        </activity>
     </application>
 
 </manifest>

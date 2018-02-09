@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="221dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/imgResult"
+        android:layout_width="69dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView22"
+        app:layout_constraintTop_toTopOf="@+id/imageView22"
+        app:srcCompat="@drawable/ic_challenge_win"/>
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_challenge_result"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/imgResult"
+        app:layout_constraintEnd_toEndOf="@+id/imgResult"
+        app:layout_constraintStart_toStartOf="@+id/imgResult"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/lblTermini"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_challenge_termini"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="123dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTermini"
+        app:srcCompat="@drawable/ic_challenge_nickname"/>
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_challenge_bet"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView42"
+        app:layout_constraintTop_toBottomOf="@+id/imageView22"/>
+
+    <ImageView
+        android:id="@+id/imageView42"
+        android:layout_width="74dp"
+        android:layout_height="27dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView39"
+        app:srcCompat="@drawable/ic_challenge_bet"/>
+
+    <ImageView
+        android:id="@+id/btnBetType"
+        android:layout_width="47dp"
+        android:layout_height="32dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
+        app:layout_constraintStart_toEndOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:srcCompat="@drawable/ic_challenge_incoming"/>
+
+    <TextView
+        android:id="@+id/lblNickname"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView22"
+        app:layout_constraintEnd_toEndOf="@+id/imageView22"
+        app:layout_constraintStart_toStartOf="@+id/imageView22"
+        app:layout_constraintTop_toTopOf="@+id/imageView22"
+        tools:text="abcdefghijklmnopqrs"/>
+
+    <TextView
+        android:id="@+id/lblBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
+        app:layout_constraintEnd_toEndOf="@+id/imageView42"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintVertical_bias="0.666"
+        tools:text="+20"/>
+</android.support.constraint.ConstraintLayout>

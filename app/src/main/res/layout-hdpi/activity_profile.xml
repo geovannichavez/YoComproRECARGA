@@ -151,7 +151,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:onClick="navigateLeaderboards"
+            android:onClick="navigateChallenges"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="@+id/imageView5"
             app:layout_constraintStart_toStartOf="@+id/imageView5"
