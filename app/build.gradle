@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 34
-        versionName "1.18"
+        versionName "1.18" 
 
         //OneSignal
         manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
