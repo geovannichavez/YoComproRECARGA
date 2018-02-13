@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ChallengesInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ChallengesListener;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IChallengesPresenter;
 import com.globalpaysolutions.yocomprorecarga.views.ChallengesView;
 
@@ -25,6 +27,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     {
         this.mContext = context;
         this.mView = view;
+        this.mInteractor = new ChallengesInteractor(mContext);
     }
 
 
@@ -32,24 +35,26 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     public void retrieveChallenges()
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.retrieveChallenges();
+        mInteractor.retrieveChallenges(this);
     }
 
     @Override
-    public void initializeViews()
+    public void initialize()
     {
-
+        mView.initializeViews();
     }
 
     @Override
-    public void onRetrieveSuccess()
+    public void onRetrieveSuccess(ChallengesResponse response)
     {
-
+        mView.hideLoadingDialog();
+        if(response != null)
+            mView.renderChallegenes(response.getList());
     }
 
     @Override
-    public void onRetrieveError()
+    public void onRetrieveError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse)
     {
-
+        mView.hideLoadingDialog();
     }
 }

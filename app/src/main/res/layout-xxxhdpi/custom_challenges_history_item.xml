@@ -40,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:fontFamily="@font/baloo_regular"
-        android:text="@string/label_challenge_termini"
+        android:text="@string/label_challenge_termini_from"
         android:textAllCaps="true"
         android:textColor="@color/pure_black"
         android:textSize="12sp"

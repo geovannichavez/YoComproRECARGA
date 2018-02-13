@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="@+id/imageView9"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/lvChallenges"
         android:layout_width="262dp"
         android:layout_height="357dp"

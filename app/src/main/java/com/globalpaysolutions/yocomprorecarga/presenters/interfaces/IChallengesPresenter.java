@@ -7,5 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IChallengesPresenter
 {
     void retrieveChallenges();
-    void initializeViews();
+    void initialize();
 }

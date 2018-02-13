@@ -384,11 +384,12 @@
     <string name="label_challenges_button">MIS RETOS</string>
     <string name="title_challenges">Historial de Retos</string>
     <string name="label_switch_activate_location">Activar Ubicación</string>
-    <string name="label_challenge_termini">Reto de:</string>
+    <string name="label_challenge_termini_from">Reto de:</string>
     <string name="label_challenge_bet">Apuesta:</string>
     <string name="label_challenge_result">Resultado</string>
     <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
     <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
+    <string name="label_challenge_termini_to">Reto a:</string>
 
 
 </resources>

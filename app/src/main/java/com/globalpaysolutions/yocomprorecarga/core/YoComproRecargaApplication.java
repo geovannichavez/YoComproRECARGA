@@ -51,8 +51,8 @@ public class YoComproRecargaApplication extends Application
         String appToken = "cjt3sm3usbnk";
 
         //TODO: Cambiar a ENVIRONMENT_PRODUCTION antes de publicar
-        //String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
-        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
+        String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+        //String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
 
         AdjustConfig config = new AdjustConfig(this, appToken, environment, true);
         config.setLogLevel(LogLevel.DEBUG);
