@@ -73,14 +73,26 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         {
             if(visible)
             {
+                UserData.getInstance(mContext).currentPlayerLocationVisible(true);
+
+                if(mGoogleLocationApiManager == null)
+                {
+                    this.mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext, Constants.FOUR_METTERS_DISPLACEMENT);
+                    this.mGoogleLocationApiManager.setLocationCallback(this);
+                }
                 //Connects to location service
                 this.mGoogleLocationApiManager.connect();
             }
             else
             {
-                if(mGoogleLocationApiManager != null)
-                    mGoogleLocationApiManager.disconnect();
+                UserData.getInstance(mContext).currentPlayerLocationVisible(false);
+
+                if(this.mGoogleLocationApiManager.isConnectionEstablished())
+                    this.mGoogleLocationApiManager.disconnect();
+                else
+                    mInteractor.deleteCurrentUserLocation(UserData.getInstance(mContext).getFacebookProfileId(), this);
             }
+
         }
         catch (Exception ex)
         {
@@ -170,6 +182,20 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         catch (Exception ex)
         {
             Log.e(TAG, "Error on connected to Google Location API: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onLocationApiManagerDisconnected()
+    {
+        try
+        {
+            String key = UserData.getInstance(mContext).getFacebookProfileId();
+            mInteractor.deleteCurrentUserLocation(key, this);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error deleting player location: " + ex.getMessage());
         }
     }
 }
