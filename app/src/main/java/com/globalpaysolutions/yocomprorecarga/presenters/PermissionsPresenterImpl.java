@@ -52,15 +52,15 @@ public class PermissionsPresenterImpl implements IPermissions
             int FirstPermissionResult = ContextCompat.checkSelfPermission(mContext, CAMERA);
             int SecondPermissionResult = ContextCompat.checkSelfPermission(mContext, ACCESS_FINE_LOCATION);
             int ThirdPermissionResult = ContextCompat.checkSelfPermission(mContext, ACCESS_COARSE_LOCATION);
-            int FourthPermissionResult = ContextCompat.checkSelfPermission(mContext, RECEIVE_SMS);
-            int FifthPermissionResult = ContextCompat.checkSelfPermission(mContext, READ_SMS);
+            //int FourthPermissionResult = ContextCompat.checkSelfPermission(mContext, RECEIVE_SMS);
+            //int FifthPermissionResult = ContextCompat.checkSelfPermission(mContext, READ_SMS);
             int SixthPermissionResult = ContextCompat.checkSelfPermission(mContext, WRITE_EXTERNAL_STORAGE);
 
             permissions = FirstPermissionResult == PackageManager.PERMISSION_GRANTED &&
                     SecondPermissionResult == PackageManager.PERMISSION_GRANTED &&
                     ThirdPermissionResult == PackageManager.PERMISSION_GRANTED &&
-                    FourthPermissionResult == PackageManager.PERMISSION_GRANTED &&
-                    FifthPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                    //FourthPermissionResult == PackageManager.PERMISSION_GRANTED &&
+                    //FifthPermissionResult == PackageManager.PERMISSION_GRANTED &&
                     SixthPermissionResult == PackageManager.PERMISSION_GRANTED;
 
             if (permissions)
@@ -74,7 +74,7 @@ public class PermissionsPresenterImpl implements IPermissions
                         new String[]
                                 {
                                     CAMERA,
-                                        READ_SMS,
+                                        //READ_SMS,
                                         ACCESS_FINE_LOCATION,
                                         WRITE_EXTERNAL_STORAGE
                                 }, Constants.REQUEST_PERMISSION_CODE);
@@ -98,11 +98,12 @@ public class PermissionsPresenterImpl implements IPermissions
                 if (pGrantResults.length > 0)
                 {
                     boolean CameraPermission = pGrantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean ReadSMSPermission = pGrantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    boolean AccessFineLocationPermission = pGrantResults[2] == PackageManager.PERMISSION_GRANTED;
-                    boolean writeExternalStorage = pGrantResults[3] == PackageManager.PERMISSION_GRANTED;
+                    //boolean ReadSMSPermission = pGrantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean AccessFineLocationPermission = pGrantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeExternalStorage = pGrantResults[2] == PackageManager.PERMISSION_GRANTED;
 
-                    if (CameraPermission && ReadSMSPermission && AccessFineLocationPermission && writeExternalStorage)
+                    //if (CameraPermission && ReadSMSPermission && AccessFineLocationPermission && writeExternalStorage)
+                    if (CameraPermission && AccessFineLocationPermission && writeExternalStorage)
                     {
                         mUserData.HasGrantedDevicePermissions(true);
                         mView.navegateNextActivity();
