@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ChallengesView
 {
-    void initializeViews();
+    void initializeViews(boolean locationVisible);
     void renderChallegenes(List<Challenge> challenges);
     void showGenericDialog(DialogViewModel dialog);
     void showLoadingDialog(String string);

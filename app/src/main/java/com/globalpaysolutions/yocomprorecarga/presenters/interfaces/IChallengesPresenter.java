@@ -8,4 +8,5 @@ public interface IChallengesPresenter
 {
     void retrieveChallenges();
     void initialize();
+    void locationVisible(boolean visible);
 }

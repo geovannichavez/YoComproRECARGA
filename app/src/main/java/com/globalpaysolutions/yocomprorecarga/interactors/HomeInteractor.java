@@ -73,6 +73,11 @@ public class HomeInteractor implements IHomeInteractor
         mHomeListener = pListener;
     }
 
+    public HomeInteractor(Context context)
+    {
+        mContext = context;
+    }
+
     @Override
     public void initializeGeolocation()
     {

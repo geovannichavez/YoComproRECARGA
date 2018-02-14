@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -36,6 +38,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     //Layouts and views
     ImageView bgTimemachine;
     ImageButton btnBack;
+    CheckBox cbxLocation;
     private ProgressDialog mProgressDialog;
 
     //Global Variables
@@ -60,6 +63,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         mRecyclerView = (RecyclerView) findViewById(R.id.lvChallenges);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
+        cbxLocation = (CheckBox) findViewById(R.id.cbxLocation);
 
         mPresenter = new ChallengesPresenterImpl(this, this, this);
         mPresenter.initialize();
@@ -67,7 +71,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     }
 
     @Override
-    public void initializeViews()
+    public void initializeViews(boolean locationVisible)
     {
         try
         {
@@ -83,6 +87,19 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                     profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(profile);
                     finish();
+                }
+            });
+
+            //Location checkbox
+            cbxLocation.setChecked(locationVisible);
+
+            //Checkbox Click Listener
+            cbxLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+                {
+                    mPresenter.locationVisible(b);
                 }
             });
 
