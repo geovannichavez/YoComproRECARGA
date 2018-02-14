@@ -336,6 +336,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void onLocationApiManagerDisconnected()
+    {
+
+    }
+
+    @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
         if(!TextUtils.equals(mUserData.getLastExchangedChestID(), pKey))

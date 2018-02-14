@@ -312,6 +312,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         }
     }
 
+    @Override
+    public void onLocationApiManagerDisconnected()
+    {
+
+    }
+
 
    /*
    *
