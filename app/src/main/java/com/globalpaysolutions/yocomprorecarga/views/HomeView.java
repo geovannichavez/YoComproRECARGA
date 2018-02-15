@@ -30,32 +30,32 @@ public interface HomeView
     void getMarkerBitmaps(Map<String, Bitmap> markerMap);
 
     void addSalePoint(String pKey, LatLng pLocation);
-    void addSalePointData(String pKey, String pTitle, String pSnippet);
+    void addSalePointData(String pKey, String pTitle, String pSnippet, String pTag);
     void removeSalePoint(String pKey);
 
     void addVendorPoint(String pKey, LatLng pLocation);
-    void addVendorPointData(String pKey, String pTitle, String pSnippet);
+    void addVendorPointData(String pKey, String pTitle, String pSnippet, String pTag);
     void moveVendorPoint(String pKey, LatLng pLocation);
     void removeVendorPoint(String pKey);
 
     void addGoldPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
-    void addGoldPointData(String pKey, String pTitle, String pSnippet);
+    void addGoldPointData(String pKey, String pTitle, String pSnippet, String pTag);
     void removeGoldPoint(String pKey);
 
     void addSilverPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
-    void addSilverPointData(String pKey, String pTitle, String pSnippet);
+    void addSilverPointData(String pKey, String pTitle, String pSnippet, String pTag);
     void removeSilverPoint(String pKey);
 
     void addBronzePoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
-    void addBronzePointData(String pKey, String pTitle, String pSnippet);
+    void addBronzePointData(String pKey, String pTitle, String pSnippet, String pTag);
     void removeBronzePoint(String pKey);
 
     void addWildcardPoint(String pKey, LatLng pLocation, Bitmap pMarkerBmp);
-    void addWildcardPointData(String pKey, String brand, String title, String message);
+    void addWildcardPointData(String pKey, String brand, String title, String message, String tag);
     void removeWildcardPoint(String pKey);
 
     void addPlayerPoint(String key, LatLng location);
-    void addPlayerPointData(String key, String title, String snippet);
+    void addPlayerPointData(String key, String title, String snippet, String tag);
     void movePlayerPoint(String key, LatLng location);
     void removePlayerPoint(String key);
 

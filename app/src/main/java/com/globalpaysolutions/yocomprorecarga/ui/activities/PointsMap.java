@@ -200,12 +200,22 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 if(marker.getTag() != null)
                 {
-                    String vendorCode = marker.getTag().toString();
-                    Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
-                    requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
-                    requestTopup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(requestTopup);
-                    finish();
+                    String tagString = (String) marker.getTag();
+
+                    if(TextUtils.equals(tagString, Constants.TAG_MARKER_PLAYER))
+                    {
+                        Intent playChallenge = new Intent(PointsMap.this, PlayChallenge.class);
+                        startActivity(playChallenge);
+                    }
+                    else
+                    {
+                        String vendorCode = marker.getTag().toString();
+                        Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
+                        requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
+                        requestTopup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(requestTopup);
+                        finish();
+                    }
                 }
                 else
                 {
@@ -495,13 +505,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addSalePointData(String pKey, String pTitle, String pSnippet)
+    public void addSalePointData(String pKey, String pTitle, String pSnippet, String pTag)
     {
         try
         {
             Marker marker = mSalesPointsMarkers.get(pKey);
             marker.setSnippet(pSnippet);
             marker.setTitle(pTitle);
+            //marker.setTag(pTag); Tag is not used as this is needed to report Stores Airtime
         }
         catch (Exception ex)
         {
@@ -543,7 +554,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addVendorPointData(String pKey, String pTitle, String pSnippet)
+    public void addVendorPointData(String pKey, String pTitle, String pSnippet, String pTag)
     {
         try
         {
@@ -626,13 +637,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addGoldPointData(String pKey, String pTitle, String pSnippet)
+    public void addGoldPointData(String pKey, String pTitle, String pSnippet, String pTag)
     {
         try
         {
             Marker marker = mGoldPointsMarkers.get(pKey);
             marker.setSnippet(pSnippet);
             marker.setTitle(pTitle);
+            marker.setTag(pTag);
         }
         catch (Exception ex)
         {
@@ -689,13 +701,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addSilverPointData(String pKey, String pTitle, String pSnippet)
+    public void addSilverPointData(String pKey, String pTitle, String pSnippet, String pTag)
     {
         try
         {
             Marker marker = mSilverPointsMarkers.get(pKey);
             marker.setSnippet(pSnippet);
             marker.setTitle(pTitle);
+            marker.setTag(pTag);
         }
         catch (Exception ex)
         {
@@ -752,13 +765,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addBronzePointData(String pKey, String pTitle, String pSnippet)
+    public void addBronzePointData(String pKey, String pTitle, String pSnippet, String pTag)
     {
         try
         {
             Marker marker = mBronzePointsMarkers.get(pKey);
             marker.setSnippet(pSnippet);
             marker.setTitle(pTitle);
+            marker.setTag(pTag);
         }
         catch (Exception ex)
         {
@@ -815,13 +829,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addWildcardPointData(String pKey, String brand, String title, String message)
+    public void addWildcardPointData(String pKey, String brand, String title, String message, String tag)
     {
         try
         {
             Marker marker = mWildcardPointsMarkers.get(pKey);
             marker.setTitle(title);
             marker.setSnippet(message);
+            marker.setTag(tag);
         }
         catch (Exception ex)
         {
@@ -862,7 +877,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             else
             {
                 marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_account))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_player))
                 );
                 mPlayerPointsMarkers.put(key, marker);
             }
@@ -878,14 +893,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addPlayerPointData(String key, String title, String snippet)
+    public void addPlayerPointData(String key, String title, String snippet, String tag)
     {
         try
         {
             Marker marker = mPlayerPointsMarkers.get(key);
             marker.setSnippet(snippet);
             marker.setTitle(title);
-            marker.setTag(snippet);
+            marker.setTag(tag);
         }
         catch (Exception ex)
         {

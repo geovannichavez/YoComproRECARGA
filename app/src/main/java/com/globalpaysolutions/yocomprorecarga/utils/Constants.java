@@ -130,6 +130,13 @@ public class Constants
     public static final String BUNDLE_GEOFIRE_SILVER_REFERENCE = "bundle_geofire_silver_reference";
     public static final String BUNDLE_GEOFIRE_BRONZE_REFERENCE = "bundle_geofire_bronze_reference";
     public static final String BUNDLE_GEOFIRE_WILDCARD_REFERENCE = "bundle_geofire_wildcard_reference";
+    public static final String TAG_MARKER_SALEPOINT = "tag_marker_salepoint";
+    public static final String TAG_MARKER_VENDOR = "tag_marker_vendor";
+    public static final String TAG_MARKER_PLAYER = "tag_marker_player";
+    public static final String TAG_MARKER_GOLD = "tag_marker_gold";
+    public static final String TAG_MARKER_SILVER = "tag_marker_silver";
+    public static final String TAG_MARKER_BRONZE = "tag_marker_bronze";
+    public static final String TAG_MARKER_WILDCARD = "tag_marker_wildcard";
 
 
     public static String PLATFORM = "ANDROID";
