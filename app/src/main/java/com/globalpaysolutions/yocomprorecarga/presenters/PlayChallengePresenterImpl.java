@@ -60,7 +60,6 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     public void choseBet(double bet)
     {
         mBetSet = true;
-        
         float f = Float.valueOf(String.valueOf(bet));
         UserData.getInstance(mContext).saveCurrentChallengBet(f);
 
