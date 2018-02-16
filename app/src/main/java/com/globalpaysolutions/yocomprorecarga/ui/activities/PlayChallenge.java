@@ -1,14 +1,55 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.presenters.PlayChallengePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.PlayChallengeView;
 
 public class PlayChallenge extends AppCompatActivity implements PlayChallengeView
 {
     private static final String TAG = PlayChallenge.class.getSimpleName();
+
+    //Views and Layouts
+    ImageView btnBack;
+    ImageView bgPaper;
+    ImageView bgScissors;
+    ImageView bgRock;
+    ImageView btnBet;
+    ImageView btnBet1;
+    ImageView btnBet2;
+    ImageView btnBet3;
+    TextView tvNickname;
+    TextView tvBet1;
+    TextView tvBet2;
+    TextView tvBet3;
+    TextView tvBetText;
+
+    //Global Variables
+    String mOpponentID;
+    boolean mChallengeReceived;
+
+    //MVP
+    PlayChallengePresenterImpl mPresenter;
+
+    //Views and layouts
+    ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -18,6 +59,54 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
 
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_new_gray_background));
 
+        btnBack = (ImageView) findViewById(R.id.btnBack);
+        bgPaper = (ImageView) findViewById(R.id.bgPaper);
+        bgScissors = (ImageView) findViewById(R.id.bgScissors);
+        bgRock = (ImageView) findViewById(R.id.bgRock);
+        btnBet = (ImageView) findViewById(R.id.btnBet);
+        btnBet1 = (ImageView) findViewById(R.id.btnBet1);
+        btnBet2 = (ImageView) findViewById(R.id.btnBet2);
+        btnBet3 = (ImageView) findViewById(R.id.btnBet3);
+        tvNickname = (TextView) findViewById(R.id.tvNickname);
+        tvBet1 = (TextView) findViewById(R.id.tvBet1);
+        tvBet2 = (TextView) findViewById(R.id.tvBet2);
+        tvBet3 = (TextView) findViewById(R.id.tvBet3);
+
+        mPresenter = new PlayChallengePresenterImpl(this, this, this);
+
+        try
+        {
+            mOpponentID = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_USER_ID);
+            mChallengeReceived = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, false);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.getMessage());
+        }
+
+        mPresenter.initialze();
+
+
+    }
+
+    @Override
+    public void initializeViews()
+    {
+        btnBet.setEnabled(false);
+        btnBet.setImageResource(R.drawable.btn_bet_off);
+    }
+
+    @Override
+    public void setViewsListeners()
+    {
+        btnBack.setOnClickListener(backListener);
+        bgPaper.setOnClickListener(paperListener);
+        bgScissors.setOnClickListener(scissorsListener);
+        bgRock.setOnClickListener(rockListener);
+        btnBet1.setOnClickListener(bet1Listener);
+        btnBet2.setOnClickListener(bet2Listener);
+        btnBet3.setOnClickListener(bet3Listener);
+        btnBet.setOnClickListener(betListener);
     }
 
     @Override
@@ -25,4 +114,238 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     {
 
     }
+
+    @Override
+    public void showGenericDialog(DialogViewModel content, View.OnClickListener clickListener)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayChallenge.this);
+            LayoutInflater inflater = PlayChallenge.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(content.getTitle());
+            tvDescription.setText(content.getLine1());
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            if(clickListener != null)
+            {
+                button.setOnClickListener(clickListener);
+            }
+            else
+            {
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showLoadingDialog(String text)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(text);
+            mProgressDialog.show();
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void finishActivty()
+    {
+        try
+        {
+            Intent map = new Intent(PlayChallenge.this, PointsMap.class);
+            map.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(map);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error finishing activity: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void highlightButton()
+    {
+        btnBet.setEnabled(true);
+        btnBet.setImageResource(R.drawable.btn_bet_on);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent map = new Intent(PlayChallenge.this, PointsMap.class);
+            map.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(map);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onStop()
+    {
+        mPresenter.clearChallenge();
+        super.onStop();
+    }
+
+    /*
+    *
+    *
+    *   LISTENERS
+    *
+    * */
+
+    private View.OnClickListener backListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PlayChallenge.this).animateButton(view);
+            Intent map = new Intent(PlayChallenge.this, PointsMap.class);
+            map.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(map);
+            finish();
+        }
+    };
+
+    private View.OnClickListener paperListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            //Changes UI
+            bgPaper.setImageResource(R.drawable.ic_attack_on);
+            bgRock.setImageResource(R.drawable.ic_attack_off);
+            bgScissors.setImageResource(R.drawable.ic_attack_off);
+
+            mPresenter.chooseGameMove(Constants.CHALLENGE_PAPER_VALUE);
+        }
+    };
+
+    private View.OnClickListener scissorsListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            //Changes UI
+            bgPaper.setImageResource(R.drawable.ic_attack_off);
+            bgRock.setImageResource(R.drawable.ic_attack_off);
+            bgScissors.setImageResource(R.drawable.ic_attack_on);
+
+            mPresenter.chooseGameMove(Constants.CHALLENGE_SCISSORS_VALUE);
+        }
+    };
+
+    private View.OnClickListener rockListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+
+            //Changes UI
+            bgPaper.setImageResource(R.drawable.ic_attack_off);
+            bgRock.setImageResource(R.drawable.ic_attack_on);
+            bgScissors.setImageResource(R.drawable.ic_attack_off);
+
+            mPresenter.chooseGameMove(Constants.CHALLENGE_ROCK_VALUE);
+        }
+    };
+
+    private View.OnClickListener betListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PlayChallenge.this).animateButton(view);
+
+            if(!mChallengeReceived)
+            {
+                mPresenter.createChallenge(mOpponentID);
+            }
+        }
+    };
+
+    private View.OnClickListener bet1Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+
+            btnBet1.setImageResource(R.drawable.ic_bet_on);
+            btnBet2.setImageResource(R.drawable.ic_bet_off);
+            btnBet3.setImageResource(R.drawable.ic_bet_off);
+            mPresenter.choseBet(Constants.CHALLENGE_BET_VALUE_1);
+        }
+    };
+
+    private View.OnClickListener bet2Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            btnBet1.setImageResource(R.drawable.ic_bet_off);
+            btnBet2.setImageResource(R.drawable.ic_bet_on);
+            btnBet3.setImageResource(R.drawable.ic_bet_off);
+            mPresenter.choseBet(Constants.CHALLENGE_BET_VALUE_2);
+        }
+    };
+
+    private View.OnClickListener bet3Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            btnBet1.setImageResource(R.drawable.ic_bet_off);
+            btnBet2.setImageResource(R.drawable.ic_bet_off);
+            btnBet3.setImageResource(R.drawable.ic_bet_on);
+            mPresenter.choseBet(Constants.CHALLENGE_BET_VALUE_3);
+        }
+    };
 }

@@ -53,13 +53,13 @@ public class ChallengesInteractor implements IChallengesInteractor
     public void retrieveChallenges(final ChallengesListener listener)
     {
         //TODO: Descomentar este
-        /*ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ChallengesResponse> call = apiService.getChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
-                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);*/
-
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<ChallengesResponse> call = apiService.getChallenges("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MTc2NzEzMzAxOTk2OTk4OQ.BnPh1-xchWJOoAA-9cpNiG1dN8eBKf_1kymvdRR8kgU",
+        final Call<ChallengesResponse> call = apiService.getChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
+
+        /*ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<ChallengesResponse> call = apiService.getChallenges("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MTc2NzEzMzAxOTk2OTk4OQ.BnPh1-xchWJOoAA-9cpNiG1dN8eBKf_1kymvdRR8kgU",
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);*/
 
         call.enqueue(new Callback<ChallengesResponse>()
         {
@@ -206,4 +206,5 @@ public class ChallengesInteractor implements IChallengesInteractor
             Log.e(TAG, "Location for current player could not be inserted: " + ex.getMessage());
         }
     }
+
 }

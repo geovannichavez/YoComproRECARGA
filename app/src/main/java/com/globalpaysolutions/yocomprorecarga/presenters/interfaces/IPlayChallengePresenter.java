@@ -6,7 +6,12 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface IPlayChallengePresenter
 {
+    void initialze();
+    void chooseGameMove(int move);
+    void choseBet(double bet);
+    void createChallenge(String playerID);
+    void clearChallenge();
+
+    void respondChallenge(int challengeID);
     void getIncomingChallengeDetail();
-    void challengePlayer();
-    void respondChallenge();
 }

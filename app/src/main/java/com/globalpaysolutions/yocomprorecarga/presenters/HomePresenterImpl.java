@@ -21,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
@@ -546,7 +547,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void fb_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
     {
-        mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet(), Constants.TAG_MARKER_SALEPOINT);
+        MarkerData markerData = new MarkerData(pKey, Constants.TAG_MARKER_SALEPOINT, null);
+        mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet(), markerData);
     }
 
     @Override
@@ -560,7 +562,10 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData)
     {
         if(pSalePointData != null)
-            mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), pSalePointData.getVendorCode(), Constants.TAG_MARKER_VENDOR);
+        {
+            MarkerData markerData = new MarkerData(pKey, Constants.TAG_MARKER_VENDOR, pSalePointData.getVendorCode());
+            mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), markerData);
+        }
     }
 
     @Override
@@ -576,8 +581,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
             {
+                MarkerData markerData = new MarkerData(key, Constants.TAG_MARKER_PLAYER, null);
                 String snippet = mContext.getString(R.string.label_player_code_snippet);
-                mView.addPlayerPointData(key, playerPointData.getNickname(), snippet, Constants.TAG_MARKER_PLAYER);
+                mView.addPlayerPointData(key, playerPointData.getNickname(), snippet, markerData);
             }
         }
     }
@@ -607,7 +613,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
     {
         if(pGoldPointData != null)
-            mView.addGoldPointData(pKey, pGoldPointData.getCoins(), pGoldPointData.getDetail(), Constants.TAG_MARKER_GOLD );
+            mView.addGoldPointData(pKey, pGoldPointData.getCoins(), pGoldPointData.getDetail());
+
+
     }
 
     @Override
@@ -621,7 +629,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_silverPoint_onDataChange(String pKey, LocationPrizeYCRData pSilverPointData)
     {
         if(pSilverPointData != null)
-            mView.addSilverPointData(pKey, pSilverPointData.getCoins(), pSilverPointData.getDetail(), Constants.TAG_MARKER_SILVER );
+            mView.addSilverPointData(pKey, pSilverPointData.getCoins(), pSilverPointData.getDetail());
     }
 
     @Override
@@ -634,7 +642,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_bronzePoint_onDataChange(String pKey, LocationPrizeYCRData pBronzePointData)
     {
         if(pBronzePointData != null)
-            mView.addBronzePointData(pKey, pBronzePointData.getCoins(), pBronzePointData.getDetail(), Constants.TAG_MARKER_BRONZE );
+            mView.addBronzePointData(pKey, pBronzePointData.getCoins(), pBronzePointData.getDetail());
     }
 
     @Override
@@ -649,7 +657,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         String title = mContext.getString(R.string.title_wildcard_pointer);
         String message = mContext.getString(R.string.label_wildcard_pointer);
         if(wildcardYCRData != null)
-            mView.addWildcardPointData(pKey, wildcardYCRData.getBrand(), title, message, Constants.TAG_MARKER_WILDCARD);
+            mView.addWildcardPointData(pKey, wildcardYCRData.getBrand(), title, message);
     }
 
     @Override

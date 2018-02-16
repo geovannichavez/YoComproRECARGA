@@ -90,5 +90,6 @@ public class StringsURL
     public static final String ACTIVATE_PRIZE = "ActivatePrize";
 
     public static final String CHALLENGES = "Challenge/Get";
+    public static final String CREATE_CHALLENGE = "Challenge/Create";
 }
 

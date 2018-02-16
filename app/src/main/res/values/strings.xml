@@ -390,6 +390,8 @@
     <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
     <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
     <string name="label_challenge_termini_to">Reto a:</string>
+    <string name="title_challenge_created">¡Reto enviado!</string>
+    <string name="label_dialog_challenge_created">¡El reto se ha enviado! Te notificaremos con los resultados.</string>
 
 
 </resources>

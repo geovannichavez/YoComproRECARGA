@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
@@ -11,6 +12,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeResp;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeComboReq;
@@ -196,4 +199,8 @@ public interface ApiInterface
     Call<ChallengesResponse> getChallenges(@Header("authenticationKey") String pAuthKey,
                                            @Header("AppVersion") String pAppVersion,
                                            @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.CREATE_CHALLENGE)
+    Call<SimpleResponse> createChallenge(String userAuthenticationKey, String versionName, String platform, CreateChallengeReq request);
 }

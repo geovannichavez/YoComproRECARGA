@@ -14,4 +14,5 @@ public interface IChallengesInteractor
     void writePlayerDataLocation(LatLng location, ChallengesListener listener);
     void deleteCurrentUserLocation(String key, ChallengesListener listener);
     void setPlayerLocation(String playerFacebookID, GeoLocation geoLocation, ChallengesListener listener);
+
 }

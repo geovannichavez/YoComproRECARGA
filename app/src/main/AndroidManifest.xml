@@ -135,24 +135,6 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
-        <!-- SMS Receiver -->
-        <!--
-        <receiver
-            android:name=".utils.SmsReceiver"
-            android:permission="android.permission.BROADCAST_SMS">
-            <intent-filter android:priority="99999">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-            </intent-filter>
-        </receiver>
-        -->
-
-
-        <!-- Intent service -->
-        <!--
-            <service
-            android:name=".utils.TokenInputService"
-            android:exported="false"/>
-        -->
 
         <activity
             android:name=".ui.activities.Permissions"
@@ -221,11 +203,7 @@
             android:name=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.Store"
@@ -306,7 +284,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-        <activity android:name=".ui.activities.PlayChallenge">
+        <activity
+            android:name=".ui.activities.PlayChallenge"
+            android:parentActivityName=".ui.activities.PointsMap"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 
