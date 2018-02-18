@@ -129,6 +129,9 @@ public class UserData
     private static final String KEY_CHALLENGE_CHOOSEN_MOVE = "key_challenge_choosen_move";
     private static final String KEY_CHALLENGE_CHOOSEN_BET = "key_challenge_choosen_bet";
     private static final String KEY_CHALLENGE_CHOOSEN_PLAYER = "key_challenge_choosen_player";
+    private static final String KEY_CHALLENGE_ROCK_ERA_ICON = "key_challenge_rock_era_icon";
+    private static final String KEY_CHALLENGE_PAPPER_ERA_ICON = "key_challenge_papper_era_icon";
+    private static final String KEY_CHALLENGE_SCISSORS_ERA_ICON = "key_challenge_scissors_era_icon";
 
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
@@ -509,6 +512,14 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveChallengeIcons(String urlRock, String urlPapper, String urlScissors)
+    {
+        mEditor.putString(KEY_CHALLENGE_ROCK_ERA_ICON, urlRock);
+        mEditor.putString(KEY_CHALLENGE_PAPPER_ERA_ICON, urlPapper);
+        mEditor.putString(KEY_CHALLENGE_SCISSORS_ERA_ICON, urlScissors);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -847,7 +858,22 @@ public class UserData
 
     public float getCurrentChallengeBet()
     {
-        return mPreferences.getFloat(KEY_CHALLENGE_CHOOSEN_MOVE, 0);
+        return mPreferences.getFloat(KEY_CHALLENGE_CHOOSEN_BET, 0);
+    }
+
+    public String getChallengeIconRock()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_ROCK_ERA_ICON, "");
+    }
+
+    public String getChallengeIconPapper()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_PAPPER_ERA_ICON, "");
+    }
+
+    public String getChallengeIconScissos()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_SCISSORS_ERA_ICON, "");
     }
 
     /*

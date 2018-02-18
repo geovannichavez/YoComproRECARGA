@@ -201,6 +201,9 @@ public interface ApiInterface
                                            @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
-    @GET(StringsURL.CREATE_CHALLENGE)
-    Call<SimpleResponse> createChallenge(String userAuthenticationKey, String versionName, String platform, CreateChallengeReq request);
+    @POST(StringsURL.CREATE_CHALLENGE)
+    Call<SimpleResponse> createChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                         @Header("AppVersion") String versionName,
+                                         @Header("Platform") String platform,
+                                         @Body CreateChallengeReq request);
 }

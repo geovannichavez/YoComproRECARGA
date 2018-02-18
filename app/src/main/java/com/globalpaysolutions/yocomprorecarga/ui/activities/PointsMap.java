@@ -212,6 +212,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                                 Intent playChallenge = new Intent(PointsMap.this, PlayChallenge.class);
                                 playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_USER_ID, markerData.getFirebaseID());
                                 playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, false);
+                                playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, markerData.getTag()); //When marker added for player, adds Nickname
                                 startActivity(playChallenge);
                             }
                             else

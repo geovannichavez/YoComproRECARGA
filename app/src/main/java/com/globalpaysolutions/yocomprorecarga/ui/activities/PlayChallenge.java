@@ -21,6 +21,9 @@ import com.globalpaysolutions.yocomprorecarga.presenters.PlayChallengePresenterI
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.PlayChallengeView;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class PlayChallenge extends AppCompatActivity implements PlayChallengeView
 {
@@ -35,14 +38,20 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     ImageView btnBet1;
     ImageView btnBet2;
     ImageView btnBet3;
+    ImageView icRock;
+    ImageView icPapper;
+    ImageView icScissors;
     TextView tvNickname;
     TextView tvBet1;
     TextView tvBet2;
     TextView tvBet3;
     TextView tvBetText;
+    TextView tvChooseBet;
+    TextView tvChooseAttack;
 
     //Global Variables
     String mOpponentID;
+    String mOpponentNickname;
     boolean mChallengeReceived;
 
     //MVP
@@ -67,10 +76,16 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         btnBet1 = (ImageView) findViewById(R.id.btnBet1);
         btnBet2 = (ImageView) findViewById(R.id.btnBet2);
         btnBet3 = (ImageView) findViewById(R.id.btnBet3);
+        icRock = (ImageView) findViewById(R.id.icRock);
+        icPapper = (ImageView) findViewById(R.id.icPapper);
         tvNickname = (TextView) findViewById(R.id.tvNickname);
+        icScissors = (ImageView) findViewById(R.id.icScissors);
         tvBet1 = (TextView) findViewById(R.id.tvBet1);
         tvBet2 = (TextView) findViewById(R.id.tvBet2);
         tvBet3 = (TextView) findViewById(R.id.tvBet3);
+        tvBetText = (TextView) findViewById(R.id.tvBetText);
+        tvChooseBet = (TextView) findViewById(R.id.tvChooseBet);
+        tvChooseAttack = (TextView) findViewById(R.id.tvChooseAttack);
 
         mPresenter = new PlayChallengePresenterImpl(this, this, this);
 
@@ -78,6 +93,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         {
             mOpponentID = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_USER_ID);
             mChallengeReceived = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, false);
+            mOpponentNickname = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME);
         }
         catch (Exception ex)
         {
@@ -90,10 +106,54 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     }
 
     @Override
-    public void initializeViews()
+    public void initializeViews(List<String> betsValues, String rock, String papper, String scissors)
     {
-        btnBet.setEnabled(false);
-        btnBet.setImageResource(R.drawable.btn_bet_off);
+        String infoText;
+        String yourMove;
+        String infoBet;
+        String buttonText;
+
+        try
+        {
+            btnBet.setEnabled(false);
+            btnBet.setImageResource(R.drawable.btn_bet_off);
+
+            //Bet buttons
+            tvBet1.setText(betsValues.get(0));
+            tvBet2.setText(betsValues.get(1));
+            tvBet3.setText(betsValues.get(2));
+
+            //Sets icons
+            Picasso.with(this).load(rock).into(icRock);
+            Picasso.with(this).load(papper).into(icPapper);
+            Picasso.with(this).load(scissors).into(icScissors);
+
+            if (mChallengeReceived)
+            {
+                infoText = String.format(getString(R.string.title_someone_has_challenged), mOpponentNickname);
+                yourMove = getString(R.string.label_challenge_choose_defense);
+                infoBet = String.format(getString(R.string.label_challenge_bet_choosen_by), mOpponentNickname);
+                buttonText = getString(R.string.button_challenge_defend);
+            }
+            else
+            {
+                infoText = String.format(getString(R.string.title_challenge_someone), mOpponentNickname);
+                yourMove = getString(R.string.label_challenge_choose_attack);
+                infoBet = getString(R.string.label_challenge_choose_bet);
+                buttonText = getString(R.string.button_challenge_challenge);
+            }
+
+            //All texts
+            tvNickname.setText(infoText);
+            tvChooseAttack.setText(yourMove);
+            tvChooseBet.setText(infoBet);
+            tvBetText.setText(buttonText);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error initializing views: " + ex.getMessage());
+        }
+
     }
 
     @Override

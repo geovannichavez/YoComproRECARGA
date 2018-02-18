@@ -209,6 +209,10 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             //Saves images for wildcard
             UserData.getInstance(mContext).saveEraWildcard(eraSelection.getWildcardWin(), eraSelection.getWildcardLose(), eraSelection.getWildcardMain());
 
+            //Saves URL images for Challenge
+            UserData.getInstance(mContext).saveChallengeIcons(eraSelection.getChallengeRock(),
+                    eraSelection.getChallengePaper(), eraSelection.getChallengeScissors());
+
             if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
             {
                 mView.forwardToStore();

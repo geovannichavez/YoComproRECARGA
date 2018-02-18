@@ -99,6 +99,7 @@ public class Constants
     //Bundles from Map
     public static final String BUNDLE_CHALLENGE_USER_ID = "bundle_challenge_user_id";
     public static final String BUNDLE_CHALLENGE_RECEIVED = "bundle_challenge_received";
+    public static final String BUNDLE_CHALLENGE_OPPONENT_NICKNAME = "bundle_challenge_opponent_nickname";
 
     //Leaderboards
     public static final String TODAY = "Today";

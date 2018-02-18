@@ -388,10 +388,18 @@
     <string name="label_challenge_bet">Apuesta:</string>
     <string name="label_challenge_result">Resultado</string>
     <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
+    <string name="label_challenge_choose_defense">Selecciona tu defensa</string>
     <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
     <string name="label_challenge_termini_to">Reto a:</string>
     <string name="title_challenge_created">¡Reto enviado!</string>
     <string name="label_dialog_challenge_created">¡El reto se ha enviado! Te notificaremos con los resultados.</string>
+    <string name="title_someone_has_challenged">¡%1$s te ha retado!</string>
+    <string name="title_challenge_someone">¿Deseas retar a %1$s?</string>
+    <string name="label_challenge_bet_choosen_by">Apuesta seleccionada por %1$s</string>
+    <string name="button_challenge_challenge">RETAR</string>
+    <string name="button_challenge_defend">DEFENDER</string>
+    <string name="error_title_already_challenged">¡Ya lo retaste!</string>
+    <string name="error_content_already_challenged">Recuerda que puedes mandar solo 1 reto cada %1$s horas al mismo usuario</string>
 
 
 </resources>

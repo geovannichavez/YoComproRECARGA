@@ -58,7 +58,7 @@ public class PlayChallengeInteractor implements IPlayChallengeInteractor
                 {
                     int codeResponse = response.code();
 
-                    if(codeResponse == 426)
+                    if(codeResponse == 426 || codeResponse == 429)
                     {
                         try
                         {

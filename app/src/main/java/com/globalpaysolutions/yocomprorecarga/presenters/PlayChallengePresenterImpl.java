@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
-import android.hardware.usb.UsbRequest;
 import android.util.Log;
 import android.view.View;
 
@@ -12,8 +11,12 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPlayChallengePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PlayChallenge;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PlayChallengeView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Josué Chávez on 9/2/2018.
@@ -29,6 +32,7 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
 
     private boolean mMoveSet;
     private boolean mBetSet;
+    private List<String> mBetValues = new ArrayList<>();
 
     public PlayChallengePresenterImpl(Context context, PlayChallengeView view, PlayChallenge activity)
     {
@@ -42,8 +46,20 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     @Override
     public void initialze()
     {
+        //Casts bet values (double) to Strings
+        int bet1 = (int) Constants.CHALLENGE_BET_VALUE_1;
+        mBetValues.add(String.valueOf(bet1));
+        int bet2 = (int) Constants.CHALLENGE_BET_VALUE_2;
+        mBetValues.add(String.valueOf(bet2));
+        int bet3 = (int) Constants.CHALLENGE_BET_VALUE_3;
+        mBetValues.add(String.valueOf(bet3));
+
+        String rock = UserData.getInstance(mContext).getChallengeIconRock();
+        String papper = UserData.getInstance(mContext).getChallengeIconPapper();
+        String scissors = UserData.getInstance(mContext).getChallengeIconScissos();
+
         mView.setViewsListeners();
-        mView.initializeViews();
+        mView.initializeViews(mBetValues, rock, papper, scissors);
     }
 
     @Override
@@ -115,7 +131,13 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     {
         try
         {
+            String rock = UserData.getInstance(mContext).getChallengeIconRock();
+            String papper = UserData.getInstance(mContext).getChallengeIconPapper();
+            String scissors = UserData.getInstance(mContext).getChallengeIconScissos();
+
             mView.hideLoadingDialog();
+            mView.initializeViews(mBetValues, rock, papper, scissors);
+
             UserData.getInstance(mContext).clearCurrentChallenge();
 
             DialogViewModel dialog = new DialogViewModel();
@@ -137,17 +159,50 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     {
         mView.hideLoadingDialog();
 
-        DialogViewModel dialog = new DialogViewModel();
-        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-        dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
-        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
-        mView.showGenericDialog(dialog, new View.OnClickListener()
+        if(codeStatus == 429)
         {
-            @Override
-            public void onClick(View view)
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_already_challenged));
+            dialog.setLine1(String.format(mContext.getString(R.string.error_content_already_challenged), response.getMessage()));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, new View.OnClickListener()
             {
-                mView.finishActivty();
-            }
-        });
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
+        }
+        else if (codeStatus == 426)
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_update_required));
+            dialog.setLine1(String.format(mContext.getString(R.string.content_update_required), response.getInternalCode()));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
+        }
+        else
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
+        }
     }
 }
