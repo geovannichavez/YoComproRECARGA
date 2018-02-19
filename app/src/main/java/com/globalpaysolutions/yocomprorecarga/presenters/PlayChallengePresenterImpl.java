@@ -9,6 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.PlayChallengeInteracto
 import com.globalpaysolutions.yocomprorecarga.interactors.PlayChallengeListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPlayChallengePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PlayChallenge;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -63,13 +64,21 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     }
 
     @Override
-    public void chooseGameMove(int move)
+    public void chooseGameMove(int move, boolean challengeReceived)
     {
         mMoveSet = true;
         UserData.getInstance(mContext).saveCurrentChallengeMove(move);
 
-        if(mMoveSet && mBetSet)
-            mView.highlightButton();
+        if(challengeReceived)
+        {
+            if(mMoveSet)
+                mView.highlightButton();
+        }
+        else
+        {
+            if(mMoveSet && mBetSet)
+                mView.highlightButton();
+        }
     }
 
     @Override
@@ -115,9 +124,25 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     }
 
     @Override
-    public void respondChallenge(int challengeID)
+    public void respondChallenge(int challengeID, String opponentID)
     {
+        try
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
 
+            //Saves opponent ID
+            UserData.getInstance(mContext).saveCurrentChallengOpponent(opponentID);
+
+            //Retrieve info
+            int move = UserData.getInstance(mContext).getCurrentChallengeMove();
+
+            mInteractor.updateChallenge(challengeID, move, this);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error creating challenge: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -204,5 +229,17 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
                 }
             });
         }
+    }
+
+    @Override
+    public void onUpdateSuccess(UpdateChallengeResponse body)
+    {
+ 
+    }
+
+    @Override
+    public void onUpdateChallengeError(SimpleResponse errorResponse, Throwable o, int codeResponse)
+    {
+
     }
 }

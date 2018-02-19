@@ -38,6 +38,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
@@ -175,6 +177,7 @@ public interface ApiInterface
                                                     @Body ExchangeWildcardReq exchangeWildcardReq);
 
     @Headers("Content-Type: application/json")
+
     @POST(StringsURL.ACTIVATE_PRIZE)
     Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey,
                                               @Header("AppVersion") String pAppVersion,
@@ -206,4 +209,11 @@ public interface ApiInterface
                                          @Header("AppVersion") String versionName,
                                          @Header("Platform") String platform,
                                          @Body CreateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.UPDATE_CHALLENGE)
+    Call<UpdateChallengeResponse> updateChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                                  @Header("AppVersion") String versionName,
+                                                  @Header("Platform") String platform,
+                                                  @Body  UpdateChallengeReq request);
 }

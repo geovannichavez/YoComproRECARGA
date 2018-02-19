@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.presenters.ChallengesPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.ChallengesAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.ChallengesView;
@@ -112,7 +113,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     }
 
     @Override
-    public void renderChallegenes(List<Challenge> challenges)
+    public void renderChallegenes(final List<Challenge> challenges)
     {
         try
         {
@@ -129,7 +130,16 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 @Override
                 public void onClick(View view, int position)
                 {
-
+                    Challenge challenge = challenges.get(position);
+                    if(challenge.getStatus() == 0)
+                    {
+                        Intent respondChallenge = new Intent(Challenges.this, PlayChallenge.class);
+                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_ID, challenge.getChallengeID());
+                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, true);
+                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, challenge.getOpponentNickname());
+                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_BET, String.valueOf(challenge.getBet()));
+                        startActivity(respondChallenge);
+                    }
                 }
 
                 @Override

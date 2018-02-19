@@ -91,5 +91,6 @@ public class StringsURL
 
     public static final String CHALLENGES = "Challenge/Get";
     public static final String CREATE_CHALLENGE = "Challenge/Create";
+    public static final String UPDATE_CHALLENGE = "Challenge/Update";
 }
 

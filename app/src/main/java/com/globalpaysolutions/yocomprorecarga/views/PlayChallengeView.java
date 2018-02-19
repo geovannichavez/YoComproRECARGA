@@ -14,7 +14,6 @@ public interface PlayChallengeView
 {
     void initializeViews(List<String> betsValues, String rock, String papper, String scissors);
     void setViewsListeners();
-    void setIncomingChallenge();
     void showGenericDialog(DialogViewModel dialog, View.OnClickListener clickListener);
     void showLoadingDialog(String text);
     void hideLoadingDialog();
