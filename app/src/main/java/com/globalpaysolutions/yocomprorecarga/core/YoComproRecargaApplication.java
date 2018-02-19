@@ -6,9 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.adjust.sdk.Adjust;
-import com.adjust.sdk.AdjustConfig;
-import com.adjust.sdk.LogLevel;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -47,17 +44,6 @@ public class YoComproRecargaApplication extends Application
         super.onCreate();
         appSingleton = this;
 
-        //Adjust SDK
-        String appToken = "cjt3sm3usbnk";
-
-        //TODO: Cambiar a ENVIRONMENT_PRODUCTION antes de publicar
-        //String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
-        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
-
-        AdjustConfig config = new AdjustConfig(this, appToken, environment, true);
-        config.setLogLevel(LogLevel.DEBUG);
-
-        Adjust.onCreate(config);
 
         registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
 
@@ -142,13 +128,13 @@ public class YoComproRecargaApplication extends Application
         @Override
         public void onActivityResumed(Activity activity)
         {
-            Adjust.onResume();
+
         }
 
         @Override
         public void onActivityPaused(Activity activity)
         {
-            Adjust.onPause();
+
         }
 
         @Override

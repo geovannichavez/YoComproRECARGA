@@ -21,7 +21,7 @@
     public private *;
 }
 
--keep public class com.adjust.sdk.** { *; }
+
 -keep class com.google.android.gms.common.ConnectionResult {
     int SUCCESS;
 }
