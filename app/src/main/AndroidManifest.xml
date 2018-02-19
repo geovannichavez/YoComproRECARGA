@@ -279,18 +279,23 @@
         </receiver>-->
 
         <!-- Multiple Broadcast Receiver -->
-        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
-             <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-             </intent-filter>
+        <receiver
+            android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+            android:exported="true">
+             
+            <intent-filter>
+                    
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+                 
+            </intent-filter>
         </receiver>
 
         <receiver
             android:name="com.globalpaysolutions.yocomprorecarga.utils.InstallReceiver"
-            android:permission="android.permission.INSTALL_PACKAGES"
-            android:exported="true" >
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
             <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
         </receiver>
 
@@ -298,10 +303,23 @@
         <activity
             android:name=".ui.activities.Combos"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen" />
+            android:theme="@style/AppThemeFullScreen"/>
 
         <service
-            android:name=".services.CountdownService"  />
+            android:name=".services.CountdownService"/>
+
+
+        <!--    Adforms SDK-->
+        <receiver
+            android:name="com.adform.adformtrackingsdk.services.ReferrerReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+            </intent-filter>
+        </receiver>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
 
 
     </application>

@@ -6,6 +6,8 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 public class Constants
 {
+    public static final String APP_NAME = "RecarGO!";
+    public static final String APP_SIMPLE_NAME = "RecarGO";
     //Google Location Manager
     //public static final int TEN_METTERS_DISPLACEMENT = 10;
     public static final int FOUR_METTERS_DISPLACEMENT = 4;

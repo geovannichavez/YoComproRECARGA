@@ -41,6 +41,7 @@ repositories {
     maven {
         url "https://maven.google.com"
     }
+    maven { url "https://github.com/adform/adform-tracking-android-sdk/raw/master/releases/" }
 }
 
 dependencies {
@@ -135,14 +136,21 @@ dependencies {
     //RecyclerView
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 
-    //Adjust SDK
-    //implementation 'com.adjust.sdk:adjust-android:4.12.0'
 
     //Install referrer
     implementation 'com.android.installreferrer:installreferrer:1.0'
 
     // Play Services
     implementation 'com.google.android.gms:play-services-analytics:11.4.2'
+
+    //Play Services Ads
+    implementation 'com.google.android.gms:play-services-ads:11.4.2'
+
+    //Adform SDK
+    implementation 'com.adform.tracking.sdk:adform-tracking-sdk:1.1.7'
+
+    //Adform SDK - protobuf
+    implementation 'com.google.protobuf:protobuf-java:2.6.1'
 
 }
 

@@ -6,9 +6,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.adform.adformtrackingsdk.AdformTrackingSdk;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;
 import com.onesignal.OneSignal;
@@ -44,8 +46,10 @@ public class YoComproRecargaApplication extends Application
         super.onCreate();
         appSingleton = this;
 
+        //Adforms SDK
+        AdformTrackingSdk.setAppName(Constants.APP_SIMPLE_NAME);
+        AdformTrackingSdk.startTracking(this, 936955);
 
-        registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
 
         //AppsFlyer
         AppsFlyerConversionListener conversionDataListener = new AppsFlyerConversionListener()
@@ -110,49 +114,4 @@ public class YoComproRecargaApplication extends Application
         super.onTerminate();
     }
 
-    private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks
-    {
-
-        @Override
-        public void onActivityCreated(Activity activity, Bundle bundle)
-        {
-
-        }
-
-        @Override
-        public void onActivityStarted(Activity activity)
-        {
-
-        }
-
-        @Override
-        public void onActivityResumed(Activity activity)
-        {
-
-        }
-
-        @Override
-        public void onActivityPaused(Activity activity)
-        {
-
-        }
-
-        @Override
-        public void onActivityStopped(Activity activity)
-        {
-
-        }
-
-        @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle bundle)
-        {
-
-        }
-
-        @Override
-        public void onActivityDestroyed(Activity activity)
-        {
-
-        }
-    }
 }
