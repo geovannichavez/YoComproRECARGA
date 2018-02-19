@@ -50,6 +50,8 @@ public class YoComproRecargaApplication extends Application
         AdformTrackingSdk.setAppName(Constants.APP_SIMPLE_NAME);
         AdformTrackingSdk.startTracking(this, 936955);
 
+        registerActivityLifecycleCallbacks(new AdformLifecycleCallbacks());
+
 
         //AppsFlyer
         AppsFlyerConversionListener conversionDataListener = new AppsFlyerConversionListener()
@@ -112,6 +114,53 @@ public class YoComproRecargaApplication extends Application
     public void onTerminate()
     {
         super.onTerminate();
+    }
+
+
+    private static final class AdformLifecycleCallbacks implements ActivityLifecycleCallbacks
+    {
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle bundle)
+        {
+
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity)
+        {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity)
+        {
+            AdformTrackingSdk.onResume(activity);
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity)
+        {
+            AdformTrackingSdk.onPause();
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity)
+        {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle bundle)
+        {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity)
+        {
+
+        }
     }
 
 }
