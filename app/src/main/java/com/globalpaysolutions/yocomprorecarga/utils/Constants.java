@@ -153,7 +153,7 @@ public class Constants
     public static final double CHALLENGE_BET_VALUE_1 = 10;
     public static final double CHALLENGE_BET_VALUE_2 = 25;
     public static final double CHALLENGE_BET_VALUE_3 = 50;
-
+    public static final String BUNDLE_CHALLENGE_RESULT_SERIALIZABLE = "bundle_challenge_result_serializable";
 
 
     public static String PLATFORM = "ANDROID";

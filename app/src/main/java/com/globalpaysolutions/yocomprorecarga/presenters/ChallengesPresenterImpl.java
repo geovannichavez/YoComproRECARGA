@@ -11,7 +11,9 @@ import com.globalpaysolutions.yocomprorecarga.interactors.ChallengesInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ChallengesListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IChallengesPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -97,6 +99,78 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         catch (Exception ex)
         {
             Log.e(TAG, "Error on make location visble: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigateChallengeResult(Challenge challenge)
+    {
+        try
+        {
+            String title ="";
+            String content = "";
+            String opponentMoveIcon = "";
+            String playerMoveIcon = "";
+
+            switch (challenge.getResult())
+            {
+                case 0: //Result: 0 = Lose
+                    title = mContext.getString(R.string.title_challenge_result_bad_luck);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_lose), challenge.getOpponentNickname());
+                    break;
+                case 1: //Result 1 = Win
+                    title = mContext.getString(R.string.title_challenge_result_congrats);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_win), challenge.getOpponentNickname());
+                    break;
+                case 2: //Result 2 = Tie
+                    title = mContext.getString(R.string.title_challenge_result_bad_luck);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_tie), challenge.getOpponentNickname());
+                    break;
+            }
+
+            //Gets player icon
+            switch (challenge.getSelection())
+            {
+                case Constants.CHALLENGE_ROCK_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconRock();
+                    break;
+                case Constants.CHALLENGE_PAPER_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconPapper();
+                    break;
+                case Constants.CHALLENGE_SCISSORS_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
+                    break;
+            }
+
+            //Gets opponent icon
+            switch (challenge.getOpponentSelection())
+            {
+                case Constants.CHALLENGE_ROCK_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconRock();
+                    break;
+                case Constants.CHALLENGE_PAPER_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconPapper();
+                    break;
+                case Constants.CHALLENGE_SCISSORS_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
+                    break;
+            }
+
+
+            ChallengeResultData challengeResult = new ChallengeResultData();
+            challengeResult.setBet(challenge.getBet());
+            challengeResult.setResultTitle(title);
+            challengeResult.setResultContent(content);
+            challengeResult.setPlayerMoveIcon(playerMoveIcon);
+            challengeResult.setOppnenteMoveIcon(opponentMoveIcon);
+            challengeResult.setOpponentNickname(challenge.getOpponentNickname());
+            challengeResult.setOverallResult(challenge.getResult());
+
+            mView.navigateChalengeResult(challengeResult);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on intent navigation: " + ex.getMessage());
         }
     }
 

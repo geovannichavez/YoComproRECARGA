@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 import android.view.View;
 
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface PlayChallengeView
     void hideLoadingDialog();
     void finishActivty();
     void highlightButton();
-
+    void navigateResultChallenge(ChallengeResultData resultData);
 }

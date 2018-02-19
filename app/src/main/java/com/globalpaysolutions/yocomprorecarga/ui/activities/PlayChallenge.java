@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.PlayChallengePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
@@ -30,6 +31,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     private static final String TAG = PlayChallenge.class.getSimpleName();
 
     //Views and Layouts
+    ImageView bgGrayNewMachine;
     ImageView btnBack;
     ImageView bgPaper;
     ImageView bgScissors;
@@ -80,6 +82,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         btnBet3 = (ImageView) findViewById(R.id.btnBet3);
         icRock = (ImageView) findViewById(R.id.icRock);
         icPapper = (ImageView) findViewById(R.id.icPapper);
+        bgGrayNewMachine = (ImageView) findViewById(R.id.bgGrayNewMachine);
         tvNickname = (TextView) findViewById(R.id.tvNickname);
         icScissors = (ImageView) findViewById(R.id.icScissors);
         tvBet1 = (TextView) findViewById(R.id.tvBet1);
@@ -119,6 +122,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
 
         try
         {
+            Picasso.with(this).load(R.drawable.bg_new_gray_machine).into(bgGrayNewMachine);
             btnBet.setEnabled(false);
             btnBet.setImageResource(R.drawable.btn_bet_off);
 
@@ -289,6 +293,21 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     {
         btnBet.setEnabled(true);
         btnBet.setImageResource(R.drawable.btn_bet_on);
+    }
+
+    @Override
+    public void navigateResultChallenge(ChallengeResultData resultData)
+    {
+        try
+        {
+            Intent result = new Intent(PlayChallenge.this, ChallengeResult.class);
+            result.putExtra(Constants.BUNDLE_CHALLENGE_RESULT_SERIALIZABLE, resultData);
+            startActivity(result);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on navigate: " + ex.getMessage());
+        }
     }
 
     @Override

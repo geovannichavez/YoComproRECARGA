@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 
@@ -16,4 +17,5 @@ public interface ChallengesView
     void showGenericDialog(DialogViewModel dialog);
     void showLoadingDialog(String string);
     void hideLoadingDialog();
+    void navigateChalengeResult(ChallengeResultData challengeResult);
 }

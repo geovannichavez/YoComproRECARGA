@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.presenters.ChallengesPresenterImpl;
@@ -131,7 +132,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 public void onClick(View view, int position)
                 {
                     Challenge challenge = challenges.get(position);
-                    if(challenge.getStatus() == 0)
+                    if(challenge.getStatus() == 0 && challenge.getCreator() == 0)
                     {
                         Intent respondChallenge = new Intent(Challenges.this, PlayChallenge.class);
                         respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_ID, challenge.getChallengeID());
@@ -140,6 +141,10 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                         respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_BET, String.valueOf(challenge.getBet()));
                         startActivity(respondChallenge);
                     }
+                    /*else
+                    {
+                        mPresenter.navigateChallengeResult(challenge);
+                    }*/
                 }
 
                 @Override
@@ -193,6 +198,20 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigateChalengeResult(ChallengeResultData challengeResult)
+    {
+        try
+        {
+            Intent result = new Intent(Challenges.this, ChallengeResult.class);
+            result.putExtra(Constants.BUNDLE_CHALLENGE_RESULT_SERIALIZABLE, challengeResult);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on navigate: " + ex.getMessage());
         }
     }
 

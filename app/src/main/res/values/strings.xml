@@ -400,6 +400,12 @@
     <string name="button_challenge_defend">DEFENDER</string>
     <string name="error_title_already_challenged">¡Ya lo retaste!</string>
     <string name="error_content_already_challenged">Recuerda que puedes mandar solo 1 reto cada %1$s horas al mismo usuario</string>
+    <string name="title_challenge_result">RESULTADO</string>
+    <string name="title_challenge_result_bad_luck">¡Mala Suerte!</string>
+    <string name="title_challenge_result_congrats">¡Felicitaciones!</string>
+    <string name="label_challenge_result_text_lose">Has perdido el reto contra %1$s</string>
+    <string name="label_challenge_result_text_win">Has ganado el reto contra %1$s</string>
+    <string name="label_challenge_result_text_tie">Has empatado en reto contra %1$s</string>
 
 
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.PlayChallengeInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.PlayChallengeListener;
+import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
@@ -232,9 +233,77 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     }
 
     @Override
-    public void onUpdateSuccess(UpdateChallengeResponse body)
+    public void onUpdateSuccess(UpdateChallengeResponse challengeRes)
     {
- 
+        try
+        {
+            mView.hideLoadingDialog();
+
+            String title ="";
+            String content = "";
+            String opponentMoveIcon = "";
+            String playerMoveIcon = "";
+
+            switch (challengeRes.getResult())
+            {
+                case 0: //Result: 0 = Tie
+                    title = mContext.getString(R.string.title_challenge_result_bad_luck);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_lose), challengeRes.getOpponentNickname());
+                    break;
+                case 1: //Result 1 = Win
+                    title = mContext.getString(R.string.title_challenge_result_congrats);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_win), challengeRes.getOpponentNickname());
+                    break;
+                case 2: //Result 2 = Lose
+                    title = mContext.getString(R.string.title_challenge_result_bad_luck);
+                    content = String.format(mContext.getString(R.string.label_challenge_result_text_tie), challengeRes.getOpponentNickname());
+                    break;
+            }
+
+            //Gets player icon
+            switch (challengeRes.getSelection())
+            {
+                case Constants.CHALLENGE_ROCK_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconRock();
+                    break;
+                case Constants.CHALLENGE_PAPER_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconPapper();
+                    break;
+                case Constants.CHALLENGE_SCISSORS_VALUE:
+                    playerMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
+                    break;
+            }
+
+            //Gets opponent icon
+            switch (challengeRes.getOpponentSelection())
+            {
+                case Constants.CHALLENGE_ROCK_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconRock();
+                    break;
+                case Constants.CHALLENGE_PAPER_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconPapper();
+                    break;
+                case Constants.CHALLENGE_SCISSORS_VALUE:
+                    opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
+                    break;
+            }
+
+
+            ChallengeResultData challengeResult = new ChallengeResultData();
+            challengeResult.setBet(challengeRes.getBet());
+            challengeResult.setResultTitle(title);
+            challengeResult.setResultContent(content);
+            challengeResult.setPlayerMoveIcon(playerMoveIcon);
+            challengeResult.setOppnenteMoveIcon(opponentMoveIcon);
+            challengeResult.setOpponentNickname(challengeRes.getOpponentNickname());
+            challengeResult.setOverallResult(challengeRes.getResult());
+
+            mView.navigateResultChallenge(challengeResult);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on navigate to ChallengeResult: " + ex.getMessage());
+        }
     }
 
     @Override

@@ -134,8 +134,6 @@
             android:theme="@style/AppWhiteThemeFullScreen"
             android:windowSoftInputMode="adjustPan">
         </activity>
-
-
         <activity
             android:name=".ui.activities.Permissions"
             android:screenOrientation="portrait"
@@ -181,7 +179,6 @@
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.Leaderboards"
@@ -203,7 +200,11 @@
             android:name=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activities.Store"
@@ -289,11 +290,13 @@
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activities.ChallengeResult"
+            android:parentActivityName=".ui.activities.Challenges"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 

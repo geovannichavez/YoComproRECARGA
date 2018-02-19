@@ -48,16 +48,16 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Ch
             holder.lblBet.setText(String.valueOf(challenge.getBet()));
             holder.lblNickname.setText(challenge.getOpponentNickname());
 
-            // Creator: if equals 1, current user has been challenged
+            // Creator: if equals 1, current user has created the challenged
             if(challenge.getCreator() > 0)
-            {
-                holder.lblTermini.setText(R.string.label_challenge_termini_from);
-                Picasso.with(mContext).load(R.drawable.ic_challenge_incoming).into(holder.btnBetType);
-            }
-            else
             {
                 holder.lblTermini.setText(R.string.label_challenge_termini_to);
                 Picasso.with(mContext).load(R.drawable.ic_challenge_outgoing).into(holder.btnBetType);
+            }
+            else
+            {
+                holder.lblTermini.setText(R.string.label_challenge_termini_from);
+                Picasso.with(mContext).load(R.drawable.ic_challenge_incoming).into(holder.btnBetType);
             }
 
             // Status: 0 = Pending, 1 = Finished
