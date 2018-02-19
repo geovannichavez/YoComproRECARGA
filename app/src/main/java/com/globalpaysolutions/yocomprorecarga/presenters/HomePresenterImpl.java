@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -23,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -283,6 +285,46 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void showcaseMapSeen()
     {
         mUserData.setShowcaseMapSeen();
+    }
+
+    @Override
+    public void setPendingChallenges()
+    {
+        try
+        {
+            mInteractor.getPendingChallenges(this);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting pending challenges: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigateToAR()
+    {
+        String challenges = UserData.getInstance(mContext).getPendingChallenges();
+
+        //If has no pending challenges continues to AR
+        if(TextUtils.equals(challenges, "0"))
+        {
+            mView.navigateToAR();
+        }
+        else
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_pending_challenges));
+            dialog.setLine1(mContext.getString(R.string.label_pending_challenges_to_solve));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericImageDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.navigateChallenges();
+                }
+            });
+        }
     }
 
     @Override
@@ -606,6 +648,31 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             Log.e(TAG, "Error trying to insert current player data: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public void onPendingChallengesSuccess(SimpleResponse body)
+    {
+        try
+        {
+            UserData.getInstance(mContext).savePendingChallenges(body.getMessage());
+
+            String pending = (TextUtils.isEmpty(UserData.getInstance(mContext).getPendingChallenges())) ? "0" : UserData.getInstance(mContext).getPendingChallenges();
+            boolean active = !TextUtils.equals(pending, "0");
+
+            mView.setPendingChallenges(pending, active);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on success Pending Challenges: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onPendingChallengesError(int code, Throwable o)
+    {
+        Log.e(TAG, "Error retrieving pending challenges: CodeStatus = " +
+                String.valueOf(code) + ", Throwable: " + o.getLocalizedMessage());
     }
 
     //  FIREBASE GOLD POINTS

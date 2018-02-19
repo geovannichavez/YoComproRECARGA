@@ -132,6 +132,7 @@ public class UserData
     private static final String KEY_CHALLENGE_ROCK_ERA_ICON = "key_challenge_rock_era_icon";
     private static final String KEY_CHALLENGE_PAPPER_ERA_ICON = "key_challenge_papper_era_icon";
     private static final String KEY_CHALLENGE_SCISSORS_ERA_ICON = "key_challenge_scissors_era_icon";
+    private static final String KEY_CHALLENGE_PENDING_NUMBER = "key_challenge_pending_number";
 
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
@@ -520,6 +521,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void savePendingChallenges(String number)
+    {
+        mEditor.putString(KEY_CHALLENGE_PENDING_NUMBER, number);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -874,6 +881,11 @@ public class UserData
     public String getChallengeIconScissos()
     {
         return  mPreferences.getString(KEY_CHALLENGE_SCISSORS_ERA_ICON, "");
+    }
+
+    public String getPendingChallenges()
+    {
+        return mPreferences.getString(KEY_CHALLENGE_PENDING_NUMBER, "0");
     }
 
     /*

@@ -124,7 +124,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         {
             Picasso.with(this).load(R.drawable.bg_new_gray_machine).into(bgGrayNewMachine);
             btnBet.setEnabled(false);
-            btnBet.setImageResource(R.drawable.btn_bet_off);
+            Picasso.with(this).load(R.drawable.btn_bet_off).into(btnBet);
 
             //Bet buttons
             tvBet1.setText(betsValues.get(0));
@@ -303,6 +303,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             Intent result = new Intent(PlayChallenge.this, ChallengeResult.class);
             result.putExtra(Constants.BUNDLE_CHALLENGE_RESULT_SERIALIZABLE, resultData);
             startActivity(result);
+            finish();
         }
         catch (Exception ex)
         {

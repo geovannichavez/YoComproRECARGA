@@ -140,6 +140,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                         respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, challenge.getOpponentNickname());
                         respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_BET, String.valueOf(challenge.getBet()));
                         startActivity(respondChallenge);
+                        finish();
                     }
                     /*else
                     {
@@ -208,6 +209,8 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         {
             Intent result = new Intent(Challenges.this, ChallengeResult.class);
             result.putExtra(Constants.BUNDLE_CHALLENGE_RESULT_SERIALIZABLE, challengeResult);
+            startActivity(result);
+            finish();
         }
         catch (Exception ex)
         {

@@ -14,12 +14,14 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -293,6 +295,36 @@ public class HomeInteractor implements IHomeInteractor
             public void onFailure(Call<SimpleMessageResponse> call, Throwable t)
             {
                 mHomeListener.onError(0, t);
+            }
+        });
+    }
+
+    @Override
+    public void getPendingChallenges(final HomeListener listener)
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<SimpleResponse> call = apiService.getPendingChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
+
+        call.enqueue(new Callback<SimpleResponse>()
+        {
+            @Override
+            public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+                    listener.onPendingChallengesSuccess(response.body());
+                }
+                else
+                {
+                    listener.onPendingChallengesError(response.code(), null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleResponse> call, Throwable t)
+            {
+                listener.onPendingChallengesError(0, t);
             }
         });
     }

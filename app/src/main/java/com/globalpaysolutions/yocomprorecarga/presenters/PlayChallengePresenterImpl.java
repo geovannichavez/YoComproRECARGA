@@ -171,7 +171,14 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
             dialog.setLine1(mContext.getString(R.string.label_dialog_challenge_created));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
 
-            mView.showGenericDialog(dialog, null);
+            mView.showGenericDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
         }
         catch (Exception ex)
         {

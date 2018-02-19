@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,12 +24,16 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -36,6 +42,7 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
+import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -43,6 +50,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,6 +62,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -71,6 +80,8 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     ImageButton btnBackMap;
     ImageButton btnReqTopupMap;
     ImageButton btnLaunchAR;
+    ImageView icPendingBadge;
+    TextView tvPendingCh;
     Toast mToast;
 
     //Adapters y Layouts
@@ -111,6 +122,9 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
         btnBackMap = (ImageButton) findViewById(R.id.btnBackMap);
         btnReqTopupMap = (ImageButton) findViewById(R.id.btnReqTopupMap);
+        icPendingBadge = (ImageView) findViewById(R.id.icPendingBadge);
+        tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
+
         //btnLaunchAR = (ImageButton) findViewById(R.id.btnLaunchAR);
 
         btnBackMap.setOnClickListener(new View.OnClickListener()
@@ -133,6 +147,20 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 ButtonAnimator.getInstance(PointsMap.this).animateButton(v);
                 Intent intent = new Intent(PointsMap.this, RequestTopup.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //Navigates to Challenges
+        icPendingBadge.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
+                Intent intent = new Intent(PointsMap.this, Challenges.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();
@@ -256,6 +284,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         }
 
         mPresenter.onMapReady();
+        mPresenter.setPendingChallenges();
 
     }
 
@@ -1038,6 +1067,80 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
+    public void setPendingChallenges(String pending, boolean active)
+    {
+        if(active)
+            Picasso.with(this).load(R.drawable.ic_pending_badge_on).into(icPendingBadge);
+        else
+            Picasso.with(this).load(R.drawable.ic_pending_badge_off).into(icPendingBadge);
+
+        tvPendingCh.setText(pending);
+    }
+
+    @Override
+    public void navigateToAR()
+    {
+        try
+        {
+            Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
+            prizeCaptureAR.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(prizeCaptureAR);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showGenericImageDialog(DialogViewModel dialogContent, View.OnClickListener listener)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(dialogContent.getTitle());
+            tvDescription.setText(dialogContent.getLine1());
+            Picasso.with(this).load(R.drawable.ic_alert).into(imgSouvenir);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+            btnClose.setOnClickListener(listener);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigateChallenges()
+    {
+        try
+        {
+            Intent challenges = new Intent(this, Challenges.class);
+            challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(challenges);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
         switch (requestCode)
@@ -1090,6 +1193,9 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     public void CapturePrize(View view)
     {
         ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
+
+        String challenges = UserData.getInstance(this).getPendingChallenges();
+
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
             if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
@@ -1101,11 +1207,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         {
             try
             {
-                //Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
-                Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
-                prizeCaptureAR.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(prizeCaptureAR);
-                finish();
+                mPresenter.navigateToAR();
             }
             catch (Exception ex)
             {

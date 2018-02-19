@@ -125,7 +125,7 @@ public class ChallengeResult extends AppCompatActivity implements ChallengeResul
                     break;
                 case 2: //Result 2 = Tie
                     icResultTitle.setImageResource(R.drawable.ic_challenge_bad_luck);
-                    bgMovePlayer.setImageResource(R.drawable.ic_challenge_bad_luck);
+                    bgMovePlayer.setImageResource(R.drawable.ic_challenge_result_bad);
                     bgMoveOpponent.setImageResource(R.drawable.ic_challenge_result_bad);
                     icMovePlayerIcon.setImageResource(R.drawable.ic_challenge_result_1);
                     icMoveOpponentIcon.setImageResource(R.drawable.ic_challenge_result_1);

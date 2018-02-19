@@ -406,6 +406,8 @@
     <string name="label_challenge_result_text_lose">Has perdido el reto contra %1$s</string>
     <string name="label_challenge_result_text_win">Has ganado el reto contra %1$s</string>
     <string name="label_challenge_result_text_tie">Has empatado en reto contra %1$s</string>
+    <string name="title_pending_challenges">¡Tienes retos pendientes</string>
+    <string name="label_pending_challenges_to_solve">Debes finalizar todos los retos pendientes para continuar.</string>
 
 
 </resources>

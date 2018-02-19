@@ -216,4 +216,12 @@ public interface ApiInterface
                                                   @Header("AppVersion") String versionName,
                                                   @Header("Platform") String platform,
                                                   @Body  UpdateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_PENDING_CHALLENGES)
+    Call<SimpleResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
+
+
 }

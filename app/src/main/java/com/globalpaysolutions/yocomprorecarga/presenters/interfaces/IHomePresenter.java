@@ -40,4 +40,7 @@ public interface IHomePresenter
 
     void startShowcase();
     void showcaseMapSeen();
+
+    void setPendingChallenges();
+    void navigateToAR();
 }

@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.view.View;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
@@ -63,5 +64,9 @@ public interface HomeView
     void showToast(String string);
     void startShowcase();
 
+    void setPendingChallenges(String pending, boolean active);
+    void navigateToAR();
 
+    void showGenericImageDialog(DialogViewModel dialog, View.OnClickListener listener);
+    void navigateChallenges();
 }
