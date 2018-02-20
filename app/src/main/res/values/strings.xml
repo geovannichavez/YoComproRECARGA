@@ -54,6 +54,7 @@
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
     <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
+    <string name="label_player_code_snippet">¡Otro jugador de RecarGO!</string>
     <string name="title_success_dialog_store_report">REPORTE ENVIADO</string>
     <string name="dialog_content_report_sent">Su reporte ha sido enviado exitosamente. ¡Muchas gracias por ayudarnos con información!</string>
     <string name="yvr_vendor_marker_title">¡YoVendoRecarga! Click aquí</string>
@@ -378,6 +379,38 @@
     <string name="title_notification_countdown_finished">¡Ya puedes canjear tus premios!</string>
     <string name="label_notification_countdown_finished">Tu tiempo de espera para canjear premios ha finalizado ¡ya puedes volver a canjear tus premios!</string>
     <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
+    <string name="showcase_title_leaderboards">Tabla de líderes</string>
+    <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
+    <string name="label_challenges_button">MIS RETOS</string>
+    <string name="title_challenges">Historial de Retos</string>
+    <string name="label_switch_activate_location">Activar Ubicación</string>
+    <string name="label_challenge_termini_from">Reto de:</string>
+    <string name="label_challenge_bet">Apuesta:</string>
+    <string name="label_challenge_result">Resultado</string>
+    <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
+    <string name="label_challenge_choose_defense">Selecciona tu defensa</string>
+    <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
+    <string name="label_challenge_termini_to">Reto a:</string>
+    <string name="title_challenge_created">¡Reto enviado!</string>
+    <string name="label_dialog_challenge_created">¡El reto se ha enviado! Te notificaremos con los resultados.</string>
+    <string name="title_someone_has_challenged">¡%1$s te ha retado!</string>
+    <string name="title_challenge_someone">¿Deseas retar a %1$s?</string>
+    <string name="label_challenge_bet_choosen_by">Apuesta seleccionada por %1$s</string>
+    <string name="button_challenge_challenge">RETAR</string>
+    <string name="button_challenge_defend">DEFENDER</string>
+    <string name="error_title_already_challenged">¡Ya lo retaste!</string>
+    <string name="error_content_already_challenged">Recuerda que puedes mandar solo 1 reto cada %1$s horas al mismo usuario</string>
+    <string name="title_challenge_result">RESULTADO</string>
+    <string name="title_challenge_result_bad_luck">¡Mala Suerte!</string>
+    <string name="title_challenge_result_congrats">¡Felicitaciones!</string>
+    <string name="label_challenge_result_text_lose">Has perdido el reto contra %1$s</string>
+    <string name="label_challenge_result_text_win">Has ganado el reto contra %1$s</string>
+    <string name="label_challenge_result_text_tie">Has empatado en reto contra %1$s</string>
+    <string name="title_pending_challenges">¡Tienes retos pendientes</string>
+    <string name="label_pending_challenges_to_solve">Debes finalizar todos los retos pendientes para continuar.</string>
+    <string name="label_challenge_result_selected_bet">Apuesta seleccionada</string>
+    <string name="label_their_move">Su ataque</string>
+    <string name="label_your_move">Tu ataque</string>
 
 
 </resources>

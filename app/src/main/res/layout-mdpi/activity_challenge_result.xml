@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.ChallengeResult">
+
+    <ImageView
+        android:id="@+id/bgGrayNewMachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"  />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_new"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/title_challenge_result"
+        android:textColor="@color/white_textView_color"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgGrayNewMachine"/>
+
+    <ImageView
+        android:id="@+id/icResultTitle"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:srcCompat="@drawable/ic_challenge_congrats"/>
+
+    <ImageView
+        android:id="@+id/icResultContent"
+        android:layout_width="199dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icResultTitle"
+        app:srcCompat="@drawable/label_challenge_result"/>
+
+    <ImageView
+        android:id="@+id/bgMovePlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icResultContent"
+        app:srcCompat="@drawable/ic_challenge_result_bad"/>
+
+    <ImageView
+        android:id="@+id/bgMoveOpponent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icResultContent"
+        app:srcCompat="@drawable/ic_challenge_result_bad"/>
+
+    <TextView
+        android:id="@+id/tvMovePlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_your_move"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bgMovePlayer"
+        app:layout_constraintStart_toStartOf="@+id/bgMovePlayer"
+        app:layout_constraintTop_toBottomOf="@+id/bgMovePlayer"/>
+
+    <TextView
+        android:id="@+id/tvMoveOppnent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_their_move"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/bgMoveOpponent"
+        app:layout_constraintStart_toStartOf="@+id/bgMoveOpponent"
+        app:layout_constraintTop_toBottomOf="@+id/bgMoveOpponent"/>
+
+    <ImageView
+        android:id="@+id/icMovePlayerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvMovePlayer"
+        app:layout_constraintStart_toStartOf="@+id/tvMovePlayer"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovePlayer"
+        app:srcCompat="@drawable/ic_challenge_result_1"/>
+
+    <ImageView
+        android:id="@+id/icMoveOpponentIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvMoveOppnent"
+        app:layout_constraintStart_toStartOf="@+id/tvMoveOppnent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMoveOppnent"
+        app:srcCompat="@drawable/ic_challenge_result_1"/>
+
+    <ImageView
+        android:id="@+id/btnBetSelected"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_bet_result_tie_0"/>
+
+    <TextView
+        android:id="@+id/tvTitleResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        tools:text="FELICIDADES"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icResultTitle"
+        app:layout_constraintEnd_toEndOf="@+id/icResultTitle"
+        app:layout_constraintStart_toStartOf="@+id/icResultTitle"
+        app:layout_constraintTop_toTopOf="@+id/icResultTitle"/>
+
+    <TextView
+        android:id="@+id/tvResultText"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="@color/white_textView_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icResultContent"
+        app:layout_constraintEnd_toEndOf="@+id/icResultContent"
+        app:layout_constraintStart_toStartOf="@+id/icResultContent"
+        app:layout_constraintTop_toTopOf="@+id/icResultContent"
+        tools:text="Has empatado el reto contra Username"/>
+
+    <ImageView
+        android:id="@+id/icMovePlayer"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="@+id/bgMovePlayer"
+        app:layout_constraintEnd_toEndOf="@+id/bgMovePlayer"
+        app:layout_constraintStart_toStartOf="@+id/bgMovePlayer"
+        app:layout_constraintTop_toTopOf="@+id/bgMovePlayer" />
+
+    <ImageView
+        android:id="@+id/icMoveOpponent"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgMoveOpponent"
+        app:layout_constraintEnd_toEndOf="@+id/bgMoveOpponent"
+        app:layout_constraintStart_toStartOf="@+id/bgMoveOpponent"
+        app:layout_constraintTop_toTopOf="@+id/bgMoveOpponent"/>
+
+    <TextView
+        android:id="@+id/tvSelectedBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_challenge_result_selected_bet"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnBetSelected"
+        app:layout_constraintStart_toStartOf="@+id/btnBetSelected"
+        app:layout_constraintTop_toBottomOf="@+id/icMoveOpponentIcon"/>
+
+    <TextView
+        android:id="@+id/tvButtonBet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBetSelected"
+        app:layout_constraintStart_toStartOf="@+id/btnBetSelected"
+        app:layout_constraintTop_toTopOf="@+id/btnBetSelected"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="50"/>
+
+
+</android.support.constraint.ConstraintLayout>

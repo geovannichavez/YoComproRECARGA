@@ -2,8 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.views;
 
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.view.View;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Map;
@@ -30,11 +32,11 @@ public interface HomeView
     void getMarkerBitmaps(Map<String, Bitmap> markerMap);
 
     void addSalePoint(String pKey, LatLng pLocation);
-    void addSalePointData(String pKey, String pTitle, String pSnippet);
+    void addSalePointData(String pKey, String pTitle, String pSnippet, MarkerData markerData);
     void removeSalePoint(String pKey);
 
     void addVendorPoint(String pKey, LatLng pLocation);
-    void addVendorPointData(String pKey, String pTitle, String pSnippet);
+    void addVendorPointData(String pKey, String pTitle, MarkerData pMarkerData);
     void moveVendorPoint(String pKey, LatLng pLocation);
     void removeVendorPoint(String pKey);
 
@@ -54,7 +56,17 @@ public interface HomeView
     void addWildcardPointData(String pKey, String brand, String title, String message);
     void removeWildcardPoint(String pKey);
 
+    void addPlayerPoint(String key, LatLng location);
+    void addPlayerPointData(String key, String title, String snippet, MarkerData markerData);
+    void movePlayerPoint(String key, LatLng location);
+    void removePlayerPoint(String key);
+
     void showToast(String string);
     void startShowcase();
 
+    void setPendingChallenges(String pending, boolean active);
+    void navigateToAR();
+
+    void showGenericImageDialog(DialogViewModel dialog, View.OnClickListener listener);
+    void navigateChallenges();
 }

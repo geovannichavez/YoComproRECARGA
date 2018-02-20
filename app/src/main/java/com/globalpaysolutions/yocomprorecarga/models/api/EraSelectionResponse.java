@@ -41,6 +41,18 @@ public class EraSelectionResponse
     @SerializedName("WildcardLose")
     @Expose
     private String wildcardLose;
+    @SerializedName("PrizeImage")
+    @Expose
+    private String prizeImage;
+    @SerializedName("ChallengeRock")
+    @Expose
+    private String challengeRock;
+    @SerializedName("ChallengePaper")
+    @Expose
+    private String challengePaper;
+    @SerializedName("ChallengeScissors")
+    @Expose
+    private String challengeScissors;
 
     public int getAgeID()
     {
@@ -140,6 +152,46 @@ public class EraSelectionResponse
     public void setWildcardLose(String wildcardLose)
     {
         this.wildcardLose = wildcardLose;
+    }
+
+    public String getPrizeImage()
+    {
+        return prizeImage;
+    }
+
+    public void setPrizeImage(String prizeImage)
+    {
+        this.prizeImage = prizeImage;
+    }
+
+    public String getChallengeRock()
+    {
+        return challengeRock;
+    }
+
+    public void setChallengeRock(String challengeRock)
+    {
+        this.challengeRock = challengeRock;
+    }
+
+    public String getChallengePaper()
+    {
+        return challengePaper;
+    }
+
+    public void setChallengePaper(String challengePaper)
+    {
+        this.challengePaper = challengePaper;
+    }
+
+    public String getChallengeScissors()
+    {
+        return challengeScissors;
+    }
+
+    public void setChallengeScissors(String challengeScissors)
+    {
+        this.challengeScissors = challengeScissors;
     }
 
 }

@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -22,12 +24,16 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -35,6 +41,8 @@ import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
+import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -42,6 +50,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -53,6 +62,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -70,6 +80,8 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     ImageButton btnBackMap;
     ImageButton btnReqTopupMap;
     ImageButton btnLaunchAR;
+    ImageView icPendingBadge;
+    TextView tvPendingCh;
     Toast mToast;
 
     //Adapters y Layouts
@@ -89,6 +101,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     private Map<String, Marker> mSilverPointsMarkers;
     private Map<String, Marker> mBronzePointsMarkers;
     private Map<String, Marker> mWildcardPointsMarkers;
+    private Map<String, Marker> mPlayerPointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
     private Map<String, Bitmap> mBitmapMarkers;
 
@@ -109,6 +122,9 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         btnCloseInfography = (ImageButton) findViewById(R.id.btnCloseInfography);
         btnBackMap = (ImageButton) findViewById(R.id.btnBackMap);
         btnReqTopupMap = (ImageButton) findViewById(R.id.btnReqTopupMap);
+        icPendingBadge = (ImageView) findViewById(R.id.icPendingBadge);
+        tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
+
         //btnLaunchAR = (ImageButton) findViewById(R.id.btnLaunchAR);
 
         btnBackMap.setOnClickListener(new View.OnClickListener()
@@ -137,6 +153,20 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
         });
 
+        //Navigates to Challenges
+        icPendingBadge.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
+                Intent intent = new Intent(PointsMap.this, Challenges.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         mSalesPointsMarkers = new HashMap<>();
         mVendorPointsMarkers = new HashMap<>();
         mGoldPointsMarkers = new HashMap<>();
@@ -144,12 +174,12 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mBronzePointsMarkers = new HashMap<>();
         mWildcardPointsMarkers = new HashMap<>();
         mSalePointMarkersFirebaseKeys = new HashMap<>();
+        mPlayerPointsMarkers = new HashMap<>();
         mBitmapMarkers = new HashMap<>();
 
         mPresenter = new HomePresenterImpl(this, this, this);
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
-        //mPresenter.intializeGeolocation();
 
     }
 
@@ -197,18 +227,34 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             @Override
             public void onInfoWindowClick(Marker marker)
             {
-                if(marker.getTag() != null)
+                try
                 {
-                    String vendorCode = marker.getTag().toString();
-                    Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
-                    requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
-                    requestTopup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(requestTopup);
-                    finish();
-                }
-                else
-                {
-                    try
+                    if(marker.getTag() != null)
+                    {
+                        MarkerData markerData = (MarkerData) marker.getTag();
+
+                        if (markerData != null)
+                        {
+                            if (TextUtils.equals(markerData.getMarkerType(), Constants.TAG_MARKER_PLAYER))
+                            {
+                                Intent playChallenge = new Intent(PointsMap.this, PlayChallenge.class);
+                                playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_USER_ID, markerData.getFirebaseID());
+                                playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, false);
+                                playChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, markerData.getTag()); //When marker added for player, adds Nickname
+                                startActivity(playChallenge);
+                            }
+                            else
+                            {
+                                String vendorCode = markerData.getTag();
+                                Intent requestTopup = new Intent(PointsMap.this, RequestTopup.class);
+                                requestTopup.putExtra(Constants.VENDOR_CODE_REQUEST_EXTRA, vendorCode);
+                                requestTopup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                startActivity(requestTopup);
+                                finish();
+                            }
+                        }
+                    }
+                    else
                     {
                         String firebaseKey = mSalePointMarkersFirebaseKeys.get(marker.getId());
 
@@ -220,10 +266,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                             mPresenter.onSalePointClick(storeName, storeAddress, location, firebaseKey);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        ex.printStackTrace();
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.e(TAG, "Error on onInfoWindowClick: " + ex.getMessage());
                 }
             }
         });
@@ -238,6 +284,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         }
 
         mPresenter.onMapReady();
+        mPresenter.setPendingChallenges();
 
     }
 
@@ -344,10 +391,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(17).build();
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-            mPresenter.vendorPointsQuery(currentLocation);
+            mPresenter.vendorsPointsQuery(currentLocation);
             mPresenter.salesPointsQuery(currentLocation);
             mPresenter.prizePointsQuery(currentLocation);
-
+            mPresenter.playersPointsQuery(currentLocation);
+            mPresenter.writeCurrentPlayerLocation(currentLocation);
         }
         catch (Exception ex)
         {
@@ -365,7 +413,10 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
             mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
-            mPresenter.updateVendorePntCriteria(currentLocation);
+            mPresenter.updateVendorsPntCriteria(currentLocation);
+            //mPresenter.writeCurrentPlayerLocation(currentLocation); //Updates current user location
+            mPresenter.updatePrizePntCriteria(currentLocation); //TODO: No se había implementado este metodo
+            mPresenter.updatePlayersPntCriteria(currentLocation);
         }
         catch (Exception ex)
         {
@@ -490,13 +541,14 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addSalePointData(String pKey, String pTitle, String pSnippet)
+    public void addSalePointData(String pKey, String pTitle, String pSnippet, MarkerData markerData)
     {
         try
         {
             Marker marker = mSalesPointsMarkers.get(pKey);
             marker.setSnippet(pSnippet);
             marker.setTitle(pTitle);
+            marker.setTag(markerData);
         }
         catch (Exception ex)
         {
@@ -538,16 +590,19 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
-    public void addVendorPointData(String pKey, String pTitle, String pSnippet)
+    public void addVendorPointData(String pKey, String pTitle, MarkerData pMarkerData)
     {
         try
         {
-            String vendorCode = String.format(getString(R.string.label_vendor_code_snippet), pSnippet);
+            if(pMarkerData != null)
+            {
+                String titleVendorCode = String.format(getString(R.string.label_vendor_code_snippet), pMarkerData.getTag());
 
-            Marker marker = mVendorPointsMarkers.get(pKey);
-            marker.setSnippet(vendorCode);
-            marker.setTitle(pTitle);
-            marker.setTag(pSnippet);
+                Marker marker = mVendorPointsMarkers.get(pKey);
+                marker.setSnippet(titleVendorCode);
+                marker.setTitle(pTitle);
+                marker.setTag(pMarkerData);
+            }
         }
         catch (Exception ex)
         {
@@ -567,7 +622,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         {
             ex.printStackTrace();
         }
-
     }
 
     @Override
@@ -845,6 +899,84 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
+    public void addPlayerPoint(String key, LatLng location)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", key));
+                animateMarkerTo(marker, location);
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_player))
+                );
+                mPlayerPointsMarkers.put(key, marker);
+            }
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addPlayerPointData(String key, String title, String snippet, MarkerData markerData)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            marker.setSnippet(snippet);
+            marker.setTitle(title);
+            marker.setTag(markerData);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void movePlayerPoint(String key, LatLng location)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            animateMarkerTo(marker, location);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removePlayerPoint(String key)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            marker.remove();
+            mPlayerPointsMarkers.remove(key);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void showToast(String string)
     {
         if(mToast != null)
@@ -935,6 +1067,80 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     }
 
     @Override
+    public void setPendingChallenges(String pending, boolean active)
+    {
+        if(active)
+            Picasso.with(this).load(R.drawable.ic_pending_badge_on).into(icPendingBadge);
+        else
+            Picasso.with(this).load(R.drawable.ic_pending_badge_off).into(icPendingBadge);
+
+        tvPendingCh.setText(pending);
+    }
+
+    @Override
+    public void navigateToAR()
+    {
+        try
+        {
+            Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
+            prizeCaptureAR.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(prizeCaptureAR);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showGenericImageDialog(DialogViewModel dialogContent, View.OnClickListener listener)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(dialogContent.getTitle());
+            tvDescription.setText(dialogContent.getLine1());
+            Picasso.with(this).load(R.drawable.ic_alert).into(imgSouvenir);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+            btnClose.setOnClickListener(listener);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigateChallenges()
+    {
+        try
+        {
+            Intent challenges = new Intent(this, Challenges.class);
+            challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(challenges);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
         switch (requestCode)
@@ -987,6 +1193,9 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     public void CapturePrize(View view)
     {
         ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
+
+        String challenges = UserData.getInstance(this).getPendingChallenges();
+
         if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
             if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA))
@@ -998,11 +1207,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         {
             try
             {
-                //Intent camera = new Intent("android.media.action.IMAGE_CAPTURE");
-                Intent prizeCaptureAR = new Intent(this, CapturePrizeAR.class);
-                prizeCaptureAR.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(prizeCaptureAR);
-                finish();
+                mPresenter.navigateToAR();
             }
             catch (Exception ex)
             {

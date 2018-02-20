@@ -9,7 +9,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -20,8 +22,11 @@ import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.globalpaysolutions.yocomprorecarga.location.GoogleLocationApiManager;
 import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
@@ -81,6 +86,23 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         this.mView.renderMap();
         this.mView.setClickListeners();
+
+        try
+        {
+            String lastChallenges = UserData.getInstance(mContext).getPendingChallenges();
+            int value = Integer.valueOf(lastChallenges);
+
+            if(value > 0)
+                this.mView.setPendingChallenges(lastChallenges, true);
+            else
+                this.mView.setPendingChallenges(lastChallenges, false);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error parsing string to int: " + ex.getMessage());
+        }
+
+
     }
 
 
@@ -205,14 +227,14 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
-    public void vendorPointsQuery(LatLng pLocation)
+    public void vendorsPointsQuery(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
         mInteractor.vendorPointsQuery(location);
     }
 
     @Override
-    public void updateVendorePntCriteria(LatLng pLocation)
+    public void updateVendorsPntCriteria(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
         mInteractor.vendorPointsUpdateCriteria(location);
@@ -239,6 +261,35 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     }
 
     @Override
+    public void playersPointsQuery(LatLng location)
+    {
+        GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+        mInteractor.playersPointsQuery(geoLocation);
+    }
+
+    @Override
+    public void updatePlayersPntCriteria(LatLng location)
+    {
+        GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+        mInteractor.playersPointsUpdateCriteria(geoLocation);
+    }
+
+    @Override
+    public void writeCurrentPlayerLocation(LatLng location)
+    {
+        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+        {
+            GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+            mInteractor.insertCurrentPlayerData(geoLocation, UserData.getInstance(mContext).getFacebookProfileId());
+        }
+        else
+        {
+            mInteractor.deletePlayerLocation(UserData.getInstance(mContext).getFacebookProfileId());
+        }
+
+    }
+
+    @Override
     public void startShowcase()
     {
         if(!mUserData.showcaseMapSeen())
@@ -251,6 +302,46 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void showcaseMapSeen()
     {
         mUserData.setShowcaseMapSeen();
+    }
+
+    @Override
+    public void setPendingChallenges()
+    {
+        try
+        {
+            mInteractor.getPendingChallenges(this);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting pending challenges: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigateToAR()
+    {
+        String challenges = UserData.getInstance(mContext).getPendingChallenges();
+
+        //If has no pending challenges continues to AR
+        if(TextUtils.equals(challenges, "0"))
+        {
+            mView.navigateToAR();
+        }
+        else
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_pending_challenges));
+            dialog.setLine1(mContext.getString(R.string.label_pending_challenges_to_solve));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericImageDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.navigateChallenges();
+                }
+            });
+        }
     }
 
     @Override
@@ -310,6 +401,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void onLocationApiManagerDisconnected()
+    {
+
     }
 
 
@@ -380,6 +477,47 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
 
     }
+
+
+    /*
+    *
+    *
+    *   GEOFIRE PLAYERS POINTS
+    *
+    * */
+    @Override
+    public void gf_playerPoint_onKeyEntered(String key, LatLng location)
+    {
+        if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            mView.addPlayerPoint(key, location);
+    }
+
+    @Override
+    public void gf_playerPoint_onKeyExited(String key)
+    {
+        mView.removePlayerPoint(key);
+    }
+
+    @Override
+    public void gf_playerPoint_onKeyMoved(String key, LatLng location)
+    {
+        mView.movePlayerPoint(key, location);
+    }
+
+    @Override
+    public void gf_playerPoint_onGeoQueryReady()
+    {
+
+    }
+
+    @Override
+    public void gf_playerPoint_onGeoQueryError(DatabaseError pError)
+    {
+
+    }
+
+
+
 
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
@@ -468,7 +606,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void fb_salePoint_onDataChange(String pKey, SalePointData pSalePointData)
     {
-        mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet());
+        MarkerData markerData = new MarkerData(pKey, Constants.TAG_MARKER_SALEPOINT, null);
+        mView.addSalePointData(pKey, pSalePointData.getTitle(), pSalePointData.getSnippet(), markerData);
     }
 
     @Override
@@ -482,7 +621,10 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void fb_vendorPoint_onDataChange(String pKey, VendorPointData pSalePointData)
     {
         if(pSalePointData != null)
-            mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), pSalePointData.getVendorCode());
+        {
+            MarkerData markerData = new MarkerData(pKey, Constants.TAG_MARKER_VENDOR, pSalePointData.getVendorCode());
+            mView.addVendorPointData(pKey, mContext.getString(R.string.yvr_vendor_marker_title), markerData);
+        }
     }
 
     @Override
@@ -491,12 +633,78 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
     }
 
+    @Override
+    public void fb_playerPoint_onDataChange(String key, PlayerPointData playerPointData)
+    {
+        if(playerPointData != null)
+        {
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            {
+                MarkerData markerData = new MarkerData(key, Constants.TAG_MARKER_PLAYER, playerPointData.getNickname());
+                String snippet = mContext.getString(R.string.label_player_code_snippet);
+                mView.addPlayerPointData(key, playerPointData.getNickname(), snippet, markerData);
+            }
+        }
+    }
+
+    @Override
+    public void fb_playerPoint_onCancelled(DatabaseError databaseError)
+    {
+        Log.e(TAG, "Error on dataChange for PlayerData: " + databaseError.getDetails());
+    }
+
+    @Override
+    public void fb_currentPlayerDataInserted(String key, GeoLocation location)
+    {
+        try
+        {
+            //If data is inserted, then inserts respetive GeoFire location
+            mInteractor.insertCurrentPlayerLocation(key, location);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error trying to insert current player data: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onPendingChallengesSuccess(SimpleResponse body)
+    {
+        try
+        {
+            UserData.getInstance(mContext).savePendingChallenges(body.getMessage());
+
+            String pending = (TextUtils.isEmpty(UserData.getInstance(mContext).getPendingChallenges())) ? "0" : UserData.getInstance(mContext).getPendingChallenges();
+
+            int quantity = Integer.valueOf(pending);
+
+            if(quantity > 0)
+                mView.setPendingChallenges(pending, true);
+            else
+                mView.setPendingChallenges(pending, false);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on success Pending Challenges: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onPendingChallengesError(int code, Throwable o)
+    {
+        Log.e(TAG, "Error retrieving pending challenges: CodeStatus = " +
+                String.valueOf(code) + ", Throwable: " + o.getLocalizedMessage());
+    }
+
     //  FIREBASE GOLD POINTS
     @Override
     public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
     {
         if(pGoldPointData != null)
             mView.addGoldPointData(pKey, pGoldPointData.getCoins(), pGoldPointData.getDetail());
+
+
     }
 
     @Override

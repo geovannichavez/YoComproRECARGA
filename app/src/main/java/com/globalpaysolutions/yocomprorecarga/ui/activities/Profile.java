@@ -152,6 +152,15 @@ public class Profile extends ImmersiveActivity implements ProfileView
         finish();
     }
 
+    public void navigateChallenges(View view)
+    {
+        animateButton(view);
+        Intent challenges = new Intent(this, Challenges.class);
+        challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(challenges);
+        finish();
+    }
+
     public void navigatePrizesHistory(View view)
     {
         animateButton(view);

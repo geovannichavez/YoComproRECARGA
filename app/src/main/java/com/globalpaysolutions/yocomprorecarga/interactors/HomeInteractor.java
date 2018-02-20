@@ -3,7 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -14,24 +14,26 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
@@ -54,20 +56,28 @@ public class HomeInteractor implements IHomeInteractor
     private DatabaseReference mDataSalesPoints = mRootReference.child("dataStaticPoints");
     private DatabaseReference mVendorPoints = mRootReference.child("YVR");
     private DatabaseReference mDataVendorPoints = mRootReference.child("dataYVR");
-
+    private DatabaseReference mPlayersPoints = mRootReference.child("locationPlayerRecargo");
+    private DatabaseReference mDataPlayersPoints = mRootReference.child("locationPlayerRecargoData");
 
     //GeoFire
     private GeoFire mSalesPntsRef;
     private GeoFire mVendorPntsRef;
+    private GeoFire mPlayerPntsRef;
 
     //GeoFire Queries
     private GeoQuery mSalesPntsQuery;
     private GeoQuery mVendorPntsQuery;
+    private GeoQuery mPlayerPntsQuery;
 
     public HomeInteractor(Context pContext, HomeListener pListener)
     {
         mContext = pContext;
         mHomeListener = pListener;
+    }
+
+    public HomeInteractor(Context context)
+    {
+        mContext = context;
     }
 
     @Override
@@ -76,6 +86,7 @@ public class HomeInteractor implements IHomeInteractor
         //GeoFire
         mSalesPntsRef = new GeoFire(mSalesPoints);
         mVendorPntsRef = new GeoFire(mVendorPoints);
+        mPlayerPntsRef = new GeoFire(mPlayersPoints);
     }
 
     @Override
@@ -133,6 +144,122 @@ public class HomeInteractor implements IHomeInteractor
     }
 
     @Override
+    public void playersPointsQuery(GeoLocation location)
+    {
+        try
+        {
+            mPlayerPntsQuery = mPlayerPntsRef.queryAtLocation(location, Constants.PLAYER_RADIUS_KM);
+            mPlayerPntsQuery.addGeoQueryEventListener(playersPointsListener);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void playersPointsUpdateCriteria(GeoLocation location)
+    {
+        try
+        {
+            mPlayerPntsQuery.setLocation(location, Constants.PLAYER_RADIUS_KM);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insertCurrentPlayerData(final GeoLocation location, String facebookID)
+    {
+        try
+        {
+            String playerNick = UserData.getInstance(mContext).getNickname();
+            final String playerFacebookID = UserData.getInstance(mContext).getFacebookProfileId();
+
+            Map<String, String> vendorPoint = new HashMap<>();
+            vendorPoint.put("Nickname", playerNick);
+
+            mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
+            {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
+                {
+                    if(databaseError == null)
+                    {
+                        mHomeListener.fb_currentPlayerDataInserted(playerFacebookID, location);
+                    }
+                    else
+                    {
+                        Log.e(TAG, "Write vendor location on Firebase failed: " + databaseError.getMessage());
+                    }
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insertCurrentPlayerLocation(String key, GeoLocation location)
+    {
+        try
+        {
+            mPlayerPntsRef.setLocation(key, location, new GeoFire.CompletionListener()
+            {
+                @Override
+                public void onComplete(String key, DatabaseError error)
+                {
+                    if(error == null)
+                        Log.i(TAG, "Location inserted succesfully for Current Player " + key);
+                    else
+                        Log.e(TAG, "Error trying to insert location for Current Player " + key);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Location for current player could not be inserted: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void deletePlayerLocation(String key)
+    {
+        try
+        {
+            mPlayerPntsRef.removeLocation(key, new GeoFire.CompletionListener()
+            {
+                @Override
+                public void onComplete(String key, DatabaseError error)
+                {
+                    if(error == null)
+                        Log.i(TAG, "Location deleted succesfully for CurrentPlayer " + key);
+                    else
+                        Log.e(TAG, "Error trying to delete location for CurrentPlayer " + key);
+                }
+            });
+
+
+            /*mDataVendorPoints.child(key).removeValue(new DatabaseReference.CompletionListener()
+            {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
+                {
+                    Log.d(TAG, "Se borró current palyer data de DataVendor, ref: " + databaseReference.getKey());
+                }
+            });*/
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Location for current player couldn't be deleted: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID)
     {
         UserData userData = UserData.getInstance(mContext);
@@ -173,22 +300,33 @@ public class HomeInteractor implements IHomeInteractor
     }
 
     @Override
-    public Bitmap fetchBitmap(String url)
+    public void getPendingChallenges(final HomeListener listener)
     {
-        Bitmap bitmap = null;
-        try
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<SimpleResponse> call = apiService.getPendingChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
+
+        call.enqueue(new Callback<SimpleResponse>()
         {
-            bitmap = new FetchMarker().execute(url).get();
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-        catch (ExecutionException e)
-        {
-            e.printStackTrace();
-        }
-        return  bitmap;
+            @Override
+            public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response)
+            {
+                if(response.isSuccessful())
+                {
+                    listener.onPendingChallengesSuccess(response.body());
+                }
+                else
+                {
+                    listener.onPendingChallengesError(response.code(), null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleResponse> call, Throwable t)
+            {
+                listener.onPendingChallengesError(0, t);
+            }
+        });
     }
 
     public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
@@ -234,6 +372,7 @@ public class HomeInteractor implements IHomeInteractor
     *
     */
 
+    //Static points
     private GeoQueryEventListener salesPointsListener = new GeoQueryEventListener()
     {
         @Override
@@ -285,6 +424,7 @@ public class HomeInteractor implements IHomeInteractor
         }
     };
 
+    //Vendor points
     private GeoQueryEventListener vendorPointsListener = new GeoQueryEventListener()
     {
         @Override
@@ -339,6 +479,60 @@ public class HomeInteractor implements IHomeInteractor
         }
     };
 
+    //Player points
+    private GeoQueryEventListener playersPointsListener = new GeoQueryEventListener()
+    {
+        @Override
+        public void onKeyEntered(final String key, GeoLocation location)
+        {
+            mDataPlayersPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    PlayerPointData player = dataSnapshot.getValue(PlayerPointData.class);
+                    if(player != null)
+                        mHomeListener.fb_playerPoint_onDataChange(key, player);
+
+                    Log.i(TAG, dataSnapshot.toString());
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    mHomeListener.fb_playerPoint_onCancelled(databaseError);
+                }
+            });
+
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation);;
+        }
+
+        @Override
+        public void onKeyExited(String key)
+        {
+            mHomeListener.gf_playerPoint_onKeyExited(key);
+        }
+
+        @Override
+        public void onKeyMoved(String key, GeoLocation location)
+        {
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mHomeListener.gf_playerPoint_onKeyMoved(key, geoLocation);
+        }
+
+        @Override
+        public void onGeoQueryReady()
+        {
+            mHomeListener.gf_playerPoint_onGeoQueryReady();
+        }
+
+        @Override
+        public void onGeoQueryError(DatabaseError error)
+        {
+            mHomeListener.gf_playerPoint_onGeoQueryError(error);
+        }
+    };
 
 
 }

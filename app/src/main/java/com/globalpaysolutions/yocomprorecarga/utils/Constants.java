@@ -25,6 +25,8 @@ public class Constants
     //public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
     public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 0.75;
 
+    public static final double PLAYER_RADIUS_KM = 0.10; // 100 meters
+
 
     //Permissions
     public static final int REQUEST_PERMISSION_CODE = 1;
@@ -87,6 +89,8 @@ public class Constants
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
     public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
+    public static final String BUNDLE_CHALLENGE_RECEIVED_ID = "bundle_challenge_received_id";
+    public static final String BUNDLE_CHALLENGE_RECEIVED_BET = "bundle_challenge_received_bet";
 
     //General bundle keys
     public static final String BUNDLE_TOKEN_VALIDATION = "bundle_data_usr_phone_validation";
@@ -96,7 +100,10 @@ public class Constants
     public static final String BUNDLE_ERA_SELECTION_INTENT_DESTINY = "bundle_era_selection_intent_destiny";
     public static final String BUNDLE_DESTINY_MAP = "bundle_destiny_map";
     public static final String BUNDLE_DESTINY_STORE = "bundle_destiny_store";
-
+    //Bundles from Map
+    public static final String BUNDLE_CHALLENGE_USER_ID = "bundle_challenge_user_id";
+    public static final String BUNDLE_CHALLENGE_RECEIVED = "bundle_challenge_received";
+    public static final String BUNDLE_CHALLENGE_OPPONENT_NICKNAME = "bundle_challenge_opponent_nickname";
 
     //Leaderboards
     public static final String TODAY = "Today";
@@ -130,6 +137,25 @@ public class Constants
     public static final String BUNDLE_GEOFIRE_SILVER_REFERENCE = "bundle_geofire_silver_reference";
     public static final String BUNDLE_GEOFIRE_BRONZE_REFERENCE = "bundle_geofire_bronze_reference";
     public static final String BUNDLE_GEOFIRE_WILDCARD_REFERENCE = "bundle_geofire_wildcard_reference";
+
+
+    public static final String TAG_MARKER_SALEPOINT = "tag_marker_salepoint";
+    public static final String TAG_MARKER_VENDOR = "tag_marker_vendor";
+    public static final String TAG_MARKER_PLAYER = "tag_marker_player";
+    public static final String TAG_MARKER_GOLD = "tag_marker_gold";
+    public static final String TAG_MARKER_SILVER = "tag_marker_silver";
+    public static final String TAG_MARKER_BRONZE = "tag_marker_bronze";
+    public static final String TAG_MARKER_WILDCARD = "tag_marker_wildcard";
+
+
+    //Challenge
+    public static final int CHALLENGE_ROCK_VALUE = 3;
+    public static final int CHALLENGE_PAPER_VALUE = 2;
+    public static final int CHALLENGE_SCISSORS_VALUE = 1;
+    public static final double CHALLENGE_BET_VALUE_1 = 10;
+    public static final double CHALLENGE_BET_VALUE_2 = 25;
+    public static final double CHALLENGE_BET_VALUE_3 = 50;
+    public static final String BUNDLE_CHALLENGE_RESULT_SERIALIZABLE = "bundle_challenge_result_serializable";
 
 
     public static String PLATFORM = "ANDROID";

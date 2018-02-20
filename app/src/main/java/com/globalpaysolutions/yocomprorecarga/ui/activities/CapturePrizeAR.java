@@ -1159,7 +1159,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     public void navigateTimeMachine(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
-        Intent timeMachine = new Intent(this, Main.class);
+        Intent timeMachine = new Intent(this, Profile.class);
         startActivity(timeMachine);
         finish();
     }

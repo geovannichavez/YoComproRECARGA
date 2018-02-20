@@ -2,6 +2,8 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
@@ -12,6 +14,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
 
 public class UserData
 {
+    private static final String TAG = UserData.class.getSimpleName();
+
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
     private static Context mContext;
@@ -32,6 +36,7 @@ public class UserData
     private static final String KEY_CONSUMER_EMAIL = "usr_email";
     private static final String KEY_CONSUMER_NICKNAME = "usr_nickname";
     private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
+    private static final String KEY_CONSUMER_LOCATION_VISIBLE = "key_consumer_location_visible";
 
     //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
@@ -119,6 +124,15 @@ public class UserData
 
     //Countdown
     private static final String KEY_COUNTDOWN_START_TIME = "key_countdown_start_time";
+
+    //Challenge
+    private static final String KEY_CHALLENGE_CHOOSEN_MOVE = "key_challenge_choosen_move";
+    private static final String KEY_CHALLENGE_CHOOSEN_BET = "key_challenge_choosen_bet";
+    private static final String KEY_CHALLENGE_CHOOSEN_PLAYER = "key_challenge_choosen_player";
+    private static final String KEY_CHALLENGE_ROCK_ERA_ICON = "key_challenge_rock_era_icon";
+    private static final String KEY_CHALLENGE_PAPPER_ERA_ICON = "key_challenge_papper_era_icon";
+    private static final String KEY_CHALLENGE_SCISSORS_ERA_ICON = "key_challenge_scissors_era_icon";
+    private static final String KEY_CHALLENGE_PENDING_NUMBER = "key_challenge_pending_number";
 
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
@@ -475,6 +489,44 @@ public class UserData
         mEditor.commit();
     }
 
+    public void currentPlayerLocationVisible(boolean visible)
+    {
+        mEditor.putBoolean(KEY_CONSUMER_LOCATION_VISIBLE, visible);
+        mEditor.commit();
+    }
+
+    public void saveCurrentChallengeMove(int move)
+    {
+        mEditor.putInt(KEY_CHALLENGE_CHOOSEN_MOVE, move);
+        mEditor.commit();
+    }
+
+    public void saveCurrentChallengBet(float bet)
+    {
+        mEditor.putFloat(KEY_CHALLENGE_CHOOSEN_BET, bet);
+        mEditor.commit();
+    }
+
+    public void saveCurrentChallengOpponent(String playerID)
+    {
+        mEditor.putString(KEY_CHALLENGE_CHOOSEN_PLAYER, playerID);
+        mEditor.commit();
+    }
+
+    public void saveChallengeIcons(String urlRock, String urlPapper, String urlScissors)
+    {
+        mEditor.putString(KEY_CHALLENGE_ROCK_ERA_ICON, urlRock);
+        mEditor.putString(KEY_CHALLENGE_PAPPER_ERA_ICON, urlPapper);
+        mEditor.putString(KEY_CHALLENGE_SCISSORS_ERA_ICON, urlScissors);
+        mEditor.commit();
+    }
+
+    public void savePendingChallenges(String number)
+    {
+        mEditor.putString(KEY_CHALLENGE_PENDING_NUMBER, number);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -715,6 +767,11 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_SEEN_INTRO, false);
     }
 
+    public String getFacebookProfileId()
+    {
+        return mPreferences.getString(KEY_FACEBOOK_PROFILE_ID, "");
+    }
+
     public Achievement getLastAchievement()
     {
         Achievement achievement = new Achievement();
@@ -801,6 +858,36 @@ public class UserData
         return mPreferences.getInt(KEY_APP_MARKERS_COUNT, 0);
     }
 
+    public int getCurrentChallengeMove()
+    {
+        return mPreferences.getInt(KEY_CHALLENGE_CHOOSEN_MOVE, 0);
+    }
+
+    public float getCurrentChallengeBet()
+    {
+        return mPreferences.getFloat(KEY_CHALLENGE_CHOOSEN_BET, 0);
+    }
+
+    public String getChallengeIconRock()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_ROCK_ERA_ICON, "");
+    }
+
+    public String getChallengeIconPapper()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_PAPPER_ERA_ICON, "");
+    }
+
+    public String getChallengeIconScissos()
+    {
+        return  mPreferences.getString(KEY_CHALLENGE_SCISSORS_ERA_ICON, "");
+    }
+
+    public String getPendingChallenges()
+    {
+        return mPreferences.getString(KEY_CHALLENGE_PENDING_NUMBER, "0");
+    }
+
     /*
     * ********************
     *
@@ -834,6 +921,21 @@ public class UserData
         mEditor.commit();
     }
 
+    public void clearCurrentChallenge()
+    {
+        try
+        {
+            mEditor.remove(KEY_CHALLENGE_CHOOSEN_MOVE);
+            mEditor.remove(KEY_CHALLENGE_CHOOSEN_BET);
+            mEditor.remove(KEY_CHALLENGE_CHOOSEN_PLAYER);
+            mEditor.commit();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, ex.getMessage());
+        }
+    }
+
 
     public void hasSeenIntro(boolean seen)
     {
@@ -851,6 +953,13 @@ public class UserData
     {
         return mPreferences.getBoolean(KEY_SHOWCASE_FIRSTTIME_AR, false);
     }
+
+
+    public boolean checkCurrentLocationVisible()
+    {
+        return mPreferences.getBoolean(KEY_CONSUMER_LOCATION_VISIBLE, false);
+    }
+
 
 
 }

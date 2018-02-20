@@ -3,13 +3,17 @@ package com.globalpaysolutions.yocomprorecarga.api;
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeResp;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeComboReq;
@@ -34,6 +38,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 
@@ -171,6 +177,7 @@ public interface ApiInterface
                                                     @Body ExchangeWildcardReq exchangeWildcardReq);
 
     @Headers("Content-Type: application/json")
+
     @POST(StringsURL.ACTIVATE_PRIZE)
     Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey,
                                               @Header("AppVersion") String pAppVersion,
@@ -189,4 +196,32 @@ public interface ApiInterface
                                          @Header("AppVersion") String versionName,
                                          @Header("Platform") String platform,
                                          @Body ExchangeComboReq exchangeCombo);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.CHALLENGES)
+    Call<ChallengesResponse> getChallenges(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.CREATE_CHALLENGE)
+    Call<SimpleResponse> createChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                         @Header("AppVersion") String versionName,
+                                         @Header("Platform") String platform,
+                                         @Body CreateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.UPDATE_CHALLENGE)
+    Call<UpdateChallengeResponse> updateChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                                  @Header("AppVersion") String versionName,
+                                                  @Header("Platform") String platform,
+                                                  @Body  UpdateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_PENDING_CHALLENGES)
+    Call<SimpleResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
+
+
 }

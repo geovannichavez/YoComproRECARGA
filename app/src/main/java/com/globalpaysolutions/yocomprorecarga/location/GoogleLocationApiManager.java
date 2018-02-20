@@ -155,8 +155,13 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
     public void disconnect()
     {
         Log.d(TAG, "disconnect: hit");
-        mGoogleApiClient.disconnect();
+
+        //TODO: Revisar efectos de este cambio en RA y Home
+        // Location updates removed before disconnect from GoogleApiClient as
+        // this was causing exceptions
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        mGoogleApiClient.disconnect();
+        locationCallback.onLocationApiManagerDisconnected();
     }
 
     public GoogleApiClient getGoogleApiClient()
