@@ -11,8 +11,7 @@
         android:id="@+id/bgGrayNewMachine"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_new_gray_machine"/>
+        android:scaleType="centerCrop"  />
 
     <ImageView
         android:id="@+id/btnBack"

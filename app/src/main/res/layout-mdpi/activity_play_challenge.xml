@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/tvNickname"
-        android:layout_width="218dp"
+        android:layout_width="199dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
