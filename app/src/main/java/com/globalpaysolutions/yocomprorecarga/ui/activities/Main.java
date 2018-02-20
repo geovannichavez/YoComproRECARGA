@@ -27,6 +27,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Main extends ImmersiveActivity implements MainView
 {
+    private static final String TAG = Main.class.getSimpleName();
+
     //Layouts and Views
     ImageButton buttonSettings;
     ImageView bgTimemachine;
@@ -73,11 +75,6 @@ public class Main extends ImmersiveActivity implements MainView
 
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-    }
 
     public void navigateMap(View view)
     {
@@ -282,6 +279,18 @@ public class Main extends ImmersiveActivity implements MainView
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
         mPresenter.onPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
     }
 
 }
