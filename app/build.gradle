@@ -149,13 +149,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-analytics:11.4.2'
 
     //Play Services Ads
-    implementation 'com.google.android.gms:play-services-ads:11.4.2'
+    //implementation 'com.google.android.gms:play-services-ads:11.4.2'
 
     //Adform SDK
-    implementation 'com.adform.tracking.sdk:adform-tracking-sdk:1.1.7'
+    //implementation 'com.adform.tracking.sdk:adform-tracking-sdk:1.1.7'
 
     //Adform SDK - protobuf
-    compile 'com.google.protobuf:protobuf-java:2.6.1'
+    //compile 'com.google.protobuf:protobuf-java:2.6.1'
 
 
 }

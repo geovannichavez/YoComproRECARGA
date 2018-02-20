@@ -47,8 +47,8 @@ public class YoComproRecargaApplication extends Application
         appSingleton = this;
 
         //Adforms SDK
-        AdformTrackingSdk.setAppName(Constants.APP_SIMPLE_NAME);
-        AdformTrackingSdk.startTracking(this, 936955);
+        //AdformTrackingSdk.setAppName(Constants.APP_SIMPLE_NAME);
+        //AdformTrackingSdk.startTracking(this, 936955);
 
         //registerActivityLifecycleCallbacks(new AdformLifecycleCallbacks());
 
@@ -117,7 +117,7 @@ public class YoComproRecargaApplication extends Application
     }
 
 
-    private static final class AdformLifecycleCallbacks implements ActivityLifecycleCallbacks
+    /*private static final class AdformLifecycleCallbacks implements ActivityLifecycleCallbacks
     {
 
         @Override
@@ -135,13 +135,13 @@ public class YoComproRecargaApplication extends Application
         @Override
         public void onActivityResumed(Activity activity)
         {
-            AdformTrackingSdk.onResume(activity);
+            //AdformTrackingSdk.onResume(activity);
         }
 
         @Override
         public void onActivityPaused(Activity activity)
         {
-            AdformTrackingSdk.onPause();
+            //AdformTrackingSdk.onPause();
         }
 
         @Override
@@ -161,6 +161,6 @@ public class YoComproRecargaApplication extends Application
         {
 
         }
-    }
+    }*/
 
 }
