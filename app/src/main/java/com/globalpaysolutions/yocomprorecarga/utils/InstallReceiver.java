@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.adjust.sdk.AdjustReferrerReceiver;
 import com.google.android.gms.analytics.CampaignTrackingReceiver;
 
 /**
@@ -16,8 +15,6 @@ public class InstallReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        // Adjust
-        new AdjustReferrerReceiver().onReceive(context, intent);
 
         // Google Analytics
         new CampaignTrackingReceiver().onReceive(context, intent);

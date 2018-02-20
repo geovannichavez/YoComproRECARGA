@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.adform.adformtrackingsdk.AdformTrackingSdk;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
@@ -27,6 +29,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Main extends ImmersiveActivity implements MainView
 {
+    private static final String TAG = Main.class.getSimpleName();
+
     //Layouts and Views
     ImageButton buttonSettings;
     ImageView bgTimemachine;
@@ -73,11 +77,6 @@ public class Main extends ImmersiveActivity implements MainView
 
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-    }
 
     public void navigateMap(View view)
     {
@@ -273,6 +272,18 @@ public class Main extends ImmersiveActivity implements MainView
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
         mPresenter.onPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
     }
 
 }

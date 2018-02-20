@@ -50,7 +50,7 @@ public class YoComproRecargaApplication extends Application
         AdformTrackingSdk.setAppName(Constants.APP_SIMPLE_NAME);
         AdformTrackingSdk.startTracking(this, 936955);
 
-        registerActivityLifecycleCallbacks(new AdformLifecycleCallbacks());
+        //registerActivityLifecycleCallbacks(new AdformLifecycleCallbacks());
 
 
         //AppsFlyer
