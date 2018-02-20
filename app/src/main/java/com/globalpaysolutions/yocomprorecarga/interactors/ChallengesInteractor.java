@@ -52,7 +52,6 @@ public class ChallengesInteractor implements IChallengesInteractor
     @Override
     public void retrieveChallenges(final ChallengesListener listener)
     {
-        //TODO: Descomentar este
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ChallengesResponse> call = apiService.getChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
