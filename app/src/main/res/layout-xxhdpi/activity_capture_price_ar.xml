@@ -115,7 +115,7 @@
                     android:onClick="navigateTimeMachine"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_timemachine_map"/>
+                    app:srcCompat="@drawable/ic_profile_ra"/>
 
                 <!-- <ImageView
                         android:id="@+id/ivPrize2D"
