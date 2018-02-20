@@ -86,6 +86,23 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         this.mView.renderMap();
         this.mView.setClickListeners();
+
+        try
+        {
+            String lastChallenges = UserData.getInstance(mContext).getPendingChallenges();
+            int value = Integer.valueOf(lastChallenges);
+
+            if(value > 0)
+                this.mView.setPendingChallenges(lastChallenges, true);
+            else
+                this.mView.setPendingChallenges(lastChallenges, false);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error parsing string to int: " + ex.getMessage());
+        }
+
+
     }
 
 
@@ -658,9 +675,14 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             UserData.getInstance(mContext).savePendingChallenges(body.getMessage());
 
             String pending = (TextUtils.isEmpty(UserData.getInstance(mContext).getPendingChallenges())) ? "0" : UserData.getInstance(mContext).getPendingChallenges();
-            boolean active = !TextUtils.equals(pending, "0");
 
-            mView.setPendingChallenges(pending, active);
+            int quantity = Integer.valueOf(pending);
+
+            if(quantity > 0)
+                mView.setPendingChallenges(pending, true);
+            else
+                mView.setPendingChallenges(pending, false);
+
         }
         catch (Exception ex)
         {
