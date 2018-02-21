@@ -2,8 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.ui.activities.EraSelection;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.NotificationDetail;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
@@ -45,11 +47,24 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
 
         try
         {
-            Intent intent = new Intent(mContext, NotificationDetail.class);
-            intent.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, result.notification.payload.title);
-            intent.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(intent);
+            String title = result.notification.payload.title;
+
+            if(TextUtils.equals(title, Constants.NOTIFICATION_TITLE_SWITCH_ERA))
+            {
+                Intent eraSelection = new Intent(mContext, EraSelection.class);
+                eraSelection.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, title);
+                eraSelection.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
+                eraSelection.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(eraSelection);
+            }
+            else
+            {
+                Intent intent = new Intent(mContext, NotificationDetail.class);
+                intent.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, result.notification.payload.title);
+                intent.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
         }
         catch(Exception ex)
         {

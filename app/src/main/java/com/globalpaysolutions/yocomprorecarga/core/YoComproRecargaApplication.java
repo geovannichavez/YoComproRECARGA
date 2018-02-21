@@ -1,16 +1,12 @@
 package com.globalpaysolutions.yocomprorecarga.core;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.util.Log;
 
-import com.adform.adformtrackingsdk.AdformTrackingSdk;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
 import com.globalpaysolutions.yocomprorecarga.R;
-import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationReceivedHandler;
 import com.onesignal.OneSignal;

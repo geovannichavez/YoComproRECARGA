@@ -37,6 +37,7 @@ public class Constants
     //Intent extras: Notificactions
     public static final String NOTIFICATION_TITLE_EXTRA = "notification_title_extra";
     public static final String NOTIFICATION_BODY_EXTRA = "notification_body_extgra";
+    public static final String NOTIFICATION_TITLE_SWITCH_ERA = "¡CAMBIA DE ERA YA!";
 
     //OneSignal
     public static final String ONESIGNAL_USER_TAG_KEY = "userid";
@@ -156,6 +157,7 @@ public class Constants
     public static final double CHALLENGE_BET_VALUE_2 = 25;
     public static final double CHALLENGE_BET_VALUE_3 = 50;
     public static final String BUNDLE_CHALLENGE_RESULT_SERIALIZABLE = "bundle_challenge_result_serializable";
+
 
 
     public static String PLATFORM = "ANDROID";
