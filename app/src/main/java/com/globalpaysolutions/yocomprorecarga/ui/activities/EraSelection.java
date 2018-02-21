@@ -11,10 +11,13 @@ import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,6 +51,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
+    WebView wvTraveling;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -73,6 +77,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         lblEraName = (TextView) findViewById(R.id.lblEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+        wvTraveling = (WebView) findViewById(R.id.wvTraveling);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -308,6 +313,39 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
+    public void setTravelingWebView()
+    {
+        try
+        {
+            wvTraveling.setVisibility(View.VISIBLE);
+            wvTraveling.getSettings().setJavaScriptEnabled(true);
+            wvTraveling.setBackgroundColor(0x50000000);
+            wvTraveling.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+            wvTraveling.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+            wvTraveling.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+            //wvTraveling.loadDataWithBaseURL("file:///assets/img/", getHtmlString(),"text/html","utf-8","");
+            wvTraveling.loadUrl("file:///assets/img/travel_time.gif");
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting visible WebView: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void hideTravlingWebView()
+    {
+        try
+        {
+            wvTraveling.setVisibility(View.GONE);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error hiding webview: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
@@ -319,5 +357,20 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private String getHtmlString()
+    {
+        String html = "";
+        try
+        {
+            html = "<html><body><table width=\"100%\" height=\"100%\"><tr><td align=\"center\" valign=\"center\"><img src=\"travel_time.gif\"></td></tr></table></body></html>";
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error generating string: " + ex.getMessage() );
+        }
+
+        return html;
     }
 }

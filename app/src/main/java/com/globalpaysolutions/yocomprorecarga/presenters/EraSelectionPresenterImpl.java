@@ -67,7 +67,9 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         if (ageID.getStatus() > 0)
         {
-            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            //mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+
+            mView.setTravelingWebView();
             mInteractor.eraSelection(ageID.getAgeID(), this, destiny);
         }
         else
@@ -87,7 +89,9 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     @Override
     public void onRetrieveError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion)
     {
-        mView.hideLoadingDialog();
+        //mView.hideLoadingDialog();
+
+        mView.hideTravlingWebView();
         if(pCodeStatus == 426)
         {
             String title = mContext.getString(R.string.title_update_required);
