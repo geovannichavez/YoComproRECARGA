@@ -44,6 +44,7 @@ public class EraSelectionResponse
     @SerializedName("PrizeImage")
     @Expose
     private String prizeImage;
+
     @SerializedName("ChallengeRock")
     @Expose
     private String challengeRock;
@@ -53,6 +54,7 @@ public class EraSelectionResponse
     @SerializedName("ChallengeScissors")
     @Expose
     private String challengeScissors;
+
 
     public int getAgeID()
     {
@@ -163,6 +165,7 @@ public class EraSelectionResponse
     {
         this.prizeImage = prizeImage;
     }
+
 
     public String getChallengeRock()
     {

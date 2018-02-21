@@ -7,14 +7,18 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -31,6 +35,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EraSelection extends ImmersiveActivity implements EraSelectionView
@@ -46,6 +52,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
+    GifImageView gifTravel;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -71,6 +78,8 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         lblEraName = (TextView) findViewById(R.id.lblEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+        gifTravel = (GifImageView) findViewById(R.id.gifTravel);
+
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -311,6 +320,32 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
+    public void setTravelingAnim()
+    {
+        try
+        {
+            gifTravel.setVisibility(View.VISIBLE);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting visible WebView: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void hideTravlingAnim()
+    {
+        try
+        {
+            gifTravel.setVisibility(View.GONE);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error hiding webview: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
@@ -323,4 +358,5 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }

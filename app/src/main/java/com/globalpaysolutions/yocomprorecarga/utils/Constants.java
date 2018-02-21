@@ -88,6 +88,7 @@ public class Constants
     public static final String BUNDLE_PRIZE_CODE = "bundle_data_prize_code";
     public static final String BUNDLE_PRIZE_DIAL = "bundle_data_prize_dial";
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
+    public static final String BUNDLE_PRIZE_IMAGE = "bundle_prize_image";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
     public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
     public static final String BUNDLE_CHALLENGE_RECEIVED_ID = "bundle_challenge_received_id";

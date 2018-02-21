@@ -77,7 +77,9 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         if (ageID.getStatus() > 0)
         {
-            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            //mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            mView.setTravelingAnim();
+
             mInteractor.eraSelection(ageID.getAgeID(), this, destiny);
         }
         else
@@ -204,7 +206,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     eraSelection.getMarkerG(),
                     eraSelection.getMarkerS(),
                     eraSelection.getMarkerB(),
-                    eraSelection.getMarkerW());
+                    eraSelection.getMarkerW(),
+                    eraSelection.getPrizeImage());
 
             //Saves images for wildcard
             UserData.getInstance(mContext).saveEraWildcard(eraSelection.getWildcardWin(), eraSelection.getWildcardLose(), eraSelection.getWildcardMain());
@@ -260,9 +263,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
             outStream.close();
 
-
-
             Log.i(TAG, "Bitmap saved!");
+
         }
         catch (Exception e)
         {
