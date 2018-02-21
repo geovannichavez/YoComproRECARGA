@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -36,6 +37,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class EraSelection extends ImmersiveActivity implements EraSelectionView
@@ -51,7 +54,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
-    WebView wvTraveling;
+    GifImageView gifTravel;
 
     //Global Variables
     ErasAdapter mErasAdapter;
@@ -77,7 +80,8 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         lblEraName = (TextView) findViewById(R.id.lblEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
-        wvTraveling = (WebView) findViewById(R.id.wvTraveling);
+        gifTravel = (GifImageView) findViewById(R.id.gifTravel);
+
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -313,18 +317,11 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
-    public void setTravelingWebView()
+    public void setTravelingAnim()
     {
         try
         {
-            wvTraveling.setVisibility(View.VISIBLE);
-            wvTraveling.getSettings().setJavaScriptEnabled(true);
-            wvTraveling.setBackgroundColor(0x50000000);
-            wvTraveling.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
-            wvTraveling.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-            wvTraveling.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-            //wvTraveling.loadDataWithBaseURL("file:///assets/img/", getHtmlString(),"text/html","utf-8","");
-            wvTraveling.loadUrl("file:///assets/img/travel_time.gif");
+            gifTravel.setVisibility(View.VISIBLE);
         }
         catch (Exception ex)
         {
@@ -333,11 +330,11 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
-    public void hideTravlingWebView()
+    public void hideTravlingAnim()
     {
         try
         {
-            wvTraveling.setVisibility(View.GONE);
+            gifTravel.setVisibility(View.GONE);
         }
         catch (Exception ex)
         {
@@ -359,18 +356,4 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         return super.onKeyDown(keyCode, event);
     }
 
-    private String getHtmlString()
-    {
-        String html = "";
-        try
-        {
-            html = "<html><body><table width=\"100%\" height=\"100%\"><tr><td align=\"center\" valign=\"center\"><img src=\"travel_time.gif\"></td></tr></table></body></html>";
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error generating string: " + ex.getMessage() );
-        }
-
-        return html;
-    }
 }

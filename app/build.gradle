@@ -144,6 +144,9 @@ dependencies {
     // Play Services
     implementation 'com.google.android.gms:play-services-analytics:11.4.2'
 
+    // Gif
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+
 }
 
 //Google Services

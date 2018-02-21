@@ -140,13 +140,15 @@
         app:layout_constraintStart_toStartOf="@+id/imageView14"
         app:layout_constraintTop_toTopOf="@+id/imageView14"/>
 
-    <WebView
-        android:id="@+id/wvTraveling"
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifTravel"
         android:visibility="gone"
-        android:layout_gravity="center"
-        android:scrollbars="none"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:src="@drawable/travel_time"
+        />
+
 
 </android.support.constraint.ConstraintLayout>
 

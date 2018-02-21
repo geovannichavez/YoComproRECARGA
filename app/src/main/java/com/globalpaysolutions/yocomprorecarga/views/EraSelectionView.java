@@ -21,6 +21,6 @@ public interface EraSelectionView
     void createLockedEraDialog();
     void setSelectedEraName(String eraName);
     void showGenericDialog(String title, String message);
-    void setTravelingWebView();
-    void hideTravlingWebView();
+    void setTravelingAnim();
+    void hideTravlingAnim();
 }
