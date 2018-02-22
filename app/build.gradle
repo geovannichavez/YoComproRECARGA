@@ -18,6 +18,7 @@ android {
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
 
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -176,6 +177,9 @@ dependencies {
 
     // Gif
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+
+    //Multidex
+    implementation 'com.android.support:multidex:1.0.2'
 
 
 }

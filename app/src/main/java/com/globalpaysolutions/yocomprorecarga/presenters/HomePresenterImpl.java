@@ -292,7 +292,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void startShowcase()
     {
-        if(!mUserData.showcaseMapSeen())
+        if(!mUserData.showcaseMapSeen()) //TODO: Cambiar a false
         {
             mView.startShowcase();
         }

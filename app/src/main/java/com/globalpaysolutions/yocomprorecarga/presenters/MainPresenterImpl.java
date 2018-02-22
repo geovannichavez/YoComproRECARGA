@@ -111,7 +111,7 @@ public class MainPresenterImpl implements IMainPresenter
             mContext.startActivity(nickname);
         }
 
-        if(!mUserData.showcaseMainSeen())
+        if(!mUserData.showcaseMainSeen()) //TODO: Cambiar a false
         {
             mView.showTutorial();
         }
