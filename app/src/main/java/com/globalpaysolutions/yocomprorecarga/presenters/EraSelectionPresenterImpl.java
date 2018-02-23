@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ErasInteractor;
@@ -73,11 +74,13 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     }
 
     @Override
-    public void switchEra(AgesListModel ageID, String destiny)
+    public void switchEra(AgesListModel ageID, String destiny, boolean reselection)
     {
+        if(reselection)
+            UserData.getInstance(mContext).setEraReselected();
+
         if (ageID.getStatus() > 0)
         {
-            //mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             mView.setTravelingAnim();
 
             mInteractor.eraSelection(ageID.getAgeID(), this, destiny);
@@ -88,6 +91,7 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
         }
 
     }
+
 
     @Override
     public void onRetrieveSuccess(List<AgesListModel> eras)
@@ -141,10 +145,6 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                 markerCounter = markerCounter + 1;
             }
 
-            /*if(markerCounter >= markers.size())
-            {
-
-            }*/
         }
         catch (Exception ex)
         {
@@ -156,7 +156,8 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
     {
         try
         {
-            mView.hideLoadingDialog();
+            //mView.hideLoadingDialog();
+            mView.hideTravlingAnim();
             if(pCodeStatus == 426)
             {
                 String title = mContext.getString(R.string.title_update_required);
@@ -171,14 +172,21 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
                     {
                         String title = mContext.getString(R.string.error_title_not_enough_souvs);
                         String message = String.format(mContext.getString(R.string.error_label_not_enough_souvs), simpleResponse.getMessage());
-                        mView.createImageDialog(title, message, R.drawable.ic_alert);
+                        mView.createImageDialog(title, message, R.drawable.ic_alert, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View view)
+                            {
+                                mView.navigateMain();
+                            }
+                        });
                     }
                 }
             }
             else
             {
                 mView.createImageDialog(mContext.getString(R.string.error_title_something_went_wrong),
-                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert);
+                        mContext.getString(R.string.error_content_something_went_wrong_try_again), R.drawable.ic_alert, null);
             }
         }
         catch (Exception ex)
@@ -219,6 +227,10 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
             {
                 mView.forwardToStore();
+            }
+            else if (TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_CHALLENGES))
+            {
+                mView.forwardToChallenges();
             }
             else
             {

@@ -142,10 +142,6 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                         startActivity(respondChallenge);
                         finish();
                     }
-                    /*else
-                    {
-                        mPresenter.navigateChallengeResult(challenge);
-                    }*/
                 }
 
                 @Override

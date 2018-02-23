@@ -10,5 +10,6 @@ public interface IEraSelectionPresenter
 {
     void initialize();
     void retrieveEras();
-    void switchEra(AgesListModel eraSelected, String destiny);
+    void switchEra(AgesListModel eraSelected, String destiny, boolean reselection);
+    //void reselectionFlags(boolean reselectionAction);
 }

@@ -138,6 +138,7 @@ public class UserData
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
+    private static final String KEY_APP_ERA_RESELECTED = "key_app_era_reselected";
 
     private UserData(Context pContext)
     {
@@ -443,11 +444,11 @@ public class UserData
         mEditor.commit();
     }
 
-    public void secondEraSelectedFlag()
+    /*public void secondEraSelectedFlag()
     {
         mEditor.putBoolean(KEY_SECOND_ERA_UPDATE_ERA_SELECTED, true);
         mEditor.commit();
-    }
+    }*/
 
     public void saveLastExchangedChestID(String lastExchanged)
     {
@@ -855,10 +856,10 @@ public class UserData
         return mPreferences.getString(KEY_ERA_WILDCARD_MAIN, "");
     }
 
-    public boolean getSecondEraSelectedFlag()
+    /*public boolean getSecondEraSelectedFlag()
     {
         return mPreferences.getBoolean(KEY_SECOND_ERA_UPDATE_ERA_SELECTED, false);
-    }
+    }*/
 
     public int getMarkersCount()
     {
@@ -968,5 +969,14 @@ public class UserData
     }
 
 
+    public boolean hasReselectedEra()
+    {
+        return mPreferences.getBoolean(KEY_APP_ERA_RESELECTED, false);
+    }
 
+    public void setEraReselected()
+    {
+        mEditor.putBoolean(KEY_APP_ERA_RESELECTED, true);
+        mEditor.commit();
+    }
 }

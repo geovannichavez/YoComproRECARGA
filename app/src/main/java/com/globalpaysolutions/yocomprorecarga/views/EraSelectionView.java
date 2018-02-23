@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.view.View;
+
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
 
 import java.util.List;
@@ -17,10 +19,12 @@ public interface EraSelectionView
     void renderEras(List<AgesListModel> eras);
     void navigateMap();
     void forwardToStore();
-    void createImageDialog(String title, String description, int resource);
+    void forwardToChallenges();
+    void createImageDialog(String title, String description, int resource, View.OnClickListener clickListener);
     void createLockedEraDialog();
     void setSelectedEraName(String eraName);
     void showGenericDialog(String title, String message);
     void setTravelingAnim();
     void hideTravlingAnim();
+    void navigateMain();
 }

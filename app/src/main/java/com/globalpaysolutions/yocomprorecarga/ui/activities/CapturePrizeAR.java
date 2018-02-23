@@ -911,8 +911,8 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                                     lps.setMargins(margin, margin, margin, margin);
 
                                     mShowcaseView.setShowcase(store, true);
-                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_go_store));
-                                    mShowcaseView.setContentText(getString(R.string.showcase_content_go_store));
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_profile));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_profile));
                                     mShowcaseView.forceTextPosition(ShowcaseView.ABOVE_SHOWCASE);
                                     mShowcaseView.setButtonPosition(lps);
                                     mShowcaseView.setButtonText(getString(R.string.button_accept));
@@ -1156,11 +1156,11 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         mPresenter.redeemPrize();
     }
 
-    public void navigateTimeMachine(View view)
+    public void navigateProfile(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
-        Intent timeMachine = new Intent(this, Profile.class);
-        startActivity(timeMachine);
+        Intent profile = new Intent(this, Profile.class);
+        startActivity(profile);
         finish();
     }
 

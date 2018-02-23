@@ -17,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IChallengesPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.EraSelectionValidator;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ChallengesView;
 import com.google.android.gms.maps.model.LatLng;
@@ -56,6 +57,9 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     @Override
     public void initialize()
     {
+        //Checks if era has been reselected
+        EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_CHALLENGES);
+
         boolean locationVisible = UserData.getInstance(mContext).checkCurrentLocationVisible();
 
         mView.initializeViews(locationVisible);

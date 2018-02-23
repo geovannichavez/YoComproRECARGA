@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.EraSelectionValidator;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
@@ -122,8 +123,6 @@ public class MainPresenterImpl implements IMainPresenter
     @Override
     public void checkFunctionalityLimitedShown()
     {
-        double version = Double.valueOf(VersionName.getVersionName(mContext, TAG));
-
         //Checks if user has not selected era
         if(!mUserData.chechUserHasSelectedEra())
         {
@@ -145,38 +144,21 @@ public class MainPresenterImpl implements IMainPresenter
                 }
                 else
                 {
-                    //If version is greater than 1.14 and has not selected new era
-                    if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION && !mUserData.getSecondEraSelectedFlag()) //TODO
-                    {
-                        Intent eraSelection = new Intent(mActivity, EraSelection.class);
-                        this.addFlags(eraSelection);
-                        eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
-                        mContext.startActivity(eraSelection);
-                    }
-                    else
-                    {
-                        Intent map = new Intent(mActivity, PointsMap.class);
-                        this.addFlags(map);
-                        mContext.startActivity(map);
-                    }
-                }
-            }
-            else
-            {
-                //If version is greater than 1.14 and has not selected new era
-                if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION && !mUserData.getSecondEraSelectedFlag()) //TODO
-                {
-                    Intent eraSelection = new Intent(mActivity, EraSelection.class);
-                    this.addFlags(eraSelection);
-                    eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
-                    mContext.startActivity(eraSelection);
-                }
-                else
-                {
+                    //Validates if era reselection required, if it is then navigates to 'EraSelection'
+                    EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_MAP);
+
                     Intent map = new Intent(mActivity, PointsMap.class);
                     this.addFlags(map);
                     mContext.startActivity(map);
                 }
+            }
+            else
+            {
+                EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_MAP);
+
+                Intent map = new Intent(mActivity, PointsMap.class);
+                this.addFlags(map);
+                mContext.startActivity(map);
             }
         }
 

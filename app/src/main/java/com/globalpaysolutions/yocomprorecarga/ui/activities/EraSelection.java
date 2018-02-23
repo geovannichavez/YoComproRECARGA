@@ -12,13 +12,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.MediaController;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -28,14 +25,11 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.ErasAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.UserData;
-import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -58,6 +52,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     ErasAdapter mErasAdapter;
 
     String mDestiny;
+    boolean mEraReselection;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -71,8 +66,16 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_era_selection);
 
-        //Get extras
-        mDestiny = getIntent().getStringExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY);
+        try
+        {
+            //Get extras
+            mDestiny = getIntent().getStringExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY);
+            mEraReselection = getIntent().getBooleanExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, false);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error getting extras: " + ex.getMessage());
+        }
 
         lvEras = (ListView) findViewById(R.id.lvEras);
         lblEraName = (TextView) findViewById(R.id.lblEraName);
@@ -156,13 +159,8 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                //Validates version and era selection
-                double version = Double.valueOf(VersionName.getVersionName(EraSelection.this, TAG));
-                if(version >= Constants.MULTIPLE_ERA_REQUIRED_SELECTION_VERSION)
-                    UserData.getInstance(EraSelection.this).secondEraSelectedFlag();
-
                 AgesListModel currentItem = ((AgesListModel) parent.getItemAtPosition(position));
-                mPresenter.switchEra(currentItem, mDestiny);
+                mPresenter.switchEra(currentItem, mDestiny, mEraReselection);
             }
         });
 
@@ -198,7 +196,16 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
-    public void createImageDialog(String title, String description, int resource)
+    public void forwardToChallenges()
+    {
+        Intent challenges = new Intent(EraSelection.this, Challenges.class);
+        challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(challenges);
+        finish();
+    }
+
+    @Override
+    public void createImageDialog(String title, String description, int resource, View.OnClickListener clickListener)
     {
         try
         {
@@ -221,14 +228,19 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
 
-            btnClose.setOnClickListener(new View.OnClickListener()
+            if(clickListener != null)
+                btnClose.setOnClickListener(clickListener);
+            else
             {
-                @Override
-                public void onClick(View v)
+                btnClose.setOnClickListener(new View.OnClickListener()
                 {
-                    dialog.dismiss();
-                }
-            });
+                    @Override
+                    public void onClick(View view)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+            }
         }
         catch (Exception ex)
         {
@@ -342,6 +354,22 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         catch (Exception ex)
         {
             Log.e(TAG, "Error hiding webview: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigateMain()
+    {
+        try
+        {
+            Intent main = new Intent(EraSelection.this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error navigating to Main: " +  ex.getMessage());
         }
     }
 

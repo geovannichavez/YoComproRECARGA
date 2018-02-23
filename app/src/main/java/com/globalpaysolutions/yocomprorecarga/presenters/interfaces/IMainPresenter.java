@@ -13,4 +13,5 @@ public interface IMainPresenter
     void downloadMarkers();
     void checkPermissions();
     void onPermissionsResult(int requestCode, String permissions[], int[] grantResults);
+    //void mustReselectEra(String destiny);
 }

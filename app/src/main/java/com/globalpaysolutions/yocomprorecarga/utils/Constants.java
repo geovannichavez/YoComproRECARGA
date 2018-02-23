@@ -102,6 +102,10 @@ public class Constants
     public static final String BUNDLE_ERA_SELECTION_INTENT_DESTINY = "bundle_era_selection_intent_destiny";
     public static final String BUNDLE_DESTINY_MAP = "bundle_destiny_map";
     public static final String BUNDLE_DESTINY_STORE = "bundle_destiny_store";
+    public static final String BUNDLE_ERA_RESELECTION_ACTION = "bundle_era_reselection_action" ;
+    public static final String BUNDLE_DESTINY_CHALLENGES = "bundle_destiny_challenges";
+    //public static final String BUNDLE_SECOND_ERA_UPDATE_ERA_SELECTED_VALUE = "bundle_second_era_update_era_selected_value";
+
     //Bundles from Map
     public static final String BUNDLE_CHALLENGE_USER_ID = "bundle_challenge_user_id";
     public static final String BUNDLE_CHALLENGE_RECEIVED = "bundle_challenge_received";
@@ -163,6 +167,6 @@ public class Constants
 
     public static String PLATFORM = "ANDROID";
 
-    //TODO: Cambiar cuando sea nueva era
-    public static double MULTIPLE_ERA_REQUIRED_SELECTION_VERSION = 1.14;
+    //TODO: Cambiar para obligar al cambio de era
+    public static double RESELECT_ERA_IN_VERSION = 1.21;
 }
