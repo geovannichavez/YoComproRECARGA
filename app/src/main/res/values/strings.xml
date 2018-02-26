@@ -411,6 +411,8 @@
     <string name="label_challenge_result_selected_bet">Apuesta seleccionada</string>
     <string name="label_their_move">Su ataque</string>
     <string name="label_your_move">Tu ataque</string>
+    <string name="showcase_title_challenges">Retos Pendientes</string>
+    <string name="showcase_content_challenges">Mira la cantidad de las Solicitudes de Retos pendientes recibidas</string>
 
 
 </resources>

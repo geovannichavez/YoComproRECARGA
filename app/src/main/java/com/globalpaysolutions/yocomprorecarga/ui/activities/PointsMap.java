@@ -996,6 +996,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             final Target requestTopup = new ViewTarget(findViewById(R.id.btnReqTopupMap));
             final Target pin = new ViewTarget(findViewById(R.id.layoutShowcasePin));
             final Target go = new ViewTarget(findViewById(R.id.btnLaunchAR));
+            final Target badge = new ViewTarget(findViewById(R.id.icPendingBadge));
 
             ShowcaseTextPainter painter = new ShowcaseTextPainter(this);
 
@@ -1049,6 +1050,13 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                                     mShowcaseView.setButtonText(getString(R.string.button_accept));
                                     break;
                                 case 3:
+                                   //Challenges
+                                    mShowcaseView.setShowcase(badge, true);
+                                    mShowcaseView.setContentTitle(getString(R.string.showcase_title_challenges));
+                                    mShowcaseView.setContentText(getString(R.string.showcase_content_challenges));
+                                    mShowcaseView.forceTextPosition(ShowcaseView.BELOW_SHOWCASE);
+                                    break;
+                                case 4:
                                     //Dismiss
                                     mPresenter.showcaseMapSeen();
                                     mShowcaseView.hide();
