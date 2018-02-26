@@ -414,5 +414,10 @@
     <string name="showcase_title_challenges">Retos Pendientes</string>
     <string name="showcase_content_challenges">Mira la cantidad de las Solicitudes de Retos pendientes recibidas</string>
 
+    <string name="title_someone_you_challenged">Retaste a %1$s</string>
+    <string name="label_challenge_your_choosen_move">Ataque seleccionado</string>
+    <string name="label_challenge_bet_choosen">Apuesta que seleccionaste</string>
+
+
 
 </resources>

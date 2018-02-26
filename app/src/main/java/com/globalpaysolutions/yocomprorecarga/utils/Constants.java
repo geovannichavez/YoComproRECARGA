@@ -91,8 +91,8 @@ public class Constants
     public static final String BUNDLE_PRIZE_IMAGE = "bundle_prize_image";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
     public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
-    public static final String BUNDLE_CHALLENGE_RECEIVED_ID = "bundle_challenge_received_id";
-    public static final String BUNDLE_CHALLENGE_RECEIVED_BET = "bundle_challenge_received_bet";
+    public static final String BUNDLE_CHALLENGE_ID = "bundle_challenge_received_id";
+    public static final String BUNDLE_CHALLENGE_BET = "bundle_challenge_received_bet";
 
     //General bundle keys
     public static final String BUNDLE_TOKEN_VALIDATION = "bundle_data_usr_phone_validation";
@@ -108,7 +108,7 @@ public class Constants
 
     //Bundles from Map
     public static final String BUNDLE_CHALLENGE_USER_ID = "bundle_challenge_user_id";
-    public static final String BUNDLE_CHALLENGE_RECEIVED = "bundle_challenge_received";
+    //public static final String BUNDLE_CHALLENGE_RECEIVED = "bundle_challenge_received";
     public static final String BUNDLE_CHALLENGE_OPPONENT_NICKNAME = "bundle_challenge_opponent_nickname";
 
     //Leaderboards
@@ -155,18 +155,29 @@ public class Constants
 
 
     //Challenge
-    public static final int CHALLENGE_ROCK_VALUE = 3;
-    public static final int CHALLENGE_PAPER_VALUE = 2;
-    public static final int CHALLENGE_SCISSORS_VALUE = 1;
+    public static final int CHALLENGE_PAPER_VALUE = 1;
+    public static final int CHALLENGE_ROCK_VALUE = 2;
+    public static final int CHALLENGE_SCISSORS_VALUE = 3;
     public static final double CHALLENGE_BET_VALUE_1 = 10;
     public static final double CHALLENGE_BET_VALUE_2 = 25;
     public static final double CHALLENGE_BET_VALUE_3 = 50;
     public static final String BUNDLE_CHALLENGE_RESULT_SERIALIZABLE = "bundle_challenge_result_serializable";
-
+    public static final String BUNDLE_CHALLENGE_USER_MOVE = "bundle_challenge_user_move";
+    public static final String BUNDLE_CHALLENGE_SOLVED = "bundle_challenge_solved";
+    public static final String BUNDLE_CHALLENGE_OPPONENT_MOVE = "bundle_challenge_opponent_move";
+    public static final String BUNDLE_CHALLENGE_QUERY = "bundle_challenge_query";
 
 
     public static String PLATFORM = "ANDROID";
 
     //TODO: Cambiar para obligar al cambio de era
     public static double RESELECT_ERA_IN_VERSION = 1.21;
+
+    //TODO: Cambiar cuando sea nueva era
+    public static double MULTIPLE_ERA_REQUIRED_SELECTION_VERSION = 1.14;
+
+    public enum ChallengeQuery
+    {
+        CREATE, UPDATE, SELECT
+    }
 }

@@ -65,20 +65,30 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     }
 
     @Override
-    public void chooseGameMove(int move, boolean challengeReceived)
+    public void chooseGameMove(int move, Constants.ChallengeQuery query)
     {
         mMoveSet = true;
         UserData.getInstance(mContext).saveCurrentChallengeMove(move);
 
-        if(challengeReceived)
+        switch (query)
         {
-            if(mMoveSet)
+            case UPDATE:
+                if(mMoveSet)
+                {
+                    mView.highlightButton();
+                }
+                break;
+
+            case CREATE:
+                if(mMoveSet && mBetSet)
+                {
+                    mView.highlightButton();
+                }
+                break;
+
+            case SELECT:
                 mView.highlightButton();
-        }
-        else
-        {
-            if(mMoveSet && mBetSet)
-                mView.highlightButton();
+                break;
         }
     }
 

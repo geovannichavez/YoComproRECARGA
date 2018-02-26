@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.answers.LevelStartEvent;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
@@ -55,8 +56,11 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     String mOpponentID;
     String mOpponentNickname;
     String mChallengeBet;
-    boolean mChallengeReceived;
+    //boolean mChallengeReceived;
+    Constants.ChallengeQuery mChallengeQuery;
     int mChallengeReceivedID;
+    int mUserMove;
+    boolean mChallengeSolved;
 
     //MVP
     PlayChallengePresenterImpl mPresenter;
@@ -97,10 +101,12 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         try
         {
             mOpponentID = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_USER_ID);
-            mChallengeReceived = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, false);
+            mChallengeQuery = (Constants.ChallengeQuery) getIntent().getSerializableExtra(Constants.BUNDLE_CHALLENGE_QUERY);
             mOpponentNickname = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME);
-            mChallengeBet = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_BET);
-            mChallengeReceivedID = getIntent().getIntExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_ID, 0);
+            mChallengeBet = getIntent().getStringExtra(Constants.BUNDLE_CHALLENGE_BET);
+            mChallengeReceivedID = getIntent().getIntExtra(Constants.BUNDLE_CHALLENGE_ID, 0);
+            mUserMove = getIntent().getIntExtra(Constants.BUNDLE_CHALLENGE_USER_MOVE, 0);
+            mChallengeSolved = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGE_SOLVED, false);
         }
         catch (Exception ex)
         {
@@ -115,10 +121,10 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
     @Override
     public void initializeViews(List<String> betsValues, String rock, String papper, String scissors)
     {
-        String infoText;
-        String yourMove;
-        String infoBet;
-        String buttonText;
+        String infoText = "";
+        String yourMove = "";
+        String infoBet = "";
+        String buttonText = "";
 
         try
         {
@@ -136,27 +142,45 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             Picasso.with(this).load(papper).into(icPapper);
             Picasso.with(this).load(scissors).into(icScissors);
 
-            if (mChallengeReceived)
-            {
-                //Makes other buttons invisible
-                btnBet1.setVisibility(View.INVISIBLE);
-                tvBet1.setVisibility(View.INVISIBLE);
-                btnBet3.setVisibility(View.INVISIBLE);
-                tvBet3.setVisibility(View.INVISIBLE);
-                tvBet2.setText(mChallengeBet);
-                btnBet2.setImageResource(R.drawable.ic_bet_on);
 
-                infoText = String.format(getString(R.string.title_someone_has_challenged), mOpponentNickname);
-                yourMove = getString(R.string.label_challenge_choose_defense);
-                infoBet = String.format(getString(R.string.label_challenge_bet_choosen_by), mOpponentNickname);
-                buttonText = getString(R.string.button_challenge_defend);
-            }
-            else
+            switch (mChallengeQuery)
             {
-                infoText = String.format(getString(R.string.title_challenge_someone), mOpponentNickname);
-                yourMove = getString(R.string.label_challenge_choose_attack);
-                infoBet = getString(R.string.label_challenge_choose_bet);
-                buttonText = getString(R.string.button_challenge_challenge);
+                case CREATE:
+                    infoText = String.format(getString(R.string.title_challenge_someone), mOpponentNickname);
+                    yourMove = getString(R.string.label_challenge_choose_attack);
+                    infoBet = getString(R.string.label_challenge_choose_bet);
+                    buttonText = getString(R.string.button_challenge_challenge);
+                    break;
+
+                case SELECT:
+                    //Makes other buttons invisible
+                    btnBet1.setVisibility(View.INVISIBLE);
+                    tvBet1.setVisibility(View.INVISIBLE);
+                    btnBet3.setVisibility(View.INVISIBLE);
+                    tvBet3.setVisibility(View.INVISIBLE);
+                    tvBet2.setText(mChallengeBet);
+                    btnBet2.setImageResource(R.drawable.ic_bet_on);
+
+                    infoText = String.format(getString(R.string.title_someone_you_challenged), mOpponentNickname);
+                    yourMove = getString(R.string.label_challenge_your_choosen_move);
+                    infoBet = getString(R.string.label_challenge_bet_choosen);
+                    buttonText = getString(R.string.button_accept);
+                    break;
+
+                case UPDATE:
+                    //Makes other buttons invisible
+                    btnBet1.setVisibility(View.INVISIBLE);
+                    tvBet1.setVisibility(View.INVISIBLE);
+                    btnBet3.setVisibility(View.INVISIBLE);
+                    tvBet3.setVisibility(View.INVISIBLE);
+                    tvBet2.setText(mChallengeBet);
+                    btnBet2.setImageResource(R.drawable.ic_bet_on);
+
+                    infoText = String.format(getString(R.string.title_someone_has_challenged), mOpponentNickname);
+                    yourMove = getString(R.string.label_challenge_choose_defense);
+                    infoBet = String.format(getString(R.string.label_challenge_bet_choosen_by), mOpponentNickname);
+                    buttonText = getString(R.string.button_challenge_defend);
+                    break;
             }
 
             //All texts
@@ -164,6 +188,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             tvChooseAttack.setText(yourMove);
             tvChooseBet.setText(infoBet);
             tvBetText.setText(buttonText);
+            tvBetText.setAllCaps(true);
         }
         catch (Exception ex)
         {
@@ -268,15 +293,20 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         {
             Intent back = null;
 
-            if(mChallengeReceived)
+            switch (mChallengeQuery)
             {
-                back = new Intent(PlayChallenge.this, Challenges.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            }
-            else
-            {
-                back = new Intent(PlayChallenge.this, PointsMap.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                case UPDATE:
+                    back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case CREATE:
+                    back = new Intent(PlayChallenge.this, PointsMap.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case SELECT:
+                    back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
             }
 
             startActivity(back);
@@ -318,15 +348,20 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         {
             Intent back = null;
 
-            if(mChallengeReceived)
+            switch (mChallengeQuery)
             {
-                back = new Intent(PlayChallenge.this, Challenges.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            }
-            else
-            {
-                back = new Intent(PlayChallenge.this, PointsMap.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                case UPDATE:
+                    back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case CREATE:
+                    back = new Intent(PlayChallenge.this, PointsMap.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case SELECT:
+                    back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
             }
 
             startActivity(back);
@@ -359,15 +394,21 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
 
             Intent backAction = null;
 
-            if(mChallengeReceived)
+
+            switch (mChallengeQuery)
             {
-                backAction = new Intent(PlayChallenge.this, Challenges.class);
-                backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            }
-            else
-            {
-                backAction = new Intent(PlayChallenge.this, PointsMap.class);
-                backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                case SELECT:
+                    backAction = new Intent(PlayChallenge.this, Challenges.class);
+                    backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case CREATE:
+                    backAction = new Intent(PlayChallenge.this, PointsMap.class);
+                    backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case UPDATE:
+                    backAction = new Intent(PlayChallenge.this, Challenges.class);
+                    backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
             }
 
             startActivity(backAction);
@@ -385,7 +426,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             bgRock.setImageResource(R.drawable.ic_attack_off);
             bgScissors.setImageResource(R.drawable.ic_attack_off);
 
-            mPresenter.chooseGameMove(Constants.CHALLENGE_PAPER_VALUE, mChallengeReceived);
+            mPresenter.chooseGameMove(Constants.CHALLENGE_PAPER_VALUE, mChallengeQuery);
         }
     };
 
@@ -399,7 +440,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             bgRock.setImageResource(R.drawable.ic_attack_off);
             bgScissors.setImageResource(R.drawable.ic_attack_on);
 
-            mPresenter.chooseGameMove(Constants.CHALLENGE_SCISSORS_VALUE, mChallengeReceived);
+            mPresenter.chooseGameMove(Constants.CHALLENGE_SCISSORS_VALUE, mChallengeQuery);
         }
     };
 
@@ -414,7 +455,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             bgRock.setImageResource(R.drawable.ic_attack_on);
             bgScissors.setImageResource(R.drawable.ic_attack_off);
 
-            mPresenter.chooseGameMove(Constants.CHALLENGE_ROCK_VALUE, mChallengeReceived);
+            mPresenter.chooseGameMove(Constants.CHALLENGE_ROCK_VALUE, mChallengeQuery);
         }
     };
 
@@ -425,13 +466,20 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
         {
             ButtonAnimator.getInstance(PlayChallenge.this).animateButton(view);
 
-            if(!mChallengeReceived)
+            switch (mChallengeQuery)
             {
-                mPresenter.createChallenge(mOpponentID);
-            }
-            else
-            {
-                mPresenter.respondChallenge(mChallengeReceivedID,  mOpponentID);
+                case SELECT:
+                    Intent backAction = new Intent(PlayChallenge.this, Challenges.class);
+                    backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(backAction);
+                    finish();
+                    break;
+                case CREATE:
+                    mPresenter.createChallenge(mOpponentID);
+                    break;
+                case UPDATE:
+                    mPresenter.respondChallenge(mChallengeReceivedID,  mOpponentID);
+                    break;
             }
         }
     };
