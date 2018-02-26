@@ -173,9 +173,6 @@ public class Constants
     //TODO: Cambiar para obligar al cambio de era
     public static double RESELECT_ERA_IN_VERSION = 1.21;
 
-    //TODO: Cambiar cuando sea nueva era
-    public static double MULTIPLE_ERA_REQUIRED_SELECTION_VERSION = 1.14;
-
     public enum ChallengeQuery
     {
         CREATE, UPDATE, SELECT

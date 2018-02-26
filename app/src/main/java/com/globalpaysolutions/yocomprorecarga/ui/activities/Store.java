@@ -518,7 +518,6 @@ public class Store extends ImmersiveActivity implements StoreView
             tvSouvenirName.setText(souvenirName);
             tvSouvenirDesc.setText(souvenirDescription);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
 
             souvenirDialog = builder.setView(dialogView).create();

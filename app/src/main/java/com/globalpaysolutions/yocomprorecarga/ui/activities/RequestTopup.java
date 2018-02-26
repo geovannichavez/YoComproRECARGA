@@ -380,8 +380,6 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         catch (Exception ex)
         {
             ex.printStackTrace();
-            //TODO: Quitar toast
-             //Toast.makeText(this, "_debug info: " + ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
 

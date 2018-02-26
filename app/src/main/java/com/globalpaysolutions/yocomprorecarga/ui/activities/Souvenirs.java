@@ -223,7 +223,6 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
             lblSouvenirNameDialog.setText(title);
             lblSouvenirDialogDescr.setText(description);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenirDetail);
             Picasso.with(this).load(counterResource).into(imgSouvCounter);
 
