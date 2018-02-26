@@ -132,20 +132,37 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 public void onClick(View view, int position)
                 {
                     Challenge challenge = challenges.get(position);
-                    if(challenge.getStatus() == 0 && challenge.getCreator() == 0)
+                    if(challenge.getStatus() == 0) //Unsolved
                     {
-                        Intent respondChallenge = new Intent(Challenges.this, PlayChallenge.class);
-                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_ID, challenge.getChallengeID());
-                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED, true);
-                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, challenge.getOpponentNickname());
-                        respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_RECEIVED_BET, String.valueOf(challenge.getBet()));
-                        startActivity(respondChallenge);
-                        finish();
+                        if(challenge.getCreator() == 0) //Received
+                        {
+                            Intent respondChallenge = new Intent(Challenges.this, PlayChallenge.class);
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_ID, challenge.getChallengeID());
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_QUERY, Constants.ChallengeQuery.UPDATE);
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, challenge.getOpponentNickname());
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_BET, String.valueOf(challenge.getBet()));
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_SOLVED, false);
+                            startActivity(respondChallenge);
+                            finish();
+                        }
+                        else //Created
+                        {
+                            Intent respondChallenge = new Intent(Challenges.this, PlayChallenge.class);
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_ID, challenge.getChallengeID());
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_QUERY, Constants.ChallengeQuery.SELECT);
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_OPPONENT_NICKNAME, challenge.getOpponentNickname());
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_BET, String.valueOf(challenge.getBet()));
+
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_USER_MOVE, challenge.getSelection());
+                            respondChallenge.putExtra(Constants.BUNDLE_CHALLENGE_SOLVED, false);
+                            startActivity(respondChallenge);
+                            finish();
+                        }
                     }
-                    /*else
+                    else //Solved
                     {
                         mPresenter.navigateChallengeResult(challenge);
-                    }*/
+                    }
                 }
 
                 @Override

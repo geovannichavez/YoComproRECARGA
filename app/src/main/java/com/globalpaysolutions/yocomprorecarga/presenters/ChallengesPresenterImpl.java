@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoLocation;
@@ -114,7 +115,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
 
             switch (challenge.getResult())
             {
-                case 0: //Result: 0 = Lose
+                case 0: //Result: 0 = Tie
                     title = mContext.getString(R.string.title_challenge_result_bad_luck);
                     content = String.format(mContext.getString(R.string.label_challenge_result_text_lose), challenge.getOpponentNickname());
                     break;
@@ -122,7 +123,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
                     title = mContext.getString(R.string.title_challenge_result_congrats);
                     content = String.format(mContext.getString(R.string.label_challenge_result_text_win), challenge.getOpponentNickname());
                     break;
-                case 2: //Result 2 = Tie
+                case 2: //Result 2 = Lose
                     title = mContext.getString(R.string.title_challenge_result_bad_luck);
                     content = String.format(mContext.getString(R.string.label_challenge_result_text_tie), challenge.getOpponentNickname());
                     break;
@@ -140,6 +141,9 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
                 case Constants.CHALLENGE_SCISSORS_VALUE:
                     playerMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
                     break;
+                case 0:
+                    playerMoveIcon = "";
+                    break;
             }
 
             //Gets opponent icon
@@ -154,8 +158,15 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
                 case Constants.CHALLENGE_SCISSORS_VALUE:
                     opponentMoveIcon = UserData.getInstance(mContext).getChallengeIconScissos();
                     break;
+                case 0: //When is a tie, API returns 0
+                    opponentMoveIcon = playerMoveIcon;
+                    break;
             }
 
+
+            //validates player icon if tie (API returns 0)
+            if(TextUtils.equals(playerMoveIcon, ""))
+                playerMoveIcon = opponentMoveIcon;
 
             ChallengeResultData challengeResult = new ChallengeResultData();
             challengeResult.setBet(challenge.getBet());
