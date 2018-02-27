@@ -650,8 +650,11 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
             {
                 MarkerData markerData = new MarkerData(key, Constants.TAG_MARKER_PLAYER, playerPointData.getNickname());
-                String snippet = mContext.getString(R.string.label_player_code_snippet);
-                mView.addPlayerPointData(key, playerPointData.getNickname(), snippet, markerData);
+
+                String title = String.format(mContext.getString(R.string.title_marker_player), playerPointData.getNickname());
+                String content = mContext.getString(R.string.label_player_code_snippet);
+
+                mView.addPlayerPointData(key, title, content, markerData);
             }
         }
     }

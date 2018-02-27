@@ -54,7 +54,7 @@
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
     <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
-    <string name="label_player_code_snippet">¡Otro jugador de RecarGO!</string>
+    <string name="label_player_code_snippet">Haz click aquí para retarle</string>
     <string name="title_success_dialog_store_report">REPORTE ENVIADO</string>
     <string name="dialog_content_report_sent">Su reporte ha sido enviado exitosamente. ¡Muchas gracias por ayudarnos con información!</string>
     <string name="yvr_vendor_marker_title">¡YoVendoRecarga! Click aquí</string>
@@ -414,6 +414,7 @@
     <string name="title_someone_you_challenged">Retaste a %1$s</string>
     <string name="label_challenge_your_choosen_move">Ataque seleccionado</string>
     <string name="label_challenge_bet_choosen">Apuesta que seleccionaste</string>
+    <string name="title_marker_player">¡Reta ahora a %1$s!</string>
 
 
 </resources>

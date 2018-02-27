@@ -46,6 +46,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     //Global Variables
     private RecyclerView mRecyclerView;
     private ChallengesAdapter mChallengesAdapter;
+    private boolean mFromMap;
 
     //MVP
     ChallengesPresenterImpl mPresenter;
@@ -61,6 +62,15 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenges);
+
+        try
+        {
+            mFromMap = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, false);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error retrieving value from bundle: " + ex.getMessage());
+        }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.lvChallenges);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
@@ -85,9 +95,20 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 @Override
                 public void onClick(View view)
                 {
-                    Intent profile = new Intent(Challenges.this, Profile.class);
-                    profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(profile);
+                    Intent back = null;
+
+                    if(mFromMap)
+                    {
+                        back = new Intent(Challenges.this, PointsMap.class);
+                        back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    }
+                    else
+                    {
+                        back = new Intent(Challenges.this, Profile.class);
+                        back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    }
+
+                    startActivity(back);
                     finish();
                 }
             });
@@ -240,9 +261,20 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent profile = new Intent(Challenges.this, Profile.class);
-            profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(profile);
+            Intent back = null;
+
+            if(mFromMap)
+            {
+                back = new Intent(Challenges.this, PointsMap.class);
+                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            }
+            else
+            {
+                back = new Intent(Challenges.this, Profile.class);
+                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            }
+
+            startActivity(back);
             finish();
             return true;
         }

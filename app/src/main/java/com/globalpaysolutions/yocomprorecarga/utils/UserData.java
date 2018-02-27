@@ -957,7 +957,7 @@ public class UserData
 
     public boolean checkCurrentLocationVisible()
     {
-        return mPreferences.getBoolean(KEY_CONSUMER_LOCATION_VISIBLE, false);
+        return mPreferences.getBoolean(KEY_CONSUMER_LOCATION_VISIBLE, true);
     }
 
 
