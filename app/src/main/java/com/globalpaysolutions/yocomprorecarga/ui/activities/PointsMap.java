@@ -160,6 +160,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
                 Intent intent = new Intent(PointsMap.this, Challenges.class);
+                intent.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, true);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();

@@ -161,6 +161,27 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
                     tvBet2.setText(mChallengeBet);
                     btnBet2.setImageResource(R.drawable.ic_bet_on);
 
+                    bgPaper.setOnClickListener(null);
+                    bgScissors.setOnClickListener(null);
+                    bgRock.setOnClickListener(null);
+
+                    btnBet.setEnabled(true);
+                    btnBet.setImageResource(R.drawable.btn_bet_on);
+
+                    //Sets move selected
+                    switch (mUserMove)
+                    {
+                        case Constants.CHALLENGE_ROCK_VALUE:
+                            bgRock.setImageResource(R.drawable.ic_attack_on);
+                            break;
+                        case Constants.CHALLENGE_PAPER_VALUE:
+                            bgPaper.setImageResource(R.drawable.ic_attack_on);
+                            break;
+                        case Constants.CHALLENGE_SCISSORS_VALUE:
+                            bgScissors.setImageResource(R.drawable.ic_attack_on);
+                            break;
+                    }
+
                     infoText = String.format(getString(R.string.title_someone_you_challenged), mOpponentNickname);
                     yourMove = getString(R.string.label_challenge_your_choosen_move);
                     infoBet = getString(R.string.label_challenge_bet_choosen);

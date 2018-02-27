@@ -166,6 +166,7 @@ public class Constants
     public static final String BUNDLE_CHALLENGE_SOLVED = "bundle_challenge_solved";
     public static final String BUNDLE_CHALLENGE_OPPONENT_MOVE = "bundle_challenge_opponent_move";
     public static final String BUNDLE_CHALLENGE_QUERY = "bundle_challenge_query";
+    public static final String BUNDLE_CHALLENGES_BACK_MAP = "bundle_challenges_back_map";
 
 
     public static String PLATFORM = "ANDROID";

@@ -19,7 +19,7 @@ public interface IHomeInteractor
     void playersPointsQuery(GeoLocation location);
     void playersPointsUpdateCriteria(GeoLocation location);
     void insertCurrentPlayerData(GeoLocation location, String facebookID);
-    void insertCurrentPlayerLocation(String key, GeoLocation location);
+    void setPlayerLocation(String key, GeoLocation location);
     void deletePlayerLocation(String key);
 
     void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
