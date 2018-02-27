@@ -279,6 +279,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         if(UserData.getInstance(mContext).checkCurrentLocationVisible())
         {
+            //Inserts data first, then location
             GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
             mInteractor.insertCurrentPlayerData(geoLocation, UserData.getInstance(mContext).getFacebookProfileId());
         }
@@ -292,7 +293,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void startShowcase()
     {
-        if(!mUserData.showcaseMapSeen())
+        if(!mUserData.showcaseMapSeen()) //TODO: Cambiar a false
         {
             mView.startShowcase();
         }
@@ -367,9 +368,17 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                 {
                     //Checks apps blacklist
                     if(MockLocationUtility.isMockAppInstalled(mContext) <= 0 )
+                    {
+                        String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
+                        GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
+                        mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+
                         mView.updateUserLocationOnMap(location);
+                    }
                     else
+                    {
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                    }
                 }
             }
         }
@@ -659,7 +668,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         try
         {
             //If data is inserted, then inserts respetive GeoFire location
-            mInteractor.insertCurrentPlayerLocation(key, location);
+            mInteractor.setPlayerLocation(key, location);
         }
         catch (Exception ex)
         {

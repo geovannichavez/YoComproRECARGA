@@ -188,6 +188,7 @@ public class HomeInteractor implements IHomeInteractor
                 {
                     if(databaseError == null)
                     {
+                        //On data insert success, inserts location
                         mHomeListener.fb_currentPlayerDataInserted(playerFacebookID, location);
                     }
                     else
@@ -204,7 +205,7 @@ public class HomeInteractor implements IHomeInteractor
     }
 
     @Override
-    public void insertCurrentPlayerLocation(String key, GeoLocation location)
+    public void setPlayerLocation(String key, GeoLocation location)
     {
         try
         {
