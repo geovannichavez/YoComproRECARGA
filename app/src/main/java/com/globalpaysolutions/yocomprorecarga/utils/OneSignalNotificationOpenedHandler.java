@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Challenges;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.EraSelection;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.NotificationDetail;
 import com.onesignal.OSNotificationAction;
@@ -49,6 +50,7 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
         {
             String title = result.notification.payload.title;
 
+
             if(TextUtils.equals(title, Constants.NOTIFICATION_TITLE_SWITCH_ERA))
             {
                 Intent eraSelection = new Intent(mContext, EraSelection.class);
@@ -56,6 +58,14 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
                 eraSelection.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
                 eraSelection.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(eraSelection);
+            }
+            else if (TextUtils.equals(title, Constants.NOTIFICATION_TITLE_BEEN_CHALLENGED))
+            {
+                Intent challenges = new Intent(mContext, Challenges.class);
+                challenges.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, title);
+                challenges.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
+                challenges.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(challenges);
             }
             else
             {

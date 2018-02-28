@@ -398,8 +398,8 @@
     <string name="label_challenge_bet_choosen_by">Apuesta seleccionada por %1$s</string>
     <string name="button_challenge_challenge">RETAR</string>
     <string name="button_challenge_defend">DEFENDER</string>
-    <string name="error_title_already_challenged">¡Ya lo retaste!</string>
-    <string name="error_content_already_challenged">Recuerda que puedes mandar solo 1 reto cada %1$s horas al mismo usuario</string>
+    <string name="error_title_already_challenged">Jugador ya retado</string>
+    <string name="error_content_already_challenged">¡Este jugador tiene un reto pendiente contigo, ten paciencia!</string>
     <string name="title_challenge_result">RESULTADO</string>
     <string name="title_challenge_result_bad_luck">¡Mala Suerte!</string>
     <string name="title_challenge_result_congrats">¡Felicitaciones!</string>

@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer
 import com.globalpaysolutions.yocomprorecarga.presenters.SourvenirsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvenirsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.FastClickUtil;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
 import com.squareup.picasso.Picasso;
@@ -160,10 +161,13 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
                 ListSouvenirsByConsumer souvenir = ((ListSouvenirsByConsumer) parent.getItemAtPosition(position));
                 if(souvenir.getSouvenirsOwnedByConsumer() > 0)
                 {
-                    mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
-                            String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
-                            souvenir.getImgUrl(),
-                            souvenir.getSouvenirID(), souvenir.getLevel());
+                    if(!FastClickUtil.isFastClick())
+                    {
+                        mPresnter.showSouvenirDetailsModal(souvenir.getTitle(), souvenir.getDescription(),
+                                String.valueOf(souvenir.getSouvenirsOwnedByConsumer()),
+                                souvenir.getImgUrl(),
+                                souvenir.getSouvenirID(), souvenir.getLevel());
+                    }
                 }
             }
         });

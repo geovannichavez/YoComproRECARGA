@@ -69,7 +69,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView14"/>
 
     <ImageView
-        android:id="@+id/imageView45"
+        android:id="@+id/btnLocation"
         android:layout_width="185dp"
         android:layout_height="44dp"
         android:layout_marginEnd="8dp"
@@ -124,11 +124,11 @@
         android:text="@string/label_switch_activate_location"
         android:textColor="@color/pure_black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView45"
-        app:layout_constraintEnd_toEndOf="@+id/imageView45"
+        app:layout_constraintBottom_toBottomOf="@+id/btnLocation"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocation"
         app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="@+id/imageView45"
-        app:layout_constraintTop_toTopOf="@+id/imageView45"
+        app:layout_constraintStart_toStartOf="@+id/btnLocation"
+        app:layout_constraintTop_toTopOf="@+id/btnLocation"
         app:layout_constraintVertical_bias="1.0"/>
 
 </android.support.constraint.ConstraintLayout>

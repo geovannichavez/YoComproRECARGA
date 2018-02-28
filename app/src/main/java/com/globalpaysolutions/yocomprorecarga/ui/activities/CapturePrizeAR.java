@@ -125,10 +125,10 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             public void onClick(View v)
             {
                 ButtonAnimator.getInstance(CapturePrizeAR.this).animateButton(v);
-                Intent store = new Intent(CapturePrizeAR.this, Store.class);
+                Intent store = new Intent(CapturePrizeAR.this, Profile.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
-                finish();//TODO: Verificar si deberia de hacerse
+                finish();
             }
         });
 
@@ -1155,15 +1155,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         mPresenter.redeemPrize();
     }
-
-    public void navigateProfile(View view)
-    {
-        ButtonAnimator.getInstance(this).animateButton(view);
-        Intent profile = new Intent(this, Profile.class);
-        startActivity(profile);
-        finish();
-    }
-
 
 
 

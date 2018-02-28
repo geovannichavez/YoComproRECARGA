@@ -206,7 +206,7 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
         {
             DialogViewModel dialog = new DialogViewModel();
             dialog.setTitle(mContext.getString(R.string.error_title_already_challenged));
-            dialog.setLine1(String.format(mContext.getString(R.string.error_content_already_challenged), response.getMessage()));
+            dialog.setLine1(mContext.getString(R.string.error_content_already_challenged));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
             mView.showGenericDialog(dialog, new View.OnClickListener()
             {

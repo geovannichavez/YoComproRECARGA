@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.Challenge;
 import com.globalpaysolutions.yocomprorecarga.presenters.ChallengesPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.ChallengesAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
@@ -41,6 +42,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     ImageView bgTimemachine;
     ImageButton btnBack;
     CheckBox cbxLocation;
+    ImageView btnLocation;
     private ProgressDialog mProgressDialog;
 
     //Global Variables
@@ -76,6 +78,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         cbxLocation = (CheckBox) findViewById(R.id.cbxLocation);
+        btnLocation = (ImageView) findViewById(R.id.btnLocation);
 
         mPresenter = new ChallengesPresenterImpl(this, this, this);
         mPresenter.initialize();
@@ -115,6 +118,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
 
             //Location checkbox
             cbxLocation.setChecked(locationVisible);
+            cbxLocation.setClickable(false);
 
             //Checkbox Click Listener
             cbxLocation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -123,6 +127,16 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b)
                 {
                     mPresenter.locationVisible(b);
+                }
+            });
+
+            //Listens for clicks on Checkbox
+            btnLocation.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    cbxLocation.performClick();
                 }
             });
 
