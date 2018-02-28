@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -232,6 +233,24 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
                 }
             });
         }
+        else if(codeStatus == 500)
+        {
+            DialogViewModel dialog = new DialogViewModel();
+
+            if(TextUtils.equals("02", response.getInternalCode()))
+            {
+                dialog.setTitle(mContext.getString(R.string.title_attention));
+                dialog.setLine1(mContext.getString(R.string.label_not_enough_coins_to_create_challenge));
+            }
+            else
+            {
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            }
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, null);
+
+        }
         else
         {
             DialogViewModel dialog = new DialogViewModel();
@@ -326,6 +345,55 @@ public class PlayChallengePresenterImpl implements IPlayChallengePresenter, Play
     @Override
     public void onUpdateChallengeError(SimpleResponse errorResponse, Throwable o, int codeResponse)
     {
+        mView.hideLoadingDialog();
 
+        if (codeResponse == 426)
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.title_update_required));
+            dialog.setLine1(String.format(mContext.getString(R.string.content_update_required), errorResponse.getInternalCode()));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
+        }
+        else if(codeResponse == 500)
+        {
+            DialogViewModel dialog = new DialogViewModel();
+
+            if(TextUtils.equals("02", errorResponse.getInternalCode()))
+            {
+                dialog.setTitle(mContext.getString(R.string.title_attention));
+                dialog.setLine1(mContext.getString(R.string.label_not_enough_coins_to_update_challenge));
+            }
+            else
+            {
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            }
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, null);
+
+        }
+        else
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    mView.finishActivty();
+                }
+            });
+        }
     }
 }
