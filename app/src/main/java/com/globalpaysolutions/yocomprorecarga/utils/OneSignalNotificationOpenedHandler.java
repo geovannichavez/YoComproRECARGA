@@ -50,7 +50,6 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
         {
             String title = result.notification.payload.title;
 
-
             if(TextUtils.equals(title, Constants.NOTIFICATION_TITLE_SWITCH_ERA))
             {
                 Intent eraSelection = new Intent(mContext, EraSelection.class);
