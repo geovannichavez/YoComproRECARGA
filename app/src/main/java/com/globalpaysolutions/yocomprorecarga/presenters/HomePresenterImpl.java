@@ -263,8 +263,11 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void playersPointsQuery(LatLng location)
     {
-        GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
-        mInteractor.playersPointsQuery(geoLocation);
+        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+        {
+            GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
+            mInteractor.playersPointsQuery(geoLocation);
+        }
     }
 
     @Override
