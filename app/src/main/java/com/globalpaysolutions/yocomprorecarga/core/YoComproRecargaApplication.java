@@ -2,8 +2,10 @@ package com.globalpaysolutions.yocomprorecarga.core;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.adform.adformtrackingsdk.AdformTrackingSdk;
@@ -32,6 +34,13 @@ public class YoComproRecargaApplication extends Application
     public static YoComproRecargaApplication getInstance()
     {
         return appSingleton;
+    }
+
+    @Override
+    protected void attachBaseContext(Context context)
+    {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
     }
 
     @Override
