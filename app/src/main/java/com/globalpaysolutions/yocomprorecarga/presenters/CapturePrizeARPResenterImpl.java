@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -27,6 +28,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
+import com.globalpaysolutions.yocomprorecarga.views.MainView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
@@ -106,7 +108,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
         }
-
     }
 
     @Override
@@ -116,12 +117,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             this.mGoogleLocationApiManager.connect();
 
         mFirebaseInteractor.initializePOIGeolocation();
-
-        if (!m3Dcompatible)
-        {
-            mView.removeBlinkingAnimation();
-            mView.switchRecarcoinVisible(false);
-        }
     }
 
     @Override
@@ -278,6 +273,88 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void checkForWelcomeChest()
+    {
+        if(mUserData.checkWelcomeChestAvailable()) //TODO: Cambiar a true
+        {
+            double lat = (double) mUserData.getWelcomeChestLat();
+            double longt = (double) mUserData.getWelcomeChestLong();
+            LatLng location = new LatLng(lat, longt);
+
+            try
+            {
+                if (m3Dcompatible)
+                {
+                    mView.onGoldKeyEntered(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraName());
+                }
+                else
+                {
+                    mView.onGoldKeyEntered_2D(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraID());
+                }
+
+                //User has seen the welcom chest, won't be available anymore
+                mUserData.setWelcomeChestAvailable(true); //TODO: Cambiar a false
+            }
+            catch (Exception ex)
+            {
+                Log.e(TAG, "Error adding welcome chest: " + ex.getMessage());
+            }
+
+        }
+    }
+
+    @Override
+    public void deleteFirstKeySaved()
+    {
+        try
+        {
+            UserData.getInstance(mContext).deleteFirstKeyEntered();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType)
+    {
+        try
+        {
+            //If there is no key, then is the first entered
+            if(TextUtils.equals(this.getFirstKeyEntered2D(), ""))
+            {
+                //Saves first key entered
+                this.saveFirstKeyEntered2D(pKey);
+
+                //Draws chests
+                switch (chestType)
+                {
+                    case Constants.NAME_CHEST_TYPE_GOLD:
+                        mView.drawChestGold2D(pKey, location, ageID);
+                        break;
+                    case Constants.NAME_CHEST_TYPE_SILVER:
+                        mView.drawChestSilver2D(pKey, location, ageID);
+                        break;
+                    case Constants.NAME_CHEST_TYPE_BRONZE:
+                        mView.drawChestBronze2D(pKey, location, ageID);
+                        break;
+                    case Constants.NAME_CHEST_TYPE_WILDCARD:
+                        mView.drawChestWildcard2D(pKey, location, ageID);
+                        break;
+                }
+
+                mView.switchRecarcoinVisible(true);
+                mView.blinkRecarcoin();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error registering key: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void onLocationChanged(Location location)
     {
         try
@@ -356,9 +433,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
             else
             {
+                //Draws chest on screen
                 mView.onGoldKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
-                mView.switchRecarcoinVisible(true);
-                mView.blinkRecarcoin();
+
             }
         }
     }
@@ -371,6 +448,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
+
+            //Deletes last key entered
+            this.deleteSpecificFirstKeyEntered2D(pKey);
         }
         else
         {
@@ -400,9 +480,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
             else
             {
+                //Draws chest on screen
                 mView.onSilverKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
-                mView.switchRecarcoinVisible(true);
-                mView.blinkRecarcoin();
             }
         }
     }
@@ -418,6 +497,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
+
+            //Deletes last key entered
+            this.deleteSpecificFirstKeyEntered2D(pKey);
         }
         else
         {
@@ -446,9 +528,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
             else
             {
+                //Draws chest on screen
                 mView.onBronzeKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
-                mView.switchRecarcoinVisible(true);
-                mView.blinkRecarcoin();
             }
         }
     }
@@ -462,6 +543,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mView.removeBlinkingAnimation();
             mView.switchRecarcoinVisible(false);
+
+            //Deletes last key entered
+            this.deleteSpecificFirstKeyEntered2D(pKey);
         }
         else
         {
@@ -498,10 +582,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
             else
             {
-
+                //Draws chest on screen
                 mView.onWildcardKeyEntered_2D(pKey, pLocation, mUserData.getEraID());
-                mView.switchRecarcoinVisible(true);
-                mView.blinkRecarcoin();
             }
         }
     }
@@ -516,6 +598,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.removeBlinkingAnimation();
 
             mView.switchRecarcoinVisible(false);
+
+            //Deletes last key entered
+            this.deleteSpecificFirstKeyEntered2D(pKey);
         }
         else
        {
@@ -896,6 +981,39 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         map.put(Constants.URI_MAP_VALUE_LONGITUDE, params[4]);
 
         return map;
+    }
+
+    private void saveFirstKeyEntered2D(String key)
+    {
+        try
+        {
+            UserData.getInstance(mContext).saveFirstKeyEntered(key);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error saving first key entered: " + ex.getMessage());
+        }
+    }
+
+    private String getFirstKeyEntered2D()
+    {
+        return UserData.getInstance(mContext).getFirstKeyEntered();
+    }
+
+    private void deleteSpecificFirstKeyEntered2D(String key)
+    {
+        try
+        {
+            //Deletes key saved only if is the same that has left
+            if(TextUtils.equals(this.getFirstKeyEntered2D(), key))
+            {
+                UserData.getInstance(mContext).deleteFirstKeyEntered();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error deleting key from shared preferences: " +ex.getMessage());
+        }
     }
 
     private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String requiredVersion)

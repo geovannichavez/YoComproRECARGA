@@ -3,7 +3,6 @@ package com.globalpaysolutions.yocomprorecarga.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.MotionEvent;
 
 import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.api.Achievement;
@@ -50,6 +49,7 @@ public class UserData
     private static final String KEY_HAS_SEEN_INTRO = "usr_has_seen_intro";
     private static final String KEY_HAS_SELECTED_ERA = "usr_has_selected_era";
     private static final String KEY_HAS_SET_NICKNAME = "usr_has_set_nickname";
+    private static final String KEY_WELCOME_CHEST_AVAILABLE = "key_welcome_chest_available";
 
     //Coins and Chests
     private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
@@ -59,6 +59,7 @@ public class UserData
     private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
     private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
     private static final String KEY_LAST_CHEST_ID = "usr_last_chest_exchanged";
+    private static final String KEY_FIRST_CHEST_KEY_ENTERED = "key_last_chest_key_entered";
 
     //Achievements
     private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
@@ -113,6 +114,8 @@ public class UserData
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
+    private static final String KEY_WELCOME_CHEST_LATITUDE = "key_welcome_chest_latitude";
+    private static final String KEY_WELCOME_CHEST_LONGITUDE = "key_welcome_chest_longitude";
 
     //Last Wildcard touched
     private static final String KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID = "usr_last_wildcard_touched_firebase_id";
@@ -977,6 +980,56 @@ public class UserData
     public void setEraReselected()
     {
         mEditor.putBoolean(KEY_APP_ERA_RESELECTED, true);
+        mEditor.commit();
+    }
+
+    public void setWelcomeChestAvailable(boolean available)
+    {
+        mEditor.putBoolean(KEY_WELCOME_CHEST_AVAILABLE, available);
+        mEditor.commit();
+    }
+
+    public boolean checkWelcomeChestAvailable()
+    {
+        return mPreferences.getBoolean(KEY_WELCOME_CHEST_AVAILABLE, false);
+    }
+
+    public void saveWelcomeChestLat(float latt)
+    {
+        mEditor.putFloat(KEY_WELCOME_CHEST_LATITUDE, latt);
+        mEditor.commit();
+    }
+
+    public float getWelcomeChestLat()
+    {
+        return mPreferences.getFloat(KEY_WELCOME_CHEST_LATITUDE, 0);
+    }
+
+    public void saveWelcomeChestLong(float longt)
+    {
+        mEditor.putFloat(KEY_WELCOME_CHEST_LONGITUDE, longt);
+        mEditor.commit();
+    }
+
+    public float getWelcomeChestLong()
+    {
+        return mPreferences.getFloat(KEY_WELCOME_CHEST_LONGITUDE, 0);
+    }
+
+    public void saveFirstKeyEntered(String key)
+    {
+        mEditor.putString(KEY_FIRST_CHEST_KEY_ENTERED, key);
+        mEditor.commit();
+    }
+
+    public String getFirstKeyEntered()
+    {
+        return mPreferences.getString(KEY_FIRST_CHEST_KEY_ENTERED, "");
+    }
+
+    public void deleteFirstKeyEntered()
+    {
+        mEditor.remove(KEY_FIRST_CHEST_KEY_ENTERED);
         mEditor.commit();
     }
 }

@@ -69,4 +69,9 @@ public interface CapturePrizeView
     void navigateToPrizeDetails();
     void setEnabledChestImage(boolean enabled);
     void startShowcaseAR(boolean accelormeterDevice);
+
+    void drawChestGold2D(String pKey, LatLng pLocation, int pAgeID);
+    void drawChestSilver2D(String pKey, LatLng pLocation, int pAgeID);
+    void drawChestBronze2D(String pKey, LatLng pLocation, int pAgeID);
+    void drawChestWildcard2D(String pKey, LatLng pLocation, int pAgeID);
 }

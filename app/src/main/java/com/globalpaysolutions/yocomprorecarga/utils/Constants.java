@@ -77,6 +77,8 @@ public class Constants
     public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
     public static final String NAME_CHEST_TYPE_WILDCARD = "Wildcard";
 
+    public static final String WELCOME_CHEST_FIREBASE_KEY = "FreeChest";
+
     //URL Map Properties
     public static final String URI_MAP_VALUE_CHEST_TYPE = "chestType";
     public static final String URI_MAP_VALUE_FIREBASE_ID = "firebaseID";
@@ -168,6 +170,7 @@ public class Constants
     public static final String BUNDLE_CHALLENGE_QUERY = "bundle_challenge_query";
     public static final String BUNDLE_CHALLENGES_BACK_MAP = "bundle_challenges_back_map";
     public static final String NOTIFICATION_TITLE_BEEN_CHALLENGED = "¡Te han retado!";
+
 
 
     public static String PLATFORM = "ANDROID";
