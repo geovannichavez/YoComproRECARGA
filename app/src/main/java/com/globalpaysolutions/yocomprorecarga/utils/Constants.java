@@ -25,7 +25,7 @@ public class Constants
     //public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
     public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 0.75;
 
-    public static final double PLAYER_RADIUS_KM = 0.10; // 100 meters
+    public static final double PLAYER_RADIUS_KM = 0.5; // 500 meters
 
 
     //Permissions
