@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -65,6 +64,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     private GoogleLocationApiManager mGoogleLocationApiManager;
 
     private Map<String, Bitmap> mMarkerMap;
+    private int mLocationUpdatesCount;
 
     public HomePresenterImpl(HomeView pView, AppCompatActivity pActivity, Context pContext)
     {
@@ -79,6 +79,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         this.mGoogleLocationApiManager.setLocationCallback(this);
 
         this.mMarkerMap = new HashMap<>();
+        mLocationUpdatesCount = 0;
     }
 
     @Override
@@ -349,6 +350,36 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                 }
             });
         }*/
+    }
+
+    @Override
+    public void checkWelcomeChest(Location location)
+    {
+        try
+        {
+            //Checks if welcome user is available for welcome chest
+            if(UserData.getInstance(mContext).checkWelcomeChestAvailable()) //TODO: pasar a 'true'
+            {
+                Bitmap goldMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_GOLD);
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                float latt = Float.valueOf(String.valueOf(location.getLatitude()));
+                float longt = Float.valueOf(String.valueOf(location.getLongitude()));
+
+                UserData.getInstance(mContext).saveWelcomeChestLat(latt);
+                UserData.getInstance(mContext).saveWelcomeChestLong(longt);
+
+                mView.addGoldPointData(Constants.WELCOME_CHEST_FIREBASE_KEY, null, null);
+                mView.addGoldPoint(Constants.WELCOME_CHEST_FIREBASE_KEY, latLng, goldMarker);
+
+                //Sets user as welcome chest-unavailable
+                //UserData.getInstance(mContext).setWelcomeChestAvailable(false);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error checking for welcome chest: " + ex.getMessage());
+        }
     }
 
     @Override

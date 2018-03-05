@@ -148,6 +148,8 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         config.setCameraPosition(CameraSettings.CameraPosition.BACK);
         this.architectView.onCreate(config);
 
+        mPresenter.checkForWelcomeChest();
+
     }
 
     @Override
@@ -608,16 +610,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            ChestData2D data = new ChestData2D();
-            data.setLocation(pLocation);
-            data.setChestType(Constants.VALUE_CHEST_TYPE_GOLD);
-
-            mFirbaseObjects.clear();
-            mFirbaseObjects.put(pKey, data);
-
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getGoldResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
-            Picasso.with(this).load(resourceID).into(ivPrize2D);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_GOLD);
         }
         catch (Exception ex)
         {
@@ -648,16 +641,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            ChestData2D data = new ChestData2D();
-            data.setLocation(pLocation);
-            data.setChestType(Constants.VALUE_CHEST_TYPE_SILVER);
-
-            mFirbaseObjects.clear();
-            mFirbaseObjects.put(pKey, data);
-
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getSilverResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
-            Picasso.with(this).load(resourceID).into(ivPrize2D);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_SILVER);
         }
         catch (Exception ex)
         {
@@ -694,16 +678,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            ChestData2D data = new ChestData2D();
-            data.setLocation(pLocation);
-            data.setChestType(Constants.VALUE_CHEST_TYPE_BRONZE);
-
-            mFirbaseObjects.clear();
-            mFirbaseObjects.put(pKey, data);
-
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getBronzeResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
-            Picasso.with(this).load(resourceID).into(ivPrize2D);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_BRONZE);
         }
         catch (Exception ex)
         {
@@ -740,16 +715,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            ChestData2D data = new ChestData2D();
-            data.setLocation(pLocation);
-            data.setChestType(Constants.VALUE_CHEST_TYPE_WILDCARD);
-
-            mFirbaseObjects.clear();
-            mFirbaseObjects.put(pKey, data);
-
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getWildcardResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
-            Picasso.with(this).load(resourceID).into(ivPrize2D);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_WILDCARD);
         }
         catch (Exception ex)
         {
@@ -935,6 +901,95 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         }
     }
 
+    @Override
+    public void drawChestGold2D(String pKey, LatLng pLocation, int pAgeID)
+    {
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(pLocation);
+            data.setChestType(Constants.VALUE_CHEST_TYPE_GOLD);
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+            //Gets resource according to era selected
+            int resourceID = ChestSelector.getInstance(this).getGoldResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing gold chest 2d: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void drawChestSilver2D(String pKey, LatLng pLocation, int pAgeID)
+    {
+
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(pLocation);
+            data.setChestType(Constants.VALUE_CHEST_TYPE_SILVER);
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+            //Gets resource according to era selected
+            int resourceID = ChestSelector.getInstance(this).getSilverResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing silver chest 2d: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void drawChestBronze2D(String pKey, LatLng pLocation, int pAgeID)
+    {
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(pLocation);
+            data.setChestType(Constants.VALUE_CHEST_TYPE_BRONZE);
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+            //Gets resource according to era selected
+            int resourceID = ChestSelector.getInstance(this).getBronzeResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing silver chest 2d: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void drawChestWildcard2D(String pKey, LatLng pLocation, int pAgeID)
+    {
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(pLocation);
+            data.setChestType(Constants.VALUE_CHEST_TYPE_WILDCARD);
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+            //Gets resource according to era selected
+            int resourceID = ChestSelector.getInstance(this).getWildcardResource(pAgeID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing wildcard chest 2d: " +  ex.getMessage());
+        }
+    }
+
 
     /*
     *
@@ -975,6 +1030,8 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         try
         {
+            //Deletes any key saved, next time activity is created, will be a totally new key
+            mPresenter.deleteFirstKeySaved();
 
             mVibrator.cancel();
         }
@@ -992,7 +1049,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
 
         try
         {
-
             mVibrator.cancel();
         }
         catch (Exception ex)

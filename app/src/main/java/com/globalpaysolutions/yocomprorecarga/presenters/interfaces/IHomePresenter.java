@@ -2,7 +2,6 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 import android.location.Location;
 
-import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -43,4 +42,6 @@ public interface IHomePresenter
 
     void setPendingChallenges();
     void navigateToAR();
+
+    void checkWelcomeChest(Location location);
 }
