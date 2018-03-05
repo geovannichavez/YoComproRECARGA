@@ -293,7 +293,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 }
 
                 //User has seen the welcom chest, won't be available anymore
-                mUserData.setWelcomeChestAvailable(true); //TODO: Cambiar a false
+                mUserData.setWelcomeChestAvailable(false);
             }
             catch (Exception ex)
             {
