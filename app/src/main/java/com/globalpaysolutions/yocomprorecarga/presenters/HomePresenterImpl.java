@@ -408,7 +408,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     {
                         String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
                         GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
-                        mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+
+                        //Inserts location if setting is set to 'Visible'
+                        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+                            mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+                        else
+                            mInteractor.deletePlayerLocation(firebaseKey);
 
                         mView.updateUserLocationOnMap(location);
                     }
