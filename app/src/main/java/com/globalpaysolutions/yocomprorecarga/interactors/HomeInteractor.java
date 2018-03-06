@@ -215,9 +215,14 @@ public class HomeInteractor implements IHomeInteractor
                 public void onComplete(String key, DatabaseError error)
                 {
                     if(error == null)
+                    {
                         Log.i(TAG, "Location inserted succesfully for Current Player " + key);
+                    }
                     else
+                    {
                         Log.e(TAG, "Error trying to insert location for Current Player " + key);
+                    }
+
                 }
             });
         }
