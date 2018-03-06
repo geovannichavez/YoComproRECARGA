@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface ITriviaPresenter
 {
     void initialize();
+    void requestTrivia();
 }

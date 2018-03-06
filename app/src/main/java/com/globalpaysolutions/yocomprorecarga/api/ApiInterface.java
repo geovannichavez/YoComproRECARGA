@@ -38,6 +38,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
@@ -223,5 +224,9 @@ public interface ApiInterface
                                            @Header("AppVersion") String pAppVersion,
                                            @Header("Platform") String pPlatform);
 
-
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_TRIVIA)
+    Call<TriviaResponse> getTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                   @Header("AppVersion") String versionName,
+                                   @Header("Platform") String platform);
 }
