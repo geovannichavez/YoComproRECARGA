@@ -73,6 +73,8 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
 
         mUserData.hasSetNickname(true);
 
+        mUserData.setWelcomeChestAvailable(true);
+
         Intent next = new Intent(mActivity, Main.class);
         mView.navigateNext(next);
 

@@ -396,6 +396,8 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             mPresenter.prizePointsQuery(currentLocation);
             mPresenter.playersPointsQuery(currentLocation);
             mPresenter.writeCurrentPlayerLocation(currentLocation);
+
+            mPresenter.checkWelcomeChest(pLocation);
         }
         catch (Exception ex)
         {
@@ -417,6 +419,8 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             //mPresenter.writeCurrentPlayerLocation(currentLocation); //Updates current user location
             mPresenter.updatePrizePntCriteria(currentLocation); //TODO: No se había implementado este metodo
             mPresenter.updatePlayersPntCriteria(currentLocation);
+
+            //mPresenter.checkWelcomeChest(pLocation);
         }
         catch (Exception ex)
         {

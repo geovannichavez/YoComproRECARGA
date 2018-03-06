@@ -1,6 +1,5 @@
 package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
-import com.globalpaysolutions.yocomprorecarga.utils.CustomClickListener;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
@@ -21,4 +20,7 @@ public interface ICapturePrizeARPresenter
     void handleCoinExchangeKeyUp();
     void touchWildcard_2D(String pFirebaseID, int chestType);
     void showcaseARSeen();
+    void checkForWelcomeChest();
+    void deleteFirstKeySaved();
+    void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType);
 }
