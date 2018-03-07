@@ -9,4 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.interactors.TriviaListener;
 public interface ITriviaInteractor
 {
     void requestTrivia(TriviaListener listener);
+    void answerTrivia(int answerID);
 }

@@ -421,6 +421,9 @@
     <string name="title_attention">¡Atención!</string>
     <string name="label_not_enough_coins_to_create_challenge">¡No tienes suficientes RecarCoins para realizar un reto!</string>
     <string name="label_not_enough_coins_to_update_challenge">¡No tienes suficientes RecarCoins para responder un reto!</string>
+    <string name="label_loading_trivia">Cargando trivia, espere...</string>
+    <string name="label_time">Tiempo</string>
+    <string name="label_prize">Premio</string>
 
 
 </resources>

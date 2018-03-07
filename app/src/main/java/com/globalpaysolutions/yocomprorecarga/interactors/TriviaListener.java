@@ -11,4 +11,6 @@ public interface TriviaListener
 {
     void onRetriveTriviaSuccess(TriviaResponse response);
     void onRetriveTriviaError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse);
+    void onAnswerSuccess();
+    void onAnswerError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse);
 }

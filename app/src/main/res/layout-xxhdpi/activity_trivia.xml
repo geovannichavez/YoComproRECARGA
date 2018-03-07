@@ -12,6 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scaleType="centerCrop"
+        android:src="@drawable/bg_trivia"
         />
 
     <ImageView
@@ -26,31 +27,30 @@
         android:id="@+id/bgSponsor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bgTrivia"
+        app:layout_constraintTop_toBottomOf="@+id/lblQuestionNumber"
         app:srcCompat="@drawable/bg_trivia_sponsor"/>
 
     <ImageView
         android:id="@+id/bgPrizePointer"
-        android:layout_width="112dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="156dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/bgSponsor"
         app:layout_constraintTop_toTopOf="@+id/bgSponsor"
         app:srcCompat="@drawable/ic_trivia_prize_indicator"/>
 
     <ImageView
         android:id="@+id/bgTimePointer"
-        android:layout_width="112dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
@@ -69,7 +69,7 @@
         android:fontFamily="@font/baloo_regular"
         android:text="@string/label_prize"
         android:textColor="@color/pure_black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/bgPrizePointer"
         app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"/>
 
@@ -82,7 +82,7 @@
         android:fontFamily="@font/baloo_regular"
         android:text="@string/label_time"
         android:textColor="@color/pure_black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/bgTimePointer"
         app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
         app:layout_constraintTop_toBottomOf="@+id/bgPrizePointer"
@@ -90,8 +90,8 @@
 
     <ImageView
         android:id="@+id/icPrize"
-        android:layout_width="36dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
@@ -105,12 +105,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_regular"
         android:textColor="@color/white_textView_color"
-        android:textSize="26sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/bgPrizePointer"
         app:layout_constraintEnd_toStartOf="@+id/icPrize"
         app:layout_constraintStart_toStartOf="@+id/bgPrizePointer"
@@ -126,7 +126,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/white_textView_color"
-        android:textSize="28sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/bgTimePointer"
         app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
         app:layout_constraintStart_toStartOf="@+id/bgTimePointer"
@@ -143,21 +143,23 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/bgSponsor"
         app:layout_constraintEnd_toEndOf="@+id/bgSponsor"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/bgSponsor"
-        app:layout_constraintTop_toTopOf="@+id/bgSponsor"/>
+        app:layout_constraintTop_toTopOf="@+id/bgSponsor"
+        app:layout_constraintVertical_bias="0.0"/>
 
     <TextView
         android:id="@+id/lblQuestion"
-        android:layout_width="371dp"
+        android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/baloo_regular"
         android:gravity="center"
         android:maxLines="4"
         android:textColor="@color/pure_black"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgSponsor"
@@ -169,7 +171,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/lblQuestion"
         app:layout_constraintStart_toStartOf="@+id/lblQuestion"
         app:layout_constraintTop_toBottomOf="@+id/lblQuestion"
@@ -182,7 +183,7 @@
 
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/btnAnswer1"
         app:layout_constraintStart_toStartOf="@+id/btnAnswer1"
         app:layout_constraintTop_toBottomOf="@+id/btnAnswer1"
@@ -194,7 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="@+id/btnAnswer2"
         app:layout_constraintStart_toStartOf="@+id/btnAnswer2"
         app:layout_constraintTop_toBottomOf="@+id/btnAnswer2"
@@ -206,7 +207,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_regular"
         android:gravity="center"
         android:textColor="@color/white_textView_color"
@@ -272,6 +273,8 @@
         app:layout_constraintEnd_toEndOf="@+id/btnAnswer3"
         app:layout_constraintStart_toStartOf="@+id/btnAnswer3"
         app:layout_constraintTop_toTopOf="@+id/btnAnswer3"/>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

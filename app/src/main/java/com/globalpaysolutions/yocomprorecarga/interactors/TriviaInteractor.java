@@ -92,4 +92,10 @@ public class TriviaInteractor implements ITriviaInteractor
             }
         });
     }
+
+    @Override
+    public void answerTrivia(int answerID)
+    {
+
+    }
 }

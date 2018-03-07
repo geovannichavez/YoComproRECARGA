@@ -127,7 +127,7 @@ public class Main extends ImmersiveActivity implements MainView
         }
         else
         {
-            Intent store = new Intent(Main.this, Store.class);
+            Intent store = new Intent(Main.this, Trivia.class);//TODO: Cambiar a Store.class
             store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(store);
             finish();

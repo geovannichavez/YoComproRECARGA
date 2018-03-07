@@ -1,30 +1,50 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.QuestionTrivia;
 import com.globalpaysolutions.yocomprorecarga.presenters.TriviaPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.views.TriviaView;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Trivia extends AppCompatActivity implements TriviaView
 {
+    private static final String TAG = Trivia.class.getSimpleName();
+
     //Views and layouts
     ImageView bgTrivia;
     ImageView imgSponsor;
     ImageView btnAnswer1;
     ImageView btnAnswer2;
     ImageView btnAnswer3;
+    ImageView icPrize;
     TextView lblQuestionNumber;
     TextView lblPrizeCount;
     TextView lblTimeRem;
     TextView lblQuestion;
+    TextView tvAnswer1;
+    TextView tvAnswer2;
+    TextView tvAnswer3;
+    ProgressDialog mProgressDialog;
 
     //MVP
     TriviaPresenterImpl mPresenter;
+
+    //Global variables
+    private int mAnswerID;
+    HashMap<Integer, String> mAnswers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +57,10 @@ public class Trivia extends AppCompatActivity implements TriviaView
         btnAnswer1 = (ImageView) findViewById(R.id.btnAnswer1);
         btnAnswer2 = (ImageView) findViewById(R.id.btnAnswer2);
         btnAnswer3 = (ImageView) findViewById(R.id.btnAnswer3);
+        icPrize = (ImageView) findViewById(R.id.icPrize);
+        tvAnswer1 = (TextView) findViewById(R.id.tvAnswer1);
+        tvAnswer2 = (TextView) findViewById(R.id.tvAnswer2);
+        tvAnswer3 = (TextView) findViewById(R.id.tvAnswer3);
         lblQuestionNumber = (TextView) findViewById(R.id.lblQuestionNumber);
         lblPrizeCount = (TextView) findViewById(R.id.lblPrizeCount);
         lblTimeRem = (TextView) findViewById(R.id.lblTimeRem);
@@ -49,9 +73,187 @@ public class Trivia extends AppCompatActivity implements TriviaView
     }
 
     @Override
-    public void initilizeViews()
+    public void initialViewsState()
     {
         //Background
         Picasso.with(this).load(R.drawable.bg_trivia).into(bgTrivia);
+
+        btnAnswer1.setEnabled(false);
+        btnAnswer2.setEnabled(false);
+        btnAnswer3.setEnabled(false);
+
+        btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
+        btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
+        btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
+
     }
+
+    @Override
+    public void renderQuestion(QuestionTrivia trivia)
+    {
+        int counter = 0;
+
+        try
+        {
+            mAnswers = trivia.getAnswers();
+
+            if(!TextUtils.equals(trivia.getSponsorUrl(), ""))
+                Picasso.with(this).load(trivia.getSponsorUrl()).into(imgSponsor);
+
+            lblPrizeCount.setText(trivia.getCoinsPrize());
+            lblQuestionNumber.setText(trivia.getTitle());
+            lblQuestion.setText(trivia.getQuestionText());
+
+            switch (trivia.getPrizeType())
+            {
+                case 1: // Coins
+                    Picasso.with(this).load(R.drawable.ic_trivia_recarcoin).into(icPrize);
+                    break;
+                case 2: // Souvenirs
+                    Picasso.with(this).load(R.drawable.ic_trivia_souvenir).into(icPrize);
+                    break;
+                case 3: // Prize
+                    Picasso.with(this).load(R.drawable.ic_trivia_prize).into(icPrize);
+                    break;
+            }
+
+            for (Map.Entry<Integer, String> entry : mAnswers.entrySet())
+            {
+                counter = counter + 1;
+                Integer id = entry.getKey();
+                String answer = entry.getValue();
+
+                switch (counter)
+                {
+                    case 1:
+                        tvAnswer1.setText(answer);
+                        btnAnswer1.setTag(id);
+                        break;
+                    case 2:
+                        tvAnswer2.setText(answer);
+                        btnAnswer2.setTag(id);
+                        break;
+                    case 3:
+                        tvAnswer3.setText(answer);
+                        btnAnswer3.setTag(id);
+                        break;
+                }
+            }
+
+            btnAnswer1.setEnabled(true);
+            btnAnswer2.setEnabled(true);
+            btnAnswer3.setEnabled(true);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error rendering trivia question: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updateTimer(String remaining)
+    {
+        try
+        {
+            lblTimeRem.setText(remaining);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Something went wrong setting text on 'lblTimeRem': " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void setViewsListeners()
+    {
+        btnAnswer1.setOnClickListener(answer1Listener);
+        btnAnswer2.setOnClickListener(answer2Listener);
+        btnAnswer3.setOnClickListener(answer3Listener);
+    }
+
+    @Override
+    public void showLoadingDialog(String label)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(label);
+            mProgressDialog.show();
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(true);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showToast(String toast)
+    {
+        Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
+    }
+
+    /*
+    *
+    *   CLICK LISTENERS
+    *
+    * */
+    private View.OnClickListener answer1Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_on);
+            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
+            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
+            mAnswerID = (int)view.getTag();
+
+            mPresenter.answerTrivia(mAnswerID);
+        }
+    };
+
+    private View.OnClickListener answer2Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
+            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_on);
+            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
+            mAnswerID = (int)view.getTag();
+
+            mPresenter.answerTrivia(mAnswerID);
+        }
+    };
+
+    private View.OnClickListener answer3Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
+            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
+            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
+            mAnswerID = (int)view.getTag();
+
+            mPresenter.answerTrivia(mAnswerID);
+        }
+    };
 }
