@@ -1,18 +1,28 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.QuestionTrivia;
 import com.globalpaysolutions.yocomprorecarga.presenters.TriviaPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.views.TriviaView;
 import com.squareup.picasso.Picasso;
 
@@ -30,6 +40,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     ImageView btnAnswer2;
     ImageView btnAnswer3;
     ImageView icPrize;
+    ImageView btnBack;
     TextView lblQuestionNumber;
     TextView lblPrizeCount;
     TextView lblTimeRem;
@@ -58,6 +69,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         btnAnswer2 = (ImageView) findViewById(R.id.btnAnswer2);
         btnAnswer3 = (ImageView) findViewById(R.id.btnAnswer3);
         icPrize = (ImageView) findViewById(R.id.icPrize);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
         tvAnswer1 = (TextView) findViewById(R.id.tvAnswer1);
         tvAnswer2 = (TextView) findViewById(R.id.tvAnswer2);
         tvAnswer3 = (TextView) findViewById(R.id.tvAnswer3);
@@ -166,6 +178,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     @Override
     public void setViewsListeners()
     {
+        btnBack.setOnClickListener(backListener);
         btnAnswer1.setOnClickListener(answer1Listener);
         btnAnswer2.setOnClickListener(answer2Listener);
         btnAnswer3.setOnClickListener(answer3Listener);
@@ -210,6 +223,213 @@ public class Trivia extends AppCompatActivity implements TriviaView
         Toast.makeText(this, toast, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void showImageDialog(String title, String message, int resource, View.OnClickListener clickListener)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Trivia.this);
+            LayoutInflater inflater = Trivia.this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic_image, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgDialogImage);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(title);
+            tvDescription.setText(message);
+            imgSouvenir.setImageResource(resource);
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            if(clickListener != null)
+            {
+                btnClose.setOnClickListener(clickListener);
+            }
+            else
+            {
+                btnClose.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showSouvenirDialog(String name, String description, String url, View.OnClickListener clickListener)
+    {
+        try
+        {
+            //Creates the builder and inflater of dialog
+            final AlertDialog souvenirDialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(Trivia.this);
+            LayoutInflater inflater = Trivia.this.getLayoutInflater();
+            final View dialogView = inflater.inflate(R.layout.custom_dialog_won_sourvenir, null);
+
+            TextView tvSouvenirName = (TextView) dialogView.findViewById(R.id.lblSouvenirName);
+            ImageView imgSouvenir = (ImageView) dialogView.findViewById(R.id.imgSouvenirDialog);
+            ImageButton btnClose = (ImageButton) dialogView.findViewById(R.id.btnClose);
+            ImageButton btnGenericDialogButton = (ImageButton) dialogView.findViewById(R.id.btnGenericDialogButton);
+
+            btnGenericDialogButton.setOnClickListener(clickListener);
+
+            tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), name));
+            Picasso.with(this).load(url).into(imgSouvenir);
+
+            souvenirDialog = builder.setView(dialogView).create();
+            souvenirDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            souvenirDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            souvenirDialog.show();
+
+            btnClose.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    souvenirDialog.dismiss();
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigateSouvenirs()
+    {
+        try
+        {
+            Intent souvs = new Intent(this, Souvenirs.class);
+            souvs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(souvs);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error navigating to Souvenirs: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigatePrizeDetail()
+    {
+        try
+        {
+            Intent prizeDetails = new Intent(this, PrizeDetail.class);
+            prizeDetails.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(prizeDetails);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error navigating to prize details: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void showGenericDialog(DialogViewModel content)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(content.getTitle());
+            tvDescription.setText(content.getLine1());
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    dialog.dismiss();
+                }
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void finishActivity()
+    {
+        try
+        {
+            Intent back = new Intent(this, Main.class);
+            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(back);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeClickable()
+    {
+        btnAnswer1.setClickable(false);
+        btnAnswer2.setClickable(false);
+        btnAnswer3.setClickable(false);
+    }
+
+    @Override
+    public void highlightButton(int buttonClicked, boolean correctAnswer)
+    {
+        switch (buttonClicked)
+        {
+            case 1:
+                if(correctAnswer)
+                    btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_good);
+                else
+                    btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_wrong);
+                break;
+            case 2:
+                if(correctAnswer)
+                    btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_good);
+                else
+                    btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_wrong);
+                break;
+            case 3:
+                if(correctAnswer)
+                    btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_good);
+                else
+                    btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_wrong);
+                break;
+        }
+    }
+
     /*
     *
     *   CLICK LISTENERS
@@ -225,7 +445,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID);
+            mPresenter.answerTrivia(mAnswerID, 1);
         }
     };
 
@@ -239,7 +459,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID);
+            mPresenter.answerTrivia(mAnswerID, 2);
         }
     };
 
@@ -253,7 +473,28 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID);
+            mPresenter.answerTrivia(mAnswerID, 3);
         }
     };
+
+    private View.OnClickListener backListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(Trivia.this).animateButton(view);
+            finishActivity();
+        }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            finishActivity();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

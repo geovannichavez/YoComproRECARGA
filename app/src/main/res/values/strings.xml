@@ -424,6 +424,9 @@
     <string name="label_loading_trivia">Cargando trivia, espere...</string>
     <string name="label_time">Tiempo</string>
     <string name="label_prize">Premio</string>
+    <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
+    <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
+    <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
 
 
 </resources>

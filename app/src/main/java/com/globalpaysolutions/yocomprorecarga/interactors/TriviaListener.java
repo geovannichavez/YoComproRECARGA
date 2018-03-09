@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 
 /**
@@ -11,6 +12,6 @@ public interface TriviaListener
 {
     void onRetriveTriviaSuccess(TriviaResponse response);
     void onRetriveTriviaError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse);
-    void onAnswerSuccess();
+    void onAnswerSuccess(RespondTriviaResponse response, int answerID, int buttonClicked);
     void onAnswerError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse);
 }

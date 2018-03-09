@@ -3,16 +3,21 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.TriviaInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.TriviaListener;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.QuestionTrivia;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Answer;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITriviaPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TriviaView;
 
 import java.util.HashMap;
@@ -29,6 +34,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     private TriviaView mView;
     private AppCompatActivity mActivity;
     private TriviaInteractor mInteractor;
+    private CountDownTimer mTriviaCountdwon;
 
     public TriviaPresenterImpl(Context context, TriviaView view, AppCompatActivity activity)
     {
@@ -59,10 +65,12 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     }
 
     @Override
-    public void answerTrivia(int answerID)
+    public void answerTrivia(int answerID, int buttonClicked)
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.answerTrivia(answerID);
+
+        mView.removeClickable();
+        mInteractor.answerTrivia(answerID, this, buttonClicked);
     }
 
     @Override
@@ -99,19 +107,147 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     @Override
     public void onRetriveTriviaError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse)
     {
-        mView.hideLoadingDialog();
+        try
+        {
+            mView.hideLoadingDialog();
+            mTriviaCountdwon.cancel();
+
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public void onAnswerSuccess()
+    public void onAnswerSuccess(RespondTriviaResponse response, int answerID, int buttonClicked)
     {
         mView.hideLoadingDialog();
+        mTriviaCountdwon.cancel();
+
+        try
+        {
+            if(TextUtils.equals(response.getInternalCode(), "05")) //Wrong answer
+            {
+                String title = mContext.getString(R.string.title_trivia_wrong_answer);
+                String description = mContext.getString(R.string.content_trivia_wrong_answer);
+                int resource = R.drawable.ic_alert;
+
+                mView.highlightButton(buttonClicked, false);
+
+                mView.showImageDialog(title, description, resource, new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        mView.finishActivity();
+                    }
+                });
+            }
+            else //Correct Answer
+            {
+                switch (response.getType())
+                {
+                    case 1: //Coins
+
+                        //Saves coins earned
+                        UserData.getInstance(mContext).saveLastChestValue(response.getCoins().getExchangeCoins());
+
+                        String title = mContext.getString(R.string.label_congratulations_title);
+                        String message = String.format(mContext.getString(R.string.label_congratulations_you_earned_coins),
+                                String.valueOf(response.getCoins().getExchangeCoins()));
+                        int resource = R.drawable.img_recarcoin_multiple;
+
+                        mView.showImageDialog(title, message, resource, null);
+
+                        break;
+
+                    case 2: //Sourbivor
+
+                        String name = response.getSouvenir().getTitle();
+                        String description = response.getSouvenir().getDescription();
+                        String url = response.getSouvenir().getImgUrl();
+
+                        //Saves obtained Souv
+                        UserData.getInstance(mContext).saveSouvenirObtained(name, description, url, response.getSouvenir().getValue());
+
+                        mView.showSouvenirDialog(name, description, url, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View view)
+                            {
+                                mView.navigateSouvenirs();
+                            }
+                        });
+                        break;
+                    case 3: //Prize
+
+                        String prizeTitle = response.getPrize().getTitle();
+                        String prizeDescription = response.getPrize().getDescription();
+                        String prizeCode = response.getPrize().getCode();
+                        String prizeDial = response.getPrize().getDial();
+                        int prizeLevel = response.getPrize().getPrizeLevel();
+                        String prizeLogoUrl = response.getPrize().getLogoUrl();
+                        String prizeHexColor = response.getPrize().getHexColor();
+
+                        UserData.getInstance(mContext).saveLastPrizeTitle(prizeTitle);
+                        UserData.getInstance(mContext).saveLastPrizeDescription(prizeDescription);
+                        UserData.getInstance(mContext).saveLastPrizeCode(prizeCode);
+                        UserData.getInstance(mContext).saveLastPrizeDial(prizeDial);
+                        UserData.getInstance(mContext).saveLastPrizeLevel(prizeLevel);
+                        UserData.getInstance(mContext).saveLastPrizeLogoUrl(prizeLogoUrl);
+                        UserData.getInstance(mContext).saveLastPrizeExchangedColor(prizeHexColor);
+                        mView.navigatePrizeDetail();
+
+                        break;
+                    case 0: //Error
+                        DialogViewModel dialog = new DialogViewModel();
+                        dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                        dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+                        dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                        mView.showGenericDialog(dialog);
+                        break;
+                }
+
+                mView.highlightButton(buttonClicked, true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on Answer Trivia success: " + ex.getMessage());
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
     }
 
     @Override
     public void onAnswerError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse)
     {
-        mView.hideLoadingDialog();
+        try
+        {
+            mView.hideLoadingDialog();
+            mTriviaCountdwon.cancel();
+
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+
     }
 
     private void startTimer(long senconds)
@@ -120,7 +256,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
         {
             final long millis = senconds * 1000;
 
-            CountDownTimer triviaCountdwon = new CountDownTimer(millis, 100)
+            mTriviaCountdwon = new CountDownTimer(millis, 100)
             {
                 int secondsLeft = 0;
 
@@ -141,7 +277,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                 }
             };
 
-            triviaCountdwon.start();
+            mTriviaCountdwon.start();
         }
         catch (Exception ex)
         {

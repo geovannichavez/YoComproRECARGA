@@ -8,5 +8,5 @@ public interface ITriviaPresenter
 {
     void initialize();
     void requestTrivia();
-    void answerTrivia(int answerID);
+    void answerTrivia(int answerID, int buttonClicked);
 }

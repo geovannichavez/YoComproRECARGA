@@ -31,6 +31,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
@@ -229,4 +231,11 @@ public interface ApiInterface
     Call<TriviaResponse> getTrivia(@Header("authenticationKey") String userAuthenticationKey,
                                    @Header("AppVersion") String versionName,
                                    @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.RESPOND_TRIVIA)
+    Call<RespondTriviaResponse> respondTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                              @Header("AppVersion") String versionName,
+                                              @Header("Platform") String platforn,
+                                              @Body RespondTriviaReq request);
 }
