@@ -8,5 +8,6 @@ public interface ITriviaPresenter
 {
     void initialize();
     void requestTrivia();
-    void answerTrivia(int answerID, int buttonClicked);
+    void answerTrivia(int answerID, int buttonClicked, int triviaID, boolean answered);
+    void finishTimer();
 }

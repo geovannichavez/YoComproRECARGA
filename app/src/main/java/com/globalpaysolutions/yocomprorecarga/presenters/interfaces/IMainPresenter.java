@@ -6,12 +6,13 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface IMainPresenter
 {
-    void setBackground();
+    void setInitialViews();
     void checkUserDataCompleted();
     void checkFunctionalityLimitedShown();
     void showcaseSeen(boolean seen);
     void downloadMarkers();
     void checkPermissions();
     void onPermissionsResult(int requestCode, String permissions[], int[] grantResults);
+    void retrievePendings();
     //void mustReselectEra(String destiny);
 }

@@ -65,12 +65,35 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     }
 
     @Override
-    public void answerTrivia(int answerID, int buttonClicked)
+    public void answerTrivia(int answerID, int buttonClicked, int triviaID, boolean answered)
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-
         mView.removeClickable();
-        mInteractor.answerTrivia(answerID, this, buttonClicked);
+        if(answered)
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            mInteractor.answerTrivia(answerID, this, buttonClicked, triviaID);
+        }
+        else
+        {
+            mInteractor.silentAnswerTrivia(0, this, triviaID);
+        }
+    }
+
+    @Override
+    public void finishTimer()
+    {
+        try
+        {
+            if(mTriviaCountdwon != null)
+            {
+                mTriviaCountdwon.cancel();
+                mTriviaCountdwon = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Failed when stoping timer: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -89,6 +112,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
             }
 
             QuestionTrivia trivia = new QuestionTrivia();
+            trivia.setTriviaID(response.getTriviaID());
             trivia.setTitle(response.getTitle());
             trivia.setQuestionText(response.getDescription());
             trivia.setCoinsPrize(String.valueOf(response.getValue()));
@@ -110,7 +134,8 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
         try
         {
             mView.hideLoadingDialog();
-            mTriviaCountdwon.cancel();
+            if(mTriviaCountdwon != null)
+                mTriviaCountdwon.cancel();
 
             DialogViewModel dialog = new DialogViewModel();
             dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
@@ -128,7 +153,8 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     public void onAnswerSuccess(RespondTriviaResponse response, int answerID, int buttonClicked)
     {
         mView.hideLoadingDialog();
-        mTriviaCountdwon.cancel();
+        if(mTriviaCountdwon != null)
+            mTriviaCountdwon.cancel();
 
         try
         {
@@ -234,7 +260,9 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
         try
         {
             mView.hideLoadingDialog();
-            mTriviaCountdwon.cancel();
+
+            if(mTriviaCountdwon != null)
+                mTriviaCountdwon.cancel();
 
             DialogViewModel dialog = new DialogViewModel();
             dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
@@ -248,6 +276,18 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
         }
 
 
+    }
+
+    @Override
+    public void onSilentAnswerSuccess()
+    {
+        Log.i(TAG, "Silent answer to triva suceeded");
+    }
+
+    @Override
+    public void onSilentAnswerError()
+    {
+        Log.i(TAG, "Silent answer to triva failed");
     }
 
     private void startTimer(long senconds)
@@ -273,6 +313,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                 @Override
                 public void onFinish()
                 {
+                    mView.finishActivity();
                     Log.i(TAG, "Trivia timer has finished");
                 }
             };

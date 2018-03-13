@@ -10,4 +10,7 @@ public interface MainView
     void navigateStore();
     void navigateSettings();
     void showTutorial();
+    void setPendingChallenges(String pending, boolean active);
+    void setTriviaAvailable(boolean available);
+    void setClickListeners();
 }

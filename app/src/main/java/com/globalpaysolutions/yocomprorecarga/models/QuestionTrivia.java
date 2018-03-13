@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class QuestionTrivia
 {
+    private int mTriviaID;
     private String mTitle;
     private String mQuestionText;
     private String mSponsorUrl;
@@ -16,6 +17,16 @@ public class QuestionTrivia
     private HashMap<Integer, String> mAnswers;
 
     public QuestionTrivia(){}
+
+    public int getTriviaID()
+    {
+        return mTriviaID;
+    }
+
+     public void setTriviaID(int triviaID)
+     {
+         this.mTriviaID = triviaID;
+     }
 
     public String getTitle()
     {

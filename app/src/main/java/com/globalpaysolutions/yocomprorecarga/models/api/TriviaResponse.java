@@ -11,6 +11,9 @@ import java.util.List;
 
 public class TriviaResponse
 {
+    @SerializedName("TriviaID")
+    @Expose
+    private int triviaID;
     @SerializedName("Title")
     @Expose
     private String title;
@@ -32,6 +35,16 @@ public class TriviaResponse
     @SerializedName("Answer")
     @Expose
     private List<Answer> answer = null;
+
+    public int getTriviaID()
+    {
+        return triviaID;
+    }
+
+    public void setTriviaID(int triviaID)
+    {
+        this.triviaID = triviaID;
+    }
 
     public String getTitle()
     {

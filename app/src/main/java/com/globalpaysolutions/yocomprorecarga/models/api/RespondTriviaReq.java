@@ -13,6 +13,10 @@ public class RespondTriviaReq
     @Expose
     private int triviaAnswerID;
 
+    @SerializedName("TriviaID")
+    @Expose
+    private int triviaID;
+
     public int getTriviaAnswerID()
     {
         return triviaAnswerID;
@@ -21,5 +25,15 @@ public class RespondTriviaReq
     public void setTriviaAnswerID(int triviaAnswerID)
     {
         this.triviaAnswerID = triviaAnswerID;
+    }
+
+    public int getTriviaID()
+    {
+        return triviaID;
+    }
+
+    public void setTriviaID(int triviaID)
+    {
+        this.triviaID = triviaID;
     }
 }

@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
@@ -62,6 +63,6 @@ public interface HomeListener
 
     void fb_currentPlayerDataInserted(String key, GeoLocation location);
 
-    void onPendingChallengesSuccess(SimpleResponse body);
+    void onPendingChallengesSuccess(PendingsResponse body);
     void onPendingChallengesError(int code, Throwable throwable);
 }

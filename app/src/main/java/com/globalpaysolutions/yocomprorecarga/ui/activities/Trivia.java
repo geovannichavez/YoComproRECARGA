@@ -55,6 +55,8 @@ public class Trivia extends AppCompatActivity implements TriviaView
 
     //Global variables
     private int mAnswerID;
+    private int mTriviaID;
+    private boolean mAnswered;
     HashMap<Integer, String> mAnswers;
 
     @Override
@@ -79,6 +81,9 @@ public class Trivia extends AppCompatActivity implements TriviaView
         lblQuestion = (TextView) findViewById(R.id.lblQuestion);
 
         mPresenter = new TriviaPresenterImpl(this, this, this);
+        mAnswerID = 0;
+        mTriviaID = 0;
+        mAnswered = false;
 
         mPresenter.initialize();
         mPresenter.requestTrivia();
@@ -104,6 +109,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     public void renderQuestion(QuestionTrivia trivia)
     {
         int counter = 0;
+        mTriviaID = trivia.getTriviaID();
 
         try
         {
@@ -440,12 +446,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
+            mAnswered = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_on);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 1);
+            mPresenter.answerTrivia(mAnswerID, 1, mTriviaID, mAnswered);
         }
     };
 
@@ -454,12 +461,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
+            mAnswered = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_on);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 2);
+            mPresenter.answerTrivia(mAnswerID, 2, mTriviaID, mAnswered);
         }
     };
 
@@ -468,12 +476,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
+            mAnswered = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 3);
+            mPresenter.answerTrivia(mAnswerID, 3, mTriviaID, mAnswered);
         }
     };
 
@@ -496,5 +505,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        mPresenter.answerTrivia(mAnswerID, 0, mTriviaID, mAnswered);
+        mPresenter.finishTimer();
     }
 }

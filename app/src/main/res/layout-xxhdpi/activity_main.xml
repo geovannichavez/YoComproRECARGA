@@ -19,13 +19,12 @@
     <ImageView
         android:id="@+id/imageView25"
         android:layout_width="326dp"
-        android:layout_height="119dp"
-        android:layout_marginTop="44dp"
+        android:layout_height="97dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView51"
         app:srcCompat="@drawable/logo_recargo"/>
 
 
@@ -140,5 +139,60 @@
         app:layout_constraintStart_toEndOf="@+id/buttonPrize"
         app:layout_constraintTop_toBottomOf="@+id/btnTravel"
         app:layout_constraintVertical_bias="1.0"/>
+
+    <ImageView
+        android:id="@+id/imageView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_trivia_panel"/>
+
+    <ImageView
+        android:id="@+id/icNewChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView51"
+        app:layout_constraintStart_toStartOf="@+id/imageView51"
+        app:layout_constraintTop_toTopOf="@+id/imageView51"
+        app:srcCompat="@drawable/ic_challenge_off"/>
+
+    <ImageView
+        android:id="@+id/icNewTrivia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView51"
+        app:layout_constraintEnd_toEndOf="@+id/imageView51"
+        app:layout_constraintTop_toTopOf="@+id/imageView51"
+        app:srcCompat="@drawable/ic_trivia_off"/>
+
+    <TextView
+        android:id="@+id/tvPendingCh"
+        android:layout_width="26dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icNewChallenge"
+        app:layout_constraintEnd_toEndOf="@+id/icNewChallenge"
+        app:layout_constraintStart_toStartOf="@+id/icNewChallenge"
+        app:layout_constraintTop_toTopOf="@+id/icNewChallenge"
+        tools:text="4"/>
 
 </android.support.constraint.ConstraintLayout>

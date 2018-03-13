@@ -25,6 +25,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardRespons
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
@@ -222,9 +223,9 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_PENDING_CHALLENGES)
-    Call<SimpleResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
-                                           @Header("AppVersion") String pAppVersion,
-                                           @Header("Platform") String pPlatform);
+    Call<PendingsResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
+                                                @Header("AppVersion") String pAppVersion,
+                                                @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_TRIVIA)

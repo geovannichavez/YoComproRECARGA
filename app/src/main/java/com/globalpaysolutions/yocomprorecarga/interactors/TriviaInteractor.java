@@ -96,10 +96,11 @@ public class TriviaInteractor implements ITriviaInteractor
     }
 
     @Override
-    public void answerTrivia(final int answerID, final TriviaListener listener, final int buttonClicked)
+    public void answerTrivia(final int answerID, final TriviaListener listener, final int buttonClicked, int triviaID)
     {
         RespondTriviaReq request = new RespondTriviaReq();
         request.setTriviaAnswerID(answerID);
+        request.setTriviaID(triviaID);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<RespondTriviaResponse> call = apiService.respondTrivia(UserData.getInstance(mContext).getUserAuthenticationKey(),
@@ -157,5 +158,32 @@ public class TriviaInteractor implements ITriviaInteractor
         });
 
 
+    }
+
+    @Override
+    public void silentAnswerTrivia(int answer, final TriviaListener listener, int triviaID)
+    {
+        RespondTriviaReq request = new RespondTriviaReq();
+        request.setTriviaAnswerID(answer);
+        request.setTriviaID(triviaID);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<RespondTriviaResponse> call = apiService.respondTrivia(UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, request);
+
+        call.enqueue(new Callback<RespondTriviaResponse>()
+        {
+            @Override
+            public void onResponse(Call<RespondTriviaResponse> call, Response<RespondTriviaResponse> response)
+            {
+                listener.onSilentAnswerSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<RespondTriviaResponse> call, Throwable t)
+            {
+                listener.onSilentAnswerError();
+            }
+        });
     }
 }
