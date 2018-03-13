@@ -334,9 +334,9 @@ public class Main extends ImmersiveActivity implements MainView
         public void onClick(View view)
         {
             ButtonAnimator.getInstance(Main.this).animateButton(view);
-            Intent store = new Intent(Main.this, Trivia.class);
-            store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(store);
+            Intent trivia = new Intent(Main.this, Trivia.class);
+            trivia.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(trivia);
             finish();
         }
     };
@@ -347,9 +347,10 @@ public class Main extends ImmersiveActivity implements MainView
         public void onClick(View view)
         {
             ButtonAnimator.getInstance(Main.this).animateButton(view);
-            Intent store = new Intent(Main.this, Challenges.class);
-            store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(store);
+            Intent challenges = new Intent(Main.this, Challenges.class);
+            challenges.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.MAIN);
+            challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(challenges);
             finish();
         }
     };

@@ -179,4 +179,9 @@ public class Constants
     {
         CREATE, UPDATE, SELECT
     }
+
+    public enum ChallengesBackStack
+    {
+        MAP, PROFILE, MAIN
+    }
 }
