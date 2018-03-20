@@ -31,6 +31,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RewardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
@@ -225,10 +226,10 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUEST_REWARD_LIKES)
-    Call<SimpleResponse> requestLikesReward(@Header("authenticationKey") String userAuthenticationKey,
-                              @Header("AppVersion") String versionName,
-                              @Header("Platform") String platform,
-                              @Body RequestRewardReq request);
+    Call<RewardResponse> requestLikesReward(@Header("authenticationKey") String userAuthenticationKey,
+                                            @Header("AppVersion") String versionName,
+                                            @Header("Platform") String platform,
+                                            @Body RequestRewardReq request);
 
 
 }

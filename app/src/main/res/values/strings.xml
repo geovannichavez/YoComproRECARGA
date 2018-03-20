@@ -423,9 +423,12 @@
     <string name="label_not_enough_coins_to_update_challenge">¡No tienes suficientes RecarCoins para responder un reto!</string>
     <string name="title_free_recarcoins">RecarCoins Gratis</string>
     <string name="label_reward">Recompensa:</string>
-    <string name="label_like_fanpage_action">Dar \"Me Gusta\" a RecarGO! en Facebook</string>
+    <string name="label_like_fanpage_action">Compartir la página de RecarGO! en Facebook</string>
     <string name="label_share_player">Compartir tu usuario en tu muro de Facebook</string>
     <string name="label_earned_coins_reward">Has ganado %1$s monedas. ¡Sigue jugando para ganar más premios!</string>
+    <string name="facebook_share_content_im_a_player">Soy jugador de RecarGO!, juega y gana muchos premios, encuéntrame como %1$s y rétame</string>
+    <string name="title_aready_done_like_share">¡Ya ganaste tus monedas!</string>
+    <string name="label_aready_done_like_share">Ya ganaste tus monedas por compartir en Facebook. ¡Continúa jugando para ganar!</string>
 
 
 </resources>

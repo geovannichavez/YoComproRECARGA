@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -34,6 +37,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.LikesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.LikesClickListener;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.LikesView;
 import com.squareup.picasso.Picasso;
 
@@ -74,7 +78,7 @@ public class Likes extends AppCompatActivity implements LikesView
             @Override
             public void onSuccess(Sharer.Result result)
             {
-                mPresenter.requestReward(2);
+                mPresenter.requestReward();
             }
 
             @Override
@@ -109,17 +113,37 @@ public class Likes extends AppCompatActivity implements LikesView
             LikesAdapter rewardsAdapter = new LikesAdapter(this, rewards, mPresenter, new LikesClickListener()
             {
                 @Override
-                public void onClickListener(int position, Constants.FacebookActions action, ShareButton shareButton)
+                public void onClickListener(int position, ShareButton shareButton, Constants.FacebookActions actions)
                 {
-                    switch (action)
+
+                    if (ShareDialog.canShow(ShareLinkContent.class))
                     {
-                        case LIKE:
-                            likeFanpage();
-                            break;
-                        case SHARE:
-                            shareContent(shareButton);
-                            break;
+                        ShareLinkContent shareContent =  null;
+                        switch (actions)
+                        {
+                            case SHARE_PROFILE:
+                                String nickname = UserData.getInstance(Likes.this).getNickname();
+                                String phrase = String.format(Likes.this.getString(R.string.facebook_share_content_im_a_player), nickname);
+
+                                shareContent = new ShareLinkContent.Builder()
+                                        .setContentUrl(Uri.parse(Constants.FACEBOOK_PLAYER_URL))
+                                        .setQuote(phrase)
+                                        .setShareHashtag(new ShareHashtag.Builder().setHashtag("RecarGO").build())
+                                        .build();
+                                break;
+                            case SHARE_PAGE:
+                                shareContent = new ShareLinkContent.Builder()
+                                        .setContentUrl(Uri.parse(Constants.FACEBOOK_FANPAGE_URL))
+                                        .setShareHashtag(new ShareHashtag.Builder().setHashtag("SiempreGanas").build())
+                                        .build();
+                                break;
+                        }
+
+                        shareButton.setShareContent(shareContent);
+
                     }
+
+                    shareButton.performClick();
                 }
             });
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplication());
@@ -221,27 +245,6 @@ public class Likes extends AppCompatActivity implements LikesView
         }
     }
 
-
-    private void likeFanpage()
-    {
-        //mPresenter.lik
-    }
-
-    private void shareContent(ShareButton shareButton)
-    {
-        try
-        {
-            if(shareButton != null)
-            {
-                shareButton.performClick();
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error mocking content to share: " + ex.getMessage());
-        }
-    }
-
     /*
     *
     *   CLICK LISTENERS
@@ -251,10 +254,17 @@ public class Likes extends AppCompatActivity implements LikesView
 
     private void backNavigation()
     {
-        Intent back = new Intent(Likes.this, Main.class);
+        Intent back = new Intent(Likes.this, Store.class);
         back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(back);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

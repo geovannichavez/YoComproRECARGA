@@ -268,6 +268,17 @@
         app:layout_constraintStart_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="@+id/imageView10"/>
 
+    <ImageView
+        android:id="@+id/btnRewards"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_free_recarcoins"/>
+
     <!--<ImageButton
         android:id="@+id/btnInfoStoreItem"
         android:layout_width="wrap_content"

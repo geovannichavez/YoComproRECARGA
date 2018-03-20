@@ -9,6 +9,5 @@ import com.globalpaysolutions.yocomprorecarga.presenters.LikesPresenterImpl;
 
 public interface ILikesInteractor
 {
-    void likeFanpage(LikesListener listener);
     void requestReward(int option, LikesListener listener);
 }

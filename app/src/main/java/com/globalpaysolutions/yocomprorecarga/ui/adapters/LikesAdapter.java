@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.CallbackManager;
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
@@ -18,7 +18,9 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.RewardItem;
 import com.globalpaysolutions.yocomprorecarga.presenters.LikesPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.LikesClickListener;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -33,15 +35,14 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikesViewHol
 
     private Context mContext;
     private List<RewardItem> mRewardList;
-    private LikesClickListener mClickListener;
-    private CallbackManager mCallbackManager = CallbackManager.Factory.create();
     private LikesPresenterImpl mPresenter;
+    private LikesClickListener mClickListener;
 
     public LikesAdapter(Context context, List<RewardItem> rewardsList, LikesPresenterImpl presenter, LikesClickListener listener)
     {
         this.mContext = context;
-        this.mRewardList = rewardsList;
         this.mPresenter = presenter;
+        this.mRewardList = rewardsList;
         this.mClickListener = listener;
     }
 
@@ -63,6 +64,16 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikesViewHol
 
             holder.lblDescription.setText(rewardItem.getDescription());
             holder.lblCoins.setText(rewardItem.getReward());
+
+            switch (rewardItem.getAction())
+            {
+                case SHARE_PROFILE:
+                    holder.btnAction.setImageResource(R.drawable.ic_share_fb);
+                    break;
+                case SHARE_PAGE:
+                    holder.btnAction.setImageResource(R.drawable.ic_share_fb);
+                    break;
+            }
         }
         catch (Exception ex)
         {
@@ -95,15 +106,6 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikesViewHol
             btnAction = (ImageView) row.findViewById(R.id.btnAction);
             shareButton = (ShareButton) row.findViewById(R.id.btnShare);
             btnAction.setOnClickListener(this);
-
-            if (ShareDialog.canShow(ShareLinkContent.class))
-            {
-                ShareLinkContent shareContent = new ShareLinkContent.Builder()
-                        .setContentUrl(Uri.parse("http://recar-go.com/share/ShareAchievement")) //TODO: Cambiar URL
-                        .setQuote("Acabo de lograr el nivel %1$s de %2$s en RecarGO!") //TODO: Cambair texto
-                        .build();
-                shareButton.setShareContent(shareContent);
-            }
         }
 
         @Override
@@ -112,12 +114,14 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.LikesViewHol
             ButtonAnimator.getInstance(mContext).animateButton(view);
 
             RewardItem rewardItem = mRewardList.get(getAdapterPosition());
+            mPresenter.saveLastShareSelection(rewardItem.getAction());
+
             if (view.getId() == btnAction.getId())
                 Log.i(TAG, "Item pressed: " +  String.valueOf(getAdapterPosition()));
             else
                 Log.i(TAG, "Row pressed: " +  String.valueOf(getAdapterPosition()));
 
-            listenerRef.get().onClickListener(getAdapterPosition(), rewardItem.getAction(), shareButton);
+            listenerRef.get().onClickListener(getAdapterPosition(), shareButton, rewardItem.getAction());
         }
     }
 }

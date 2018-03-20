@@ -3,15 +3,12 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.util.Log;
 
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ILikesInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.RewardResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
@@ -39,34 +36,6 @@ public class LikesInteractor implements ILikesInteractor
     }
 
     @Override
-    public void likeFanpage(final LikesListener listener)
-    {
-        try
-        {
-            new GraphRequest(AccessToken.getCurrentAccessToken(), Constants.FACEBOOK_FANPAGE_GRAPH_PATH,
-                    null,
-                    HttpMethod.POST,
-                    new GraphRequest.Callback()
-                    {
-                        public void onCompleted(GraphResponse response)
-                        {
-                            /* handle the result */
-                            if(response.getError() == null)
-                                listener.onLikeSuccess();
-                            else
-                                listener.onLikeError();
-
-                        }
-                    }
-            ).executeAsync();
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error on Like GraphAPI: " + ex.getMessage());
-        }
-    }
-
-    @Override
     public void requestReward(final int option, final LikesListener listener)
     {
         try
@@ -75,17 +44,17 @@ public class LikesInteractor implements ILikesInteractor
             request.setActionID(option);
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-            final Call<SimpleResponse> call = apiService.requestLikesReward(UserData.getInstance(mContext).getUserAuthenticationKey(),
+            final Call<RewardResponse> call = apiService.requestLikesReward(UserData.getInstance(mContext).getUserAuthenticationKey(),
                     VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, request);
 
-            call.enqueue(new Callback<SimpleResponse>()
+            call.enqueue(new Callback<RewardResponse>()
             {
                 @Override
-                public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response)
+                public void onResponse(Call<RewardResponse> call, Response<RewardResponse> response)
                 {
                     if(response.isSuccessful())
                     {
-                        listener.onRewardSuccess(response, option);
+                        listener.onRewardSuccess(response.body(), option);
                     }
                     else
                     {
@@ -123,7 +92,7 @@ public class LikesInteractor implements ILikesInteractor
                 }
 
                 @Override
-                public void onFailure(Call<SimpleResponse> call, Throwable t)
+                public void onFailure(Call<RewardResponse> call, Throwable t)
                 {
                     listener.onRewardError(0, t, null, null);
                 }

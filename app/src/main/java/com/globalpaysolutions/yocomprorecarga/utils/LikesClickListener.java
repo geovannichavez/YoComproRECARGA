@@ -8,5 +8,5 @@ import com.facebook.share.widget.ShareButton;
 
 public interface LikesClickListener
 {
-    void onClickListener(int position, Constants.FacebookActions action, ShareButton shareButton);
+    void onClickListener(int position, ShareButton shareButton, Constants.FacebookActions actions);
 }

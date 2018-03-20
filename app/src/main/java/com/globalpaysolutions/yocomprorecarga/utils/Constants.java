@@ -175,6 +175,8 @@ public class Constants
     public static final String FACEBOOK_REWARD_LIKE_FANPAGE = "250";
     public static final String FACEBOOK_REWARD_SHARE_PLAYER = "100";
     public static final java.lang.String FACEBOOK_FANPAGE_GRAPH_PATH = "/RecarGOGame/likes";
+    public static final String FACEBOOK_FANPAGE_URL = "https://www.facebook.com/RecarGOGame/";
+    public static final String FACEBOOK_PLAYER_URL = "http://recar-go.com/share/FreeCoins";
 
     public static String PLATFORM = "ANDROID";
 
@@ -188,6 +190,6 @@ public class Constants
 
     public enum FacebookActions
     {
-        LIKE, SHARE
+        SHARE_PAGE, SHARE_PROFILE
     }
 }
