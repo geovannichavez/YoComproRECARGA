@@ -13,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
-import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeResp;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeComboReq;
@@ -30,6 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
@@ -222,6 +222,13 @@ public interface ApiInterface
     Call<SimpleResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
                                            @Header("AppVersion") String pAppVersion,
                                            @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REQUEST_REWARD_LIKES)
+    Call<SimpleResponse> requestLikesReward(@Header("authenticationKey") String userAuthenticationKey,
+                              @Header("AppVersion") String versionName,
+                              @Header("Platform") String platform,
+                              @Body RequestRewardReq request);
 
 
 }

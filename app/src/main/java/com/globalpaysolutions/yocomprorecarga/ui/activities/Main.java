@@ -146,7 +146,13 @@ public class Main extends ImmersiveActivity implements MainView
     public void navigateLeaderboards(View view)
     {
         ButtonAnimator.getInstance(this).animateButton(view);
-        Intent leaderboards = new Intent(Main.this, Leaderboards.class);
+        /*Intent leaderboards = new Intent(Main.this, Leaderboards.class);
+        leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(leaderboards);
+        finish();*/
+
+        //TODO: Quitar este bloque y desomentar el anterior
+        Intent leaderboards = new Intent(Main.this, Likes.class);
         leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(leaderboards);
         finish();

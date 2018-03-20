@@ -171,7 +171,10 @@ public class Constants
     public static final String BUNDLE_CHALLENGES_BACK_MAP = "bundle_challenges_back_map";
     public static final String NOTIFICATION_TITLE_BEEN_CHALLENGED = "¡Te han retado!";
 
-
+    //Facebook
+    public static final String FACEBOOK_REWARD_LIKE_FANPAGE = "250";
+    public static final String FACEBOOK_REWARD_SHARE_PLAYER = "100";
+    public static final java.lang.String FACEBOOK_FANPAGE_GRAPH_PATH = "/RecarGOGame/likes";
 
     public static String PLATFORM = "ANDROID";
 
@@ -181,5 +184,10 @@ public class Constants
     public enum ChallengeQuery
     {
         CREATE, UPDATE, SELECT
+    }
+
+    public enum FacebookActions
+    {
+        LIKE, SHARE
     }
 }

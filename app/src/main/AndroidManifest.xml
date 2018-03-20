@@ -157,11 +157,14 @@
             android:parentActivityName=".ui.activities.CapturePrizeAR"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".ui.activities.LimitedFunctionality"
@@ -228,7 +231,6 @@
             android:name=".ui.activities.RedeemPrize"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.Wildcard"
@@ -280,11 +282,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"/>
 
-        <service
-            android:name=".services.CountdownService"/>
+        <service android:name=".services.CountdownService"/>
 
-
-        <!--    Adforms SDK-->
+        <!-- Adforms SDK -->
         <receiver
             android:name="com.adform.adformtrackingsdk.services.ReferrerReceiver"
             android:exported="true">
@@ -292,10 +292,10 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER"/>
             </intent-filter>
         </receiver>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
-
 
         <activity
             android:name=".ui.activities.Challenges"
@@ -308,13 +308,17 @@
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
         <activity
             android:name=".ui.activities.ChallengeResult"
             android:parentActivityName=".ui.activities.Challenges"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity android:name=".ui.activities.Likes"
+                  android:parentActivityName=".ui.activities.Main"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 
