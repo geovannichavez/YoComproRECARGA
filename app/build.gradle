@@ -10,8 +10,8 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 44
-        versionName "1.27" //06-MAR-18
+        versionCode 45
+        versionName "1.28" //22-MAR-18
 
 
         //OneSignal

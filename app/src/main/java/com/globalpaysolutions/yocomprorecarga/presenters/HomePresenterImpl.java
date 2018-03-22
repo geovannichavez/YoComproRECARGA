@@ -747,8 +747,11 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void onPendingChallengesError(int code, Throwable o)
     {
-        Log.e(TAG, "Error retrieving pending challenges: CodeStatus = " +
-                String.valueOf(code) + ", Throwable: " + o.getLocalizedMessage());
+        try
+        {
+            Log.e(TAG, "Error retrieving pending challenges: CodeStatus = " +
+                    String.valueOf(code) + ", Throwable: " + o.getLocalizedMessage());
+        }catch (Exception ex) { ex.printStackTrace(); }
     }
 
     //  FIREBASE GOLD POINTS
