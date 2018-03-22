@@ -61,7 +61,7 @@ public class PlayChallengeInteractor implements IPlayChallengeInteractor
                 {
                     int codeResponse = response.code();
 
-                    if(codeResponse == 426 || codeResponse == 429)
+                    if(codeResponse == 426 || codeResponse == 429 || codeResponse == 500)
                     {
                         try
                         {
@@ -77,7 +77,11 @@ public class PlayChallengeInteractor implements IPlayChallengeInteractor
                     }
                     else
                     {
-                        listener.onCreateChallengeError(response.body(), null, codeResponse);
+                        try
+                        {
+                            listener.onCreateChallengeError(response.body(), null, codeResponse);
+                        }
+                        catch (Exception ex) { ex.printStackTrace();}
                     }
                 }
             }
@@ -127,7 +131,7 @@ public class PlayChallengeInteractor implements IPlayChallengeInteractor
                     }
 
 
-                    if(codeResponse == 426)
+                    if(codeResponse == 426 || codeResponse == 500)
                     {
                         listener.onUpdateChallengeError(errorResponse, null, codeResponse);
                     }
