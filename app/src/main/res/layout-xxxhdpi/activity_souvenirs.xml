@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="TIENDA"
+        android:text="@string/label_combos"
         android:fontFamily="@font/baloo_regular"
         android:textSize="22sp"
         android:textStyle="bold"

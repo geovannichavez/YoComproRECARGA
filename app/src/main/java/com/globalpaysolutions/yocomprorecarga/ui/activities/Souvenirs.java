@@ -88,7 +88,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
             @Override
             public void onClick(View v)
             {
-                Intent main = new Intent(Souvenirs.this, Store.class);
+                Intent main = new Intent(Souvenirs.this, Combos.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
                 finish();

@@ -429,6 +429,7 @@
     <string name="facebook_share_content_im_a_player">Soy jugador de RecarGO!, juega y gana muchos premios, encuéntrame como %1$s y rétame</string>
     <string name="title_aready_done_like_share">¡Ya ganaste tus monedas!</string>
     <string name="label_aready_done_like_share">Ya ganaste tus monedas por compartir en Facebook. ¡Continúa jugando para ganar!</string>
+    <string name="label_combos">COMBOS</string>
 
 
 </resources>
