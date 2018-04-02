@@ -92,7 +92,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/baloo_regular"
-        android:text="TIENDA"
+        android:text="@string/label_combos"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/btnStore"

@@ -49,6 +49,7 @@ public class Store extends ImmersiveActivity implements StoreView
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
     AlertDialog mConfirmDialog;
+    ImageView btnRewards;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -73,6 +74,7 @@ public class Store extends ImmersiveActivity implements StoreView
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+        btnRewards = (ImageView) findViewById(R.id.btnRewards);
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,6 +82,19 @@ public class Store extends ImmersiveActivity implements StoreView
             {
                 ButtonAnimator.getInstance(Store.this).animateButton(v);
                 Intent main = new Intent(Store.this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
+                finish();
+            }
+        });
+
+        btnRewards.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ButtonAnimator.getInstance(Store.this).animateButton(view);
+                Intent main = new Intent(Store.this, Likes.class);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
                 finish();
