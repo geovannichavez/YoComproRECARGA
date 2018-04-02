@@ -143,6 +143,9 @@ public class UserData
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
     private static final String KEY_APP_ERA_RESELECTED = "key_app_era_reselected";
 
+    //Shares
+    private static final String KEY_FACEBOOK_SHARE_SELECTION = "key_facebook_share_selection";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -533,6 +536,12 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveLastShareSelection(int selection)
+    {
+        mEditor.putInt(KEY_FACEBOOK_SHARE_SELECTION, selection);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -899,6 +908,11 @@ public class UserData
         return mPreferences.getString(KEY_CHALLENGE_PENDING_NUMBER, "0");
     }
 
+    public int getLastShareSelection()
+    {
+        return mPreferences.getInt(KEY_FACEBOOK_SHARE_SELECTION, 0);
+    }
+
     /*
     * ********************
     *
@@ -1032,4 +1046,11 @@ public class UserData
         mEditor.remove(KEY_FIRST_CHEST_KEY_ENTERED);
         mEditor.commit();
     }
+
+    public void deleteLastShareSelection()
+    {
+        mEditor.remove(KEY_FACEBOOK_SHARE_SELECTION);
+        mEditor.commit();
+    }
+
 }

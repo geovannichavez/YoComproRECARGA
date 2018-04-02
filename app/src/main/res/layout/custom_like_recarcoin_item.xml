@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:srcCompat="@drawable/ic_free_recarcoin_prize"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:lineSpacingExtra="-6sp"
+        android:textColor="@color/pure_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Dar &quot;Me Gusta&quot; a RecarGO! en Facebook"/>
+
+    <ImageView
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvDescription"
+        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        app:srcCompat="@drawable/ic_like_fb"/>
+
+    <TextView
+        android:id="@+id/tvRewardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_reward"
+        android:textAllCaps="true"
+        android:textColor="@color/pure_black"
+        app:layout_constraintEnd_toEndOf="@+id/btnAction"
+        app:layout_constraintStart_toStartOf="@+id/btnAction"
+        app:layout_constraintTop_toBottomOf="@+id/btnAction"/>
+
+    <ImageView
+        android:id="@+id/icCoinCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvRewardText"
+        app:layout_constraintStart_toStartOf="@+id/tvRewardText"
+        app:layout_constraintTop_toBottomOf="@+id/tvRewardText"
+        app:srcCompat="@drawable/ic_reward"/>
+
+    <TextView
+        android:id="@+id/tvCoins"
+        android:layout_width="49dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icCoinCounter"
+        app:layout_constraintEnd_toEndOf="@+id/icCoinCounter"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="@+id/icCoinCounter"
+        app:layout_constraintTop_toTopOf="@+id/icCoinCounter"
+        app:layout_constraintVertical_bias="0.8"
+        tools:text="250"/>
+
+    <com.facebook.share.widget.ShareButton
+        android:id="@+id/btnShare"
+        android:layout_width="38dp"
+        android:layout_height="29dp"
+        android:visibility="gone"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp" />
+
+
+</android.support.constraint.ConstraintLayout>
