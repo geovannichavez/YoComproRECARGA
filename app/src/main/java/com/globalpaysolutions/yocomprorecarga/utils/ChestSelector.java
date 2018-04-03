@@ -21,6 +21,7 @@ public class ChestSelector
     private static Context mContext;
     private static ChestSelector singleton;
 
+    //TODO: Añadir cofres 2D al cambio de Era
     private ChestSelector(Context context)
     {
         ChestSelector.mContext = context;
