@@ -64,7 +64,7 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                           var architectSdkUrl = "architectsdk://Bronze//" + key + "//" + latitude + "//" + longitude;
                                           document.location = architectSdkUrl;
                                           exchanging = false;
-                                          },2400);
+                                          },3500);
                                 }
                                 }
                                 });

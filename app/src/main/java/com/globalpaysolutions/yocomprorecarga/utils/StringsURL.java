@@ -16,11 +16,11 @@ public class StringsURL
     //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8073/v1/";
 
     //API v2
-    //public final static String URL_BASE = "http://csncusgats1.northcentralus.cloudapp.azure.com:8073/v1/";
+    public final static String URL_BASE = "http://csncusgats1.northcentralus.cloudapp.azure.com:8073/v1/";
 
     //TODO: Cambiar antes de publciar
     //PRODUCCION
-    public final static String URL_BASE  = "https://api.yovendorecarga.com/RG/";
+    //public final static String URL_BASE  = "https://api.yovendorecarga.com/RG/";
 
     public final static String COUNTRIES = "countries";
 
