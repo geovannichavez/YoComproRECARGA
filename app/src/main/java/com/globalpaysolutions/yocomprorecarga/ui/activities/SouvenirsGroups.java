@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.GroupSouvenirModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.SouvenirsGroupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvsGroupsAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsGroupsView;
@@ -85,7 +87,11 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
                 @Override
                 public void onClick(View view, int position)
                 {
-                    Toast.makeText(SouvenirsGroups.this, "Clicked!", Toast.LENGTH_LONG).show();
+                    ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
+                    Intent souvenirs = new Intent(SouvenirsGroups.this, Souvenirs.class);
+                    souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(souvenirs);
+                    finish();
                 }
 
                 @Override

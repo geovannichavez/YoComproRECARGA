@@ -173,7 +173,8 @@ public class Profile extends ImmersiveActivity implements ProfileView
     public void navigateSouvenirs(View view)
     {
         animateButton(view);
-        Intent souvenirs = new Intent(this, Souvenirs.class);
+        //Intent souvenirs = new Intent(this, Souvenirs.class);
+        Intent souvenirs = new Intent(this, SouvenirsGroups.class);
         souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(souvenirs);
         finish();
