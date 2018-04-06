@@ -1,5 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.view.View;
+
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.GroupSouvenirModel;
 
 import java.util.List;
@@ -10,6 +13,10 @@ import java.util.List;
 
 public interface SouvenirsGroupsView
 {
-    void initializeViews();
+    void initializeViews(String progress, int stars);
     void renderGroups(List<GroupSouvenirModel> groups);
+    void updateSouvsProgress(String progress, int stars);
+    void showLoadingDialog(String text);
+    void hideLoadingDialog();
+    void showGenericDialog(DialogViewModel content, View.OnClickListener clickListener);
 }

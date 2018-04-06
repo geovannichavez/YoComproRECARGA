@@ -89,7 +89,7 @@ public class Combos extends AppCompatActivity implements CombosView
                 @Override
                 public void onClick(View view)
                 {
-                    Intent main = new Intent(Combos.this, Souvenirs.class);
+                    Intent main = new Intent(Combos.this, SouvenirsGroups.class);
                     main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(main);
                     finish();
@@ -259,7 +259,7 @@ public class Combos extends AppCompatActivity implements CombosView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent main = new Intent(Combos.this, Souvenirs.class);
+            Intent main = new Intent(Combos.this, SouvenirsGroups.class);
             main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(main);
             finish();

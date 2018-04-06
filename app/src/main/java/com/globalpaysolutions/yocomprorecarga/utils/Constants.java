@@ -177,6 +177,7 @@ public class Constants
     public static final java.lang.String FACEBOOK_FANPAGE_GRAPH_PATH = "/RecarGOGame/likes";
     public static final String FACEBOOK_FANPAGE_URL = "https://www.facebook.com/RecarGOGame/";
     public static final String FACEBOOK_PLAYER_URL = "http://recar-go.com/share/FreeCoins";
+    public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
     public static String PLATFORM = "ANDROID";
 

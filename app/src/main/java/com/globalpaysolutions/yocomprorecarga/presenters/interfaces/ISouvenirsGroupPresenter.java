@@ -8,4 +8,6 @@ public interface ISouvenirsGroupPresenter
 {
     void init();
     void createGroupsArray();
+    void retrieveProgress();
+    void retrieveGroupedSouvenirs();
 }

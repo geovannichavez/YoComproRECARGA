@@ -94,5 +94,6 @@ public class StringsURL
     public static final String UPDATE_CHALLENGE = "Challenge/Update";
     public static final String GET_PENDING_CHALLENGES = "Challenge/GetPendingChallenges";
     public static final String REQUEST_REWARD_LIKES = "ActionSocialNetworks";
+    public static final String GET_SOUVS_PROGRESS = "GetSouvenirProgress";
 }
 

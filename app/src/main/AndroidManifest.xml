@@ -323,9 +323,15 @@
         </activity>
         <activity
             android:name=".ui.activities.SouvenirsGroups"
+            android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
+        </activity>
+        <activity
+            android:name=".ui.activities.SouvenirsGrouped"
+            android:parentActivityName=".ui.activities.SouvenirsGroups"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 

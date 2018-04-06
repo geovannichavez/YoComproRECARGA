@@ -1,23 +1,30 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.GroupSouvenirModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.SouvenirsGroupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvsGroupsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsGroupsView;
@@ -35,7 +42,12 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
     ImageView btnBack;
     ImageView icLeftTower;
     ImageView icRightTower;
+    ImageView icStar0;
+    ImageView icStar1;
+    ImageView icStar2;
+    TextView tvProgress;
     RecyclerView gvGroups;
+    ProgressDialog mProgressDialog;
 
     SouvsGroupsAdapter mGroupsAdapter;
 
@@ -49,29 +61,46 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
         btnBack = (ImageView) findViewById(R.id.btnBack);
         icLeftTower = (ImageView) findViewById(R.id.icLeftTower);
         icRightTower = (ImageView) findViewById(R.id.icRightTower);
+        tvProgress = (TextView) findViewById(R.id.tvProgress);
+        icStar0 = (ImageView) findViewById(R.id.icStar0);
+        icStar1 = (ImageView) findViewById(R.id.icStar1);
+        icStar2 = (ImageView) findViewById(R.id.icStar2);
         gvGroups = (RecyclerView) findViewById(R.id.gvGroups);
 
         mPresenter = new SouvenirsGroupPresenterImpl(this, this, this);
 
         mPresenter.init();
         mPresenter.createGroupsArray();
+        mPresenter.retrieveProgress();
+        mPresenter.retrieveGroupedSouvenirs();
 
     }
 
     @Override
-    public void initializeViews()
+    public void initializeViews(String progress, int stars)
     {
-        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_gray_3));
+        try
+        {
+            getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_gray_3));
 
-        //Loads images
-        Picasso.with(this).load(R.drawable.bg_background_4).into(ivBackground);
-        Picasso.with(this).load(R.drawable.ic_worldcup_theme_left_tower).into(icLeftTower);
-        Picasso.with(this).load(R.drawable.ic_worldcup_theme_right_tower).into(icRightTower);
+            tvProgress.setText(String.format(getString(R.string.label_souvs_progress), progress));
+            updateStars(stars);
 
+            //Loads images
+            Picasso.with(this).load(R.drawable.bg_background_4).into(ivBackground);
+            Picasso.with(this).load(R.drawable.ic_worldcup_theme_left_tower).into(icLeftTower);
+            Picasso.with(this).load(R.drawable.ic_worldcup_theme_right_tower).into(icRightTower);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error initializing views: " + ex.getMessage());
+        }
     }
 
+
+
     @Override
-    public void renderGroups(List<GroupSouvenirModel> groups)
+    public void renderGroups(final List<GroupSouvenirModel> groups)
     {
         try
         {
@@ -87,8 +116,10 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
                 @Override
                 public void onClick(View view, int position)
                 {
+                    GroupSouvenirModel group = groups.get(position);
                     ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
-                    Intent souvenirs = new Intent(SouvenirsGroups.this, Souvenirs.class);
+                    Intent souvenirs = new Intent(SouvenirsGroups.this, SouvenirsGrouped.class);
+                    souvenirs.putExtra(Constants.BUNDLE_SOUVENIRS_GROUP_SELCTED, group.getGroup());
                     souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(souvenirs);
                     finish();
@@ -105,6 +136,116 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
         catch (Exception ex)
         {
             Log.e(TAG, "Error rendering groups: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void updateSouvsProgress(String progress, int stars)
+    {
+        try
+        {
+            tvProgress.setText(String.format(getString(R.string.label_souvs_progress), progress));
+            updateStars(stars);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error updating progress: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void showLoadingDialog(String text)
+    {
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(text);
+            mProgressDialog.show();
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void hideLoadingDialog()
+    {
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showGenericDialog(DialogViewModel content, View.OnClickListener clickListener)
+    {
+        try
+        {
+            final AlertDialog dialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = this.getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.custom_dialog_generic, null);
+
+            TextView tvTitle = (TextView) dialogView.findViewById(R.id.tvDialogTitle);
+            TextView tvDescription = (TextView) dialogView.findViewById(R.id.tvDialogMessage);
+            ImageView button = (ImageView) dialogView.findViewById(R.id.btnClose);
+
+            tvTitle.setText(content.getTitle());
+            tvDescription.setText(content.getLine1());
+
+            dialog = builder.setView(dialogView).create();
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+
+            if(clickListener != null)
+            {
+                button.setOnClickListener(clickListener);
+            }
+            else
+            {
+                button.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+
+    private void updateStars(int stars)
+    {
+        switch (stars)
+        {
+            case 1:
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar0);
+                break;
+            case 2:
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar0);
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar1);
+                break;
+            case 3:
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar0);
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar1);
+                Picasso.with(this).load(R.drawable.ic_star_on).into(icStar2);
+                break;
         }
     }
 }

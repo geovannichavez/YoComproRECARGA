@@ -1,20 +1,21 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ISouvenirsInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvsProgressResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
@@ -43,18 +44,24 @@ public class SouvenirsInteractor implements ISouvenirsInteractor
     public void requestUserSouvenirs(final SouvenirsListeners listener)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SouvenirsResponse> call = apiService.getSouvenirs(mUserData.getUserAuthenticationKey(),
-                getVersionName(), Constants.PLATFORM);
+        final Call<JsonObject> call = apiService.getGropuedSouvenirs(mUserData.getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
-        call.enqueue(new Callback<SouvenirsResponse>()
+        call.enqueue(new Callback<JsonObject>()
         {
             @Override
-            public void onResponse(Call<SouvenirsResponse> call, Response<SouvenirsResponse> response)
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
             {
                 if(response.isSuccessful())
                 {
-                    SouvenirsResponse souvenirs = response.body();
-                    listener.onSuccess(souvenirs.getListSouvenirsByConsumer());
+                    try
+                    {
+                        listener.onSuccess(response.body());
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.e(TAG, "Error processing raw response: " + ex.getMessage());
+                    }
                 }
                 else
                 {
@@ -80,7 +87,7 @@ public class SouvenirsInteractor implements ISouvenirsInteractor
                 }
             }
             @Override
-            public void onFailure(Call<SouvenirsResponse> call, Throwable t)
+            public void onFailure(Call<JsonObject> call, Throwable t)
             {
                 listener.onError(0, t, null);
             }
@@ -95,7 +102,7 @@ public class SouvenirsInteractor implements ISouvenirsInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<WinPrizeResponse> call = apiService.exchangeSouvenir(mUserData.getUserAuthenticationKey(),
-                getVersionName(), Constants.PLATFORM, request);
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, request);
 
         call.enqueue(new Callback<WinPrizeResponse>()
         {
@@ -139,20 +146,66 @@ public class SouvenirsInteractor implements ISouvenirsInteractor
         });
     }
 
-    private String getVersionName()
+    @Override
+    public void requestSouvsProgress(final SouvenirsListeners listener)
     {
-        String version = "";
         try
         {
-            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-            version = pInfo.versionName;//Version Name
-            Log.i(TAG, "Version name: " + version);
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+            final Call<SouvsProgressResponse> call = apiService.retrieveSouvsProgress(mUserData.getUserAuthenticationKey(),
+                    VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
+
+            call.enqueue(new Callback<SouvsProgressResponse>()
+            {
+                @Override
+                public void onResponse(Call<SouvsProgressResponse> call, Response<SouvsProgressResponse> response)
+                {
+                    if(response.isSuccessful())
+                    {
+                        listener.onGetProgressSuccess(response.body());
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int codeResponse = response.code();
+                            if(codeResponse == 426 || codeResponse == 429 || codeResponse == 500)
+                            {
+                                try
+                                {
+                                    Gson gson = new Gson();
+                                    SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                                    listener.onGetProgressError(codeResponse, null, errorResponse);
+                                }
+                                catch (IOException ex)
+                                {
+                                    listener.onGetProgressError(codeResponse, null, null);
+                                }
+                            }
+                            else
+                            {
+                                listener.onGetProgressError(codeResponse, null, null);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SouvsProgressResponse> call, Throwable t)
+                {
+                    listener.onGetProgressError(0, t, null);
+                }
+            });
         }
         catch (Exception ex)
         {
-            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
+            Log.e(TAG, "Error on request: " + ex.getMessage());
         }
-
-        return version;
     }
+
+
 }

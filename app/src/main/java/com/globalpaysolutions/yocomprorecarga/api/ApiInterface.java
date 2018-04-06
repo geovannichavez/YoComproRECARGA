@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RewardResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvsProgressResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
@@ -43,6 +44,9 @@ import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -134,6 +138,12 @@ public interface ApiInterface
     @Headers("Content-Type: application/json")
     @GET(StringsURL.SOUVENIRS)
     Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.SOUVENIRS)
+    Call<JsonObject> getGropuedSouvenirs(@Header("authenticationKey") String pAuthKey,
                                          @Header("AppVersion") String pAppVersion,
                                          @Header("Platform") String pPlatform);
 
@@ -231,5 +241,9 @@ public interface ApiInterface
                                             @Header("Platform") String platform,
                                             @Body RequestRewardReq request);
 
-
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_SOUVS_PROGRESS)
+    Call<SouvsProgressResponse> retrieveSouvsProgress(@Header("authenticationKey") String userAuthenticationKey,
+                                                      @Header("AppVersion") String versionName,
+                                                      @Header("Platform") String platform);
 }
