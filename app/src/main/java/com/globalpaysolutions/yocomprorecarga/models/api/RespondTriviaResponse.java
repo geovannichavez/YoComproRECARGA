@@ -30,7 +30,9 @@ public class RespondTriviaResponse
     @SerializedName("Message")
     @Expose
     private String message;
-
+    @SerializedName("CorrectAnswerID")
+    @Expose
+    private int correctAnswerID;
 
     public void setType(int type)
     {
@@ -100,5 +102,15 @@ public class RespondTriviaResponse
     public void setMessage(String message)
     {
         this.message = message;
+    }
+
+    public int getCorrectAnswerID()
+    {
+        return correctAnswerID;
+    }
+
+    public void setCorrectAnswerID(int correctAnswerID)
+    {
+        this.correctAnswerID = correctAnswerID;
     }
 }

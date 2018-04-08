@@ -268,6 +268,20 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
         mInteractor.retrievePendings(this);
     }
 
+    @Override
+    public void evaluateTriviaNavigation()
+    {
+        try
+        {
+            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//TODO: Debe ser mayor a cero
+                mView.navigateTrivia();
+
+        }catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
 
     private void addFlags(Intent pIntent)
     {

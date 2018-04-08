@@ -165,15 +165,8 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                 int resource = R.drawable.ic_alert;
 
                 mView.highlightButton(buttonClicked, false);
-
-                mView.showImageDialog(title, description, resource, new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        mView.finishActivity();
-                    }
-                });
+                mView.highlightCorrect(response.getCorrectAnswerID());
+                mView.showImageDialog(title, description, resource, null);
             }
             else //Correct Answer
             {

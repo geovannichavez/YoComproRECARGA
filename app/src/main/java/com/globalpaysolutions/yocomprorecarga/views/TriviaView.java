@@ -26,4 +26,5 @@ public interface TriviaView
     void finishActivity();
     void removeClickable();
     void highlightButton(int buttonClicked, boolean correctAnswer);
+    void highlightCorrect(int correctAnswerID);
 }

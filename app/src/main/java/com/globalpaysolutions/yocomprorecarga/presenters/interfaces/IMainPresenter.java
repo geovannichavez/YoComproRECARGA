@@ -14,5 +14,6 @@ public interface IMainPresenter
     void checkPermissions();
     void onPermissionsResult(int requestCode, String permissions[], int[] grantResults);
     void retrievePendings();
+    void evaluateTriviaNavigation();
     //void mustReselectEra(String destiny);
 }

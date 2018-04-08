@@ -13,4 +13,5 @@ public interface MainView
     void setPendingChallenges(String pending, boolean active);
     void setTriviaAvailable(boolean available);
     void setClickListeners();
+    void navigateTrivia();
 }

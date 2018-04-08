@@ -308,7 +308,7 @@ public class Main extends ImmersiveActivity implements MainView
     @Override
     public void setTriviaAvailable(boolean available)
     {
-        if(available)
+        if (available)
             Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
         else
             Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
@@ -328,16 +328,22 @@ public class Main extends ImmersiveActivity implements MainView
         }
     }
 
+    @Override
+    public void navigateTrivia()
+    {
+        Intent trivia = new Intent(Main.this, Trivia.class);
+        trivia.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(trivia);
+        finish();
+    }
+
     private View.OnClickListener triviaClick = new View.OnClickListener()
     {
         @Override
         public void onClick(View view)
         {
             ButtonAnimator.getInstance(Main.this).animateButton(view);
-            Intent trivia = new Intent(Main.this, Trivia.class);
-            trivia.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(trivia);
-            finish();
+            mPresenter.evaluateTriviaNavigation();
         }
     };
 

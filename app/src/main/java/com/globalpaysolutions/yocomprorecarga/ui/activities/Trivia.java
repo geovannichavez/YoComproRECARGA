@@ -57,6 +57,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     private int mAnswerID;
     private int mTriviaID;
     private boolean mAnswered;
+    private boolean alreadyPressed;
     HashMap<Integer, String> mAnswers;
 
     @Override
@@ -436,6 +437,37 @@ public class Trivia extends AppCompatActivity implements TriviaView
         }
     }
 
+    @Override
+    public void highlightCorrect(int correctAnswerID)
+    {
+        try
+        {
+            int answer1 = (int)btnAnswer1.getTag();
+            int answer2 = (int)btnAnswer2.getTag();
+            int answer3 = (int)btnAnswer3.getTag();
+
+            if(answer1 == correctAnswerID)
+            {
+                btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_good);
+            }
+
+            if(answer2 == correctAnswerID)
+            {
+                btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_good);
+            }
+
+            if(answer3 == correctAnswerID)
+            {
+                btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_good);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error highlighting: " + ex.getMessage());
+        }
+
+    }
+
     /*
     *
     *   CLICK LISTENERS
@@ -447,6 +479,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         public void onClick(View view)
         {
             mAnswered = true;
+            alreadyPressed = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_on);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
@@ -462,6 +495,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         public void onClick(View view)
         {
             mAnswered = true;
+            alreadyPressed = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_on);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
@@ -477,6 +511,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         public void onClick(View view)
         {
             mAnswered = true;
+            alreadyPressed = true;
             btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
@@ -511,7 +546,9 @@ public class Trivia extends AppCompatActivity implements TriviaView
     protected void onStop()
     {
         super.onStop();
-        mPresenter.answerTrivia(mAnswerID, 0, mTriviaID, mAnswered);
+        if(!alreadyPressed)
+            mPresenter.answerTrivia(mAnswerID, 0, mTriviaID, mAnswered);
+
         mPresenter.finishTimer();
     }
 }
