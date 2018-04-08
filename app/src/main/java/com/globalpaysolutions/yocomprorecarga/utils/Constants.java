@@ -100,6 +100,8 @@ public class Constants
     public static final String BUNDLE_TOKEN_VALIDATION = "bundle_data_usr_phone_validation";
     public static final String BUNDLE_PHONE_RETYPE = "bundle_data_phone_retype";
     public static final String BUNDLE_PHONE_TYPED = "bundle_data_phone_typed";
+
+
     //Bundles from Era Selection
     public static final String BUNDLE_ERA_SELECTION_INTENT_DESTINY = "bundle_era_selection_intent_destiny";
     public static final String BUNDLE_DESTINY_MAP = "bundle_destiny_map";
@@ -107,6 +109,9 @@ public class Constants
     public static final String BUNDLE_ERA_RESELECTION_ACTION = "bundle_era_reselection_action" ;
     public static final String BUNDLE_DESTINY_CHALLENGES = "bundle_destiny_challenges";
     //public static final String BUNDLE_SECOND_ERA_UPDATE_ERA_SELECTED_VALUE = "bundle_second_era_update_era_selected_value";
+
+    public static final String BUNDLE_COMBOS_BACK_STACK = "bundle_combos_back_stack";
+    public static final String BUNDLE_STORE_BACK_STACK = "bundle_store_back_stack";
 
     //Bundles from Map
     public static final String BUNDLE_CHALLENGE_USER_ID = "bundle_challenge_user_id";
@@ -179,6 +184,8 @@ public class Constants
     public static final String FACEBOOK_PLAYER_URL = "http://recar-go.com/share/FreeCoins";
     public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
+
+
     public static String PLATFORM = "ANDROID";
 
     //TODO: Cambiar para obligar al cambio de era
@@ -193,4 +200,15 @@ public class Constants
     {
         SHARE_PAGE, SHARE_PROFILE
     }
+
+    public enum StoreNavigationStack
+    {
+        SOUVENIRS, SOUVENIRS_GROUPS, MAIN
+    }
+
+    public enum CombosNavigationStack
+    {
+        SOUVENIRs_GROUPED, SOUVENIRS
+    }
+
 }

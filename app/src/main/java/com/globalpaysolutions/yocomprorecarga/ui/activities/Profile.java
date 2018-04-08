@@ -143,6 +143,14 @@ public class Profile extends ImmersiveActivity implements ProfileView
         Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
     }
 
+    @Override
+    public void navigateSouvenirs(Intent souvenirs)
+    {
+        souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(souvenirs);
+        finish();
+    }
+
     public void navigateLeaderboards(View view)
     {
         animateButton(view);
@@ -173,11 +181,7 @@ public class Profile extends ImmersiveActivity implements ProfileView
     public void navigateSouvenirs(View view)
     {
         animateButton(view);
-        //Intent souvenirs = new Intent(this, Souvenirs.class);
-        Intent souvenirs = new Intent(this, SouvenirsGroups.class);
-        souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(souvenirs);
-        finish();
+        mPresenter.evaluateNavigation();
     }
 
     public void navigateAchievements(View view)

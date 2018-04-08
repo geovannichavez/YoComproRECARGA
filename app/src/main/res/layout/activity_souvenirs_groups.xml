@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         app:srcCompat="@drawable/ic_souvs_progress_panel"/>
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/btnExchange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,6 +109,18 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/ivPanel"
         app:layout_constraintStart_toEndOf="@+id/btnExchange"
+        app:layout_constraintTop_toBottomOf="@+id/ivPanel"
+        app:srcCompat="@drawable/ic_button_red_3"/>-->
+
+    <ImageView
+        android:id="@+id/btnClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivPanel"
+        app:layout_constraintStart_toStartOf="@+id/ivPanel"
         app:layout_constraintTop_toBottomOf="@+id/ivPanel"
         app:srcCompat="@drawable/ic_button_red_3"/>
 
@@ -203,7 +215,7 @@
         app:layout_constraintTop_toTopOf="@+id/icStar1"
         app:srcCompat="@drawable/ic_star_off"/>
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tvExchange"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
@@ -221,6 +233,23 @@
         app:layout_constraintStart_toStartOf="@+id/btnExchange"
         app:layout_constraintTop_toTopOf="@+id/btnExchange"/>
 
+    <TextView
+        android:id="@+id/tvClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_claim_combo"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClaim"
+        app:layout_constraintEnd_toEndOf="@+id/btnClaim"
+        app:layout_constraintStart_toStartOf="@+id/btnClaim"
+        app:layout_constraintTop_toTopOf="@+id/btnClaim"/>-->
     <TextView
         android:id="@+id/tvClaim"
         android:layout_width="wrap_content"

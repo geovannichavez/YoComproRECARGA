@@ -14,4 +14,6 @@ public interface SouvenirsGroupedView
     void renderSouvs(List<ListSouvenirsByConsumer> souvsList, String groupUpdated);
     void updateCurrentGroup(String letter);
     void showSouvenirDetails(String title, String description, String count, String url, int souvID, int counterResource);
+    void setVisibleLeftArrow(boolean visible);
+    void setVisibleRightArrow(boolean visible);
 }

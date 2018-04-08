@@ -3,13 +3,14 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -171,6 +172,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
                 {
                     ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(v);
                     Intent combos = new Intent(SouvenirsGrouped.this, Combos.class);
+                    combos.putExtra(Constants.BUNDLE_COMBOS_BACK_STACK, Constants.CombosNavigationStack.SOUVENIRs_GROUPED);
                     combos.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(combos);
                     finish();
@@ -197,6 +199,35 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         }
     }
 
+    @Override
+    public void setVisibleLeftArrow(boolean visible)
+    {
+        if(!visible)
+            icArrowLeft.setVisibility(View.INVISIBLE);
+        else
+            icArrowLeft.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setVisibleRightArrow(boolean visible)
+    {
+        if(!visible)
+            icArrowRight.setVisibility(View.INVISIBLE);
+        else
+            icArrowRight.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            navigateBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void closeSouvenirDialog(View view)
     {
         try
@@ -213,7 +244,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
 
     private void navigateBack()
     {
-        Intent backAction = new Intent(this, Challenges.class);
+        Intent backAction = new Intent(this, SouvenirsGroups.class);
         backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(backAction);
         finish();
@@ -224,6 +255,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         @Override
         public void onClick(View view)
         {
+            ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(view);
             navigateBack();
         }
     };
@@ -233,6 +265,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         @Override
         public void onClick(View view)
         {
+            //ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(view);
             mPresenter.navigateBackward(mGroup);
         }
     };
@@ -242,6 +275,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         @Override
         public void onClick(View view)
         {
+            //ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(view);
             mPresenter.navigateForward(mGroup);
         }
     };
@@ -251,7 +285,9 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         @Override
         public void onClick(View view)
         {
+            ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(view);
             Intent store = new Intent(SouvenirsGrouped.this, Store.class);
+            store.putExtra(Constants.BUNDLE_STORE_BACK_STACK, Constants.StoreNavigationStack.SOUVENIRS_GROUPS);
             store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(store);
             finish();
@@ -263,6 +299,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
         @Override
         public void onClick(View view)
         {
+            ButtonAnimator.getInstance(SouvenirsGrouped.this).animateButton(view);
             Intent leaderboards = new Intent(SouvenirsGrouped.this, Leaderboards.class);
             leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(leaderboards);

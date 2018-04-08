@@ -4,14 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -40,11 +40,14 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
 
     ImageView ivBackground;
     ImageView btnBack;
+    ImageView btnClaim;
     ImageView icLeftTower;
     ImageView icRightTower;
     ImageView icStar0;
     ImageView icStar1;
     ImageView icStar2;
+    ImageView btnLeaderboards;
+    ImageView btnStore;
     TextView tvProgress;
     RecyclerView gvGroups;
     ProgressDialog mProgressDialog;
@@ -59,12 +62,15 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
 
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
         btnBack = (ImageView) findViewById(R.id.btnBack);
+        btnClaim = (ImageView) findViewById(R.id.btnClaim);
         icLeftTower = (ImageView) findViewById(R.id.icLeftTower);
         icRightTower = (ImageView) findViewById(R.id.icRightTower);
         tvProgress = (TextView) findViewById(R.id.tvProgress);
         icStar0 = (ImageView) findViewById(R.id.icStar0);
         icStar1 = (ImageView) findViewById(R.id.icStar1);
         icStar2 = (ImageView) findViewById(R.id.icStar2);
+        btnLeaderboards = (ImageView) findViewById(R.id.btnLeaderboards);
+        btnStore = (ImageView) findViewById(R.id.btnStore);
         gvGroups = (RecyclerView) findViewById(R.id.gvGroups);
 
         mPresenter = new SouvenirsGroupPresenterImpl(this, this, this);
@@ -90,14 +96,18 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
             Picasso.with(this).load(R.drawable.bg_background_4).into(ivBackground);
             Picasso.with(this).load(R.drawable.ic_worldcup_theme_left_tower).into(icLeftTower);
             Picasso.with(this).load(R.drawable.ic_worldcup_theme_right_tower).into(icRightTower);
+
+            //Sets click listener
+            btnBack.setOnClickListener(backListener);
+            btnLeaderboards.setOnClickListener(leaderboardsListener);
+            btnStore.setOnClickListener(storeListener);
+            btnClaim.setOnClickListener(claimComboListener);
         }
         catch (Exception ex)
         {
             Log.e(TAG, "Error initializing views: " + ex.getMessage());
         }
     }
-
-
 
     @Override
     public void renderGroups(final List<GroupSouvenirModel> groups)
@@ -229,6 +239,75 @@ public class SouvenirsGroups extends AppCompatActivity implements SouvenirsGroup
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            navigateBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private View.OnClickListener storeListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
+            Intent store = new Intent(SouvenirsGroups.this, Store.class);
+            store.putExtra(Constants.BUNDLE_STORE_BACK_STACK, Constants.StoreNavigationStack.SOUVENIRS_GROUPS);
+            store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(store);
+            finish();
+        }
+    };
+
+    private View.OnClickListener leaderboardsListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
+            Intent leaderboards = new Intent(SouvenirsGroups.this, Leaderboards.class);
+            leaderboards.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(leaderboards);
+            finish();
+        }
+    };
+
+    private View.OnClickListener backListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
+            navigateBack();
+        }
+    };
+
+    private View.OnClickListener claimComboListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(SouvenirsGroups.this).animateButton(view);
+            Intent combos = new Intent(SouvenirsGroups.this, Combos.class);
+            combos.putExtra(Constants.BUNDLE_COMBOS_BACK_STACK, Constants.CombosNavigationStack.SOUVENIRs_GROUPED);
+            combos.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(combos);
+            finish();
+        }
+    };
+
+    private void navigateBack()
+    {
+        Intent backAction = new Intent(this, Profile.class);
+        backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(backAction);
+        finish();
+    }
 
     private void updateStars(int stars)
     {

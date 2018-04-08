@@ -13,6 +13,8 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsGroupedView;
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +70,16 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
                 {
                     int position = i - 1;
                     backwards = groups[position];
+
+                    if(position <= 0)
+                    {
+                        mView.setVisibleLeftArrow(false);
+                    }
+                    else
+                    {
+                        mView.setVisibleLeftArrow(true);
+                        mView.setVisibleRightArrow(true);
+                    }
                 }
             }
 
@@ -95,6 +107,15 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
                 {
                     int position = i + 1;
                     forward = groups[position];
+
+                    if(position == groups.length - 1) //Because arrat starts at 0
+                    {
+                        mView.setVisibleRightArrow(false);}
+                    else
+                    {
+                        mView.setVisibleRightArrow(true);
+                        mView.setVisibleLeftArrow(true);
+                    }
                 }
             }
 
