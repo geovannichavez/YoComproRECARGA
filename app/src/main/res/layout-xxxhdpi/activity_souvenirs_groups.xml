@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGroups">
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
+
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="62dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"
+        app:srcCompat="@drawable/ic_back_3"/>
+
+
+    <ImageView
+        android:id="@+id/bgTitle"
+        android:layout_width="205dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBackground"
+        app:srcCompat="@drawable/bg_title_3"/>
+
+    <ImageView
+        android:id="@+id/icTutorial"
+        android:layout_width="62dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintStart_toEndOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"
+        app:srcCompat="@drawable/ic_tutorial_3"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/title_souvenirs_collection"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toEndOf="@+id/bgTitle"
+        app:layout_constraintStart_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"/>
+
+    <ImageView
+        android:id="@+id/icLeftTower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/icRightTower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/ivPanel"
+        android:layout_width="333dp"
+        android:layout_height="151dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:srcCompat="@drawable/ic_souvs_progress_panel"/>
+
+
+    <ImageView
+        android:id="@+id/btnClaim"
+        android:layout_width="148dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivPanel"
+        app:layout_constraintStart_toStartOf="@+id/ivPanel"
+        app:layout_constraintTop_toBottomOf="@+id/ivPanel"
+        app:srcCompat="@drawable/ic_button_red_3"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gvGroups"
+        android:layout_width="323dp"
+        android:layout_height="298dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="288dp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/custom_souvenir_groups_item"/>
+
+    <ImageView
+        android:id="@+id/btnLeaderboards"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gvGroups"
+        app:layout_constraintTop_toBottomOf="@+id/gvGroups"
+        app:srcCompat="@drawable/ic_groups_leaderboards"/>
+
+    <ImageView
+        android:id="@+id/btnStore"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnLeaderboards"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="@+id/gvGroups"
+        app:layout_constraintTop_toTopOf="@+id/btnLeaderboards"
+        app:srcCompat="@drawable/ic_groups_store"/>
+
+    <TextView
+        android:id="@+id/tvProgress"
+        android:layout_width="113dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPanel"
+        app:layout_constraintEnd_toEndOf="@+id/ivPanel"
+        app:layout_constraintTop_toTopOf="@+id/ivPanel"
+        app:layout_constraintVertical_bias="0.808"
+        tools:text="Progreso: 32/32"/>
+
+    <ImageView
+        android:id="@+id/icStar0"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginLeft="136dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvProgress"
+        app:layout_constraintStart_toStartOf="@+id/ivPanel"
+        app:layout_constraintTop_toTopOf="@+id/ivPanel"
+        app:layout_constraintVertical_bias="0.461"
+        app:srcCompat="@drawable/ic_star_off"/>
+
+    <ImageView
+        android:id="@+id/icStar1"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icStar0"
+        app:layout_constraintStart_toEndOf="@+id/icStar0"
+        app:layout_constraintTop_toTopOf="@+id/icStar0"
+        app:srcCompat="@drawable/ic_star_off"/>
+
+    <ImageView
+        android:id="@+id/icStar2"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icStar1"
+        app:layout_constraintStart_toEndOf="@+id/icStar1"
+        app:layout_constraintTop_toTopOf="@+id/icStar1"
+        app:srcCompat="@drawable/ic_star_off"/>
+
+
+    <TextView
+        android:id="@+id/tvClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_claim_combo"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClaim"
+        app:layout_constraintEnd_toEndOf="@+id/btnClaim"
+        app:layout_constraintStart_toStartOf="@+id/btnClaim"
+        app:layout_constraintTop_toTopOf="@+id/btnClaim"/>
+
+
+
+
+
+
+
+
+
+
+
+    <!--<ImageView
+        android:id="@+id/btnExchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/ivPanel"
+        app:layout_constraintTop_toBottomOf="@+id/ivPanel"
+        app:srcCompat="@drawable/ic_button_red_3"/>
+
+    <ImageView
+        android:id="@+id/btnClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivPanel"
+        app:layout_constraintStart_toEndOf="@+id/btnExchange"
+        app:layout_constraintTop_toBottomOf="@+id/ivPanel"
+        app:srcCompat="@drawable/ic_button_red_3"/>-->
+
+    <!--<TextView
+        android:id="@+id/tvExchange"
+        android:layout_width="123dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_interchange_xd"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExchange"
+        app:layout_constraintEnd_toEndOf="@+id/btnExchange"
+        app:layout_constraintStart_toStartOf="@+id/btnExchange"
+        app:layout_constraintTop_toTopOf="@+id/btnExchange"/>
+
+    <TextView
+        android:id="@+id/tvClaim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_claim_combo"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClaim"
+        app:layout_constraintEnd_toEndOf="@+id/btnClaim"
+        app:layout_constraintStart_toStartOf="@+id/btnClaim"
+        app:layout_constraintTop_toTopOf="@+id/btnClaim"/>-->
+
+</android.support.constraint.ConstraintLayout>
