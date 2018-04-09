@@ -315,6 +315,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
+<<<<<<< HEAD
         <activity android:name=".ui.activities.Likes"
                   android:parentActivityName=".ui.activities.Main"
                   android:screenOrientation="portrait"
@@ -326,6 +327,25 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
 
+=======
+        <activity
+            android:name=".ui.activities.Likes"
+            android:parentActivityName=".ui.activities.Main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity
+            android:name=".ui.activities.SouvenirsGroups"
+            android:parentActivityName=".ui.activities.Profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+        </activity>
+        <activity
+            android:name=".ui.activities.SouvenirsGrouped"
+            android:parentActivityName=".ui.activities.SouvenirsGroups"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+>>>>>>> EraRusia2018_Coleccion
         </activity>
     </application>
 

@@ -9,4 +9,5 @@ public interface IProfilePresenter
     void loadBackground();
     void loadInitialData();
     void viewTutorial();
+    void evaluateNavigation();
 }

@@ -27,6 +27,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Combo;
 import com.globalpaysolutions.yocomprorecarga.presenters.CombosPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.CombosAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.views.CombosView;
 import com.squareup.picasso.Picasso;
 
@@ -51,6 +52,7 @@ public class Combos extends AppCompatActivity implements CombosView
     //Global variables
     private RecyclerView mRecyclerView;
     private CombosAdapter mAdapter;
+    private Constants.CombosNavigationStack mBackStack;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -63,6 +65,8 @@ public class Combos extends AppCompatActivity implements CombosView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combos);
+
+        mBackStack = (Constants.CombosNavigationStack) getIntent().getSerializableExtra(Constants.BUNDLE_COMBOS_BACK_STACK);
 
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnBack = (ImageView) findViewById(R.id.btnBack);
@@ -89,9 +93,7 @@ public class Combos extends AppCompatActivity implements CombosView
                 @Override
                 public void onClick(View view)
                 {
-                    Intent main = new Intent(Combos.this, Souvenirs.class);
-                    main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(main);
+                    navigateBack();
                     finish();
                 }
             });
@@ -112,6 +114,28 @@ public class Combos extends AppCompatActivity implements CombosView
         catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+
+    private void navigateBack()
+    {
+        try
+        {
+            Intent back = new Intent(Combos.this, Souvenirs.class);
+
+            if(mBackStack != null)
+            {
+                if(mBackStack.equals(Constants.CombosNavigationStack.SOUVENIRs_GROUPED))
+                    back = new Intent(Combos.this, SouvenirsGroups.class);
+            }
+
+            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(back);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error going back: " + ex.getMessage());
         }
     }
 
@@ -259,10 +283,7 @@ public class Combos extends AppCompatActivity implements CombosView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent main = new Intent(Combos.this, Souvenirs.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(main);
-            finish();
+            navigateBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);

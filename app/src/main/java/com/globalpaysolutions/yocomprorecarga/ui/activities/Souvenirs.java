@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer
 import com.globalpaysolutions.yocomprorecarga.presenters.SourvenirsPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.SouvenirsAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.FastClickUtil;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
@@ -89,6 +90,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
             public void onClick(View v)
             {
                 Intent main = new Intent(Souvenirs.this, Combos.class);
+                main.putExtra(Constants.BUNDLE_COMBOS_BACK_STACK, Constants.CombosNavigationStack.SOUVENIRS);
                 main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(main);
                 finish();
@@ -215,6 +217,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 
                     ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     Intent combos = new Intent(Souvenirs.this, Combos.class);
+                    combos.putExtra(Constants.BUNDLE_COMBOS_BACK_STACK, Constants.CombosNavigationStack.SOUVENIRS);
                     combos.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(combos);
                     finish();

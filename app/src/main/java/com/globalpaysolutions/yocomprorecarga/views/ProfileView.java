@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.content.Intent;
+
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 
 /**
@@ -13,4 +15,5 @@ public interface ProfileView
     void showGenericDialog(DialogViewModel model);
     void launchChromeView(String url);
     void setBackground();
+    void navigateSouvenirs(Intent souvenirs);
 }

@@ -437,7 +437,11 @@
     <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
     <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
     <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
-
+    <string name="label_group">Grupo</string>
+    <string name="label_interchange_xd">Intercambio</string>
+    <string name="label_claim_combo">Canjear Combo</string>
+    <string name="label_souvs_progress">Progreso: %1$s/32</string>
+    <string name="label_group_name">Grupo %1$s</string>
 
 
 </resources>

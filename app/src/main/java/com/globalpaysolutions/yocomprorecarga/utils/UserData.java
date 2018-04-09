@@ -98,6 +98,8 @@ public class UserData
     private static final String KEY_SOUVENIR_IMG_URL = "usr_souvenir_img_url";
     private static final String KEY_SOUVENIR_QUANTITY_OWNED = "usr_souvenir_quantity_owned";
     private static final String KEY_SOUVENIR_PRICE = "usr_souvenir_prce";
+    private static final String KEY_SOUVENIR_PROGRESS = "key_souvenir_progress";
+    private static final String KEY_SOUVENIR_GROUPED_RAW_RESPONSE = "key_souvenir_grouped_raw_response";
 
     //Era
     private static final String KEY_ERA_ID = "usr_age_id";
@@ -545,6 +547,18 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveSouvsProgress(int progress)
+    {
+        mEditor.putInt(KEY_SOUVENIR_PROGRESS, progress);
+        mEditor.commit();
+    }
+
+    public void saveSouvsStringResponse(String response)
+    {
+        mEditor.putString(KEY_SOUVENIR_GROUPED_RAW_RESPONSE, response);
+        mEditor.commit();
+    }
+
     /*
     * ********************
     *
@@ -914,6 +928,16 @@ public class UserData
     public int getLastShareSelection()
     {
         return mPreferences.getInt(KEY_FACEBOOK_SHARE_SELECTION, 0);
+    }
+
+    public int getSouvsProgress()
+    {
+        return mPreferences.getInt(KEY_SOUVENIR_PROGRESS, 0);
+    }
+
+    public String getSouvsStringResponse()
+    {
+        return mPreferences.getString(KEY_SOUVENIR_GROUPED_RAW_RESPONSE, "");
     }
 
     /*

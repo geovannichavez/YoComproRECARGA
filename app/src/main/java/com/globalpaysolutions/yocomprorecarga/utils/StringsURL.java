@@ -95,5 +95,6 @@ public class StringsURL
     public static final String REQUEST_REWARD_LIKES = "ActionSocialNetworks";
     public static final String GET_TRIVIA = "GetTrivia";
     public static final String RESPOND_TRIVIA = "TriviaResponse";
+    public static final String GET_SOUVS_PROGRESS = "GetSouvenirProgress";
 }
 

@@ -8,12 +8,17 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.SouvenirsListeners;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListSouvenirsByConsumer;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvsProgressResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ISourvenirsPresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.SouvenirsView;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -77,11 +82,22 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
         mInteractor.atemptExchangeSouv(this, souvID);
     }
 
-    @Override
+    /*@Override
     public void onSuccess(List<ListSouvenirsByConsumer> souvenirs)
     {
         mView.hideLoadingDialog();
         mView.renderSouvenirs(souvenirs);
+    }*/
+
+    @Override
+    public void onSuccess(JsonObject responseRaw)
+    {
+        mView.hideLoadingDialog();
+
+        Gson gson = new Gson();
+        SouvenirsResponse souvenirsResponse = gson.fromJson(responseRaw, SouvenirsResponse.class);
+
+        mView.renderSouvenirs(souvenirsResponse.getListSouvenirsByConsumer());
     }
 
     @Override
@@ -172,4 +188,17 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
             mView.generateImageDialog(dialog, R.drawable.ic_alert);
         }
     }
+
+    @Override
+    public void onGetProgressSuccess(SouvsProgressResponse response)
+    {
+
+    }
+
+    @Override
+    public void onGetProgressError(int codeStatus, Throwable throwable, SimpleResponse response)
+    {
+
+    }
+
 }
