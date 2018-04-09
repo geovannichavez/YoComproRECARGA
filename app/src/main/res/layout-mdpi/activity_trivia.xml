@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Trivia">
+
+    <ImageView
+        android:id="@+id/bgTrivia"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_trivia"
+        />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_new"/>
+
+    <ImageView
+        android:id="@+id/bgSponsor"
+        android:layout_width="186dp"
+        android:layout_height="186dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblQuestionNumber"
+        app:srcCompat="@drawable/bg_trivia_sponsor"/>
+
+    <ImageView
+        android:id="@+id/bgPrizePointer"
+        android:layout_width="78dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/bgSponsor"
+        app:layout_constraintTop_toTopOf="@+id/bgSponsor"
+        app:srcCompat="@drawable/ic_trivia_prize_indicator"/>
+
+    <ImageView
+        android:id="@+id/bgTimePointer"
+        android:layout_width="81dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"
+        app:layout_constraintStart_toStartOf="@+id/bgPrizePointer"
+        app:layout_constraintTop_toBottomOf="@+id/bgPrizePointer"
+        app:srcCompat="@drawable/ic_trivia_prize_indicator"/>
+
+    <TextView
+        android:id="@+id/lblPrize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_prize"
+        android:textColor="@color/pure_black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/bgPrizePointer"
+        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"/>
+
+    <TextView
+        android:id="@+id/lblTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/label_time"
+        android:textColor="@color/pure_black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/bgTimePointer"
+        app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
+        app:layout_constraintTop_toBottomOf="@+id/bgPrizePointer"
+        app:layout_constraintVertical_bias="1.0"/>
+
+    <ImageView
+        android:id="@+id/icPrize"
+        android:layout_width="28dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPrizePointer"
+        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"
+        app:layout_constraintTop_toTopOf="@+id/bgPrizePointer"/>
+
+    <TextView
+        android:id="@+id/lblPrizeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgPrizePointer"
+        app:layout_constraintEnd_toStartOf="@+id/icPrize"
+        app:layout_constraintStart_toStartOf="@+id/bgPrizePointer"
+        app:layout_constraintTop_toTopOf="@+id/bgPrizePointer"
+        tools:text="50"/>
+
+    <TextView
+        android:id="@+id/lblTimeRem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTimePointer"
+        app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
+        app:layout_constraintStart_toStartOf="@+id/bgTimePointer"
+        app:layout_constraintTop_toTopOf="@+id/bgTimePointer"
+        tools:text="00:30"/>
+
+    <ImageView
+        android:id="@+id/imgSponsor"
+        android:layout_width="186dp"
+        android:layout_height="186dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgSponsor"
+        app:layout_constraintEnd_toEndOf="@+id/bgSponsor"
+        app:layout_constraintStart_toStartOf="@+id/bgSponsor"
+        app:layout_constraintTop_toTopOf="@+id/bgSponsor"/>
+
+    <TextView
+        android:id="@+id/lblQuestion"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="4"
+        android:textColor="@color/pure_black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSponsor"
+        tools:text="¿Cual es el precio del Paquete Triple Claro Hogar que incluye internet de 5 Megas y una Laptop Dell?"/>
+
+    <ImageView
+        android:id="@+id/btnAnswer1"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/lblQuestion"
+        app:layout_constraintStart_toStartOf="@+id/lblQuestion"
+        app:layout_constraintTop_toBottomOf="@+id/lblQuestion"
+        app:srcCompat="@drawable/btn_trivia_answer_good"/>
+
+    <ImageView
+        android:id="@+id/btnAnswer2"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnswer1"
+        app:layout_constraintStart_toStartOf="@+id/btnAnswer1"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnswer1"
+        app:srcCompat="@drawable/btn_trivia_answer_on"/>
+
+    <ImageView
+        android:id="@+id/btnAnswer3"
+        android:layout_width="188dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnswer2"
+        app:layout_constraintStart_toStartOf="@+id/btnAnswer2"
+        app:layout_constraintTop_toBottomOf="@+id/btnAnswer2"
+        app:srcCompat="@drawable/btn_trivia_answer_wrong"/>
+
+    <TextView
+        android:id="@+id/lblQuestionNumber"
+        android:layout_width="268dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgTrivia"
+        tools:text="Pregunta #120"/>
+
+    <TextView
+        android:id="@+id/tvAnswer1"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer1"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnswer1"
+        app:layout_constraintStart_toStartOf="@+id/btnAnswer1"
+        app:layout_constraintTop_toTopOf="@+id/btnAnswer1"
+        tools:text="$40 Mensuales"/>
+
+    <TextView
+        android:id="@+id/tvAnswer2"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer2"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnswer2"
+        app:layout_constraintStart_toStartOf="@+id/btnAnswer2"
+        app:layout_constraintTop_toTopOf="@+id/btnAnswer2"
+        tools:text="$55 Mensuales"/>
+
+    <TextView
+        android:id="@+id/tvAnswer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        tools:text="$85 Mensuales"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer3"
+        app:layout_constraintEnd_toEndOf="@+id/btnAnswer3"
+        app:layout_constraintStart_toStartOf="@+id/btnAnswer3"
+        app:layout_constraintTop_toTopOf="@+id/btnAnswer3"/>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

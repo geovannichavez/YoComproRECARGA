@@ -188,8 +188,14 @@ public class Constants
         CREATE, UPDATE, SELECT
     }
 
+
     public enum FacebookActions
     {
         SHARE_PAGE, SHARE_PROFILE
+    }
+
+    public enum ChallengesBackStack
+    {
+        MAP, PROFILE, MAIN
     }
 }

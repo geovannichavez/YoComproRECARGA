@@ -421,6 +421,7 @@
     <string name="title_attention">¡Atención!</string>
     <string name="label_not_enough_coins_to_create_challenge">¡No tienes suficientes RecarCoins para realizar un reto!</string>
     <string name="label_not_enough_coins_to_update_challenge">¡No tienes suficientes RecarCoins para responder un reto!</string>
+
     <string name="title_free_recarcoins">RecarCoins Gratis</string>
     <string name="label_reward">Recompensa:</string>
     <string name="label_like_fanpage_action">Compartir la página de RecarGO! en Facebook</string>
@@ -430,6 +431,13 @@
     <string name="title_aready_done_like_share">¡Ya ganaste tus monedas!</string>
     <string name="label_aready_done_like_share">Ya ganaste tus monedas por compartir en Facebook. ¡Continúa jugando para ganar!</string>
     <string name="label_combos">COMBOS</string>
+    <string name="label_loading_trivia">Cargando trivia, espere...</string>
+    <string name="label_time">Tiempo</string>
+    <string name="label_prize">Premio</string>
+    <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
+    <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
+    <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
+
 
 
 </resources>

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.ProfilePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.ProfileView;
 import com.squareup.picasso.Picasso;
@@ -156,6 +157,7 @@ public class Profile extends ImmersiveActivity implements ProfileView
     {
         animateButton(view);
         Intent challenges = new Intent(this, Challenges.class);
+        challenges.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
         challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(challenges);
         finish();

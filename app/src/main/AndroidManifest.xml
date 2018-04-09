@@ -318,7 +318,14 @@
         <activity android:name=".ui.activities.Likes"
                   android:parentActivityName=".ui.activities.Main"
                   android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeFullScreen">
+                  android:theme="@style/AppThemeFullScreen" />
+
+        <activity
+            android:parentActivityName=".ui.activities.Main"
+            android:name=".ui.activities.Trivia"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen">
+
         </activity>
     </application>
 

@@ -15,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -309,13 +310,13 @@ public class HomeInteractor implements IHomeInteractor
     public void getPendingChallenges(final HomeListener listener)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<SimpleResponse> call = apiService.getPendingChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
+        final Call<PendingsResponse> call = apiService.getPendingChallenges(UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
-        call.enqueue(new Callback<SimpleResponse>()
+        call.enqueue(new Callback<PendingsResponse>()
         {
             @Override
-            public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response)
+            public void onResponse(Call<PendingsResponse> call, Response<PendingsResponse> response)
             {
                 if(response.isSuccessful())
                 {
@@ -328,7 +329,7 @@ public class HomeInteractor implements IHomeInteractor
             }
 
             @Override
-            public void onFailure(Call<SimpleResponse> call, Throwable t)
+            public void onFailure(Call<PendingsResponse> call, Throwable t)
             {
                 listener.onPendingChallengesError(0, t);
             }

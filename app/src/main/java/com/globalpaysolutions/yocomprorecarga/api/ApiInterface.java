@@ -24,6 +24,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardRespons
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
@@ -32,6 +33,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerRe
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RewardResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
@@ -39,6 +42,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
@@ -220,9 +224,9 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_PENDING_CHALLENGES)
-    Call<SimpleResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
-                                           @Header("AppVersion") String pAppVersion,
-                                           @Header("Platform") String pPlatform);
+    Call<PendingsResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
+                                                @Header("AppVersion") String pAppVersion,
+                                                @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUEST_REWARD_LIKES)
@@ -231,5 +235,15 @@ public interface ApiInterface
                                             @Header("Platform") String platform,
                                             @Body RequestRewardReq request);
 
+    @GET(StringsURL.GET_TRIVIA)
+    Call<TriviaResponse> getTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                   @Header("AppVersion") String versionName,
+                                   @Header("Platform") String platform);
 
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.RESPOND_TRIVIA)
+    Call<RespondTriviaResponse> respondTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                              @Header("AppVersion") String versionName,
+                                              @Header("Platform") String platforn,
+                                              @Body RespondTriviaReq request);
 }

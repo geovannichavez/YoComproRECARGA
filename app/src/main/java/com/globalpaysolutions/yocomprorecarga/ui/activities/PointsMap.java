@@ -160,7 +160,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 ButtonAnimator.getInstance(PointsMap.this).animateButton(view);
                 Intent intent = new Intent(PointsMap.this, Challenges.class);
-                intent.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, true);
+                intent.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.MAP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
                 finish();
@@ -1136,21 +1136,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         }
     }
 
-    @Override
-    public void navigateChallenges()
-    {
-        try
-        {
-            Intent challenges = new Intent(this, Challenges.class);
-            challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(challenges);
-            finish();
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)

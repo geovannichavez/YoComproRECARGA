@@ -138,6 +138,9 @@ public class UserData
     private static final String KEY_CHALLENGE_SCISSORS_ERA_ICON = "key_challenge_scissors_era_icon";
     private static final String KEY_CHALLENGE_PENDING_NUMBER = "key_challenge_pending_number";
 
+    //Trivia
+    private static final String KEY_TRIVIA_PENDINGS = "KEY_TRIVIA_PENDINGS";
+
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
@@ -1051,6 +1054,17 @@ public class UserData
     {
         mEditor.remove(KEY_FACEBOOK_SHARE_SELECTION);
         mEditor.commit();
+    }
+
+    public void saveTriviaPending(int getNewTrivia)
+    {
+        mEditor.putInt(KEY_TRIVIA_PENDINGS, getNewTrivia);
+        mEditor.commit();
+    }
+
+    public int getTriviaPeding()
+    {
+        return mPreferences.getInt(KEY_TRIVIA_PENDINGS, 0);
     }
 
 }

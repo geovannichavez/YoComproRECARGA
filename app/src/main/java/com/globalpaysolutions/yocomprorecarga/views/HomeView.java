@@ -68,5 +68,4 @@ public interface HomeView
     void navigateToAR();
 
     void showGenericImageDialog(DialogViewModel dialog, View.OnClickListener listener);
-    void navigateChallenges();
 }
