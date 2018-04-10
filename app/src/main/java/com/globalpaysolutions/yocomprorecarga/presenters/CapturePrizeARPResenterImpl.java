@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGroups;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
@@ -351,6 +354,27 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         catch (Exception ex)
         {
             Log.e(TAG, "Error registering key: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void evaluateSouvsNavigation()
+    {
+        try
+        {
+
+            Intent souvenirs = new Intent(mActivity, Souvenirs.class);
+
+            if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), "Mundial")) //WorldCup Era
+            {
+                souvenirs = new Intent(mActivity, SouvenirsGroups.class);
+            }
+
+            mView.navigateSouvenirs(souvenirs);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
 

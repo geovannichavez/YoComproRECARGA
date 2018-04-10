@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.content.Intent;
+
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
@@ -33,7 +35,7 @@ public interface CapturePrizeView
     void removeRunnableCallback();
     void deleteModelAR();
     void showNewAchievementDialog(String name, String level, String prize, String score, int resource, boolean navigatePrize);
-
+    void navigateSouvenirs(Intent souvenirs);
 
 
     void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
@@ -74,4 +76,6 @@ public interface CapturePrizeView
     void drawChestSilver2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestBronze2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestWildcard2D(String pKey, LatLng pLocation, int pAgeID);
+
+
 }

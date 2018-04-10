@@ -445,6 +445,21 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
+    public void navigateSouvenirs(Intent souvenirs)
+    {
+        try
+        {
+            souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(souvenirs);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error navigating: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url)
     {
         try
@@ -465,9 +480,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 @Override
                 public void onClick(View v)
                 {
-                    Intent souvs = new Intent(CapturePrizeAR.this, Souvenirs.class);
-                    startActivity(souvs);
-                    finish();
+                    mPresenter.evaluateSouvsNavigation();
                 }
             });
 
