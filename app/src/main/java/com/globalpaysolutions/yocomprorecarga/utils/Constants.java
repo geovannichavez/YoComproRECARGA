@@ -185,6 +185,7 @@ public class Constants
     public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
 
+    public static final String ERA_WORLDCUP_NAME = "Mundial";
 
     public static String PLATFORM = "ANDROID";
 
