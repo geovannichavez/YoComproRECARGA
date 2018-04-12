@@ -363,7 +363,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             Intent souvenirs = new Intent(mActivity, Souvenirs.class);
 
-            if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), "Mundial")) //WorldCup Era
+            if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
             {
                 souvenirs = new Intent(mActivity, SouvenirsGroups.class);
             }

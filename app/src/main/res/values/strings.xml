@@ -381,7 +381,7 @@
     <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
     <string name="showcase_title_leaderboards">Tabla de líderes</string>
     <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
-    <string name="label_challenges_button">MIS RETOS</string>
+    <string name="label_challenges_button">RETOS</string>
     <string name="title_challenges">Historial de Retos</string>
     <string name="label_switch_activate_location">Activar Ubicación</string>
     <string name="label_challenge_termini_from">Reto de:</string>
@@ -442,6 +442,7 @@
     <string name="label_claim_combo">Canjear Combo</string>
     <string name="label_souvs_progress">Progreso: %1$s/32</string>
     <string name="label_group_name">Grupo %1$s</string>
+    <string name="label_progress">Progreso</string>
 
 
 </resources>

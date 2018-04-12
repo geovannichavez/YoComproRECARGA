@@ -6,8 +6,8 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 
 public interface IProfilePresenter
 {
-    void loadBackground();
+    void retrieveTracking();
     void loadInitialData();
-    void viewTutorial();
     void evaluateNavigation();
+
 }
