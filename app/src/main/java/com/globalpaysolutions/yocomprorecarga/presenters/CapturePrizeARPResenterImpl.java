@@ -1,6 +1,5 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -31,7 +30,6 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
-import com.globalpaysolutions.yocomprorecarga.views.MainView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
@@ -214,7 +212,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
-        mView.changeToOpenChest(pChestType, mUserData.getEraID());
+        //mView.changeToOpenChest(pChestType, mUserData.getEraID());
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
@@ -250,7 +248,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.stopVibrate();
         mView.setEnabledChestImage(false);
-        mView.on2DChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
+        mView.on2DChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS, mUserData.getEraID());
     }
 
     @Override

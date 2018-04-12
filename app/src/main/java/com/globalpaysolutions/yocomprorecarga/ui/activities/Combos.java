@@ -180,22 +180,9 @@ public class Combos extends AppCompatActivity implements CombosView
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.getRecycledViewPool().setMaxRecycledViews(1,0); //To prevent recycle
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             mRecyclerView.setAdapter(mAdapter);
-            /*mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, mRecyclerView, new RecyclerClickListener()
-            {
-                @Override
-                public void onClick(View view, int position)
-                {
-                    Combo combo = combos.get(position);
-                    mPresenter.exhangeCombo(combo.getComboID(), combo.getDescription());
-                }
-
-                @Override
-                public void onLongClick(View view, int position) {
-
-                }
-            }));*/
 
             mAdapter.notifyDataSetChanged();
 

@@ -205,7 +205,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
             TextView lblSouvenirDialogDescr = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogDescr);
             TextView lblSouvenirDialogQntt = (TextView) dialogView.findViewById(R.id.tvSouvCount);
             ImageView btnSouvDialgSell = (ImageView) dialogView.findViewById(R.id.btnSouvDialgSell);
-            ImageView imgSouvCounter = (ImageView) dialogView.findViewById(R.id.imgSouvCounter);
+            ImageView imgSouvCounter = (ImageView) dialogView.findViewById(R.id.icSouvCounter);
 
             btnSouvDialgSell.setOnClickListener(new View.OnClickListener()
             {

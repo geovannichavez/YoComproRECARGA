@@ -165,8 +165,7 @@ public class SouvenirsGrouped extends AppCompatActivity implements SouvenirsGrou
             TextView lblSouvenirDialogDescr = (TextView) dialogView.findViewById(R.id.lblSouvenirDialogDescr);
             TextView lblSouvenirDialogQntt = (TextView) dialogView.findViewById(R.id.tvSouvCount);
             ImageView btnSouvDialgSell = (ImageView) dialogView.findViewById(R.id.btnSouvDialgSell);
-            ImageView imgSouvCounter = (ImageView) dialogView.findViewById(R.id.imgSouvCounter);
-            TextView tvSouvCount = (TextView) dialogView.findViewById(R.id.tvSouvCount);
+            ImageView imgSouvCounter = (ImageView) dialogView.findViewById(R.id.icSouvCounter);
 
             btnSouvDialgSell.setOnClickListener(new View.OnClickListener()
             {

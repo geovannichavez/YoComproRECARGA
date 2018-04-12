@@ -133,7 +133,21 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
     @Override
     public void showSouvenirDetailsModal(String title, String description, String count, String imgUrl, int souvenirID, int level)
     {
-        mView.showSouvenirDetails(title, description, count, imgUrl, souvenirID, level);
+        int resourceLevel = 0;
+
+        switch (level)
+        {
+            case 1:
+                resourceLevel = R.drawable.ic_souvenir_counter_01;
+                break;
+            case 2:
+                resourceLevel = R.drawable.ic_souvenir_counter_02;
+                break;
+            case 3:
+                resourceLevel = R.drawable.ic_souvenir_counter_03;
+                break;
+        }
+        mView.showSouvenirDetails(title, description, count, imgUrl, souvenirID, resourceLevel);
     }
 
     private List<ListSouvenirsByConsumer> getFilteredSouvs(String groupSelected)

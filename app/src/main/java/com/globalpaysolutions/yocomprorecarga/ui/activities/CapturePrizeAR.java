@@ -238,6 +238,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                     then = System.currentTimeMillis();
 
                     //Stops vibrating and removes animation
+
                     mPresenter.handle2DCoinTouch();
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP)
@@ -359,10 +360,25 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void on2DChestTouch(int pAwait)
+    public void on2DChestTouch(int pAwait, int eraID)
     {
         mVibrator.cancel();
         removeBlinkingAnimation();
+
+        try
+        {
+            //Gets the first object found
+            Map.Entry<String, ChestData2D> entry = mFirbaseObjects.entrySet().iterator().next();
+            ChestData2D chestData = entry.getValue();
+
+            if(chestData.getChestType() != Constants.VALUE_CHEST_TYPE_WILDCARD)
+                changeToOpenChest(chestData.getChestType(), eraID);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         mHandler.postDelayed(runCoinExchange, pAwait);
     }
 

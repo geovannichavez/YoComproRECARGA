@@ -31,7 +31,7 @@ public interface CapturePrizeView
     void stopVibrate();
     void showToast(String pText);
     void removeBlinkingAnimation();
-    void on2DChestTouch(int pAwait);
+    void on2DChestTouch(int pAwait, int eraID);
     void removeRunnableCallback();
     void deleteModelAR();
     void showNewAchievementDialog(String name, String level, String prize, String score, int resource, boolean navigatePrize);
