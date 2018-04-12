@@ -62,9 +62,9 @@
     <!--    CAPTURE PRIZE AR    -->
     <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
     <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
-    <string name="label_loading_exchanging_chest">¡Abriendo cofre, espera!</string>
+    <string name="label_loading_exchanging_chest">¡Abriendo objeto, espera!</string>
     <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
-    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo cofre una vez al día.</string>
+    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo objeto una vez al día.</string>
     <string name="label_chest_open_succesfully">Lo has hecho muy bien, lograste conseguir %1$s. ¡Vamos continúa buscando más!</string>
     <string name="label_indicator_prizes">PREMIOS</string>
     <string name="label_indicator_saved">ACUMULADO</string>
@@ -368,8 +368,8 @@
     <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
     <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
     <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
-    <string name="title_buy_barrell_confirm_dialog">¿Comprar barril?</string>
-    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este barril?</string>
+    <string name="title_buy_barrell_confirm_dialog">¿Comprar ítem?</string>
+    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este ítem?</string>
     <string name="title_copied_to_clipboard">Código copiado</string>
     <string name="content_copied_to_clipboard">Pega y envía gratis el código por SMS para canjear tu premio al %1$s</string>
     <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>

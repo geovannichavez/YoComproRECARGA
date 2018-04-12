@@ -17,7 +17,7 @@ alertPrueba: function alertPruebaFn(word) {
 
 deleteObjectGeo: function deleteObjectGeoFn() {
     AR.context.destroyAll();
-    document.body.innerHTML = "<div id=\"container\" class=\"container\"><div class=\"content\"><div id=\"loadingMessage\" class=\"loading\">No hay cofres cerca, revisa tu mapa...</div></div></div>";
+    document.body.innerHTML = "<div id=\"container\" class=\"container\"><div class=\"content\"><div id=\"loadingMessage\" class=\"loading\">No hay objetos cerca, revisa tu mapa...</div></div></div>";
 },
 
 destroyObjectGeo: function destroyObjectGeoFn() {
