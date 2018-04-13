@@ -150,6 +150,12 @@ public class UserData
 
     //Shares
     private static final String KEY_FACEBOOK_SHARE_SELECTION = "key_facebook_share_selection";
+    
+    //Worldcup
+    private static final String KEY_WORLDCUP_COUNTRY_ID = "key_worldcup_country_id";
+    private static final String KEY_WORLDCUP_COUNTRY_NAME = "key_worldcup_country_name";
+    private static final String KEY_WORLDCUP_FLAG_URL = "key_worldcup_flag_url";
+    private static final String KEY_WORLDCUP_MARKER_URL = "key_worldcup_marker_url";
 
     private UserData(Context pContext)
     {
@@ -274,6 +280,14 @@ public class UserData
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
         mEditor.putInt(KEY_ERA_ID, pEraID);
         mEditor.commit();
+    }
+
+    public void saveWorldcupTracking(int countryID, String countryName, String urlImg, String urlImgMarker)
+    {
+        mEditor.putInt(KEY_WORLDCUP_COUNTRY_ID, countryID);
+        mEditor.putString(KEY_WORLDCUP_COUNTRY_NAME, countryName);
+        mEditor.putString(KEY_WORLDCUP_FLAG_URL, urlImg);
+        mEditor.putString(KEY_WORLDCUP_MARKER_URL, urlImgMarker);
     }
 
     public void Save3DCompatibleValue(boolean isCompatible)
@@ -1090,5 +1104,6 @@ public class UserData
     {
         return mPreferences.getInt(KEY_TRIVIA_PENDINGS, 0);
     }
+
 
 }

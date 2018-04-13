@@ -101,6 +101,11 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
                    tracking.getTotalSouvenirs(),
                    tracking.getAgeID());
 
+           mUserData.saveWorldcupTracking(tracking.getCountryID(),
+                   tracking.getCountryName(),
+                   tracking.getUrlImg(),
+                   tracking.getUrlImgMarker());
+
            mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
 
        }

@@ -54,6 +54,18 @@ public class EraSelectionResponse
     @SerializedName("ChallengeScissors")
     @Expose
     private String challengeScissors;
+    @SerializedName("CountryID")
+    @Expose
+    private int countryID;
+    @SerializedName("CountryName")
+    @Expose
+    private String countryName;
+    @SerializedName("UrlImg")
+    @Expose
+    private String urlImg;
+    @SerializedName("UrlImgMarker")
+    @Expose
+    private String urlImgMarker;
 
 
     public int getAgeID()
@@ -195,6 +207,46 @@ public class EraSelectionResponse
     public void setChallengeScissors(String challengeScissors)
     {
         this.challengeScissors = challengeScissors;
+    }
+
+    public int getCountryID()
+    {
+        return countryID;
+    }
+
+    public void setCountryID(int countryID)
+    {
+        this.countryID = countryID;
+    }
+
+    public String getCountryName()
+    {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName)
+    {
+        this.countryName = countryName;
+    }
+
+    public String getUrlImg()
+    {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg)
+    {
+        this.urlImg = urlImg;
+    }
+
+    public String getUrlImgMarker()
+    {
+        return urlImgMarker;
+    }
+
+    public void setUrlImgMarker(String urlImgMarker)
+    {
+        this.urlImgMarker = urlImgMarker;
     }
 
 }

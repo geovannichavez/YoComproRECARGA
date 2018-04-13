@@ -101,6 +101,10 @@ public class WildcardInteractor implements IWildcardInteractor
                     tracking.getCurrentCoinsProgress(),
                     tracking.getTotalSouvenirs(),
                     tracking.getAgeID());
+            UserData.getInstance(mContext).saveWorldcupTracking(tracking.getCountryID(),
+                    tracking.getCountryName(),
+                    tracking.getUrlImg(),
+                    tracking.getUrlImgMarker());
         }
         catch (Exception ex)
         {

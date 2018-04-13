@@ -139,6 +139,16 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             wildcard.setMarkerUrl(eraSelection.getMarkerW());
             mMarkers.add(wildcard);
 
+            //Saves worldcup tracking
+            if(TextUtils.equals(eraSelection.getName(), Constants.ERA_WORLDCUP_NAME))
+            {
+                UserData.getInstance(mContext).saveWorldcupTracking(
+                        eraSelection.getCountryID(),
+                        eraSelection.getCountryName(),
+                        eraSelection.getUrlImg(),
+                        eraSelection.getUrlImgMarker());
+            }
+
             for (final EraMarker marker: mMarkers)
             {
                 mInteractor.fetchBitmap(marker.getMarkerUrl(), this, marker.getEraName(), eraSelection, destiny);
