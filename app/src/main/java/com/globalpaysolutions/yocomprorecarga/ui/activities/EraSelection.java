@@ -206,6 +206,15 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     }
 
     @Override
+    public void forwardWorldcupCountrySelection()
+    {
+        Intent countrySelection = new Intent(EraSelection.this, WorldCupCountries.class);
+        countrySelection.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(countrySelection);
+        finish();
+    }
+
+    @Override
     public void createImageDialog(String title, String description, int resource, View.OnClickListener clickListener)
     {
         try

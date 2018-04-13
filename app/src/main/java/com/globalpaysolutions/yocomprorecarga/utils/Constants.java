@@ -174,6 +174,7 @@ public class Constants
     public static final String BUNDLE_CHALLENGE_OPPONENT_MOVE = "bundle_challenge_opponent_move";
     public static final String BUNDLE_CHALLENGE_QUERY = "bundle_challenge_query";
     public static final String BUNDLE_CHALLENGES_BACK_MAP = "bundle_challenges_back_map";
+    //public static final String BUNDLE_COUNTRYSELECTION_BACK_MAP = "bundle_countryselection_back_map";
     public static final String NOTIFICATION_TITLE_BEEN_CHALLENGED = "¡Te han retado!";
 
     //Facebook
