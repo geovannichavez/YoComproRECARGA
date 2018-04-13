@@ -443,6 +443,9 @@
     <string name="label_souvs_progress">Progreso: %1$s/32</string>
     <string name="label_group_name">Grupo %1$s</string>
     <string name="label_progress">Progreso</string>
+    <string name="label_select_country_recargo_worldcup">Selecciona tu equipo para la Copa RecarGO!</string>
+    <string name="label_select">Seleccione</string>
+    <string name="label_selected_country">País seleccionado:</string>
 
 
 </resources>

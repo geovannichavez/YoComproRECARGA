@@ -96,5 +96,6 @@ public class StringsURL
     public static final String GET_TRIVIA = "GetTrivia";
     public static final String RESPOND_TRIVIA = "TriviaResponse";
     public static final String GET_SOUVS_PROGRESS = "GetSouvenirProgress";
+    public static final String GET_WORLDCUP_COUNTRIES = "GetCountries";
 }
 

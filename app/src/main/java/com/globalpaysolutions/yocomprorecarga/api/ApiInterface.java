@@ -47,6 +47,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.WorldCupCountriesRspns;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.google.gson.JsonObject;
 
@@ -264,4 +265,9 @@ public interface ApiInterface
                                                       @Header("AppVersion") String versionName,
                                                       @Header("Platform") String platform);
 
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_WORLDCUP_COUNTRIES)
+    Call<WorldCupCountriesRspns> retrieveWorldcupCountries(@Header("authenticationKey") String userAuthenticationKey,
+                                                           @Header("AppVersion") String versionName,
+                                                           @Header("Platform") String platform);
 }
