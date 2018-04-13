@@ -102,7 +102,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
         try
         {
             mView.hideLoadingDialog();
-            startTimer((int) String.valueOf(response.getTimer()).charAt(1));
+            startTimer(response.getTimer());
 
             HashMap<Integer, String> answers = new HashMap<>();
 

@@ -25,7 +25,7 @@ public class TriviaResponse
     private String imgUrl;
     @SerializedName("Timer")
     @Expose
-    private float timer;
+    private int timer;
     @SerializedName("Type")
     @Expose
     private int type;
@@ -76,12 +76,12 @@ public class TriviaResponse
         this.imgUrl = imgUrl;
     }
 
-    public float getTimer()
+    public int getTimer()
     {
         return timer;
     }
 
-    public void setTimer(float timer)
+    public void setTimer(int timer)
     {
         this.timer = timer;
     }
