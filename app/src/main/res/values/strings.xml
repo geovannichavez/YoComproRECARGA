@@ -287,7 +287,7 @@
     <string name="label_sorry_not_compatible_part1">¡Lo siento tu celular no acepta la versión 3D!</string>
     <string name="label_sorry_not_compatible_part2">¡Pero no te preocupes que aún puedes jugar con la versión 2D!</string>
     <string name="label_congrats_souvenir_name">Lograste encontrar %1$s.</string>
-    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí!¡Mereces una recompensa!</string>
+    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí! ¡Mereces una recompensa!</string>
     <string name="label_just_earned">Acabas de ganar gracias a Claro:</string>
     <string name="title_initial_wildcard">¡Pongamos a prueba tu suerte!</string>
     <string name="title_await_please">Espera un momento</string>
