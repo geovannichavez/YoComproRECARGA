@@ -183,7 +183,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icPanel"/>
 
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gvCountries"
         android:layout_width="319dp"
         android:layout_height="334dp"

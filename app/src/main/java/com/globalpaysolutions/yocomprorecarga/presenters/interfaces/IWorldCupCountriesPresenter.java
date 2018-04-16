@@ -10,4 +10,5 @@ public interface IWorldCupCountriesPresenter
 {
     void initialize();
     void retrieveCountries();
+    void selectCountry(int worldCupCountryID);
 }

@@ -9,4 +9,6 @@ import com.globalpaysolutions.yocomprorecarga.interactors.WorldCupCountriesListe
 public interface IWorldCupCountriesInteractor
 {
     void retrieveCountries(WorldCupCountriesListener listener);
+    void setCountrySelected(int worldCupCountryID, WorldCupCountriesListener listener);
+    void insertUrlMarker(String urlImgMarker, WorldCupCountriesListener listener);
 }

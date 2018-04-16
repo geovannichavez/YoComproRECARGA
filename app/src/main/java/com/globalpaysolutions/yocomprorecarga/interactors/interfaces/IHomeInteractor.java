@@ -1,7 +1,5 @@
 package com.globalpaysolutions.yocomprorecarga.interactors.interfaces;
 
-import android.location.Location;
-
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.interactors.HomeListener;
 
@@ -24,4 +22,6 @@ public interface IHomeInteractor
 
     void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
     void getPendingChallenges(HomeListener listener);
+
+    void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener);
 }

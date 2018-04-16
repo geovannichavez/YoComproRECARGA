@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.graphics.Bitmap;
+
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
@@ -65,4 +67,6 @@ public interface HomeListener
 
     void onPendingChallengesSuccess(PendingsResponse body);
     void onPendingChallengesError(int code, Throwable throwable);
+
+    void onRetrieveBitmapSuccess(Bitmap bitmap, String mName);
 }

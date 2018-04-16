@@ -1,5 +1,8 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.view.View;
+
+import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.Country;
 
 import java.util.List;
@@ -14,4 +17,6 @@ public interface WorldCupCountriesView
     void renderCountries(List<Country> countries);
     void showLoadingDialog(String message);
     void hideLoadingDialog();
+    void showGenericDialog(DialogViewModel content, View.OnClickListener clickListener);
+    void navigateMap();
 }

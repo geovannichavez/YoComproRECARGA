@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -23,7 +24,6 @@ import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
@@ -41,7 +41,9 @@ import com.google.firebase.database.DatabaseError;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -692,6 +694,14 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
             {
+                if(!TextUtils.isEmpty(playerPointData.getMarkerUrl()))
+                {
+                    Uri uri = Uri.parse(playerPointData.getMarkerUrl());
+                    String name = uri.getLastPathSegment();
+
+                    mInteractor.downloadMarkerBmp(playerPointData.getMarkerUrl(), name, this);
+                }
+
                 MarkerData markerData = new MarkerData(key, Constants.TAG_MARKER_PLAYER, playerPointData.getNickname());
 
                 String title = String.format(mContext.getString(R.string.title_marker_player), playerPointData.getNickname());
@@ -753,6 +763,31 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             Log.e(TAG, "Error retrieving pending challenges: CodeStatus = " +
                     String.valueOf(code) + ", Throwable: " + o.getLocalizedMessage());
         }catch (Exception ex) { ex.printStackTrace(); }
+    }
+
+    @Override
+    public void onRetrieveBitmapSuccess(Bitmap bitmap, String name)
+    {
+        try
+        {
+            File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
+
+            if(!file1.exists())
+                file1.mkdirs();
+
+            OutputStream outStream = null;
+            File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
+
+            outStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.close();
+
+            Log.i(TAG, "Bitmap saved!");
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error downloading worldcup marker: " + ex.getMessage());
+        }
     }
 
     //  FIREBASE GOLD POINTS

@@ -954,6 +954,11 @@ public class UserData
         return mPreferences.getString(KEY_SOUVENIR_GROUPED_RAW_RESPONSE, "");
     }
 
+    public String getWorldcupMarkerUrl()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_MARKER_URL, "");
+    }
+
     /*
     * ********************
     *

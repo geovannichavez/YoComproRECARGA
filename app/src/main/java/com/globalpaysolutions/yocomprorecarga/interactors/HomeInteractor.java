@@ -3,7 +3,6 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -14,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
@@ -33,8 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
@@ -178,9 +178,11 @@ public class HomeInteractor implements IHomeInteractor
         {
             String playerNick = UserData.getInstance(mContext).getNickname();
             final String playerFacebookID = UserData.getInstance(mContext).getFacebookProfileId();
+            final String urlImgMarker = UserData.getInstance(mContext).getWorldcupMarkerUrl();
 
             Map<String, String> vendorPoint = new HashMap<>();
             vendorPoint.put("Nickname", playerNick);
+            vendorPoint.put("MarkerUrl", urlImgMarker);
 
             mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
             {
@@ -336,9 +338,35 @@ public class HomeInteractor implements IHomeInteractor
         });
     }
 
+    @Override
+    public void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener)
+    {
+        mHomeListener = listener;
+        try
+        {
+            new FetchMarker(listener, markerName).execute(markerUrl).get();
+        }
+        catch (InterruptedException e)
+        {
+            Log.e(TAG, "Error: " + e.getMessage());
+        }
+        catch (ExecutionException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
     {
         Bitmap mBitmap;
+        HomeListener mListener;
+        String mName;
+
+        private FetchMarker(HomeListener listener, String markerName)
+        {
+            mListener = listener;
+            mName = markerName;
+        }
 
         @Override
         protected Bitmap doInBackground(String... strings)
@@ -350,7 +378,6 @@ public class HomeInteractor implements IHomeInteractor
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
-                //mBitmap = BitmapFactory.decodeStream(input);
                 Bitmap bitmap = BitmapFactory.decodeStream(input);
                 mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
             }
@@ -366,6 +393,12 @@ public class HomeInteractor implements IHomeInteractor
         protected void onPreExecute()
         {
             super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap)
+        {
+            mListener.onRetrieveBitmapSuccess(bitmap, mName);
         }
 
     }
