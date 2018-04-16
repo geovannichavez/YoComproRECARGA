@@ -197,6 +197,27 @@ dependencies {
 
 }
 
+ext.additionalDensities = ['mdpi': ['160'], 'hdpi': ['240', '280']]
+import com.android.build.OutputFile
+
+android.applicationVariants.all { variant ->
+    // assign different version code for each output
+    variant.outputs.each { output ->
+        if (output.getFilter(com.android.build.OutputFile.DENSITY) != null && project.ext.additionalDensities.containsKey(output.getFilter(com.android.build.OutputFile.DENSITY))) {
+            output.processManifest.doFirst {
+                def manifestFile = new File(project.buildDir, "intermediates" + File.separator + "manifests" + File.separator + "density" + File.separator + output.getFilter(com.android.build.OutputFile.DENSITY) + File.separator + variant.buildType.name + File.separator + "AndroidManifest.xml")
+                def manifestText = manifestFile.text
+                for (String density : project.ext.additionalDensities.get(output.getFilter(com.android.build.OutputFile.DENSITY))) {
+                    manifestText = manifestText.replaceAll("</compatible-screens>", "<screen android:screenSize=\"small\" android:screenDensity=\"${density}\" />\n" +
+                            "<screen android:screenSize=\"medium\" android:screenDensity=\"${density}\" />\n" +
+                            "<screen android:screenSize=\"high\" android:screenDensity=\"${density}\" />\n </compatible-screens>")
+                }
+                manifestFile.text = manifestText
+            }
+        }
+    }
+}
+
 //Google Services
 //OBLIGATORIO: ESta línea debe ir al final del documento
 apply plugin: 'com.google.gms.google-services'
