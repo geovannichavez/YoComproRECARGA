@@ -31,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -523,8 +522,9 @@ public class HomeInteractor implements IHomeInteractor
     private GeoQueryEventListener playersPointsListener = new GeoQueryEventListener()
     {
         @Override
-        public void onKeyEntered(final String key, GeoLocation location)
+        public void onKeyEntered(final String key, final GeoLocation location)
         {
+            //Reads values and data for key entered
             mDataPlayersPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
             {
                 @Override
@@ -532,20 +532,18 @@ public class HomeInteractor implements IHomeInteractor
                 {
                     PlayerPointData player = dataSnapshot.getValue(PlayerPointData.class);
                     if(player != null)
+                    {
+                        LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+                        mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation, player);
                         mHomeListener.fb_playerPoint_onDataChange(key, player);
-
-                    Log.i(TAG, dataSnapshot.toString());
+                    }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError)
                 {
                     mHomeListener.fb_playerPoint_onCancelled(databaseError);
                 }
             });
-
-            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation);;
         }
 
         @Override

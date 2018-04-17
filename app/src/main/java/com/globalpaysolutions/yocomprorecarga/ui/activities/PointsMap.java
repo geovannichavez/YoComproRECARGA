@@ -1136,6 +1136,31 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         }
     }
 
+    @Override
+    public void addWorldcupPlayerMarker(String key, LatLng location, Bitmap bitmap)
+    {
+        try
+        {
+            Marker marker = mPlayerPointsMarkers.get(key);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", key));
+                animateMarkerTo(marker, location);
+            }
+            else
+            {
+                marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
+                        .icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+                );
+                mPlayerPointsMarkers.put(key, marker);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error trying to add wc marker: " + ex.getMessage());
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
