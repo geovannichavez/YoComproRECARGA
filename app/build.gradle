@@ -55,10 +55,10 @@ android {
     splits {
         density {
             enable true
-            exclude 'ldpi', 'tvdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi'
+            //exclude 'ldpi', 'tvdpi', 'hdpi', 'mhdpi','xhdpi'
             //alternatively use the following two lines to only include:
-            //            reset()
-            //            include 'mdpi', 'hdpi', 'xhdpi', 'xxhdpi'
+                        reset()
+                        include "xxhdpi", "xxxhdpi"
             //compatibleScreens 'normal'
         }
 
@@ -205,15 +205,13 @@ android.applicationVariants.all { variant ->
     variant.outputs.each { output ->
         if (output.getFilter(OutputFile.DENSITY) != null && project.ext.additionalDensities.containsKey(output.getFilter(OutputFile.DENSITY))) {
             output.processManifest.doFirst {
-                //def manifestFile = new File(project.buildDir, "intermediates" + File.separator + "manifests" + File.separator + "density" + File.separator + output.getFilter(com.android.build.OutputFile.DENSITY) + File.separator + variant.buildType.name + File.separator + "AndroidManifest.xml")
-                def manifestFile = new File(project.buildDir, "intermediates" + File.separator + "manifests" + File.separator + "density" + File.separator  + variant.buildType.name + File.separator + output.getFilter(com.android.build.OutputFile.DENSITY) + File.separator + "AndroidManifest.xml")
+                def manifestFile = new File(project.buildDir, "intermediates" + File.separator + "manifests" + File.separator + "density" + File.separator + output.getFilter(OutputFile.DENSITY) + File.separator + variant.buildType.name + File.separator + "AndroidManifest.xml")
                 def manifestText = manifestFile.text
-                for (String density : project.ext.additionalDensities.get(output.getFilter(OutputFile.DENSITY)))
-                {
-                    manifestText = manifestText.replaceAll("</compatible-screens>",
-
-                            "<screen android:screenSize=\"medium\" android:screenDensity=\"${density}\" />\n" +
-                            "<screen android:screenSize=\"high\" android:screenDensity=\"${density}\" />\n </compatible-screens>")
+                for (String density : project.ext.additionalDensities.get(output.getFilter(OutputFile.DENSITY))) {
+                    manifestText = manifestText.replaceAll("</compatible-screens>", "<screen android:screenSize=\"small\" android:screenDensity=\"${density}\" />\n" +
+                            "<screen android:screenSize=\"large\" android:screenDensity=\"${density}\" />\n" +
+                            "<screen android:screenSize=\"xlarge\" android:screenDensity=\"${density}\" />\n" +
+                            "<screen android:screenSize=\"normal\" android:screenDensity=\"${density}\" />\n </compatible-screens>")
                 }
                 manifestFile.text = manifestText
             }
@@ -223,7 +221,7 @@ android.applicationVariants.all { variant ->
 
 
 // map for the version codes
-ext.versionCodes = ['mdpi':1, 'hdpi':2].withDefault {0}
+ext.versionCodes = ['mdpi':1, 'hdpi':2, 'xhdpi':3, 'xxhdpi':4, 'xxxhdpi':5].withDefault {0}
 import com.android.build.OutputFile
 android.applicationVariants.all { variant ->
 // assign different version code for each output

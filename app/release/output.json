@@ -1,1 +1,60 @@
-[{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"DENSITY","value":"mdpi"}],"versionCode":48},"path":"app-mdpi-release.apk","properties":{"packageId":"com.globalpaysolutions.yocomprorecarga","split":"","minSdkVersion":"16"}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[{"filterType":"DENSITY","value":"hdpi"}],"versionCode":48},"path":"app-hdpi-release.apk","properties":{"packageId":"com.globalpaysolutions.yocomprorecarga","split":"","minSdkVersion":"16"}},{"outputType":{"type":"APK"},"apkInfo":{"type":"FULL_SPLIT","splits":[],"versionCode":48},"path":"app-universal-release.apk","properties":{"packageId":"com.globalpaysolutions.yocomprorecarga","split":"","minSdkVersion":"16"}}]
+[
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "FULL_SPLIT",
+      "splits": [
+        {
+          "filterType": "DENSITY",
+          "value": "xxxhdpi"
+        }
+      ],
+      "versionCode": 5000048
+    },
+    "path": "app-xxxhdpi-release.apk",
+    "properties": {
+      "packageId": "com.globalpaysolutions.yocomprorecarga",
+      "split": "",
+      "minSdkVersion": "16"
+    }
+  },
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "FULL_SPLIT",
+      "splits": [
+        {
+          "filterType": "DENSITY",
+          "value": "xxhdpi"
+        }
+      ],
+      "versionCode": 4000048
+    },
+    "path": "app-xxhdpi-release.apk",
+    "properties": {
+      "packageId": "com.globalpaysolutions.yocomprorecarga",
+      "split": "",
+      "minSdkVersion": "16"
+    }
+  },
+  {
+    "outputType": {
+      "type": "APK"
+    },
+    "apkInfo": {
+      "type": "FULL_SPLIT",
+      "splits": [],
+      "versionCode": 48
+    },
+    "path": "app-universal-release.apk",
+    "properties": {
+      "packageId": "com.globalpaysolutions.yocomprorecarga",
+      "split": "",
+      "minSdkVersion": "16"
+    }
+  }
+]
