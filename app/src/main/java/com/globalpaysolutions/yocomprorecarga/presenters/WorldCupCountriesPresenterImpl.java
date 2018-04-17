@@ -43,6 +43,7 @@ public class WorldCupCountriesPresenterImpl implements IWorldCupCountriesPresent
     @Override
     public void retrieveCountries()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.title_await_please));
         mInteractor.retrieveCountries(this);
     }
 
@@ -56,6 +57,7 @@ public class WorldCupCountriesPresenterImpl implements IWorldCupCountriesPresent
     @Override
     public void onRetrieveSuccess(WorldCupCountriesRspns response)
     {
+        mView.hideLoadingDialog();
         mView.renderCountries(response.getCountry());
     }
 
@@ -113,7 +115,11 @@ public class WorldCupCountriesPresenterImpl implements IWorldCupCountriesPresent
     public void onSelectedError(int code, Throwable t, SimpleResponse errorResponse)
     {
         mView.hideLoadingDialog();
-        //TODO: Completar codigo
+        DialogViewModel content = new DialogViewModel();
+        content.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        content.setLine1(mContext.getString(R.string.error_content_please_try_again));
+        content.setAcceptButton(mContext.getString(R.string.button_accept));
+        mView.showGenericDialog(content, null);
     }
 
     @Override

@@ -338,7 +338,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-        <activity android:name=".ui.activities.WorldCupCountries">
+        <activity android:name=".ui.activities.WorldCupCountries"
+                  android:parentActivityName=".ui.activities.Main"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 

@@ -15,4 +15,5 @@ public interface ProfileView
     void showGenericDialog(DialogViewModel model);
     void updateIndicators(String totalCoins, String totalSouvenirs);
     void navigateSouvenirs(Intent souvenirs);
+    void loadCountryBadge(String worldcupCountryUrl);
 }

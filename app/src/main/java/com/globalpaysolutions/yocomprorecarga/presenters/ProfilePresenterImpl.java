@@ -55,6 +55,13 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
 
         mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
 
+        if(TextUtils.equals(mUserData.getEraName(), Constants.ERA_WORLDCUP_NAME))
+        {
+            if(!TextUtils.isEmpty(mUserData.getWorldcupCountryName()))
+                mView.loadCountryBadge(mUserData.getWorldcupCountryUrl());
+
+        }
+
         if(profile != null)
             mView.loadViewsState("",
                     mUserData.getNickname(),

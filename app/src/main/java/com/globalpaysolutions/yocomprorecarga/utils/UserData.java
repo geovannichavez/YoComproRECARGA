@@ -959,6 +959,16 @@ public class UserData
         return mPreferences.getString(KEY_WORLDCUP_MARKER_URL, "");
     }
 
+    public String getWorldcupCountryName()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_COUNTRY_NAME, "");
+    }
+
+    public String getWorldcupCountryUrl()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_FLAG_URL, "");
+    }
+
     /*
     * ********************
     *

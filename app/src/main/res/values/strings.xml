@@ -446,6 +446,7 @@
     <string name="label_select_country_recargo_worldcup">Selecciona tu equipo para la Copa RecarGO!</string>
     <string name="label_select">Seleccione</string>
     <string name="label_selected_country">País seleccionado:</string>
+    <string name="error_content_please_try_again">Algo salió mal... Inténtalo de nuevo</string>
 
 
 </resources>

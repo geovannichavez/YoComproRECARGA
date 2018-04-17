@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,6 +27,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.WordlcupCountriesAdapt
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.WorldCupCountriesView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class WorldCupCountries extends AppCompatActivity implements WorldCupCoun
     ImageView icCountryBadge;
     ImageView btnAccept;
     TextView tvCountryName;
+    ProgressDialog mProgressDialog;
     RecyclerView gvCountries;
 
     WordlcupCountriesAdapter mCountriesAdapter;
@@ -52,6 +55,8 @@ public class WorldCupCountries extends AppCompatActivity implements WorldCupCoun
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_world_cup_countries);
+
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_gray_3));
 
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
         btnBack = (ImageView) findViewById(R.id.btnBack);
@@ -70,6 +75,7 @@ public class WorldCupCountries extends AppCompatActivity implements WorldCupCoun
     @Override
     public void initializeViews()
     {
+        Picasso.with(this).load(R.drawable.bg_background_4);
         btnAccept.setImageResource(R.drawable.bg_title_3);
         btnAccept.setClickable(false);
         btnAccept.setOnClickListener(selectListener);
@@ -93,9 +99,8 @@ public class WorldCupCountries extends AppCompatActivity implements WorldCupCoun
                 @Override
                 public void onClick(View view, int position)
                 {
-                    mCountrySelected = countries.get(position);
-                    btnAccept.setClickable(true);
-                    btnAccept.setImageResource(R.drawable.btn_country_select_03);
+                    Country selected = countries.get(position);
+                    setSelectedCountry(selected);
                 }
 
                 @Override
@@ -111,16 +116,52 @@ public class WorldCupCountries extends AppCompatActivity implements WorldCupCoun
         }
     }
 
+    private void setSelectedCountry(Country selected)
+    {
+        try
+        {
+            mCountrySelected = selected;
+            btnAccept.setClickable(true);
+            btnAccept.setImageResource(R.drawable.btn_country_select_03);
+            tvCountryName.setText(selected.getName());
+            Picasso.with(this).load(selected.getUrlImg()).into(icCountryBadge);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
     @Override
     public void showLoadingDialog(String message)
     {
-
+        try
+        {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(message);
+            mProgressDialog.show();
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void hideLoadingDialog()
     {
-
+        try
+        {
+            if (mProgressDialog != null && mProgressDialog.isShowing())
+            {
+                mProgressDialog.dismiss();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
