@@ -23,5 +23,5 @@ public interface IHomeInteractor
     void sendStoreAirtimeReport(String pStoreName, String pAddressStore, double pLongitude, double pLatitude, String pFirebaseID);
     void getPendingChallenges(HomeListener listener);
 
-    void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener);
+    //void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener);
 }

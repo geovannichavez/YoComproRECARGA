@@ -59,7 +59,6 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
         {
             if(!TextUtils.isEmpty(mUserData.getWorldcupCountryName()))
                 mView.loadCountryBadge(mUserData.getWorldcupCountryUrl());
-
         }
 
         if(profile != null)

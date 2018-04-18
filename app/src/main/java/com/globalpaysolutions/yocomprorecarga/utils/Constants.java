@@ -186,7 +186,9 @@ public class Constants
     public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
 
-    public static final String ERA_WORLDCUP_NAME = "Mundial";
+    public static final String ERA_WORLDCUP_NAME = "Mundial 2018";
+    public static final int MARKER_MAX_WIDTH_DP_SIZE = 50;
+    public static final int MARKER_MAX_HEIGHT_DP_SIZE = 44;
 
     public static String PLATFORM = "ANDROID";
 

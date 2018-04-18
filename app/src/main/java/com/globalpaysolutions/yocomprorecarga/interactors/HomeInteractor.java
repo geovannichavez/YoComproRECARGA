@@ -337,7 +337,7 @@ public class HomeInteractor implements IHomeInteractor
         });
     }
 
-    @Override
+    /*@Override
     public void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener)
     {
         mHomeListener = listener;
@@ -353,57 +353,7 @@ public class HomeInteractor implements IHomeInteractor
         {
             e.printStackTrace();
         }
-    }
-
-    public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
-    {
-        Bitmap mBitmap;
-        HomeListener mListener;
-        String mName;
-
-        private FetchMarker(HomeListener listener, String markerName)
-        {
-            mListener = listener;
-            mName = markerName;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings)
-        {
-            try
-            {
-                URL bitmapUrl = new URL(strings[0]);
-                HttpURLConnection connection = (HttpURLConnection) bitmapUrl.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(input);
-                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                mBitmap = null;
-            }
-            return mBitmap;
-        }
-
-        @Override
-        protected void onPreExecute()
-        {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap)
-        {
-            mListener.onRetrieveBitmapSuccess(bitmap, mName);
-        }
-
-    }
-
-
-
+    }*/
 
     /*
     *

@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRDat
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -572,6 +573,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                             {
+                                bitmap = BitmapScaler.scaleMarker(bitmap, mContext);
+
                                 saveBitmap(bitmap, name);
                                 mView.addWorldcupPlayerMarker(key, location, bitmap);
                             }
