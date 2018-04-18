@@ -3,7 +3,6 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -14,7 +13,6 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IHomeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
@@ -35,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
@@ -178,9 +177,11 @@ public class HomeInteractor implements IHomeInteractor
         {
             String playerNick = UserData.getInstance(mContext).getNickname();
             final String playerFacebookID = UserData.getInstance(mContext).getFacebookProfileId();
+            final String urlImgMarker = UserData.getInstance(mContext).getWorldcupMarkerUrl();
 
             Map<String, String> vendorPoint = new HashMap<>();
             vendorPoint.put("Nickname", playerNick);
+            vendorPoint.put("MarkerUrl", urlImgMarker);
 
             mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
             {
@@ -336,42 +337,23 @@ public class HomeInteractor implements IHomeInteractor
         });
     }
 
-    public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
+    /*@Override
+    public void downloadMarkerBmp(String markerUrl, String markerName, HomeListener listener)
     {
-        Bitmap mBitmap;
-
-        @Override
-        protected Bitmap doInBackground(String... strings)
+        mHomeListener = listener;
+        try
         {
-            try
-            {
-                URL bitmapUrl = new URL(strings[0]);
-                HttpURLConnection connection = (HttpURLConnection) bitmapUrl.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                //mBitmap = BitmapFactory.decodeStream(input);
-                Bitmap bitmap = BitmapFactory.decodeStream(input);
-                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-                mBitmap = null;
-            }
-            return mBitmap;
+            new FetchMarker(listener, markerName).execute(markerUrl).get();
         }
-
-        @Override
-        protected void onPreExecute()
+        catch (InterruptedException e)
         {
-            super.onPreExecute();
+            Log.e(TAG, "Error: " + e.getMessage());
         }
-
-    }
-
-
-
+        catch (ExecutionException e)
+        {
+            e.printStackTrace();
+        }
+    }*/
 
     /*
     *
@@ -490,8 +472,9 @@ public class HomeInteractor implements IHomeInteractor
     private GeoQueryEventListener playersPointsListener = new GeoQueryEventListener()
     {
         @Override
-        public void onKeyEntered(final String key, GeoLocation location)
+        public void onKeyEntered(final String key, final GeoLocation location)
         {
+            //Reads values and data for key entered
             mDataPlayersPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
             {
                 @Override
@@ -499,20 +482,18 @@ public class HomeInteractor implements IHomeInteractor
                 {
                     PlayerPointData player = dataSnapshot.getValue(PlayerPointData.class);
                     if(player != null)
+                    {
+                        LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+                        mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation, player);
                         mHomeListener.fb_playerPoint_onDataChange(key, player);
-
-                    Log.i(TAG, dataSnapshot.toString());
+                    }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError)
                 {
                     mHomeListener.fb_playerPoint_onCancelled(databaseError);
                 }
             });
-
-            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-            mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation);;
         }
 
         @Override

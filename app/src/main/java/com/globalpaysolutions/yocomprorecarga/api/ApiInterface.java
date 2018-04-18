@@ -12,6 +12,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
@@ -47,6 +49,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.WorldCupCountriesRspns;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.WorldCupCountries;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.google.gson.JsonObject;
 
@@ -264,4 +268,16 @@ public interface ApiInterface
                                                       @Header("AppVersion") String versionName,
                                                       @Header("Platform") String platform);
 
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_WORLDCUP_COUNTRIES)
+    Call<WorldCupCountriesRspns> retrieveWorldcupCountries(@Header("authenticationKey") String userAuthenticationKey,
+                                                           @Header("AppVersion") String versionName,
+                                                           @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.SELECT_WORLDCUP_COUNTRY)
+    Call<CountrySelectedResponse> setWorldcupCountry(@Header("authenticationKey") String userAuthenticationKey,
+                                                    @Header("AppVersion") String versionName,
+                                                    @Header("Platform") String platform,
+                                                    @Body CountrySelectedReq selectedCountry);
 }

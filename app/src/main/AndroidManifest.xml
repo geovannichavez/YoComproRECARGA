@@ -315,21 +315,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
         </activity>
-
-        <activity android:name=".ui.activities.Likes"
-                  android:parentActivityName=".ui.activities.Main"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppThemeFullScreen" />
-
         <activity
+            android:name=".ui.activities.Likes"
             android:parentActivityName=".ui.activities.Main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen"/>
+        <activity
             android:name=".ui.activities.Trivia"
+            android:parentActivityName=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
         </activity>
-
-
         <activity
             android:name=".ui.activities.SouvenirsGroups"
             android:parentActivityName=".ui.activities.Profile"
@@ -341,7 +337,11 @@
             android:parentActivityName=".ui.activities.SouvenirsGroups"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen">
-
+        </activity>
+        <activity android:name=".ui.activities.WorldCupCountries"
+                  android:parentActivityName=".ui.activities.Main"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppThemeFullScreen">
         </activity>
     </application>
 

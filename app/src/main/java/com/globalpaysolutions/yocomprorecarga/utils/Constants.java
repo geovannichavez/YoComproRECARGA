@@ -174,6 +174,7 @@ public class Constants
     public static final String BUNDLE_CHALLENGE_OPPONENT_MOVE = "bundle_challenge_opponent_move";
     public static final String BUNDLE_CHALLENGE_QUERY = "bundle_challenge_query";
     public static final String BUNDLE_CHALLENGES_BACK_MAP = "bundle_challenges_back_map";
+    //public static final String BUNDLE_COUNTRYSELECTION_BACK_MAP = "bundle_countryselection_back_map";
     public static final String NOTIFICATION_TITLE_BEEN_CHALLENGED = "¡Te han retado!";
 
     //Facebook
@@ -185,7 +186,9 @@ public class Constants
     public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
 
-    public static final String ERA_WORLDCUP_NAME = "Mundial";
+    public static final String ERA_WORLDCUP_NAME = "Mundial 2018";
+    public static final int MARKER_MAX_WIDTH_DP_SIZE = 50;
+    public static final int MARKER_MAX_HEIGHT_DP_SIZE = 44;
 
     public static String PLATFORM = "ANDROID";
 

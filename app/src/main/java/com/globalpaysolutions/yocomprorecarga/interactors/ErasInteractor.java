@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
 
@@ -183,7 +184,7 @@ public class ErasInteractor implements IErasInteractor
     {
         try
         {
-            new FetchMarker(listener, markerName, eraSelection, destiny).execute(url).get();
+            new FetchMarker(listener, markerName, eraSelection, destiny, mContext).execute(url).get();
         }
         catch (InterruptedException e)
         {
@@ -202,14 +203,16 @@ public class ErasInteractor implements IErasInteractor
         ErasListener mListener;
         String mName;
         String mDestiny;
+        Context mContext;
         int mValue;
 
-        private FetchMarker(ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny)
+        private FetchMarker(ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny, Context context)
         {
             mListener = listener;
             mName = markerName;
             mResponse = eraSelection;
             mDestiny = destiny;
+            mContext = context;
         }
 
         @Override
@@ -223,7 +226,8 @@ public class ErasInteractor implements IErasInteractor
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(input);
-                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
+
+                mBitmap = BitmapScaler.scaleMarker(bitmap, mContext);
             }
             catch (Exception e)
             {

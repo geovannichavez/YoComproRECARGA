@@ -128,6 +128,12 @@ public class Profile extends ImmersiveActivity implements ProfileView
         }
     }
 
+    @Override
+    public void loadCountryBadge(String worldcupCountryUrl)
+    {
+        Picasso.with(this).load(worldcupCountryUrl).into(icCountry);
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)

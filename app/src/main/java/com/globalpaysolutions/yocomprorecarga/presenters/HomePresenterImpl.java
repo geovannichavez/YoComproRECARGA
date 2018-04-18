@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -23,7 +25,6 @@ import com.globalpaysolutions.yocomprorecarga.location.LocationCallback;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
@@ -33,15 +34,20 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRDat
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.SocketTimeoutException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -538,10 +544,63 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     *
     * */
     @Override
-    public void gf_playerPoint_onKeyEntered(String key, LatLng location)
+    public void gf_playerPoint_onKeyEntered(final String key, final LatLng location, PlayerPointData playerData)
     {
-        if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
-            mView.addPlayerPoint(key, location);
+        //Checks if current Era selected is Worldcup
+        if(TextUtils.equals(mUserData.getEraName(), Constants.ERA_WORLDCUP_NAME))
+        {
+            //If key entered is not user's key, then draws a marker
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            {
+                try
+                {
+                    //Gets last part of Uri to create the file name
+                    Uri markerUrl = Uri.parse(playerData.getMarkerUrl());
+                    final String name = markerUrl.getLastPathSegment();
+
+                    //Checks if bitmap already exists
+                    Bitmap marker = retrieveBitmap(name);
+
+                    if(marker != null)
+                    {
+                        mView.addWorldcupPlayerMarker(key, location, marker);
+                    }
+                    else
+                    {
+                        //If marker file does not exists, downloads it
+                        Picasso.with(mContext).load(playerData.getMarkerUrl()).into(new Target()
+                        {
+                            @Override
+                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+                            {
+                                bitmap = BitmapScaler.scaleMarker(bitmap, mContext);
+
+                                saveBitmap(bitmap, name);
+                                mView.addWorldcupPlayerMarker(key, location, bitmap);
+                            }
+
+                            @Override
+                            public void onBitmapFailed(Drawable errorDrawable)
+                            { }
+
+                            @Override
+                            public void onPrepareLoad(Drawable placeHolderDrawable)
+                            { }
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.e(TAG, "Error on key entered: " + ex.getMessage());
+                    mView.addPlayerPoint(key, location);
+                }
+            }
+        }
+        else
+        {
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+                mView.addPlayerPoint(key, location);
+        }
     }
 
     @Override
@@ -755,6 +814,12 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         }catch (Exception ex) { ex.printStackTrace(); }
     }
 
+    @Override
+    public void onRetrieveBitmapSuccess(Bitmap bitmap, String name)
+    {
+        saveBitmap(bitmap, name);
+    }
+
     //  FIREBASE GOLD POINTS
     @Override
     public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
@@ -860,6 +925,30 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
         return bitmap;
 
+    }
+
+    private void saveBitmap(Bitmap bitmap, String name)
+    {
+        try
+        {
+            File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
+
+            if(!file1.exists())
+                file1.mkdirs();
+
+            OutputStream outStream = null;
+            File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
+
+            outStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.close();
+
+            Log.i(TAG, "Bitmap saved!");
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error downloading worldcup marker: " + ex.getMessage());
+        }
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)

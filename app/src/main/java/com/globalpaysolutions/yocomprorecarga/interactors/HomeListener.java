@@ -1,8 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import android.graphics.Bitmap;
+
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -37,7 +38,7 @@ public interface HomeListener
     void gf_vendorPoint_onGeoQueryError(DatabaseError pError);
 
     //GeoFire PlayerPoints
-    void gf_playerPoint_onKeyEntered(String key, LatLng location);
+    void gf_playerPoint_onKeyEntered(String key, LatLng location, PlayerPointData playerData);
     void gf_playerPoint_onKeyExited(String key);
     void gf_playerPoint_onKeyMoved(String key, LatLng location);
     void gf_playerPoint_onGeoQueryReady();
@@ -65,4 +66,6 @@ public interface HomeListener
 
     void onPendingChallengesSuccess(PendingsResponse body);
     void onPendingChallengesError(int code, Throwable throwable);
+
+    void onRetrieveBitmapSuccess(Bitmap bitmap, String mName);
 }

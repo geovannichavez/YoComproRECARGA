@@ -139,6 +139,16 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             wildcard.setMarkerUrl(eraSelection.getMarkerW());
             mMarkers.add(wildcard);
 
+            //Saves worldcup tracking
+            if(TextUtils.equals(eraSelection.getName(), Constants.ERA_WORLDCUP_NAME))
+            {
+                UserData.getInstance(mContext).saveWorldcupTracking(
+                        eraSelection.getCountryID(),
+                        eraSelection.getCountryName(),
+                        eraSelection.getUrlImg(),
+                        eraSelection.getUrlImgMarker());
+            }
+
             for (final EraMarker marker: mMarkers)
             {
                 mInteractor.fetchBitmap(marker.getMarkerUrl(), this, marker.getEraName(), eraSelection, destiny);
@@ -224,38 +234,17 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
             UserData.getInstance(mContext).saveChallengeIcons(eraSelection.getChallengeRock(),
                     eraSelection.getChallengePaper(), eraSelection.getChallengeScissors());
 
-            if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
+
+            if(TextUtils.equals(eraSelection.getName(), Constants.ERA_WORLDCUP_NAME))
             {
-                mView.forwardToStore();
-            }
-            else if (TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_CHALLENGES))
-            {
-                mView.forwardToChallenges();
+                if(eraSelection.getCountryID() <= 0)
+                    mView.forwardWorldcupCountrySelection();
+                else
+                    navigateNext(destiny);
             }
             else
             {
-                //Navigates to map. Checks user compatibility
-                if(!UserData.getInstance(mContext).Is3DCompatibleDevice())
-                {
-                    if(!UserData.getInstance(mContext).isUserConfirmedLimitedFunctionality())
-                    {
-                        Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
-                        this.addFlags(functionality);
-                        mContext.startActivity(functionality);
-                    }
-                    else
-                    {
-                        Intent map = new Intent(mActivity, PointsMap.class);
-                        this.addFlags(map);
-                        mContext.startActivity(map);
-                    }
-                }
-                else
-                {
-                    Intent map = new Intent(mActivity, PointsMap.class);
-                    this.addFlags(map);
-                    mContext.startActivity(map);
-                }
+                navigateNext(destiny);
             }
         }
     }
@@ -292,5 +281,42 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    }
+
+    private void navigateNext(String destiny)
+    {
+        if(TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_STORE))
+        {
+            mView.forwardToStore();
+        }
+        else if (TextUtils.equals(destiny, Constants.BUNDLE_DESTINY_CHALLENGES))
+        {
+            mView.forwardToChallenges();
+        }
+        else
+        {
+            //Navigates to map. Checks user compatibility
+            if(!UserData.getInstance(mContext).Is3DCompatibleDevice())
+            {
+                if(!UserData.getInstance(mContext).isUserConfirmedLimitedFunctionality())
+                {
+                    Intent functionality = new Intent(mActivity, LimitedFunctionality.class);
+                    this.addFlags(functionality);
+                    mContext.startActivity(functionality);
+                }
+                else
+                {
+                    Intent map = new Intent(mActivity, PointsMap.class);
+                    this.addFlags(map);
+                    mContext.startActivity(map);
+                }
+            }
+            else
+            {
+                Intent map = new Intent(mActivity, PointsMap.class);
+                this.addFlags(map);
+                mContext.startActivity(map);
+            }
+        }
     }
 }
