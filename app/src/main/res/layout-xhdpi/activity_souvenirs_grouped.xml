@@ -38,17 +38,6 @@
         app:layout_constraintTop_toTopOf="@+id/ivBackground"
         app:srcCompat="@drawable/bg_title_3"/>
 
-    <ImageView
-        android:id="@+id/icTutorial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
-        app:layout_constraintStart_toEndOf="@+id/bgTitle"
-        app:layout_constraintTop_toTopOf="@+id/bgTitle"
-        app:srcCompat="@drawable/ic_tutorial_3"/>
-
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"

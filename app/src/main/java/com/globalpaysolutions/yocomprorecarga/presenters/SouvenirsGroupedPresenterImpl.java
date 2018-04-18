@@ -28,6 +28,7 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
 
     private Context mContext;
     private SouvenirsGroupedView mView;
+    private String[] mGroupsArray = {"A", "B", "C", "D", "E", "F", "G", "H" };
 
     public SouvenirsGroupedPresenterImpl(Context context, AppCompatActivity activity, SouvenirsGroupedView view)
     {
@@ -47,6 +48,24 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
     {
         try
         {
+            for (int i = 0; i < mGroupsArray.length; i++)
+            {
+                if(TextUtils.equals(mGroupsArray[i], groupSelected))
+                {
+                    int position = i - 1;
+
+                    if(position <= 0)
+                    {
+                        mView.setVisibleLeftArrow(false);
+                        mView.setVisibleRightArrow(true);
+                    }
+                    else if (i == mGroupsArray.length - 1)
+                    {
+                        mView.setVisibleRightArrow(false);
+                    }
+                }
+            }
+
             mView.renderSouvs(getFilteredSouvs(groupSelected), groupSelected);
         }
         catch (Exception ex)
@@ -62,14 +81,13 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
         try
         {
             String backwards = "";
-            String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H" };
 
-            for (int i = 0; i < groups.length; i++)
+            for (int i = 0; i < mGroupsArray.length; i++)
             {
-                if(TextUtils.equals(groups[i], group))
+                if(TextUtils.equals(mGroupsArray[i], group))
                 {
                     int position = i - 1;
-                    backwards = groups[position];
+                    backwards = mGroupsArray[position];
 
                     if(position <= 0)
                     {
@@ -99,16 +117,15 @@ public class SouvenirsGroupedPresenterImpl implements ISouvenirsGroupedPresenter
         try
         {
             String forward = "";
-            String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H" };
 
-            for (int i = 0; i < groups.length; i++)
+            for (int i = 0; i < mGroupsArray.length; i++)
             {
-                if(TextUtils.equals(groups[i], group))
+                if(TextUtils.equals(mGroupsArray[i], group))
                 {
                     int position = i + 1;
-                    forward = groups[position];
+                    forward = mGroupsArray[position];
 
-                    if(position == groups.length - 1) //Because arrat starts at 0
+                    if(position == mGroupsArray.length - 1) //Because arrat starts at 0
                     {
                         mView.setVisibleRightArrow(false);}
                     else
