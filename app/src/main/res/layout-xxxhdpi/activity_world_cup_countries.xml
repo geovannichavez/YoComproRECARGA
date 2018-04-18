@@ -177,13 +177,12 @@
         android:id="@+id/gvCountries"
         android:layout_width="366dp"
         android:layout_height="391dp"
+        android:layout_marginTop="260dp"
         android:numColumns="3"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89"
         tools:listitem="@layout/custom_worldcup_country_gridview_item"/>
 
 </android.support.constraint.ConstraintLayout>
