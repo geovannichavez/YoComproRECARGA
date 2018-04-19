@@ -373,6 +373,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             {
                 case UPDATE:
                     back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
                     back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     break;
                 case CREATE:
@@ -381,6 +382,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
                     break;
                 case SELECT:
                     back = new Intent(PlayChallenge.this, Challenges.class);
+                    back.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
                     back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     break;
             }
@@ -420,6 +422,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
             {
                 case SELECT:
                     backAction = new Intent(PlayChallenge.this, Challenges.class);
+                    backAction.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
                     backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     break;
                 case CREATE:
@@ -428,6 +431,7 @@ public class PlayChallenge extends AppCompatActivity implements PlayChallengeVie
                     break;
                 case UPDATE:
                     backAction = new Intent(PlayChallenge.this, Challenges.class);
+                    backAction.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
                     backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     break;
             }
