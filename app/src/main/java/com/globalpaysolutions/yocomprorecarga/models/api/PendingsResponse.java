@@ -9,22 +9,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class PendingsResponse
 {
-    @SerializedName("PendingChallenge")
+    @SerializedName("Message")
     @Expose
-    private int pendingChallenge;
-
+    private String message;
     @SerializedName("GetNewTrivia")
     @Expose
     private int getNewTrivia;
 
-    public int getPendingChallenge()
+    public String getMessage()
     {
-        return pendingChallenge;
+        return message;
     }
 
-    public void setPendingChallenge(int pendingChallenge)
+    public void setMessage(String message)
     {
-        this.pendingChallenge = pendingChallenge;
+        this.message = message;
     }
 
     public int getGetNewTrivia()

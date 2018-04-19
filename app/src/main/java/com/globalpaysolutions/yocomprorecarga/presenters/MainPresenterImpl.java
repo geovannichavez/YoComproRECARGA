@@ -300,12 +300,12 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
         {
             // 0 = No new trivia
             // 1 = New trivia availble
-            UserData.getInstance(mContext).savePendingChallenges(String.valueOf(response.getPendingChallenge()));
+            UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
             UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
 
             //Challenges
-            String pending = String.valueOf(response.getPendingChallenge());
-            int quantityChallenges = response.getPendingChallenge();
+            String pending = response.getMessage();
+            int quantityChallenges = Integer.getInteger(response.getMessage());
 
             if(quantityChallenges > 0)
                 mView.setPendingChallenges(pending, true);

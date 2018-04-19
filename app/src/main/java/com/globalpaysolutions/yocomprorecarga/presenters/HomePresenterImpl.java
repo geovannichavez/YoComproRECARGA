@@ -786,7 +786,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            UserData.getInstance(mContext).savePendingChallenges(String.valueOf(body.getPendingChallenge()));
+            UserData.getInstance(mContext).savePendingChallenges(body.getMessage());
 
             String pending = (TextUtils.isEmpty(UserData.getInstance(mContext).getPendingChallenges())) ? "0" : UserData.getInstance(mContext).getPendingChallenges();
 
