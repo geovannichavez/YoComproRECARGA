@@ -44,7 +44,6 @@ public class EraSelectionResponse
     @SerializedName("PrizeImage")
     @Expose
     private String prizeImage;
-
     @SerializedName("ChallengeRock")
     @Expose
     private String challengeRock;
@@ -66,7 +65,9 @@ public class EraSelectionResponse
     @SerializedName("UrlImgMarker")
     @Expose
     private String urlImgMarker;
-
+    @SerializedName("FolderName")
+    @Expose
+    private String folderName;
 
     public int getAgeID()
     {
@@ -178,7 +179,6 @@ public class EraSelectionResponse
         this.prizeImage = prizeImage;
     }
 
-
     public String getChallengeRock()
     {
         return challengeRock;
@@ -247,6 +247,16 @@ public class EraSelectionResponse
     public void setUrlImgMarker(String urlImgMarker)
     {
         this.urlImgMarker = urlImgMarker;
+    }
+
+    public String getFolderName()
+    {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName)
+    {
+        this.folderName = folderName;
     }
 
 }
