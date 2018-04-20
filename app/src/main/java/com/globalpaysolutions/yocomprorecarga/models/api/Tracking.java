@@ -27,6 +27,18 @@ public class Tracking
     @SerializedName("Nickname")
     @Expose
     private String nickname;
+    @SerializedName("CountryID")
+    @Expose
+    private int countryID;
+    @SerializedName("CountryName")
+    @Expose
+    private String countryName;
+    @SerializedName("UrlImg")
+    @Expose
+    private String urlImg;
+    @SerializedName("UrlImgMarker")
+    @Expose
+    private String urlImgMarker;
 
     public int getTotalWinCoins()
     {
@@ -86,6 +98,46 @@ public class Tracking
     public void setNickname(String nickname)
     {
         this.nickname = nickname;
+    }
+
+    public int getCountryID()
+    {
+        return countryID;
+    }
+
+    public void setCountryID(int countryID)
+    {
+        this.countryID = countryID;
+    }
+
+    public String getCountryName()
+    {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName)
+    {
+        this.countryName = countryName;
+    }
+
+    public String getUrlImg()
+    {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg)
+    {
+        this.urlImg = urlImg;
+    }
+
+    public String getUrlImgMarker()
+    {
+        return urlImgMarker;
+    }
+
+    public void setUrlImgMarker(String urlImgMarker)
+    {
+        this.urlImgMarker = urlImgMarker;
     }
 
 }

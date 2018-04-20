@@ -16,11 +16,11 @@ public class StringsURL
     //public final static String URL_BASE = "http://csncusgats.cloudapp.net:8073/v1/";
 
     //API v2
-    //public final static String URL_BASE = "http://csncusgats1.northcentralus.cloudapp.azure.com:8073/v1/";
+    public final static String URL_BASE = "http://csncusgats1.northcentralus.cloudapp.azure.com:8073/v1/";
 
     //TODO: Cambiar antes de publciar
     //PRODUCCION
-    public final static String URL_BASE  = "https://api.yovendorecarga.com/RG/";
+    //public final static String URL_BASE  = "https://api.yovendorecarga.com/RG/";
 
     public final static String COUNTRIES = "countries";
 
@@ -88,11 +88,15 @@ public class StringsURL
     public static final String EXCHANGE_SOUVENIR = "ExchangeSouvenir";
     public static final String EXCHANGE_WILDCARD = "ExchangeWildcard";
     public static final String ACTIVATE_PRIZE = "ActivatePrize";
-
     public static final String CHALLENGES = "Challenge/Get";
     public static final String CREATE_CHALLENGE = "Challenge/Create";
     public static final String UPDATE_CHALLENGE = "Challenge/Update";
     public static final String GET_PENDING_CHALLENGES = "Challenge/GetPendingChallenges";
     public static final String REQUEST_REWARD_LIKES = "ActionSocialNetworks";
+    public static final String GET_TRIVIA = "GetTrivia";
+    public static final String RESPOND_TRIVIA = "TriviaResponse";
+    public static final String GET_SOUVS_PROGRESS = "GetSouvenirProgress";
+    public static final String GET_WORLDCUP_COUNTRIES = "GetCountries";
+    public static final String SELECT_WORLDCUP_COUNTRY = "SelectCountries";
 }
 

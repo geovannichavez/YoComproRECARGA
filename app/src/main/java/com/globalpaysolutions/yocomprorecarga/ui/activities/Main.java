@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
@@ -32,6 +34,9 @@ public class Main extends ImmersiveActivity implements MainView
     //Layouts and Views
     ImageButton buttonSettings;
     ImageView bgTimemachine;
+    ImageView icNewChallenge;
+    ImageView icNewTrivia;
+    TextView tvPendingCh;
     ShowcaseView mShowcaseView;
 
     //MVP
@@ -54,6 +59,9 @@ public class Main extends ImmersiveActivity implements MainView
 
         buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+        icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
+        icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
+        tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
 
         mShowcaseCounter = 0;
 
@@ -69,10 +77,12 @@ public class Main extends ImmersiveActivity implements MainView
         });
 
         mPresenter = new MainPresenterImpl(this, this, this);
+        mPresenter.setInitialViews();
+
         mPresenter.checkUserDataCompleted();
 
         mPresenter.checkPermissions();
-
+        mPresenter.retrievePendings();
     }
 
 
@@ -274,6 +284,82 @@ public class Main extends ImmersiveActivity implements MainView
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public void setPendingChallenges(String pending, boolean active)
+    {
+        try
+        {
+            if(active)
+                Picasso.with(this).load(R.drawable.ic_challenge_on).into(icNewChallenge);
+            else
+                Picasso.with(this).load(R.drawable.ic_challenge_off).into(icNewChallenge);
+
+            tvPendingCh.setText(pending);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting pending challenges: " + ex.getMessage());
+        }
+
+
+    }
+
+    @Override
+    public void setTriviaAvailable(boolean available)
+    {
+        if (available)
+            Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
+        else
+            Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        try
+        {
+            icNewTrivia.setOnClickListener(triviaClick);
+            icNewChallenge.setOnClickListener(challengesClick);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting click listeners: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void navigateTrivia()
+    {
+        Intent trivia = new Intent(Main.this, Trivia.class);
+        trivia.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(trivia);
+        finish();
+    }
+
+    private View.OnClickListener triviaClick = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(Main.this).animateButton(view);
+            mPresenter.evaluateTriviaNavigation();
+        }
+    };
+
+    private View.OnClickListener challengesClick = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(Main.this).animateButton(view);
+            Intent challenges = new Intent(Main.this, Challenges.class);
+            challenges.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.MAIN);
+            challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(challenges);
+            finish();
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)

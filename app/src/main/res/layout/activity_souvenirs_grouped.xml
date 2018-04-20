@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGrouped">
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:src="@drawable/bg_background_4"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"
+        app:srcCompat="@drawable/ic_back_3"/>
+
+
+    <ImageView
+        android:id="@+id/bgTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBackground"
+        app:srcCompat="@drawable/bg_title_3"/>
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:text="@string/title_souvenirs_collection"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toEndOf="@+id/bgTitle"
+        app:layout_constraintStart_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"/>
+
+    <ImageView
+        android:id="@+id/bgGroupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/bgTitle"
+        app:layout_constraintStart_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:srcCompat="@drawable/ic_title_lightgray_3"/>
+
+    <ImageView
+        android:id="@+id/icArrowLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgGroupTitle"
+        app:layout_constraintEnd_toStartOf="@+id/bgGroupTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgGroupTitle"
+        app:srcCompat="@drawable/ic_arrow_left_3"/>
+
+    <ImageView
+        android:id="@+id/icArrowRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="@+id/bgGroupTitle"
+        app:layout_constraintStart_toEndOf="@+id/bgGroupTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgGroupTitle"
+        app:srcCompat="@drawable/ic_arrow_left_3"/>
+
+    <TextView
+        android:id="@+id/tvGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgGroupTitle"
+        app:layout_constraintEnd_toEndOf="@+id/bgGroupTitle"
+        app:layout_constraintStart_toStartOf="@+id/bgGroupTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgGroupTitle"
+        tools:text="Grupo E"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gvSouvs"
+        android:layout_width="283dp"
+        android:layout_height="360dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="120dp"
+        android:numColumns="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
+        tools:listitem="@layout/custom_souv_gridview_item"/>
+
+
+    <ImageView
+        android:id="@+id/btnLeaderboards"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gvSouvs"
+        app:layout_constraintTop_toBottomOf="@+id/gvSouvs"
+        app:srcCompat="@drawable/ic_groups_leaderboards"/>
+
+    <ImageView
+        android:id="@+id/btnStore"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnLeaderboards"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="@+id/gvSouvs"
+        app:layout_constraintTop_toTopOf="@+id/btnLeaderboards"
+        app:srcCompat="@drawable/ic_groups_store"/>
+
+</android.support.constraint.ConstraintLayout>

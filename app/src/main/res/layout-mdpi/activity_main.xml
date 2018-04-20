@@ -22,55 +22,53 @@
         android:layout_height="92dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView45"
         app:srcCompat="@drawable/logo_recargo"/>
 
 
     <ImageButton
         android:id="@+id/btnPlay"
-        android:layout_width="258dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="230dp"
+        android:layout_height="78dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateMap"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_play"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView25"/>
 
     <ImageButton
         android:id="@+id/btnProfile"
-        android:layout_width="259dp"
-        android:layout_height="87dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="210dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateProfile"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_profile"
-        app:layout_constraintEnd_toEndOf="@+id/btnPlay"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/btnPlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPlay"/>
 
     <ImageButton
         android:id="@+id/btnTravel"
-        android:layout_width="259dp"
-        android:layout_height="85dp"
+        android:layout_width="213dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="navigateEraSelection"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_travel"
-        app:layout_constraintEnd_toEndOf="@+id/btnProfile"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/btnProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnProfile"/>
 
     <ImageButton
@@ -142,5 +140,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnTravel"
         app:layout_constraintVertical_bias="0.934"/>
+
+    <ImageView
+        android:id="@+id/imageView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bgTimemachine"
+        app:srcCompat="@drawable/img_trivia_panel"/>
+
+    <ImageView
+        android:id="@+id/icNewChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView45"
+        app:layout_constraintStart_toStartOf="@+id/imageView45"
+        app:layout_constraintTop_toTopOf="@+id/imageView45"
+        app:srcCompat="@drawable/ic_challenge_off"/>
+
+    <ImageView
+        android:id="@+id/icNewTrivia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView45"
+        app:layout_constraintEnd_toEndOf="@+id/imageView45"
+        app:layout_constraintTop_toTopOf="@+id/imageView45"
+        app:srcCompat="@drawable/ic_trivia_off"/>
+
+    <TextView
+        android:id="@+id/tvPendingCh"
+        android:layout_width="26dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textColor="@color/white_textView_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icNewChallenge"
+        app:layout_constraintEnd_toEndOf="@+id/icNewChallenge"
+        app:layout_constraintStart_toStartOf="@+id/icNewChallenge"
+        app:layout_constraintTop_toTopOf="@+id/icNewChallenge"
+        tools:text="4"/>
 
 </android.support.constraint.ConstraintLayout>

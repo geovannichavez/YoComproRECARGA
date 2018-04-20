@@ -23,6 +23,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ListGameStoreResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.StorePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.StoreAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 import com.squareup.picasso.Picasso;
@@ -54,6 +55,7 @@ public class Store extends ImmersiveActivity implements StoreView
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
     int mCurrentItem;
+    Constants.StoreNavigationStack mNavigationStack;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -66,6 +68,8 @@ public class Store extends ImmersiveActivity implements StoreView
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
+        mNavigationStack = (Constants.StoreNavigationStack)getIntent().getSerializableExtra(Constants.BUNDLE_STORE_BACK_STACK);
 
         pagerStoreItems = (ViewPager) findViewById(R.id.pagerStoreItems);
         btnLeft = (ImageButton) findViewById(R.id.btnLeft);
@@ -81,10 +85,7 @@ public class Store extends ImmersiveActivity implements StoreView
             public void onClick(View v)
             {
                 ButtonAnimator.getInstance(Store.this).animateButton(v);
-                Intent main = new Intent(Store.this, Main.class);
-                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(main);
-                finish();
+                navigateBack();
             }
         });
 
@@ -104,6 +105,29 @@ public class Store extends ImmersiveActivity implements StoreView
         mPresenter = new StorePresenterImpl(this, this, this);
         mPresenter.initialValues();
         mPresenter.retrieveStoreItems();
+    }
+
+    private void navigateBack()
+    {
+        try
+        {
+            Intent back = new Intent(Store.this, Main.class);
+
+            if(mNavigationStack != null)
+            {
+                //Checks if comes from 'SouvenirsGroups'
+                if(mNavigationStack.equals(Constants.StoreNavigationStack.SOUVENIRS_GROUPS))
+                    back = new Intent(Store.this, SouvenirsGroups.class);
+            }
+
+            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(back);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error going back: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -562,10 +586,7 @@ public class Store extends ImmersiveActivity implements StoreView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent main = new Intent(this, Main.class);
-            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(main);
-            finish();
+            navigateBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);

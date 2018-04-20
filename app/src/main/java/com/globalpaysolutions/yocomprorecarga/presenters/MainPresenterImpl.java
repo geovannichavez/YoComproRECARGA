@@ -10,6 +10,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.MainInteractor;
+import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.MainListener;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
@@ -24,7 +28,6 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.EraSelectionValidator;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
-import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
 
 import java.util.ArrayList;
@@ -39,13 +42,14 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
  * Created by Josué Chávez on 06/11/2017.
  */
 
-public class MainPresenterImpl implements IMainPresenter
+public class MainPresenterImpl implements IMainPresenter, MainListener
 {
     private static final String TAG = MainPresenterImpl.class.getSimpleName();
 
     private Context mContext;
     private MainView mView;
     private UserData mUserData;
+    private MainInteractor mInteractor;
     private AppCompatActivity mActivity;
     private FirebasePOIInteractor mFirebaseInteractor;
 
@@ -54,15 +58,40 @@ public class MainPresenterImpl implements IMainPresenter
         this.mContext = context;
         this.mView = view;
         this.mActivity = activity;
+        this.mInteractor = new MainInteractor(mContext);
         this.mUserData = UserData.getInstance(mContext);
         this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, null);
     }
 
 
     @Override
-    public void setBackground()
+    public void setInitialViews()
     {
-        mView.setBackground();
+        try
+        {
+            mView.setBackground();
+            mView.setClickListeners();
+
+            //Challenges
+            String lastChallenges = UserData.getInstance(mContext).getPendingChallenges();
+            int value = Integer.valueOf(lastChallenges);
+
+            if(value > 0)
+                this.mView.setPendingChallenges(lastChallenges, true);
+            else
+                this.mView.setPendingChallenges(lastChallenges, false);
+
+            //Trivia
+            if(UserData.getInstance(mContext).getTriviaPeding() > 0)
+                mView.setTriviaAvailable(true);
+            else
+                mView.setTriviaAvailable(false);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error setting inital views: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -233,6 +262,26 @@ public class MainPresenterImpl implements IMainPresenter
         }
     }
 
+    @Override
+    public void retrievePendings()
+    {
+        mInteractor.retrievePendings(this);
+    }
+
+    @Override
+    public void evaluateTriviaNavigation()
+    {
+        try
+        {
+            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//TODO: Debe ser mayor a cero
+                mView.navigateTrivia();
+
+        }catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
 
     private void addFlags(Intent pIntent)
     {
@@ -242,5 +291,43 @@ public class MainPresenterImpl implements IMainPresenter
         pIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         pIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         pIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    }
+
+    @Override
+    public void onRetrieveSucces(PendingsResponse response)
+    {
+        try
+        {
+            // 0 = No new trivia
+            // 1 = New trivia availble
+            UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
+            UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
+
+            //Challenges
+            String pending = response.getMessage();
+            int quantityChallenges = Integer.valueOf(response.getMessage());
+
+            if(quantityChallenges > 0)
+                mView.setPendingChallenges(pending, true);
+            else
+                mView.setPendingChallenges(pending, false);
+
+            //Trivia
+            if(response.getGetNewTrivia() > 0)
+                mView.setTriviaAvailable(true);
+            else
+                mView.setTriviaAvailable(false);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on success Pending Challenges: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onRetrieveError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse)
+    {
+
     }
 }

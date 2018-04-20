@@ -33,6 +33,9 @@ public class ListSouvenirsByConsumer
     @SerializedName("Unlocked")
     @Expose
     private int unlocked;
+    @SerializedName("WorldCupGroup")
+    @Expose
+    private String worldCupGroup;
 
     public int getSouvenirID() {
         return souvenirID;
@@ -96,5 +99,13 @@ public class ListSouvenirsByConsumer
 
     public void setUnlocked(int unlocked) {
         this.unlocked = unlocked;
+    }
+
+    public String getWorldCupGroup() {
+        return worldCupGroup;
+    }
+
+    public void setWorldCupGroup(String worldCupGroup) {
+        this.worldCupGroup = worldCupGroup;
     }
 }

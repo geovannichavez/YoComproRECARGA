@@ -199,8 +199,18 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     public void forwardToChallenges()
     {
         Intent challenges = new Intent(EraSelection.this, Challenges.class);
+        challenges.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
         challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(challenges);
+        finish();
+    }
+
+    @Override
+    public void forwardWorldcupCountrySelection()
+    {
+        Intent countrySelection = new Intent(EraSelection.this, WorldCupCountries.class);
+        countrySelection.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(countrySelection);
         finish();
     }
 

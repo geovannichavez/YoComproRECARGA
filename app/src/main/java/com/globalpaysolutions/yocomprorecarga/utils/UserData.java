@@ -98,6 +98,8 @@ public class UserData
     private static final String KEY_SOUVENIR_IMG_URL = "usr_souvenir_img_url";
     private static final String KEY_SOUVENIR_QUANTITY_OWNED = "usr_souvenir_quantity_owned";
     private static final String KEY_SOUVENIR_PRICE = "usr_souvenir_prce";
+    private static final String KEY_SOUVENIR_PROGRESS = "key_souvenir_progress";
+    private static final String KEY_SOUVENIR_GROUPED_RAW_RESPONSE = "key_souvenir_grouped_raw_response";
 
     //Era
     private static final String KEY_ERA_ID = "usr_age_id";
@@ -111,6 +113,7 @@ public class UserData
     private static final String KEY_ERA_WILDCARD_LOSE = "key_era_wildcard_lose";
     private static final String KEY_ERA_WILDCARD_MAIN = "key_era_wildcard_main";
     private static final String KEY_ERA_PRIZE_IMAGE = "key_era_prize_image";
+    private static final String KEY_ERA_FOLDER_NAME = "key_era_folder_name";
 
     //First time settings
     private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
@@ -138,6 +141,9 @@ public class UserData
     private static final String KEY_CHALLENGE_SCISSORS_ERA_ICON = "key_challenge_scissors_era_icon";
     private static final String KEY_CHALLENGE_PENDING_NUMBER = "key_challenge_pending_number";
 
+    //Trivia
+    private static final String KEY_TRIVIA_PENDINGS = "KEY_TRIVIA_PENDINGS";
+
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
@@ -145,6 +151,12 @@ public class UserData
 
     //Shares
     private static final String KEY_FACEBOOK_SHARE_SELECTION = "key_facebook_share_selection";
+    
+    //Worldcup
+    private static final String KEY_WORLDCUP_COUNTRY_ID = "key_worldcup_country_id";
+    private static final String KEY_WORLDCUP_COUNTRY_NAME = "key_worldcup_country_name";
+    private static final String KEY_WORLDCUP_FLAG_URL = "key_worldcup_flag_url";
+    private static final String KEY_WORLDCUP_MARKER_URL = "key_worldcup_marker_url";
 
     private UserData(Context pContext)
     {
@@ -269,6 +281,14 @@ public class UserData
         mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
         mEditor.putInt(KEY_ERA_ID, pEraID);
         mEditor.commit();
+    }
+
+    public void saveWorldcupTracking(int countryID, String countryName, String urlImg, String urlImgMarker)
+    {
+        mEditor.putInt(KEY_WORLDCUP_COUNTRY_ID, countryID);
+        mEditor.putString(KEY_WORLDCUP_COUNTRY_NAME, countryName);
+        mEditor.putString(KEY_WORLDCUP_FLAG_URL, urlImg);
+        mEditor.putString(KEY_WORLDCUP_MARKER_URL, urlImgMarker);
     }
 
     public void Save3DCompatibleValue(boolean isCompatible)
@@ -403,7 +423,7 @@ public class UserData
     }
 
     public void saveEraSelected(int eraID, String eraName, String eraUrl, String markerGold, String markerSilver,
-                                String markerBronze, String markerWildcard, String prizeImage)
+                                String markerBronze, String markerWildcard, String prizeImage, String folderName)
     {
         try
         {
@@ -415,6 +435,7 @@ public class UserData
             mEditor.putString(KEY_ERA_MARKER_BRONZE, markerBronze);
             mEditor.putString(KEY_ERA_MARKER_WILDCARD, markerWildcard);
             mEditor.putString(KEY_ERA_PRIZE_IMAGE, prizeImage);
+            mEditor.putString(KEY_ERA_FOLDER_NAME, folderName);
             mEditor.commit();
         }
         catch (Exception ex)
@@ -539,6 +560,18 @@ public class UserData
     public void saveLastShareSelection(int selection)
     {
         mEditor.putInt(KEY_FACEBOOK_SHARE_SELECTION, selection);
+        mEditor.commit();
+    }
+
+    public void saveSouvsProgress(int progress)
+    {
+        mEditor.putInt(KEY_SOUVENIR_PROGRESS, progress);
+        mEditor.commit();
+    }
+
+    public void saveSouvsStringResponse(String response)
+    {
+        mEditor.putString(KEY_SOUVENIR_GROUPED_RAW_RESPONSE, response);
         mEditor.commit();
     }
 
@@ -757,6 +790,11 @@ public class UserData
     {
         return mPreferences.getString(KEY_ERA_NAME, "");
     }
+
+    public String getEraFolderName()
+    {
+        return mPreferences.getString(KEY_ERA_FOLDER_NAME, "");
+    }
     public String getLastAchievementTitle()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_TITLE, "");
@@ -913,6 +951,31 @@ public class UserData
         return mPreferences.getInt(KEY_FACEBOOK_SHARE_SELECTION, 0);
     }
 
+    public int getSouvsProgress()
+    {
+        return mPreferences.getInt(KEY_SOUVENIR_PROGRESS, 0);
+    }
+
+    public String getSouvsStringResponse()
+    {
+        return mPreferences.getString(KEY_SOUVENIR_GROUPED_RAW_RESPONSE, "");
+    }
+
+    public String getWorldcupMarkerUrl()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_MARKER_URL, "");
+    }
+
+    public String getWorldcupCountryName()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_COUNTRY_NAME, "");
+    }
+
+    public String getWorldcupCountryUrl()
+    {
+        return mPreferences.getString(KEY_WORLDCUP_FLAG_URL, "");
+    }
+
     /*
     * ********************
     *
@@ -1052,5 +1115,17 @@ public class UserData
         mEditor.remove(KEY_FACEBOOK_SHARE_SELECTION);
         mEditor.commit();
     }
+
+    public void saveTriviaPending(int getNewTrivia)
+    {
+        mEditor.putInt(KEY_TRIVIA_PENDINGS, getNewTrivia);
+        mEditor.commit();
+    }
+
+    public int getTriviaPeding()
+    {
+        return mPreferences.getInt(KEY_TRIVIA_PENDINGS, 0);
+    }
+
 
 }

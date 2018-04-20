@@ -1,7 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -24,11 +24,12 @@ import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGroups;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
-import com.globalpaysolutions.yocomprorecarga.views.MainView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
 
@@ -211,7 +212,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
-        mView.changeToOpenChest(pChestType, mUserData.getEraID());
+        //mView.changeToOpenChest(pChestType, mUserData.getEraID());
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
@@ -247,7 +248,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         mView.stopVibrate();
         mView.setEnabledChestImage(false);
-        mView.on2DChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS);
+        mView.on2DChestTouch(Constants.REQUIRED_TIME_TOUCH_MILLISECONDS, mUserData.getEraID());
     }
 
     @Override
@@ -285,7 +286,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             {
                 if (m3Dcompatible)
                 {
-                    mView.onGoldKeyEntered(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraName());
+                    mView.onGoldKeyEntered(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraFolderName());
                 }
                 else
                 {
@@ -351,6 +352,27 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         catch (Exception ex)
         {
             Log.e(TAG, "Error registering key: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void evaluateSouvsNavigation()
+    {
+        try
+        {
+
+            Intent souvenirs = new Intent(mActivity, Souvenirs.class);
+
+            if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
+            {
+                souvenirs = new Intent(mActivity, SouvenirsGroups.class);
+            }
+
+            mView.navigateSouvenirs(souvenirs);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
 
@@ -428,7 +450,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onGoldKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onGoldKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -475,7 +497,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onSilverKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onSilverKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -523,7 +545,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onBronzeKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onBronzeKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -577,7 +599,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onWildcardKeyEntered(pKey, pLocation, mUserData.getEraName() );
+                    mView.onWildcardKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else

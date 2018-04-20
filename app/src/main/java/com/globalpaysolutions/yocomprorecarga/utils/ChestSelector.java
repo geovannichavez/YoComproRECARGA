@@ -21,6 +21,7 @@ public class ChestSelector
     private static Context mContext;
     private static ChestSelector singleton;
 
+    //TODO: Añadir cofres 2D al cambio de Era
     private ChestSelector(Context context)
     {
         ChestSelector.mContext = context;
@@ -59,6 +60,12 @@ public class ChestSelector
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
+                case 3: //World Cup
+                    drawableClosed = getDrawableId("img_03_gold_chest_closed");
+                    drawableOpen = getDrawableId("img_03_gold_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
             }
         }
         catch (Exception ex)
@@ -81,17 +88,21 @@ public class ChestSelector
 
             switch (eraID)
             {
-                case 1:
-
+                case 1: //Vikings
                     drawableClosed = getDrawableId("img_silver_chest_2d_closed");
                     drawableOpen = getDrawableId("img_silver_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
-
-                case 2:
+                case 2: //Western
                     drawableClosed = getDrawableId("img_02_silver_chest_closed");
                     drawableOpen = getDrawableId("img_02_silver_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 3: //World Cup
+                    drawableClosed = getDrawableId("img_03_silver_chest_closed");
+                    drawableOpen = getDrawableId("img_03_silver_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
@@ -117,17 +128,21 @@ public class ChestSelector
 
             switch (eraID)
             {
-                case 1:
-
+                case 1: //Vikings
                     drawableClosed = getDrawableId("img_bronze_chest_2d_closed");
                     drawableOpen = getDrawableId("img_bronze_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
-
-                case 2:
+                case 2: //Western
                     drawableClosed = getDrawableId("img_02_bronze_chest_closed");
                     drawableOpen = getDrawableId("img_02_bronze_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 3: //WorldCup
+                    drawableClosed = getDrawableId("img_03_bronze_chest_closed");
+                    drawableOpen = getDrawableId("img_03_bronze_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
@@ -151,17 +166,22 @@ public class ChestSelector
         {
             switch (eraID)
             {
-                case 1:
+                case 1: //Vikings
                     resourceMap.clear();
                     drawableClosed = getDrawableId("img_wildcard_chest_2d_closed");
                     drawableOpen = getDrawableId("img_wildcard_chest_2d_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
-
-                case 2:
+                case 2: //Western
                     drawableClosed = getDrawableId("img_02_wildcard_chest_closed");
                     drawableOpen = getDrawableId("img_02_wildcard_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 3: //WorldCup
+                    drawableClosed = getDrawableId("img_03_wildcard_chest_closed");
+                    drawableOpen = getDrawableId("img_03_wildcard_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;

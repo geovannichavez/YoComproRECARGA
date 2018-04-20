@@ -87,6 +87,12 @@ public class CombosAdapter extends RecyclerView.Adapter<CombosAdapter.ComboViewH
     }
 
     @Override
+    public int getItemViewType(int position)
+    {
+        return 1; //Returns the same type (for not recycling)
+    }
+
+    @Override
     public void onBindViewHolder(final ComboViewHolder holder, final int position)
     {
         try

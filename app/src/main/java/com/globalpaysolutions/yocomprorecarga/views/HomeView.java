@@ -68,5 +68,6 @@ public interface HomeView
     void navigateToAR();
 
     void showGenericImageDialog(DialogViewModel dialog, View.OnClickListener listener);
-    void navigateChallenges();
+
+    void addWorldcupPlayerMarker(String key, LatLng location, Bitmap marker);
 }

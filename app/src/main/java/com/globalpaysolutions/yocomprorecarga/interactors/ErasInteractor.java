@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -14,8 +15,11 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -179,11 +183,35 @@ public class ErasInteractor implements IErasInteractor
     }
 
     @Override
-    public void fetchBitmap(String url, ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny)
+    public void fetchBitmap(String url, final ErasListener listener, final String markerName, final EraSelectionResponse eraSelection, final String destiny)
     {
         try
         {
-            new FetchMarker(listener, markerName, eraSelection, destiny).execute(url).get();
+            Picasso.with(mContext).load(url).into(new Target()
+            {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+                {
+                    Bitmap bitmapScaled = BitmapScaler.scaleMarker(bitmap, mContext);
+                    mBitmapExecutions = mBitmapExecutions + 1;
+                    listener.onRetrieveBitmapSuccess(bitmapScaled, markerName, eraSelection, destiny, mBitmapExecutions);
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable)
+                { }
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable)
+                { }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error fetching bitmaps: " + ex.getMessage());
+        }
+        /*try
+        {
+            new FetchMarker(listener, markerName, eraSelection, destiny, mContext).execute(url).get();
         }
         catch (InterruptedException e)
         {
@@ -192,7 +220,7 @@ public class ErasInteractor implements IErasInteractor
         catch (ExecutionException e)
         {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static class FetchMarker extends AsyncTask<String, Void, Bitmap>
@@ -202,14 +230,16 @@ public class ErasInteractor implements IErasInteractor
         ErasListener mListener;
         String mName;
         String mDestiny;
+        Context mContext;
         int mValue;
 
-        private FetchMarker(ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny)
+        private FetchMarker(ErasListener listener, String markerName, EraSelectionResponse eraSelection, String destiny, Context context)
         {
             mListener = listener;
             mName = markerName;
             mResponse = eraSelection;
             mDestiny = destiny;
+            mContext = context;
         }
 
         @Override
@@ -223,7 +253,8 @@ public class ErasInteractor implements IErasInteractor
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(input);
-                mBitmap = Bitmap.createScaledBitmap(bitmap , bitmap.getWidth()/2, bitmap.getHeight()/2, false);
+
+                mBitmap = BitmapScaler.scaleMarker(bitmap, mContext);
             }
             catch (Exception e)
             {
