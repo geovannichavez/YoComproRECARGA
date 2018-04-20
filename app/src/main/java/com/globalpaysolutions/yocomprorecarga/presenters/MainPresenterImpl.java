@@ -305,7 +305,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
 
             //Challenges
             String pending = response.getMessage();
-            int quantityChallenges = Integer.getInteger(response.getMessage());
+            int quantityChallenges = Integer.valueOf(response.getMessage());
 
             if(quantityChallenges > 0)
                 mView.setPendingChallenges(pending, true);

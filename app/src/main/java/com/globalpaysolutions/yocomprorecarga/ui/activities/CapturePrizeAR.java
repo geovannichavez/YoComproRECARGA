@@ -623,9 +623,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onGoldKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onGoldKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pFolderName + "')");
     }
 
     @Override
@@ -660,9 +660,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onSilverKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onSilverKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pFolderName + "')");
     }
 
     @Override
@@ -697,9 +697,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onBronzeKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onBronzeKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '"+ pAge  + "')");
+        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '"+ pFolderName + "')");
     }
 
     @Override
@@ -734,9 +734,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onWildcardKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onWildcardKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey+ "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey+ "', '" + pFolderName + "')");
     }
 
     @Override

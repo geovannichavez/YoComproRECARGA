@@ -41,25 +41,25 @@ public interface CapturePrizeView
     void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
     void updatePrizeButton(int pCoins);
 
-    void onGoldKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onGoldKeyEntered(String pKey, LatLng pLocation, String pFolderName);
     void onGoldKeyExited(String pKey);
     void onGoldKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onGoldPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onGoldPointCancelled(DatabaseError pDatabaseError);
 
-    void onSilverKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onSilverKeyEntered(String pKey, LatLng pLocation, String pFolderName);
     void onSilverKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onSilverKeyExited(String pKey);
     void onSilverPointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onSilverPointCancelled(DatabaseError pDatabaseError);
 
-    void onBronzeKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onBronzeKeyEntered(String pKey, LatLng pLocation, String pFolderName);
     void onBronzeKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onBronzeKeyExited(String pKey);
     void onBronzePointDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void onBronzePointCancelled(DatabaseError pDatabaseError);
 
-    void onWildcardKeyEntered(String pKey, LatLng pLocation, String pAge);
+    void onWildcardKeyEntered(String pKey, LatLng pLocation, String pFolderName);
     void onWildcardKeyEntered_2D(String pKey, LatLng pLocation, int pAgeID);
     void onWildcardKeyExited(String pKey);
     void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData);

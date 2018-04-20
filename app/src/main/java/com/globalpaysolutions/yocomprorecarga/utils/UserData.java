@@ -790,6 +790,11 @@ public class UserData
     {
         return mPreferences.getString(KEY_ERA_NAME, "");
     }
+
+    public String getEraFolderName()
+    {
+        return mPreferences.getString(KEY_ERA_FOLDER_NAME, "");
+    }
     public String getLastAchievementTitle()
     {
         return mPreferences.getString(KEY_ACHIEVEMENT_TITLE, "");

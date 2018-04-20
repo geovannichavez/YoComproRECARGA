@@ -286,7 +286,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             {
                 if (m3Dcompatible)
                 {
-                    mView.onGoldKeyEntered(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraName());
+                    mView.onGoldKeyEntered(Constants.WELCOME_CHEST_FIREBASE_KEY, location, mUserData.getEraFolderName());
                 }
                 else
                 {
@@ -450,7 +450,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onGoldKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onGoldKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -497,7 +497,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onSilverKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onSilverKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -545,7 +545,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onBronzeKeyEntered(pKey, pLocation, mUserData.getEraName());
+                    mView.onBronzeKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
@@ -599,7 +599,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 if(!TextUtils.equals(mCurrentChestKey, pKey))
                 {
                     mCurrentChestKey = pKey;
-                    mView.onWildcardKeyEntered(pKey, pLocation, mUserData.getEraName() );
+                    mView.onWildcardKeyEntered(pKey, pLocation, mUserData.getEraFolderName());
                 }
             }
             else
