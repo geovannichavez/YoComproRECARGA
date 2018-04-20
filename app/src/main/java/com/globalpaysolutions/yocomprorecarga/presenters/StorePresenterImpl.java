@@ -148,19 +148,23 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
 
        try
        {
-           UserData.getInstance(mContext).saveSouvenirObtained( response.getTitle(),
-                   response.getDescription(),
-                   response.getImgUrl(),
-                   response.getValue());
+           UserData.getInstance(mContext).saveSouvenirObtained(response.getTitle(), response.getDescription(), response.getImgUrl(), response.getValue());
 
            //Updates user tracking
-           if(response.getTracking() != null)
-               UserData.getInstance(mContext).SaveUserTrackingProgess(response.getTracking().getTotalWinCoins(),
+           if (response.getTracking() != null)
+           {
+               UserData.getInstance(mContext).SaveUserTrackingProgess(
+                       response.getTracking().getTotalWinCoins(),
                        response.getTracking().getTotalWinPrizes(),
                        response.getTracking().getCurrentCoinsProgress(),
                        response.getTracking().getTotalSouvenirs(),
                        response.getTracking().getAgeID());
 
+               UserData.getInstance(mContext).saveWorldcupTracking(response.getTracking().getCountryID(),
+                       response.getTracking().getCountryName(),
+                       response.getTracking().getUrlImg(),
+                       response.getTracking().getUrlImgMarker());
+            }
            //Formats coins left
            DecimalFormat formatter = new DecimalFormat("#,###,###");
            String totalWinCoins = formatter.format(UserData.getInstance(mContext).getTotalWonCoins());

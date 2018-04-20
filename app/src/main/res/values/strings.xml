@@ -62,9 +62,9 @@
     <!--    CAPTURE PRIZE AR    -->
     <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
     <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
-    <string name="label_loading_exchanging_chest">¡Abriendo cofre, espera!</string>
+    <string name="label_loading_exchanging_chest">¡Abriendo objeto, espera!</string>
     <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
-    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo cofre una vez al día.</string>
+    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo objeto una vez al día.</string>
     <string name="label_chest_open_succesfully">Lo has hecho muy bien, lograste conseguir %1$s. ¡Vamos continúa buscando más!</string>
     <string name="label_indicator_prizes">PREMIOS</string>
     <string name="label_indicator_saved">ACUMULADO</string>
@@ -287,7 +287,7 @@
     <string name="label_sorry_not_compatible_part1">¡Lo siento tu celular no acepta la versión 3D!</string>
     <string name="label_sorry_not_compatible_part2">¡Pero no te preocupes que aún puedes jugar con la versión 2D!</string>
     <string name="label_congrats_souvenir_name">Lograste encontrar %1$s.</string>
-    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí!¡Mereces una recompensa!</string>
+    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí! ¡Mereces una recompensa!</string>
     <string name="label_just_earned">Acabas de ganar gracias a Claro:</string>
     <string name="title_initial_wildcard">¡Pongamos a prueba tu suerte!</string>
     <string name="title_await_please">Espera un momento</string>
@@ -368,8 +368,8 @@
     <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
     <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
     <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
-    <string name="title_buy_barrell_confirm_dialog">¿Comprar barril?</string>
-    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este barril?</string>
+    <string name="title_buy_barrell_confirm_dialog">¿Comprar ítem?</string>
+    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este ítem?</string>
     <string name="title_copied_to_clipboard">Código copiado</string>
     <string name="content_copied_to_clipboard">Pega y envía gratis el código por SMS para canjear tu premio al %1$s</string>
     <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>
@@ -381,7 +381,7 @@
     <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
     <string name="showcase_title_leaderboards">Tabla de líderes</string>
     <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
-    <string name="label_challenges_button">MIS RETOS</string>
+    <string name="label_challenges_button">RETOS</string>
     <string name="title_challenges">Historial de Retos</string>
     <string name="label_switch_activate_location">Activar Ubicación</string>
     <string name="label_challenge_termini_from">Reto de:</string>
@@ -421,6 +421,7 @@
     <string name="title_attention">¡Atención!</string>
     <string name="label_not_enough_coins_to_create_challenge">¡No tienes suficientes RecarCoins para realizar un reto!</string>
     <string name="label_not_enough_coins_to_update_challenge">¡No tienes suficientes RecarCoins para responder un reto!</string>
+
     <string name="title_free_recarcoins">RecarCoins Gratis</string>
     <string name="label_reward">Recompensa:</string>
     <string name="label_like_fanpage_action">Compartir la página de RecarGO! en Facebook</string>
@@ -430,6 +431,26 @@
     <string name="title_aready_done_like_share">¡Ya ganaste tus monedas!</string>
     <string name="label_aready_done_like_share">Ya ganaste tus monedas por compartir en Facebook. ¡Continúa jugando para ganar!</string>
     <string name="label_combos">COMBOS</string>
+    <string name="label_loading_trivia">Cargando trivia, espere...</string>
+    <string name="label_time">Tiempo</string>
+    <string name="label_prize">Premio</string>
+    <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
+    <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
+    <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
+    <string name="label_group">Grupo</string>
+    <string name="label_interchange_xd">Intercambio</string>
+    <string name="label_claim_combo">Canjear Combo</string>
+    <string name="label_souvs_progress">Progreso: %1$s/32</string>
+    <string name="label_group_name">Grupo %1$s</string>
+    <string name="label_progress">Progreso</string>
+    <string name="label_select_country_recargo_worldcup">Selecciona tu equipo para la Copa RecarGO!</string>
+    <string name="label_select">Seleccione</string>
+    <string name="label_selected_country">País seleccionado:</string>
+    <string name="error_content_please_try_again">Algo salió mal... Inténtalo de nuevo</string>
+    <string name="label_play">Jugar</string>
+    <string name="label_winner">Ganador</string>
+    <string name="label_completed">Completado</string>
+    <string name="gold_collector">Recolector de Oro</string>
 
 
 </resources>

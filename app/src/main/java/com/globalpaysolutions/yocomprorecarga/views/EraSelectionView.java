@@ -20,6 +20,7 @@ public interface EraSelectionView
     void navigateMap();
     void forwardToStore();
     void forwardToChallenges();
+    void forwardWorldcupCountrySelection();
     void createImageDialog(String title, String description, int resource, View.OnClickListener clickListener);
     void createLockedEraDialog();
     void setSelectedEraName(String eraName);
@@ -27,4 +28,5 @@ public interface EraSelectionView
     void setTravelingAnim();
     void hideTravlingAnim();
     void navigateMain();
+
 }

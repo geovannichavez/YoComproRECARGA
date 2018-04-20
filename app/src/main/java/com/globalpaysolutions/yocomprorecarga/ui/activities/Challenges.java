@@ -48,7 +48,8 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     //Global Variables
     private RecyclerView mRecyclerView;
     private ChallengesAdapter mChallengesAdapter;
-    private boolean mFromMap;
+    //private boolean mFromMap;
+    private Constants.ChallengesBackStack mBackStack;
 
     //MVP
     ChallengesPresenterImpl mPresenter;
@@ -67,7 +68,8 @@ public class Challenges extends AppCompatActivity implements ChallengesView
 
         try
         {
-            mFromMap = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, false);
+            //mFromMap = getIntent().getBooleanExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, false);
+            mBackStack = (Constants.ChallengesBackStack) getIntent().getSerializableExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP);
         }
         catch (Exception ex)
         {
@@ -100,15 +102,20 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 {
                     Intent back = null;
 
-                    if(mFromMap)
+                    switch (mBackStack)
                     {
-                        back = new Intent(Challenges.this, PointsMap.class);
-                        back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    }
-                    else
-                    {
-                        back = new Intent(Challenges.this, Profile.class);
-                        back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        case MAP:
+                            back = new Intent(Challenges.this, PointsMap.class);
+                            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            break;
+                        case MAIN:
+                            back = new Intent(Challenges.this, Main.class);
+                            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            break;
+                        case PROFILE:
+                            back = new Intent(Challenges.this, Profile.class);
+                            back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            break;
                     }
 
                     startActivity(back);
@@ -277,15 +284,20 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         {
             Intent back = null;
 
-            if(mFromMap)
+            switch (mBackStack)
             {
-                back = new Intent(Challenges.this, PointsMap.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            }
-            else
-            {
-                back = new Intent(Challenges.this, Profile.class);
-                back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                case MAP:
+                    back = new Intent(Challenges.this, PointsMap.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case MAIN:
+                    back = new Intent(Challenges.this, Main.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
+                case PROFILE:
+                    back = new Intent(Challenges.this, Profile.class);
+                    back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    break;
             }
 
             startActivity(back);

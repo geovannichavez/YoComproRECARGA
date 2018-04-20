@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="144dp"
+    android:layout_height="62dp"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/bgGroup"
+        android:layout_width="132dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_groups_souvs"/>
+
+    <TextView
+        android:id="@+id/tvGroupLabel"
+        android:layout_width="60dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_group"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgGroup"
+        app:layout_constraintStart_toStartOf="@+id/bgGroup"
+        app:layout_constraintTop_toTopOf="@+id/bgGroup"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <TextView
+        android:id="@+id/tvGroup"
+        android:layout_width="41dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/white_textView_color"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgGroup"
+        app:layout_constraintEnd_toEndOf="@+id/bgGroup"
+        app:layout_constraintStart_toEndOf="@+id/tvGroupLabel"
+        app:layout_constraintTop_toTopOf="@+id/bgGroup"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="B"/>
+</android.support.constraint.ConstraintLayout>

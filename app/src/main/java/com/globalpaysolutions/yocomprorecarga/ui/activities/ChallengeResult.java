@@ -150,11 +150,7 @@ public class ChallengeResult extends AppCompatActivity implements ChallengeResul
                 public void onClick(View view)
                 {
                     ButtonAnimator.getInstance(ChallengeResult.this).animateButton(view);
-
-                    Intent backAction = new Intent(ChallengeResult.this, Challenges.class);
-                    backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(backAction);
-                    finish();
+                    backNavigation();
                 }
             });
         }
@@ -169,12 +165,18 @@ public class ChallengeResult extends AppCompatActivity implements ChallengeResul
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent backAction = new Intent(ChallengeResult.this, Challenges.class);
-            backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(backAction);
-            finish();
+            backNavigation();
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void backNavigation()
+    {
+        Intent backAction = new Intent(ChallengeResult.this, Challenges.class);
+        backAction.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.PROFILE);
+        backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(backAction);
+        finish();
     }
 }

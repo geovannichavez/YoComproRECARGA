@@ -3,230 +3,201 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="215dp"
-    android:layout_height="130dp">
-
+    android:layout_width="267dp"
+    android:layout_height="154dp">
 
     <ImageView
-        android:id="@+id/imageView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/icPanel"
+        android:layout_width="267dp"
+        android:layout_height="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_achievement_item"/>
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="180dp"
-        android:layout_height="18dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/baloo_regular"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView31"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imgAchvCounter"
-        app:layout_constraintTop_toTopOf="@+id/imageView31"
-        tools:text="RECOLECTOR DE ORO"/>
+        app:srcCompat="@drawable/ic_achiev_panel_item"/>
 
     <ImageView
-        android:id="@+id/imgAchvCounter"
-        android:layout_width="62dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginRight="152dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView31"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView31"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_achvs_counter_2"/>
-
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:textSize="12sp"
-        android:fontFamily="@font/lato_semibold"
-        fontPath="fonts/lato_semibold.ttf"
-        tools:text="Debes recolectar 100 monedas de oro en un sólo dia para ganar."
-        app:layout_constraintEnd_toEndOf="@+id/imageView31"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imgAchvCounter"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle"/>
-
-    <TextView
-        android:id="@+id/txtActual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        fontPath="fonts/lato_semibold.ttf"
-        android:fontFamily="@font/lato_semibold"
-        tools:text="Actual: 10000"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/imgAchvCounter"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription"/>
-
-    <ImageView
-        android:id="@+id/imgCoins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnFacebook"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView31"
-        app:layout_constraintTop_toBottomOf="@+id/txtActual"
-        app:srcCompat="@drawable/ic_prize_on_achievement"/>
-
-
-
-    <ImageButton
-        android:id="@+id/btnFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="@+id/imageView31"
-        app:layout_constraintTop_toBottomOf="@+id/txtActual"
-        app:srcCompat="@drawable/ic_facebook"/>
-
-    <com.facebook.share.widget.ShareButton
-        android:id="@+id/btnShare"
-        android:layout_width="38dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:visibility="gone"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintEnd_toEndOf="@+id/imageView31"
-        app:layout_constraintTop_toBottomOf="@+id/txtActual"/>
-
-    <TextView
-        android:id="@+id/txtCoins"
-        android:layout_width="44dp"
-        android:layout_height="26dp"
+        android:id="@+id/icStar02"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/icAchievName"
+        app:layout_constraintStart_toStartOf="@+id/icPanel"
+        app:layout_constraintTop_toTopOf="@+id/icPanel"
+        app:srcCompat="@drawable/ic_star_on"/>
+
+    <ImageView
+        android:id="@+id/icAchievName"
+        android:layout_width="135dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/icPanel"
+        app:layout_constraintTop_toTopOf="@+id/icPanel"
+        app:srcCompat="@drawable/ic_achiev_name"/>
+
+    <ImageView
+        android:id="@+id/icAchievDesc"
+        android:layout_width="135dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/icAchievName"
+        app:layout_constraintStart_toStartOf="@+id/icAchievName"
+        app:layout_constraintTop_toBottomOf="@+id/icAchievName"
+        app:srcCompat="@drawable/ic_achiev_description"/>
+
+
+    <ImageView
+        android:id="@+id/icStar01"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icStar02"
+        app:layout_constraintEnd_toStartOf="@+id/icStar02"
+        app:layout_constraintTop_toTopOf="@+id/icStar02"
+        app:srcCompat="@drawable/ic_star_on"/>
+
+    <ImageView
+        android:id="@+id/icStar03"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icStar02"
+        app:layout_constraintStart_toEndOf="@+id/icStar02"
+        app:layout_constraintTop_toTopOf="@+id/icStar02"
+        app:srcCompat="@drawable/ic_star_off"/>
+
+    <TextView
+        android:id="@+id/tvAchievName"
+        android:layout_width="131dp"
+        android:layout_height="21dp"
         android:fontFamily="@font/baloo_regular"
         android:gravity="center"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imgCoins"
-        app:layout_constraintEnd_toEndOf="@+id/imgCoins"
-        app:layout_constraintHorizontal_bias="0.894"
-        app:layout_constraintStart_toStartOf="@+id/imgCoins"
-        app:layout_constraintTop_toTopOf="@+id/imgCoins"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="10,000"/>
+        android:includeFontPadding="false"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icAchievName"
+        app:layout_constraintEnd_toEndOf="@+id/icAchievName"
+        app:layout_constraintStart_toStartOf="@+id/icAchievName"
+        app:layout_constraintTop_toTopOf="@+id/icAchievName"
+        tools:text="Coleccionista"/>
 
+    <TextView
+        android:id="@+id/tvAchievDesc"
+        android:layout_width="129dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/lato_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:maxLines="3"
+        android:textColor="@color/white_textView_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icAchievDesc"
+        app:layout_constraintEnd_toEndOf="@+id/icAchievDesc"
+        app:layout_constraintStart_toStartOf="@+id/icAchievDesc"
+        app:layout_constraintTop_toTopOf="@+id/icAchievDesc"
+        tools:text="Recolecta souvenirs durante tus viajes. Prueba de sonido"/>
+
+    <ImageView
+        android:id="@+id/icAchProgress"
+        android:layout_width="67dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/icAchievDesc"
+        app:layout_constraintTop_toBottomOf="@+id/icAchievDesc"
+        app:srcCompat="@drawable/ic_achiev_progress"/>
+
+
+    <TextView
+        android:id="@+id/tvAchievProgress"
+        android:layout_width="64dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/white_textView_color"
+        android:textSize="7sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icAchProgress"
+        app:layout_constraintEnd_toEndOf="@+id/icAchProgress"
+        app:layout_constraintStart_toStartOf="@+id/icAchProgress"
+        app:layout_constraintTop_toTopOf="@+id/icAchProgress"
+        tools:text="Progreso: 200/200"/>
+
+    <ImageView
+        android:id="@+id/icAchScore"
+        android:layout_width="57dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/icAchievDesc"
+        app:layout_constraintStart_toEndOf="@+id/icAchProgress"
+        app:layout_constraintTop_toBottomOf="@+id/icAchievDesc"
+        app:srcCompat="@drawable/ic_achiev_score"/>
+
+    <TextView
+        android:id="@+id/tvCounter"
+        android:layout_width="34dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/white_textView_color"
+        app:layout_constraintBottom_toBottomOf="@+id/icAchScore"
+        app:layout_constraintEnd_toEndOf="@+id/icAchScore"
+        app:layout_constraintTop_toTopOf="@+id/icAchScore"
+        tools:text="100"/>
+
+    <ImageView
+        android:id="@+id/icAchievement"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/icPanel"
+        app:layout_constraintTop_toBottomOf="@+id/icStar02"
+        tools:src="@drawable/img_02_silver_chest_closed"/>
+
+     <ImageView
+            android:id="@+id/icAchiveResult"
+            android:layout_width="135dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/icAchievDesc"
+            app:layout_constraintStart_toStartOf="@+id/icAchievDesc"
+            app:layout_constraintTop_toBottomOf="@+id/icAchievDesc"
+            app:srcCompat="@drawable/ic_achiev_name"/>
+
+    <TextView
+        android:id="@+id/tvAchieveResult"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/label_completed"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/icAchiveResult"
+        app:layout_constraintEnd_toEndOf="@+id/icAchiveResult"
+        app:layout_constraintStart_toStartOf="@+id/icAchiveResult"
+        app:layout_constraintTop_toTopOf="@+id/icAchiveResult"/>
 
 </android.support.constraint.ConstraintLayout>
-
-    <!-- <ImageView
-            android:id="@+id/imageView31"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/bg_achievement_item"/>
-
-        <ImageView
-            android:id="@+id/imgAchvCounter"
-            android:layout_width="75dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="56dp"
-            app:layout_constraintStart_toStartOf="@+id/imageView31"
-            app:layout_constraintTop_toTopOf="@+id/imageView31"
-            app:srcCompat="@drawable/ic_prize_on_achievement"/>
-
-        <ImageButton
-            android:id="@+id/btnAcceptNick"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="56dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="@+id/imageView31"
-            app:layout_constraintTop_toTopOf="@+id/imageView31"
-            app:srcCompat="@drawable/ic_facebook"/>
-
-        <ImageView
-            android:id="@+id/tvAchImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView31"
-            app:layout_constraintStart_toStartOf="@+id/imageView31"
-            app:layout_constraintTop_toTopOf="@+id/imageView31"
-            app:srcCompat="@drawable/ic_achievement_temp"/>
-
-        <TextView
-            android:id="@+id/tvAchTitle"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tvAchImg"
-            app:layout_constraintTop_toTopOf="@+id/imageView31"/>
-
-        <TextView
-            android:id="@+id/tvAchDescription"
-            android:layout_width="174dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:maxLines="2"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/tvAchImg"
-            app:layout_constraintTop_toTopOf="@+id/tvAchTitle"/>
-
-        <TextView
-            android:id="@+id/tvAchCoinsValue"
-            android:layout_width="37dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
-            android:text="10,000"
-            android:gravity="center"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imgAchvCounter"
-            app:layout_constraintStart_toStartOf="@+id/imgAchvCounter"/>-->

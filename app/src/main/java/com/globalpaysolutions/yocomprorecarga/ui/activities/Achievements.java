@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,8 +38,8 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
 
     //Global Variables
     AchievementsAdapter mAdapter;
-    ImageButton btnBack;
-    ImageButton btnPlay;
+    ImageView btnBack;
+    ImageView btnPlay;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
 
@@ -60,8 +59,8 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
         setContentView(R.layout.activity_achievements);
 
         lvAchievements = (ListView) findViewById(R.id.lvAchievements);
-        btnBack = (ImageButton) findViewById(R.id.btnBack);
-        btnPlay = (ImageButton) findViewById(R.id.btnPlay);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
+        btnPlay = (ImageView) findViewById(R.id.btnPlay);
         bgTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
         btnBack.setOnClickListener(new View.OnClickListener()
@@ -198,7 +197,7 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
     @Override
     public void loadBackground()
     {
-        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+        Picasso.with(this).load(R.drawable.bg_achievements).into(bgTimemachine);
     }
 
     @Override

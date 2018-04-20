@@ -1,5 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.views;
 
+import android.content.Intent;
+
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 
 /**
@@ -8,9 +10,10 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 
 public interface ProfileView
 {
-    void loadViewsState(String fullName, String nickname, String photoUrl);
+    void loadViewsState(String countryUrl, String nickname, String photoUrl);
     void generateToast(String text);
     void showGenericDialog(DialogViewModel model);
-    void launchChromeView(String url);
-    void setBackground();
+    void updateIndicators(String totalCoins, String totalSouvenirs);
+    void navigateSouvenirs(Intent souvenirs);
+    void loadCountryBadge(String worldcupCountryUrl);
 }

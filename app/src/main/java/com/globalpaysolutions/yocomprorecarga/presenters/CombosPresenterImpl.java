@@ -141,11 +141,17 @@ public class CombosPresenterImpl implements ICombosPresenter, CombosListener
 
                 //Saves tracking and updates UI
                 if(redeemPrize.getTracking() != null)
+                {
                     UserData.getInstance(mContext).SaveUserTrackingProgess(redeemPrize.getTracking().getTotalWinCoins(),
                             redeemPrize.getTracking().getTotalWinPrizes(),
                             redeemPrize.getTracking().getCurrentCoinsProgress(),
                             redeemPrize.getTracking().getTotalSouvenirs(),
                             redeemPrize.getTracking().getAgeID());
+                    UserData.getInstance(mContext).saveWorldcupTracking(redeemPrize.getTracking().getCountryID(),
+                            redeemPrize.getTracking().getCountryName(),
+                            redeemPrize.getTracking().getUrlImg(),
+                            redeemPrize.getTracking().getUrlImgMarker());
+                }
 
                 //If there is a new achievement
                 if (redeemPrize.getAchievement() != null)

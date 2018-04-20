@@ -23,4 +23,5 @@ public interface ICapturePrizeARPresenter
     void checkForWelcomeChest();
     void deleteFirstKeySaved();
     void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType);
+    void evaluateSouvsNavigation();
 }

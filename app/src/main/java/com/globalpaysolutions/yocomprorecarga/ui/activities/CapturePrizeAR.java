@@ -238,6 +238,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                     then = System.currentTimeMillis();
 
                     //Stops vibrating and removes animation
+
                     mPresenter.handle2DCoinTouch();
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP)
@@ -359,10 +360,25 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void on2DChestTouch(int pAwait)
+    public void on2DChestTouch(int pAwait, int eraID)
     {
         mVibrator.cancel();
         removeBlinkingAnimation();
+
+        try
+        {
+            //Gets the first object found
+            Map.Entry<String, ChestData2D> entry = mFirbaseObjects.entrySet().iterator().next();
+            ChestData2D chestData = entry.getValue();
+
+            if(chestData.getChestType() != Constants.VALUE_CHEST_TYPE_WILDCARD)
+                changeToOpenChest(chestData.getChestType(), eraID);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
         mHandler.postDelayed(runCoinExchange, pAwait);
     }
 
@@ -445,6 +461,21 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
+    public void navigateSouvenirs(Intent souvenirs)
+    {
+        try
+        {
+            souvenirs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(souvenirs);
+            finish();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error navigating: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void showSouvenirWonDialog(String souvenirName, String souvenirDescription, String url)
     {
         try
@@ -465,9 +496,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 @Override
                 public void onClick(View v)
                 {
-                    Intent souvs = new Intent(CapturePrizeAR.this, Souvenirs.class);
-                    startActivity(souvs);
-                    finish();
+                    mPresenter.evaluateSouvsNavigation();
                 }
             });
 
@@ -594,9 +623,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onGoldKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onGoldKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelGoldAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pFolderName + "')");
     }
 
     @Override
@@ -631,9 +660,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onSilverKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onSilverKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelSilverAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '" + pFolderName + "')");
     }
 
     @Override
@@ -668,9 +697,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onBronzeKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onBronzeKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '"+ pAge  + "')");
+        this.architectView.callJavascript("World.createModelBronzeAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey + "', '"+ pFolderName + "')");
     }
 
     @Override
@@ -705,9 +734,9 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onWildcardKeyEntered(String pKey, LatLng pLocation, String pAge)
+    public void onWildcardKeyEntered(String pKey, LatLng pLocation, String pFolderName)
     {
-        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey+ "', '" + pAge + "')");
+        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + pLocation.latitude + ", " + pLocation.longitude + ", '" + pKey+ "', '" + pFolderName + "')");
     }
 
     @Override

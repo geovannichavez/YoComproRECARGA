@@ -17,7 +17,7 @@ alertPrueba: function alertPruebaFn(word) {
 
 deleteObjectGeo: function deleteObjectGeoFn() {
     AR.context.destroyAll();
-    document.body.innerHTML = "<div id=\"container\" class=\"container\"><div class=\"content\"><div id=\"loadingMessage\" class=\"loading\">No hay cofres cerca, revisa tu mapa...</div></div></div>";
+    document.body.innerHTML = "<div id=\"container\" class=\"container\"><div class=\"content\"><div id=\"loadingMessage\" class=\"loading\">No hay objetos cerca, revisa tu mapa...</div></div></div>";
 },
 
 destroyObjectGeo: function destroyObjectGeoFn() {
@@ -64,7 +64,7 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                           var architectSdkUrl = "architectsdk://Bronze//" + key + "//" + latitude + "//" + longitude;
                                           document.location = architectSdkUrl;
                                           exchanging = false;
-                                          },2400);
+                                          },3500);
                                 }
                                 }
                                 });

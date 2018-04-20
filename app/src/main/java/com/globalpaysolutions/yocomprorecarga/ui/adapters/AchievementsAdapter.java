@@ -22,6 +22,7 @@ import com.facebook.share.widget.ShareButton;
 import com.facebook.share.widget.ShareDialog;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.api.ListAchievementsByConsumer;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 
 /**
  * Created by Josué Chávez on 16/11/2017.
@@ -57,67 +58,29 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
 
         final ListAchievementsByConsumer currentItem = getItem(position);
 
-        if(row != null)
+        if (row != null)
         {
             row = inflater.inflate(mResource, parent, false);
             row.setTag(currentItem);
         }
 
-        TextView title = (TextView) row.findViewById(R.id.txtTitle);
-        TextView description = (TextView) row.findViewById(R.id.txtDescription);
-        TextView coinsValue = (TextView) row.findViewById(R.id.txtCoins);
-        TextView actual = (TextView) row.findViewById(R.id.txtActual);
-        ImageView level = (ImageView) row.findViewById(R.id.imgAchvCounter);
-        ImageView imgCoins = (ImageView) row.findViewById(R.id.imgCoins);
-        ImageButton btnFacebook = (ImageButton) row.findViewById(R.id.btnFacebook);
-        final ShareButton btnShare = (ShareButton) row.findViewById(R.id.btnShare);
-        ShareDialog shareDialog;
+        TextView title = (TextView) row.findViewById(R.id.tvAchievName);
+        TextView description = (TextView) row.findViewById(R.id.tvAchievDesc);
+        TextView coinsValue = (TextView) row.findViewById(R.id.tvCounter);
+        TextView actual = (TextView) row.findViewById(R.id.tvAchievProgress);
+        ImageView star1 = row.findViewById(R.id.icStar01);
+        ImageView star2 = row.findViewById(R.id.icStar02);
+        ImageView star3 = row.findViewById(R.id.icStar03);
+        ImageView icAchScore = (ImageView) row.findViewById(R.id.icAchScore);
+        ImageView icAchProgress = (ImageView) row.findViewById(R.id.icAchProgress);
+        ImageView icAchievement = (ImageView) row.findViewById(R.id.icAchievement);
 
-        String currentLevel = String.valueOf(currentItem.getLevel());
+        ImageView icAchiveResult = (ImageView) row.findViewById(R.id.icAchiveResult);
+        TextView tvAchieveResult = (TextView) row.findViewById(R.id.tvAchieveResult);
+
         String score = String.valueOf(currentItem.getScore());
         String next = String.valueOf(currentItem.getNextLevel());
 
-        btnFacebook.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                btnShare.performClick();
-            }
-        });
-
-        if (ShareDialog.canShow(ShareLinkContent.class))
-        {
-            ShareLinkContent shareContent = new ShareLinkContent.Builder()
-                    .setContentUrl(Uri.parse("http://recar-go.com/share/ShareAchievement"))
-                    .setQuote(String.format("Acabo de lograr el nivel %1$s de %2$s en RecarGO!", currentLevel, currentItem.getName()))
-                    /*.setShareHashtag(new ShareHashtag.Builder().setHashtag("LoLogre").build())*/
-                    .build();
-            btnShare.setShareContent(shareContent);
-        }
-
-        //Share
-        shareDialog = new ShareDialog((Activity) mContext);
-        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>()
-        {
-            @Override
-            public void onSuccess(Sharer.Result result)
-            {
-
-            }
-
-            @Override
-            public void onCancel()
-            {
-
-            }
-
-            @Override
-            public void onError(FacebookException error)
-            {
-
-            }
-        });
 
         title.setText(currentItem.getName());
         description.setText(currentItem.getDescription());
@@ -129,28 +92,57 @@ public class AchievementsAdapter extends ArrayAdapter<ListAchievementsByConsumer
         switch (currentItem.getLevel())
         {
             case 0:
-                level.setImageResource(R.drawable.ic_achvs_counter_0);
-                btnFacebook.setEnabled(false);
-                btnShare.setEnabled(false);
-                btnFacebook.setVisibility(View.INVISIBLE);
+                star1.setImageResource(R.drawable.ic_star_off);
+                star2.setImageResource(R.drawable.ic_star_off);
+                star3.setImageResource(R.drawable.ic_star_off);
                 break;
             case 1:
-                level.setImageResource(R.drawable.ic_achvs_counter_1);
+                star1.setImageResource(R.drawable.ic_star_on);
+                star2.setImageResource(R.drawable.ic_star_off);
+                star3.setImageResource(R.drawable.ic_star_off);
                 break;
             case 2:
-                level.setImageResource(R.drawable.ic_achvs_counter_2);
+                star1.setImageResource(R.drawable.ic_star_on);
+                star2.setImageResource(R.drawable.ic_star_on);
+                star3.setImageResource(R.drawable.ic_star_off);
                 break;
             case 3:
-                level.setImageResource(R.drawable.ic_achvs_counter_3);
-                actual.setVisibility(View.INVISIBLE);
-                imgCoins.setVisibility(View.INVISIBLE);
-                coinsValue.setVisibility(View.INVISIBLE);
+                star1.setImageResource(R.drawable.ic_star_on);
+                star2.setImageResource(R.drawable.ic_star_on);
+                star3.setImageResource(R.drawable.ic_star_on);
+
+                icAchScore.setVisibility(View.GONE);
+                coinsValue.setVisibility(View.GONE);
+                icAchProgress.setVisibility(View.GONE);
+                actual.setVisibility(View.GONE);
+
+                tvAchieveResult.setVisibility(View.VISIBLE);
+                icAchiveResult.setVisibility(View.VISIBLE);
                 break;
             default:
-                level.setImageResource(R.drawable.ic_achvs_counter_0);
+                star1.setImageResource(R.drawable.ic_star_off);
+                star2.setImageResource(R.drawable.ic_star_off);
+                star3.setImageResource(R.drawable.ic_star_off);
                 break;
         }
 
-        return  row;
+        switch (currentItem.getAchievementID())
+        {
+            case 1:
+                icAchievement.setImageResource(R.drawable.ic_gold_collector);
+                break;
+            case 7:
+                icAchievement.setImageResource(R.drawable.ic_souv_collector);
+                break;
+            case 8:
+                icAchievement.setImageResource(R.drawable.ic_prize_winner);
+                break;
+            default:
+                icAchievement.setImageResource(R.drawable.ic_prize_winner);
+                break;
+        }
+
+        return row;
     }
+
 }

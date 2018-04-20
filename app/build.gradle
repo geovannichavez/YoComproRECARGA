@@ -10,8 +10,9 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 47
-        versionName "1.30" //02-ABR-18 - Integrando Likes X Monedas
+        versionCode 51
+        versionName "1.35" //20-ABR-18 - Era Mundial. Rediseño de pantallas
+
 
         //OneSignal
         manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
@@ -31,6 +32,7 @@ android {
     }
     dexOptions {
         jumboMode true
+        javaMaxHeapSize "2g"
     }
 
     //ProtoBuf - Specificate files

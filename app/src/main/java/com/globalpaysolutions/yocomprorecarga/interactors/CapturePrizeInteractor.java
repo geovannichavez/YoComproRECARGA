@@ -161,6 +161,10 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                     pTracking.getCurrentCoinsProgress(),
                     pTracking.getTotalSouvenirs(),
                     pTracking.getAgeID());
+            mUserData.saveWorldcupTracking(pTracking.getCountryID(),
+                    pTracking.getCountryName(),
+                    pTracking.getUrlImg(),
+                    pTracking.getUrlImgMarker());
         }
         catch (Exception ex)
         {
