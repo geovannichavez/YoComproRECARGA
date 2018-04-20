@@ -52,6 +52,16 @@ android {
         pickFirst 'google/protobuf/compiler/plugin.proto'
     }
 
+    //Densities
+    splits {
+        density {
+            enable true
+            reset()
+            include "xxhdpi", "xxxhdpi"
+        }
+
+    }
+
 }
 
 repositories {
@@ -184,6 +194,24 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.2'
 
 }
+
+    // Map for the version codes
+    ext.versionCodes = ['mdpi':1, 'hdpi':2, 'xhdpi':3, 'xxhdpi':4, 'xxxhdpi':5].withDefault {0}
+    import com.android.build.OutputFile
+
+    android.applicationVariants.all { variant ->
+        //Assign different version code for each output
+        variant.outputs.each { output ->
+            output.versionCodeOverride = project.ext.versionCodes.get(output.getFilter(OutputFile.DENSITY)) * 1000000 + android.defaultConfig.versionCode
+        }
+
+        /*
+            Universal:       1,      2,       3 ...
+            MDPI:      1000001,1000002, 1000003 ...
+            HDPI:      2000001,2000002, 2000003 ...
+            XHDPI:     3000001,3000002, 3000003 ...
+        */
+    }
 
 //Google Services
 //OBLIGATORIO: ESta línea debe ir al final del documento
