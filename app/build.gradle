@@ -10,7 +10,7 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 52
+        versionCode 53
         versionName "1.35" //20-ABR-18 - Era Mundial. Rediseño de pantallas
 
 
@@ -25,8 +25,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -53,15 +53,15 @@ android {
     }
 
     //Densities
-    splits {
+    /*splits {
         density {
             enable true
             reset()
-            include "xxhdpi", "xxxhdpi"
+            include "mdpi", "hdpi"
             compatibleScreens 'small', 'normal', 'large', 'xlarge'
         }
 
-    }
+    }*/
 
 }
 
@@ -196,6 +196,17 @@ dependencies {
 
 }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    * 
+
     // Map for the version codes
     ext.versionCodes = ['mdpi':1, 'hdpi':2, 'xhdpi':3, 'xxhdpi':4, 'xxxhdpi':5].withDefault {0}
     import com.android.build.OutputFile
@@ -214,9 +225,29 @@ dependencies {
             }
         }
     }
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+
+    */
 
 
-    ext.additionalDensities = ['xxhdpi': ['360', '420'], 'xxxhdpi': ['560']]
+    /*ext.additionalDensities = ['xxhdpi': ['360', '420'], 'xxxhdpi': ['560']]
     import com.android.build.OutputFile
 
     android.applicationVariants.all { variant ->
@@ -237,7 +268,7 @@ dependencies {
                 }
             }
         }
-    }
+    }*/
 
 
 //Google Services
