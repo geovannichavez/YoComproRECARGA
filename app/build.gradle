@@ -57,7 +57,8 @@ android {
         density {
             enable true
             reset()
-            include "xxhdpi", "xxxhdpi"
+            include "xxdpi", "xxxhdpi"
+            compatibleScreens 'small', 'normal', 'large', 'xlarge'
         }
 
     }
@@ -196,21 +197,22 @@ dependencies {
 }
 
     // Map for the version codes
-    ext.versionCodes = ['mdpi':1, 'hdpi':2, 'xhdpi':3, 'xxhdpi':4, 'xxxhdpi':5].withDefault {0}
+    ext.densityCodes = ['mdpi': 1, 'hdpi': 2, 'xhdpi': 3, 'xxhdpi': 4, 'xxxhdpi': 5]
     import com.android.build.OutputFile
 
     android.applicationVariants.all { variant ->
-        //Assign different version code for each output
-        variant.outputs.each { output ->
-            output.versionCodeOverride = project.ext.versionCodes.get(output.getFilter(OutputFile.DENSITY)) * 1000000 + android.defaultConfig.versionCode
-        }
 
-        /*
-            Universal:       1,      2,       3 ...
-            MDPI:      1000001,1000002, 1000003 ...
-            HDPI:      2000001,2000002, 2000003 ...
-            XHDPI:     3000001,3000002, 3000003 ...
-        */
+        variant.outputs.each { output ->
+
+            def baseDensityVersionCode =
+
+                    project.ext.densityCodes.get(output.getFilter(OutputFile.DENSITY))
+
+            if (baseDensityVersionCode != null) {
+                output.versionCodeOverride =
+                        baseDensityVersionCode * 1000 + variant.versionCode
+            }
+        }
     }
 
 //Google Services
