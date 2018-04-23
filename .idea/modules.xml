@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RecarGO.iml" filepath="$PROJECT_DIR$/RecarGO.iml" />
-      <module fileurl="file://C:\RAFAEL\RecarGO\YoComproRECARGA.iml" filepath="C:\RAFAEL\RecarGO\YoComproRECARGA.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\RAFAEL\RecarGO\app\app.iml" filepath="C:\RAFAEL\RecarGO\app\app.iml" />
     </modules>
   </component>
 </project>
