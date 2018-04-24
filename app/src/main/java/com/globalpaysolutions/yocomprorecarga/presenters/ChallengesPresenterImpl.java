@@ -23,6 +23,11 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ChallengesView;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Josué Chávez on 8/2/2018.
  */
@@ -265,7 +270,18 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
             if(location != null)
             {
                 LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                mInteractor.writePlayerDataLocation(userLocation, this);
+
+                //Retrieves saved current player data
+                Map<String, String> vendorPoint = new HashMap<>();
+                vendorPoint.put("Nickname", UserData.getInstance(mContext).getNickname());
+
+                //If current era is WorldCup then adds marker Url
+                if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), Constants.ERA_WORLDCUP_NAME))
+                {
+                    vendorPoint.put("MarkerUrl", UserData.getInstance(mContext).getWorldcupMarkerUrl());
+                }
+
+                mInteractor.writePlayerDataLocation(userLocation, this, vendorPoint, UserData.getInstance(mContext).getFacebookProfileId());
             }
         }
         catch (Exception ex)
