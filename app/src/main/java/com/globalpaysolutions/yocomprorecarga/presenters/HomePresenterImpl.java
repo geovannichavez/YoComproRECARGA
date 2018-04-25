@@ -33,7 +33,6 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointDat
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
@@ -206,13 +205,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            //Checks if mock locations are active
-            if(!MockLocationUtility.isMockSettingsON(mContext))
-            {
-                mView.getMarkerBitmaps(mMarkerMap);
-                mInteractor.initializeGeolocation();
-                mFirebaseInteractor.initializePOIGeolocation();
-            }
+            mView.getMarkerBitmaps(mMarkerMap);
+            mInteractor.initializeGeolocation();
+            mFirebaseInteractor.initializePOIGeolocation();
         }
         catch (Exception ex)
         {
@@ -407,28 +402,16 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             if(location != null)
             {
-                //Checks if location received is fake
-                if(!MockLocationUtility.isMockLocation(location, mContext))
-                {
-                    //Checks apps blacklist
-                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0 )
-                    {
-                        String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
-                        GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
+                String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
+                GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
 
-                        //Inserts location if setting is set to 'Visible'
-                        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
-                            mInteractor.setPlayerLocation(firebaseKey, geoLocation);
-                        else
-                            mInteractor.deletePlayerLocation(firebaseKey);
+                //Inserts location if setting is set to 'Visible'
+                if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+                    mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+                else
+                    mInteractor.deletePlayerLocation(firebaseKey);
 
-                        mView.updateUserLocationOnMap(location);
-                    }
-                    else
-                    {
-                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
-                    }
-                }
+                mView.updateUserLocationOnMap(location);
             }
         }
         catch (Exception ex)
@@ -445,14 +428,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             if(location != null)
             {
                 //Checks if location received is fake
-                if(!MockLocationUtility.isMockLocation(location, mContext))
-                {
-                    //Checks apps in blaclist
-                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
-                        mView.setInitialUserLocation(location);
-                    else
-                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
-                }
+                mView.setInitialUserLocation(location);
             }
         }
         catch (Exception ex)

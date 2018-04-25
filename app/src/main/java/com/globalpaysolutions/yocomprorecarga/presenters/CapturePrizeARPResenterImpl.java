@@ -27,7 +27,6 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePriz
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGroups;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -383,20 +382,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
            if(location != null)
            {
-               // Validates location from property
-               if(!MockLocationUtility.isMockLocation(location, mContext))
-               {
-                   //Check apps blacklist
-                   if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
-                   {
-                       mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-                       mCurrentLocation = location;
-                   }
-                   else
-                   {
-                       mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
-                   }
-               }
+               mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+               mCurrentLocation = location;
            }
         }
         catch (Exception ex)
@@ -412,20 +399,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             if(location != null)
             {
-                //Checks if location is fake
-                if(!MockLocationUtility.isMockLocation(location, mContext))
-                {
-                    //Checks apps in blacklist
-                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
-                    {
-                        mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-                        mCurrentLocation = location;
-                    }
-                    else
-                    {
-                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
-                    }
-                }
+                mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                mCurrentLocation = location;
             }
         }
         catch (Exception ex)
