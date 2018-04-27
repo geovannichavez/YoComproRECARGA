@@ -11,8 +11,7 @@
         android:id="@+id/bgWhiteTimemachine"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/bg_achievements"/>
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/btnBack"

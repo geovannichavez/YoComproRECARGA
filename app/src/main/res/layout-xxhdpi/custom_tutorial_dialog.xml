@@ -28,8 +28,7 @@
                 android:layout_gravity="end"
                 android:layout_margin="@dimen/margin_8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_close"/>
+                android:scaleType="fitXY" />
         </FrameLayout>
 
        <!-- <me.relex.circleindicator.CircleIndicator
