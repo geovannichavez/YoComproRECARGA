@@ -109,19 +109,13 @@ public class ChallengesInteractor implements IChallengesInteractor
     }
 
     @Override
-    public void writePlayerDataLocation(final LatLng location, final ChallengesListener listener)
+    public void writePlayerDataLocation(final LatLng location, final ChallengesListener listener, Map<String, String> playerData, final String playerFacebookID)
     {
         try
         {
             if(location != null)
             {
-                String playerNick = UserData.getInstance(mContext).getNickname();
-                final String playerFacebookID = UserData.getInstance(mContext).getFacebookProfileId();
-
-                Map<String, String> vendorPoint = new HashMap<>();
-                vendorPoint.put("Nickname", playerNick);
-
-                mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
+                mDataPlayersPoints.child(playerFacebookID).setValue(playerData, new DatabaseReference.CompletionListener()
                 {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)

@@ -9,7 +9,7 @@
 
 
     <ImageView
-        tools:src="@drawable/bg_achievements"
+        tools:src="@drawable/bg_background_4"
         android:id="@+id/bgWhiteTimemachine"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

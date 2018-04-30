@@ -31,7 +31,6 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.LeadersAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +44,6 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
 
     //Layouts and Views
     //Toolbar toolbar;
-    //NonScrollableListView mLeaderboardListView;
     ListView mLeaderboardListView;
     TextView tvToday;
     TextView tvWeek;

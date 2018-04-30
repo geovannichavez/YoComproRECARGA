@@ -197,7 +197,7 @@ public class Achievements extends ImmersiveActivity implements AchievementsView
     @Override
     public void loadBackground()
     {
-        Picasso.with(this).load(R.drawable.bg_achievements).into(bgTimemachine);
+        Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
     }
 
     @Override
