@@ -24,8 +24,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -126,7 +126,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
     //Picasso
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    //implementation 'com.squareup.picasso:picasso:2.5.2'
 
     //CircleIndicator
     //compile 'me.relex:circleindicator:1.2.2@aar'
@@ -174,10 +174,10 @@ dependencies {
     implementation 'com.adform.tracking.sdk:adform-tracking-sdk:1.1.7'
 
     //Adform SDK - ProtoBuf
-    compile 'com.google.protobuf:protobuf-java:3.5.1'
+    implementation 'com.google.protobuf:protobuf-java:3.5.1'
 
     // Gif
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
 
     //Multidex
     implementation 'com.android.support:multidex:1.0.2'
