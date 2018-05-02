@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RecarGO.iml" filepath="$PROJECT_DIR$/RecarGO.iml" />
-<<<<<<< HEAD
-=======
       <module fileurl="file://$PROJECT_DIR$/YoComproRECARGA.iml" filepath="$PROJECT_DIR$/YoComproRECARGA.iml" />
->>>>>>> Release
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
