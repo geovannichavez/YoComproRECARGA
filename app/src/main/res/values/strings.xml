@@ -1,76 +1,165 @@
 <resources>
-    <string name="app_name">Yo Compro RECARGA</string>
+    <string name="app_name">RecarGO!</string>
+
+
+    <!--    ACTIVITIES  -->
+    <string name="activity_title_my_profile">Mi Perfil</string>
+    <string name="activity_title_leaderboards">Tabla de Líderes</string>
+    <string name="activity_title_prizes_history">Historial de Premios</string>
 
     <!--    ACCEPT TERMS    -->
-    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos y Condiciones</u> y <u>Políticas de Privacidad</u> de YoVendoRecarga.com</string>
+    <string name="label_accept_terms_and_conditions">Al continuar acepta <u>Términos, Condiciones</u> y <u>Políticas de Privacidad</u> de RecarGO!</string>
+
+
+    <!--    PERMISSIONS     -->
+    <string name="label_permissions_title">Concede Permisos</string>
+    <string name="label_permissions_content">Deberás conceder permisos a la aplicación para hacer uso de todas sus características. Haz click en el siguiente botón</string>
+    <string name="toast_permissions_denied">Denegaste los permisos. Inténtalo de nuevo.</string>
+
 
     <!--    VALIDATE PHONE-->
     <string name="confirm_country_code">Por favor confirma el código de país e introduce tu número de teléfono</string>
     <string name="label_country">País</string>
     <string name="label_country_code">Cód.</string>
     <string name="label_title_select_country">Seleccione país</string>
+    <string name="label_choose">Elegir</string>
 
     <!--    TOKEN INPUT -->
     <string name="hint_type_token">Código</string>
     <string name="label_type_token">Hemos enviado un SMS al número proporcionado, por favor ingrese el código de confirmación.</string>
+    <string name="label_type_token_part1">Hemos enviado un SMS al número</string>
+    <string name="label_type_token_part2">, por favor ingrese el código de confirmación.</string>
+    <string name="label_type_token_part3"><s>¿Número equivocado?</s></string>
     <string name="dialog_success_token_validation_message">Se ha validado tu número de teléfono exitosamente.</string>
     <string name="error_title_incorrect_token">CÓDIGO</string>
     <string name="error_label_incorrect_token">Código incorrecto, inténtalo nuevamente.</string>
 
+
     <!--    REQUEST TOPUP   -->
     <string name="label_make_sure_correct_phone">¡Asegúrate que el número sea el correcto!</string>
-    <string name="label_type_vendor_code">Ingresa el código de vendedor:</string>
+    <string name="label_type_vendor_code">Ingresa el código de vendedor</string>
     <string name="label_select_recharge_amount">Seleccione el monto a recargar:</string>
     <string name="label_select_operator">Selecciona el operador móvil:</string>
     <string name="label_title_select_amount_dialog">Seleccione un monto</string>
-    <string name="progress_dialog_sending_topup_request">Enviando su solicitud...</string>
+    <string name="progress_dialog_sending_topup_request">Enviando su solicitud…</string>
     <string name="title_success_dialog_label">¡SOLICITUD ENVIADA!</string>
     <string name="content_success_dialog_label_line1">Se ha enviado tu solicitud de recarga al vendedor.</string>
     <string name="content_success_dialog_label_line2">Recibirás una notificación con el resultado.</string>
+    <string name="label_become_a_vendor"><u>¿Quieres vender recargas?</u></string>
+
 
     <!--    HOME    -->
     <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
     <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
     <string name="dialog_permissions_title">PERMISOS</string>
     <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
+    <string name="label_vendor_code_snippet">Cód. Vendedor: %1$s</string>
+    <string name="label_player_code_snippet">Haz click aquí para retarle</string>
+    <string name="title_success_dialog_store_report">REPORTE ENVIADO</string>
+    <string name="dialog_content_report_sent">Su reporte ha sido enviado exitosamente. ¡Muchas gracias por ayudarnos con información!</string>
+    <string name="yvr_vendor_marker_title">¡YoVendoRecarga! Click aquí</string>
 
+    <!--    CAPTURE PRIZE AR    -->
+    <string name="dialog_title_incompatible_device">DISPOSITIVO INCOMPATIBLE</string>
+    <string name="dialog_content_incompatible_device">Tu dispositivo no es compatible para jugar al RecarGO! Necesitarás lo siguiente para usarlo:</string>
+    <string name="label_loading_exchanging_chest">¡Abriendo objeto, espera!</string>
+    <string name="label_alreadey_open_chest_title">¡Ya lo abriste!</string>
+    <string name="label_allowed_open_chest_once_per_day">Solo puedes abrir el mismo objeto una vez al día.</string>
+    <string name="label_chest_open_succesfully">Lo has hecho muy bien, lograste conseguir %1$s. ¡Vamos continúa buscando más!</string>
+    <string name="label_indicator_prizes">PREMIOS</string>
+    <string name="label_indicator_saved">ACUMULADO</string>
+    <string name="cant_redeem_title">¡No tan Rápido!</string>
+    <string name="redeem_prize_interval">¡Solo te faltan %1$s hora(s) para canjear tu premio! ¡No te canses de jugar, buena suerte!</string>
+    <string name="exchange_souvenir_interval">Te faltan %1$s hora(s) para canjear tu souvenir ¡No te canses de jugar, buena suerte!</string>
+    <string name="title_not_enough_coins">Sin Monedas...</string>
+    <string name="label_not_enough_coins">No tienes suficientes monedas para canjear un premio. ¡Abre más cofres y conseguirás monedas!</string>
+    <string name="label_not_enough_coins_store">No tienes suficientes monedas para comprar de la tienda. ¡Abre más cofres y conseguirás monedas!</string>
+    <string name="label_redeeming_prize_wait">¡Canjeando premio, espera!</string>
+    <string name="label_click_on_button_to_redeem">¡Haz click en el botón \"Ver Premio\" para saber qué ganaste!</string>
+
+    <!--    PRIZE DETAIL    -->
+    <string name="label_congratulations_title">¡Felicidades!</string>
+    <string name="label_have_collected_prize">Haz recolectado tu premio de:</string>
+    <string name="label_prize_title">PERSONA FAVORITA</string>
+    <string name="label_prize_detail">Para que le puedas llamar y que te llame ilimitado con tu prepago.</string>
+    <string name="label_copy_paste_code">Copia y pega este código:</string>
+    <string name="edittext_code_example">5A567H232Q</string>
+    <string name="label_activate_dialing">Actívalo marcando el:</string>
+    <string name="label_ussd_exchange_number">*555#</string>
+    <string name="prize_colected_thanks_to">Haz recolectado un premio gracias a:</string>
+    <string name="label_reedem_it_dialing">Canjealo marcando el número:</string>
+
+
+    <!--    LIMITED FUNCTIONALITY    -->
+    <string name="title_limited_functionality">FUNCIONALIDAD LIMITADA</string>
+    <string name="label_limited_functionality_content">Tu dispositivo carece de características necesarias para el funcionamiento de RecarGO! con realidad aumentada (%1$s), por lo que podrás jugar al RecarGO! con una mecánica diferente.</string>
+    <string name="label_warning">¡Atención!</string>
+    <string name="label_divice_not_ar_compatible">Tu dispositivo no es compatible con la función de Realidad Aumentada (AR)</string>
+    <string name="label_2d_playable">Sin embargo, puedes seguir disfrutando de RecarGO! en su versión en 2 dimensiones.</string>
 
     <!--BUTTONS AND OTHERS-->
     <string name="button_continue">Continuar</string>
-    <string name="button_login">Iniciar Sesión</string>
+    <string name="button_login">Registrarme</string>
     <string name="button_my_number">Mi número</string>
     <string name="button_request_topup">Solicitar Recarga</string>
+    <string name="button_buy">Comprar</string>
     <string name="button_accept">Aceptar</string>
-    <string name="label_loading_please_wait">Por favor espere...</string>
+    <string name="label_loading_please_wait">Por favor espere…</string>
     <string name="button_verify">Verificar</string>
     <string name="button_activate">Activar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="button_retry">Reintentar</string>
+    <string name="button_yes">Si</string>
+    <string name="button_no">No</string>
+    <string name="button_whatever">Ni modo</string>
+    <string name="button_redeem_now">Ver Premio</string>
+    <string name="button_leaders_board">Tabla de líderes</string>
+    <string name="button_my_prizes">Mis Premios</string>
+    <string name="button_logout">Cerrar sesión</string>
+    <string name="button_tutorial">Ver Tutorial</string>
+    <string name="button_next">Siguiente</string>
+    <string name="button_skip">Omitir</string>
+    <string name="button_start">Iniciar</string>
+
+    <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
+    <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
+    <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
+    <string name="toast_bronze_out_of_search_range">BRONCE: Saliste del rango de búsqueda</string>
+
 
     <!--    HINTS   -->
-    <string name="spinner_select">Seleccione...</string>
+    <string name="spinner_select">Seleccione…</string>
     <string name="hint_your_phone_number"><font size="16">TU TELÉFONO</font></string>
-    <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>
+    <!-- <string name="hint_specify_phone_number"><font size="16">ESPECIFICAR NÚMERO</font></string>-->
+    <string name="hint_specify_phone_number"><font size="16">NÚMERO</font></string>
     <string name="hint_vendor_code"><font size="16">CÓDIGO</font></string>
 
+
     <!--    ERRROR MESSAGES  -->
-    <string name="error_title_something_went_wrong">ALGO HA SALIDO MAL...</string>
-    <string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>
+    <!--<string name="error_title_something_went_wrong">ALGO HA SALIDO MAL…</string>-->
+    <string name="error_title_something_went_wrong">Ups!…</string>
+    <string name="error_title_sms_await_title">ESPERA UN POCO…</string>
+    <!--<string name="error_content_something_went_wrong_try_again">Algo ha salido mal, inténtelo nuevamente</string>-->
+    <string name="error_content_something_went_wrong_try_again">¡Revisa tu conexión!</string>
+    <string name="error_content_progress_something_went_wrong_try_again">Algo ha salido mal al obtener los datos de su progreso, inténtelo nuevamente</string>
     <string name="error_title_internet_connecttion">ERROR DE CONEXIÓN</string>
     <string name="error_content_internet_connecttion">Algo ha salido mal, revisa tu conexión a internet.</string>
     <string name="error_title_vendor_not_found">VENDEDOR NO ENCONTRADO</string>
     <string name="error_content_vendor_not_found_line">No encontramos ningún vendedor con ese código. Asegúrate de escribir el código correcto.</string>
-
+    <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
 
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
+    <string name="dialog_title_airtime_report">Reporte de Recargas</string>
+    <string name="dialog_content_airtime_report">¿Tenían recargas?</string>
 
 
     <!--    SPECIAL SIGNS   -->
-    <string name="sign_plus">+</string>
+    <string name="sign_plus">+%1$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!--    VALIDATIONS -->
     <string name="validation_not_valid_phone_message">Teléfono no válido</string>
@@ -79,5 +168,289 @@
     <string name="validation_required_amount">Debe seleccionar un monto</string>
     <string name="validation_not_valid_vendor_code">El código de vendedor no es válido</string>
     <string name="validation_required_vendor_code">El código de vendedor es requerido</string>
+    <string name="validation_title_required">Requerido</string>
+    <string name="validation_required_nickname">El nickname es requerido.</string>
+    <string name="validation_title_invalid_nickname">Nick</string>
+    <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
+
+
+    <!--    COMPONENTS -->
+    <string name="component_compass">Giroscopio</string>
+    <string name="component_gps">GPS</string>
+    <string name="component_camera">Cámara</string>
+    <string name="component_opengl">OpenGL 2.0</string>
+    <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
+
+    <!--    AUTHENTICATE    -->
+    <string name="label_welcome_to_recargo">¡Bienvenido a RecarGO!</string>
+    <string name="label_login_with_facebook">¡Comprar recargas nunca fue tan fácil! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+    <string name="label_what_is_recargo">Gana muchísimos premios increíbles y tiempo aire! Para continuar regístrate o inicia sesión con tu cuenta de Facebook.</string>
+
+
+    <!--    FACEBOOK    -->
+    <string name="facebook_app_id">1738584339775798</string>
+    <string name="fb_login_protocol_scheme">fb1738584339775798</string>
+
+    <!--    NICKNAME    -->
+    <string name="title_nickname">NICKNAME (APODO)</string>
+    <string name="label_content_nickname">Elige un nombre de usuario (apodo) para identificarte. Este nombre se mostrará en las tablas de Rankings y otros contenidos de uso público. Ejemplos:</string>
+    <string name="hint_nickname">Nickname</string>
+    <string name="validation_nickname_already_exists">Este nombre ya está en uso, usa uno diferente.</string>
+    <string-array name="array_nickname_examples">
+        <item>Pepe43</item>
+        <item>jose.luis</item>
+        <item>majo12</item>
+    </string-array>
+
+    <!--    INFO     -->
+    <string name="action_info">¿Cómo Jugar?</string>
+
+
+    <!--    PROFILE     -->
+    <string name="action_profile">Mi Perfil</string>
+
+    <!--    LEADER BOARDS   -->
+    <string name="label_name">Nombre</string>
+    <string name="label_nickname">Nickname</string>
+    <string name="label_ranking">Ranking</string>
+    <string name="label_username">Usuario</string>
+    <string name="label_recarcoins">RecarCoins</string>
+    <string name="label_last_winner">Último Ganador: %1$s</string>
+    <string name="label_daily">Diario</string>
+    <string name="label_weekly">Semanal</string>
+    <string name="label_monthly">Mensual</string>
+    <string name="label_global">Global</string>
+
+    <!--    PRIZE HISTORY   -->
+    <string name="label_prize_type">Tipo</string>
+    <string name="label_prize_name">Premio</string>
+    <string name="label_prize_exchange">Canje</string>
+    <string name="label_code">Código: %1$s</string>
+
+    <!--    CONTENT DESCRIPTION     -->
+    <string name="contentdescription_indicator">indicator</string>
+    <string name="contentdescription_coin_counter">coin counter</string>
+    <string name="label_facebook_logged_in">Inició sesión en Facebook</string>
+    <string name="label_portable_phone_number">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número <b>7768-1443</b> para obtener tu código.</string>
+
+    <string name="label_portable_phone_number_part1">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número </string>
+    <string name="label_portable_phone_number_part2"> para obtener tu código.</string>
+    <string name="label_callcenter_phone_number">7768-1443</string>
+    <string name="title_terms_and_conditions">Términos y Condiciones</string>
+    <string name="toast_not_valid_phone">Número telefónico inválido</string>
+    <string name="contentdescription_close_infograpgy">Cerrar dialogo</string>
+    <string name="label_title_era_selection">Viaje en el tiempo</string>
+
+    <string name="label_storeitem_price">%1$s RecarCoin</string>
+    <string name="label_sell">VENDER</string>
+    <string name="label_buy">COMPRAR</string>
+    <string name="label_store">TIENDA</string>
+    <string name="label_quantity_recarcoins">%1$s RecarCoins</string>
+    <string name="lbl_store_item_description">En los barriles de tienda encontrarás souvenirs que son elementos que debes seleccionar poder ganarte los premios mayores.</string>
+    <string name="label_locked_era">¡ERA BLOQUEADA!</string>
+    <string name="label_locked_era_content">Continúa recolectando más suvenires o monedas, muy pronto podrás realizar otro viaje para descubrir una nueva era.</string>
+    <string name="label_welcome">Hola Aventurer@, me emociona que te quieras unir a este viaje. Antes de conocernos mejor, debes estar de acuerdo con algunos términos.</string>
+    <string name="label_continue">CONTINUAR</string>
+    <string name="label_achievements">LOGROS</string>
+    <string name="title_couldnt_exchange_souvenir">No se canjeó el Souvenir</string>
+    <string name="content_couldnt_exchange_souvenir">Algo salió mal y no se pudo canjear tu souvenir. ¡Inténtalo más tarde!</string>
+    <string name="label_enter_pin_to_redeem">PIN del Regalo</string>
+    <string name="label_type_phone_to_apply_prize">Número de celular</string>
+    <string name="label_must_be_claro_client">Recuerda que debes ser cliente de Claro para canjear tu premio.</string>
+    <string name="label_wildcard_explanation">Si aceptas puedes hacerte millonario o acabar completamente arruinado. Si no aceptas no te preocupes puedes continuar jugando y buscando cofres.</string>
+    <string name="title_you_won">¡Es tu día de suerte!</string>
+    <string name="label_you_won">Puedes seguir acumulando o comprar e intercambiar una pieza por un premio.</string>
+    <string name="label_back_to_map">VOLVER AL MAPA</string>
+    <string name="title_you_lost">¡Lo siento mucho, no fue tu día de suerte!</string>
+    <string name="label_you_lost">Inténtalo de nuevo dentro de 24 horas, tal vez mañana logres conseguir un premio.</string>
+    <string name="label_win">¡GANASTE!</string>
+    <string name="label_lost">PERDISTE</string>
+    <string name="label_something_went_wrong_wildcard">Algo ha salido mal al procesar tu reto de ahora. ¡Inténtalo de nuevo!</string>
+    <string name="label_allowed_accept_challenge_once_per_day">¡Sólo puedes aceptar el reto una vez al día! Vuelve mañana e inténtalo de nuevo.</string>
+    <string name="label_loading_wildacrd">¡Aceptaste el reto, espera!</string>
+    <string name="label_alreadey_played_challenge_title">¡Hasta mañana podrás!</string>
+    <string name="toast_wildcard_out_of_search_range">COMODÍN: Saliste del rango de búsqueda.</string>
+    <string name="title_activate_gift">ACTIVAR REGALO</string>
+    <string name="label_shall_we_begin">¿Iniciamos la aventura?</string>
+    <string name="label_intro_intro">Bienvenido a la máquina del tiempo, la cual se construyó para recolectar los mejores tesoros de la historia.</string>
+    <string name="label_click_to_intro">Toca al centro para iniciar.</string>
+    <string name="label_intro_2">Ayuda a su dueño Albert Fermi en sus viajes, recuerda recolectar 20 monedas para canjearlas por un premio diario.</string>
+    <string name="label_intro_3">En cada Era encontrarás souvenirs escondidos en algunos cofres o puedes comprarlos en la tienda de cada era.</string>
+    <string name="label_intro_3_1">Son tesoros que puedes canjear por premios. No te quedes sin souvenirs pues no podrás avanzar a la siguiente era.</string>
+    <string name="label_intro_4">Las monedas RecarCoins las encontrarás en los contenedores que visualizarás en el mapa. \n\n Con ellas podrás comprar en la tienda, obteniendo más souvenirs. La suerte decide cuántas monedas tendrás.</string>
+    <string name="label_intro_5">Todos los días puedes canjear premios con tus 20 RecarCoins o con souvenirs repetidos. \n\n Tus premios se mantendrán vigentes hasta activar el código. Atento al canjear, ya que puedes obtener premios increíbles.</string>
+    <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con tu cuenta de Facebook para continuar</string>
+    <string name="label_we_may_need_comunicate">Si obtienes un gran premio necesitaremos comunicarnos contigo</string>
+    <string name="label_how_to_contact">¿CÓMO NOS PODREMOS CONTACTAR?</string>
+    <string name="label_welcome_aventurer">¡INGRESA TU NICKNAME!</string>
+    <string name="label_ask_nickname">Soy Albert, el creador de la máquina del tiempo. ¿Qué tal si comenzamos con tu nombre para conocernos mejor?</string>
+    <string name="label_sorry_not_compatible_part1">¡Lo siento tu celular no acepta la versión 3D!</string>
+    <string name="label_sorry_not_compatible_part2">¡Pero no te preocupes que aún puedes jugar con la versión 2D!</string>
+    <string name="label_congrats_souvenir_name">Lograste encontrar %1$s.</string>
+    <string name="label_thanks_valuable_thing">¡Gracias aventurer@ esta pieza es muy valiosa para mí! ¡Mereces una recompensa!</string>
+    <string name="label_just_earned">Acabas de ganar gracias a Claro:</string>
+    <string name="title_initial_wildcard">¡Pongamos a prueba tu suerte!</string>
+    <string name="title_await_please">Espera un momento</string>
+    <string name="title_store_items_error">No se cargaron artículos</string>
+    <string name="label_store_items_error">No se cargaron los artículos de la tienda. Vuelve a intentarlo.</string>
+    <string name="label_unknown_era">Desconocido</string>
+
+    <string name="label_type_token_part4"><u>Intentar otra vez</u></string>
+    <string name="lbl_confirm_number">CONFIRMA TU CELULAR</string>
+    <string name="lbl_if_dont_get_sms">Si no recibes el SMS de confirmación, por favor comunícate con nosotros por WhatsApp al número 7768–1443 para ayudarte</string>
+    <string name="lbl_write_your_code">Digita tu código</string>
+    <string name="lbl_btn_verify_cellphone">VERIFICAR</string>
+    <string name="title_redeem_prize_success">Regalo Activado con éxito</string>
+    <!--<string name="title_redeem_prize_error">El código es incorrecto</string>-->
+
+    <string name="title_redeem_prize_error">No se activó tu regalo</string>
+    <!--<string name="title_redeem_prize_error">El código es incorrecto</string>-->
+
+    <string name="label_claro_prize_activated">Has activado un regalo Claro exitosamente.</string>
+    <string name="label_reedem_error">Revisa el código que ingresaste y el número que se va a usar</string>
+    <string name="title_wildcard_pointer">¡Suerte!</string>
+    <string name="label_wildcard_pointer">Averigua el secreto</string>
+    <string name="title_dialog_invalid_nickname">Nombre Inválido</string>
+    <string name="label_dialog_invalid_nickname">Este nombre no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
+    <string name="title_no_prizes_yet">¡Aún no has logrado ningún premio!</string>
+    <string name="label_no_prizes_yet">Busca cofres y recolecta suficientes monedas para canjeralos</string>
+    <string name="title_era_selection">VIAJAR</string>
+    <string name="title_leaderboards">Tabla de Líderes</string>
+    <string name="title_prizes">Premios</string>
+    <string name="title_souvenirs_collection">Colección</string>
+    <string name="title_combos_collection">COMBOS</string>
+    <string name="label_prizes_button">PREMIOS</string>
+    <string name="label_collection_button">COLECCIÓN</string>
+    <string name="label_achievements_button">LOGROS</string>
+    <string name="label_leaders_button">LÍDERES</string>
+    <string name="title_invalid_pin">Código Inválido</string>
+    <string name="label_pin_already_activated">El código ingresado es inválido. Este PIN ya fue utilizado.</string>
+    <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
+    <string name="showcase_title_play">Jugar</string>
+    <string name="showcase_content_play">Inicia la aventura</string>
+    <string name="showcase_title_profile">Perfil</string>
+    <string name="showcase_content_profile">Repasa el estado de tu juego</string>
+    <string name="showcase_title_travel">Viajar</string>
+    <string name="showcase_content_travel">Selecciona la Era a la que deseas viajar</string>
+    <string name="showcase_title_topup_request">YoComproRecarga.com</string>
+    <string name="showcase_content_topup_request">Solicita Recargas a Vendedores de YoVendoRecarga.com</string>
+    <string name="showcase_title_store">Tienda</string>
+    <string name="showcase_content_store">En la tienda puedes comprar los Souvenir que te faltan para completar tu colección</string>
+    <string name="showcase_content_prize">Canjea tu PIN y obtén tu regalo de Claro</string>
+    <string name="showcase_title_prize">Activar Premios</string>
+    <string name="showcase_title_tutorial">Tutorial</string>
+    <string name="showcase_content_tutorial">Mira el tutorial</string>
+    <string name="showcase_title_back">Atrás</string>
+    <string name="showcase_content_back">Regresa al menú principal</string>
+    <string name="showcase_title_pin">Contenedores de monedas</string>
+    <string name="showcase_content_pin">Busca contenedores de monedas como Cofres, arcas, etc. que se encuentren más cercanos a tu ubicación</string>
+    <string name="showcase_title_go">GO!</string>
+    <string name="showcase_content_go">Cuando te encuentres cerca de un contenedor presiona GO! para visualizarlo en Realidad Aumentada</string>
+    <string name="showcase_title_coins">Marcador RecarCoins</string>
+    <string name="showcase_content_coins">Aquí puedes ver cuantas RecarCoins has recolectado en el viaje</string>
+    <string name="showcase_title_prizes_earned">Premios Claro</string>
+    <string name="showcase_content_prizes_earned">Esta es la cantidad de Premios de Claro que has canjeado</string>
+    <string name="showcase_title_souvenirs">Souvenirs</string>
+    <string name="showcase_content_souvenirs">Esta es la cantidad de Souvenir que has coleccionado</string>
+    <string name="showcase_title_ra">Contenedor de monedas</string>
+    <string name="showcase_content_ra">Visualiza el contenedor por medio de la Realidad Aumentada. Las flechas te ayudarán a guiarte. Seguidamente, presiónalo cuando lo encuentres.</string>
+    <string name="showcase_content_ra_2d">Visualiza el contenedor aquí. Cuando estés en el rango de ubicación aparecerá. Seguidamente, presiónalo cuando aparezca.</string>
+    <string name="showcase_title_coins_counter">Contador de monedas</string>
+    <string name="showcase_content_coins_counter">Tu contador de RecarCoins te muestra la cantidad que posees para canjear el siguiente premio, recuerda que necesitas 20 RecarCoins para cada premio.</string>
+    <string name="showcase_title_back_map">Regresa al mapa</string>
+    <string name="showcase_content_back_map">Regresa al Mapa cuando necesites mejorar tu ubicación</string>
+    <string name="showcase_title_go_store">Tienda</string>
+    <string name="showcase_content_go_store">Accede a la tienda de Souvenirs</string>
+    <string name="error_title_not_enough_souvs">¡Faltan souvenirs!</string>
+    <string name="error_label_not_enough_souvs">Debes recolectar al menos %1$s souvenirs para cambiar de Era. ¡Sigue abriendo cofres!</string>
+    <string name="title_update_required">¡Actualiza tu aplicación!</string>
+    <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
+    <string name="error_label_not_enough_souvs_combos">Debes tener todos los souvenirs de éste combo en tu colección para hacer el canje.</string>
+    <string name="title_confirm_combo_exchange">¿Canjear combo?</string>
+    <string name="title_buy_barrell_confirm_dialog">¿Comprar ítem?</string>
+    <string name="content_buy_barrell_confirm_text">¿Estás seguro que quieres comprar este ítem?</string>
+    <string name="title_copied_to_clipboard">Código copiado</string>
+    <string name="content_copied_to_clipboard">Pega y envía gratis el código por SMS para canjear tu premio al %1$s</string>
+    <string name="content_confirm_combo_exchange">¿Estás seguro que deseas canjear este combo por un premio?</string>
+    <string name="content_confirm_combo_exchange_2">¿Estás seguro que deseas canjear el combo \"%1$s\" por un premio?</string>
+    <string name="button_exchange">CANJEAR</string>
+    <string name="label_exchange">Canjear</string>
+    <string name="title_notification_countdown_finished">¡Ya puedes canjear tus premios!</string>
+    <string name="label_notification_countdown_finished">Tu tiempo de espera para canjear premios ha finalizado ¡ya puedes volver a canjear tus premios!</string>
+    <string name="permissions_granted_list">Permissions granted: %1$s, %2$s, %3$s, %4$s, </string>
+    <string name="showcase_title_leaderboards">Tabla de líderes</string>
+    <string name="showcase_content_leaderboards">Mira qué jugadores van en los primeros puestos en la recolección de RecarCoins</string>
+    <string name="label_challenges_button">RETOS</string>
+    <string name="title_challenges">Historial de Retos</string>
+    <string name="label_switch_activate_location">Activar Ubicación</string>
+    <string name="label_challenge_termini_from">Reto de:</string>
+    <string name="label_challenge_bet">Apuesta:</string>
+    <string name="label_challenge_result">Resultado</string>
+    <string name="label_challenge_choose_attack">Selecciona tu ataque</string>
+    <string name="label_challenge_choose_defense">Selecciona tu defensa</string>
+    <string name="label_challenge_choose_bet">Selecciona la apuesta</string>
+    <string name="label_challenge_termini_to">Reto a:</string>
+    <string name="title_challenge_created">¡Reto enviado!</string>
+    <string name="label_dialog_challenge_created">¡El reto se ha enviado! Te notificaremos con los resultados.</string>
+    <string name="title_someone_has_challenged">¡%1$s te ha retado!</string>
+    <string name="title_challenge_someone">¿Deseas retar a %1$s?</string>
+    <string name="label_challenge_bet_choosen_by">Apuesta seleccionada por %1$s</string>
+    <string name="button_challenge_challenge">RETAR</string>
+    <string name="button_challenge_defend">DEFENDER</string>
+    <string name="error_title_already_challenged">Jugador ya retado</string>
+    <string name="error_content_already_challenged">¡Este jugador tiene un reto pendiente contigo, ten paciencia!</string>
+    <string name="title_challenge_result">RESULTADO</string>
+    <string name="title_challenge_result_bad_luck">¡Mala Suerte!</string>
+    <string name="title_challenge_result_congrats">¡Felicitaciones!</string>
+    <string name="label_challenge_result_text_lose">Has perdido el reto contra %1$s</string>
+    <string name="label_challenge_result_text_win">Has ganado el reto contra %1$s</string>
+    <string name="label_challenge_result_text_tie">Has empatado en reto contra %1$s</string>
+    <string name="title_pending_challenges">¡Tienes retos pendientes</string>
+    <string name="label_pending_challenges_to_solve">Debes finalizar todos los retos pendientes para continuar.</string>
+    <string name="label_challenge_result_selected_bet">Apuesta seleccionada</string>
+    <string name="label_their_move">Su ataque</string>
+    <string name="label_your_move">Tu ataque</string>
+    <string name="showcase_title_challenges">Retos Pendientes</string>
+    <string name="showcase_content_challenges">Mira la cantidad de las Solicitudes de Retos pendientes recibidas</string>
+
+    <string name="title_someone_you_challenged">Retaste a %1$s</string>
+    <string name="label_challenge_your_choosen_move">Ataque seleccionado</string>
+    <string name="label_challenge_bet_choosen">Apuesta que seleccionaste</string>
+    <string name="title_marker_player">¡Reta ahora a %1$s!</string>
+    <string name="title_attention">¡Atención!</string>
+    <string name="label_not_enough_coins_to_create_challenge">¡No tienes suficientes RecarCoins para realizar un reto!</string>
+    <string name="label_not_enough_coins_to_update_challenge">¡No tienes suficientes RecarCoins para responder un reto!</string>
+
+    <string name="title_free_recarcoins">RecarCoins Gratis</string>
+    <string name="label_reward">Recompensa:</string>
+    <string name="label_like_fanpage_action">Compartir la página de RecarGO! en Facebook</string>
+    <string name="label_share_player">Compartir tu usuario en tu muro de Facebook</string>
+    <string name="label_earned_coins_reward">Has ganado %1$s monedas. ¡Sigue jugando para ganar más premios!</string>
+    <string name="facebook_share_content_im_a_player">Soy jugador de RecarGO!, juega y gana muchos premios, encuéntrame como %1$s y rétame</string>
+    <string name="title_aready_done_like_share">¡Ya ganaste tus monedas!</string>
+    <string name="label_aready_done_like_share">Ya ganaste tus monedas por compartir en Facebook. ¡Continúa jugando para ganar!</string>
+    <string name="label_combos">COMBOS</string>
+    <string name="label_loading_trivia">Cargando trivia, espere...</string>
+    <string name="label_time">Tiempo</string>
+    <string name="label_prize">Premio</string>
+    <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
+    <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
+    <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
+    <string name="label_group">Grupo</string>
+    <string name="label_interchange_xd">Intercambio</string>
+    <string name="label_claim_combo">Canjear Combo</string>
+    <string name="label_souvs_progress">Progreso: %1$s/32</string>
+    <string name="label_group_name">Grupo %1$s</string>
+    <string name="label_progress">Progreso</string>
+    <string name="label_select_country_recargo_worldcup">Selecciona tu equipo para la Copa RecarGO!</string>
+    <string name="label_select">Seleccione</string>
+    <string name="label_selected_country">País seleccionado:</string>
+    <string name="error_content_please_try_again">Algo salió mal... Inténtalo de nuevo</string>
+    <string name="label_play">Jugar</string>
+    <string name="label_winner">Ganador</string>
+    <string name="label_completed">Completado</string>
+    <string name="gold_collector">Recolector de Oro</string>
+
 
 </resources>

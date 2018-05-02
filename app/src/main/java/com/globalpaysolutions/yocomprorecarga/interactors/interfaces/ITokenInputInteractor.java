@@ -8,7 +8,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
 
 public interface ITokenInputInteractor
 {
-    void sendTokenValidation(TokenInputListener pListener, String pMsisdn, String pToken);
+    void sendTokenValidation(TokenInputListener pListener, String pToken);
     void setConfirmedPhone(boolean pConfirmed);
     void setConfirmedCountry(boolean pConfirmedCountry);
 }

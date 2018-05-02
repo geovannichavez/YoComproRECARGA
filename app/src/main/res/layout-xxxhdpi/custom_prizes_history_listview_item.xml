@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:weightSum="15">
+
+    <!--    Column 1: Weight 3-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivPrizeIcon"
+            android:layout_width="38dp"
+            android:layout_height="21dp"
+            android:src="@drawable/ic_prize_first"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/custom_dashed_vertical_line"/>
+
+    <!--    Column 2: Weight 8-->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        android:layout_weight="8"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_6dp">
+
+            <TextView
+                android:id="@+id/tvPrizeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="5"
+                android:text="Nevagcion Ilimitada 1 Sem."
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/pure_black"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvPin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:text="Nevega ilimitado por 7 dias "
+                android:textColor="@color/pure_black"
+                fontPath="fonts/lato_semibold.ttf"
+                android:textSize="12sp"
+                android:maxLines="5"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/custom_dashed_vertical_line"/>
+
+
+    <!--    Column 3: Weight 4-->
+    <RelativeLayout
+        android:paddingLeft="@dimen/margin_6dp"
+        android:paddingStart="@dimen/margin_6dp"
+        android:paddingEnd="@dimen/margin_6dp"
+        android:paddingRight="@dimen/margin_6dp"
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        android:layout_weight="4"
+        android:gravity="center">
+
+        <TextView
+            android:text="SMS al 323"
+            android:id="@+id/tvExchange"
+            android:textSize="14sp"
+            android:maxLines="5"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pure_black"/>
+    </RelativeLayout>
+</LinearLayout>

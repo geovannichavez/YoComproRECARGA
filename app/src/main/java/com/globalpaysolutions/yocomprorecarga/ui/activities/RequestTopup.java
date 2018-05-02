@@ -2,10 +2,13 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -13,9 +16,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +28,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -33,8 +38,10 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.RequestTopupPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IRequestTopupPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.adapters.OperatorsAdapter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
+import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.Validation;
 import com.globalpaysolutions.yocomprorecarga.views.RequestTopupView;
@@ -46,10 +53,12 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 {
     //Adapters y Layouts
     Button btnEnvar;
+    //Button btnComprar;
+    TextView tvStoreLink;
     EditText etCodeNumber;
     EditText etExplPhone;
     Toolbar mToolbar;
-    ToggleButton btnMyNumber;
+    //ToggleButton btnMyNumber;
     TextView lblSelectedAmount;
     OperatorsAdapter mOperatorsAdapter;
     GridView mOperatorsGridView;
@@ -63,8 +72,13 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
     //Global variables
     Amount selectedAmount;
+    CountryOperator selectedOperator;
     Validation mValidator;
     UserData mUserData;
+    String mVendorCodeExtra = "";
+
+    //Constants
+    static final int REQUEST_SELECT_PHONE_NUMBER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,17 +90,26 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Extras
+        mVendorCodeExtra = getIntent().getStringExtra(Constants.VENDOR_CODE_REQUEST_EXTRA);
+
+        //Views
         btnEnvar = (Button) findViewById(R.id.btnEnvar);
+        //btnComprar = (Button) findViewById(R.id.btnComprar);
         etCodeNumber = (EditText) findViewById(R.id.etCodeNumber);
         etExplPhone = (EditText) findViewById(R.id.etExplPhone);
+        tvStoreLink = (TextView) findViewById(R.id.tvStoreLink);
         lnrSelectAmount = (LinearLayout) findViewById(R.id.lnrSelectAmount);
         lblSelectedAmount = (TextView) findViewById(R.id.lblSelectedAmount);
-        btnMyNumber = (ToggleButton) findViewById(R.id.btnMyNumber);
         mOperatorsGridView = (GridView) findViewById(R.id.gvOperadores);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
-        mUserData = new UserData(this);
+        //Adapters
+        mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
+        mOperatorsGridView.setAdapter(mOperatorsAdapter);
+
+        mUserData = UserData.getInstance(this);
         mValidator = new Validation(this, coordinatorLayout);
         presenter = new RequestTopupPresenterImpl(this, this, this);
         presenter.setInitialViewState();
@@ -97,18 +120,16 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
     @Override
     public void renderOperators(final List<CountryOperator> countryOperators)
     {
-        mOperatorsAdapter = new OperatorsAdapter(this, R.layout.custom_operator_gridview_item);
         mOperatorsAdapter.notifyDataSetChanged();
         mOperatorsGridView.setNumColumns(countryOperators.size());
-        mOperatorsGridView.setAdapter(mOperatorsAdapter);
         mOperatorsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                final CountryOperator operator = ((CountryOperator) parent.getItemAtPosition(position));
+                selectedOperator = ((CountryOperator) parent.getItemAtPosition(position));
                 presenter.onOperatorSelected(position);
-                presenter.createRequestTopupObject().setOperatorId(String.valueOf(operator.getOperatorID()));
+                presenter.createRequestTopupObject().setOperatorID(String.valueOf(selectedOperator.getOperatorID()));
 
                 selectedAmount = null;
                 lnrSelectAmount.setOnClickListener(new View.OnClickListener()
@@ -116,7 +137,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                     @Override
                     public void onClick(View v)
                     {
-                        presenter.selectAmount(operator);
+                        presenter.selectAmount(selectedOperator);
                     }
                 });
             }
@@ -125,6 +146,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         //Llenado de items en el GridView
         try
         {
+            mOperatorsAdapter.clear();
             for (CountryOperator item : countryOperators)
             {
                 mOperatorsAdapter.add(item);
@@ -148,9 +170,8 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             etExplPhone.setEnabled(true);
             etExplPhone.setText("");
             etExplPhone.clearFocus();
-            etCodeNumber.setText("");
+            etCodeNumber.setText(mVendorCodeExtra);
             etCodeNumber.clearFocus();
-            btnMyNumber.setChecked(false);
 
             //Resetea el MONTO
             lblSelectedAmount.setText(getString(R.string.spinner_select));
@@ -159,7 +180,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             lnrSelectAmount.setOnClickListener(null);
 
             //Setea el SwipeRefreshLayout
-            mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2, R.color.refresh_progress_3, R.color.SubtitleTextColor);
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.color_yovendorecarga_green, R.color.color_yovendorecarga_green_dark, R.color.refresh_progress_3, R.color.SubtitleTextColor);
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
             {
                 @Override
@@ -171,17 +192,35 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
 
             //Deselecciona el operador del GridView
-            for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
+            if(mOperatorsGridView.getAdapter().getCount() > 0)
             {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                for (int i = 0; i < mOperatorsGridView.getAdapter().getCount(); i++)
                 {
-                    mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
-                }
-                else
-                {
-                    mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                    {
+                        mOperatorsGridView.getChildAt(i).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
+                    }
+                    else
+                    {
+                        mOperatorsGridView.getChildAt(i).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
+                    }
                 }
             }
+
+            //Añade Click Listener a TextView
+            tvStoreLink.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Uri webpage = Uri.parse(StringsURL.YVR_STORE);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    if (intent.resolveActivity(getPackageManager()) != null)
+                    {
+                        startActivity(intent);
+                    }
+                }
+            });
         }
         catch (Exception ex)
         {
@@ -229,21 +268,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
             {
-                mOperatorsGridView.getChildAt(i).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                mOperatorsGridView.getChildAt(i).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
             }
             else
             {
-                mOperatorsGridView.getChildAt(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_operator));
+                mOperatorsGridView.getChildAt(i).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_operator));
             }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
         {
-            mOperatorsGridView.getChildAt(position).setBackground(getResources().getDrawable(R.drawable.custom_rounded_corner_selected));
+            mOperatorsGridView.getChildAt(position).setBackground(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_selected));
         }
         else
         {
-            mOperatorsGridView.getChildAt(position).setBackgroundDrawable(getResources().getDrawable(R.drawable.custom_rounded_corner_selected));
+            mOperatorsGridView.getChildAt(position).setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.custom_rounded_corner_selected));
         }
     }
 
@@ -328,6 +367,48 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
                 .build();
     }
 
+    @Override
+    public void launchChromeView(String pURL)
+    {
+        try
+        {
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = builder.build();
+            builder.setToolbarColor(ContextCompat.getColor(this, R.color.ActivityWhiteBackground));
+            customTabsIntent.launchUrl(this, Uri.parse(pURL));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPhoneOnEdittext(String phoneNumber)
+    {
+        try
+        {
+            String phone = phoneNumber.trim();
+            phone = phone.replace(" ", "");
+
+            if (phone.length() >= 8)
+            {
+                phone = phone.substring(phone.length() - 8);
+                phone = phone.substring(0, 4) + "-" + phone.substring(4, phone.length());
+
+                etExplPhone.setText(phone);
+            }
+            else
+            {
+                Toast.makeText(this, getString(R.string.toast_not_valid_phone), Toast.LENGTH_LONG).show();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
     public void setSelectedAmount(Amount pSelected)
     {
         lblSelectedAmount.setText(pSelected.getDescription());
@@ -337,14 +418,33 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
 
     public void sendTopupRequest(View view)
     {
-        if(CheckValidation())
+        if(CheckValidation(true))
         {
             String msisdn = mUserData.GetPhoneCode() + etExplPhone.getText().toString().trim();
             msisdn = msisdn.replace("-", "");
-            presenter.createRequestTopupObject().setCountryId(mUserData.GetCountryID());
-            presenter.createRequestTopupObject().setMSISDN(msisdn);
+            presenter.createRequestTopupObject().setConsumerId(mUserData.GetConsumerID());
+            //presenter.createRequestTopupObject().set(mUserData.GetCountryID());
+            presenter.createRequestTopupObject().setTargetPhoneNumber(msisdn);
             presenter.createRequestTopupObject().setVendorCode(etCodeNumber.getText().toString().trim());
             presenter.sendTopupRequest();
+        }
+    }
+
+    public void creditCardPayment(View view)
+    {
+        try
+        {
+            if(CheckValidation(false))
+            {
+                String phone = etExplPhone.getText().toString();
+                String amount = selectedAmount.getAmount();
+                String operator = selectedOperator.getName();
+                presenter.creditCardPayment(phone, amount, operator);
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 
@@ -370,6 +470,21 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         {
             ex.printStackTrace();
         }
+    }
+
+    public void openContacts(View view)
+    {
+        presenter.openContacts(REQUEST_SELECT_PHONE_NUMBER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == REQUEST_SELECT_PHONE_NUMBER && resultCode == RESULT_OK)
+        {
+            presenter.handleContactsResult(data);
+        }
+
     }
 
     /*
@@ -403,7 +518,7 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
         mSnackbar.show();
     }
 
-    private boolean CheckValidation()
+    private boolean CheckValidation(boolean pValidateVendorCode)
     {
         boolean valid = true;
 
@@ -412,12 +527,12 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             return false;
         }
 
-        if (!mValidator.isPhoneNumber(etExplPhone, true))
+        if (!mValidator.isPhoneNumberContent(etExplPhone, true))
         {
             return false;
         }
 
-        if(TextUtils.isEmpty(presenter.createRequestTopupObject().getOperatorId()))
+        if(TextUtils.isEmpty(presenter.createRequestTopupObject().getOperatorID()))
         {
             CreateSnackbar(getString(R.string.validation_required_operator));
             return false;
@@ -429,12 +544,49 @@ public class RequestTopup extends AppCompatActivity implements RequestTopupView
             return false;
         }
 
-        if(!mValidator.isVendorCode(etCodeNumber, true))
+        if(pValidateVendorCode)
         {
-            return false;
+            if(!mValidator.isVendorCode(etCodeNumber, true))
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
         }
 
+
         return valid;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            Intent main = new Intent(this, Main.class);
+            main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(main);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                Intent main = new Intent(this, Main.class);
+                main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(main);
+                finish();
+                break;
+        }
+        return true;
     }
 
 }

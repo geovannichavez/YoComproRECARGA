@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.WorldCupCountries">
+
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/bg_background_4"/>
+
+    <ImageView
+        android:id="@+id/icPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_panel_countries_03"/>
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"
+        app:srcCompat="@drawable/ic_back_3"/>
+
+
+    <ImageView
+        android:id="@+id/bgTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBackground"
+        app:srcCompat="@drawable/bg_title_3"/>
+
+    <ImageView
+        android:id="@+id/icCountryBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/icPanel"
+        app:layout_constraintEnd_toEndOf="@+id/bgTitle"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="@+id/icPanel"
+        app:layout_constraintTop_toBottomOf="@+id/bgTitle"
+        app:srcCompat="@drawable/ic_country_badge_empty_03"/>
+
+    <TextView
+        android:id="@+id/lblSelectedCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_selected_country"
+        android:textColor="@color/pure_black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/icPanel"
+        app:layout_constraintStart_toEndOf="@+id/icCountryBadge"
+        app:layout_constraintTop_toBottomOf="@+id/bgTitle"/>
+
+    <ImageView
+        android:id="@+id/icCountryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icPanel"
+        app:layout_constraintStart_toEndOf="@+id/icCountryBadge"
+        app:layout_constraintTop_toBottomOf="@+id/lblSelectedCountry"
+        app:srcCompat="@drawable/ic_country_name_03"/>
+
+    <ImageView
+        android:id="@+id/btnAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/icCountryName"
+        app:layout_constraintStart_toStartOf="@+id/icCountryName"
+        app:layout_constraintTop_toBottomOf="@+id/icCountryName"
+        app:srcCompat="@drawable/btn_country_select_03"/>
+
+    <TextView
+        android:id="@+id/lblAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:includeFontPadding="false"
+        android:text="@string/button_accept"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAccept"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccept"
+        app:layout_constraintStart_toStartOf="@+id/btnAccept"
+        app:layout_constraintTop_toTopOf="@+id/btnAccept"/>
+
+    <TextView
+        android:id="@+id/tvCountryName"
+        android:layout_width="173dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/icCountryName"
+        app:layout_constraintEnd_toEndOf="@+id/icCountryName"
+        app:layout_constraintStart_toStartOf="@+id/icCountryName"
+        app:layout_constraintTop_toTopOf="@+id/icCountryName"
+        tools:text="afganistan"/>
+
+    <TextView
+        android:id="@+id/lblCountriesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_select"
+        android:textAllCaps="true"
+        android:textColor="@color/white_textView_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgTitle"
+        app:layout_constraintEnd_toEndOf="@+id/bgTitle"
+        app:layout_constraintStart_toStartOf="@+id/bgTitle"
+        app:layout_constraintTop_toTopOf="@+id/bgTitle"/>
+
+    <TextView
+        android:id="@+id/lblSelectWorldcup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/baloo_regular"
+        android:gravity="center"
+        android:text="@string/label_select_country_recargo_worldcup"
+        android:textColor="@color/pure_black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icPanel"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gvCountries"
+        android:layout_width="319dp"
+        android:layout_height="334dp"
+        android:layout_marginTop="240dp"
+        android:numColumns="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/custom_worldcup_country_gridview_item"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -10,40 +10,40 @@ import java.util.Map;
 
 public class Country
 {
-    private String code;
-    private String name;
-    private String countrycode;
+    private String Code;
+    private String Name;
+    private String CountryCode;
     private String PhoneCode;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getCode()
     {
-        return code;
+        return Code;
     }
 
     public void setCode(String code)
     {
-        this.code = code;
+        this.Code = code;
     }
 
     public String getName()
     {
-        return name;
+        return Name;
     }
 
     public void setName(String name)
     {
-        this.name = name;
+        this.Name = name;
     }
 
     public String getCountrycode()
     {
-        return countrycode;
+        return CountryCode;
     }
 
     public void setCountrycode(String countrycode)
     {
-        this.countrycode = countrycode;
+        this.CountryCode = countrycode;
     }
 
     public String getPhoneCode()

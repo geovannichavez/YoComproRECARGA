@@ -5,8 +5,10 @@
     <color name="colorAccent">#FF4081</color>-->
 
 
-    <color name="ApplicationGreenTheme">#66cc00</color>
-    <color name="ApplicationGreenThemeDark">#59af03</color>
+    <!--<color name="ApplicationGreenTheme">#66cc00</color>-->
+    <color name="ApplicationGreenTheme">#DF0024</color>
+    <!--<color name="ApplicationGreenThemeDark">#59af03</color>-->
+    <color name="ApplicationGreenThemeDark">#cc0122</color>
     <color name="ActivityWhiteBackground">#FFFFFF</color>
     <color name="GeneralTextColor">#666666</color>
     <color name="SubtitleTextColor">#999999</color>
@@ -17,7 +19,8 @@
     <color name="SuperUltraLightGray2">#f7f7f7</color>
     <color name="SemiTransparentBlack">#d2000000</color>
 
-    <color name="AppGreen">#66cc00</color>
+    <!--<color name="AppGreen">#66cc00</color>-->
+    <color name="AppGreen">#DF0024</color>
     <color name="SemiTransparentWhite">#CCFFFFFF</color>
 
     <!--Colors Button Effect -->
@@ -38,7 +41,11 @@
     <color name="materia_error_700">#D32F2F</color>
     <color name="material_gray_100">#F5F5F5</color>
 
-    <color name="navigation_drawer_icon_color">#333333</color>
+    <color name="gray_bg_text_color">#333333</color>
+
+    <color name="white_textView_color">#FFFFFF</color>
+    <color name="gray_textView_color">#484848</color>
+    <color name="orange_textView_color">#f7931e</color>
 
 
     <color name="refresh_progress_1">@color/AppGreen</color>
@@ -46,6 +53,40 @@
     <color name="refresh_progress_3">@color/PressedGreenTheme</color>
 
     <color name="edittext_primary_color_android">#87000000</color>
+    <color name="color_middle_green">#a0cc00</color>
     <color name="pure_black">#1F1F1F</color>
+    <color name="dark_recargo_green">#1A8129</color>
+
+    <color name="color_general_text">#666666</color>
+
+    <!--    DARK GRAY-->
+    <color name="color_dark_gray_pressed">#999999</color>
+    <color name="color_dark_gray">#666666</color>
+
+    <!--    RECARGO -->
+    <color name="color_red_recargo">#ca212c</color>
+    <color name="color_red_soft_recargo">#ac1c25</color>
+    <color name="color_title_recargo">#2b343f</color>
+    <color name="color_paragraph_recargo">#191e25</color>
+
+    <!-- GREEEN THEME -->
+    <color name="yvr_green_color">#88a80d</color>
+    <color name="yvr_green_color_dark">#738e0b</color>
+
+
+    <color name="color_yovendorecarga_green">#66cc00</color>
+    <color name="color_yovendorecarga_green_dark">#59af03</color>
+
+    <color name="color_timemachine_background">#1d2226</color>
+    <color name="color_white_timemachine_background">#e6e5e5</color>
+
+    <!--<color name="color_intro_background">#191c20</color>-->
+    <color name="color_intro_background">#acada9</color>
+    <color name="color_new_gray_background">#9c9c9b</color>
+    <color name="color_orange_background">#e45d2b</color>
+    <color name="color_map_background">#ececdd</color>
+    <color name="colo_gray_new_timemachine_2">#9c9c9c</color>
+
+    <color name="color_gray_3">#b4b4b4</color>
 
 </resources>

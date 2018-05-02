@@ -29,9 +29,9 @@ public class ApiClient
         return retrofit;
     }
 
-    public static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .connectTimeout(30, TimeUnit.SECONDS)
+    private static final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .readTimeout(42, TimeUnit.SECONDS)
+            .writeTimeout(42, TimeUnit.SECONDS)
+            .connectTimeout(40, TimeUnit.SECONDS)
             .build();
 }

@@ -5,30 +5,48 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Vibrator;
 import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.TokenInputPresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
+import com.squareup.picasso.Picasso;
 
-public class TokenInput extends AppCompatActivity implements TokenInputView
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class TokenInput extends ImmersiveActivity implements TokenInputView
 {
     //Adapters y Layouts
     private EditText etToken;
-    private Button btnConfirmToken;
+    private ImageButton btnConfirmToken;
+    private TextView tvWrongPhone;
     private ProgressDialog progressDialog;
+    private ImageView bgWhiteTimemachine;
 
     //MVP
     TokenInputPresenterImpl mPresenter;
@@ -37,26 +55,41 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     UserData mUserData;
 
     @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_token_input);
 
         etToken = (EditText) findViewById(R.id.etToken);
-        btnConfirmToken = (Button) findViewById(R.id.btnConfirmToken);
+        btnConfirmToken = (ImageButton) findViewById(R.id.btnConfirmToken);
+        tvWrongPhone = (TextView) findViewById(R.id.lblWrongNumber);
+        bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
 
+        //Get data from intent
+        String userPhone = getIntent().getExtras().getString(Constants.BUNDLE_TOKEN_VALIDATION);
+
+        //Initialize objects
         mPresenter = new TokenInputPresenterImpl(this, this, this);
-        mUserData = new UserData(this);
 
         mPresenter.setInitialViewState();
+
+        if(!TextUtils.isEmpty(userPhone))
+            mPresenter.buildSentText(userPhone);
     }
 
     public void VerifyToken(View view)
     {
         try
         {
+            ButtonAnimator.getInstance(TokenInput.this).animateButton(view);
             String token = etToken.getText().toString();
-            mPresenter.sendValidationToken(mUserData.GetMsisdn(), token);
+            mPresenter.sendValidationToken(token);
         }
         catch (Exception ex)
         {
@@ -67,8 +100,23 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     @Override
     public void initialViewsState()
     {
+        Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
         btnConfirmToken.setEnabled(false);
         EntriesValidations();
+    }
+
+    @Override
+    public void setClickListeners()
+    {
+        //Wrong phone hyperlink
+        tvWrongPhone.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mPresenter.retypePhoneNumber(true);
+            }
+        });
     }
 
     @Override
@@ -99,16 +147,25 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     }
 
     @Override
-    public void navigateHome()
+    public void navigateHome(boolean p3DCompatible)
     {
-        Intent home = new Intent(this, Home.class);
-        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(home);
+        try
+        {
+
+            Intent next = new Intent(this, Main.class);
+
+            next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            next.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            next.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            next.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(next);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -129,6 +186,54 @@ public class TokenInput extends AppCompatActivity implements TokenInputView
     public void cleanFields()
     {
         etToken.setText("");
+    }
+
+    @Override
+    public void setCallcenterContactText()
+    {
+        try
+        {
+            String phone = getString(R.string.label_callcenter_phone_number);
+
+            SpannableString part1 = new SpannableString(getString(R.string.label_portable_phone_number_part1));
+            SpannableString part2 = new SpannableString(phone);
+            part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phone.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            SpannableString part3 = new SpannableString(getString(R.string.label_portable_phone_number_part2));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setCodeSentLabelText(String phoneNumber)
+    {
+        try
+        {
+            SpannableString part1 = new SpannableString(getString(R.string.label_type_token_part1));
+            SpannableString part2 = new SpannableString(phoneNumber);
+            part2.setSpan(new StyleSpan(Typeface.BOLD), 0, phoneNumber.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            SpannableString part3 = new SpannableString(getString(R.string.label_type_token_part2));
+
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void navigatePhoneValidation(boolean retypePhone)
+    {
+        try
+        {
+            Intent validatePhone = new Intent(TokenInput.this, ValidatePhone.class);
+            validatePhone.putExtra(Constants.BUNDLE_PHONE_RETYPE, retypePhone);
+            startActivity(validatePhone);
+        }
+        catch (Exception ex) {  ex.printStackTrace();   }
     }
 
     /*

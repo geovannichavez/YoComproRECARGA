@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms">
+
+    <ImageView
+        android:id="@+id/bgWhiteTimemachine"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="279dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bgWhiteTimemachine"
+        app:layout_constraintTop_toTopOf="@+id/bgWhiteTimemachine"
+        app:srcCompat="@drawable/logo_recargo"/>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="270dp"
+        android:layout_height="114dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/label_welcome"
+        android:textColor="@color/gray_textView_color"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        fontPath="fonts/lato_semibold.ttf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:ignore="MissingPrefix"/>
+
+    <ImageButton
+        android:id="@+id/btnAcceptTerms"
+        android:layout_width="165dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:onClick="acceptTerms"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/bgWhiteTimemachine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/btn_button_6"/>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/label_continue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btnAcceptTerms"
+        app:layout_constraintStart_toStartOf="@+id/btnAcceptTerms"
+        app:layout_constraintTop_toTopOf="@+id/btnAcceptTerms"/>
+
+</android.support.constraint.ConstraintLayout>

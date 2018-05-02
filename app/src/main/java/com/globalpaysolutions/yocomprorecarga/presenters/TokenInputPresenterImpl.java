@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
+import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITokenInputPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
+import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;
 
@@ -25,25 +28,43 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
     private TokenInputView mView;
     private Context mContext;
     private TokenInputInteractor mInteractor;
+    private UserData mUserData;
+    private boolean is3Dcompatible;
 
     public TokenInputPresenterImpl(TokenInputView pView, AppCompatActivity pActivity, Context pContext)
     {
         mView = pView;
         mContext = pContext;
         mInteractor = new TokenInputInteractor(mContext);
+        mUserData = UserData.getInstance(mContext);
+        is3Dcompatible = mUserData.Is3DCompatibleDevice();
     }
 
     @Override
     public void setInitialViewState()
     {
         mView.initialViewsState();
+        //mView.setCallcenterContactText();
+        mView.setClickListeners();
     }
 
     @Override
-    public void sendValidationToken(String pMsisdn, String pToken)
+    public void sendValidationToken(String pToken)
     {
         mView.showLoading();
-        mInteractor.sendTokenValidation(this, pMsisdn, pToken);
+        mInteractor.sendTokenValidation(this, pToken);
+    }
+
+    @Override
+    public void buildSentText(String phone)
+    {
+        mView.setCodeSentLabelText(phone);
+    }
+
+    @Override
+    public void retypePhoneNumber(boolean retypePhone)
+    {
+        mView.navigatePhoneValidation(retypePhone);
     }
 
     @Override
@@ -73,7 +94,10 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         mInteractor.setConfirmedCountry(true);
         mInteractor.setConfirmedPhone(true);
 
-        mView.navigateHome();
+        //Sets tag for OneSignal
+        OneSignal.sendTag(Constants.ONESIGNAL_USER_TAG_KEY, mUserData.GetMsisdn());
+
+        mView.navigateHome(is3Dcompatible);
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)

@@ -7,4 +7,9 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IAcceptTerms
 {
     void acceptTerms();
+    void setFirstTimeSettings();
+    void grantDevicePermissions();
+    void checkDeviceComponents();
+    void viewTerms();
+    void generateWebDialog();
 }

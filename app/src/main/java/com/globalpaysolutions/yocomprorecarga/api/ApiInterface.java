@@ -2,11 +2,59 @@ package com.globalpaysolutions.yocomprorecarga.api;
 
 import com.globalpaysolutions.yocomprorecarga.models.Countries;
 import com.globalpaysolutions.yocomprorecarga.models.OperatorsResponse;
-import com.globalpaysolutions.yocomprorecarga.models.RequestTopupReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
-import com.globalpaysolutions.yocomprorecarga.models.TokenReqBody;
-import com.globalpaysolutions.yocomprorecarga.models.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AchievementsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ActivatePrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeComboReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.RequestTopupReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RewardResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.RespondTriviaResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvenirsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.SouvsProgressResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
+import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
+import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.WorldCupCountriesRspns;
+import com.globalpaysolutions.yocomprorecarga.ui.activities.WorldCupCountries;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -33,10 +81,203 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_TOKEN)
-    Call<SimpleMessageResponse> requestTokenValidation(@Body TokenValidationBody pTokenValBody);
+    Call<SimpleMessageResponse> requestTokenValidation(@Header("authenticationKey") String pAuthKey, @Body TokenValidationBody pTokenValBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUESTTOPUP)
-    Call<SimpleMessageResponse> requestTopup(@Body RequestTopupReqBody pRequestTopupBody);
+    Call<SimpleMessageResponse> requestTopup(@Header("authenticationKey") String pAuthKey, @Body RequestTopupReqBody pRequestTopupBody);
 
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REGISTER_PHONE_CONSUMER)
+    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey, @Header("AppVersion") String pAppVersion,
+                                                  @Header("Platform") String pPlatform,
+                                                  @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
+    Call<SimpleMessageResponse> sendStoreAirtimeReport(@Header("authenticationKey") String pAuthKey, @Body StoreAirtimeReportReqBody pStoreAirtimeReportReqBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE)
+    Call<ExchangeResponse> exchangeChest(@Header("authenticationKey") String pAuthKey, @Body ExchangeReqBody pExchangeCoin,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.TRACKING)
+    Call<Tracking> getConsumerTracking(@Header("authenticationKey") String pAuthKey,
+                                       @Header("AppVersion") String pAppVersion,
+                                       @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.AUTHENTICATE_CONSUMER)
+    Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticaReqBody pAuthenticateBody, @Header("AppVersion") String pAppVersion,
+                                                    @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.VALIDATE_NICKNAME)
+    Call<SimpleResultResponse> registerNickname(@Header("authenticationKey") String pAuthKey,
+                                                @Body NicknameReqBody pNicknameRequest,
+                                                @Header("AppVersion") String pAppVersion,
+                                                @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REDEEM_PRIZE)
+    Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey,
+                                       @Header("AppVersion") String pAppVersion,
+                                       @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.LEADERBOARDS)
+    Call<LeaderboardsResponse> retrieveLeaderboards(@Header("authenticationKey") String pAuthKey, @Body LeaderboardReqBody pInterval);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.PRIZES_HISTORY)
+    Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey,
+                                                     @Header("AppVersion") String pAppVersion,
+                                                     @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_ERAS)
+    Call<AgesResponse> retrieveAges(@Header("authenticationKey") String pAuthKey,
+                                    @Header("AppVersion") String pAppVersion,
+                                    @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.SOUVENIRS)
+    Call<SouvenirsResponse> getSouvenirs(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.SOUVENIRS)
+    Call<JsonObject> getGropuedSouvenirs(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.STORE_ITEMS)
+    Call<StoreItemsResponse> getStoreItems(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.PURCHASE)
+    Call<PurchaseItemResponse> purchaseStoreItem(@Header("authenticationKey") String pAuthKey,
+                                                 @Header("AppVersion") String pAppVersion,
+                                                 @Header("Platform") String pPlatform,
+                                                 @Body PurchaseStoreReqBody request);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.ERA_SELECTION)
+    Call<EraSelectionResponse> selectEra(@Header("authenticationKey") String pAuthKey,
+                                         @Header("AppVersion") String pAppVersion,
+                                         @Header("Platform") String pPlatform,
+                                         @Body EraSelectionReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.ACHIEVEMENTS)
+    Call<AchievementsResponse> getAchievements(@Header("authenticationKey") String pAuthKey,
+                                               @Header("AppVersion") String pAppVersion,
+                                               @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE_SOUVENIR)
+    Call<WinPrizeResponse> exchangeSouvenir(@Header("authenticationKey") String authKey,
+                                            @Header("AppVersion") String pAppVersion,
+                                            @Header("Platform") String pPlatform,
+                                            @Body ExchangeSouvenirReq exchangeSouvenirReq);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE_WILDCARD)
+    Call<ExchangeWildcardResponse> exchangeWildcard(@Header("authenticationKey") String authKey,
+                                                    @Header("AppVersion") String pAppVersion,
+                                                    @Header("Platform") String pPlatform,
+                                                    @Body ExchangeWildcardReq exchangeWildcardReq);
+
+    @Headers("Content-Type: application/json")
+
+    @POST(StringsURL.ACTIVATE_PRIZE)
+    Call<ActivatePrizeResponse> activatePrize(@Header("authenticationKey") String authKey,
+                                              @Header("AppVersion") String pAppVersion,
+                                              @Header("Platform") String pPlatform,
+                                              @Body ActivatePrizeReq activatePrizeReq);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_COMBOS)
+    Call<CombosResponse> getCombos(@Header("authenticationKey") String userAuthenticationKey,
+                                   @Header("AppVersion") String versionName,
+                                   @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.EXCHANGE_COMBOS)
+    Call<WinPrizeResponse> exchangeCombo(@Header("authenticationKey") String userAuthenticationKey,
+                                         @Header("AppVersion") String versionName,
+                                         @Header("Platform") String platform,
+                                         @Body ExchangeComboReq exchangeCombo);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.CHALLENGES)
+    Call<ChallengesResponse> getChallenges(@Header("authenticationKey") String pAuthKey,
+                                           @Header("AppVersion") String pAppVersion,
+                                           @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.CREATE_CHALLENGE)
+    Call<SimpleResponse> createChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                         @Header("AppVersion") String versionName,
+                                         @Header("Platform") String platform,
+                                         @Body CreateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.UPDATE_CHALLENGE)
+    Call<UpdateChallengeResponse> updateChallenge(@Header("authenticationKey") String userAuthenticationKey,
+                                                  @Header("AppVersion") String versionName,
+                                                  @Header("Platform") String platform,
+                                                  @Body  UpdateChallengeReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_PENDING_CHALLENGES)
+    Call<PendingsResponse> getPendingChallenges(@Header("authenticationKey") String pAuthKey,
+                                                @Header("AppVersion") String pAppVersion,
+                                                @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REQUEST_REWARD_LIKES)
+    Call<RewardResponse> requestLikesReward(@Header("authenticationKey") String userAuthenticationKey,
+                                            @Header("AppVersion") String versionName,
+                                            @Header("Platform") String platform,
+                                            @Body RequestRewardReq request);
+
+
+    @GET(StringsURL.GET_TRIVIA)
+    Call<TriviaResponse> getTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                   @Header("AppVersion") String versionName,
+                                   @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.RESPOND_TRIVIA)
+    Call<RespondTriviaResponse> respondTrivia(@Header("authenticationKey") String userAuthenticationKey,
+                                              @Header("AppVersion") String versionName,
+                                              @Header("Platform") String platforn,
+                                              @Body RespondTriviaReq request);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_SOUVS_PROGRESS)
+    Call<SouvsProgressResponse> retrieveSouvsProgress(@Header("authenticationKey") String userAuthenticationKey,
+                                                      @Header("AppVersion") String versionName,
+                                                      @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @GET(StringsURL.GET_WORLDCUP_COUNTRIES)
+    Call<WorldCupCountriesRspns> retrieveWorldcupCountries(@Header("authenticationKey") String userAuthenticationKey,
+                                                           @Header("AppVersion") String versionName,
+                                                           @Header("Platform") String platform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.SELECT_WORLDCUP_COUNTRY)
+    Call<CountrySelectedResponse> setWorldcupCountry(@Header("authenticationKey") String userAuthenticationKey,
+                                                    @Header("AppVersion") String versionName,
+                                                    @Header("Platform") String platform,
+                                                    @Body CountrySelectedReq selectedCountry);
 }

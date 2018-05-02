@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="224dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/lblComboName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        tools:text="COMBO DE DEFENSA"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/pure_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--    BACKGROUND  -->
+
+    <ImageView
+        android:id="@+id/imgSouveType1"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblComboName"
+        app:srcCompat="@drawable/bg_souvenir_01"/>
+
+    <ImageView
+        android:id="@+id/imgSouveType2"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/imgSouveType3"
+        app:layout_constraintStart_toEndOf="@+id/imgSouveType1"
+        app:layout_constraintTop_toBottomOf="@+id/lblComboName"
+        app:srcCompat="@drawable/bg_souvenir_01"/>
+
+    <ImageView
+        android:id="@+id/imgSouveType3"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblComboName"
+        app:srcCompat="@drawable/bg_souvenir_01"/>
+
+    <!--    SOUVENIR  -->
+
+    <ImageView
+        android:id="@+id/imgSouv1"
+        android:layout_width="58dp"
+        android:layout_height="62dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType1"
+        app:layout_constraintEnd_toEndOf="@+id/imgSouveType1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType1"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType1"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/item_souvenir"/>
+
+    <ImageView
+        android:id="@+id/imgSouv2"
+        android:layout_width="58dp"
+        android:layout_height="62dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType2"
+        app:layout_constraintEnd_toEndOf="@+id/imgSouveType2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType2"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/item_souvenir"/>
+
+    <ImageView
+        android:id="@+id/imgSouv3"
+        android:layout_width="58dp"
+        android:layout_height="62dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType3"
+        app:layout_constraintEnd_toEndOf="@+id/imgSouveType3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType3"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType3"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/item_souvenir"/>
+
+    <TextView
+        android:id="@+id/lblPrizeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textSize="12sp"
+        android:maxLines="2"
+        android:gravity="center"
+        tools:text="WhatsApp Ilimitado + 10 mins. T/R"
+        fontPath="fonts/lato_semibold.ttf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSouveType2"/>
+
+    <ImageView
+        android:id="@+id/btnExchange"
+        android:layout_width="108dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPrizeDescription"
+        app:srcCompat="@drawable/bg_coins_store"/>
+
+    <TextView
+        android:id="@+id/textExchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/button_exchange"
+        android:textColor="@color/color_red_recargo"
+        android:textSize="11sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExchange"
+        app:layout_constraintEnd_toEndOf="@+id/btnExchange"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/btnExchange"
+        app:layout_constraintTop_toTopOf="@+id/btnExchange"/>
+
+    <View
+        android:id="@+id/viewLocked1"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:background="@drawable/bg_souvenir_disabled_background"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType1"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType1"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType1"/>
+
+    <View
+        android:id="@+id/viewLocked2"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:background="@drawable/bg_souvenir_disabled_background"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType2"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType2"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType2"/>
+
+    <View
+        android:id="@+id/viewLocked3"
+        android:layout_width="66dp"
+        android:layout_height="71dp"
+        android:background="@drawable/bg_souvenir_disabled_background"
+        app:layout_constraintBottom_toBottomOf="@+id/imgSouveType3"
+        app:layout_constraintStart_toStartOf="@+id/imgSouveType3"
+        app:layout_constraintTop_toTopOf="@+id/imgSouveType3"/>
+
+</android.support.constraint.ConstraintLayout>

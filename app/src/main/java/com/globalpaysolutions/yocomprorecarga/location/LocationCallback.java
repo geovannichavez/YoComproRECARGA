@@ -10,4 +10,5 @@ public interface LocationCallback
 {
     void onLocationChanged(Location location);
     void onLocationApiManagerConnected(Location location);
+    void onLocationApiManagerDisconnected();
 }

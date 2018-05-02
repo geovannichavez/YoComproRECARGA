@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.globalpaysolutions.yocomprorecarga.R;
 
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class Validation
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PHONE_REGEX = "\\d{4}-\\d{4}";
     private static final String NAME_REGEX = "^[\\p{L} .'-]+$";
-    private static final String USERNAME_REGEX = "^[_A-Za-z0-9-\\+]{3,15}$";
+    private static final String NICKNAME_REGEX = "^[_A-Za-z0-9-\\.]{3,15}$";
     private static final String AMOUNT_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     private static final String VOUCHER_REGEX = "\\d+$";
     private static final String VENDOR_CODE_REGEX = "^[0-9]{4,5}$";
@@ -41,17 +42,29 @@ public class Validation
         mCoordinatorLayout  = pCoordinatorLayout;
     }
 
+    public Validation(Context pContext)
+    {
+        mContext = pContext;
+    }
+
     /*
     *
     *   PHONE NUMBER
     *
     */
-    public boolean isPhoneNumber(EditText pEditText, boolean pRequired)
+    public boolean isPhoneNumberContent(EditText pEditText, boolean pRequired)
     {
         String requiredMsg = mContext.getResources().getString(R.string.validation_required_phone_message);
         String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_phone_message);
         return IsValid(pEditText, PHONE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
+
+    public boolean isPhoneNumber(String phone)
+    {
+        String text = phone.trim();
+        return Pattern.matches(PHONE_REGEX, text);
+    }
+
 
     public void setPhoneInutFormatter(final EditText pEditText)
     {
@@ -124,6 +137,20 @@ public class Validation
         return IsValid(pEdittext, VENDOR_CODE_REGEX, requiredMsg, notValidMsg, pRequired);
     }
 
+    /*
+    *
+    *
+    *   NICKNAME
+    *
+    *
+    */
+    public boolean isValidNicknameSnackbar(EditText pEdittext, boolean pRequired)
+    {
+        String requiredMsg = mContext.getResources().getString(R.string.validation_required_nickname);
+        String notValidMsg = mContext.getResources().getString(R.string.validation_not_valid_nickname);
+        return IsValid(pEdittext, NICKNAME_REGEX, requiredMsg, notValidMsg, pRequired);
+    }
+
 
 
     /*
@@ -137,17 +164,40 @@ public class Validation
 
         if (pRequired && !HasText(pEditText))
         {
-            CreateSnackbar(mCoordinatorLayout, pRequiredMsg);
+            createSnackbar(mCoordinatorLayout, pRequiredMsg);
             return false;
         }
 
         if (pRequired && !Pattern.matches(pRegex, text))
         {
-            CreateSnackbar(mCoordinatorLayout, pErrorMessage);
+            createSnackbar(mCoordinatorLayout, pErrorMessage);
             return false;
         }
 
         return true;
+    }
+
+
+    public enum ValidNickname
+    {
+        VALID,
+        REQUIRED,
+        NOT_VALID
+    }
+
+    public ValidNickname checkNickname(EditText editText, boolean required)
+    {
+        String text = editText.getText().toString().trim();
+        if (required && !HasText(editText))
+        {
+            return ValidNickname.REQUIRED;
+        }
+
+        if (required && !Pattern.matches(NICKNAME_REGEX, text))
+        {
+            return ValidNickname.NOT_VALID;
+        }
+        return ValidNickname.VALID;
     }
 
     private boolean HasText(EditText pEditText)
@@ -170,14 +220,26 @@ public class Validation
     *
     */
 
-    private void CreateSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
+    private void createSnackbar(CoordinatorLayout pCoordinatorLayout, String pLine)
     {
-        Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
-        View snackbarView = mSnackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(mContext,  R.color.materia_error_700));
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(Color.WHITE);
-        mSnackbar.show();
+        try
+        {
+            if(pCoordinatorLayout != null)
+            {
+                Snackbar mSnackbar = Snackbar.make(pCoordinatorLayout, pLine, Snackbar.LENGTH_LONG);
+                View snackbarView = mSnackbar.getView();
+                snackbarView.setBackgroundColor(ContextCompat.getColor(mContext,  R.color.materia_error_700));
+                TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+                textView.setTextColor(Color.WHITE);
+                mSnackbar.show();
+            }
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.logException(ex);
+        }
+
+
     }
 
 }

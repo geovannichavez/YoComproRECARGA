@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Wildcard">
+
+    <ImageView
+        android:id="@+id/bg_wildcard"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_dark_recargo_theme"/>
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="309dp"
+        android:layout_height="455dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.207"
+        app:srcCompat="@drawable/bg_timemachine_screen_3"/>
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="198dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:text="¡RETO COMODIN!"
+        android:fontFamily="@font/baloo_regular"
+        android:textColor="@color/color_red_recargo"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12"/>
+
+    <TextView
+        android:id="@+id/lblDescription"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/label_wildcard_explanation"
+        android:textColor="@color/pure_black"
+        android:fontFamily="@font/lato_semibold"
+        fontPath="fonts/lato_semibold.ttf"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle"/>
+
+    <ImageView
+        android:id="@+id/imgResult"
+        android:layout_width="172dp"
+        android:layout_height="122dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/lblDescription"
+         />
+
+    <TextView
+        android:id="@+id/lblResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="¡GANA O PIERDE!"
+        android:fontFamily="@font/baloo_regular"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/imgResult"/>
+
+    <ImageView
+        android:id="@+id/imageView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/imgResult"
+        app:layout_constraintTop_toBottomOf="@+id/lblResult"
+        app:srcCompat="@drawable/ic_recarcoin_single"/>
+
+    <TextView
+        android:id="@+id/lblCoinsResult"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="RecarCoins"
+        android:fontFamily="@font/lato_semibold"
+        fontPath="fonts/lato_semibold.ttf"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView41"
+        app:layout_constraintStart_toEndOf="@+id/imageView41"
+        app:layout_constraintTop_toBottomOf="@+id/lblResult"
+        app:layout_constraintVertical_bias="1.0"/>
+
+    <ImageButton
+        android:id="@+id/btnAccept"
+        android:layout_width="173dp"
+        android:layout_height="53dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toBottomOf="@+id/lblCoinsResult"
+        app:srcCompat="@drawable/btn_button_5"/>
+
+    <ImageButton
+        android:id="@+id/btnDecline"
+        android:layout_width="138dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccept"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintStart_toStartOf="@+id/btnAccept"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccept"
+        app:srcCompat="@drawable/btn_button_6"/>
+
+    <TextView
+        android:id="@+id/lblAcceptChallenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="ACEPTAR RETO"
+        android:fontFamily="@font/baloo_regular"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDecline"
+        app:layout_constraintEnd_toEndOf="@+id/btnAccept"
+        app:layout_constraintStart_toStartOf="@+id/btnAccept"
+        app:layout_constraintTop_toTopOf="@+id/btnAccept"/>
+
+    <TextView
+        android:id="@+id/tvDeclineTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="NO ACEPTAR"
+        android:fontFamily="@font/baloo_regular"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDecline"
+        app:layout_constraintEnd_toEndOf="@+id/btnDecline"
+        app:layout_constraintStart_toStartOf="@+id/btnDecline"
+        app:layout_constraintTop_toTopOf="@+id/btnDecline"/>
+
+
+</android.support.constraint.ConstraintLayout>
