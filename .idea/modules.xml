@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RecarGO.iml" filepath="$PROJECT_DIR$/RecarGO.iml" />
-      <module fileurl="file://$PROJECT_DIR$/YoComproRECARGA.iml" filepath="$PROJECT_DIR$/YoComproRECARGA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidRecarGO.iml" filepath="$PROJECT_DIR$/AndroidRecarGO.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:/RAFAEL/RecarGO/app/app.iml" filepath="C:/RAFAEL/RecarGO/app/app.iml" />
     </modules>
   </component>
 </project>

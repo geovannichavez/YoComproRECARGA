@@ -66,6 +66,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         //Checks if era has been reselected
         EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_CHALLENGES);
 
+
         boolean locationVisible = UserData.getInstance(mContext).checkCurrentLocationVisible();
 
         mView.initializeViews(locationVisible);

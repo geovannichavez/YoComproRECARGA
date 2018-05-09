@@ -158,6 +158,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             Intent eraSelection = new Intent(mActivity, EraSelection.class);
             this.addFlags(eraSelection);
             eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
             mContext.startActivity(eraSelection);
         }
         else

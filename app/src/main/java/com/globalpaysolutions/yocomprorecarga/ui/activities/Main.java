@@ -112,6 +112,7 @@ public class Main extends ImmersiveActivity implements MainView
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent eraSelection = new Intent(Main.this, EraSelection.class);
         eraSelection.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
         startActivity(eraSelection);
         finish();
     }
@@ -132,6 +133,7 @@ public class Main extends ImmersiveActivity implements MainView
         {
             Intent eraSelection = new Intent(Main.this, EraSelection.class);
             eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_STORE);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
             startActivity(eraSelection);
             finish();
         }
