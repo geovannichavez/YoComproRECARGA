@@ -92,7 +92,7 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     {
         try
         {
-            Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+            Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
             //Back button click
             btnBack.setOnClickListener(new View.OnClickListener()
