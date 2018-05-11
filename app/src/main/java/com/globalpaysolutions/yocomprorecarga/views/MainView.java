@@ -12,6 +12,7 @@ public interface MainView
     void showTutorial();
     void setPendingChallenges(String pending, boolean active);
     void setTriviaAvailable(boolean available);
+    void setNewAgeAvailable(boolean available);
     void setClickListeners();
     void navigateTrivia();
 }

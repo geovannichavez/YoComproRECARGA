@@ -16,6 +16,11 @@ public class PendingsResponse
     @Expose
     private int getNewTrivia;
 
+    @SerializedName("NewAge")
+    @Expose
+    private int newAge;
+
+
     public String getMessage()
     {
         return message;
@@ -35,4 +40,13 @@ public class PendingsResponse
     {
         this.getNewTrivia = getNewTrivia;
     }
+
+    public int getNewAge()
+    {
+        return newAge;
+    }
+
+    public void setNewAge(int newAge)
+    { this.newAge = newAge; }
+
 }

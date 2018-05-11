@@ -38,7 +38,7 @@ public class Main extends ImmersiveActivity implements MainView
     ImageView icNewTrivia;
     TextView tvPendingCh;
     ShowcaseView mShowcaseView;
-
+    ImageButton btnTravel;
     //MVP
     MainPresenterImpl mPresenter;
 
@@ -62,6 +62,7 @@ public class Main extends ImmersiveActivity implements MainView
         icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
         icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
         tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
+        btnTravel = (ImageButton) findViewById(R.id.btnTravel);
 
         mShowcaseCounter = 0;
 
@@ -314,6 +315,14 @@ public class Main extends ImmersiveActivity implements MainView
             Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
         else
             Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
+    }
+
+    public void setNewAgeAvailable(boolean available)
+    {
+        if (available)
+            Picasso.with(this).load(R.drawable.ic_travel_new).into(btnTravel);
+        else
+            Picasso.with(this).load(R.drawable.ic_travel).into(btnTravel);
     }
 
     @Override

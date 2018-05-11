@@ -144,6 +144,9 @@ public class UserData
     //Trivia
     private static final String KEY_TRIVIA_PENDINGS = "KEY_TRIVIA_PENDINGS";
 
+    //NewAge
+    private static final String KEY_NEW_AGE = "KEY_NEW_AGE";
+
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
@@ -556,6 +559,9 @@ public class UserData
         mEditor.putString(KEY_CHALLENGE_PENDING_NUMBER, number);
         mEditor.commit();
     }
+
+
+
 
     public void saveLastShareSelection(int selection)
     {
@@ -1116,7 +1122,8 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveTriviaPending(int getNewTrivia)
+    public void
+    saveTriviaPending(int getNewTrivia)
     {
         mEditor.putInt(KEY_TRIVIA_PENDINGS, getNewTrivia);
         mEditor.commit();
@@ -1127,5 +1134,16 @@ public class UserData
         return mPreferences.getInt(KEY_TRIVIA_PENDINGS, 0);
     }
 
+
+    public void saveNewAge(int getNewAge)
+    {
+        mEditor.putInt(KEY_NEW_AGE, getNewAge);
+        mEditor.commit();
+    }
+
+    public int getNewAge()
+    {
+        return mPreferences.getInt(KEY_NEW_AGE, 0);
+    }
 
 }

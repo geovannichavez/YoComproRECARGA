@@ -303,6 +303,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             // 1 = New trivia availble
             UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
             UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
+            UserData.getInstance(mContext).saveNewAge(response.getNewAge());
 
             //Challenges
             String pending = response.getMessage();
@@ -318,6 +319,12 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setTriviaAvailable(true);
             else
                 mView.setTriviaAvailable(false);
+
+            //NewAge
+            if(response.getNewAge()>0)
+                mView.setNewAgeAvailable(true);
+            else
+                mView.setNewAgeAvailable(false);
 
         }
         catch (Exception ex)
