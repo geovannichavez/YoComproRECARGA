@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,150 +10,326 @@
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory"
     tools:layout_editor_absoluteY="25dp">
 
-    <ImageView
-        android:id="@+id/bgTimemachine"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"/>
-
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="428dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_screen_narrow"/>
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_title_generic"/>
-
-    <ListView
-        android:id="@+id/lvHistory"
-        android:layout_width="239dp"
-        android:layout_height="366dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView13"
-        tools:listitem="@layout/custom_prizes_history_listview_item"/>
-
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="fitXY"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_back"/>
-
-    <ImageButton
-        android:id="@+id/btnActivatePrize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:srcCompat="@drawable/btn_button_3"/>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="154dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="ACTIVAR PREMIO"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/btnActivatePrize"
-        app:layout_constraintEnd_toEndOf="@+id/btnActivatePrize"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="@+id/btnActivatePrize"
-        app:layout_constraintTop_toTopOf="@+id/btnActivatePrize"
-        app:layout_constraintVertical_bias="0.0"/>
 
 
-    <TextView
-        android:id="@+id/tvNoPrizesYetTitle"
-        android:layout_width="207dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:maxLines="2"
-        android:text="@string/title_no_prizes_yet"
-        android:textAllCaps="true"
-        android:textColor="@color/color_red_recargo"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/imageView13"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/imageView13"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvNoPrizesYetContent"
-        android:layout_width="203dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:maxLines="3"
-        android:text="@string/label_no_prizes_yet"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/tvNoPrizesYetTitle"
-        app:layout_constraintStart_toStartOf="@+id/tvNoPrizesYetTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvNoPrizesYetTitle"/>
+        <ImageView
+            android:id="@+id/bgprizes"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_background_4"/>
 
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textAllCaps="true"
-        android:fontFamily="@font/baloo_regular"
-        android:textSize="24sp"
-        android:text="@string/title_prizes"
-        android:textColor="@color/color_red_recargo"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-        app:layout_constraintEnd_toEndOf="@+id/imageView14"
-        app:layout_constraintStart_toStartOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/imageView14"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="11"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="87"
+                android:src="@drawable/ic_achv_panel"/>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"/>
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    android:layout_weight="25"
+                    app:srcCompat="@drawable/ic_back_3"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:src="@drawable/bg_title_3"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"/>
+
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15"/>
+
+                <ListView
+                    android:id="@+id/lvHistory"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    tools:listitem="@layout/custom_prizes_history_listview_item"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15"/>
+
+
+
+            </LinearLayout>
+
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"/>
+
+                <ImageButton
+                    android:id="@+id/btnActivatePrize"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_button_red_3"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"/>
+
+
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="32"/>
+
+                <TextView
+                    android:id="@+id/TextView43"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="46"
+                    android:gravity="center"
+                    android:fontFamily="@font/baloo_regular"
+                    android:text="Premios"
+                    android:textAllCaps="true"
+                    android:textColor="#ffffff"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="32"/>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4.5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+
+                <TextView
+                    android:id="@+id/tvNoPrizesYetTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="80"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="@string/title_no_prizes_yet"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_red_recargo"
+                    android:textSize="16sp"
+                    android:visibility="invisible" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+
+                <TextView
+                    android:id="@+id/tvNoPrizesYetContent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="80"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:maxLines="3"
+                    android:text="@string/label_no_prizes_yet"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="16.5"/>
+
+            <TextView
+                android:id="@+id/tvActivatePrize"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:gravity="center"
+                android:fontFamily="@font/baloo_regular"
+                android:text="Activar Premio"
+                android:textColor="#ffffff"
+                android:textAllCaps="true"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.5"/>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

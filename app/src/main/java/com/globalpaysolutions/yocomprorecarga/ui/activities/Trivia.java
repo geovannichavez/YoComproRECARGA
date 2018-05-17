@@ -23,6 +23,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.QuestionTrivia;
 import com.globalpaysolutions.yocomprorecarga.presenters.TriviaPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TriviaView;
 import com.squareup.picasso.Picasso;
 
@@ -326,8 +328,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
     {
         try
         {
+
             Intent souvs = new Intent(this, Souvenirs.class);
             souvs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            if(TextUtils.equals(UserData.getInstance(this).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
+            {
+                souvs = new Intent(this, SouvenirsGroups.class);
+            }
             startActivity(souvs);
             finish();
         }

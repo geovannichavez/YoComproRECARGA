@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChallengeResultData;
@@ -43,6 +45,17 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     ImageButton btnBack;
     CheckBox cbxLocation;
     ImageView btnLocation;
+    ImageView imgTeam1;
+    ImageView imgTeam2;
+    ImageView imgTeam3;
+    ImageView imgTeam4;
+    ImageView imgTeam5;
+    TextView txtWinHistory;
+    TextView txtLoseHistory;
+    TextView txtDrawHistory;
+
+
+
     private ProgressDialog mProgressDialog;
 
     //Global Variables
@@ -81,6 +94,17 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         cbxLocation = (CheckBox) findViewById(R.id.cbxLocation);
         btnLocation = (ImageView) findViewById(R.id.btnLocation);
+
+        imgTeam1 = (ImageView) findViewById(R.id.imgWinTeam1);
+        imgTeam2 = (ImageView) findViewById(R.id.imgWinTeam2);
+        imgTeam3 = (ImageView) findViewById(R.id.imgWinTeam3);
+        imgTeam4 = (ImageView) findViewById(R.id.imgWinTeam4);
+        imgTeam5 = (ImageView) findViewById(R.id.imgWinTeam5);
+
+        txtWinHistory = (TextView) findViewById(R.id.tvWinHistory);
+        txtLoseHistory = (TextView) findViewById(R.id.tvLoseHistory);
+        txtDrawHistory = (TextView) findViewById(R.id.tvDrawHistory);
+
 
         mPresenter = new ChallengesPresenterImpl(this, this, this);
         mPresenter.initialize();
@@ -147,6 +171,48 @@ public class Challenges extends AppCompatActivity implements ChallengesView
                 }
             });
 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            Log.e(TAG, "Error at initialize: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void initializeValues(int totalWins, int totalLose, int totalDraw, int winLaPulga, int winElPibe, int winDinho, int winElComandante, int winZizou) {
+
+        txtWinHistory.setText(String.format("%1$d",totalWins));
+        txtLoseHistory.setText(String.format("%1$d",totalLose));
+        txtDrawHistory.setText(String.format("%1$d",totalDraw));
+
+        try {
+            if (winLaPulga > 0) {
+                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam1);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam1);
+            }
+            if (winDinho > 0) {
+                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam2);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam2);
+            }
+
+            if (winElPibe > 0) {
+                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam3);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam3);
+            }
+            if (winZizou > 0) {
+                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam4);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam4);
+            }
+            if (winElComandante > 0) {
+                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam5);
+            } else {
+                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam5);
+            }
         }
         catch (Exception ex)
         {
