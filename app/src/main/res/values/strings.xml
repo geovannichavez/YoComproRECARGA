@@ -213,6 +213,7 @@
     <string name="label_name">Nombre</string>
     <string name="label_nickname">Nickname</string>
     <string name="label_ranking">Ranking</string>
+    <string name="label_ranking_number"> %1$s </string>
     <string name="label_username">Usuario</string>
     <string name="label_recarcoins">RecarCoins</string>
     <string name="label_last_winner">Último Ganador: %1$s</string>

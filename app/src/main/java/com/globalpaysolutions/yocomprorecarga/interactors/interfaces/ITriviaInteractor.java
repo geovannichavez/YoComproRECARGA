@@ -9,6 +9,6 @@ import com.globalpaysolutions.yocomprorecarga.interactors.TriviaListener;
 public interface ITriviaInteractor
 {
     void requestTrivia(TriviaListener listener);
-    void answerTrivia(int answerID, TriviaListener listener, int buttonClicked, int triviaID);
+    void answerTrivia(int answerID, TriviaListener listener, int buttonClicked, int triviaID, int points);
     void silentAnswerTrivia(int answer, TriviaListener listener, int triviaID);
 }

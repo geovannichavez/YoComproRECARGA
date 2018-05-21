@@ -3,15 +3,15 @@ apply plugin: 'io.fabric'
 //apply plugin: 'com.google.protobuf'
 
 android {
+
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
-
     defaultConfig {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 55
-        versionName "1.38" //20-ABR-18 - Era Mundial. Rediseño de pantallas
+        versionName "1.38"
 
 
         //OneSignal

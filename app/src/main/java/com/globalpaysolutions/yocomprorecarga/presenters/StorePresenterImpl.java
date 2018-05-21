@@ -88,7 +88,8 @@ public class StorePresenterImpl implements IStorePresenter, StoreListener
     {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String totalWinCoins = formatter.format(UserData.getInstance(mContext).getTotalWonCoins());
-        mView.setInitialValues(totalWinCoins);
+        String totalWinSouvs = formatter.format(UserData.getInstance(mContext).getSavedSouvenirsCount());
+        mView.setInitialValues(totalWinCoins,totalWinSouvs);
 
     }
 

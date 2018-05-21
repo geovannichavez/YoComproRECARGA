@@ -259,7 +259,7 @@ public interface ApiInterface
     @POST(StringsURL.RESPOND_TRIVIA)
     Call<RespondTriviaResponse> respondTrivia(@Header("authenticationKey") String userAuthenticationKey,
                                               @Header("AppVersion") String versionName,
-                                              @Header("Platform") String platforn,
+                                              @Header("Platform") String platform,
                                               @Body RespondTriviaReq request);
 
     @Headers("Content-Type: application/json")

@@ -38,7 +38,7 @@ public class Main extends ImmersiveActivity implements MainView
     ImageView icNewTrivia;
     TextView tvPendingCh;
     ShowcaseView mShowcaseView;
-
+    ImageButton btnTravel;
     //MVP
     MainPresenterImpl mPresenter;
 
@@ -62,6 +62,7 @@ public class Main extends ImmersiveActivity implements MainView
         icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
         icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
         tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
+        btnTravel = (ImageButton) findViewById(R.id.btnTravel);
 
         mShowcaseCounter = 0;
 
@@ -112,6 +113,7 @@ public class Main extends ImmersiveActivity implements MainView
         ButtonAnimator.getInstance(this).animateButton(view);
         Intent eraSelection = new Intent(Main.this, EraSelection.class);
         eraSelection.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
         startActivity(eraSelection);
         finish();
     }
@@ -132,6 +134,7 @@ public class Main extends ImmersiveActivity implements MainView
         {
             Intent eraSelection = new Intent(Main.this, EraSelection.class);
             eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_STORE);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
             startActivity(eraSelection);
             finish();
         }
@@ -312,6 +315,14 @@ public class Main extends ImmersiveActivity implements MainView
             Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
         else
             Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
+    }
+
+    public void setNewAgeAvailable(boolean available)
+    {
+        if (available)
+            Picasso.with(this).load(R.drawable.ic_travel_new).into(btnTravel);
+        else
+            Picasso.with(this).load(R.drawable.ic_travel).into(btnTravel);
     }
 
     @Override

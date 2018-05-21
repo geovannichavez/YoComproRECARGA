@@ -123,6 +123,7 @@ public class Constants
     public static final String WEEK = "Week";
     public static final String MONTH = "Month";
     public static final String OVER_ALL = "OverAll";
+    public static final String TRIVIA = "Trivia";
 
     //Prizes
     public static final String SMS_NUMBER_PRIZE_EXCHANGE = "323";

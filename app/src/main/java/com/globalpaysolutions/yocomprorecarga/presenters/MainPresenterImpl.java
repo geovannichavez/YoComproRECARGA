@@ -158,6 +158,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             Intent eraSelection = new Intent(mActivity, EraSelection.class);
             this.addFlags(eraSelection);
             eraSelection.putExtra(Constants.BUNDLE_ERA_SELECTION_INTENT_DESTINY, Constants.BUNDLE_DESTINY_MAP);
+            eraSelection.putExtra(Constants.BUNDLE_ERA_RESELECTION_ACTION, true);
             mContext.startActivity(eraSelection);
         }
         else
@@ -302,6 +303,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             // 1 = New trivia availble
             UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
             UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
+            UserData.getInstance(mContext).saveNewAge(response.getNewAge());
 
             //Challenges
             String pending = response.getMessage();
@@ -317,6 +319,12 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setTriviaAvailable(true);
             else
                 mView.setTriviaAvailable(false);
+
+            //NewAge
+            if(response.getNewAge()>0)
+                mView.setNewAgeAvailable(true);
+            else
+                mView.setNewAgeAvailable(false);
 
         }
         catch (Exception ex)

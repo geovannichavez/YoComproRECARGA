@@ -13,7 +13,7 @@ public interface TriviaView
 {
     void initialViewsState();
     void renderQuestion(QuestionTrivia trivia);
-    void updateTimer(String remaining);
+    void updateTimer(String remaining, int timeRemaining);
     void setViewsListeners();
     void showLoadingDialog(String label);
     void hideLoadingDialog();

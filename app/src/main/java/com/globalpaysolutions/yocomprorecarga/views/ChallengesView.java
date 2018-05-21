@@ -13,6 +13,7 @@ import java.util.List;
 public interface ChallengesView
 {
     void initializeViews(boolean locationVisible);
+    void initializeValues(int totalWins,int totalLose,int totalDraw,int winLaPulga,int winElPibe,int winDinho,int winElComandante, int winZizou);
     void renderChallegenes(List<Challenge> challenges);
     void showGenericDialog(DialogViewModel dialog);
     void showLoadingDialog(String string);

@@ -66,6 +66,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         //Checks if era has been reselected
         EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_CHALLENGES);
 
+
         boolean locationVisible = UserData.getInstance(mContext).checkCurrentLocationVisible();
 
         mView.initializeViews(locationVisible);
@@ -206,8 +207,10 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     public void onRetrieveSuccess(ChallengesResponse response)
     {
         mView.hideLoadingDialog();
-        if(response != null)
+        if(response != null) {
+            mView.initializeValues(response.getChallengesWin(), response.getChallengesLose(), response.getChallengesDraw(), response.getLaPulgaWin(), response.getELPibeWin(), response.getDinhoWin(), response.getElComandanteWin(), response.getZizouWin());
             mView.renderChallegenes(response.getList());
+        }
     }
 
     @Override
