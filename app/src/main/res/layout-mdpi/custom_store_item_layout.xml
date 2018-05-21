@@ -41,7 +41,7 @@
                 android:id="@+id/imgStoreItem"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="70"
+                android:layout_weight="67"
                 app:srcCompat="@drawable/img_store_item"/>
 
             <Space
@@ -54,14 +54,14 @@
                 android:id="@+id/bgStoreItemDesc"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="10"
+                android:layout_weight="14"
                 android:scaleType="fitXY"
                 android:src="@drawable/img_store_item_desc"/>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"/>
+                android:layout_weight="5"/>
 
         </LinearLayout>
 
@@ -78,13 +78,13 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="84"/>
+                android:layout_weight="81"/>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="9"
+                android:layout_weight="13"
                 android:weightSum="100">
 
                 <Space
@@ -100,6 +100,7 @@
                     android:textColor="#ffffff"
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
+                    android:autoSizeTextType="uniform"
                     android:text="Este barril es barato, te ofrece la posibilidad de ganarte souvenirs comunes
                     con posibilidades de raros."/>
 

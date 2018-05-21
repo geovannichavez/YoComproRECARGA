@@ -88,6 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="88"
+                    android:scaleType="fitXY"
                     app:srcCompat="@drawable/bg_screen_leaderboards"/>
                 <Space
                     android:layout_width="0dp"
@@ -406,6 +407,7 @@
                         android:text="Último ganador:"
                         android:gravity="center"
                         android:layout_weight="40"
+                        android:autoSizeTextType="uniform"
                         android:textColor="@color/white_textView_color"
                         android:textStyle="bold" />
                     <Space

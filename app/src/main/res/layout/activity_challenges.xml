@@ -257,14 +257,14 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="15"
+                    android:layout_weight="10"
                     />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/lvChallenges"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
+                    android:layout_weight="80"
                     android:gravity="center"
                     android:scaleType="fitXY"
                     tools:listitem="@layout/custom_challenges_history_item" />

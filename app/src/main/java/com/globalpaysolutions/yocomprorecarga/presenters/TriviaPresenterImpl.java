@@ -101,6 +101,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     {
         try
         {
+            UserData.getInstance(mContext).saveTriviaPending(0); //Reset Trivia Available
             mView.hideLoadingDialog();
             startTimer(response.getTimer());
 
