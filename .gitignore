@@ -8,3 +8,5 @@
 /captures
 *.apk
 *.hprof
+.idea/encodings.xml
+.idea/codeStyles/codeStyleConfig.xml
