@@ -6,8 +6,6 @@
     android:gravity="center">
 
 
-
-
     <ImageView
         android:id="@+id/bgLeaderboardListItem"
         android:layout_width="match_parent"

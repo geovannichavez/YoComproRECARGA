@@ -88,6 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="88"
+                    android:scaleType="fitXY"
                     app:srcCompat="@drawable/bg_screen_leaderboards"/>
                 <Space
                     android:layout_width="0dp"
@@ -407,7 +408,8 @@
                         android:gravity="center"
                         android:layout_weight="40"
                         android:textColor="@color/white_textView_color"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:autoSizeTextType="uniform"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
