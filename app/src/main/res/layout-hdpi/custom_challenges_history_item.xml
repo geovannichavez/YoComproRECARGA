@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -34,7 +34,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="20"
                     android:text="Reto de:"
-
+                    android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:fontFamily="@font/baloo_regular"
                     android:textColor="#000000"
@@ -44,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="30"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_challenge_nickname"/>
 
                 <TextView
@@ -52,6 +53,7 @@
                     android:gravity="center"
                     android:layout_weight="20"
                     android:text="Apuesta:"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="@font/baloo_regular"
                     android:textColor="#000000"
                     android:textAllCaps="true"/>
@@ -104,6 +106,7 @@
                     android:gravity="center"
                     android:text="Resultado:"
                     android:fontFamily="@font/baloo_regular"
+                    android:autoSizeTextType="uniform"
                     android:textColor="#000000"
                     android:textAllCaps="true"/>
 
@@ -159,13 +162,14 @@
                     android:id="@+id/lblNickname"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="30"
                     android:fontFamily="@font/baloo_regular"
                     android:maxLines="1"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="#FFFFFF"
+                    android:textSize="11sp"
                     tools:text="abcdefghijklmnopqrs" />
 
                 <Space
@@ -187,6 +191,7 @@
                         android:fontFamily="@font/baloo_regular"
                         android:gravity="center"
                         android:textColor="#ffffff"
+                        android:autoSizeTextType="uniform"
                         tools:text="+20" />
 
 
@@ -206,4 +211,4 @@
     </RelativeLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

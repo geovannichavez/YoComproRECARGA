@@ -56,6 +56,7 @@ public class Store extends ImmersiveActivity implements StoreView
     AlertDialog mConfirmDialog;
     ImageView btnRewards;
     TextView lblPrizeStore;
+    ImageView btnCollectionStore;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -85,6 +86,8 @@ public class Store extends ImmersiveActivity implements StoreView
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnRewards = (ImageView) findViewById(R.id.btnRewards);
+        btnCollectionStore = (ImageView) findViewById(R.id.btnCollectionStore);
+
 
         lblPrizeStore =(TextView) findViewById(R.id.tvPrizeStore);
 
@@ -95,6 +98,16 @@ public class Store extends ImmersiveActivity implements StoreView
             {
                 ButtonAnimator.getInstance(Store.this).animateButton(v);
                 navigateBack();
+            }
+        });
+
+        btnCollectionStore.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ButtonAnimator.getInstance(Store.this).animateButton(v);
+                navigateSouvenirs();
             }
         });
 
@@ -110,6 +123,7 @@ public class Store extends ImmersiveActivity implements StoreView
                 finish();
             }
         });
+
 
         mPresenter = new StorePresenterImpl(this, this, this);
         mPresenter.initialValues();

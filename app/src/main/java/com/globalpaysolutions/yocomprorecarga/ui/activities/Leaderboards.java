@@ -111,9 +111,9 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
         mPresenter.initialize();
         mPresenter.getLeaderboards(Constants.TODAY, null);
 
-        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-                tvLastWinner, 10, 100,30,TypedValue.COMPLEX_UNIT_SP
-        );
+//        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+//                tvLastWinner, 10, 100,30,TypedValue.COMPLEX_UNIT_SP
+//        );
 
 
 
