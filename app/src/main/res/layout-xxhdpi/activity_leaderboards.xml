@@ -307,6 +307,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="40"
                         android:id="@+id/imageView21"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/bg_last_winner"/>
 
                     <Space
@@ -407,7 +408,7 @@
                         android:text="Último ganador:"
                         android:gravity="center"
                         android:layout_weight="40"
-                        android:autoSizeTextType="uniform"
+                        android:textSize="11sp"
                         android:textColor="@color/white_textView_color"
                         android:textStyle="bold" />
                     <Space

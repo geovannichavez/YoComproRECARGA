@@ -307,6 +307,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="40"
                         android:id="@+id/imageView21"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/bg_last_winner"/>
 
                     <Space
@@ -408,8 +409,7 @@
                         android:gravity="center"
                         android:layout_weight="40"
                         android:textColor="@color/white_textView_color"
-
-                        android:autoSizeTextType="uniform"
+                        android:textSize="9sp"
                         android:textStyle="bold" />
                     <Space
                         android:layout_width="match_parent"
