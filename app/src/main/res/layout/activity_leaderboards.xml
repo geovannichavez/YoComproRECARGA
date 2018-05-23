@@ -306,6 +306,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="40"
+
+                        android:scaleType="fitXY"
                         android:id="@+id/imageView21"
                         app:srcCompat="@drawable/bg_last_winner"/>
 
@@ -409,7 +411,7 @@
                         android:layout_weight="40"
                         android:textColor="@color/white_textView_color"
                         android:textStyle="bold"
-                        android:autoSizeTextType="uniform"/>
+                        android:textSize="8sp"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
