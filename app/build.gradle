@@ -10,8 +10,8 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 58
-        versionName "1.42" // 23-MAY-18 - Rediseño de pantallas, reto de estrellas mundial, lideres trivia
+        versionCode 59
+        versionName "1.43" // 23-MAY-18 - Rediseño de pantallas, reto de estrellas mundial, lideres trivia
 
 
         //OneSignal
