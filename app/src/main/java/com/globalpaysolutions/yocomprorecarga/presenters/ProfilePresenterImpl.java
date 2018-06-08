@@ -18,6 +18,10 @@ import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ProfileView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
+import java.net.UnknownServiceException;
 
 /**
  * Created by Josué Chávez on 17/07/2017.
@@ -51,7 +55,7 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
     @Override
     public void loadInitialData()
     {
-        Profile profile = Profile.getCurrentProfile();
+
 
         mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
 
@@ -61,14 +65,28 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
                 mView.loadCountryBadge(mUserData.getWorldcupCountryUrl());
         }
 
-        if(profile != null)
-            mView.loadViewsState("",
-                    mUserData.getNickname(),
-                    profile.getProfilePictureUri(500, 500).toString());
-        else
-            mView.loadViewsState("",
-                    mUserData.getNickname(),
-                    null);
+        switch (UserData.getInstance(mContext).getAuthModeSelected())
+        {
+            case Constants.FACEBOOK:
+                Profile profile = Profile.getCurrentProfile();
+                if(profile != null)
+                    mView.loadViewsState("", mUserData.getNickname(), profile.getProfilePictureUri(500, 500).toString());
+                else
+                    mView.loadViewsState("", mUserData.getNickname(),null);
+                break;
+            case Constants.GOOGLE:
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(mContext);
+                if(account != null)
+                {
+                    mView.loadViewsState("", mUserData.getNickname(),mUserData.getGooglePhotoUrl());
+                }
+                else
+                {
+                    mView.loadViewsState("", mUserData.getNickname(),null);
+                }
+                break;
+
+        }
 
     }
 
@@ -99,7 +117,7 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
        try
        {
            //Saves updated nickname
-           mUserData.saveNickname(tracking.getNickname());
+           //mUserData.saveNickname(tracking.getNickname());
 
            mUserData.SaveUserTrackingProgess(tracking.getTotalWinCoins(),
                    tracking.getTotalWinPrizes(),

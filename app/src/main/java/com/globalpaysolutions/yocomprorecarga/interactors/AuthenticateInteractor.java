@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.coreui.BuildConfig;
 import android.util.Log;
 
 import com.facebook.AccessToken;
@@ -23,11 +22,12 @@ import com.facebook.login.widget.LoginButton;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IAuthenticateInteractor;
-import com.globalpaysolutions.yocomprorecarga.models.FacebookConsumer;
+import com.globalpaysolutions.yocomprorecarga.models.Consumer;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -35,6 +35,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -98,33 +99,47 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     }
 
     @Override
-    public void authenticateFirebaseUser(final AuthenticateListener pListener, final AccessToken pAcessToken, final String pEmail)
+    public void authenticateFirebaseUser(final AuthenticateListener pListener, String providerToken, final String pEmail)
     {
+        AuthCredential credential = null;
+
         try
         {
-            AuthCredential credential = FacebookAuthProvider.getCredential(pAcessToken.getToken());
-
-            mFirebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+            switch (UserData.getInstance(mContext).getAuthModeSelected())
             {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task)
+                case Constants.FACEBOOK:
+                    credential = FacebookAuthProvider.getCredential(providerToken);
+                    break;
+                case Constants.GOOGLE:
+                    credential = GoogleAuthProvider.getCredential(providerToken, null);
+                    break;
+            }
+
+            if(credential != null)
+            {
+                mFirebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>()
                 {
-                    if (task.isSuccessful())
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task)
                     {
-                        FirebaseUser user = mFirebaseAuth.getCurrentUser();
-                        if(user != null)
+                        if (task.isSuccessful())
                         {
-                            Log.i(TAG, String.format("FirebaseAuth: %1$s - %2$s)", user.getDisplayName(), user.getUid()));
-                            pListener.onFirebaseAuthSuccess(pEmail);
+                            FirebaseUser user = mFirebaseAuth.getCurrentUser();
+                            if(user != null)
+                            {
+                                Log.i(TAG, String.format("FirebaseAuth: %1$s - %2$s)", user.getDisplayName(), user.getUid()));
+                                pListener.onFirebaseAuthSuccess(pEmail, UserData.getInstance(mContext).getAuthModeSelected());
+                            }
+                        }
+                        else
+                        {
+                            Log.w(TAG, "FirebaseAuth failed", task.getException());
+                            pListener.onFirebaseAuthError();
                         }
                     }
-                    else
-                    {
-                        Log.w(TAG, "FirebaseAuth failed", task.getException());
-                        pListener.onFirebaseAuthError();
-                    }
-                }
-            });
+                });
+            }
+
         }
         catch (Exception ex)
         {
@@ -226,7 +241,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     }
 
     @Override
-    public void authenticateUser(final AuthenticateListener pListener, FacebookConsumer pAuthentictionReqBody)
+    public void authenticateUser(final AuthenticateListener pListener, Consumer pAuthentictionReqBody)
     {
         AuthenticaReqBody requestBody = new AuthenticaReqBody();
         requestBody.setFirstName(pAuthentictionReqBody.getFirstName());
@@ -237,6 +252,8 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
         requestBody.setUserID(pAuthentictionReqBody.getUserID());
         requestBody.setProfileID(pAuthentictionReqBody.getProfileID());
         requestBody.setURL(pAuthentictionReqBody.getURL());
+        requestBody.setAuthenticationProvider(UserData.getInstance(mContext).getAuthModeSelected());
+
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<AuthenticateResponse> call = apiService.authenticateConsumer(requestBody,

@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.AuthenticatePresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
+import com.google.android.gms.common.SignInButton;
 import com.squareup.picasso.Picasso;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -34,6 +35,7 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
     ProgressDialog progressDialog;
     LoginButton btnLogin;
     ImageView bgWhiteTimemachine;
+    SignInButton btnGoogleLogin;
 
     //MVP
     private AuthenticatePresenterImpl mPresenter;
@@ -53,6 +55,9 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
         //Views
         btnLogin = (LoginButton) findViewById(R.id.btnLogin);
         bgWhiteTimemachine = (ImageView) findViewById(R.id.bgWhiteTimemachine);
+        btnGoogleLogin = (SignInButton) findViewById(R.id.btnGoogleLogin);
+        btnGoogleLogin.setSize(SignInButton.SIZE_WIDE);
+        btnGoogleLogin.setOnClickListener(googleSiginListener);
 
         Picasso.with(this).load(R.drawable.bg_white_timemachine).into(bgWhiteTimemachine);
 
@@ -61,6 +66,7 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
 
         mPresenter.checkPlayServices();
         mPresenter.setupFacebookAuth(btnLogin);
+        mPresenter.setupGoogleAuth();
     }
 
     @Override
@@ -131,6 +137,22 @@ public class Authenticate extends ImmersiveActivity implements AuthenticateView
     {
         btnLogin.setEnabled(enabled);
     }
+
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+        mPresenter.checkGoogleSignedIn();
+    }
+
+    private View.OnClickListener googleSiginListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            mPresenter.googleSignin();
+        }
+    };
 
     /*
     *

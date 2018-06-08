@@ -18,7 +18,7 @@ public interface AuthenticateListener
     void onGraphLoginCancel();
     void onGraphLoginError(FacebookException pException);
 
-    void onFirebaseAuthSuccess(String pEmail);
+    void onFirebaseAuthSuccess(String pEmail, String authProvider);
     void onFirebaseAuthError();
 
     void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile);

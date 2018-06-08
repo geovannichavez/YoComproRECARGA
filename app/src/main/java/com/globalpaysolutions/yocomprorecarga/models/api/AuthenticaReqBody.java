@@ -35,6 +35,10 @@ public class AuthenticaReqBody
     @Expose
     private String userID;
 
+    @SerializedName("AuthenticationProvider")
+    @Expose
+    private String authenticationProvider;
+
     public String getFirstName()
     {
         return firstName;
@@ -115,4 +119,13 @@ public class AuthenticaReqBody
         this.userID = userID;
     }
 
+    public String getAuthenticationProvider()
+    {
+        return authenticationProvider;
+    }
+
+    public void setAuthenticationProvider(String authenticateProvider)
+    {
+        this.authenticationProvider = authenticateProvider;
+    }
 }

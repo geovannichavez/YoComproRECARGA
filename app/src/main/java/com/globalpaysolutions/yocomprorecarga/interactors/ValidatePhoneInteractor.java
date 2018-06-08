@@ -2,7 +2,6 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.support.coreui.BuildConfig;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -74,7 +73,7 @@ public class ValidatePhoneInteractor implements IValidatePhoneInteractor
     @Override
     public void validatePhone(final ValidatePhoneListener pListener, String pPhone, String pCountryID)
     {
-        String deviceID = mUserData.GetDeviceID();
+        String deviceID = mUserData.getDeviceID();
         RegisterPhoneConsumerReqBody registerConsumerBody = new RegisterPhoneConsumerReqBody();
         registerConsumerBody.setPhone(pPhone);
         registerConsumerBody.setCountryID(pCountryID);

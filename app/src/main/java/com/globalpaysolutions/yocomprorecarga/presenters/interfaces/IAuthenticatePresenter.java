@@ -13,5 +13,11 @@ public interface IAuthenticatePresenter
 {
     void checkPlayServices();
     void setupFacebookAuth(LoginButton pLoginButton);
+    void setupGoogleAuth();
+    void checkGoogleSignedIn();
+    void googleSignin();
     void onActivityResult(int pRequestCode, int pResultCode, Intent pData);
+
+
+
 }

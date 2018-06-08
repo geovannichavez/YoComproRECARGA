@@ -158,7 +158,7 @@ public class WorldCupCountriesInteractor implements IWorldCupCountriesInteractor
         {
             final DatabaseReference root = FirebaseDatabase.getInstance().getReference();
             final DatabaseReference playerData = root.child("locationPlayerRecargoData");
-            final String facebookID = UserData.getInstance(mContext).getFacebookProfileId();
+            final String facebookID = UserData.getInstance(mContext).getAuthProviderId();
 
             playerData.child(facebookID).addListenerForSingleValueEvent(new ValueEventListener()
             {
