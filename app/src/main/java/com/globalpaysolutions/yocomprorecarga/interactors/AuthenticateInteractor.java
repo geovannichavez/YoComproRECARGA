@@ -28,6 +28,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -251,7 +252,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
         requestBody.setDeviceID(pAuthentictionReqBody.getDeviceID());
         requestBody.setUserID(pAuthentictionReqBody.getUserID());
         requestBody.setProfileID(pAuthentictionReqBody.getProfileID());
-        requestBody.setURL(pAuthentictionReqBody.getURL());
+        requestBody.setUrl(pAuthentictionReqBody.getURL());
         requestBody.setAuthenticationProvider(UserData.getInstance(mContext).getAuthModeSelected());
 
 
@@ -300,6 +301,26 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
                 pListener.onAuthenticateConsumerError(0, t, null);
             }
         });
+    }
+
+    @Override
+    public void logoutGoogleUser(final AuthenticateListener listener, GoogleSignInClient signInClient)
+    {
+        try
+        {
+            signInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task)
+                        {
+                            Log.i(TAG, "Google signout completed");
+                        }
+                    });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Couldn't logout Google user: " + ex.getMessage());
+        }
     }
 
     private String getVersionName()

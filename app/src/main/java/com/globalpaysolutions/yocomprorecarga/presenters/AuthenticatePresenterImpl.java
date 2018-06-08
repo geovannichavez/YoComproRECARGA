@@ -118,12 +118,17 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(mContext);
         if(account != null)
-            Log.i(TAG, "User has been GoogleSigned in"); //TODO: Manejo de caso
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            Log.i(TAG, "User has been GoogleSigned in");
+            mInteractor.authenticateFirebaseUser(this, account.getIdToken(), account.getEmail());
+        }
     }
 
     @Override
     public void googleSignin()
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         UserData.getInstance(mContext).saveAuthModeSelected(Constants.GOOGLE);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         mActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -264,6 +269,14 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         {
             mInteractor.logoutFirebaseUser();
             mInteractor.logoutFacebookUser();
+            mInteractor.logoutGoogleUser(this, mGoogleSignInClient);
+
+            mView.hideLoadingDialog();
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
         }
         catch (Exception ex)
         {
@@ -324,6 +337,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         this.processErrorMessage(pCodeStatus, pThrowable, pRequiredVersion);
     }
 
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask)
     {
         try
@@ -335,6 +349,15 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             {
                 String tokenId = mGoogleAccount.getIdToken();
                 mInteractor.authenticateFirebaseUser(this, tokenId, mGoogleAccount.getEmail());
+            }
+            else
+            {
+                mView.hideLoadingDialog();
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
             }
 
         }

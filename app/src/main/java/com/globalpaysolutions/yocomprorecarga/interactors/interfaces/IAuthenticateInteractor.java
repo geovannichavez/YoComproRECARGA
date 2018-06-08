@@ -6,6 +6,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.globalpaysolutions.yocomprorecarga.interactors.AuthenticateListener;
 import com.globalpaysolutions.yocomprorecarga.models.Consumer;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 /**
  * Created by Josué Chávez on 29/06/2017.
@@ -24,4 +25,6 @@ public interface IAuthenticateInteractor
     void requestUserEmail(AuthenticateListener pListener, LoginResult pLoginResult);
     void onActivityResult(int pRequestCode, int pResultCode, Intent pData);
     void authenticateUser(AuthenticateListener pListener, Consumer pAuthentictionReqBody);
+
+    void logoutGoogleUser(AuthenticateListener listener, GoogleSignInClient signInClient);
 }
