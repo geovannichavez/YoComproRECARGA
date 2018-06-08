@@ -9,22 +9,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class AuthenticaReqBody
 {
-
     @SerializedName("FirstName")
     @Expose
     private String firstName;
-    @SerializedName("MiddleName")
-    @Expose
-    private String middleName;
     @SerializedName("LastName")
     @Expose
     private String lastName;
+    @SerializedName("MiddleName")
+    @Expose
+    private String middleName;
     @SerializedName("DeviceID")
     @Expose
     private String deviceID;
-    @SerializedName("URL")
+    @SerializedName("Url")
     @Expose
-    private String uRL;
+    private String url;
     @SerializedName("Email")
     @Expose
     private String email;
@@ -34,98 +33,79 @@ public class AuthenticaReqBody
     @SerializedName("UserID")
     @Expose
     private String userID;
-
     @SerializedName("AuthenticationProvider")
     @Expose
     private String authenticationProvider;
 
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getMiddleName()
-    {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName)
-    {
-        this.middleName = middleName;
-    }
-
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public String getDeviceID()
-    {
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getDeviceID() {
         return deviceID;
     }
 
-    public void setDeviceID(String deviceID)
-    {
+    public void setDeviceID(String deviceID) {
         this.deviceID = deviceID;
     }
 
-    public String getURL()
-    {
-        return uRL;
+    public String getUrl() {
+        return url;
     }
 
-    public void setURL(String uRL)
-    {
-        this.uRL = uRL;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email)
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getProfileID()
-    {
+    public String getProfileID() {
         return profileID;
     }
 
-    public void setProfileID(String profileID)
-    {
+    public void setProfileID(String profileID) {
         this.profileID = profileID;
     }
 
-    public String getUserID()
-    {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID)
-    {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
-    public String getAuthenticationProvider()
-    {
+    public String getAuthenticationProvider() {
         return authenticationProvider;
     }
 
-    public void setAuthenticationProvider(String authenticateProvider)
-    {
-        this.authenticationProvider = authenticateProvider;
+    public void setAuthenticationProvider(String authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
     }
 }
