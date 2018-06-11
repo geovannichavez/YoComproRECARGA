@@ -244,6 +244,8 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
     @Override
     public void authenticateUser(final AuthenticateListener pListener, Consumer pAuthentictionReqBody)
     {
+        String authMode = UserData.getInstance(mContext).getAuthModeSelected();
+
         AuthenticaReqBody requestBody = new AuthenticaReqBody();
         requestBody.setFirstName(pAuthentictionReqBody.getFirstName());
         requestBody.setLastName(pAuthentictionReqBody.getLastName());
@@ -253,7 +255,7 @@ public class AuthenticateInteractor implements IAuthenticateInteractor
         requestBody.setUserID(pAuthentictionReqBody.getUserID());
         requestBody.setProfileID(pAuthentictionReqBody.getProfileID());
         requestBody.setUrl(pAuthentictionReqBody.getURL());
-        requestBody.setAuthenticationProvider(UserData.getInstance(mContext).getAuthModeSelected());
+        requestBody.setAuthenticationProvider(authMode);
 
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
