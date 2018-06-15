@@ -20,4 +20,5 @@ public interface TokenInputView
     void setCallcenterContactText();
     void setCodeSentLabelText(String phoneNumber);
     void navigatePhoneValidation(boolean retypePhone);
+    void navigateCompleteProfile();
 }

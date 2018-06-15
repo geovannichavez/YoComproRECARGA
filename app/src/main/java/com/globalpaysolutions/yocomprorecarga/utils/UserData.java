@@ -37,6 +37,7 @@ public class UserData
     private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
     private static final String KEY_CONSUMER_LOCATION_VISIBLE = "key_consumer_location_visible";
     private static final String KEY_AUTH_MODE_SELECTED = "key_auth_mode_selected";
+    private static final String KEY_AUTH_LOCAL_USER_EXISTS = "key_auth_local_user_exists";
 
     //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
@@ -1170,5 +1171,16 @@ public class UserData
     public String getGooglePhotoUrl()
     {
         return mPreferences.getString(KEY_GOOGLE_PHOTO_URL, "");
+    }
+
+    public void saveLocalUserExists(boolean exists)
+    {
+        mEditor.putBoolean(KEY_AUTH_LOCAL_USER_EXISTS, exists);
+        mEditor.commit();
+    }
+
+    public boolean localUserExists()
+    {
+        return mPreferences.getBoolean(KEY_AUTH_LOCAL_USER_EXISTS, false);
     }
 }

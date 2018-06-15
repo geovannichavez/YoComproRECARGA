@@ -95,6 +95,37 @@
         app:layout_constraintStart_toStartOf="@+id/btnLogin"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
+    <ImageView
+        android:id="@+id/btnPhoneAuth"
+        android:layout_width="203dp"
+        android:layout_height="44dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnGoogleLogin"
+        app:srcCompat="@drawable/btn_button_6" />
+
+    <TextView
+        android:id="@+id/lblPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/label_phone"
+        android:fontFamily="@font/baloo_regular"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPhoneAuth"
+        app:layout_constraintEnd_toEndOf="@+id/btnPhoneAuth"
+        app:layout_constraintStart_toStartOf="@+id/btnPhoneAuth"
+        app:layout_constraintTop_toTopOf="@+id/btnPhoneAuth" />
+
 </android.support.constraint.ConstraintLayout>
 <!--<RelativeLayout-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->

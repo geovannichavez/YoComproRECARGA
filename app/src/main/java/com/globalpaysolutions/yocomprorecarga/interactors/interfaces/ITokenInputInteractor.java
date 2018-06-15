@@ -11,4 +11,5 @@ public interface ITokenInputInteractor
     void sendTokenValidation(TokenInputListener pListener, String pToken);
     void setConfirmedPhone(boolean pConfirmed);
     void setConfirmedCountry(boolean pConfirmedCountry);
+    void validateSmsTokenLocalAuth(TokenInputListener listener, String token);
 }

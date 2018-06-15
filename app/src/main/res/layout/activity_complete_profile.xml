@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.CompleteProfile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Layer 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <!-- w: 4-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+            <!-- w: 15-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="80"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/logo_recargo" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
+            </LinearLayout>
+
+            <!-- w: 12 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="12"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="84"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_ask_nickname" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:text="@string/label_type_firstname"
+                        android:textColor="@color/color_red_recargo"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_caja_txt" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:text="@string/label_type_lastname"
+                        android:textColor="@color/color_red_recargo"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_caja_txt" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:text="@string/label_type_nickname"
+                        android:textColor="@color/color_red_recargo"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_caja_txt" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 15 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+                <ImageView
+                    android:id="@+id/btnContinue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_button_6" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+            </LinearLayout>
+
+            <!-- w: 4 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+        </LinearLayout>
+
+        <!-- Layer 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <!-- w: 4-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+            <!-- w: 15-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15" />
+
+            <!-- w: 12 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="12" />
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30" />
+
+                    <EditText
+                        android:id="@+id/txtFirstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords|textPersonName"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:nextFocusDown="@id/txtLastname"
+                        android:src="@drawable/btn_caja_txt"
+                        android:textColor="@color/white_textView_color"
+                        android:textSize="18sp"
+                        tools:text="Geovanni" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30" />
+
+                    <EditText
+                        android:id="@+id/txtLastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="textCapWords|textWebEditText"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:nextFocusDown="@id/txtNickname"
+                        android:src="@drawable/btn_caja_txt"
+                        android:textColor="@color/white_textView_color"
+                        android:textSize="18sp"
+                        tools:text="Estefanomobolopolis" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 14 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="74"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30" />
+
+                    <EditText
+                        android:id="@+id/txtNickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:imeOptions="actionDone"
+                        android:inputType="textVisiblePassword|textNoSuggestions"
+                        android:maxLength="20"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/btn_caja_txt"
+                        android:textColor="@color/white_textView_color"
+                        android:textSize="18sp"
+                        tools:text="josher93" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="13" />
+            </LinearLayout>
+
+            <!-- w: 2 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <!-- w: 15 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:text="@string/label_continue"
+                    android:textSize="18sp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+            </LinearLayout>
+
+            <!-- w: 4 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+

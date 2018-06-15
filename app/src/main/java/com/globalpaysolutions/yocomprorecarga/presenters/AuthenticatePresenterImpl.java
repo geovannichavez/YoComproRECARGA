@@ -44,7 +44,6 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     private static final String TAG = AuthenticatePresenterImpl.class.getSimpleName();
 
     private Context mContext;
-    private UserData mUserData;
     private AuthenticateView mView;
     private AuthenticateInteractor mInteractor;
     private AppCompatActivity mActivity;
@@ -55,7 +54,6 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     public AuthenticatePresenterImpl(Context pContext, AuthenticateView pView, AppCompatActivity pActivity)
     {
         this.mContext = pContext;
-        this.mUserData = UserData.getInstance(mContext);
         this.mView = pView;
         this.mInteractor = new AuthenticateInteractor(mContext);
         this.mActivity = pActivity;
@@ -216,7 +214,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
 
                     consumer.setFirstName(firstname);
                     consumer.setLastName(lastname);
-                    consumer.setDeviceID(mUserData.getDeviceID());
+                    consumer.setDeviceID(UserData.getInstance(mContext).getDeviceID());
                     consumer.setURL(facebookUrl);
                     consumer.setProfileID(profileId);
                     consumer.setEmail(pEmail);
@@ -228,11 +226,11 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
                 case Constants.GOOGLE:
                     String googleUrl = (TextUtils.isEmpty(mGoogleAccount.getPhotoUrl().toString())) ? "NotFound" : mGoogleAccount.getPhotoUrl().toString();
 
-                    mUserData.saveGooglePhotoUrl(googleUrl);
+                    UserData.getInstance(mContext).saveGooglePhotoUrl(googleUrl);
 
                     consumer.setFirstName(mGoogleAccount.getGivenName());
                     consumer.setLastName(mGoogleAccount.getFamilyName());
-                    consumer.setDeviceID(mUserData.getDeviceID());
+                    consumer.setDeviceID(UserData.getInstance(mContext).getDeviceID());
                     consumer.setURL("NotFound");
                     consumer.setProfileID(mGoogleAccount.getId());
                     consumer.setEmail(mGoogleAccount.getEmail());
@@ -242,8 +240,8 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
                     break;
             }
 
-            consumer.setAuthProvider(mUserData.getAuthModeSelected());
-            mUserData.saveAuthData(consumer.getProfileID(), consumer.getURL());
+            consumer.setAuthProvider(UserData.getInstance(mContext).getAuthModeSelected());
+            UserData.getInstance(mContext).saveAuthData(consumer.getProfileID(), consumer.getURL());
 
             String name = consumer.getFirstName() + " " + consumer.getLastName();
 
@@ -251,7 +249,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
             Crashlytics.setUserEmail(pEmail);
             Crashlytics.setUserName(name);
 
-            mUserData.saveAuthProviderFullname(name);
+            UserData.getInstance(mContext).saveAuthProviderFullname(name);
 
             //Registers user on RecarGO! API
             mInteractor.authenticateUser(this, consumer);
@@ -300,31 +298,32 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     public void onAuthenticateConsumerSuccess(AuthenticateResponse pResponse)
     {
         mView.hideLoadingDialog();
-        mUserData.saveUserGeneralInfo(pResponse.getFirstName(), pResponse.getLastName(), pResponse.getEmail(), pResponse.getPhone());
-        mUserData.saveAuthenticationKey(pResponse.getAuthenticationKey());
-        mUserData.saveNickname(pResponse.getNickname());
-        mUserData.hasAuthenticated(true);
+        UserData.getInstance(mContext).saveUserGeneralInfo(pResponse.getFirstName(), pResponse.getLastName(), pResponse.getEmail(), pResponse.getPhone());
+        UserData.getInstance(mContext).saveAuthenticationKey(pResponse.getAuthenticationKey());
+        UserData.getInstance(mContext).saveNickname(pResponse.getNickname());
+        UserData.getInstance(mContext).hasAuthenticated(true);
 
         //Saves if user has nickname
         if(pResponse.getNickname() != null || !TextUtils.equals(pResponse.getNickname(), ""))
-            mUserData.hasSetNickname(true);
+            UserData.getInstance(mContext).hasSetNickname(true);
         else
-            mUserData.hasSetNickname(false);
+            UserData.getInstance(mContext).hasSetNickname(false);
 
 
-        if(mUserData.getUserPhone() == null || TextUtils.isEmpty(mUserData.getUserPhone()))
+        if(UserData.getInstance(mContext).getUserPhone() == null || TextUtils.isEmpty(UserData.getInstance(mContext).getUserPhone()))
         {
             mView.navigateValidatePhone();
         }
-        else if(mUserData.getNickname() == null || TextUtils.isEmpty(mUserData.getNickname()))
+        else if(UserData.getInstance(mContext).getNickname() == null || TextUtils.isEmpty(UserData.getInstance(mContext).getNickname()))
         {
             mView.navigateSetNickname();
         }
         else
         {
+            UserData.getInstance(mContext).HasConfirmedPhone(true);
+            UserData.getInstance(mContext).HasSelectedCountry(true);
             mView.navigateHome();
         }
-
 
     }
 
@@ -355,7 +354,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
                 mView.hideLoadingDialog();
                 DialogViewModel dialog = new DialogViewModel();
                 dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-                dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+                dialog.setLine1(mContext.getString(R.string.error_content_google_auth));
                 dialog.setAcceptButton(mContext.getString(R.string.button_accept));
                 mView.showGenericDialog(dialog);
             }

@@ -12,6 +12,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticaReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ChallengesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CombosResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.CompleteProfileReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.CountrySelectedResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.CreateChallengeReq;
@@ -44,10 +45,12 @@ import com.globalpaysolutions.yocomprorecarga.models.api.StoreAirtimeReportReqBo
 import com.globalpaysolutions.yocomprorecarga.models.api.StoreItemsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.TokenValidationLocalReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.TriviaResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.ValidateLocalSmsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WorldCupCountriesRspns;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.WorldCupCountries;
@@ -84,6 +87,12 @@ public interface ApiInterface
     Call<SimpleMessageResponse> requestTokenValidation(@Header("authenticationKey") String pAuthKey, @Body TokenValidationBody pTokenValBody);
 
     @Headers("Content-Type: application/json")
+    @POST(StringsURL.VALIDATE_TOKEN_LOCAL_AUTH)
+    Call<ValidateLocalSmsResponse> requestTokenValidationLocal(@Body TokenValidationLocalReqBody pTokenValBody,
+                                                               @Header("AppVersion") String pAppVersion,
+                                                               @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
     @POST(StringsURL.REQUESTTOPUP)
     Call<SimpleMessageResponse> requestTopup(@Header("authenticationKey") String pAuthKey, @Body RequestTopupReqBody pRequestTopupBody);
 
@@ -92,6 +101,12 @@ public interface ApiInterface
     Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey, @Header("AppVersion") String pAppVersion,
                                                   @Header("Platform") String pPlatform,
                                                   @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REGISTER_PHONE)
+    Call<RegisterClientResponse> registerConsumerLocal(@Header("AppVersion") String pAppVersion,
+                                                       @Header("Platform") String pPlatform,
+                                                       @Body RegisterPhoneConsumerReqBody pRegisterConsumerBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SEND_STORE_AIRTIME_REPORT)
@@ -120,6 +135,13 @@ public interface ApiInterface
                                                 @Body NicknameReqBody pNicknameRequest,
                                                 @Header("AppVersion") String pAppVersion,
                                                 @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.COMPLETE_PROFILE)
+    Call<SimpleResponse> completeLocalProfile(@Header("authenticationKey") String pAuthKey,
+                                              @Header("AppVersion") String pAppVersion,
+                                              @Header("Platform") String pPlatform,
+                                              @Body CompleteProfileReqBody requestBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.REDEEM_PRIZE)

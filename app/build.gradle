@@ -13,7 +13,6 @@ android {
         versionCode 55
         versionName "1.38"
 
-
         //OneSignal
         manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
                                 // Project number pulled from dashboard, local value is ignored.

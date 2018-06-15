@@ -9,7 +9,7 @@ import com.globalpaysolutions.yocomprorecarga.models.Country;
 public interface ITokenInputPresenter
 {
     void setInitialViewState();
-    void sendValidationToken(String pToken);
+    void validateSmsToken(String pToken);
     void buildSentText(String phone);
     void retypePhoneNumber(boolean retypePhone);
     void setConfirmedPhone(boolean pConfirmedPhone);

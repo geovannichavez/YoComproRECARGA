@@ -229,4 +229,6 @@ public class Constants
         SOUVENIRs_GROUPED, SOUVENIRS
     }
 
+    //Auth
+    public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
 }

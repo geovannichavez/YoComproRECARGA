@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.facebook.Profile;
+import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.ProfileInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.ProfileListener;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
@@ -55,13 +56,11 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
     @Override
     public void loadInitialData()
     {
-
-
         mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
 
-        if(TextUtils.equals(mUserData.getEraName(), Constants.ERA_WORLDCUP_NAME))
+        if (TextUtils.equals(mUserData.getEraName(), Constants.ERA_WORLDCUP_NAME))
         {
-            if(!TextUtils.isEmpty(mUserData.getWorldcupCountryName()))
+            if (!TextUtils.isEmpty(mUserData.getWorldcupCountryName()))
                 mView.loadCountryBadge(mUserData.getWorldcupCountryUrl());
         }
 
@@ -69,25 +68,31 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
         {
             case Constants.FACEBOOK:
                 Profile profile = Profile.getCurrentProfile();
-                if(profile != null)
-                    mView.loadViewsState("", mUserData.getNickname(), profile.getProfilePictureUri(500, 500).toString());
+                if (profile != null)
+                {
+                    mView.loadViewsState("", mUserData.getNickname(),
+                            profile.getProfilePictureUri(500, 500).toString());
+                }
                 else
-                    mView.loadViewsState("", mUserData.getNickname(),null);
+                {
+                    mView.loadViewsState("", mUserData.getNickname(), null);
+                }
                 break;
             case Constants.GOOGLE:
                 GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(mContext);
-                if(account != null)
+                if (account != null)
                 {
-                    mView.loadViewsState("", mUserData.getNickname(),mUserData.getGooglePhotoUrl());
+                    mView.loadViewsState("", mUserData.getNickname(), mUserData.getGooglePhotoUrl());
                 }
                 else
                 {
-                    mView.loadViewsState("", mUserData.getNickname(),null);
+                    mView.loadViewsState("", mUserData.getNickname(), null);
                 }
                 break;
-
+            case Constants.LOCAL:
+                mView.loadViewsState("", mUserData.getNickname(), null);
+                break;
         }
-
     }
 
 
@@ -98,7 +103,7 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
         {
             Intent souvenirs = new Intent(mActivity, Souvenirs.class);
 
-            if(TextUtils.equals(UserData.getInstance(mContext).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
+            if (TextUtils.equals(UserData.getInstance(mContext).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
             {
                 souvenirs = new Intent(mActivity, SouvenirsGroups.class);
             }
@@ -114,29 +119,20 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
     @Override
     public void onRetrieveTrackingSuccess(Tracking tracking)
     {
-       try
-       {
-           //Saves updated nickname
-           //mUserData.saveNickname(tracking.getNickname());
+        try
+        {
 
-           mUserData.SaveUserTrackingProgess(tracking.getTotalWinCoins(),
-                   tracking.getTotalWinPrizes(),
-                   tracking.getCurrentCoinsProgress(),
-                   tracking.getTotalSouvenirs(),
-                   tracking.getAgeID());
+            mUserData.SaveUserTrackingProgess(tracking.getTotalWinCoins(), tracking.getTotalWinPrizes(), tracking.getCurrentCoinsProgress(), tracking.getTotalSouvenirs(), tracking.getAgeID());
 
-           mUserData.saveWorldcupTracking(tracking.getCountryID(),
-                   tracking.getCountryName(),
-                   tracking.getUrlImg(),
-                   tracking.getUrlImgMarker());
+            mUserData.saveWorldcupTracking(tracking.getCountryID(), tracking.getCountryName(), tracking.getUrlImg(), tracking.getUrlImgMarker());
 
-           mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
+            mView.updateIndicators(String.valueOf(mUserData.getTotalWonCoins()), String.valueOf(mUserData.getSavedSouvenirsCount()));
 
-       }
-       catch (Exception ex)
-       {
-           Log.e(TAG, "Error: " + ex.getMessage());
-       }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override
