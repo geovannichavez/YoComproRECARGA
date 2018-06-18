@@ -219,7 +219,6 @@ public class ValidatePhonePresenterImpl implements IValidatePhonePresenter, Vali
             // it's value, if exists registered Locally, will return false
             if(response.isExistsPhone())
             {
-                //TODO: Mostrar mensaje de usuario con registrado
                 ErrorResponseViewModel dialog = new ErrorResponseViewModel();
                 dialog.setTitle(context.getString(R.string.title_user_already_exists));
                 dialog.setLine1(context.getString(R.string.label_user_already_exists));
