@@ -7,6 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,8 +31,9 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.PrizesAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
+import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +45,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
 
     //Layouts and views
     Toolbar toolbar;
-    ListView mHistoryListview;
+    RecyclerView mHistoryListview;
     ProgressDialog progressDialog;
     ImageButton btnActivatePrize;
     ImageButton btnBack;
@@ -67,7 +72,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         setContentView(R.layout.activity_prizes_history);
 
         //Layouts
-        mHistoryListview = (ListView) findViewById(R.id.lvHistory);
+        mHistoryListview = (RecyclerView) findViewById(R.id.lvHistory);
         btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
@@ -105,11 +110,6 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         //Initialize views
         mPresenter.initialize();
 
-        //Adapter
-        mPrizesAdapter = new PrizesAdapter(this, R.layout.custom_prizes_history_listview_item);
-        mHistoryListview.setAdapter(mPrizesAdapter);
-
-
         mPresenter.retrievePrizes();
 
     }
@@ -124,29 +124,6 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
            mHistoryListview.setVisibility(View.VISIBLE);
            tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
            tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
-
-           mHistoryListview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-           {
-               @Override
-               public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-               {
-                   Prize currentItem = ((Prize) parent.getItemAtPosition(position));
-
-                   try
-                   {
-                       Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                       smsIntent.setType("vnd.android-dir/mms-sms");
-                       smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
-                       smsIntent.putExtra("sms_body",currentItem.getCode());
-                       startActivity(smsIntent);
-                   }
-                   catch (ActivityNotFoundException anf)
-                   {
-                       Log.e(TAG, anf.getLocalizedMessage());
-                       mPresenter.copyCodeToClipboard(currentItem.getCode());
-                   }
-               }
-           });
        }
        catch (Exception ex)
        {
@@ -156,18 +133,26 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     }
 
     @Override
-    public void renderPrizes(List<Prize> prizes)
+    public void renderPrizes(final List<Prize> prizes)
     {
-        mPrizesAdapter.notifyDataSetChanged();
-
         //Llenado de items en el GridView
         try
         {
-            mPrizesAdapter.clear();
-            for (Prize item : prizes)
-            {
-                mPrizesAdapter.add(item);
-            }
+
+            //Adapter
+            mPrizesAdapter = new PrizesAdapter(this, prizes, mPresenter);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplication());
+
+            mPrizesAdapter.notifyDataSetChanged();
+
+            mHistoryListview.setLayoutManager(layoutManager);
+            mHistoryListview.setItemAnimator(new DefaultItemAnimator());
+            mHistoryListview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            mHistoryListview.getRecycledViewPool().setMaxRecycledViews(1,0); //To prevent recycle
+            mHistoryListview.setAdapter(mPrizesAdapter);
+
+            mPrizesAdapter.notifyDataSetChanged();
+
         }
         catch (Exception ex)
         {

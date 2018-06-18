@@ -1,5 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 
 /**
@@ -10,4 +11,5 @@ public interface PrizesHistoryListener
 {
     void onRetrievePrizesSuccess(PrizesHistoryResponse response);
     void onRetrievePrizesError(int code, Throwable throwable, String requiredVersion);
+    void onSetRedeemedPrizeSuccess(SimpleResponse body);
 }

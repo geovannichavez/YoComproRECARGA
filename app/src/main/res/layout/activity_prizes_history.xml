@@ -7,8 +7,7 @@
     android:id="@+id/activity_era_selection"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory"
-    tools:layout_editor_absoluteY="25dp">
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory" >
 
 
 
@@ -132,19 +131,19 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="15"/>
+                    android:layout_weight="10" />
 
-                <ListView
+                <android.support.v7.widget.RecyclerView
                     android:id="@+id/lvHistory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="70"
-                    tools:listitem="@layout/custom_prizes_history_listview_item"/>
+                    android:layout_weight="80"
+                    tools:listitem="@layout/custom_prizes_history_listview_item" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="15"/>
+                    android:layout_weight="10" />
 
 
 
@@ -227,6 +226,7 @@
                     android:gravity="center"
                     android:fontFamily="@font/baloo_regular"
                     android:text="Premios"
+                    android:textSize="18sp"
                     android:textAllCaps="true"
                     android:textColor="#ffffff"/>
 

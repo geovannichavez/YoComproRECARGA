@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal"
-              android:weightSum="15">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100">
 
-    <!--    Column 1: Weight 3-->
+    <!--    Column 1: Weight 15-->
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_weight="3"
+        android:layout_height="105dp"
+        android:layout_weight="15"
         android:gravity="center">
 
         <ImageView
@@ -24,40 +24,42 @@
         android:layout_height="fill_parent"
         android:background="@drawable/custom_dashed_vertical_line"/>
 
-    <!--    Column 2: Weight 8-->
+    <!--    Column 2: Weight 40-->
     <RelativeLayout
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_weight="8"
+        android:layout_height="105dp"
+        android:layout_weight="40"
         android:gravity="center">
 
         <LinearLayout
-            android:padding="@dimen/margin_6dp"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_6dp">
+
             <TextView
                 android:id="@+id/tvPrizeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:maxLines="3"
                 android:text="Nevagcion Ilimitada 1 Sem."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:maxLines="2"
-                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/pure_black"
                 android:textSize="14sp"
-                android:fontFamily="@font/baloo_regular"
-                android:textColor="@color/pure_black"/>
+                android:textStyle="bold"/>
+
             <TextView
-                android:text="Nevega ilimitado por 7 dias "
-                android:layout_gravity="center"
                 android:id="@+id/tvPin"
-                android:gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:text="Nevega ilimitado por 7 dias gbgbbbgbgbgbgbgbggbgb  "
+                android:textColor="@color/pure_black"
                 fontPath="fonts/lato_semibold.ttf"
                 android:textSize="12sp"
-                android:textColor="@color/pure_black"/>
+                android:maxLines="3"/>
         </LinearLayout>
 
     </RelativeLayout>
@@ -68,27 +70,69 @@
         android:background="@drawable/custom_dashed_vertical_line"/>
 
 
-    <!--    Column 3: Weight 4-->
+    <!--    Column 3: Weight 20 -->
     <RelativeLayout
         android:paddingLeft="@dimen/margin_6dp"
         android:paddingStart="@dimen/margin_6dp"
         android:paddingEnd="@dimen/margin_6dp"
         android:paddingRight="@dimen/margin_6dp"
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_weight="4"
+        android:layout_height="105dp"
+        android:layout_weight="20"
         android:gravity="center">
 
         <TextView
-            android:text="SMS al 323"
+            android:text="SMS al 323 rfrffrfrfrfrf"
             android:id="@+id/tvExchange"
-            android:textSize="16sp"
-            android:maxLines="2"
+            android:textSize="14sp"
+            android:maxLines="3"
             android:textStyle="bold"
-            android:fontFamily="@font/baloo_regular"
             android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/pure_black"/>
     </RelativeLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/custom_dashed_vertical_line"/>
+
+    <!--    Column4: Weight 25 -->
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="105dp"
+        android:layout_weight="25"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_6dp">
+
+            <TextView
+                android:id="@+id/lblRedeemed"
+                fontPath="fonts/lato_semibold.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:maxLines="2"
+                android:text="¿Canjeado?"
+                android:textColor="@color/pure_black"
+                android:textSize="10sp" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/swRedeemed"
+                android:textOff=""
+                android:textOn=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
 </LinearLayout>

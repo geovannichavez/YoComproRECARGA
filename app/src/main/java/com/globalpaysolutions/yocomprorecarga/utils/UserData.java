@@ -36,6 +36,8 @@ public class UserData
     private static final String KEY_CONSUMER_NICKNAME = "usr_nickname";
     private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
     private static final String KEY_CONSUMER_LOCATION_VISIBLE = "key_consumer_location_visible";
+    private static final String KEY_AUTH_MODE_SELECTED = "key_auth_mode_selected";
+    private static final String KEY_AUTH_LOCAL_USER_EXISTS = "key_auth_local_user_exists";
 
     //App Preferences and Settings
     private static final String KEY_HAS_ACCEPTED_TERMS = "usr_has_accepted_terms";
@@ -88,9 +90,9 @@ public class UserData
     private static final String KEY_FACEBOOK_FIRST_NAME = "usr_facebook_first_name";
     private static final String KEY_FACEBOOK_LAST_NAME = "usr_facebook_last_name";
     private static final String KEY_FACEBOOK_EMAIL = "usr_facebook_email";
-    private static final String KEY_FACEBOOK_FULLNAME = "usr_facebook_fullname";
-    private static final String KEY_FACEBOOK_PROFILE_ID = "usr_facebook_profile_id";
-    private static final String KEY_FACEBOOK_URL = "usr_facebook_url";
+    private static final String KEY_AUTH_PROVIDER_FULLNAME = "usr_facebook_fullname";
+    private static final String KEY_AUTH_PROVIDER_ID = "usr_facebook_profile_id";
+    private static final String KEY_AUTH_PROVIDER_URL = "usr_facebook_url";
 
     //Souvenir
     private static final String KEY_SOUVENIR_TITLE = "usr_souvenir_title";
@@ -160,6 +162,9 @@ public class UserData
     private static final String KEY_WORLDCUP_COUNTRY_NAME = "key_worldcup_country_name";
     private static final String KEY_WORLDCUP_FLAG_URL = "key_worldcup_flag_url";
     private static final String KEY_WORLDCUP_MARKER_URL = "key_worldcup_marker_url";
+
+    //Google
+    private static final String KEY_GOOGLE_PHOTO_URL = "key_google_photo_url";
 
     private UserData(Context pContext)
     {
@@ -300,10 +305,10 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveFacebookData(String pFacebookID, String pURL)
+    public void saveAuthData(String authProviderID, String url)
     {
-        mEditor.putString(KEY_FACEBOOK_PROFILE_ID, pFacebookID);
-        mEditor.putString(KEY_FACEBOOK_URL, pURL);
+        mEditor.putString(KEY_AUTH_PROVIDER_ID, authProviderID);
+        mEditor.putString(KEY_AUTH_PROVIDER_URL, url);
         mEditor.commit();
     }
 
@@ -374,9 +379,9 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveFacebookFullname(String pFullname)
+    public void saveAuthProviderFullname(String pFullname)
     {
-        mEditor.putString(KEY_FACEBOOK_FULLNAME, pFullname);
+        mEditor.putString(KEY_AUTH_PROVIDER_FULLNAME, pFullname);
         mEditor.commit();
     }
 
@@ -654,7 +659,7 @@ public class UserData
         return mPreferences.getString(KEY_CONSUMER_COUNTRY_PHONE_CODE, "");
     }
 
-    public String GetDeviceID()
+    public String getDeviceID()
     {
         return mPreferences.getString(KEY_UNIQUE_DEVICE_ID, "");
     }
@@ -751,7 +756,7 @@ public class UserData
 
     public String getFacebookFullname()
     {
-        return mPreferences.getString(KEY_FACEBOOK_FULLNAME, "");
+        return mPreferences.getString(KEY_AUTH_PROVIDER_FULLNAME, "");
     }
 
     public boolean getSimpleInstructionsShowed()
@@ -831,9 +836,9 @@ public class UserData
         return mPreferences.getBoolean(KEY_HAS_SEEN_INTRO, false);
     }
 
-    public String getFacebookProfileId()
+    public String getAuthProviderId()
     {
-        return mPreferences.getString(KEY_FACEBOOK_PROFILE_ID, "");
+        return mPreferences.getString(KEY_AUTH_PROVIDER_ID, "");
     }
 
     public Achievement getLastAchievement()
@@ -999,8 +1004,8 @@ public class UserData
             mEditor.remove(KEY_CONSUMER_COUNTRY_NAME);
             mEditor.remove(KEY_CONSUMER_NICKNAME);
             mEditor.remove(KEY_CONSUMER_ID);
-            mEditor.remove(KEY_FACEBOOK_PROFILE_ID);
-            mEditor.remove(KEY_FACEBOOK_URL);
+            mEditor.remove(KEY_AUTH_PROVIDER_ID);
+            mEditor.remove(KEY_AUTH_PROVIDER_URL);
             mEditor.commit();
         }
         catch (Exception ex)
@@ -1146,4 +1151,36 @@ public class UserData
         return mPreferences.getInt(KEY_NEW_AGE, 0);
     }
 
+    public void saveAuthModeSelected(String mode)
+    {
+        mEditor.putString(KEY_AUTH_MODE_SELECTED, mode);
+        mEditor.commit();
+    }
+
+    public String getAuthModeSelected()
+    {
+        return mPreferences.getString(KEY_AUTH_MODE_SELECTED, "none");
+    }
+
+    public void saveGooglePhotoUrl(String googleUrl)
+    {
+        mEditor.putString(KEY_GOOGLE_PHOTO_URL, googleUrl);
+        mEditor.commit();
+    }
+
+    public String getGooglePhotoUrl()
+    {
+        return mPreferences.getString(KEY_GOOGLE_PHOTO_URL, "");
+    }
+
+    public void saveLocalUserExists(boolean exists)
+    {
+        mEditor.putBoolean(KEY_AUTH_LOCAL_USER_EXISTS, exists);
+        mEditor.commit();
+    }
+
+    public boolean localUserExists()
+    {
+        return mPreferences.getBoolean(KEY_AUTH_LOCAL_USER_EXISTS, false);
+    }
 }

@@ -7,22 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -35,7 +29,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.ValidatePhonePresenterI
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.Validation;
+import com.globalpaysolutions.yocomprorecarga.utils.NavFlagsUtil;
 import com.globalpaysolutions.yocomprorecarga.views.ValidatePhoneView;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +56,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
     List<String> countriesNames = new ArrayList<>();
     HashMap<String, Country> countriesMap = new HashMap<>();
     Country selectedCountry;
+    String mAuithType = "";
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -74,6 +69,8 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validate_phone);
+
+        mAuithType = getIntent().getStringExtra(Constants.INTENT_BUNDLE_AUTH_TYPE);
 
         etPhoneNumber = (EditText) findViewById(R.id.etConfirmPhone);
         btnSignin = (ImageButton) findViewById(R.id.btnConfirm);
@@ -118,7 +115,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
             String phoneNumber = etPhoneNumber.getText().toString();
             phoneNumber = phoneNumber.replace("-", "");
 
-            this.presenter.requestToken(phoneNumber);
+            this.presenter.requestToken(phoneNumber, mAuithType);
         }
         catch (Exception ex)
         {
@@ -192,7 +189,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
     }
 
     @Override
-    public void navigateTokenInput(RegisterClientResponse pResponse)
+    public void navigateTokenInput(RegisterClientResponse pResponse, String stringExtra)
     {
         String phone = etPhoneNumber.getText().toString();
 
@@ -200,13 +197,8 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
         this.presenter.saveUserGeneralData(rawPhone, pResponse.getConsumerID());
 
         Intent inputToken = new Intent(ValidatePhone.this, TokenInput.class);
-        inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        inputToken.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        inputToken.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        inputToken.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        inputToken.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        inputToken.putExtra(Constants.BUNDLE_TOKEN_VALIDATION, phone);
+        inputToken.putExtra(Constants.INTENT_BUNDLE_AUTH_TYPE, stringExtra);
+        NavFlagsUtil.addFlags(inputToken);
         startActivity(inputToken);
     }
 
@@ -347,7 +339,7 @@ public class ValidatePhone extends ImmersiveActivity implements ValidatePhoneVie
         {
             public void onClick(DialogInterface dialog, int which)
             {
-                //etRegPass.setText("");
+                dialog.dismiss();
             }
         });
         alertDialog.show();

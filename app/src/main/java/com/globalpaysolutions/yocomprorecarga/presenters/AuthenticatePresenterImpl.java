@@ -16,14 +16,20 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.AuthenticateInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.AuthenticateListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
-import com.globalpaysolutions.yocomprorecarga.models.FacebookConsumer;
+import com.globalpaysolutions.yocomprorecarga.models.Consumer;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IAuthenticatePresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.AuthenticateView;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -38,16 +44,16 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     private static final String TAG = AuthenticatePresenterImpl.class.getSimpleName();
 
     private Context mContext;
-    private UserData mUserData;
     private AuthenticateView mView;
     private AuthenticateInteractor mInteractor;
     private AppCompatActivity mActivity;
-
+    private GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInAccount mGoogleAccount;
+    private int RC_SIGN_IN = 11;
 
     public AuthenticatePresenterImpl(Context pContext, AuthenticateView pView, AppCompatActivity pActivity)
     {
         this.mContext = pContext;
-        this.mUserData = UserData.getInstance(mContext);
         this.mView = pView;
         this.mInteractor = new AuthenticateInteractor(mContext);
         this.mActivity = pActivity;
@@ -78,17 +84,66 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     @Override
     public void setupFacebookAuth(LoginButton pLoginButton)
     {
+        UserData.getInstance(mContext).saveAuthModeSelected(Constants.FACEBOOK);
         Log.i(TAG, "Facebook authentication started");
+
         mInteractor.initializeFacebook(this);
         pLoginButton.setReadPermissions(Arrays.asList("email","public_profile"));
         mInteractor.authenticateFacebookUser(this, pLoginButton);
     }
 
     @Override
-    public void onActivityResult(int pRequestCode, int pResultCode, Intent pData)
+    public void setupGoogleAuth()
     {
-        Log.i(TAG, "onActivityResult: resultCode = : " + String.valueOf(pRequestCode));
-        mInteractor.onActivityResult(pRequestCode, pResultCode, pData);
+        try
+        {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestServerAuthCode(Constants.GOOGLE_OAUTH_CLIENT_ID)
+                    .requestServerAuthCode(Constants.GOOGLE_OAUTH_CLIENT_ID, false)
+                    .requestIdToken(Constants.GOOGLE_OAUTH_CLIENT_ID)
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(mContext, gso);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on GoogleSignInOptions: "+ ex.getMessage());
+        }
+    }
+
+    @Override
+    public void checkGoogleSignedIn()
+    {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(mContext);
+        if(account != null)
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            Log.i(TAG, "User has been GoogleSigned in");
+            mInteractor.authenticateFirebaseUser(this, account.getIdToken(), account.getEmail());
+        }
+    }
+
+    @Override
+    public void googleSignin()
+    {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        UserData.getInstance(mContext).saveAuthModeSelected(Constants.GOOGLE);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        mActivity.startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        Log.i(TAG, "onActivityResult: resultCode = : " + String.valueOf(requestCode));
+        mInteractor.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN)
+        {
+            // The Task returned from this call is always completed, no need to attach a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
     }
 
     @Override
@@ -97,7 +152,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         try
         {
             //Authenticates user with Firebase
-            mInteractor.authenticateFirebaseUser(this, pLoginResult.getAccessToken(), pEmail);
+            mInteractor.authenticateFirebaseUser(this, pLoginResult.getAccessToken().getToken(), pEmail);
         }
         catch (Exception ex)
         {
@@ -139,43 +194,65 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     }
 
     @Override
-    public void onFirebaseAuthSuccess(String pEmail)
+    public void onFirebaseAuthSuccess(String pEmail, String authProvider)
     {
+        Consumer consumer = new Consumer();
+
         try
         {
-            Profile profile = Profile.getCurrentProfile();
+            switch (authProvider)
+            {
+                case Constants.FACEBOOK:
 
-            //Validates all fields from Profile
-            FacebookConsumer facebookConsumer = new FacebookConsumer();
-            String firstname = (!TextUtils.isEmpty(profile.getFirstName())) ? profile.getFirstName() : "NotFound";
-            String lastname = (!TextUtils.isEmpty(profile.getLastName())) ? profile.getLastName() : "NotFound";
-            String facebookUrl = (!TextUtils.isEmpty(profile.getLinkUri().toString())) ? profile.getLinkUri().toString() : "NotFound";
-            String profileId = (!TextUtils.isEmpty(profile.getId())) ? profile.getId() : "NotFound";
-            String middlename = (!TextUtils.isEmpty(profile.getMiddleName())) ? profile.getMiddleName() : "NotFound";
-            String name = (!TextUtils.isEmpty(profile.getName())) ? profile.getName() : "NotFound";
+                    Profile profile = Profile.getCurrentProfile();
+                    String firstname = (!TextUtils.isEmpty(profile.getFirstName())) ? profile.getFirstName() : "NotFound";
+                    String lastname = (!TextUtils.isEmpty(profile.getLastName())) ? profile.getLastName() : "NotFound";
+                    String facebookUrl = (!TextUtils.isEmpty(profile.getLinkUri().toString())) ? profile.getLinkUri().toString() : "NotFound";
+                    String profileId = (!TextUtils.isEmpty(profile.getId())) ? profile.getId() : "NotFound";
+                    String middlename = (!TextUtils.isEmpty(profile.getMiddleName())) ? profile.getMiddleName() : "NotFound";
+                    String name = (!TextUtils.isEmpty(profile.getName())) ? profile.getName() : "NotFound";
+
+                    consumer.setFirstName(firstname);
+                    consumer.setLastName(lastname);
+                    consumer.setDeviceID(UserData.getInstance(mContext).getDeviceID());
+                    consumer.setURL(facebookUrl);
+                    consumer.setProfileID(profileId);
+                    consumer.setEmail(pEmail);
+                    consumer.setMiddleName(middlename);
+                    consumer.setUserID(profileId);
+
+                    break;
+
+                case Constants.GOOGLE:
+                    String googleUrl = (TextUtils.isEmpty(mGoogleAccount.getPhotoUrl().toString())) ? "NotFound" : mGoogleAccount.getPhotoUrl().toString();
+
+                    UserData.getInstance(mContext).saveGooglePhotoUrl(googleUrl);
+
+                    consumer.setFirstName(mGoogleAccount.getGivenName());
+                    consumer.setLastName(mGoogleAccount.getFamilyName());
+                    consumer.setDeviceID(UserData.getInstance(mContext).getDeviceID());
+                    consumer.setURL("NotFound");
+                    consumer.setProfileID(mGoogleAccount.getId());
+                    consumer.setEmail(mGoogleAccount.getEmail());
+                    consumer.setMiddleName("NotFound");
+                    consumer.setUserID(mGoogleAccount.getId());
+
+                    break;
+            }
+
+            consumer.setAuthProvider(UserData.getInstance(mContext).getAuthModeSelected());
+            UserData.getInstance(mContext).saveAuthData(consumer.getProfileID(), consumer.getURL());
+
+            String name = consumer.getFirstName() + " " + consumer.getLastName();
 
             //Saves user email in CrashLytics
             Crashlytics.setUserEmail(pEmail);
             Crashlytics.setUserName(name);
 
-            //Registers user at OneSignal
-            //OneSignal.sendTag("userid", profile.getId());
-
-            //REGISTER CONSUMER
-            facebookConsumer.setFirstName(firstname);
-            facebookConsumer.setLastName(lastname);
-            facebookConsumer.setDeviceID(mUserData.GetDeviceID());
-            facebookConsumer.setURL(facebookUrl);
-            facebookConsumer.setProfileID(profileId);
-            facebookConsumer.setEmail(pEmail);
-            facebookConsumer.setMiddleName(middlename);
-            facebookConsumer.setUserID(profileId);
-            mUserData.saveFacebookData(profileId, facebookUrl);
-            mUserData.saveFacebookFullname(name);
+            UserData.getInstance(mContext).saveAuthProviderFullname(name);
 
             //Registers user on RecarGO! API
-            mInteractor.authenticateUser(this, facebookConsumer);
-
+            mInteractor.authenticateUser(this, consumer);
         }
         catch (Exception ex)
         {
@@ -190,6 +267,14 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         {
             mInteractor.logoutFirebaseUser();
             mInteractor.logoutFacebookUser();
+            mInteractor.logoutGoogleUser(this, mGoogleSignInClient);
+
+            mView.hideLoadingDialog();
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            dialog.setLine1(mContext.getString(R.string.error_content_facebook_graph));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(dialog);
         }
         catch (Exception ex)
         {
@@ -213,31 +298,32 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
     public void onAuthenticateConsumerSuccess(AuthenticateResponse pResponse)
     {
         mView.hideLoadingDialog();
-        mUserData.saveUserGeneralInfo(pResponse.getFirstName(), pResponse.getLastName(), pResponse.getEmail(), pResponse.getPhone());
-        mUserData.saveAuthenticationKey(pResponse.getAuthenticationKey());
-        mUserData.saveNickname(pResponse.getNickname());
-        mUserData.hasAuthenticated(true);
+        UserData.getInstance(mContext).saveUserGeneralInfo(pResponse.getFirstName(), pResponse.getLastName(), pResponse.getEmail(), pResponse.getPhone());
+        UserData.getInstance(mContext).saveAuthenticationKey(pResponse.getAuthenticationKey());
+        UserData.getInstance(mContext).saveNickname(pResponse.getNickname());
+        UserData.getInstance(mContext).hasAuthenticated(true);
 
         //Saves if user has nickname
         if(pResponse.getNickname() != null || !TextUtils.equals(pResponse.getNickname(), ""))
-            mUserData.hasSetNickname(true);
+            UserData.getInstance(mContext).hasSetNickname(true);
         else
-            mUserData.hasSetNickname(false);
+            UserData.getInstance(mContext).hasSetNickname(false);
 
 
-        if(mUserData.getUserPhone() == null || TextUtils.isEmpty(mUserData.getUserPhone()))
+        if(UserData.getInstance(mContext).getUserPhone() == null || TextUtils.isEmpty(UserData.getInstance(mContext).getUserPhone()))
         {
             mView.navigateValidatePhone();
         }
-        else if(mUserData.getNickname() == null || TextUtils.isEmpty(mUserData.getNickname()))
+        else if(UserData.getInstance(mContext).getNickname() == null || TextUtils.isEmpty(UserData.getInstance(mContext).getNickname()))
         {
             mView.navigateSetNickname();
         }
         else
         {
+            UserData.getInstance(mContext).HasConfirmedPhone(true);
+            UserData.getInstance(mContext).HasSelectedCountry(true);
             mView.navigateHome();
         }
-
 
     }
 
@@ -248,6 +334,37 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         mInteractor.logoutFirebaseUser();
         mView.hideLoadingDialog();
         this.processErrorMessage(pCodeStatus, pThrowable, pRequiredVersion);
+    }
+
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask)
+    {
+        try
+        {
+            mGoogleAccount = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            if(mGoogleAccount != null)
+            {
+                String tokenId = mGoogleAccount.getIdToken();
+                mInteractor.authenticateFirebaseUser(this, tokenId, mGoogleAccount.getEmail());
+            }
+            else
+            {
+                mView.hideLoadingDialog();
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+                dialog.setLine1(mContext.getString(R.string.error_content_google_auth));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showGenericDialog(dialog);
+            }
+
+        }
+        catch (ApiException e)
+        {
+            // The ApiException status code indicates the detailed failure reason.
+            Log.i(TAG, "signInResult:failed code=" + e.getStatusCode());
+        }
     }
 
     /*

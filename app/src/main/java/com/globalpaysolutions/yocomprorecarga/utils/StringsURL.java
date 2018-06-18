@@ -30,9 +30,13 @@ public class StringsURL
 
     public final static String VALIDATE_TOKEN = "validateToken";
 
+    public final static String VALIDATE_TOKEN_LOCAL_AUTH = "ValidateTokenPhone";
+
     public final static String REQUESTTOPUP = "requestTopup";
 
     public final static String REGISTER_PHONE_CONSUMER = "registerPhoneConsumer";
+
+    public final static String REGISTER_PHONE = "registerPhone";
 
     public final static String SEND_STORE_AIRTIME_REPORT = "sendLackCreditReport";
 
@@ -44,6 +48,8 @@ public class StringsURL
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
+    public final static String COMPLETE_PROFILE = "UpdateConsumer";
+
     public final static String REDEEM_PRIZE = "WinPrize";
 
     public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
@@ -51,6 +57,8 @@ public class StringsURL
     public static final String LEADERBOARDS = "leaderboards/";
 
     public static final String PRIZES_HISTORY = "prize/history";
+
+    public static final String SET_REDEEMED_PRIZE = "Prize/Redeeme";
 
     public static final String GET_ERAS = "GetAges";
 

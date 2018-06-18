@@ -26,7 +26,13 @@ public class PrizeData
     private String dialNumberOrPlace;
     @SerializedName("Level")
     @Expose
-    private Integer level;
+    private int level;
+    @SerializedName("RedeemedPrize")
+    @Expose
+    private boolean redeemedPrize;
+    @SerializedName("WinPrizeID")
+    @Expose
+    private int winPrizeID;
 
     public String getRegDate()
     {
@@ -78,14 +84,34 @@ public class PrizeData
         this.dialNumberOrPlace = dialNumberOrPlace;
     }
 
-    public Integer getLevel()
+    public int getLevel()
     {
         return level;
     }
 
-    public void setLevel(Integer level)
+    public void setLevel(int level)
     {
         this.level = level;
+    }
+
+    public boolean isRedeemedPrize()
+    {
+        return redeemedPrize;
+    }
+
+    public void setRedeemedPrize(boolean redeemedPrize)
+    {
+        this.redeemedPrize = redeemedPrize;
+    }
+
+    public int getWinPrizeID()
+    {
+        return winPrizeID;
+    }
+
+    public void setWinPrizeID(int winPrizeID)
+    {
+        this.winPrizeID = winPrizeID;
     }
 
 }

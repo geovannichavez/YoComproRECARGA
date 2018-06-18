@@ -200,6 +200,28 @@ public class Validation
         return ValidNickname.VALID;
     }
 
+    public enum ValidateName
+    {
+        VALID,
+        REQUIRED,
+        NOT_VALID
+    }
+
+    public ValidateName checkName(EditText editText, boolean required)
+    {
+        String text = editText.getText().toString().trim();
+        if (required && !HasText(editText))
+        {
+            return ValidateName.REQUIRED;
+        }
+
+        if (required && !Pattern.matches(NAME_REGEX, text))
+        {
+            return ValidateName.NOT_VALID;
+        }
+        return ValidateName.VALID;
+    }
+
     private boolean HasText(EditText pEditText)
     {
         boolean valid = true;

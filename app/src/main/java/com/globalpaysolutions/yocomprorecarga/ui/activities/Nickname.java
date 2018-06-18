@@ -122,6 +122,7 @@ public class Nickname extends ImmersiveActivity implements NicknameView
     public void navigateNext(Intent nextActivity)
     {
         startActivity(nextActivity);
+        finish();
     }
 
     @Override

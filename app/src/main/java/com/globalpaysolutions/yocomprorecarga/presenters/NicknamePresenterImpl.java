@@ -12,6 +12,7 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.SimpleResultResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.INicknamePresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Main;
+import com.globalpaysolutions.yocomprorecarga.utils.NavFlagsUtil;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.NicknameView;
 
@@ -76,6 +77,7 @@ public class NicknamePresenterImpl implements INicknamePresenter, NicknameListen
         mUserData.setWelcomeChestAvailable(true);
 
         Intent next = new Intent(mActivity, Main.class);
+        NavFlagsUtil.addFlags(next);
         mView.navigateNext(next);
 
     }

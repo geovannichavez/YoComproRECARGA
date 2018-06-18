@@ -186,6 +186,8 @@ public class Constants
     public static final String FACEBOOK_PLAYER_URL = "http://recar-go.com/share/FreeCoins";
     public static final String BUNDLE_SOUVENIRS_GROUP_SELCTED = "bundle_souvenirs_group_selcted";
 
+    //Google Auth
+    public static final String GOOGLE_OAUTH_CLIENT_ID = "764736593889-r30kkh6m26khvn8l8kcdckrvp1e593ol.apps.googleusercontent.com";
 
     public static final String ERA_WORLDCUP_NAME = "Futbolística";
     public static final int MARKER_MAX_WIDTH_DP_SIZE = 50;
@@ -193,6 +195,9 @@ public class Constants
     public static final String ACHV_GOLD_COLLECTOR = "Recolector de Oro";
     public static final String ACHV_SOUV_COLLECTOR = "Coleccionista de Souvenir";
     public static final String ACHV_PRIZE_WINNER = "Ganador de Premios";
+    public static final String FACEBOOK = "Facebook";
+    public static final String GOOGLE = "Google";
+    public static final String LOCAL = "Local";
 
     public static String PLATFORM = "ANDROID";
 
@@ -224,4 +229,6 @@ public class Constants
         SOUVENIRs_GROUPED, SOUVENIRS
     }
 
+    //Auth
+    public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
 }

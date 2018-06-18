@@ -1,8 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -28,14 +26,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
-import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -176,7 +169,7 @@ public class HomeInteractor implements IHomeInteractor
         try
         {
             String playerNick = UserData.getInstance(mContext).getNickname();
-            final String playerFacebookID = UserData.getInstance(mContext).getFacebookProfileId();
+            final String playerFacebookID = UserData.getInstance(mContext).getAuthProviderId();
             final String urlImgMarker = UserData.getInstance(mContext).getWorldcupMarkerUrl();
 
             Map<String, String> vendorPoint = new HashMap<>();
