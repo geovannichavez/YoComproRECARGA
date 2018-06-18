@@ -10,7 +10,7 @@ public interface IValidatePhonePresenter
 {
     void setInitialViewState();
     void fetchCountries();
-    void requestToken(String pPhoneNumber);
+    void requestToken(String pPhoneNumber, String authType);
     void savePreselectedCountry(Country pCountry);
     void saveUserGeneralData(String pPhone, int pConsumerID);
     void setSelectedCountry(Country pCountry);

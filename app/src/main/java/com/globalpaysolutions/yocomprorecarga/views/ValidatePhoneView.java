@@ -18,7 +18,7 @@ public interface ValidatePhoneView
     void hideLoading();
     void showGenericMessage(ErrorResponseViewModel pErrorMessage);
     void renderCountries(Countries pCountries);
-    void navigateTokenInput(RegisterClientResponse pResponse);
+    void navigateTokenInput(RegisterClientResponse pResponse, String stringExtra);
     void setSelectedCountry(Country pSelected);
     void loadBackground();
 }

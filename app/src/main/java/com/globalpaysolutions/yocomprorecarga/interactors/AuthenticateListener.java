@@ -5,6 +5,7 @@ import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.globalpaysolutions.yocomprorecarga.models.api.AuthenticateResponse;
+import com.google.android.gms.tasks.Task;
 
 /**
  * Created by Josué Chávez on 29/06/2017.
@@ -18,7 +19,7 @@ public interface AuthenticateListener
     void onGraphLoginCancel();
     void onGraphLoginError(FacebookException pException);
 
-    void onFirebaseAuthSuccess(String pEmail);
+    void onFirebaseAuthSuccess(String pEmail, String authProvider);
     void onFirebaseAuthError();
 
     void onCurrentProfileChanged(Profile pOldProfile, Profile pCurrentProfile);
@@ -26,4 +27,6 @@ public interface AuthenticateListener
 
     void onAuthenticateConsumerSuccess(AuthenticateResponse pResponse);
     void onAuthenticateConsumerError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
+
+
 }

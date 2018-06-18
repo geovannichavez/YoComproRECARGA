@@ -30,9 +30,13 @@ public class StringsURL
 
     public final static String VALIDATE_TOKEN = "validateToken";
 
+    public final static String VALIDATE_TOKEN_LOCAL_AUTH = "ValidateTokenPhone";
+
     public final static String REQUESTTOPUP = "requestTopup";
 
     public final static String REGISTER_PHONE_CONSUMER = "registerPhoneConsumer";
+
+    public final static String REGISTER_PHONE = "registerPhone";
 
     public final static String SEND_STORE_AIRTIME_REPORT = "sendLackCreditReport";
 
@@ -43,6 +47,8 @@ public class StringsURL
     public final static String AUTHENTICATE_CONSUMER = "ConsumerSignin";
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
+
+    public final static String COMPLETE_PROFILE = "UpdateConsumer";
 
     public final static String REDEEM_PRIZE = "WinPrize";
 

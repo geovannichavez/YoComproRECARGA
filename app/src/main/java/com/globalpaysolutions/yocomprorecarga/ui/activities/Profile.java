@@ -3,6 +3,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -79,7 +80,12 @@ public class Profile extends ImmersiveActivity implements ProfileView
         try
         {
             Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
-            Picasso.with(this).load(photoUrl).into(imgProfilePic);
+
+            if(TextUtils.isEmpty(photoUrl))
+                Picasso.with(this).load(R.drawable.img_profile_picture).into(imgProfilePic);
+            else
+                Picasso.with(this).load(photoUrl).into(imgProfilePic);
+
             tvNickname.setText(nickname);
 
             btnBack.setOnClickListener(backListener);

@@ -1,13 +1,10 @@
 package com.globalpaysolutions.yocomprorecarga.models;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by Josué Chávez on 05/07/2017.
  */
 
-public class FacebookConsumer
+public class Consumer
 {
     private String firstName;
     private String middleName;
@@ -17,8 +14,9 @@ public class FacebookConsumer
     private String email;
     private String profileID;
     private String userID;
+    private String authProvider;
 
-    public FacebookConsumer()
+    public Consumer()
     {
     }
 
@@ -100,5 +98,15 @@ public class FacebookConsumer
     public void setUserID(String userID)
     {
         this.userID = userID;
+    }
+
+    public String getAuthProvider()
+    {
+        return authProvider;
+    }
+
+    public void setAuthProvider(String authProvider)
+    {
+        this.authProvider = authProvider;
     }
 }
