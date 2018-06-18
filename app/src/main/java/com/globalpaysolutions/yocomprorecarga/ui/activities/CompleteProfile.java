@@ -146,6 +146,36 @@ public class CompleteProfile extends AppCompatActivity implements CompleteProfil
                 break;
         }
 
+        switch (validator.checkName(txtFirstname, true))
+        {
+            case REQUIRED:
+                validData = false;
+                createDialog(getString(R.string.validation_title_required), getString(R.string.validation_required_firstname), getString(R.string.button_accept), null);
+                break;
+            case VALID:
+                validData = true;
+                break;
+            case NOT_VALID:
+                validData = false;
+                createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_nickname), getString(R.string.button_accept), null);
+                break;
+        }
+
+        switch (validator.checkName(txtLastname, true))
+        {
+            case REQUIRED:
+                validData = false;
+                createDialog(getString(R.string.validation_title_required), getString(R.string.validation_required_lastname), getString(R.string.button_accept), null);
+                break;
+            case VALID:
+                validData = true;
+                break;
+            case NOT_VALID:
+                validData = false;
+                createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_lastname), getString(R.string.button_accept), null);
+                break;
+        }
+
         if(validData)
             mPresenter.completeProfile(firstname, lastname, nick);
     }

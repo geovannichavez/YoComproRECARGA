@@ -461,6 +461,9 @@
     <string name="label_type_nickname">Ingresa tu Nickname</string>
     <string name="title_phone_already_exists">Teléfono ya registrado</string>
     <string name="label_phone_already_exists">El número de teléfono que ingresaste ya está en uso</string>
+    <string name="validation_required_firstname">Tu nombre es requerido</string>
+    <string name="validation_required_lastname">Tu apellido es requerido</string>
+    <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
 
 
 </resources>
