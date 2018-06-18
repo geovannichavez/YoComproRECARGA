@@ -321,7 +321,7 @@
                             android:id="@+id/lblPrizeCount"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="70"
+                            android:layout_weight="60"
                             android:fontFamily="@font/baloo_regular"
                             android:gravity="center"
                             android:textColor="@color/white_textView_color"
@@ -332,7 +332,8 @@
                             android:id="@+id/icPrize"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="30"
+                            android:layout_weight="40"
+                            android:scaleType="centerInside"
                             android:src="@drawable/ic_trivia_prize" />
 
                     </LinearLayout>
