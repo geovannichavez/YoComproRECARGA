@@ -30,6 +30,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RedeemedPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RequestRewardReq;
@@ -136,6 +137,13 @@ public interface ApiInterface
     Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey,
                                                      @Header("AppVersion") String pAppVersion,
                                                      @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.SET_REDEEMED_PRIZE)
+    Call<SimpleResponse> setRedeemedPrize(@Body RedeemedPrizeReqBody redeemedReq,
+                                          @Header("authenticationKey") String pAuthKey,
+                                          @Header("AppVersion") String pAppVersion,
+                                          @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
     @GET(StringsURL.GET_ERAS)
@@ -280,4 +288,6 @@ public interface ApiInterface
                                                     @Header("AppVersion") String versionName,
                                                     @Header("Platform") String platform,
                                                     @Body CountrySelectedReq selectedCountry);
+
+
 }

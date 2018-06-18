@@ -9,4 +9,5 @@ public interface IPrizesHistoryPresenter
     void initialize();
     void retrievePrizes();
     void copyCodeToClipboard(String code);
+    void markPrizeRedeemed(int winPrizeID, boolean redeemed);
 }

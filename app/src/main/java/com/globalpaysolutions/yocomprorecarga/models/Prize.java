@@ -6,15 +6,23 @@ package com.globalpaysolutions.yocomprorecarga.models;
 
 public class Prize
 {
+    private String regDate;
     private String code;
-    private String Date;
     private String title;
     private String description;
-    private String exchangeMethod;
+    private String dialNumberOrPlace;
     private int level;
+    private boolean redeemedPrize;
+    private int winPrizeID;
 
-    public Prize()
+    public String getRegDate()
     {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate)
+    {
+        this.regDate = regDate;
     }
 
     public String getCode()
@@ -22,9 +30,9 @@ public class Prize
         return code;
     }
 
-    public String getDate()
+    public void setCode(String code)
     {
-        return Date;
+        this.code = code;
     }
 
     public String getTitle()
@@ -32,34 +40,14 @@ public class Prize
         return title;
     }
 
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public String getExchangeMethod()
-    {
-        return exchangeMethod;
-    }
-
-    public int getLevel()
-    {
-        return level;
-    }
-
-    public void setCode(String code)
-    {
-        this.code = code;
-    }
-
-    public void setDate(String date)
-    {
-        Date = date;
-    }
-
     public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public String getDescription()
+    {
+        return description;
     }
 
     public void setDescription(String description)
@@ -67,9 +55,19 @@ public class Prize
         this.description = description;
     }
 
-    public void setExchangeMethod(String exchangeMethod)
+    public String getDialNumberOrPlace()
     {
-        this.exchangeMethod = exchangeMethod;
+        return dialNumberOrPlace;
+    }
+
+    public void setDialNumberOrPlace(String dialNumberOrPlace)
+    {
+        this.dialNumberOrPlace = dialNumberOrPlace;
+    }
+
+    public int getLevel()
+    {
+        return level;
     }
 
     public void setLevel(int level)
@@ -77,13 +75,23 @@ public class Prize
         this.level = level;
     }
 
-    public Prize(String code, String date, String title, String description, String exchangeMethod, int level)
+    public boolean isRedeemedPrize()
     {
-        this.code = code;
-        this.Date = date;
-        this.title = title;
-        this.description = description;
-        this.exchangeMethod = exchangeMethod;
-        this.level = level;
+        return redeemedPrize;
+    }
+
+    public void setRedeemedPrize(boolean redeemedPrize)
+    {
+        this.redeemedPrize = redeemedPrize;
+    }
+
+    public int getWinPrizeID()
+    {
+        return winPrizeID;
+    }
+
+    public void setWinPrizeID(int winPrizeID)
+    {
+        this.winPrizeID = winPrizeID;
     }
 }

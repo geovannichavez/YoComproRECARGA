@@ -10,6 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.PrizesHistoryInteracto
 import com.globalpaysolutions.yocomprorecarga.interactors.PrizesHistoryListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.Prize;
+import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IPrizesHistoryPresenter;
@@ -78,6 +79,19 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     }
 
     @Override
+    public void markPrizeRedeemed(int winPrizeID, boolean redeemed)
+    {
+        try
+        {
+            mInteractor.setRedeemedPrize(winPrizeID, redeemed);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " +  ex.getMessage());
+        }
+    }
+
+    @Override
     public void onRetrievePrizesSuccess(PrizesHistoryResponse response)
     {
         List<Prize> prizeList = new ArrayList<>();
@@ -91,11 +105,13 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
                 {
                     Prize prize = new Prize();
                     prize.setCode(item.getCode());
-                    prize.setDate(item.getRegDate());
+                    prize.setRegDate(item.getRegDate());
                     prize.setDescription(item.getDescription());
-                    prize.setExchangeMethod(item.getDialNumberOrPlace());
+                    prize.setDialNumberOrPlace(item.getDialNumberOrPlace());
                     prize.setLevel(item.getLevel());
                     prize.setTitle(item.getTitle());
+                    prize.setWinPrizeID(item.getWinPrizeID());
+                    prize.setRedeemedPrize(item.isRedeemedPrize());
                     prizeList.add(prize);
                 }
                 mView.renderPrizes(prizeList);
@@ -123,7 +139,13 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
         processErrorMessage(code, throwable, requiredVersion);
     }
 
-     /*
+    @Override
+    public void onSetRedeemedPrizeSuccess(SimpleResponse body)
+    {
+        Log.i(TAG, "Response from set as redeemed: " + body.getMessage());
+    }
+
+    /*
     *
     *
     * OTHER METHODS
