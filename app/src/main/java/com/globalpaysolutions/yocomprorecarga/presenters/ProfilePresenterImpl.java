@@ -92,6 +92,18 @@ public class ProfilePresenterImpl implements IProfilePresenter, ProfileListener
             case Constants.LOCAL:
                 mView.loadViewsState("", mUserData.getNickname(), null);
                 break;
+            default: //For previus versions
+                Profile profileFb = Profile.getCurrentProfile();
+                if (profileFb != null)
+                {
+                    mView.loadViewsState("", mUserData.getNickname(),
+                            profileFb.getProfilePictureUri(500, 500).toString());
+                }
+                else
+                {
+                    mView.loadViewsState("", mUserData.getNickname(), null);
+                }
+                break;
         }
     }
 
