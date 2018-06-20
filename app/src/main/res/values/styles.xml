@@ -201,13 +201,15 @@
     </style>
 
     <style name="BrandedSwitch" parent="AppTheme">
-        <item name="colorAccent">#39ac39</item>
+        <!--<item name="colorAccent">#39ac39</item>-->
+        <!--<item name="colorControlActivated">@color/custom_switch_gray</item>-->
+        <item name="colorAccent">@color/custom_switch_gray</item>
     </style>
 
 
-    <style name="dark_switch_theme" >
+    <!--<style name="dark_switch_theme" >
         <item name="thumbTint">@color/custom_switch_gray</item>
         <item name="trackTint">@color/custom_switch_gray</item>
-    </style>
+    </style>-->
 
 </resources>

@@ -45,24 +45,26 @@
 
                 <ImageView
                     android:src="@drawable/bg_prize_pin"
-                    android:layout_weight="70"
+                    android:layout_weight="67"
                     android:layout_width="0dp"
                     android:scaleType="fitCenter"
                     android:layout_height="match_parent" />
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.5"/>
+                    android:layout_weight="1"/>
+
                 <ImageView
-                    android:src="@drawable/btn_exchange_prize_pin"
-                    android:scaleType="fitCenter"
+                    android:id="@+id/btnExchange"
                     android:layout_width="0dp"
-                    android:layout_weight="25"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="31"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_exchange_prize_pin" />
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.5"/>
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -75,7 +77,7 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"/>
+                    android:layout_weight="20"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -85,47 +87,31 @@
                     android:gravity="center_vertical|end"
                     android:includeFontPadding="false"
                     android:textColor="@color/pure_black"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/dimen_normal_10"
                     android:singleLine="true"
-                    tools:text="¿Premio canjeado?" />
+                    android:text="@string/label_answer_exchanged_prize" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
 
-
-                <LinearLayout
-                    android:weightSum="100"
-                    android:orientation="vertical"
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/swRedeemed"
                     android:layout_width="0dp"
+                    android:layout_gravity="center"
                     android:layout_height="match_parent"
-                    android:layout_weight="35">
+                    android:layout_weight="23"
+                    android:textOff=""
+                    android:textOn=""
+                    android:theme="@style/BrandedSwitch" />
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15" />
 
-                    <android.support.v7.widget.SwitchCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="70"
-                        android:textOff=""
-                        android:textOn=""
-                        android:theme="@style/dark_switch_theme" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15" />
-
-                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="8"/>
+                    android:layout_weight="12"/>
 
             </LinearLayout>
             <Space
@@ -163,28 +149,32 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_weight="30"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="0dp">
+
                 <TextView
-                    tools:text="SMS ILIM TODAS LAS REDES 24H"
-                    android:textColor="@color/white_textView_color"
+                    android:id="@+id/tvPrizeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
-                    android:textSize="12sp"
+                    android:includeFontPadding="false"
                     android:maxLines="1"
-                    android:includeFontPadding="false"
-                    android:fontFamily="@font/baloo_regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    tools:text="Ganaste mensaje de texto ilimitados a todas las redes durante 24 horas"
                     android:textColor="@color/white_textView_color"
-                    android:gravity="center"
-                    android:textSize="10sp"
-                    android:maxLines="2"
-                    android:includeFontPadding="false"
-                    android:fontFamily="@font/baloo_regular"
+                    android:textSize="@dimen/prize_item_title_size"
+                    tools:text="SMS ILIM TODAS LAS REDES 24H" />
+
+                <TextView
+                    android:id="@+id/ivDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="@dimen/prize_item_content_size"
+                    tools:text="Ganaste mensaje de texto ilimitados a todas las redes durante 24 horas" />
 
 
             </LinearLayout>
@@ -195,27 +185,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="15">
+
                 <TextView
-                    android:src="@drawable/bg_prize_pin"
-                    android:layout_weight="70"
+                    android:id="@+id/tvPin"
                     android:layout_width="0dp"
-                    android:gravity="center"
-                    tools:text="PIN: 09876543211144"
-                    android:textSize="14sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="68"
                     android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:src="@drawable/bg_prize_pin"
                     android:textColor="@color/white_textView_color"
-                    android:layout_height="match_parent" />
+                    android:textSize="@dimen/dimen_normal_12"
+                    android:maxLines="1"
+                    tools:text="PIN: 032946404556715" />
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"/>
+                    android:layout_weight="32"/>
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15"
-                android:theme="@style/dark_switch_theme" />
+                android:layout_weight="15" />
 
         </LinearLayout>
 

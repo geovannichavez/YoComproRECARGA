@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="prize_item_title_size">14sp</dimen>
+    <dimen name="prize_item_content_size">12sp</dimen>
+
+    <dimen name="dimen_normal_10">10sp</dimen>
+    <dimen name="dimen_normal_14">14sp</dimen>
+    <dimen name="dimen_normal_12">12sp</dimen>
+</resources>

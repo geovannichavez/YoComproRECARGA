@@ -49,24 +49,10 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
 
             final Prize currentItem = mPrizesHistoryList.get(position);
 
-            switch (currentItem.getLevel())
-            {
-                case 1:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_first));
-                    break;
-                case 2:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_second));
-                    break;
-                case 3:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_third));
-                    break;
-                default:
-                    Log.i(TAG, "No icon provided for prize");
-                    break;
-            }
 
             holder.title.setText(currentItem.getTitle());
-            holder.pin.setText(String.format(mContext.getString(R.string.label_code), currentItem.getCode()));
+            holder.pin.setText(String.format(mContext.getString(R.string.label_pin), currentItem.getCode()));
+            holder.description.setText(currentItem.getDescription());
             holder.pin.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -129,19 +115,21 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
     {
         ImageView icon;
         TextView title;
+        TextView description;
         TextView pin;
         TextView exchangeMethod;
+        ImageView btnExchange;
         SwitchCompat swRedeemed;
 
         PrizesHistoryViewHolder(View row)
         {
             super(row);
 
-            /*icon = (ImageView) row.findViewById(R.id.ivPrizeIcon);
             title = (TextView) row.findViewById(R.id.tvPrizeName);
             pin = (TextView) row.findViewById(R.id.tvPin);
-            exchangeMethod = (TextView) row.findViewById(R.id.tvExchange);
-            swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);*/
+            description = (TextView) row.findViewById(R.id.ivDescription) ;
+            btnExchange = (ImageView) row.findViewById(R.id.btnExchange);
+            swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);
         }
     }
 }

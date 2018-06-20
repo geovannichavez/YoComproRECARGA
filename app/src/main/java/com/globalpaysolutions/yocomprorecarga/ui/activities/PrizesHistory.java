@@ -49,8 +49,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     ProgressDialog progressDialog;
     //ImageButton btnActivatePrize;
     ImageButton btnBack;
-    TextView tvNoPrizesYetTitle;
-    TextView tvNoPrizesYetContent;
+    //TextView tvNoPrizesYetTitle;
+    //TextView tvNoPrizesYetContent;
     ImageView bgTimemachine;
 
     //Adapters
@@ -75,8 +75,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         mHistoryListview = (RecyclerView) findViewById(R.id.lvHistory);
         //btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
-        tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
+        //tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
+        //tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
         /*btnActivatePrize.setOnClickListener(new View.OnClickListener()
@@ -122,8 +122,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
            //Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
            mHistoryListview.setVisibility(View.VISIBLE);
-           tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
-           tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
+           //tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
+           //tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
        }
        catch (Exception ex)
        {
@@ -201,8 +201,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     @Override
     public void showNoPrizesText()
     {
-        tvNoPrizesYetTitle.setVisibility(View.VISIBLE);
-        tvNoPrizesYetContent.setVisibility(View.VISIBLE);
+        //tvNoPrizesYetTitle.setVisibility(View.VISIBLE);
+        //tvNoPrizesYetContent.setVisibility(View.VISIBLE);
         mHistoryListview.setVisibility(View.INVISIBLE);
     }
 

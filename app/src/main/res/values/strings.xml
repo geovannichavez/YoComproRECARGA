@@ -228,6 +228,7 @@
     <string name="label_prize_name">Premio</string>
     <string name="label_prize_exchange">Canje</string>
     <string name="label_code">Código: %1$s</string>
+    <string name="label_pin">PIN: %1$s</string>
 
     <!--    CONTENT DESCRIPTION     -->
     <string name="contentdescription_indicator">indicator</string>
@@ -464,6 +465,7 @@
     <string name="validation_required_firstname">Tu nombre es requerido</string>
     <string name="validation_required_lastname">Tu apellido es requerido</string>
     <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
+    <string name="label_answer_exchanged_prize">¿Premio canjeado?</string>
 
 
 </resources>

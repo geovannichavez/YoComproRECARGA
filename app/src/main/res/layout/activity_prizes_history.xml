@@ -14,11 +14,10 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/bgprizes"
+            android:id="@+id/bgTimemachine"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_background_4" />
+            android:scaleType="centerCrop" />
 
         <!-- Layer 1 -->
         <LinearLayout
