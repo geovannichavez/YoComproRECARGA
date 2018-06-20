@@ -40,7 +40,8 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     TextView lblPrizeDescription;
     TextView lblExchange;
     ImageButton btnSms;
-    ImageView bgOrange;
+    //ImageView bgOrange;
+    ImageView ivBackground;
 
     ImageButton btnBackMapPrizeDet;
     ImageButton btnRedeemPrizeDet;
@@ -48,11 +49,6 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     //MVP
     PrizeDetailPresenterImpl mPresenter;
 
-    @Override
-    protected void attachBaseContext(Context newBase)
-    {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,7 +56,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prize_detail);
 
-        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.color_orange_background));
+        getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colo_gray_new_timemachine_2));
 
         imgPrizeType = (ImageView) findViewById(R.id.imgChestPrize);
         etPrizeCode = (TextView) findViewById(R.id.txtPin);
@@ -68,7 +64,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
         lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
         btnSms = (ImageButton) findViewById(R.id.btnSms);
-        bgOrange = (ImageView) findViewById(R.id.bgOrange);
+        ivBackground = (ImageView) findViewById(R.id.ivBackground);
 
         btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
         btnRedeemPrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
@@ -230,7 +226,7 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     @Override
     public void loadBackground()
     {
-        Picasso.with(this).load(R.drawable.bg_orange).into(bgOrange);
+        Picasso.with(this).load(R.drawable.bg_background_4).into(ivBackground);
     }
 
     public void navigateTimeMachine(View view)
