@@ -65,13 +65,13 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     }
 
     @Override
-    public void answerTrivia(int answerID, int buttonClicked, int triviaID, boolean answered)
+    public void answerTrivia(int answerID, int buttonClicked, int triviaID, boolean answered, int points)
     {
         mView.removeClickable();
         if(answered)
         {
             mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-            mInteractor.answerTrivia(answerID, this, buttonClicked, triviaID);
+            mInteractor.answerTrivia(answerID, this, buttonClicked, triviaID,points);
         }
         else
         {
@@ -101,6 +101,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
     {
         try
         {
+            UserData.getInstance(mContext).saveTriviaPending(0); //Reset Trivia Available
             mView.hideLoadingDialog();
             startTimer(response.getTimer());
 
@@ -299,7 +300,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                     if (Math.round((float) millisUntilFinished / 1000.0f) != secondsLeft)
                     {
                         secondsLeft = Math.round((float)millisUntilFinished / 1000.0f);
-                        mView.updateTimer(String.valueOf(secondsLeft));
+                        mView.updateTimer(String.valueOf(secondsLeft),secondsLeft);
                     }
                 }
 

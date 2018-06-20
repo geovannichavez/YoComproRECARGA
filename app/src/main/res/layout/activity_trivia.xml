@@ -7,274 +7,507 @@
     android:layout_height="match_parent"
     tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.Trivia">
 
-    <ImageView
-        android:id="@+id/bgTrivia"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        />
+    <!--Layer 1-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_new"/>
+        <ImageView
+            android:id="@+id/bgTrivia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="fitXY"
+            tools:src="@drawable/bg_trivia" />
 
-    <ImageView
-        android:id="@+id/bgSponsor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="84dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bgTrivia"
-        app:srcCompat="@drawable/bg_trivia_sponsor"/>
 
-    <ImageView
-        android:id="@+id/bgPrizePointer"
-        android:layout_width="112dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="144dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/bgSponsor"
-        app:layout_constraintTop_toTopOf="@+id/bgSponsor"
-        app:srcCompat="@drawable/ic_trivia_prize_indicator"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-    <ImageView
-        android:id="@+id/bgTimePointer"
-        android:layout_width="112dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"
-        app:layout_constraintStart_toStartOf="@+id/bgPrizePointer"
-        app:layout_constraintTop_toBottomOf="@+id/bgPrizePointer"
-        app:srcCompat="@drawable/ic_trivia_prize_indicator"/>
+            <ImageView
+                android:id="@+id/panelTop"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/bg_trivia_panel1" />
 
-    <TextView
-        android:id="@+id/lblPrize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:text="@string/label_prize"
-        android:textColor="@color/pure_black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/bgPrizePointer"
-        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"/>
 
-    <TextView
-        android:id="@+id/lblTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:text="@string/label_time"
-        android:textColor="@color/pure_black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/bgTimePointer"
-        app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
-        app:layout_constraintTop_toBottomOf="@+id/bgPrizePointer"
-        app:layout_constraintVertical_bias="1.0"/>
+        </LinearLayout>
 
-    <ImageView
-        android:id="@+id/icPrize"
-        android:layout_width="36dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bgPrizePointer"
-        app:layout_constraintEnd_toEndOf="@+id/bgPrizePointer"
-        app:layout_constraintTop_toTopOf="@+id/bgPrizePointer" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/lblPrizeCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:textColor="@color/white_textView_color"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="@+id/bgPrizePointer"
-        app:layout_constraintEnd_toStartOf="@+id/icPrize"
-        app:layout_constraintStart_toStartOf="@+id/bgPrizePointer"
-        app:layout_constraintTop_toTopOf="@+id/bgPrizePointer"
-        tools:text="50"/>
+    <!--Layer 2-->
 
-    <TextView
-        android:id="@+id/lblTimeRem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/white_textView_color"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="@+id/bgTimePointer"
-        app:layout_constraintEnd_toEndOf="@+id/bgTimePointer"
-        app:layout_constraintStart_toStartOf="@+id/bgTimePointer"
-        app:layout_constraintTop_toTopOf="@+id/bgTimePointer"
-        tools:text="00:30"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgSponsor"
-        android:layout_width="255dp"
-        android:layout_height="255dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bgSponsor"
-        app:layout_constraintEnd_toEndOf="@+id/bgSponsor"
-        app:layout_constraintStart_toStartOf="@+id/bgSponsor"
-        app:layout_constraintTop_toTopOf="@+id/bgSponsor"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-    <TextView
-        android:id="@+id/lblQuestion"
-        android:layout_width="371dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:maxLines="4"
-        android:textColor="@color/white_textView_color"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgSponsor"
-        tools:text="¿Cual es el precio del Paquete Triple Claro Hogar que incluye internet de 5 Megas y una Laptop Dell?"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-    <ImageView
-        android:id="@+id/btnAnswer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/lblQuestion"
-        app:layout_constraintStart_toStartOf="@+id/lblQuestion"
-        app:layout_constraintTop_toBottomOf="@+id/lblQuestion"
-        app:srcCompat="@drawable/btn_trivia_answer_good"/>
+                <ImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="18"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_back_new" />
 
-    <ImageView
-        android:id="@+id/btnAnswer2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnswer1"
-        app:layout_constraintStart_toStartOf="@+id/btnAnswer1"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnswer1"
-        app:srcCompat="@drawable/btn_trivia_answer_on"/>
+                <TextView
+                    android:id="@+id/lblQuestionNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="64"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="28sp"
+                    tools:text="Pregunta #120" />
 
-    <ImageView
-        android:id="@+id/btnAnswer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnswer2"
-        app:layout_constraintStart_toStartOf="@+id/btnAnswer2"
-        app:layout_constraintTop_toBottomOf="@+id/btnAnswer2"
-        app:srcCompat="@drawable/btn_trivia_answer_wrong"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="18" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/lblQuestionNumber"
-        android:layout_width="268dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:textColor="@color/white_textView_color"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bgTrivia"
-        tools:text="Pregunta #120"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
 
-    <TextView
-        android:id="@+id/tvAnswer1"
-        android:layout_width="306dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:textColor="@color/white_textView_color"
-        android:maxLines="2"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer1"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnswer1"
-        app:layout_constraintStart_toStartOf="@+id/btnAnswer1"
-        app:layout_constraintTop_toTopOf="@+id/btnAnswer1"
-        tools:text="$40 Mensuales"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-    <TextView
-        android:id="@+id/tvAnswer2"
-        android:layout_width="306dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:textColor="@color/white_textView_color"
-        android:maxLines="2"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer2"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnswer2"
-        app:layout_constraintStart_toStartOf="@+id/btnAnswer2"
-        app:layout_constraintTop_toTopOf="@+id/btnAnswer2"
-        tools:text="$55 Mensuales"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
 
-    <TextView
-        android:id="@+id/tvAnswer3"
-        android:layout_width="306dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:textColor="@color/white_textView_color"
-        android:maxLines="2"
-        android:textSize="16sp"
-        android:includeFontPadding="false"
-        tools:text="$85 Mensuales"
-        app:layout_constraintBottom_toBottomOf="@+id/btnAnswer3"
-        app:layout_constraintEnd_toEndOf="@+id/btnAnswer3"
-        app:layout_constraintStart_toStartOf="@+id/btnAnswer3"
-        app:layout_constraintTop_toTopOf="@+id/btnAnswer3"/>
+                <ImageView
+                    android:id="@+id/bgSponsor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/bg_trivia_sponsor" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="26"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="30" />
+
+                    <TextView
+                        android:id="@+id/lblPrize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="10"
+                        android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:text="@string/label_prize"
+                        android:textColor="@color/pure_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/bgPrizePointer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        app:srcCompat="@drawable/ic_trivia_prize_indicator" />
+
+                    <TextView
+                        android:id="@+id/lblTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="10"
+                        android:fontFamily="@font/baloo_regular"
+                        android:text="@string/label_time"
+                        android:textColor="@color/pure_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/bgTimePointer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        app:srcCompat="@drawable/ic_trivia_prize_indicator" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+            <!-- Pregunta-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="11" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnAnswer1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/btn_trivia_answer_good" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnAnswer2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/btn_trivia_answer_good" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnAnswer3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/btn_trivia_answer_good" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <!-- Layer 3 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <ImageView
+                    android:id="@+id/imgSponsor"
+                    android:layout_width="0dp"
+                    android:layout_height="255dp"
+                    android:layout_weight="70"
+                    android:scaleType="fitCenter" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="26"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <TextView
+                            android:id="@+id/lblPrizeCount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="60"
+                            android:fontFamily="@font/baloo_regular"
+                            android:gravity="center"
+                            android:textColor="@color/white_textView_color"
+                            android:textSize="24sp"
+                            tools:text="500" />
+
+                        <ImageView
+                            android:id="@+id/icPrize"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="40"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_trivia_prize" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="10" />
+
+
+                    <TextView
+                        android:id="@+id/lblTimeRem"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:gravity="center"
+                        android:textColor="@color/white_textView_color"
+                        android:textSize="24sp"
+                        tools:text="00:30" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="11"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/lblQuestion"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="18sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:maxLines="4"
+                    android:textColor="@color/white_textView_color"
+
+                    tools:text="¿Cual es el precio del Paquete Triple Claro Hogar que incluye internet de 5 Megas y una Laptop Dell?" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/tvAnswer1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:scaleType="fitCenter"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="16sp"
+                    app:srcCompat="@drawable/btn_trivia_answer_good"
+                    tools:text="$40 Mensuales" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/tvAnswer2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:scaleType="fitCenter"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="16sp"
+                    app:srcCompat="@drawable/btn_trivia_answer_good"
+                    tools:text="$ 55 Mensuales" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <TextView
+                    android:id="@+id/tvAnswer3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="92"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:scaleType="fitCenter"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="16sp"
+                    app:srcCompat="@drawable/btn_trivia_answer_good"
+                    tools:text="Un perrro llamado Hueso lo tenía escondido en su escondite" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>

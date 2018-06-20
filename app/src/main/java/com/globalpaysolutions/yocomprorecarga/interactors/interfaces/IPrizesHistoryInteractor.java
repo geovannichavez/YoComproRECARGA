@@ -7,4 +7,5 @@ package com.globalpaysolutions.yocomprorecarga.interactors.interfaces;
 public interface IPrizesHistoryInteractor
 {
     void retrievePrizesHistory();
+    void setRedeemedPrize(int winPrizeID, boolean redeemed);
 }

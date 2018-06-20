@@ -23,8 +23,6 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.ChallengesView;
 import com.google.android.gms.maps.model.LatLng;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,6 +64,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         //Checks if era has been reselected
         EraSelectionValidator.checkMustReselectEra(mActivity, mContext, Constants.BUNDLE_DESTINY_CHALLENGES);
 
+
         boolean locationVisible = UserData.getInstance(mContext).checkCurrentLocationVisible();
 
         mView.initializeViews(locationVisible);
@@ -102,7 +101,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
                 if(this.mGoogleLocationApiManager.isConnectionEstablished())
                     this.mGoogleLocationApiManager.disconnect();
                 else
-                    mInteractor.deleteCurrentUserLocation(UserData.getInstance(mContext).getFacebookProfileId(), this);
+                    mInteractor.deleteCurrentUserLocation(UserData.getInstance(mContext).getAuthProviderId(), this);
             }
 
         }
@@ -206,8 +205,10 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     public void onRetrieveSuccess(ChallengesResponse response)
     {
         mView.hideLoadingDialog();
-        if(response != null)
+        if(response != null) {
+            mView.initializeValues(response.getChallengesWin(), response.getChallengesLose(), response.getChallengesDraw(), response.getLaPulgaWin(), response.getELPibeWin(), response.getDinhoWin(), response.getElComandanteWin(), response.getZizouWin());
             mView.renderChallegenes(response.getList());
+        }
     }
 
     @Override
@@ -251,7 +252,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
         {
             if(location != null)
             {
-                String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
+                String firebaseKey = UserData.getInstance(mContext).getAuthProviderId();
                 GeoLocation userLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
                 mInteractor.setPlayerLocation(firebaseKey, userLocation, this);
             }
@@ -281,7 +282,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
                     vendorPoint.put("MarkerUrl", UserData.getInstance(mContext).getWorldcupMarkerUrl());
                 }
 
-                mInteractor.writePlayerDataLocation(userLocation, this, vendorPoint, UserData.getInstance(mContext).getFacebookProfileId());
+                mInteractor.writePlayerDataLocation(userLocation, this, vendorPoint, UserData.getInstance(mContext).getAuthProviderId());
             }
         }
         catch (Exception ex)
@@ -295,7 +296,7 @@ public class ChallengesPresenterImpl implements IChallengesPresenter, Challenges
     {
         try
         {
-            String key = UserData.getInstance(mContext).getFacebookProfileId();
+            String key = UserData.getInstance(mContext).getAuthProviderId();
             mInteractor.deleteCurrentUserLocation(key, this);
         }
         catch (Exception ex)

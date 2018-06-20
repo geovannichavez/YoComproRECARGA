@@ -11,6 +11,7 @@ import android.util.Log;
 import com.adform.adformtrackingsdk.AdformTrackingSdk;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
+import com.flurry.android.FlurryAgent;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
@@ -20,6 +21,8 @@ import com.onesignal.OneSignal;
 import java.util.Map;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
+import static android.util.Log.VERBOSE;
 
 /**
  * Created by Josué Chávez on 22/03/2017.
@@ -112,6 +115,12 @@ public class YoComproRecargaApplication extends Application
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        //Flurry SDK
+        new FlurryAgent.Builder()
+                .withLogEnabled(true)
+                .withLogLevel(VERBOSE)
+                .build(this, "QD8CKDD7WRF2HFHFDNRX");
     }
 
     @Override

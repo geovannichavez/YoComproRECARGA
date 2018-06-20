@@ -14,30 +14,33 @@ public class RegisterClientResponse
 {
     @SerializedName("result")
     @Expose
-    private Boolean result;
+    private boolean result;
     @SerializedName("consumerID")
     @Expose
-    private Integer consumerID;
+    private int consumerID;
     @SerializedName("message")
     @Expose
     private String message;
     @SerializedName("SecondsRemaining")
     @Expose
     private String secondsRemaining;
+    @SerializedName("existsPhone")
+    @Expose
+    private boolean existsPhone;
 
-    public Boolean getResult() {
+    public boolean isResult() {
         return result;
     }
 
-    public void setResult(Boolean result) {
+    public void setResult(boolean result) {
         this.result = result;
     }
 
-    public Integer getConsumerID() {
+    public int getConsumerID() {
         return consumerID;
     }
 
-    public void setConsumerID(Integer consumerID) {
+    public void setConsumerID(int consumerID) {
         this.consumerID = consumerID;
     }
 
@@ -56,5 +59,14 @@ public class RegisterClientResponse
     public void setSecondsRemaining(String secondsRemaining) {
         this.secondsRemaining = secondsRemaining;
     }
+
+    public boolean isExistsPhone() {
+        return existsPhone;
+    }
+
+    public void setExistsPhone(boolean existsPhone) {
+        this.existsPhone = existsPhone;
+    }
+
 
 }

@@ -8,7 +8,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.StoreAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.StoreView;
 import com.squareup.picasso.Picasso;
 
@@ -45,12 +48,15 @@ public class Store extends ImmersiveActivity implements StoreView
     ImageButton btnLeft;
     ImageButton btnRight;
     TextView lblRecarCoinsLeft;
+    TextView lblSouvenirsLeft;
     ImageView btnBuy;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
     AlertDialog mConfirmDialog;
     ImageView btnRewards;
+    TextView lblPrizeStore;
+    ImageView btnCollectionStore;
 
     //Global Variables
     List<ListGameStoreResponse> mStoreItems;
@@ -75,10 +81,16 @@ public class Store extends ImmersiveActivity implements StoreView
         btnLeft = (ImageButton) findViewById(R.id.btnLeft);
         btnRight = (ImageButton) findViewById(R.id.btnRight);
         lblRecarCoinsLeft = (TextView) findViewById(R.id.lblRecarCoinsLeft);
+        lblSouvenirsLeft = (TextView) findViewById(R.id.lblSouvenirLeft);
         btnBuy = (ImageView) findViewById(R.id.btnBuy);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         btnRewards = (ImageView) findViewById(R.id.btnRewards);
+        btnCollectionStore = (ImageView) findViewById(R.id.btnCollectionStore);
+
+
+        lblPrizeStore =(TextView) findViewById(R.id.tvPrizeStore);
+
         btnBack.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -86,6 +98,16 @@ public class Store extends ImmersiveActivity implements StoreView
             {
                 ButtonAnimator.getInstance(Store.this).animateButton(v);
                 navigateBack();
+            }
+        });
+
+        btnCollectionStore.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ButtonAnimator.getInstance(Store.this).animateButton(v);
+                navigateSouvenirs();
             }
         });
 
@@ -101,6 +123,7 @@ public class Store extends ImmersiveActivity implements StoreView
                 finish();
             }
         });
+
 
         mPresenter = new StorePresenterImpl(this, this, this);
         mPresenter.initialValues();
@@ -156,13 +179,14 @@ public class Store extends ImmersiveActivity implements StoreView
     }
 
     @Override
-    public void setInitialValues(String currentCoins)
+    public void setInitialValues(String currentCoins, String currentSouvenirs)
     {
         try
         {
-            Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+            //Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
 
             lblRecarCoinsLeft.setText(currentCoins);
+            lblSouvenirsLeft.setText(currentSouvenirs);
             btnBuy.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -182,7 +206,7 @@ public class Store extends ImmersiveActivity implements StoreView
             });
 
             //Button hidden on first page
-            btnLeft.setVisibility(View.GONE);
+            btnLeft.setVisibility(View.INVISIBLE);
         }
         catch (Exception ex)
         {
@@ -195,6 +219,7 @@ public class Store extends ImmersiveActivity implements StoreView
     {
         int currentPage = 0;
         mStoreItems = items;
+        mCurrentItem=currentPage;
 
         ArrayList<ListGameStoreResponse> storeItemsArray = new ArrayList<>();
 
@@ -209,7 +234,10 @@ public class Store extends ImmersiveActivity implements StoreView
             {
                 currentPage = 0;
             }
+            lblPrizeStore.setText(String.format("COMPRAR %1$s", format(mStoreItems.get(currentPage).getValue())));
             pagerStoreItems.setCurrentItem(currentPage++, true);
+
+
         }
         catch (Exception ex)
         {
@@ -466,6 +494,9 @@ public class Store extends ImmersiveActivity implements StoreView
         {
             mCurrentItem = position;
 
+            lblPrizeStore.setText(String.format("COMPRAR %1$s", format(mStoreItems.get(position).getValue())));
+
+
             // Last page, make right button invisible
             if (position == mStoreItems.size() - 1)
             {
@@ -503,8 +534,10 @@ public class Store extends ImmersiveActivity implements StoreView
         {
             ButtonAnimator.getInstance(Store.this).animateButton(view);
             int current = pagerStoreItems.getCurrentItem() + 1;
-            if (current < mStoreItems.size())
+            if (current < mStoreItems.size()) {
                 pagerStoreItems.setCurrentItem(current);
+
+            }
             else
                 mPresenter.navigateNext();
         }
@@ -534,6 +567,12 @@ public class Store extends ImmersiveActivity implements StoreView
     public void navigateSouvenirs()
     {
         Intent souvenirs = new Intent(this, Souvenirs.class);
+
+        if(TextUtils.equals(UserData.getInstance(this).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
+        {
+            souvenirs = new Intent(this, SouvenirsGroups.class);
+        }
+
         startActivity(souvenirs);
     }
 
@@ -590,6 +629,14 @@ public class Store extends ImmersiveActivity implements StoreView
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private static String format(double d)
+    {
+        if(d == (long) d)
+            return String.format("%d",(long)d);
+        else
+            return String.format("%s",d);
     }
 
 }

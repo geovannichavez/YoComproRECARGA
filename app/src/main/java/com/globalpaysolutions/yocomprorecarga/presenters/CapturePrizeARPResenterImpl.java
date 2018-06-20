@@ -671,7 +671,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         mView.hideLoadingDialog();
 
         //Saves updated nickname
-        mUserData.saveNickname(pTracking.getNickname());
+        //mUserData.saveNickname(pTracking.getNickname());
 
         mInteractor.saveUserTracking(pTracking);
         mView.updateIndicators(String.valueOf(pTracking.getTotalWinPrizes()),

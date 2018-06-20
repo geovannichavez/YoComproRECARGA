@@ -147,6 +147,7 @@
     <string name="error_title_vendor_not_found">VENDEDOR NO ENCONTRADO</string>
     <string name="error_content_vendor_not_found_line">No encontramos ningún vendedor con ese código. Asegúrate de escribir el código correcto.</string>
     <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
+    <string name="error_content_google_auth">Error al iniciar sesión con Google. Inténtelo nuevamente.</string>
 
     <!--    DIALOGS -->
     <string name="dialog_success_title">¡ÉXITO!</string>
@@ -213,6 +214,7 @@
     <string name="label_name">Nombre</string>
     <string name="label_nickname">Nickname</string>
     <string name="label_ranking">Ranking</string>
+    <string name="label_ranking_number"> %1$s </string>
     <string name="label_username">Usuario</string>
     <string name="label_recarcoins">RecarCoins</string>
     <string name="label_last_winner">Último Ganador: %1$s</string>
@@ -279,7 +281,7 @@
     <string name="label_intro_3_1">Son tesoros que puedes canjear por premios. No te quedes sin souvenirs pues no podrás avanzar a la siguiente era.</string>
     <string name="label_intro_4">Las monedas RecarCoins las encontrarás en los contenedores que visualizarás en el mapa. \n\n Con ellas podrás comprar en la tienda, obteniendo más souvenirs. La suerte decide cuántas monedas tendrás.</string>
     <string name="label_intro_5">Todos los días puedes canjear premios con tus 20 RecarCoins o con souvenirs repetidos. \n\n Tus premios se mantendrán vigentes hasta activar el código. Atento al canjear, ya que puedes obtener premios increíbles.</string>
-    <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con tu cuenta de Facebook para continuar</string>
+    <string name="label_new_login_with_facebook_">Ahora podemos conocernos mejor. Inicia sesión con Facebook, Google o teléfono para continuar</string>
     <string name="label_we_may_need_comunicate">Si obtienes un gran premio necesitaremos comunicarnos contigo</string>
     <string name="label_how_to_contact">¿CÓMO NOS PODREMOS CONTACTAR?</string>
     <string name="label_welcome_aventurer">¡INGRESA TU NICKNAME!</string>
@@ -451,6 +453,17 @@
     <string name="label_winner">Ganador</string>
     <string name="label_completed">Completado</string>
     <string name="gold_collector">Recolector de Oro</string>
+    <string name="label_phone">Teléfono</string>
+    <string name="title_user_already_exists">Usuario Registrado</string>
+    <string name="label_user_already_exists">Ya existe un usuario con este número de teléfono</string>
+    <string name="label_type_firstname">Ingresa tu nombre</string>
+    <string name="label_type_lastname">Ingresa tu apellido</string>
+    <string name="label_type_nickname">Ingresa tu Nickname</string>
+    <string name="title_phone_already_exists">Teléfono ya registrado</string>
+    <string name="label_phone_already_exists">El número de teléfono que ingresaste ya está en uso</string>
+    <string name="validation_required_firstname">Tu nombre es requerido</string>
+    <string name="validation_required_lastname">Tu apellido es requerido</string>
+    <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
 
 
 </resources>

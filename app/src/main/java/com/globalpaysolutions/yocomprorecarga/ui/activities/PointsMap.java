@@ -92,6 +92,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
 
     //Global Variables
     final private int REQUEST_ACCESS_FINE_LOCATION = 3;
+    private int mViewUpdatesCounter = 0;
     private ShowcaseView mShowcaseView;
     private int mShowcaseCounter;
     private Map<String, Marker> mSalesPointsMarkers;
@@ -413,7 +414,12 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             Log.d(TAG, "updateUserLocationOnMap");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
+
+            if(mViewUpdatesCounter <= 0)
+            {
+                mGoogleMap.animateCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                mViewUpdatesCounter = mViewUpdatesCounter + 1;
+            }
 
             mPresenter.updateVendorsPntCriteria(currentLocation);
             //mPresenter.writeCurrentPlayerLocation(currentLocation); //Updates current user location

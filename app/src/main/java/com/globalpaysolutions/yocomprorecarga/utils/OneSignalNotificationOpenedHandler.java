@@ -63,6 +63,7 @@ public class OneSignalNotificationOpenedHandler implements OneSignal.Notificatio
                 Intent challenges = new Intent(mContext, Challenges.class);
                 challenges.putExtra(Constants.NOTIFICATION_TITLE_EXTRA, title);
                 challenges.putExtra(Constants.NOTIFICATION_BODY_EXTRA, result.notification.payload.body);
+                challenges.putExtra(Constants.BUNDLE_CHALLENGES_BACK_MAP, Constants.ChallengesBackStack.MAIN);
                 challenges.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(challenges);
             }

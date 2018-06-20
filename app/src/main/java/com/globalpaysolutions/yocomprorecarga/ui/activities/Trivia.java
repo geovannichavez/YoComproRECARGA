@@ -23,6 +23,8 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.QuestionTrivia;
 import com.globalpaysolutions.yocomprorecarga.presenters.TriviaPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TriviaView;
 import com.squareup.picasso.Picasso;
 
@@ -56,6 +58,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     //Global variables
     private int mAnswerID;
     private int mTriviaID;
+    private int mPoints;
     private boolean mAnswered;
     private boolean alreadyPressed;
     HashMap<Integer, String> mAnswers;
@@ -84,6 +87,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         mPresenter = new TriviaPresenterImpl(this, this, this);
         mAnswerID = 0;
         mTriviaID = 0;
+        mPoints = 0;
         mAnswered = false;
 
         mPresenter.initialize();
@@ -170,8 +174,10 @@ public class Trivia extends AppCompatActivity implements TriviaView
     }
 
     @Override
-    public void updateTimer(String remaining)
+    public void updateTimer(String remaining,int timeRemaining)
     {
+        mPoints=timeRemaining;
+        Log.e(TAG,"Puntos:"+mPoints);
         try
         {
             lblTimeRem.setText(remaining);
@@ -322,8 +328,13 @@ public class Trivia extends AppCompatActivity implements TriviaView
     {
         try
         {
+
             Intent souvs = new Intent(this, Souvenirs.class);
             souvs.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            if(TextUtils.equals(UserData.getInstance(this).getEraName(), Constants.ERA_WORLDCUP_NAME)) //WorldCup Era
+            {
+                souvs = new Intent(this, SouvenirsGroups.class);
+            }
             startActivity(souvs);
             finish();
         }
@@ -485,7 +496,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 1, mTriviaID, mAnswered);
+            mPresenter.answerTrivia(mAnswerID, 1, mTriviaID, mAnswered,mPoints);
         }
     };
 
@@ -501,7 +512,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 2, mTriviaID, mAnswered);
+            mPresenter.answerTrivia(mAnswerID, 2, mTriviaID, mAnswered,mPoints);
         }
     };
 
@@ -517,7 +528,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
             btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
             mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 3, mTriviaID, mAnswered);
+            mPresenter.answerTrivia(mAnswerID, 3, mTriviaID, mAnswered,mPoints);
         }
     };
 
@@ -547,7 +558,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
     {
         super.onStop();
         if(!alreadyPressed)
-            mPresenter.answerTrivia(mAnswerID, 0, mTriviaID, mAnswered);
+            mPresenter.answerTrivia(mAnswerID, 0, mTriviaID, mAnswered,mPoints);
 
         mPresenter.finishTimer();
     }

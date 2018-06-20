@@ -33,6 +33,7 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointDat
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
@@ -205,9 +206,13 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            mView.getMarkerBitmaps(mMarkerMap);
-            mInteractor.initializeGeolocation();
-            mFirebaseInteractor.initializePOIGeolocation();
+            //Checks if mock locations are active
+            if(!MockLocationUtility.isMockSettingsON(mContext))
+            {
+                mView.getMarkerBitmaps(mMarkerMap);
+                mInteractor.initializeGeolocation();
+                mFirebaseInteractor.initializePOIGeolocation();
+            }
         }
         catch (Exception ex)
         {
@@ -287,11 +292,11 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             //Inserts data first, then location
             GeoLocation geoLocation = new GeoLocation(location.latitude, location.longitude);
-            mInteractor.insertCurrentPlayerData(geoLocation, UserData.getInstance(mContext).getFacebookProfileId());
+            mInteractor.insertCurrentPlayerData(geoLocation, UserData.getInstance(mContext).getAuthProviderId());
         }
         else
         {
-            mInteractor.deletePlayerLocation(UserData.getInstance(mContext).getFacebookProfileId());
+            mInteractor.deletePlayerLocation(UserData.getInstance(mContext).getAuthProviderId());
         }
 
     }
@@ -402,16 +407,28 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             if(location != null)
             {
-                String firebaseKey = UserData.getInstance(mContext).getFacebookProfileId();
-                GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
+                //Checks if location received is fake
+                if(!MockLocationUtility.isMockLocation(location, mContext))
+                {
+                    //Checks apps blacklist
+                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0 )
+                    {
+                        String firebaseKey = UserData.getInstance(mContext).getAuthProviderId();
+                        GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
 
-                //Inserts location if setting is set to 'Visible'
-                if(UserData.getInstance(mContext).checkCurrentLocationVisible())
-                    mInteractor.setPlayerLocation(firebaseKey, geoLocation);
-                else
-                    mInteractor.deletePlayerLocation(firebaseKey);
+                        //Inserts location if setting is set to 'Visible'
+                        if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+                            mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+                        else
+                            mInteractor.deletePlayerLocation(firebaseKey);
 
-                mView.updateUserLocationOnMap(location);
+                        mView.updateUserLocationOnMap(location);
+                    }
+                    else
+                    {
+                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -428,7 +445,14 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             if(location != null)
             {
                 //Checks if location received is fake
-                mView.setInitialUserLocation(location);
+                if(!MockLocationUtility.isMockLocation(location, mContext))
+                {
+                    //Checks apps in blaclist
+                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
+                        mView.setInitialUserLocation(location);
+                    else
+                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
+                }
             }
         }
         catch (Exception ex)
@@ -526,7 +550,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         if(TextUtils.equals(mUserData.getEraName(), Constants.ERA_WORLDCUP_NAME))
         {
             //If key entered is not user's key, then draws a marker
-            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getAuthProviderId()))
             {
                 try
                 {
@@ -574,7 +598,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         }
         else
         {
-            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getAuthProviderId()))
                 mView.addPlayerPoint(key, location);
         }
     }
@@ -725,7 +749,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         if(playerPointData != null)
         {
-            if(!TextUtils.equals(key, UserData.getInstance(mContext).getFacebookProfileId()))
+            if(!TextUtils.equals(key, UserData.getInstance(mContext).getAuthProviderId()))
             {
                 MarkerData markerData = new MarkerData(key, Constants.TAG_MARKER_PLAYER, playerPointData.getNickname());
 

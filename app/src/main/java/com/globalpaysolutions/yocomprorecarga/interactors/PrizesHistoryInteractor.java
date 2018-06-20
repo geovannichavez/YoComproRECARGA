@@ -10,6 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IPrizesHistoryInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RedeemedPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
@@ -85,6 +86,64 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
                 mListener.onRetrievePrizesError(0, t, null);
             }
         });
+    }
+
+    @Override
+    public void setRedeemedPrize(int winPrizeID, boolean redeemed)
+    {
+        try
+        {
+            RedeemedPrizeReqBody redeemedReq = new RedeemedPrizeReqBody();
+            redeemedReq.setPrizeID(winPrizeID);
+            redeemedReq.setRedeemed(redeemed);
+
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+            final Call<SimpleResponse> call = apiService.setRedeemedPrize(redeemedReq, mUserData.getUserAuthenticationKey(),
+                    getVersionName(), Constants.PLATFORM);
+
+            call.enqueue(new Callback<SimpleResponse>()
+            {
+                @Override
+                public void onResponse(Call<SimpleResponse> call, Response<SimpleResponse> response)
+                {
+                    if (response.isSuccessful())
+                    {
+                        mListener.onSetRedeemedPrizeSuccess(response.body());
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int codeResponse = response.code();
+                            if(codeResponse == 426)
+                            {
+                                Gson gson = new Gson();
+                                SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                                mListener.onRetrievePrizesError(codeResponse, null, errorResponse.getInternalCode());
+                            }
+                            else
+                            {
+                                mListener.onRetrievePrizesError(codeResponse, null, null);
+                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            Log.e(TAG, "Error: " + ex.getMessage());
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SimpleResponse> call, Throwable t)
+                {
+                    mListener.onRetrievePrizesError(0, t, null);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     private String getVersionName()

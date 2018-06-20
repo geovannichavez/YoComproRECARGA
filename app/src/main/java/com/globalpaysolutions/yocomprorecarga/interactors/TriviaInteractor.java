@@ -96,11 +96,12 @@ public class TriviaInteractor implements ITriviaInteractor
     }
 
     @Override
-    public void answerTrivia(final int answerID, final TriviaListener listener, final int buttonClicked, int triviaID)
+    public void answerTrivia(final int answerID, final TriviaListener listener, final int buttonClicked, int triviaID, int points)
     {
         RespondTriviaReq request = new RespondTriviaReq();
         request.setTriviaAnswerID(answerID);
         request.setTriviaID(triviaID);
+        request.setPoints(points);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<RespondTriviaResponse> call = apiService.respondTrivia(UserData.getInstance(mContext).getUserAuthenticationKey(),

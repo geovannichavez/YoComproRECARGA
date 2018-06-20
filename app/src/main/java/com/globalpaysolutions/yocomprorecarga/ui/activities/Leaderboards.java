@@ -9,11 +9,15 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.TextViewCompat;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+//import android.support.v7.widget.AppCompatTextView;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,7 +35,6 @@ import com.globalpaysolutions.yocomprorecarga.ui.adapters.LeadersAdapter;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
-import com.globalpaysolutions.yocomprorecarga.utils.NonScrollableListView;
 import com.globalpaysolutions.yocomprorecarga.views.LeaderboardsView;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +48,6 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
 
     //Layouts and Views
     //Toolbar toolbar;
-    //NonScrollableListView mLeaderboardListView;
     ListView mLeaderboardListView;
     TextView tvToday;
     TextView tvWeek;
@@ -53,7 +55,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
     TextView tvGlobal;
     TextView tvLastWinner;
     ProgressDialog progressDialog;
-    ImageView imgButtonsBar;
+    //ImageView imgButtonsBar;
     ImageButton btnBack;
     ImageView bgTimemachine;
 
@@ -84,7 +86,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
         tvWeek = (TextView) findViewById(R.id.btnWeek);
         tvMonth = (TextView) findViewById(R.id.btnMonth);
         tvGlobal = (TextView) findViewById(R.id.btnGlobal);
-        imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
+        //imgButtonsBar = (ImageView) findViewById(R.id.imgButtonsBar);
         tvLastWinner = (TextView) findViewById(R.id.tvLastWinner);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
@@ -108,12 +110,20 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
         mPresenter = new LeaderboardsPresenterImpl(this, this);
         mPresenter.initialize();
         mPresenter.getLeaderboards(Constants.TODAY, null);
+
+//        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
+//                tvLastWinner, 10, 100,30,TypedValue.COMPLEX_UNIT_SP
+//        );
+
+
+
+
     }
 
     @Override
     public void initializeViews()
     {
-        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+        Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
         //Sets click listeners
         tvToday.setOnClickListener(new View.OnClickListener()
@@ -148,7 +158,7 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
             @Override
             public void onClick(View v)
             {
-                mPresenter.getLeaderboards(Constants.OVER_ALL, tvGlobal);
+                mPresenter.getLeaderboards(Constants.TRIVIA, tvGlobal);
             }
         });
     }
@@ -176,7 +186,13 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
     @Override
     public void setLastWinner(String data)
     {
+
         tvLastWinner.setText(data);
+
+//        TextViewCompat.setAutoSizeTextTypeWithDefaults(
+//                tvLastWinner,TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM
+//        );
+
     }
 
     @Override
@@ -223,28 +239,55 @@ public class Leaderboards extends ImmersiveActivity implements LeaderboardsView
         try
         {
             int resourceImage = 0;
+            int resourceImage2 = 0;
+
+
+            resourceImage = R.drawable.btn_time_on;
+            resourceImage2 = R.drawable.btn_time_off;
 
             switch (labelValue)
             {
                 case Constants.TODAY:
-                    resourceImage = R.drawable.btns_leaderboards_today;
-                    imgButtonsBar.setImageResource(resourceImage);
+
+                    tvToday.setBackgroundResource(resourceImage);
+                    tvWeek.setBackgroundResource(resourceImage2);
+                    tvMonth.setBackgroundResource(resourceImage2);
+                    tvGlobal.setBackgroundResource(resourceImage2);
+
+                    //imgButtonsBar.setImageResource(resourceImage);
                     break;
                 case Constants.WEEK:
-                    resourceImage = R.drawable.btns_leaderboards_week;
-                    imgButtonsBar.setImageResource(resourceImage);
+
+                    tvToday.setBackgroundResource(resourceImage2);
+                    tvWeek.setBackgroundResource(resourceImage);
+                    tvMonth.setBackgroundResource(resourceImage2);
+                    tvGlobal.setBackgroundResource(resourceImage2);
+
+                    //imgButtonsBar.setImageResource(resourceImage);
                     break;
                 case Constants.MONTH:
-                    resourceImage = R.drawable.btns_leaderboards_month;
-                    imgButtonsBar.setImageResource(resourceImage);
+
+                    tvToday.setBackgroundResource(resourceImage2);
+                    tvWeek.setBackgroundResource(resourceImage2);
+                    tvMonth.setBackgroundResource(resourceImage);
+                    tvGlobal.setBackgroundResource(resourceImage2);
+                    //imgButtonsBar.setImageResource(resourceImage);
                     break;
-                case Constants.OVER_ALL:
-                    resourceImage = R.drawable.btns_leaderboards_global;
-                    imgButtonsBar.setImageResource(resourceImage);
+                case Constants.TRIVIA:
+
+                    tvToday.setBackgroundResource(resourceImage2);
+                    tvWeek.setBackgroundResource(resourceImage2);
+                    tvMonth.setBackgroundResource(resourceImage2);
+                    tvGlobal.setBackgroundResource(resourceImage);
+                    //imgButtonsBar.setImageResource(resourceImage);
                     break;
                 default:
-                    resourceImage = R.drawable.btns_leaderboards_today;
-                    imgButtonsBar.setImageResource(resourceImage);
+
+                    tvToday.setBackgroundResource(resourceImage);
+                    tvWeek.setBackgroundResource(resourceImage2);
+                    tvMonth.setBackgroundResource(resourceImage2);
+                    tvGlobal.setBackgroundResource(resourceImage2);
+                    //imgButtonsBar.setImageResource(resourceImage);
 
                     break;
             }
