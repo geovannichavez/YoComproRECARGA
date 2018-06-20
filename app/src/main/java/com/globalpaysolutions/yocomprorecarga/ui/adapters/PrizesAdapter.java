@@ -137,11 +137,11 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         {
             super(row);
 
-            icon = (ImageView) row.findViewById(R.id.ivPrizeIcon);
+            /*icon = (ImageView) row.findViewById(R.id.ivPrizeIcon);
             title = (TextView) row.findViewById(R.id.tvPrizeName);
             pin = (TextView) row.findViewById(R.id.tvPin);
             exchangeMethod = (TextView) row.findViewById(R.id.tvExchange);
-            swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);
+            swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);*/
         }
     }
 }

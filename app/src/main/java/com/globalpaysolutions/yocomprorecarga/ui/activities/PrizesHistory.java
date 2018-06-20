@@ -47,7 +47,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     Toolbar toolbar;
     RecyclerView mHistoryListview;
     ProgressDialog progressDialog;
-    ImageButton btnActivatePrize;
+    //ImageButton btnActivatePrize;
     ImageButton btnBack;
     TextView tvNoPrizesYetTitle;
     TextView tvNoPrizesYetContent;
@@ -73,13 +73,13 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
 
         //Layouts
         mHistoryListview = (RecyclerView) findViewById(R.id.lvHistory);
-        btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
+        //btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
         tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
 
-        btnActivatePrize.setOnClickListener(new View.OnClickListener()
+        /*btnActivatePrize.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -89,7 +89,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
