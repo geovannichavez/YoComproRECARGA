@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -119,7 +120,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     {
        try
        {
-           //Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
+           Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
            mHistoryListview.setVisibility(View.VISIBLE);
            //tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
