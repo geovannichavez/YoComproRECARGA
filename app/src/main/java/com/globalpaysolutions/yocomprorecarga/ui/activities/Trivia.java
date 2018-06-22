@@ -351,6 +351,7 @@ public class Trivia extends AppCompatActivity implements TriviaView
         {
             Intent prizeDetails = new Intent(this, PrizeDetail.class);
             prizeDetails.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            prizeDetails.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.TRIVIA);
             startActivity(prizeDetails);
             finish();
         }

@@ -4,15 +4,16 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.util.Log;
 
-import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IPrizesHistoryInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RedeemedPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -41,11 +42,15 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
     }
 
     @Override
-    public void retrievePrizesHistory()
+    public void retrievePrizesHistory(int menuOption, int categoryID)
     {
+        PrizesHistoryReqBody request = new PrizesHistoryReqBody();
+        request.setCategoryID(categoryID);
+        request.setOption(menuOption);
+
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<PrizesHistoryResponse> call = apiService.retrievePrizsHistory(mUserData.getUserAuthenticationKey(),
-                getVersionName(), Constants.PLATFORM);
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, request);
 
         call.enqueue(new Callback<PrizesHistoryResponse>()
         {
@@ -99,7 +104,7 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             final Call<SimpleResponse> call = apiService.setRedeemedPrize(redeemedReq, mUserData.getUserAuthenticationKey(),
-                    getVersionName(), Constants.PLATFORM);
+                    VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
             call.enqueue(new Callback<SimpleResponse>()
             {
@@ -144,22 +149,5 @@ public class PrizesHistoryInteractor implements IPrizesHistoryInteractor
         {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
-    }
-
-    private String getVersionName()
-    {
-        String version = "";
-        try
-        {
-            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-            version = pInfo.versionName;//Version Name
-            Log.i(TAG, "Version name: " + version);
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
-        }
-
-        return version;
     }
 }

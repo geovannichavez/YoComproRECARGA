@@ -276,6 +276,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
                 {
                     ButtonAnimator.getInstance(Souvenirs.this).animateButton(v);
                     Intent intent = new Intent(Souvenirs.this, PrizeDetail.class);
+                    intent.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.SOUVENIRS);
                     startActivity(intent);
                     finish();
                 }

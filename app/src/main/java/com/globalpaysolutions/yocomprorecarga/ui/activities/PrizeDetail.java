@@ -1,12 +1,9 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
-import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizeDetailPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -27,24 +23,24 @@ import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.PrizeDetailView;
 import com.squareup.picasso.Picasso;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
 public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
 {
     private static final String TAG = PrizeDetail.class.getSimpleName();
 
     //Views and Layouts
-    ImageView imgPrizeType;
     TextView etPrizeCode;
     TextView lblPrizeTitle;
     TextView lblPrizeDescription;
     TextView lblExchange;
-    ImageButton btnSms;
-    //ImageView bgOrange;
+    ImageView btnSms;
+    ImageView ivSponsorLogo;
     ImageView ivBackground;
+    ImageView btnBack;
 
-    ImageButton btnBackMapPrizeDet;
-    ImageButton btnRedeemPrizeDet;
+    //ImageButton btnBackMapPrizeDet;
+    //ImageButton btnRedeemPrizeDet;
+
+    private Constants.PrizeDetailsNavigationStack mBackstack;
 
     //MVP
     PrizeDetailPresenterImpl mPresenter;
@@ -57,19 +53,22 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         setContentView(R.layout.activity_prize_detail);
 
         getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.colo_gray_new_timemachine_2));
+        Bundle extras = getIntent().getExtras();
+        mBackstack = (Constants.PrizeDetailsNavigationStack) getIntent().getSerializableExtra(Constants.BUNDLE_PRIZEDET_BACKS);
 
-        imgPrizeType = (ImageView) findViewById(R.id.imgChestPrize);
         etPrizeCode = (TextView) findViewById(R.id.txtPin);
         lblPrizeTitle = (TextView) findViewById(R.id.lblPrizeTitle);
         lblPrizeDescription = (TextView) findViewById(R.id.lblPrizeDescription);
+        ivSponsorLogo = (ImageView) findViewById(R.id.ivSponsorLogo);
         lblExchange = (TextView) findViewById(R.id.lblExchangeInfo);
-        btnSms = (ImageButton) findViewById(R.id.btnSms);
+        btnSms = (ImageView) findViewById(R.id.btnSms);
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
+        btnBack = (ImageView) findViewById(R.id.btnBack);
 
-        btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
-        btnRedeemPrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
+        //btnBackMapPrizeDet = (ImageButton) findViewById(R.id.btnBackMapPrizeDet);
+        //btnRedeemPrizeDet = (ImageButton) findViewById(R.id.btnStorePrizeDet);
 
-        btnBackMapPrizeDet.setOnClickListener(new View.OnClickListener()
+        /*btnBackMapPrizeDet.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -80,8 +79,8 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
                 startActivity(intent);
                 finish();
             }
-        });
-        btnRedeemPrizeDet.setOnClickListener(new View.OnClickListener()
+        });*/
+        /*btnRedeemPrizeDet.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -93,11 +92,10 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         mPresenter = new PrizeDetailPresenterImpl(this, this, this);
-        mPresenter.setBackground();
-        mPresenter.loadInitialData();
+        mPresenter.loadInitialData(extras);
         mPresenter.setClickListeners();
         mPresenter.startCountdownService();
 
@@ -108,10 +106,12 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     {
         try
         {
+            Picasso.with(this).load(data.getString(Constants.BUNDLE_PRIZE_BACKGROUND)).into(ivBackground);
+            Picasso.with(this).load(data.getString(Constants.BUNDLE_PRIZE_IMAGE)).into(ivSponsorLogo);
             lblPrizeTitle.setText(data.getString(Constants.BUNDLE_PRIZE_TITLE));
             lblPrizeDescription.setText(data.getString(Constants.BUNDLE_PRIZE_DESCRIPTION));
             etPrizeCode.setText(data.getString(Constants.BUNDLE_PRIZE_CODE));
-            Picasso.with(this).load(data.getString(Constants.BUNDLE_PRIZE_IMAGE)).into(imgPrizeType);
+
         }
         catch (Exception ex)
         {
@@ -132,6 +132,16 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
                     ButtonAnimator.getInstance(PrizeDetail.this).animateButton(v);
                     String prizePin = etPrizeCode.getText().toString();
                     mPresenter.createSmsPrizeContent(prizePin);
+                }
+            });
+
+            btnBack.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    ButtonAnimator.getInstance(PrizeDetail.this).animateButton(view);
+                    backNavigation();
                 }
             });
 
@@ -223,12 +233,6 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
         }
     }
 
-    @Override
-    public void loadBackground()
-    {
-        Picasso.with(this).load(R.drawable.bg_background_4).into(ivBackground);
-    }
-
     public void navigateTimeMachine(View view)
     {
         //Actually it has to navigate to 'Store'
@@ -274,12 +278,40 @@ public class PrizeDetail extends ImmersiveActivity implements PrizeDetailView
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
         {
-            Intent intent = new Intent(this, PointsMap.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            finish();
+            backNavigation();
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private void backNavigation()
+    {
+        Intent backAction = null;
+
+        switch (mBackstack)
+        {
+            case MAP:
+                backAction = new Intent(PrizeDetail.this, PointsMap.class);
+                break;
+            case PRIZES:
+                backAction = new Intent(PrizeDetail.this, PrizesHistory.class);
+                break;
+            case COMBOS:
+                backAction = new Intent(PrizeDetail.this, Combos.class);
+                break;
+            case SOUVENIRS:
+                backAction = new Intent(PrizeDetail.this, Souvenirs.class);
+                break;
+            case TRIVIA:
+                backAction = new Intent(PrizeDetail.this, Trivia.class);
+                break;
+            default:
+                backAction = new Intent(PrizeDetail.this, PrizesHistory.class);
+                break;
+        }
+
+        backAction.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(backAction);
+        finish();
     }
 }

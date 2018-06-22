@@ -8,7 +8,6 @@
         android:id="@+id/bgPrizeItem"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:src="@drawable/bg_prize_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

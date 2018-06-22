@@ -92,6 +92,8 @@ public class Constants
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_IMAGE = "bundle_prize_image";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
+    public static final String BUNDLE_PRIZE_BACKGROUND = "bundle_prize_background";
+    public static final String BUNDLE_PRIZE_FLAG_DETAILS = "bundle_prize_flag_details";
     public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
     public static final String BUNDLE_CHALLENGE_ID = "bundle_challenge_received_id";
     public static final String BUNDLE_CHALLENGE_BET = "bundle_challenge_received_bet";
@@ -198,6 +200,7 @@ public class Constants
     public static final String FACEBOOK = "Facebook";
     public static final String GOOGLE = "Google";
     public static final String LOCAL = "Local";
+    public static final String BUNDLE_PRIZEDET_BACKS = "bundle_prizedet_backs";
 
     public static String PLATFORM = "ANDROID";
 
@@ -229,6 +232,20 @@ public class Constants
         SOUVENIRs_GROUPED, SOUVENIRS
     }
 
+    public enum PrizeDetailsNavigationStack
+    {
+        PRIZES, COMBOS, SOUVENIRS, TRIVIA, MAP
+    }
+
     //Auth
     public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
+
+    public static final int PRIZES_MENU_OPTION_1 = 1; //Weekly
+    public static final int PRIZES_MENU_OPTION_2 = 2; //Earned
+
+    public static final int PRIZES_CATEGORY_1 = 1; //Phones
+    public static final int PRIZES_CATEGORY_2 = 2; //Food
+    public static final int PRIZES_CATEGORY_3 = 3; //Shop
+    public static final int PRIZES_CATEGORY_4 = 4; //Electronics
+
 }

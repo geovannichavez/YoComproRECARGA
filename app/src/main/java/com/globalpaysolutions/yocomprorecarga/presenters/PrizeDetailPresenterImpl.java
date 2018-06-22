@@ -38,16 +38,31 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
     }
 
     @Override
-    public void loadInitialData()
+    public void loadInitialData(Bundle extras)
     {
-        Bundle data = new Bundle();
-        data.putString(Constants.BUNDLE_PRIZE_TITLE, mUserData.getLastPrizeTitle());
-        data.putString(Constants.BUNDLE_PRIZE_DESCRIPTION, mUserData.getLastPrizeDescription());
-        data.putString(Constants.BUNDLE_PRIZE_CODE, mUserData.getLastPrizeCode());
-        data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
-        data.putString(Constants.BUNDLE_PRIZE_IMAGE, mUserData.getLastPrizeEraImage());
-        data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
-        mView.updateViews(data);
+        try
+        {
+            if(extras.getBoolean(Constants.BUNDLE_PRIZE_FLAG_DETAILS, false))
+            {
+                mView.updateViews(extras);
+            }
+            else
+            {
+                Bundle data = new Bundle();
+                data.putString(Constants.BUNDLE_PRIZE_TITLE, mUserData.getLastPrizeTitle());
+                data.putString(Constants.BUNDLE_PRIZE_DESCRIPTION, mUserData.getLastPrizeDescription());
+                data.putString(Constants.BUNDLE_PRIZE_CODE, mUserData.getLastPrizeCode());
+                data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
+                data.putString(Constants.BUNDLE_PRIZE_IMAGE, mUserData.getLastPrizeEraImage());
+                data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
+                //TODO Agregar backgrpund en datos de premio ganado
+                mView.updateViews(data);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error extracting extras from bundle: " + ex.getMessage());
+        }
 
         if(TextUtils.equals(mUserData.getAchievementFromSouvenirExchange(), Constants.ACHIEVEMENT_FROM_SOUVENIR_SALE))
             mView.showAchievementDialog();
@@ -80,12 +95,6 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
         {
            ex.printStackTrace();
         }
-    }
-
-    @Override
-    public void setBackground()
-    {
-        mView.loadBackground();
     }
 
     @Override

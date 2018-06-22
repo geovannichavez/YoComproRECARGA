@@ -432,6 +432,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                     {
                         Intent store = new Intent(CapturePrizeAR.this, PrizeDetail.class);
                         store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        store.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.MAP);
                         startActivity(store);
                         finish();
                     }
@@ -807,6 +808,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         Intent prizeDetails = new Intent(this, PrizeDetail.class);
         prizeDetails.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        prizeDetails.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.MAP);
         startActivity(prizeDetails);
         finish();
     }

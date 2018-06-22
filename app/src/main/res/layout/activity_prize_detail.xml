@@ -107,6 +107,7 @@
                         tools:text="Has recolectado tu premio gracias a:" />
 
                     <ImageView
+                        android:id="@+id/ivSponsorLogo"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="82"
@@ -168,15 +169,17 @@
                     android:layout_weight="20"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
+
                 <TextView
-                    android:text="@string/label_second_line_activate_pin_prize"
-                    android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/pure_black"
-                    android:gravity="center"
-                    android:textSize="@dimen/dimen_normal_12"
+                    android:id="@+id/lblExchangeInfo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="60"/>
+                    android:layout_weight="60"
+                    android:fontFamily="@font/lato_semibold"
+                    android:gravity="center"
+                    android:text="@string/label_second_line_activate_pin_prize"
+                    android:textColor="@color/pure_black"
+                    android:textSize="@dimen/dimen_normal_12" />
                 <Space
                     android:layout_weight="20"
                     android:layout_width="0dp"
@@ -186,12 +189,33 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
-            <ImageView
-                android:src="@drawable/btn_exchange_prize"
+
+
+            <LinearLayout
+                android:weightSum="100"
+                android:orientation="horizontal"
                 android:layout_weight="7"
-                android:scaleType="fitCenter"
                 android:layout_width="match_parent"
-                android:layout_height="0dp" />
+                android:layout_height="0dp">
+
+                <Space
+                    android:layout_weight="32.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/btnSms"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="35"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_exchange_prize" />
+                <Space
+                    android:layout_weight="32.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
 
             <Space
                 android:layout_weight="3.5"
@@ -230,33 +254,36 @@
                     android:layout_weight="88"
                     android:layout_width="0dp"
                     android:layout_height="match_parent">
+
                     <TextView
-                        tools:text="SMS ILIM TODAS LAS REDES 24 H"
+                        android:id="@+id/lblPrizeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="42"
-                        android:gravity="center"
-                        android:maxLines="1"
-                        android:includeFontPadding="false"
                         android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
                         android:textColor="@color/color_red_recargo"
                         android:textSize="@dimen/dimen_normal_18"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        tools:text="SMS ILIM TODAS LAS REDES 24 H" />
 
                     <!-- TODO: Attribute <b>lineSpacingExtra</b> is to handle padding
                          between lines -->
 
                     <TextView
-                        tools:text="Ganaste mensaje de texto a ilimitados todas las redes durante 24 horas"
+                        android:id="@+id/lblPrizeDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="58"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:lineSpacingExtra="-8sp"
-                        android:includeFontPadding="false"
                         android:fontFamily="@font/baloo_regular"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="-8sp"
+                        android:maxLines="2"
                         android:textColor="@color/color_red_recargo"
                         android:textSize="@dimen/dimen_normal_12"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        tools:text="Ganaste mensaje de texto a ilimitados todas las redes durante 24 horas" />
                 </LinearLayout>
                 <Space
                     android:layout_weight="6"
@@ -270,18 +297,20 @@
                 android:layout_weight="4"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" />
+
             <TextView
-                android:textColor="@color/white_textView_color"
-                android:fontFamily="@font/baloo_regular"
-                android:textSize="@dimen/dimen_normal_20"
-                android:gravity="center"
-                android:maxLines="1"
-                android:maxLength="22"
-                tools:text="032946404556715"
-                android:textIsSelectable="true"
+                android:id="@+id/txtPin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="7"/>
+                android:layout_weight="7"
+                android:fontFamily="@font/baloo_regular"
+                android:gravity="center"
+                android:maxLength="22"
+                android:maxLines="1"
+                android:textColor="@color/white_textView_color"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/dimen_normal_20"
+                tools:text="032946404556715" />
 
             <Space
                 android:layout_weight="18.5"

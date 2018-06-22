@@ -17,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Prize;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,9 +48,11 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         try
         {
 
+            holder.bgPrizeItem.setImageResource(R.drawable.bg_prize_item);
+
+
             final Prize currentItem = mPrizesHistoryList.get(position);
-
-
+            Picasso.with(mContext).load(currentItem.getBackgroundPrizeHistory()).into(holder.bgPrizeItem);
             holder.title.setText(currentItem.getTitle());
             holder.pin.setText(String.format(mContext.getString(R.string.label_pin), currentItem.getCode()));
             holder.description.setText(currentItem.getDescription());
@@ -91,6 +94,8 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
                 }
             });
 
+
+
         }
         catch (Exception ex)
         {
@@ -111,6 +116,21 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         this.mPresenter = presenter;
     }
 
+    public void clear()
+    {
+        final int size = mPrizesHistoryList.size();
+
+        if (size > 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                mPrizesHistoryList.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
+
     class PrizesHistoryViewHolder extends RecyclerView.ViewHolder
     {
         ImageView icon;
@@ -120,6 +140,7 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         TextView exchangeMethod;
         ImageView btnExchange;
         SwitchCompat swRedeemed;
+        ImageView bgPrizeItem;
 
         PrizesHistoryViewHolder(View row)
         {
@@ -130,6 +151,7 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
             description = (TextView) row.findViewById(R.id.ivDescription) ;
             btnExchange = (ImageView) row.findViewById(R.id.btnExchange);
             swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);
+            bgPrizeItem = (ImageView) row.findViewById(R.id.bgPrizeItem);
         }
     }
 }

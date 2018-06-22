@@ -232,6 +232,7 @@
                     android:layout_weight="8" />
 
                 <ImageView
+                    android:id="@+id/btnWeeklyPrizes1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="40"
@@ -243,6 +244,7 @@
                     android:layout_weight="4" />
 
                 <ImageView
+                    android:id="@+id/btnEarnedPrizes2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="40"
@@ -273,6 +275,7 @@
 
 
                 <ImageView
+                    android:id="@+id/btnCategory1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="17"
@@ -285,6 +288,7 @@
                     android:layout_weight="4" />
 
                 <ImageView
+                    android:id="@+id/btnCategory2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="17"
@@ -297,6 +301,7 @@
                     android:layout_weight="4" />
 
                 <ImageView
+                    android:id="@+id/btnCategory3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="17"
@@ -309,6 +314,7 @@
                     android:layout_weight="4" />
 
                 <ImageView
+                    android:id="@+id/btnCategory4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="17"

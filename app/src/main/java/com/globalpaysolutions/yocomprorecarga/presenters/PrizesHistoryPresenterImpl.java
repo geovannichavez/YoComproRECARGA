@@ -48,10 +48,10 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
     }
 
     @Override
-    public void retrievePrizes()
+    public void retrievePrizes(int menuOption, int categoryID)
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.retrievePrizesHistory();
+        mInteractor.retrievePrizesHistory(menuOption, categoryID);
     }
 
     @Override
@@ -97,38 +97,38 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
         List<Prize> prizeList = new ArrayList<>();
         mView.hideLoadingDialog();
 
-        if(response.getData().size() > 0)
+        try
         {
-            try
+            for (PrizeData item : response.getData())
             {
-                for (PrizeData item : response.getData())
-                {
-                    Prize prize = new Prize();
-                    prize.setCode(item.getCode());
-                    prize.setRegDate(item.getRegDate());
-                    prize.setDescription(item.getDescription());
-                    prize.setDialNumberOrPlace(item.getDialNumberOrPlace());
-                    prize.setLevel(item.getLevel());
-                    prize.setTitle(item.getTitle());
-                    prize.setWinPrizeID(item.getWinPrizeID());
-                    prize.setRedeemedPrize(item.isRedeemedPrize());
-                    prizeList.add(prize);
-                }
-                mView.renderPrizes(prizeList);
+                Prize prize = new Prize();
+
+                prize.setTitle(item.getTitle());
+                prize.setDescription(item.getDescription());
+                prize.setCode(item.getCode()); //PIN
+                prize.setRedeemedPrize(item.isRedeemedPrize());
+                prize.setBackgroundWinPrize(item.getBackgroundWinPrize());
+                prize.setBackgroundPrizeHistory(item.getBackgroundPrizeHistory());
+                //prize.setUrlBackground(item.getUrlBackground()); TODO: Url de background de item
+
+                //metadata
+                prize.setWinPrizeID(item.getWinPrizeID());
+                prize.setRegDate(item.getRegDate());
+                prize.setDialNumberOrPlace(item.getDialNumberOrPlace());
+                prize.setLevel(item.getLevel());
+
+                prizeList.add(prize);
             }
-            catch (Exception ex)
-            {
-                ex.printStackTrace();
-                DialogViewModel model = new DialogViewModel();
-                model.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
-                model.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
-                model.setAcceptButton(mContext.getString(R.string.button_accept));
-                mView.showGenericDialog(model);
-            }
+            mView.renderPrizes(prizeList);
         }
-        else
+        catch (Exception ex)
         {
-            mView.showNoPrizesText();
+            ex.printStackTrace();
+            DialogViewModel model = new DialogViewModel();
+            model.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+            model.setLine1(mContext.getString(R.string.error_content_something_went_wrong_try_again));
+            model.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showGenericDialog(model);
         }
     }
 

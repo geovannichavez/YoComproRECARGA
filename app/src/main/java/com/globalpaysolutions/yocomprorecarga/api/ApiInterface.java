@@ -28,6 +28,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
@@ -158,7 +159,8 @@ public interface ApiInterface
     @POST(StringsURL.PRIZES_HISTORY)
     Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey,
                                                      @Header("AppVersion") String pAppVersion,
-                                                     @Header("Platform") String pPlatform);
+                                                     @Header("Platform") String pPlatform,
+                                                     @Body PrizesHistoryReqBody request);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SET_REDEEMED_PRIZE)
