@@ -32,13 +32,13 @@ public class Main extends ImmersiveActivity implements MainView
     private static final String TAG = Main.class.getSimpleName();
 
     //Layouts and Views
-    ImageButton buttonSettings;
+    ImageView buttonSettings;
     ImageView bgTimemachine;
-    ImageView icNewChallenge;
-    ImageView icNewTrivia;
+    //ImageView icNewChallenge;
+    //ImageView icNewTrivia;
     TextView tvPendingCh;
     ShowcaseView mShowcaseView;
-    ImageButton btnTravel;
+    ImageView btnTravel;
     //MVP
     MainPresenterImpl mPresenter;
 
@@ -57,12 +57,12 @@ public class Main extends ImmersiveActivity implements MainView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+        buttonSettings = (ImageView) findViewById(R.id.buttonSettings);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
-        icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
-        icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
+        /*icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
+        icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);*/
         tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
-        btnTravel = (ImageButton) findViewById(R.id.btnTravel);
+        btnTravel = (ImageView) findViewById(R.id.btnTravel);
 
         mShowcaseCounter = 0;
 
@@ -293,12 +293,12 @@ public class Main extends ImmersiveActivity implements MainView
     {
         try
         {
-            if(active)
+            /*if(active)
                 Picasso.with(this).load(R.drawable.ic_challenge_on).into(icNewChallenge);
             else
                 Picasso.with(this).load(R.drawable.ic_challenge_off).into(icNewChallenge);
 
-            tvPendingCh.setText(pending);
+            tvPendingCh.setText(pending);*/
         }
         catch (Exception ex)
         {
@@ -311,10 +311,10 @@ public class Main extends ImmersiveActivity implements MainView
     @Override
     public void setTriviaAvailable(boolean available)
     {
-        if (available)
+        /*if (available)
             Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
         else
-            Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
+            Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);*/
     }
 
     public void setNewAgeAvailable(boolean available)
@@ -330,8 +330,8 @@ public class Main extends ImmersiveActivity implements MainView
     {
         try
         {
-            icNewTrivia.setOnClickListener(triviaClick);
-            icNewChallenge.setOnClickListener(challengesClick);
+            /*icNewTrivia.setOnClickListener(triviaClick);
+            icNewChallenge.setOnClickListener(challengesClick);*/
         }
         catch (Exception ex)
         {
