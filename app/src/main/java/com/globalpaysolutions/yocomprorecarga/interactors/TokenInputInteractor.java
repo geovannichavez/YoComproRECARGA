@@ -98,7 +98,7 @@ public class TokenInputInteractor implements ITokenInputInteractor
 
             TokenValidationLocalReqBody tokenValidation = new TokenValidationLocalReqBody();
             tokenValidation.setToken(token);
-            tokenValidation.setCountryID(country.getCountrycode());
+            tokenValidation.setCountryID(country.getCode());
             tokenValidation.setDeviceID(deviceID);
             tokenValidation.setPhone(phone);
 
