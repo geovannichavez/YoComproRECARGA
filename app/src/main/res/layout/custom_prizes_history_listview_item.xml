@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/bgPrizeItem"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
 
     <!-- Layer 1 -->
     <LinearLayout
-        android:weightSum="100"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="32"/>
+            android:layout_weight="32" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="68"
-            android:weightSum="100"
-            android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="70"/>
+                android:layout_weight="70" />
 
             <LinearLayout
-                android:weightSum="100"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15">
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <ImageView
-                    android:src="@drawable/bg_prize_pin"
-                    android:layout_weight="67"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="67"
                     android:scaleType="fitCenter"
-                    android:layout_height="match_parent" />
+                    android:src="@drawable/bg_prize_pin" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/btnExchange"
@@ -60,23 +62,25 @@
                     android:layout_weight="31"
                     android:scaleType="fitCenter"
                     android:src="@drawable/btn_exchange_prize_pin" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:weightSum="100"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="13">
+                android:layout_weight="13"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"/>
+                    android:layout_weight="20" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -85,38 +89,38 @@
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center_vertical|end"
                     android:includeFontPadding="false"
-                    android:textColor="@color/pure_black"
-                    android:textSize="@dimen/dimen_normal_10"
                     android:singleLine="true"
-                    android:text="@string/label_answer_exchanged_prize" />
+                    android:text="@string/label_answer_exchanged_prize"
+                    android:textColor="@color/pure_black"
+                    android:textSize="@dimen/dimen_normal_10" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"/>
+                    android:layout_weight="2" />
 
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/swRedeemed"
                     android:layout_width="0dp"
-                    android:layout_gravity="center"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="23"
                     android:textOff=""
                     android:textOn=""
                     android:theme="@style/BrandedSwitch" />
 
 
-
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="12"/>
+                    android:layout_weight="12" />
 
             </LinearLayout>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2" />
 
         </LinearLayout>
 
@@ -124,32 +128,33 @@
 
     <!-- Layer 2 -->
     <LinearLayout
-        android:weightSum="100"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="32"/>
+            android:layout_weight="32" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="68"
-            android:weightSum="100"
-            android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="40"/>
+                android:layout_weight="40" />
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="30"
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvPrizeName"
@@ -179,11 +184,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:weightSum="100"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15">
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/tvPin"
@@ -192,15 +197,16 @@
                     android:layout_weight="68"
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
+                    android:maxLines="1"
                     android:src="@drawable/bg_prize_pin"
                     android:textColor="@color/white_textView_color"
                     android:textSize="@dimen/dimen_normal_12"
-                    android:maxLines="1"
                     tools:text="PIN: 032946404556715" />
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="32"/>
+                    android:layout_weight="32" />
             </LinearLayout>
 
             <Space

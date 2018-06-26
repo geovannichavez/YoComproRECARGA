@@ -109,42 +109,42 @@
         <activity
             android:name=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.AcceptTerms"
             android:screenOrientation="portrait"
-            android:theme="@style/AppWhiteThemeFullScreen"></activity>
+            android:theme="@style/AppWhiteThemeFullScreen" />
         <activity
             android:name=".ui.activities.ValidatePhone"
             android:screenOrientation="portrait"
             android:theme="@style/AppWhiteThemeFullScreen"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activities.RequestTopup"
             android:parentActivityName=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeYvr"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activities.TokenInput"
             android:screenOrientation="portrait"
             android:theme="@style/AppWhiteThemeFullScreen"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activities.Permissions"
             android:screenOrientation="portrait"
-            android:theme="@style/AppWhiteThemeFullScreen"></activity>
+            android:theme="@style/AppWhiteThemeFullScreen" />
         <activity
             android:name=".ui.activities.NotificationDetail"
             android:excludeFromRecents="true"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.CapturePrizeAR"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.PrizeDetail"
             android:parentActivityName=".ui.activities.CapturePrizeAR"
@@ -163,30 +163,30 @@
             android:name=".ui.activities.LimitedFunctionality"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.Authenticate"
             android:screenOrientation="portrait"
-            android:theme="@style/AppWhiteThemeFullScreen"></activity>
+            android:theme="@style/AppWhiteThemeFullScreen" />
         <activity
             android:name=".ui.activities.Nickname"
             android:screenOrientation="portrait"
-            android:theme="@style/AppWhiteThemeFullScreen"></activity>
+            android:theme="@style/AppWhiteThemeFullScreen" />
         <activity
             android:name=".ui.activities.Profile"
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.Leaderboards"
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.PrizesHistory"
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"></activity>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.EraSelection"
             android:screenOrientation="portrait"
@@ -220,7 +220,7 @@
         <activity
             android:name=".ui.activities.Wildcard"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.Intro"
             android:screenOrientation="portrait"
@@ -284,13 +284,12 @@
             android:name=".ui.activities.Challenges"
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
-
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.PlayChallenge"
             android:parentActivityName=".ui.activities.PointsMap"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.ChallengeResult"
             android:parentActivityName=".ui.activities.Challenges"
@@ -305,30 +304,28 @@
             android:name=".ui.activities.Trivia"
             android:parentActivityName=".ui.activities.Main"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
-
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.SouvenirsGroups"
             android:parentActivityName=".ui.activities.Profile"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
-
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.SouvenirsGrouped"
             android:parentActivityName=".ui.activities.SouvenirsGroups"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen"/>
+            android:theme="@style/AppThemeFullScreen" />
         <activity
             android:name=".ui.activities.WorldCupCountries"
             android:parentActivityName=".ui.activities.Main"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen" />
-
         <activity
             android:name=".ui.activities.CompleteProfile"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppThemeFullScreen"/>
+            android:theme="@style/AppThemeFullScreen"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.activities.News"></activity>
     </application>
 
 </manifest>

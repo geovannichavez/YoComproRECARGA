@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.News">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/bgTimemachine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/bg_background_4" />
+
+
+        <!-- Layer 1 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_back_3" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="52"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_title_3" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="24" />
+
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:layout_weight="86"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+                <ImageView
+                    android:src="@drawable/bg_feed"
+                    android:scaleType="fitXY"
+                    android:layout_width="0dp"
+                    android:layout_weight="90"
+                    android:layout_height="match_parent" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+        </LinearLayout>
+
+        <!-- Layer 2 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="12" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="100"
+                android:layout_weight="86"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+                <LinearLayout
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_weight="90"
+                    android:layout_height="match_parent">
+                    <Space
+                        android:layout_weight="4.1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:weightSum="100"
+                        android:layout_weight="91.8"
+                        android:layout_height="match_parent">
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="3.2" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="4.5"
+                            android:fontFamily="@font/baloo_regular"
+                            android:gravity="center"
+                            android:text="Ordenar por: Fecha"
+                            android:textSize="@dimen/dimen_normal_12" />
+
+                        <!--TODO: Aqui va el listview  -->
+                        <ListView
+                            android:id="@+id/lvNews"
+                            tools:listitem="@layout/custom_listview_item_news"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="89.5" />
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2.8" />
+                    </LinearLayout>
+                    <Space
+                        android:layout_weight="4.1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+        </LinearLayout>
+
+        <!-- Layer 3 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="24" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="52"
+                    android:gravity="center"
+                    android:textSize="@dimen/dimen_normal_16"
+                    android:textAllCaps="true"
+                    android:fontFamily="@font/baloo_regular"
+                    android:textColor="@color/white_textView_color"
+                    android:text="@string/label_noticias"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="24" />
+
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2.5" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="88.5" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

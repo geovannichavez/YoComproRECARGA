@@ -469,5 +469,6 @@
     <string name="label_answer_exchanged_prize">¿Premio canjeado?</string>
     <string name="label_copy_pin_activate_prize">Copia este PIN y Activa tu premio</string>
     <string name="label_second_line_activate_pin_prize">o puedes enviar un SMS al 323 con el PIN de tu premio</string>
+    <string name="label_noticias">Noticias</string>
 
 </resources>

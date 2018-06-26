@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -34,8 +35,9 @@ public class Main extends ImmersiveActivity implements MainView
     //Layouts and Views
     ImageView buttonSettings;
     ImageView bgTimemachine;
-    //ImageView icNewChallenge;
-    //ImageView icNewTrivia;
+    ImageView icNewChallenge;
+    ImageView icNewTrivia;
+    ImageView icFeed;
     TextView tvPendingCh;
     ShowcaseView mShowcaseView;
     ImageView btnTravel;
@@ -59,10 +61,11 @@ public class Main extends ImmersiveActivity implements MainView
 
         buttonSettings = (ImageView) findViewById(R.id.buttonSettings);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
-        /*icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
-        icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);*/
+        icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
+        icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
         tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
         btnTravel = (ImageView) findViewById(R.id.btnTravel);
+        icFeed = (ImageView) findViewById(R.id.icFeed);
 
         mShowcaseCounter = 0;
 
@@ -311,10 +314,10 @@ public class Main extends ImmersiveActivity implements MainView
     @Override
     public void setTriviaAvailable(boolean available)
     {
-        /*if (available)
+        if (available)
             Picasso.with(this).load(R.drawable.ic_trivia_on).into(icNewTrivia);
         else
-            Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);*/
+            Picasso.with(this).load(R.drawable.ic_trivia_off).into(icNewTrivia);
     }
 
     public void setNewAgeAvailable(boolean available)
@@ -330,8 +333,8 @@ public class Main extends ImmersiveActivity implements MainView
     {
         try
         {
-            /*icNewTrivia.setOnClickListener(triviaClick);
-            icNewChallenge.setOnClickListener(challengesClick);*/
+            icNewTrivia.setOnClickListener(triviaClick);
+            icNewChallenge.setOnClickListener(challengesClick);
         }
         catch (Exception ex)
         {
