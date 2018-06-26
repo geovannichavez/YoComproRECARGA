@@ -21,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.NavFlagsUtil;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
@@ -77,6 +78,19 @@ public class Main extends ImmersiveActivity implements MainView
                 ButtonAnimator.getInstance(Main.this).animateButton(v);
                 Intent intro = new Intent(Main.this, Intro.class);
                 startActivity(intro);
+            }
+        });
+
+        icFeed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ButtonAnimator.getInstance(Main.this).animateButton(view);
+                Intent news = new Intent(Main.this, News.class);
+                NavFlagsUtil.addFlags(news);
+                startActivity(news);
+                finish();
             }
         });
 
@@ -326,6 +340,15 @@ public class Main extends ImmersiveActivity implements MainView
             Picasso.with(this).load(R.drawable.ic_travel_new).into(btnTravel);
         else
             Picasso.with(this).load(R.drawable.ic_travel).into(btnTravel);
+    }
+
+    @Override
+    public void setNewsFeedActive(boolean available)
+    {
+        if (available)
+            Picasso.with(this).load(R.drawable.ic_news_on).into(icFeed);
+        else
+            Picasso.with(this).load(R.drawable.ic_news_off).into(icFeed);
     }
 
     @Override

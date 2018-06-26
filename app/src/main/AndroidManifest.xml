@@ -325,7 +325,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeFullScreen"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.activities.News"></activity>
+        <activity
+            android:name=".ui.activities.News"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeFullScreen" />
     </application>
 
 </manifest>

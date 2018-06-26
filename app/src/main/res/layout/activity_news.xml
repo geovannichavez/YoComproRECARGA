@@ -132,12 +132,13 @@
                         android:layout_weight="4.1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
+
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="0dp"
-                        android:weightSum="100"
-                        android:layout_weight="91.8"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="90.9"
+                        android:orientation="vertical"
+                        android:weightSum="100">
 
                         <Space
                             android:layout_width="match_parent"
@@ -154,22 +155,23 @@
                             android:textSize="@dimen/dimen_normal_12" />
 
                         <!--TODO: Aqui va el listview  -->
-                        <ListView
+                        <android.support.v7.widget.RecyclerView
                             android:id="@+id/lvNews"
-                            tools:listitem="@layout/custom_listview_item_news"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="89.5" />
+                            android:layout_weight="89.5"
+                            tools:listitem="@layout/custom_listview_item_news" />
 
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="2.8" />
                     </LinearLayout>
+
                     <Space
-                        android:layout_weight="4.1"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="5" />
                 </LinearLayout>
                 <Space
                     android:layout_width="0dp"

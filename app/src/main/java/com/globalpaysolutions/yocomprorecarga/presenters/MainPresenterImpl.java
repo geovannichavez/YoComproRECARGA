@@ -87,6 +87,9 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             else
                 mView.setTriviaAvailable(false);
 
+            //News
+            mView.setNewsFeedActive(true);
+
         }
         catch (Exception ex)
         {
