@@ -8,6 +8,8 @@ loaded: false,
 rotating: false,
 init: function initFn() {
 
+ this.createOverlays();
+
 },
 
 
@@ -18,6 +20,7 @@ alertPrueba: function alertPruebaFn(word) {
 deleteObjectGeo: function deleteObjectGeoFn() {
     AR.context.destroyAll();
     document.body.innerHTML = "<div id=\"container\" class=\"container\"><div class=\"content\"><div id=\"loadingMessage\" class=\"loading\">No hay objetos cerca, revisa tu mapa...</div></div></div>";
+     //this.createOverlays();
 },
 
 destroyObjectGeo: function destroyObjectGeoFn() {
@@ -210,6 +213,182 @@ createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude
                                }
                                });
     //actualARObject = obj;
+},
+
+
+/*
+
+*******************************************************************************************************
+
+        IMAGE SCAN
+
+*******************************************************************************************************
+
+*/
+createOverlays: function createOverlaysFn() {
+    /*
+     First an AR.ImageTracker needs to be created in order to start the recognition engine. It is initialized with a AR.TargetCollectionResource specific to the target collection that should be used. Optional parameters are passed as object in the last argument. In this case a callback function for the onTargetsLoaded trigger is set. Once the tracker loaded all its target images, the function worldLoaded() is called.
+     Important: If you replace the tracker file with your own, make sure to change the target name accordingly.
+     Use a specific target name to respond only to a certain target or use a wildcard to respond to any or a certain group of targets.
+     */
+    //alert("InterLoad");
+    this.targetCollectionResource = new AR.TargetCollectionResource("assets/RecarGOBrands.wtc", {
+                                                                    });
+
+    this.tracker = new AR.ImageTracker(this.targetCollectionResource, {
+
+//                                       onTargetsLoaded: this.worldLoaded,
+                                       onError: function(errorMessage) {
+                                       alert(errorMessage);
+                                       }
+                                       });
+
+    /*
+     The next step is to create the augmentation. In this example an image resource is created and passed to the AR.ImageDrawable.
+     A drawable is a visual component that can be connected to an IR target (AR.ImageTrackable) or a geolocated object (AR.GeoObject).
+     The AR.ImageDrawable is initialized by the image and its size.
+     Optional parameters allow for position it relative to the recognized target.
+     */
+
+
+    var modelBrand = new AR.Model("assets/Vikingos/SilverChest.wt3", {
+                                 onLoaded: this.worldLoaded,
+                                 scale: {
+                                 x: 0.5,
+                                 y: 0.5,
+                                 z: 0.5
+                                 },
+                                 rotate: {
+                                 x: 270.0
+                                 },
+                                 onClick : function() {
+                                 if(!exchanging)
+                                 {
+                                 exchanging = true;
+                                 brandAnim.start(1);
+                                 setTimeout(function() {
+                                            var architectSdkUrl = "architectsdk://Brand?Wendys";
+                                            document.location = architectSdkUrl;
+                                            exchanging = false;
+                                            },4000);
+                                 }
+                                 }
+                                 });
+    var brandAnim = new AR.ModelAnimation(modelBrand, "Scene");
+
+
+
+    var modelBrand1 = new AR.Model("assets/Vikingos/GoldChest.wt3", {
+                                  onLoaded: this.worldLoaded,
+                                  scale: {
+                                  x: 0.5,
+                                  y: 0.5,
+                                  z: 0.5
+                                  },
+                                  rotate: {
+                                  x: 270.0
+                                  },
+                                  onClick : function() {
+                                  if(!exchanging)
+                                  {
+                                  exchanging = true;
+                                  brandAnim1.start(1);
+                                  setTimeout(function() {
+                                             var architectSdkUrl = "architectsdk://Brand?Puma";
+                                             document.location = architectSdkUrl;
+                                             exchanging = false;
+                                             },4000);
+                                  }
+                                  }
+                                  });
+    var brandAnim1 = new AR.ModelAnimation(modelBrand1, "Scene");
+
+
+    var modelBrand2 = new AR.Model("assets/sub.wt3", {
+                                   onLoaded: this.worldLoaded,
+                                   scale: {
+                                   x: 0.5,
+                                   y: 0.5,
+                                   z: 0.5
+                                   },
+                                   rotate: {
+                                   x: 270.0
+                                   },
+                                   onClick : function() {
+                                   if(!exchanging)
+                                   {
+                                   exchanging = true;
+                                   brandAnim2.start(1);
+                                   setTimeout(function() {
+                                              var architectSdkUrl = "architectsdk://Brand?FarmAmerica";
+                                              document.location = architectSdkUrl;
+                                              exchanging = false;
+                                              },4000);
+                                   }
+                                   }
+                                   });
+    var brandAnim2 = new AR.ModelAnimation(modelBrand2, "Scene");
+
+    /*
+     The last line combines everything by creating an AR.ImageTrackable with the previously created tracker,
+     the name of the image target and the drawable that should augment the recognized image.
+     Please note that in this case the target name is a wildcard. Wildcards can be used to respond
+     to any target defined in the target collection. If you want to respond to a certain target
+     only for a particular AR.ImageTrackable simply provide the target name as specified in the target collection.
+     */
+    var pageOne = new AR.ImageTrackable(this.tracker, "Wendys", {
+                                        drawables: {
+                                        cam: modelBrand
+                                        },
+//                                        onImageRecognized: this.removeLoadingBar,
+                                        onError: function(errorMessage) {
+                                        alert(errorMessage);
+                                        }
+                                        });
+
+    var pageTwo = new AR.ImageTrackable(this.tracker, "Puma", {
+                                        drawables: {
+                                        cam: modelBrand1
+                                        },
+                                        //                                        onImageRecognized: this.removeLoadingBar,
+                                        onError: function(errorMessage) {
+                                        alert(errorMessage);
+                                        }
+                                        });
+
+    var pageThree = new AR.ImageTrackable(this.tracker, "FarmAmericas", {
+                                          drawables: {
+                                          cam: modelBrand2
+                                          },
+                                        //                                        onImageRecognized: this.removeLoadingBar,
+                                        onError: function(errorMessage) {
+                                        alert(errorMessage);
+                                        }
+                                        });
+
+
+    // Create overlay for page one
+//    var imgOne = new AR.ImageResource("assets/Siman.png");
+//    var overlayOne = new AR.ImageDrawable(imgOne, 1, {
+//                                          translate: {
+//                                          x: 0.0,
+//                                          }
+//                                          });
+
+    var pageFour = new AR.ImageTrackable(this.tracker, "Siman", {
+                                          drawables: {
+                                          cam: modelBrand2
+                                          },
+                                          //onImageRecognized: alert("Siman Escaneado"),
+                                          onError: function(errorMessage) {
+                                          alert(errorMessage);
+                                          }
+                                          });
+
+
+
+
+
 },
 
 worldLoaded: function worldLoadedFn() {

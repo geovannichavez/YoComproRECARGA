@@ -197,12 +197,13 @@
                     android:layout_weight="12" />
 
                 <ImageView
-                    android:src="@drawable/ic_play"
-                    android:scaleType="fitCenter"
+                    android:id="@+id/btnPlay"
                     android:layout_width="0dp"
-                    android:onClick="navigateMap"
                     android:layout_height="match_parent"
-                    android:layout_weight="76"/>
+                    android:layout_weight="76"
+                    android:onClick="navigateMap"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_play" />
 
                 <Space
                     android:layout_width="0dp"
