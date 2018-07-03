@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RedeemSponsorPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RedeemedPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
@@ -149,6 +150,13 @@ public interface ApiInterface
     Call<WinPrizeResponse> redeemPrize(@Header("authenticationKey") String pAuthKey,
                                        @Header("AppVersion") String pAppVersion,
                                        @Header("Platform") String pPlatform);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REDEEM_SPONSOR_PRIZE)
+    Call<WinPrizeResponse> redeemSponsorPrize(@Header("authenticationKey") String pAuthKey,
+                                              @Header("AppVersion") String pAppVersion,
+                                              @Header("Platform") String pPlatform,
+                                              @Body RedeemSponsorPrizeReqBody requestBody);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.LEADERBOARDS)

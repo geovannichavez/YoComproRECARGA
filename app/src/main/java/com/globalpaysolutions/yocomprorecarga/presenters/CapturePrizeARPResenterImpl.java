@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
@@ -276,7 +277,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void checkForWelcomeChest()
     {
-        if(mUserData.checkWelcomeChestAvailable()) //TODO: Cambiar a true
+        if(mUserData.checkWelcomeChestAvailable())
         {
             double lat = (double) mUserData.getWelcomeChestLat();
             double longt = (double) mUserData.getWelcomeChestLong();
@@ -636,6 +637,30 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
     }
 
+    /*
+    *
+    *
+    *   SPONSOR LISTENER  IMPLEMENTATION
+    *
+    * */
+    @Override
+    public void gf_sponsorPrize_onKeyEntered(String key, LatLng location)
+    {
+        mFirebaseInteractor.retrieveSponsorPrizeData(key, location);
+    }
+
+    @Override
+    public void gf_sponsorPrize_onKeyExited(String key, boolean compatible3D)
+    {
+
+    }
+
+    @Override
+    public void gf_sponsorPrize_onGeoQueryReady()
+    {
+
+    }
+
     @Override
     public void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData)
     {
@@ -682,6 +707,40 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void fb_wildcardPoint_onCancelled(DatabaseError databaseError)
     {
         mView.onWildcardPointCancelled(databaseError);
+    }
+
+    @Override
+    public void fb_sponsorPrize_onDataChange(String key, LatLng location, SponsorPrizeData sponsorPrizeData)
+    {
+        if(sponsorPrizeData != null)
+        {
+            // If 'visible' must draw marker on map
+            if(sponsorPrizeData.getVisible() >  0)
+            {
+                if(!TextUtils.equals(mUserData.getLastExchangedChestID(), key))
+                {
+                    if (UserData.getInstance(mContext).Is3DCompatibleDevice())
+                    {
+                        if(!TextUtils.equals(mCurrentChestKey, key))
+                        {
+                            mCurrentChestKey = key;
+                            mView.onSponsorPrizeKeyEntered(key, location, mUserData.getEraFolderName(), sponsorPrizeData.getName());
+                        }
+                    }
+                    else
+                    {
+                        //Draws chest on screen
+                        mView.onSponsorPrizeKeyEntered_2D(key, location, mUserData.getEraID(), sponsorPrizeData.getName());
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void fb_sponsorPrize_onCancelled(DatabaseError databaseError)
+    {
+
     }
 
     @Override
@@ -936,6 +995,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mUserData.saveLastPrizeLevel(pResponse.getPrizeLevel());
             mUserData.saveLastPrizeLogoUrl(pResponse.getLogoUrl());
             mUserData.saveLastPrizeExchangedColor(pResponse.getHexColor());
+            mUserData.saveLastPrizeBackgroundUrl(pResponse.getUrlBackground());
 
             if(pResponse.getAchievement() != null)
             {

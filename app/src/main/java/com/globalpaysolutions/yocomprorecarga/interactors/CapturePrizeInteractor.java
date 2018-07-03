@@ -5,13 +5,13 @@ import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import com.globalpaysolutions.yocomprorecarga.BuildConfig;
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
 import com.globalpaysolutions.yocomprorecarga.api.ApiInterface;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.ICapturePrizeInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.RedeemSponsorPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
@@ -221,6 +221,69 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
             }
         });
 
+    }
+
+    @Override
+    public void atemptRedeemSponsorPrize(double latitude, double longitude, String brand, int prizeType)
+    {
+        try
+        {
+            RedeemSponsorPrizeReqBody requestBody = new RedeemSponsorPrizeReqBody();
+            requestBody.setLatitude(latitude);
+            requestBody.setLongitude(longitude);
+            requestBody.setBrand(brand);
+            requestBody.setPrizeType(prizeType);
+
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+            final Call<WinPrizeResponse> call = apiService.redeemSponsorPrize(mUserData.getUserAuthenticationKey(),
+                    getVersionName(), Constants.PLATFORM, requestBody);
+
+            call.enqueue(new Callback<WinPrizeResponse>()
+            {
+                @Override
+                public void onResponse(Call<WinPrizeResponse> call, Response<WinPrizeResponse> response)
+                {
+                    if(response.isSuccessful())
+                    {
+                        WinPrizeResponse redeemPrize = response.body();
+                        mListener.onRedeemPrizeSuccess(redeemPrize);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int codeResponse = response.code();
+
+                            if(codeResponse == 426)
+                            {
+                                Gson gson = new Gson();
+                                SimpleResponse errorResponse = gson.fromJson(response.errorBody().string(), SimpleResponse.class);
+                                mListener.onRedeemPrizeError(codeResponse, null, errorResponse.getInternalCode());
+                            }
+                            else
+                            {
+                                mListener.onRedeemPrizeError(codeResponse, null, null);
+                                Log.e(TAG, response.errorBody().toString());
+                            }
+                        }
+                        catch (IOException ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WinPrizeResponse> call, Throwable t)
+                {
+                    mListener.onRedeemPrizeError(0, t, null);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     private String getVersionName()

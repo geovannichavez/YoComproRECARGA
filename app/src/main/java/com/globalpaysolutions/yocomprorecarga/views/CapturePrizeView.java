@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -64,6 +65,12 @@ public interface CapturePrizeView
     void onWildcardKeyExited(String pKey);
     void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData);
     void onWildcardPointCancelled(DatabaseError pDatabaseError);
+
+    void onSponsorPrizeKeyEntered(String key, LatLng location, String folderName, String sponsor);
+    void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor);
+    void onSponsorPrizeKeyExited(String pKey);
+    void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData);
+    void onSponsorPrizePointCancelled(DatabaseError pDatabaseError);
 
     void changeToOpenChest(int pChestType, int pEraID);
     void navigateToWildcard();

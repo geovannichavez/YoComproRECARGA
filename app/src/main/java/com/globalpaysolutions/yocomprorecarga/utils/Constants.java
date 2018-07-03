@@ -76,6 +76,7 @@ public class Constants
     public static final String NAME_CHEST_TYPE_SILVER = "Silver";
     public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
     public static final String NAME_CHEST_TYPE_WILDCARD = "Wildcard";
+    public static final String NAME_CHEST_TYPE_SPONSOR_PRIZE = "SponsorPrize";
 
     public static final String WELCOME_CHEST_FIREBASE_KEY = "FreeChest";
 
@@ -162,6 +163,7 @@ public class Constants
     public static final String TAG_MARKER_SILVER = "tag_marker_silver";
     public static final String TAG_MARKER_BRONZE = "tag_marker_bronze";
     public static final String TAG_MARKER_WILDCARD = "tag_marker_wildcard";
+    public static final String TAG_MARKER_SPONSORPRIZE = "tag_marker_sponsorprize";
 
 
     //Challenge

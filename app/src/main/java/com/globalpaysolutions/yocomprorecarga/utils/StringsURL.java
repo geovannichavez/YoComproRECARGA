@@ -52,6 +52,8 @@ public class StringsURL
 
     public final static String REDEEM_PRIZE = "WinPrize";
 
+    public final static String TREASURE_HUNT = "";
+
     public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
 
     public static final String LEADERBOARDS = "leaderboards/";
@@ -107,5 +109,6 @@ public class StringsURL
     public static final String GET_WORLDCUP_COUNTRIES = "GetCountries";
     public static final String SELECT_WORLDCUP_COUNTRY = "SelectCountries";
     public static final String NEWS = "GetFeed";
+    public static final String REDEEM_SPONSOR_PRIZE = "" ; //TODO: Añadir url de enpoint
 }
 

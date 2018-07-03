@@ -22,12 +22,14 @@ public class GeofireSingleton
     private static GeoFire mSilverPointsRef;
     private static GeoFire mBronzePointsRef;
     private static GeoFire mWildcardPointsRef;
+    private static GeoFire mSponsorPrizeRef;
 
     //Queries
     private static GeoQuery mGoldPointsQuery;
     private static GeoQuery mSilverPointsQuery;
     private static GeoQuery mBronzePointsQuery;
     private static GeoQuery mWildcardPointsQuery;
+    private static GeoQuery mSponsorPrizeQuery;
 
     private GeofireSingleton()
     {
@@ -44,7 +46,7 @@ public class GeofireSingleton
     }
 
     public void initializeReferences(DatabaseReference goldReference, DatabaseReference silverReference,
-                                     DatabaseReference bronzeReference, DatabaseReference wildcardReference)
+                                     DatabaseReference bronzeReference, DatabaseReference wildcardReference, DatabaseReference sponsorPrizeReference)
     {
         try
         {
@@ -59,6 +61,9 @@ public class GeofireSingleton
 
             if(mWildcardPointsRef == null)
                 mWildcardPointsRef = new GeoFire(wildcardReference);
+
+            if(mSponsorPrizeRef == null)
+                mSponsorPrizeRef = new GeoFire(sponsorPrizeReference);
 
         }
         catch (Exception ex)
@@ -88,4 +93,8 @@ public class GeofireSingleton
     }
 
 
+    public GeoFire getSponsorPrizeRef()
+    {
+        return mSponsorPrizeRef;
+    }
 }

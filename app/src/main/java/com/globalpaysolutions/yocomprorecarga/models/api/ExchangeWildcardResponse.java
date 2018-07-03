@@ -54,6 +54,9 @@ public class ExchangeWildcardResponse
     @SerializedName("WaitTime")
     @Expose
     private Object waitTime;
+    @SerializedName("UrlBackground")
+    @Expose
+    private String urlBackground;
 
     public int getType()
     {
@@ -203,5 +206,15 @@ public class ExchangeWildcardResponse
     public void setWaitTime(Object waitTime)
     {
         this.waitTime = waitTime;
+    }
+
+    public String getUrlBackground()
+    {
+        return urlBackground;
+    }
+
+    public void setUrlBackground(String urlBackground)
+    {
+        this.urlBackground = urlBackground;
     }
 }

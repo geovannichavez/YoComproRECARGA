@@ -277,7 +277,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
     {
         try
         {
-            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//TODO: Debe ser mayor a cero
+            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//Must be greater than zero
                 mView.navigateTrivia();
 
         }catch (Exception ex)

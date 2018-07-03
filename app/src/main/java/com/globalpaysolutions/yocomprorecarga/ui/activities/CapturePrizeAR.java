@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
@@ -504,7 +505,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), souvenirName));
             //tvSouvenirDesc.setText(souvenirDescription);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
 
             souvenirDialog = builder.setView(dialogView).create();
@@ -769,6 +769,45 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     public void onWildcardPointCancelled(DatabaseError pDatabaseError)
     {
         //Nothing to do here
+    }
+
+    @Override
+    public void onSponsorPrizeKeyEntered(String key, LatLng location, String folderName, String sponsor)
+    {
+        //TODO: Definir qué modelo 3D se va a llamar
+        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + location.latitude + ", " + location.longitude + ", '" + key + "', '" + folderName + "')");
+    }
+
+    @Override
+    public void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor)
+    {
+        try
+        {
+            //TODO: Definir qué tipo de cofre es el "tesoro"
+            mPresenter.registerKeyEntered(key, location, eraID, Constants.NAME_CHEST_TYPE_WILDCARD);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error trying to draw chest: "  + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onSponsorPrizeKeyExited(String pKey)
+    {
+
+    }
+
+    @Override
+    public void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData)
+    {
+
+    }
+
+    @Override
+    public void onSponsorPrizePointCancelled(DatabaseError pDatabaseError)
+    {
+
     }
 
     @Override

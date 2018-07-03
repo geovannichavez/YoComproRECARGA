@@ -154,7 +154,6 @@
                             android:text="Ordenar por: Fecha"
                             android:textSize="@dimen/dimen_normal_12" />
 
-                        <!--TODO: Aqui va el listview  -->
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/lvNews"
                             android:layout_width="match_parent"

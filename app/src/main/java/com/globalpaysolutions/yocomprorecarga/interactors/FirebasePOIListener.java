@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +32,12 @@ public interface FirebasePOIListener
     void gf_wildcardPoint_onKeyExited(String pKey, boolean p3DCompatible);
     void gf_wildcardPoint_onGeoQueryReady();
 
+    //GeoFire SponsorPrize
+    void gf_sponsorPrize_onKeyEntered(String key, LatLng location);
+    void gf_sponsorPrize_onKeyExited(String key, boolean compatible3D);
+    void gf_sponsorPrize_onGeoQueryReady();
+
+
     /*
     *
     *
@@ -53,6 +60,10 @@ public interface FirebasePOIListener
     // GeoFire WildcardPointsData
     void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData);
     void fb_wildcardPoint_onCancelled(DatabaseError databaseError);
+
+    //Firebase SponsorPrize
+    void fb_sponsorPrize_onDataChange(String key, LatLng location, SponsorPrizeData sponsorPrizeData);
+    void fb_sponsorPrize_onCancelled(DatabaseError databaseError);
 
     void detachFirebaseListeners();
 }
