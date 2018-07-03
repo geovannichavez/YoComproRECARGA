@@ -192,12 +192,14 @@ public class Validation
         {
             return ValidNickname.REQUIRED;
         }
-
-        if (required && !Pattern.matches(NICKNAME_REGEX, text))
+        else if (required && !Pattern.matches(NICKNAME_REGEX, text))
         {
             return ValidNickname.NOT_VALID;
         }
-        return ValidNickname.VALID;
+        else
+        {
+           return ValidNickname.VALID;
+        }
     }
 
     public enum ValidateName

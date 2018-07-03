@@ -313,8 +313,10 @@
     <string name="label_reedem_error">Revisa el código que ingresaste y el número que se va a usar</string>
     <string name="title_wildcard_pointer">¡Suerte!</string>
     <string name="label_wildcard_pointer">Averigua el secreto</string>
-    <string name="title_dialog_invalid_nickname">Nombre Inválido</string>
-    <string name="label_dialog_invalid_nickname">Este nombre no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
+    <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_invalid_name">Nombre Inválido</string>
+    <string name="label_dialog_invalid_name">Este nombre no es válido. Intenta uno diferente</string>
     <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
     <string name="title_no_prizes_yet">¡Aún no has logrado ningún premio!</string>
     <string name="label_no_prizes_yet">Busca cofres y recolecta suficientes monedas para canjeralos</string>
@@ -465,6 +467,7 @@
     <string name="label_phone_already_exists">El número de teléfono que ingresaste ya está en uso</string>
     <string name="validation_required_firstname">Tu nombre es requerido</string>
     <string name="validation_required_lastname">Tu apellido es requerido</string>
+    <string name="title_dialog_invalid_lastname">Apellido Inválido</string>
     <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
     <string name="label_answer_exchanged_prize">¿Premio canjeado?</string>
     <string name="label_copy_pin_activate_prize">Copia este PIN y Activa tu premio</string>

@@ -228,6 +228,7 @@ public class TokenInput extends ImmersiveActivity implements TokenInputView
         {
             Intent validatePhone = new Intent(TokenInput.this, ValidatePhone.class);
             validatePhone.putExtra(Constants.BUNDLE_PHONE_RETYPE, retypePhone);
+            validatePhone.putExtra(Constants.INTENT_BUNDLE_AUTH_TYPE, UserData.getInstance(this).getAuthModeSelected());
             startActivity(validatePhone);
         }
         catch (Exception ex) {  ex.printStackTrace();   }
