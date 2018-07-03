@@ -729,11 +729,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_sponsorPrize_onKeyEntered(String key, LatLng location)
     {
-        //Prize point will not be drawed here
-
-        //Bitmap wildcardBitmap = retrieveBitmap(Constants.NAME_CHEST_TYPE_SPONSOR_PRIZE);
-        //mView.addSponsorPrizePoint(key, location, wildcardBitmap);
-
+        //Prize point will not be drawed here. Data is requested
         mFirebaseInteractor.retrieveSponsorPrizeData(key, location);
 
     }
