@@ -109,6 +109,6 @@ public class StringsURL
     public static final String GET_WORLDCUP_COUNTRIES = "GetCountries";
     public static final String SELECT_WORLDCUP_COUNTRY = "SelectCountries";
     public static final String NEWS = "GetFeed";
-    public static final String REDEEM_SPONSOR_PRIZE = "" ; //TODO: Añadir url de enpoint
+    public static final String REDEEM_SPONSOR_PRIZE = "GetPrize";
 }
 

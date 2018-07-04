@@ -16,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
+import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -48,7 +49,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<Tracking> call = apiService.getConsumerTracking(mUserData.getUserAuthenticationKey(),
-                getVersionName(), Constants.PLATFORM);
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
         call.enqueue(new Callback<Tracking>()
         {
@@ -106,7 +107,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<ExchangeResponse> call = apiService.exchangeChest(mUserData.getUserAuthenticationKey(), requestBody,
-                getVersionName(), Constants.PLATFORM);
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
         call.enqueue(new Callback<ExchangeResponse>()
         {
@@ -177,7 +178,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<WinPrizeResponse> call = apiService.redeemPrize(mUserData.getUserAuthenticationKey(),
-                getVersionName(), Constants.PLATFORM);
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM);
 
         call.enqueue(new Callback<WinPrizeResponse>()
         {
@@ -234,7 +235,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             final Call<WinPrizeResponse> call = apiService.redeemSponsorPrize(mUserData.getUserAuthenticationKey(),
-                    getVersionName(), Constants.PLATFORM, requestBody);
+                    VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, requestBody);
 
             call.enqueue(new Callback<WinPrizeResponse>()
             {
@@ -284,21 +285,6 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         }
     }
 
-    private String getVersionName()
-    {
-        String version = "";
-        try
-        {
-            PackageInfo pInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
-            version = pInfo.versionName;//Version Name
-            Log.i(TAG, "Version name: " + version);
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Could not retrieve version name: " + ex.getMessage());
-        }
 
-        return version;
-    }
 
 }
