@@ -13,5 +13,5 @@ public interface ICapturePrizeInteractor
     void openCoinsChest(LatLng pLocation, String pFirebaseID, int pChestType, int pEraID);
     void saveUserTracking(Tracking pTracking);
     void atemptRedeemPrize();
-    void atemptRedeemSponsorPrize(double latitude, double longitude, String brand, int prizeType);
+    void atemptRedeemSponsorPrize(int sponsorID, int prizeType);
 }

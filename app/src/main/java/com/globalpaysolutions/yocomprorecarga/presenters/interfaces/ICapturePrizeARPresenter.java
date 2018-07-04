@@ -16,6 +16,7 @@ public interface ICapturePrizeARPresenter
     void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType);
     void retrieveUserTracking();
     void redeemPrize();
+    void redeemSponsorPrize();
     void handle2DCoinTouch();
     void handleCoinExchangeKeyUp();
     void touchWildcard_2D(String pFirebaseID, int chestType);

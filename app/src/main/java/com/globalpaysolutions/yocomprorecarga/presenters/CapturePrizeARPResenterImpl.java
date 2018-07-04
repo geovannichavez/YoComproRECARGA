@@ -245,6 +245,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void redeemSponsorPrize()
+    {
+
+    }
+
+    @Override
     public void handle2DCoinTouch()
     {
         mView.stopVibrate();
@@ -343,6 +349,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                         break;
                     case Constants.NAME_CHEST_TYPE_WILDCARD:
                         mView.drawChestWildcard2D(pKey, location, ageID);
+                        break;
+                    default:
+                        mView.drawChestSponsor2D(pKey, location, ageID, chestType); //chestType is sponsor
                         break;
                 }
 
@@ -730,7 +739,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     else
                     {
                         //Draws chest on screen
-                        mView.onSponsorPrizeKeyEntered_2D(key, location, mUserData.getEraID(), sponsorPrizeData.getName());
+                        //mView.onSponsorPrizeKeyEntered_2D(key, location, mUserData.getEraID(), sponsorPrizeData.getName());
+                        registerKeyEntered(key, location, mUserData.getEraID(), sponsorPrizeData.getName());
                     }
                 }
             }

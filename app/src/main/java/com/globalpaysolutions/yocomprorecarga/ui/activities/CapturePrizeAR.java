@@ -42,6 +42,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ChestSelector;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -775,7 +776,12 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     public void onSponsorPrizeKeyEntered(String key, LatLng location, String folderName, String sponsor)
     {
         //TODO: Definir qué modelo 3D se va a llamar
-        this.architectView.callJavascript("World.createModelWildcardAtLocation(" + location.latitude + ", " + location.longitude + ", '" + key + "', '" + folderName + "')");
+        //this.architectView.callJavascript("World.createModelWildcardAtLocation(" + location.latitude + ", " + location.longitude + ", '" + key + "', '" + folderName + "')");
+
+        if(UserData.getInstance(this).Is3DCompatibleDevice())
+        {
+            this.architectView.callJavascript("");
+        }
     }
 
     @Override
@@ -1057,6 +1063,28 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         catch (Exception ex)
         {
             Log.e(TAG, "Error drwing wildcard chest 2d: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void drawChestSponsor2D(String pKey, LatLng location, int ageID, String chestType)
+    {
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(location);
+            data.setChestType(0); //TODO: identificar el valor en el endpoint
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+            //Gets resource according to era selected
+            int resourceID = ChestSelector.getInstance(this).getSilverResource(ageID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing silver chest 2d: " +  ex.getMessage());
         }
     }
 

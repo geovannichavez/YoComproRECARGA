@@ -83,6 +83,5 @@ public interface CapturePrizeView
     void drawChestSilver2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestBronze2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestWildcard2D(String pKey, LatLng pLocation, int pAgeID);
-
-
+    void drawChestSponsor2D(String pKey, LatLng location, int ageID, String chestType);
 }

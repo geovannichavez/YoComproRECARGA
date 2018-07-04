@@ -224,15 +224,13 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void atemptRedeemSponsorPrize(double latitude, double longitude, String brand, int prizeType)
+    public void atemptRedeemSponsorPrize(int sponsorID, int prizeType)
     {
         try
         {
             RedeemSponsorPrizeReqBody requestBody = new RedeemSponsorPrizeReqBody();
-            requestBody.setLatitude(latitude);
-            requestBody.setLongitude(longitude);
-            requestBody.setBrand(brand);
-            requestBody.setPrizeType(prizeType);
+            requestBody.setSponsorID(sponsorID);
+            requestBody.setType(prizeType);
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             final Call<WinPrizeResponse> call = apiService.redeemSponsorPrize(mUserData.getUserAuthenticationKey(),

@@ -1,59 +1,35 @@
 package com.globalpaysolutions.yocomprorecarga.models.api;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class RedeemSponsorPrizeReqBody
 {
+    @SerializedName("SponsorID")
+    @Expose
+    private int sponsorID;
+    @SerializedName("Type")
+    @Expose
+    private int type;
 
-    /*@SerializedName("Longitude")
-    @Expose*/
-    private Double longitude;
-    /*@SerializedName("Latitude")
-    @Expose*/
-    private Double latitude;
-    /*@SerializedName("ChestType")
-    @Expose*/
-    private int prizeType;
-    /*@SerializedName("ChestType")
-    @Expose*/
-    private String brand;
-
-    public Double getLongitude()
+    public int getSponsorID()
     {
-        return longitude;
+        return sponsorID;
     }
 
-    public void setLongitude(Double longitude)
+    public void setSponsorID(int sponsorID)
     {
-        this.longitude = longitude;
+        this.sponsorID = sponsorID;
     }
 
-    public Double getLatitude()
+    public int getType()
     {
-        return latitude;
+        return type;
     }
 
-    public void setLatitude(Double latitude)
+    public void setType(int type)
     {
-        this.latitude = latitude;
-    }
-
-    public int getPrizeType()
-    {
-        return prizeType;
-    }
-
-    public void setPrizeType(int prizeType)
-    {
-        this.prizeType = prizeType;
-    }
-
-    public String getBrand()
-    {
-        return brand;
-    }
-
-    public void setBrand(String brand)
-    {
-        this.brand = brand;
+        this.type = type;
     }
 
 }
