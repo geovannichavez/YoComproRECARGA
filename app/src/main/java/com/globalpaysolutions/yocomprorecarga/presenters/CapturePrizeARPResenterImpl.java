@@ -174,7 +174,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mIsRunning = true;
 
             String[] params = pArchitectURL.split("//");
-            String type = params[0];
+            String type = params[1];
 
             if(!TextUtils.equals(type, "Sponsor"))
             {
