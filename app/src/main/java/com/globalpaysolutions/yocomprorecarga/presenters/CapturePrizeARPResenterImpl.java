@@ -762,36 +762,29 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         if(sponsorPrizeData != null)
         {
-            // If 'visible' must draw marker on map
-            if(sponsorPrizeData.getVisible() >  0)
+            //If chest is not last excnaged
+            //if(!TextUtils.equals(mUserData.getLastExchangedChestID(), key))
+            //{
+
+            if (UserData.getInstance(mContext).Is3DCompatibleDevice())
             {
-                if(!TextUtils.equals(mUserData.getLastExchangedChestID(), key))
+                mView.onSponsorPrizeKeyEntered(key, location, sponsorPrizeData);
+            }
+            else
+            {
+                if(!TextUtils.equals(mCurrentChestKey, key))
                 {
-                    if(!TextUtils.equals(mCurrentChestKey, key))
-                    {
-                        if (UserData.getInstance(mContext).Is3DCompatibleDevice())
-                        {
-                            mCurrentChestKey = key;
-                            mView.onSponsorPrizeKeyEntered(key, location, sponsorPrizeData);
-                        }
-                        else
-                        {
-                            try
-                            {
-                                //Draws chest on screen
-                                registerKeyEntered(key, location, mUserData.getEraID(),
-                                        Constants.NAME_CHEST_TYPE_SPONSOR_PRIZE, //ChestType
-                                        Integer.valueOf(sponsorPrizeData.getSponsorid()), //SponsorID
-                                        Constants.SponsorExchangeType.SponsorPrizeExchange.getValue()); //ExchangeType
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.e(TAG, "Error, check if string sponsorID comes null or is not a numeric value: " + ex.getMessage());
-                            }
-                        }
-                    }
+                    mCurrentChestKey = key;
+
+                    //Draws chest on screen
+                    registerKeyEntered(key, location, mUserData.getEraID(),
+                            Constants.NAME_CHEST_TYPE_SPONSOR_PRIZE, //ChestType
+                            Integer.valueOf(sponsorPrizeData.getSponsorid()), //SponsorID
+                            Constants.SponsorExchangeType.SponsorPrizeExchange.getValue()); //ExchangeType
                 }
             }
+
+            //}
         }
     }
 
@@ -1028,6 +1021,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onRedeemPrizeSuccess(WinPrizeResponse pResponse)
     {
+        mIsRunning = false;
 
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
