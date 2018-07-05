@@ -254,11 +254,15 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     public void prizePointsQuery(LatLng pLocation)
     {
         GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
+        //Makes sponsors query first, in order to get sponsors chests ASAP
+        mFirebaseInteractor.sponsorPrizeQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+
+        //Makes remaining queries
         mFirebaseInteractor.goldPointsQuery(location, Constants.GOLD_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.silverPointsQuery(location, Constants.SILVER_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.bronzePointsQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
         mFirebaseInteractor.wildcardPointsQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
-        mFirebaseInteractor.sponsorPrizeQuery(location, Constants.BRONZE_CHESTS_QUERY_RADIUS_KM);
+
     }
 
     @Override

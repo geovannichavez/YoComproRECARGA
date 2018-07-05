@@ -55,7 +55,6 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
                 data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
                 data.putString(Constants.BUNDLE_PRIZE_IMAGE, mUserData.getLastPrizeEraImage());
                 data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
-                //TODO Agregar backgrpund en datos de premio ganado
                 data.putString(Constants.BUNDLE_PRIZE_BACKGROUND, mUserData.getLastPrizeBackgroundUrl());
                 mView.updateViews(data);
             }

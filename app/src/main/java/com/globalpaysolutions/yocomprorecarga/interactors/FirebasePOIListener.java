@@ -45,19 +45,19 @@ public interface FirebasePOIListener
     *
     */
 
-    // GeoFire GoldPointsData
+    // Firebase GoldPointsData
     void fb_goldPoint_onDataChange(String pKey, LocationPrizeYCRData pGoldPointData);
     void fb_goldPoint_onCancelled(DatabaseError databaseError);
 
-    // GeoFire SilverPointsData
+    // Firebase SilverPointsData
     void fb_silverPoint_onDataChange(String pKey, LocationPrizeYCRData pSilverPointData);
     void fb_silverPoint_onCancelled(DatabaseError databaseError);
 
-    // GeoFire BronzePointsData
+    // Firebase BronzePointsData
     void fb_bronzePoint_onDataChange(String pKey, LocationPrizeYCRData pBronzePointData);
     void fb_bronzePoint_onCancelled(DatabaseError databaseError);
 
-    // GeoFire WildcardPointsData
+    // Firebase WildcardPointsData
     void fb_wildcardPoint_onDataChange(String pKey, WildcardYCRData wildcardYCRData);
     void fb_wildcardPoint_onCancelled(DatabaseError databaseError);
 

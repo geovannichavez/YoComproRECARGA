@@ -117,7 +117,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
-                finish();//TODO: Verificar si deberia de hacerse
+                finish();
             }
         });
 
@@ -314,7 +314,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void switchRecarcoinVisible(boolean pVisible)
+    public void switchChestVisible(boolean pVisible)
     {
         int visible = (pVisible) ? View.VISIBLE : View.GONE;
         ivPrize2D.setVisibility(visible);
@@ -641,7 +641,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_GOLD);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_GOLD, 0, 0);
         }
         catch (Exception ex)
         {
@@ -672,7 +672,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_SILVER);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_SILVER, 0, 0);
         }
         catch (Exception ex)
         {
@@ -709,7 +709,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_BRONZE);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_BRONZE, 0, 0);
         }
         catch (Exception ex)
         {
@@ -746,7 +746,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_WILDCARD);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_WILDCARD, 0, 0 );
         }
         catch (Exception ex)
         {
@@ -773,29 +773,22 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void onSponsorPrizeKeyEntered(String key, LatLng location, String folderName, String sponsor)
+    public void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData)
     {
-        //TODO: Definir qué modelo 3D se va a llamar
-        //this.architectView.callJavascript("World.createModelWildcardAtLocation(" + location.latitude + ", " + location.longitude + ", '" + key + "', '" + folderName + "')");
-
+        //TODO: Cambiar modelo 3D del metodo
         if(UserData.getInstance(this).Is3DCompatibleDevice())
         {
-            this.architectView.callJavascript("");
+            this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
+                    location.longitude + ", " + prizeData.getVisible() + ", '" + prizeData.getName() + "', '" + key + "', "
+                    + prizeData.getSponsorid() + ")");
         }
+
     }
 
     @Override
     public void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor)
     {
-        try
-        {
-            //TODO: Definir qué tipo de cofre es el "tesoro"
-            mPresenter.registerKeyEntered(key, location, eraID, Constants.NAME_CHEST_TYPE_WILDCARD);
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error trying to draw chest: "  + ex.getMessage());
-        }
+
     }
 
     @Override
@@ -1067,19 +1060,22 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void drawChestSponsor2D(String pKey, LatLng location, int ageID, String chestType)
+    public void drawChestSponsor2D(String pKey, LatLng location, int sponsorID, int exchangeType)
     {
         try
         {
             ChestData2D data = new ChestData2D();
             data.setLocation(location);
-            data.setChestType(0); //TODO: identificar el valor en el endpoint
+            data.setChestType(Constants.VALUE_CHEST_TYPE_SPONSOR);
+            data.setSponsorID(sponsorID);
+            data.setExchangeType(exchangeType);
 
             mFirbaseObjects.clear();
             mFirbaseObjects.put(pKey, data);
 
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getSilverResource(ageID).get(Constants.CHEST_STATE_CLOSED);
+
+            //Gets drawable according to sponsor
+            int resourceID = ChestSelector.getInstance(this).getSponsorResource(sponsorID).get(Constants.CHEST_STATE_CLOSED);
             Picasso.with(this).load(resourceID).into(ivPrize2D);
         }
         catch (Exception ex)
@@ -1331,16 +1327,21 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 String firebaseID = entry.getKey();
                 ChestData2D chestData = entry.getValue();
 
-               if(chestData.getChestType() != Constants.VALUE_CHEST_TYPE_WILDCARD)
-               {
-                   //Atempt to exchange chest
-                   mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
-               }
-               else
-               {
-                   //Wildcard touched!
-                   mPresenter.touchWildcard_2D(firebaseID, Constants.VALUE_CHEST_TYPE_WILDCARD);
-               }
+                switch (chestData.getChestType())
+                {
+                    case Constants.VALUE_CHEST_TYPE_WILDCARD:
+                        //Wildcard touched!
+                        mPresenter.touchWildcard_2D(firebaseID, Constants.VALUE_CHEST_TYPE_WILDCARD);
+                        break;
+                    case Constants.VALUE_CHEST_TYPE_SPONSOR:
+                        //Redeem sponsor prize
+                        mPresenter.redeemSponsorPrize(chestData.getSponsorID(), chestData.getExchangeType());
+                        break;
+                    default:
+                        //Atempt to exchange chest
+                        mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
+                        break;
+                }
             }
             catch (Exception ex)
             {

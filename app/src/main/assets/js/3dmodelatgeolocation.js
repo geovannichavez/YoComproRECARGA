@@ -212,6 +212,61 @@ createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude
     //actualARObject = obj;
 },
 
+
+createModelSponsorAtLocation: function createModelSponsorAtLocationFn(latitude,longitude,visible,sponsor,key,brandid) {
+
+    exchanging=false;
+    /*var modelSponsor = new AR.Model("assets/Sponsor/"+sponsor+".wt3", {
+                                     onLoaded: this.worldLoaded,
+                                     scale: {
+                                     x: 1,
+                                     y: 1,
+                                     z: 1
+                                     }
+                                     });*/
+    var modelSponsor = new AR.Model("assets/Vikingos/Wildcard.wt3", {
+                                     onLoaded: this.worldLoaded,
+                                     scale: {
+                                     x: 1,
+                                     y: 1,
+                                     z: 1
+                                     }
+                                     });
+
+    var a = new AR.PropertyAnimation(modelSponsor, 'rotate.heading', 90.0, -270, 3000);
+
+
+    a.start(-1);
+
+
+    var SponsorAnim = new AR.ModelAnimation(modelSponsor, "Scene");
+    var indicatorImage = new AR.ImageResource("assets/GoldArrow.png");
+    var indicatorDrawable = new AR.ImageDrawable(indicatorImage, 0.1, {
+                                                 verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP
+                                                 });
+    var location = new AR.GeoLocation(latitude,longitude , AR.CONST.UNKNOWN_ALTITUDE);
+
+    var obj = new AR.GeoObject(location, {
+                               drawables: {
+                               cam: [modelSponsor],
+                               indicator: [indicatorDrawable]
+                               },
+                               onClick : function() {
+                               if(!exchanging)
+                               {
+                               exchanging = true;
+                               SponsorAnim.start(1);
+                               setTimeout(function() {
+                                          var architectSdkUrl = "architectsdk://Sponsor//"+brandid+"//"+visible+"//"+key;
+                                          document.location = architectSdkUrl;
+                                          exchanging = false;
+                                          },3000);
+                               }
+                               }
+                               });
+},
+
+
 worldLoaded: function worldLoadedFn() {
     World.loaded = true;
     var e = document.getElementById('container');

@@ -72,6 +72,8 @@ public class Constants
     public static final int VALUE_CHEST_TYPE_SILVER = 2;
     public static final int VALUE_CHEST_TYPE_BRONZE = 1;
     public static final int VALUE_CHEST_TYPE_WILDCARD = 4;
+    public static final int VALUE_CHEST_TYPE_SPONSOR = 5;
+
     public static final String NAME_CHEST_TYPE_GOLD = "Gold";
     public static final String NAME_CHEST_TYPE_SILVER = "Silver";
     public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
@@ -85,6 +87,9 @@ public class Constants
     public static final String URI_MAP_VALUE_FIREBASE_ID = "firebaseID";
     public static final String URI_MAP_VALUE_LATITUDE = "latitude";
     public static final String URI_MAP_VALUE_LONGITUDE = "longitude";
+    public static final String URI_MAP_VALUE_SPONSORID = "brandid";
+    public static final String URI_MAP_VALUE_VISIBLE = "visible";
+
 
     //Prize Detail Bundle Keys
     public static final String BUNDLE_PRIZE_TITLE = "bundle_data_prize_title";
@@ -237,6 +242,23 @@ public class Constants
     public enum PrizeDetailsNavigationStack
     {
         PRIZES, COMBOS, SOUVENIRS, TRIVIA, MAP
+    }
+
+    public enum SponsorExchangeType
+    {
+        SponsorPrizeExchange(1), TreasureHunt(2), ImageScanning(3);
+
+        private int value;
+
+        SponsorExchangeType(int value)
+        {
+            this.value = value;
+        }
+
+        public int getValue()
+        {
+            return this.value;
+        }
     }
 
     //Auth

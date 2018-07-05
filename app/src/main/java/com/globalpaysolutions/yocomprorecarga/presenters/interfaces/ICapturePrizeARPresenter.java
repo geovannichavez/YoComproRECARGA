@@ -16,13 +16,13 @@ public interface ICapturePrizeARPresenter
     void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType);
     void retrieveUserTracking();
     void redeemPrize();
-    void redeemSponsorPrize();
+    void redeemSponsorPrize(int sponsorID, int exchangeType);
     void handle2DCoinTouch();
     void handleCoinExchangeKeyUp();
     void touchWildcard_2D(String pFirebaseID, int chestType);
     void showcaseARSeen();
     void checkForWelcomeChest();
     void deleteFirstKeySaved();
-    void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType);
+    void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType, int sponsorID, int exchangeType);
     void evaluateSouvsNavigation();
 }
