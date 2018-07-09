@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -33,10 +32,9 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeDa
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.VendorPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
-import com.globalpaysolutions.yocomprorecarga.utils.BitmapSaver;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
-import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -45,8 +43,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -375,7 +371,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             //Checks if welcome user is available for welcome chest
             if(UserData.getInstance(mContext).checkWelcomeChestAvailable())
             {
-                Bitmap goldMarker = BitmapSaver.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
+                Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                 float latt = Float.valueOf(String.valueOf(location.getLatitude()));
@@ -567,7 +563,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     final String name = markerUrl.getLastPathSegment();
 
                     //Checks if bitmap already exists
-                    Bitmap marker = BitmapSaver.retrieve(name);
+                    Bitmap marker = BitmapUtils.retrieve(name);
 
                     if(marker != null)
                     {
@@ -581,7 +577,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                             {
-                                bitmap = BitmapScaler.scaleMarker(bitmap, mContext);
+                                bitmap = BitmapUtils.scaleMarker(bitmap, mContext);
 
                                 saveBitmap(bitmap, name);
                                 mView.addWorldcupPlayerMarker(key, location, bitmap);
@@ -641,7 +637,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        Bitmap goldMarker = BitmapSaver.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
+        Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
         mView.addGoldPoint(pKey, pLocation, goldMarker);
     }
 
@@ -660,7 +656,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        Bitmap silverMarker = BitmapSaver.retrieve(Constants.NAME_CHEST_TYPE_SILVER);
+        Bitmap silverMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_SILVER);
         mView.addSilverPoint(pKey, pLocation, silverMarker);
     }
 
@@ -679,7 +675,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        Bitmap bronzeBitmap = BitmapSaver.retrieve(Constants.NAME_CHEST_TYPE_BRONZE);
+        Bitmap bronzeBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_BRONZE);
         mView.addBronzePoint(pKey, pLocation, bronzeBitmap);
     }
 
@@ -705,7 +701,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        Bitmap wildcardBitmap = BitmapSaver.retrieve(Constants.NAME_CHEST_TYPE_WILDCARD);
+        Bitmap wildcardBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_WILDCARD);
         mView.addWildcardPoint(pKey, pLocation, wildcardBitmap);
     }
 
@@ -923,7 +919,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             // If 'visible' must draw marker on map
             if(sponsorPrizeData.getVisible() > 0)
             {
-                Bitmap sponsorMarkerBmp = BitmapSaver.retrieve(sponsorPrizeData.getName());
+                Bitmap sponsorMarkerBmp = BitmapUtils.retrieve(sponsorPrizeData.getName());
 
                 //If sponsor bitmap does not exists
                 if(sponsorMarkerBmp == null)
@@ -935,8 +931,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                         {
                             //Saves bitmap
-                            Bitmap resizedBitmap = BitmapScaler.scaleMarker(bitmap, mContext);
-                            BitmapSaver.save(resizedBitmap, sponsorPrizeData.getName());
+                            Bitmap resizedBitmap = BitmapUtils.scaleMarker(bitmap, mContext);
+                            BitmapUtils.save(resizedBitmap, sponsorPrizeData.getName());
 
                             //Draws marker on map
                             mView.addSponsorPrizePoint(key, location, resizedBitmap);
