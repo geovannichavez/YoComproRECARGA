@@ -130,18 +130,19 @@ public class CompleteProfile extends AppCompatActivity implements CompleteProfil
     {
         Validation validator = new Validation(this);
         boolean validData = true;
+        boolean validNick = true;
 
         switch (validator.checkNickname(txtNickname, true))
         {
             case REQUIRED:
-                validData = false;
+                validNick = false;
                 createDialog(getString(R.string.validation_title_required), getString(R.string.validation_required_nickname), getString(R.string.button_accept), null);
                 break;
             case VALID:
-                validData = true;
+                validNick = true;
                 break;
             case NOT_VALID:
-                validData = false;
+                validNick = false;
                 createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_nickname), getString(R.string.button_accept), null);
                 break;
         }
@@ -157,7 +158,7 @@ public class CompleteProfile extends AppCompatActivity implements CompleteProfil
                 break;
             case NOT_VALID:
                 validData = false;
-                createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_nickname), getString(R.string.button_accept), null);
+                createDialog(getString(R.string.title_dialog_invalid_name), getString(R.string.label_dialog_invalid_name), getString(R.string.button_accept), null);
                 break;
         }
 
@@ -172,11 +173,11 @@ public class CompleteProfile extends AppCompatActivity implements CompleteProfil
                 break;
             case NOT_VALID:
                 validData = false;
-                createDialog(getString(R.string.title_dialog_invalid_nickname), getString(R.string.label_dialog_invalid_lastname), getString(R.string.button_accept), null);
+                createDialog(getString(R.string.title_dialog_invalid_lastname), getString(R.string.label_dialog_invalid_lastname), getString(R.string.button_accept), null);
                 break;
         }
 
-        if(validData)
+        if(validData && validNick)
             mPresenter.completeProfile(firstname, lastname, nick);
     }
 
