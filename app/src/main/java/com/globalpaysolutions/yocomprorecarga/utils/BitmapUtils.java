@@ -126,14 +126,18 @@ public class BitmapUtils
 
             //Creates layer
             BitmapDrawable layer1 = new BitmapDrawable(context.getResources(), scaledMarker);
-            BitmapDrawable layer2 = new BitmapDrawable(context.getResources(),little);
+            BitmapDrawable layer2 = new BitmapDrawable(context.getResources(), little);
 
             Drawable[] layers = {layer1, layer2};
             LayerDrawable drawableLayered = new LayerDrawable(layers);
-            drawableLayered.setLayerInset(1, pixelsFromDp(context, 25), //left
-                                                    pixelsFromDp(context, 27), //top
-                                                    pixelsFromDp(context, 2), //right
-                                                    pixelsFromDp(context, 0)); //bottom
+            drawableLayered.setBounds(0,0, scaledMarker.getHeight(), scaledMarker.getWidth());
+            /*drawableLayered.setLayerInset(1, pixelsFromDp(context, 23), //left
+                                                    pixelsFromDp(context, 20), //top
+                                                    pixelsFromDp(context, 0), //right
+                                                    pixelsFromDp(context, 0)); //bottom*/
+
+            drawableLayered.setLayerInset(1, 0,0,0,0); //bottom
+
 
             finalObject =  drawableToBitmap(drawableLayered);
             //finalObject = layer2.getBitmap();
