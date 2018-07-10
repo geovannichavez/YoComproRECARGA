@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -116,8 +117,8 @@ public class BitmapUtils
 
         try
         {
-            double scaledW = scaledMarker.getWidth() * 0.65;
-            double scaledH = scaledMarker.getHeight() * 0.65;
+            double scaledW = scaledMarker.getWidth() * 0.50;
+            double scaledH = scaledMarker.getHeight() * 0.50;
 
             int newWidth = (int) scaledW;
             int newHeight = (int) scaledH;
@@ -125,22 +126,18 @@ public class BitmapUtils
             Bitmap little = Bitmap.createScaledBitmap(sponsor, newWidth, newHeight, true);
 
             //Creates layer
-            BitmapDrawable layer1 = new BitmapDrawable(context.getResources(), scaledMarker);
-            BitmapDrawable layer2 = new BitmapDrawable(context.getResources(), little);
+            BitmapDrawable marker = new BitmapDrawable(context.getResources(), scaledMarker);
+            BitmapDrawable spnsor = new BitmapDrawable(context.getResources(), little);
 
-            Drawable[] layers = {layer1, layer2};
+            Drawable[] layers = {marker, spnsor};
             LayerDrawable drawableLayered = new LayerDrawable(layers);
-            drawableLayered.setBounds(0,0, scaledMarker.getHeight(), scaledMarker.getWidth());
-            /*drawableLayered.setLayerInset(1, pixelsFromDp(context, 23), //left
-                                                    pixelsFromDp(context, 20), //top
+
+            drawableLayered.setLayerInset(1, pixelsFromDp(context, 22), //left
+                                                    pixelsFromDp(context, 23), //top
                                                     pixelsFromDp(context, 0), //right
                                                     pixelsFromDp(context, 0)); //bottom*/
 
-            drawableLayered.setLayerInset(1, 0,0,0,0); //bottom
-
-
             finalObject =  drawableToBitmap(drawableLayered);
-            //finalObject = layer2.getBitmap();
         }
         catch (Exception e)
         {

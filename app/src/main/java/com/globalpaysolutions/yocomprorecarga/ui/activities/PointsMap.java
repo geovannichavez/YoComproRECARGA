@@ -97,7 +97,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     private int mViewUpdatesCounter = 0;
     private ShowcaseView mShowcaseView;
     private int mShowcaseCounter;
-    private SponsoredChest mSponsoredChest;
     private Map<String, Marker> mSalesPointsMarkers;
     private Map<String, Marker> mVendorPointsMarkers;
     private Map<String, Marker> mGoldPointsMarkers;
@@ -184,7 +183,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mBitmapMarkers = new HashMap<>();
 
         mPresenter = new HomePresenterImpl(this, this, this);
-        mSponsoredChest = new SponsoredChest(this);
         mPresenter.setInitialViewsState();
         mPresenter.chekcLocationServiceEnabled();
 
@@ -674,19 +672,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
 
                 //If bitmaps comes null, then use the resource
                 if(pMarkerBmp != null)
-                {
-                    Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
-                    Bitmap newMarker = BitmapUtils.getSponsoredMarker(this, pMarkerBmp, sponsor);
-
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                            .icon(BitmapDescriptorFactory.fromBitmap(newMarker)));
-                }
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
                 else
-                {
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point)));
-                }
-
 
                 mGoldPointsMarkers.put(pKey, marker);
             }
@@ -745,18 +735,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 //If bitmaps comes null, then use the resource
                 if(pMarkerBmp != null)
-                {
-                    Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
-                    Bitmap newMarker = BitmapUtils.getSponsoredMarker(this, pMarkerBmp, sponsor);
-
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                            .icon(BitmapDescriptorFactory.fromBitmap(newMarker)));
-                }
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
                 else
-                {
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_silver_point)));
-                }
 
                 mSilverPointsMarkers.put(pKey, marker);
             }
@@ -815,18 +798,11 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             {
                 //If bitmaps comes null, then use the resource
                 if(pMarkerBmp != null)
-                {
-                    Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
-                    Bitmap newMarker = BitmapUtils.getSponsoredMarker(this, pMarkerBmp, sponsor);
-
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
-                            .icon(BitmapDescriptorFactory.fromBitmap(newMarker)));
-                }
+                            .icon(BitmapDescriptorFactory.fromBitmap(pMarkerBmp)));
                 else
-                {
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_bronze_point)));
-                }
 
                 mBronzePointsMarkers.put(pKey, marker);
             }

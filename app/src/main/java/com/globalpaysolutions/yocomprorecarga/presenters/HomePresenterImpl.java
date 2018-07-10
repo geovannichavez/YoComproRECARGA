@@ -35,6 +35,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresent
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
+import com.globalpaysolutions.yocomprorecarga.utils.SponsoredChest;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -70,6 +71,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
     private Map<String, Bitmap> mMarkerMap;
     private int mLocationUpdatesCount;
+    private SponsoredChest mSponsoredChest;
 
     public HomePresenterImpl(HomeView pView, AppCompatActivity pActivity, Context pContext)
     {
@@ -79,6 +81,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         mActivity = pActivity;
         mInteractor = new HomeInteractor(mContext, this);
         mFirebaseInteractor = new FirebasePOIInteractor(mContext, this);
+        mSponsoredChest = new SponsoredChest(mContext);
 
         this.mGoogleLocationApiManager = new GoogleLocationApiManager(pActivity, mContext, Constants.FOUR_METTERS_DISPLACEMENT);
         this.mGoogleLocationApiManager.setLocationCallback(this);
@@ -637,8 +640,19 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_goldPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
-        mView.addGoldPoint(pKey, pLocation, goldMarker);
+        try
+        {
+            Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
+            Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
+
+            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, goldMarker, sponsor);
+
+            mView.addGoldPoint(pKey, pLocation, marker);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error presenting gold marker bitmap: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -656,8 +670,18 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_silverPoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        Bitmap silverMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_SILVER);
-        mView.addSilverPoint(pKey, pLocation, silverMarker);
+        try
+        {
+            Bitmap silverMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_SILVER);
+            Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
+            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, silverMarker, sponsor);
+
+            mView.addSilverPoint(pKey, pLocation, marker);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error presenting silver sponsored marker: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -675,8 +699,18 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_bronzePoint_onKeyEntered(String pKey, LatLng pLocation,  boolean p3DCompatible)
     {
-        Bitmap bronzeBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_BRONZE);
-        mView.addBronzePoint(pKey, pLocation, bronzeBitmap);
+        try
+        {
+            Bitmap bronzeBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_BRONZE);
+            Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
+            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, bronzeBitmap, sponsor);
+
+            mView.addBronzePoint(pKey, pLocation, marker);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error presenting bronze sponsored marker: " + ex.getMessage());
+        }
     }
 
     @Override
