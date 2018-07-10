@@ -66,6 +66,12 @@ public class ChestSelector
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
+                case 4: //Acuatica
+                    drawableClosed = getDrawableId("img_04_gold_chest_closed");
+                    drawableOpen = getDrawableId("img_04_gold_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
             }
         }
         catch (Exception ex)
@@ -103,6 +109,12 @@ public class ChestSelector
                 case 3: //World Cup
                     drawableClosed = getDrawableId("img_03_silver_chest_closed");
                     drawableOpen = getDrawableId("img_03_silver_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 4: //Acuatica
+                    drawableClosed = getDrawableId("img_04_silver_chest_closed");
+                    drawableOpen = getDrawableId("img_04_silver_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
@@ -146,6 +158,12 @@ public class ChestSelector
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;
+                case 4: //Acuatica
+                    drawableClosed = getDrawableId("img_04_bronze_chest_closed");
+                    drawableOpen = getDrawableId("img_04_bronze_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
             }
         }
         catch (Exception ex)
@@ -182,6 +200,12 @@ public class ChestSelector
                 case 3: //WorldCup
                     drawableClosed = getDrawableId("img_03_wildcard_chest_closed");
                     drawableOpen = getDrawableId("img_03_wildcard_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 4: //Acuatica
+                    drawableClosed = getDrawableId("img_04_wildcard_chest_closed");
+                    drawableOpen = getDrawableId("img_04_wildcard_chest_open");
                     resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
                     resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
                     break;

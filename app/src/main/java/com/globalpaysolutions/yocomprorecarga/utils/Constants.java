@@ -202,7 +202,7 @@ public class Constants
     public static String PLATFORM = "ANDROID";
 
     //TODO: Cambiar para obligar al cambio de era
-    public static double RESELECT_ERA_IN_VERSION = 1.35;
+    public static double RESELECT_ERA_IN_VERSION = 1.55;
 
     public enum ChallengeQuery
     {
