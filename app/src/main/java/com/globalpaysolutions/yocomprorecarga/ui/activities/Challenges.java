@@ -45,11 +45,6 @@ public class Challenges extends AppCompatActivity implements ChallengesView
     ImageButton btnBack;
     CheckBox cbxLocation;
     ImageView btnLocation;
-    ImageView imgTeam1;
-    ImageView imgTeam2;
-    ImageView imgTeam3;
-    ImageView imgTeam4;
-    ImageView imgTeam5;
     TextView txtWinHistory;
     TextView txtLoseHistory;
     TextView txtDrawHistory;
@@ -94,12 +89,6 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         cbxLocation = (CheckBox) findViewById(R.id.cbxLocation);
         btnLocation = (ImageView) findViewById(R.id.btnLocation);
-
-        imgTeam1 = (ImageView) findViewById(R.id.imgWinTeam1);
-        imgTeam2 = (ImageView) findViewById(R.id.imgWinTeam2);
-        imgTeam3 = (ImageView) findViewById(R.id.imgWinTeam3);
-        imgTeam4 = (ImageView) findViewById(R.id.imgWinTeam4);
-        imgTeam5 = (ImageView) findViewById(R.id.imgWinTeam5);
 
         txtWinHistory = (TextView) findViewById(R.id.tvWinHistory);
         txtLoseHistory = (TextView) findViewById(R.id.tvLoseHistory);
@@ -186,39 +175,6 @@ public class Challenges extends AppCompatActivity implements ChallengesView
         txtLoseHistory.setText(String.format("%1$d",totalLose));
         txtDrawHistory.setText(String.format("%1$d",totalDraw));
 
-        try {
-            if (winLaPulga > 0) {
-                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam1);
-            } else {
-                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam1);
-            }
-            if (winDinho > 0) {
-                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam2);
-            } else {
-                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam2);
-            }
-
-            if (winElPibe > 0) {
-                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam3);
-            } else {
-                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam3);
-            }
-            if (winZizou > 0) {
-                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam4);
-            } else {
-                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam4);
-            }
-            if (winElComandante > 0) {
-                Picasso.with(this).load(R.drawable.ic_lighton).into(imgTeam5);
-            } else {
-                Picasso.with(this).load(R.drawable.ic_lightoff).into(imgTeam5);
-            }
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            Log.e(TAG, "Error at initialize: " + ex.getMessage());
-        }
     }
 
     @Override

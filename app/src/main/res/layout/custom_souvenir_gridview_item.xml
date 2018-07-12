@@ -1,79 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="125dp"
-    android:layout_height="125dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgBackground"
-        android:layout_width="82dp"
-        android:layout_height="90dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_souvenir_01"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="131dp">
 
-    <ImageView
-        android:id="@+id/imgSouvenirItem"
-        android:layout_width="59dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgBackground"
-        app:layout_constraintEnd_toEndOf="@+id/imgBackground"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="@+id/imgBackground"
-        app:layout_constraintTop_toTopOf="@+id/imgBackground"
-        app:layout_constraintVertical_bias="0.416"
-        app:srcCompat="@drawable/item_souvenir"/>
+        <RelativeLayout
+            android:id="@+id/master"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <!-- Layer 1 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-    <ImageView
-        android:id="@+id/imgSouvCounter"
-        android:layout_width="38dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-         />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_question_mark"/>
+                <LinearLayout
+                    android:id="@+id/layer1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60"
+                    android:orientation="vertical"
+                    android:weightSum="100">
 
-    <TextView
-        android:id="@+id/lblSouvenirCounter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="99"
-        android:textColor="@color/pure_black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imgSouvCounter"
-        app:layout_constraintEnd_toEndOf="@+id/imgSouvCounter"
-        app:layout_constraintStart_toStartOf="@+id/imgSouvCounter"
-        app:layout_constraintTop_toTopOf="@+id/imgSouvCounter"/>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="90"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5" />
+
+                        <ImageView
+                            android:id="@+id/imgBackground"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="90"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/bg_souvenir_01" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5" />
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="5" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+            </LinearLayout>
+
+            <!-- Layer 2-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="14" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="72"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6" />
+
+                    <ImageView
+                        android:id="@+id/imgSouvenirItem"
+                        android:layout_width="120dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="88"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/item_souvenir" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="6" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="14" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@+id/master"
+            android:layout_alignEnd="@+id/master"
+            android:layout_alignLeft="@+id/master"
+            android:layout_alignRight="@+id/master"
+            android:layout_alignStart="@+id/master"
+            android:layout_alignTop="@+id/master">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="26"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="25"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_question_mark" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="70" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="39" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="25">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="55" />
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="40">
+
+                        <ImageView
+                            android:id="@+id/imgSouvCounter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="35"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_souvenir_counter_01" />
+
+                        <TextView
+                            android:id="@+id/lblSouvenirCounter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/baloo_regular"
+                            android:gravity="center"
+                            android:textColor="@color/white_textView_color"
+                            android:textSize="14sp"
+                            tools:text="35" />
+                    </RelativeLayout>
+
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/viewLocked"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@+id/master"
+            android:layout_alignEnd="@+id/master"
+            android:layout_alignLeft="@+id/master"
+            android:layout_alignRight="@+id/master"
+            android:layout_alignStart="@+id/master"
+            android:layout_alignTop="@+id/master"
+            android:background="@drawable/bg_souvenir_disabled_background" />
+
+    </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

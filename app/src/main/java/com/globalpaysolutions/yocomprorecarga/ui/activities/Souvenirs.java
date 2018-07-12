@@ -44,7 +44,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
     SouvenirsAdapter mSouvenirsAdapter;
     GridView gvSouvenirs;
     AlertDialog mSouvenirDialog;
-    TextView tvEraName;
+    //TextView tvEraName;
     ImageButton btnBack;
     ImageButton btnStore;
     ImageView bgTimemachine;
@@ -66,7 +66,7 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
 
         //Initialize Views
         gvSouvenirs = (GridView) findViewById(R.id.gvSouvenirs);
-        tvEraName = (TextView) findViewById(R.id.tvEraName);
+        //tvEraName = (TextView) findViewById(R.id.tvEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnStore = (ImageButton) findViewById(R.id.btnStore);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
@@ -145,9 +145,9 @@ public class Souvenirs extends ImmersiveActivity implements SouvenirsView
     {
         try
         {
-            Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+            Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
-            tvEraName.setText(eraName);
+            //tvEraName.setText(eraName);
         }
         catch (Exception ex) { ex.printStackTrace();}
     }
