@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -14,6 +15,11 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ValidateLocalSmsRespons
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,10 +35,12 @@ public class TokenInputInteractor implements ITokenInputInteractor
     private Context mContext;
     private UserData mUserData;
     private TokenInputListener mListener;
+    private FirebaseAuth mAuthentication;
 
     public TokenInputInteractor(Context pContext)
     {
         mContext = pContext;
+        mAuthentication = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -133,6 +141,40 @@ public class TokenInputInteractor implements ITokenInputInteractor
         catch (Exception ex)
         {
             Log.e(TAG, "Error on validateSmsTokenLocalAuth: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void anonymousAuthFirebase(final TokenInputListener listener, final ValidateLocalSmsResponse response)
+    {
+        try
+        {
+
+            mAuthentication.signInAnonymously()
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if (task.isSuccessful())
+                            {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInAnonymously:success");
+                                FirebaseUser user = mAuthentication.getCurrentUser();
+                                listener.onFirebaseUserAuthSuccess(user, response);
+                            }
+                            else
+                            {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInAnonymously:failure", task.getException());
+                                listener.onFirebaseUserAuthError();
+                            }
+                        }
+                    });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
 

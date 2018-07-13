@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -11,6 +12,11 @@ import com.globalpaysolutions.yocomprorecarga.models.api.CompleteProfileReqBody;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.utils.VersionName;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,4 +77,5 @@ public class CompleteProfileInteractor implements ICompleteProfileInteractor
             Log.e(TAG, "Error completeProfileLocalAuth: " + ex.getMessage());
         }
     }
+
 }

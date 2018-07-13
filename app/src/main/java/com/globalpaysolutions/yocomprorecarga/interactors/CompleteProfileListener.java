@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.google.firebase.auth.FirebaseUser;
 
 public interface CompleteProfileListener
 {

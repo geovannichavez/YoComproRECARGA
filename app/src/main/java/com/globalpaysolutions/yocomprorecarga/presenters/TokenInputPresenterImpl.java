@@ -1,8 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
-import android.app.IntentService;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,7 +8,6 @@ import android.util.Log;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.TokenInputListener;
-import com.globalpaysolutions.yocomprorecarga.models.Country;
 import com.globalpaysolutions.yocomprorecarga.models.ErrorResponseViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ValidateLocalSmsResponse;
@@ -18,6 +15,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ITokenInputP
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.TokenInputView;
+import com.google.firebase.auth.FirebaseUser;
 import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;
@@ -122,6 +120,25 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
             mInteractor.setConfirmedCountry(true);
             mInteractor.setConfirmedPhone(true); //TODO
 
+            mInteractor.anonymousAuthFirebase(this, response);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on onValidationTokenLocalResult: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onFirebaseUserAuthSuccess(FirebaseUser user, ValidateLocalSmsResponse response)
+    {
+        try
+        {
+            Log.i(TAG, "Anonymous Firebase user: " + user.getUid() + "; " + user.getDisplayName());
+
+            //Saves user's phone as AuthID
+            UserData.getInstance(mContext).saveAuthData(response.getPhone(), "");
+
             //If nickname comes empty, is a new user registration. Must complete profile
             if(TextUtils.isEmpty(response.getNickname()))
             {
@@ -142,8 +159,14 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         }
         catch (Exception ex)
         {
-            Log.e(TAG, "Error on onValidationTokenLocalResult: " + ex.getMessage());
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public void onFirebaseUserAuthError()
+    {
+        ProcessErrorMessage(0, null);
     }
 
     private void ProcessErrorMessage(int pCodeStatus, Throwable pThrowable)
