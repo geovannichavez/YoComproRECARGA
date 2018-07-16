@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="prize_item_title_size">16sp</dimen>
+    <dimen name="prize_item_content_size">14sp</dimen>
+
+    <dimen name="dimen_normal_10">12sp</dimen>
+    <dimen name="dimen_normal_12">14sp</dimen>
+    <dimen name="dimen_normal_13">15sp</dimen>
+    <dimen name="dimen_normal_14">16sp</dimen>
+    <dimen name="dimen_normal_16">18sp</dimen>
+    <dimen name="dimen_normal_18">20sp</dimen>
+    <dimen name="dimen_normal_20">22sp</dimen>
+    <dimen name="dimen_normal_22">24sp</dimen>
+</resources>

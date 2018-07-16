@@ -24,8 +24,10 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeSouvenirReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeWildcardResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.FeedReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.NewsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
@@ -310,6 +312,11 @@ public interface ApiInterface
                                                     @Header("AppVersion") String versionName,
                                                     @Header("Platform") String platform,
                                                     @Body CountrySelectedReq selectedCountry);
-
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.NEWS)
+    Call<NewsResponse> getFeed(@Header("authenticationKey") String pAuthKey,
+                               @Header("AppVersion") String pAppVersion,
+                               @Header("Platform") String pPlatform,
+                               @Body FeedReqBody request);
 
 }

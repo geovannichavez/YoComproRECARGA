@@ -20,6 +20,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.MainPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
+import com.globalpaysolutions.yocomprorecarga.utils.NavFlagsUtil;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
@@ -389,7 +390,11 @@ public class Main extends ImmersiveActivity implements MainView
         @Override
         public void onClick(View view)
         {
-            
+            ButtonAnimator.getInstance(Main.this).animateButton(view);
+            Intent news = new Intent(Main.this, News.class);
+            NavFlagsUtil.addFlags(news);
+            startActivity(news);
+            finish();
         }
     };
 
