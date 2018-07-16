@@ -326,6 +326,15 @@ public class Main extends ImmersiveActivity implements MainView
     }
 
     @Override
+    public void setNewsFeedActive(boolean available)
+    {
+        //if (available)
+            //Picasso.with(this).load(R.drawable.ic_news_on).into(icFeed);
+        //else
+            //Picasso.with(this).load(R.drawable.ic_news_off).into(icFeed);
+    }
+
+    @Override
     public void setClickListeners()
     {
         try

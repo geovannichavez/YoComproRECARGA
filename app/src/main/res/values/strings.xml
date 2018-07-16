@@ -467,6 +467,7 @@
     <string name="validation_required_lastname">Tu apellido es requerido</string>
     <string name="title_dialog_invalid_lastname">Apellido Inválido</string>
     <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
+    <string name="label_noticias">Noticias</string>
 
 
 </resources>
