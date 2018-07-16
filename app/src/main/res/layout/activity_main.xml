@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -12,115 +11,360 @@
         android:id="@+id/bgTimemachine"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:src="@drawable/bg_time_machine"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_time_machine" />
 
 
-    <ImageView
-        android:id="@+id/imageView25"
-        android:layout_width="343dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_recargo"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Layer 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <!-- w: 9-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_trivia_panel" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+            </LinearLayout>
+
+            <!-- w: 18-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" />
+
+                <ImageView
+                    android:src="@drawable/logo_recargo"
+                    android:scaleType="fitCenter"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="84"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" />
+
+            </LinearLayout>
+
+            <!-- w: 2-->
+            <Space
+                android:layout_weight="60"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <!-- w: 11-->
+            <LinearLayout
+                android:weightSum="100"
+                android:orientation="horizontal"
+                android:layout_weight="11"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Space
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/btnTopupRequest"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:onClick="navigateTopupRequest"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_topup_request" />
+
+                <Space
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/buttonLighbub"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:onClick="navigateStore"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_store" />
+
+                <Space
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/buttonPrize"
+                    android:src="@drawable/ic_leaderboards"
+                    android:layout_weight="20"
+                    android:scaleType="fitCenter"
+                    android:layout_width="0dp"
+                    android:onClick="navigateLeaderboards"
+                    android:layout_height="match_parent" />
+
+                <Space
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/buttonSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_info" />
+                <Space
+                    android:layout_weight="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <!-- w: 2-->
+            <Space
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
 
 
-    <ImageButton
-        android:id="@+id/btnPlay"
-        android:layout_width="282dp"
-        android:layout_height="106dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="navigateMap"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25"
-        />
+        <!-- Layer 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-    <ImageButton
-        android:id="@+id/btnProfile"
-        android:layout_width="287dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="navigateProfile"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintEnd_toEndOf="@+id/btnPlay"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnPlay"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlay"/>
+            <!-- w: 9-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"   />
 
-    <ImageButton
-        android:id="@+id/btnTravel"
-        android:layout_width="280dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="navigateEraSelection"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_travel"
-        app:layout_constraintEnd_toEndOf="@+id/btnProfile"
-        app:layout_constraintStart_toStartOf="@+id/btnProfile"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfile"/>
+            <!-- w: 20-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
 
-    <ImageButton
-        android:id="@+id/btnTopupRequest"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="navigateTopupRequest"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_topup_request"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
 
-    <ImageButton
-        android:id="@+id/buttonLighbub"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="navigateStore"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_store"
-        app:layout_constraintStart_toEndOf="@+id/btnTopupRequest"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"
-        />
+            <!-- w: 18-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18"
+                android:orientation="horizontal"
+                android:weightSum="100">
 
-    <ImageButton
-        android:id="@+id/buttonPrize"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
-        android:onClick="navigatePrizeRedeem"
-        android:src="@drawable/ic_prize"
-        app:layout_constraintStart_toEndOf="@+id/buttonLighbub"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
 
-    <ImageButton
-        android:id="@+id/buttonSettings"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
-        android:src="@drawable/btn_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/buttonPrize"
-        app:layout_constraintTop_toBottomOf="@+id/btnTravel"/>
+                <ImageView
+                    android:id="@+id/btnPlay"
+                    android:src="@drawable/ic_play"
+                    android:scaleType="fitCenter"
+                    android:layout_width="0dp"
+                    android:onClick="navigateMap"
+                    android:layout_height="match_parent"
+                    android:layout_weight="76"/>
 
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+            </LinearLayout>
+
+            <!-- w: 18-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+                <ImageView
+                    android:id="@+id/btnProfile"
+                    android:src="@drawable/ic_profile"
+                    android:scaleType="fitCenter"
+                    android:layout_width="0dp"
+                    android:onClick="navigateProfile"
+                    android:layout_height="match_parent"
+                    android:layout_weight="76"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+            </LinearLayout>
+
+            <!-- w: 18-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+                <ImageView
+                    android:id="@+id/btnTravel"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="76"
+                    android:onClick="navigateEraSelection"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_travel" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+            </LinearLayout>
+
+            <!-- w: 17-->
+            <Space
+                android:layout_weight="17"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
+
+        <!-- Layer 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <!-- w: 9-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25" />
+
+
+
+                <LinearLayout
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <Space
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icNewChallenge"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_challenge_off" />
+                    <Space
+                        android:layout_weight="6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icNewTrivia"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_trivia_off" />
+                    <Space
+                        android:layout_weight="6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icFeed"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_news_off" />
+
+                    <Space
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25" />
+
+            </LinearLayout>
+
+            <!-- w: 91-->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="91" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

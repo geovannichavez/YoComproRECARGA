@@ -87,6 +87,9 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             else
                 mView.setTriviaAvailable(false);
 
+            //News
+            mView.setNewsFeedActive(true);
+
         }
         catch (Exception ex)
         {
@@ -325,6 +328,11 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setNewAgeAvailable(true);
             else
                 mView.setNewAgeAvailable(false);
+
+            if(response.getNewFeed() > 0)
+                mView.setNewsFeedActive(true);
+            else
+                mView.setNewsFeedActive(false);
 
         }
         catch (Exception ex)
