@@ -198,8 +198,6 @@
 
                 <ImageView
                     android:id="@+id/btnPlay"
-                    android:src="@drawable/ic_play"
-                    android:scaleType="fitCenter"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="76"
