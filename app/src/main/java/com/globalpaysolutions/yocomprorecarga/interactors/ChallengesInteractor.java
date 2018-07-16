@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -115,21 +116,24 @@ public class ChallengesInteractor implements IChallengesInteractor
         {
             if(location != null)
             {
-                mDataPlayersPoints.child(playerFacebookID).setValue(playerData, new DatabaseReference.CompletionListener()
+                if(!TextUtils.isEmpty(playerFacebookID))
                 {
-                    @Override
-                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
+                    mDataPlayersPoints.child(playerFacebookID).setValue(playerData, new DatabaseReference.CompletionListener()
                     {
-                        if(databaseError == null)
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
                         {
-                            listener.onPlayerDataInserted(playerFacebookID, location);
+                            if(databaseError == null)
+                            {
+                                listener.onPlayerDataInserted(playerFacebookID, location);
+                            }
+                            else
+                            {
+                                Log.e(TAG, "Write vendor location on Firebase failed: " + databaseError.getMessage());
+                            }
                         }
-                        else
-                        {
-                            Log.e(TAG, "Write vendor location on Firebase failed: " + databaseError.getMessage());
-                        }
-                    }
-                });
+                    });
+                }
             }
         }
         catch (Exception ex)
@@ -143,23 +147,26 @@ public class ChallengesInteractor implements IChallengesInteractor
     {
         try
         {
-            mPlayerPntsRef.removeLocation(key, new GeoFire.CompletionListener()
+            if(!TextUtils.isEmpty(key))
             {
-                @Override
-                public void onComplete(String key, DatabaseError error)
+                mPlayerPntsRef.removeLocation(key, new GeoFire.CompletionListener()
                 {
-                    if(error == null)
+                    @Override
+                    public void onComplete(String key, DatabaseError error)
                     {
-                        listener.onPlayerLocationDeleted(key);
-                        Log.i(TAG, "Location deleted succesfully for CurrentPlayer " + key);
-                    }
-                    else
-                    {
-                        Log.e(TAG, "Error trying to delete location for CurrentPlayer " + key);
-                    }
+                        if(error == null)
+                        {
+                            listener.onPlayerLocationDeleted(key);
+                            Log.i(TAG, "Location deleted succesfully for CurrentPlayer " + key);
+                        }
+                        else
+                        {
+                            Log.e(TAG, "Error trying to delete location for CurrentPlayer " + key);
+                        }
 
-                }
-            });
+                    }
+                });
+            }
         }
         catch (Exception ex)
         {
@@ -172,23 +179,26 @@ public class ChallengesInteractor implements IChallengesInteractor
     {
         try
         {
-            mPlayerPntsRef.setLocation(key, geoLocation, new GeoFire.CompletionListener()
+            if(!TextUtils.isEmpty(key))
             {
-                @Override
-                public void onComplete(String key, DatabaseError error)
+                mPlayerPntsRef.setLocation(key, geoLocation, new GeoFire.CompletionListener()
                 {
-                    if(error == null)
+                    @Override
+                    public void onComplete(String key, DatabaseError error)
                     {
-                        Log.i(TAG, "Location inserted succesfully for Current Player " + key);
-                        listener.onPlayerLocationSet(key);
-                    }
-                    else
-                    {
-                        Log.e(TAG, "Error trying to insert location for Current Player " + key);
-                    }
+                        if(error == null)
+                        {
+                            Log.i(TAG, "Location inserted succesfully for Current Player " + key);
+                            listener.onPlayerLocationSet(key);
+                        }
+                        else
+                        {
+                            Log.e(TAG, "Error trying to insert location for Current Player " + key);
+                        }
 
-                }
-            });
+                    }
+                });
+            }
         }
         catch (Exception ex)
         {

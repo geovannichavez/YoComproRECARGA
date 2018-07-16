@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.globalpaysolutions.yocomprorecarga.api.ApiClient;
@@ -160,37 +161,40 @@ public class WorldCupCountriesInteractor implements IWorldCupCountriesInteractor
             final DatabaseReference playerData = root.child("locationPlayerRecargoData");
             final String facebookID = UserData.getInstance(mContext).getAuthProviderId();
 
-            playerData.child(facebookID).addListenerForSingleValueEvent(new ValueEventListener()
+            if(!TextUtils.isEmpty(facebookID))
             {
-               @Override
-               public void onDataChange(DataSnapshot dataSnapshot)
-               {
-                   //Creates map
-                   Map<String, Object> playerValues = new HashMap<>();
+                playerData.child(facebookID).addListenerForSingleValueEvent(new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        //Creates map
+                        Map<String, Object> playerValues = new HashMap<>();
 
-                   //Checks all properties of the Snapshot
-                   for (DataSnapshot snapshot : dataSnapshot.getChildren())
-                   {
-                       playerValues.put(snapshot.getKey(),snapshot.getValue());
-                   }
+                        //Checks all properties of the Snapshot
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                        {
+                            playerValues.put(snapshot.getKey(),snapshot.getValue());
+                        }
 
-                   //Puts new properties to child
-                   playerValues.put("MarkerUrl", urlImgMarker);
+                        //Puts new properties to child
+                        playerValues.put("MarkerUrl", urlImgMarker);
 
-                   //Updates child with new properties and values
-                   playerData.child(facebookID).updateChildren(playerValues).addOnCompleteListener(new OnCompleteListener<Void>()
-                   {
-                       @Override
-                       public void onComplete(@NonNull Task<Void> task)
-                       {
-                           listener.onUpdateMarkerUrl();
-                       }
-                   });
-               }
+                        //Updates child with new properties and values
+                        playerData.child(facebookID).updateChildren(playerValues).addOnCompleteListener(new OnCompleteListener<Void>()
+                        {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task)
+                            {
+                                listener.onUpdateMarkerUrl();
+                            }
+                        });
+                    }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+            }
 
         }
         catch (Exception ex)

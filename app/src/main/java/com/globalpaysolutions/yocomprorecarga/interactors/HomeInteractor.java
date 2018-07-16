@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.firebase.geofire.GeoFire;
@@ -176,22 +177,25 @@ public class HomeInteractor implements IHomeInteractor
             vendorPoint.put("Nickname", playerNick);
             vendorPoint.put("MarkerUrl", urlImgMarker);
 
-            mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
+            if(!TextUtils.isEmpty(playerFacebookID))
             {
-                @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
+                mDataPlayersPoints.child(playerFacebookID).setValue(vendorPoint, new DatabaseReference.CompletionListener()
                 {
-                    if(databaseError == null)
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
                     {
-                        //On data insert success, inserts location
-                        mHomeListener.fb_currentPlayerDataInserted(playerFacebookID, location);
+                        if(databaseError == null)
+                        {
+                            //On data insert success, inserts location
+                            mHomeListener.fb_currentPlayerDataInserted(playerFacebookID, location);
+                        }
+                        else
+                        {
+                            Log.e(TAG, "Write vendor location on Firebase failed: " + databaseError.getMessage());
+                        }
                     }
-                    else
-                    {
-                        Log.e(TAG, "Write vendor location on Firebase failed: " + databaseError.getMessage());
-                    }
-                }
-            });
+                });
+            }
         }
         catch (Exception ex)
         {
@@ -467,26 +471,29 @@ public class HomeInteractor implements IHomeInteractor
         @Override
         public void onKeyEntered(final String key, final GeoLocation location)
         {
-            //Reads values and data for key entered
-            mDataPlayersPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            if(!TextUtils.isEmpty(key))
             {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
+                //Reads values and data for key entered
+                mDataPlayersPoints.child(key).addListenerForSingleValueEvent(new ValueEventListener()
                 {
-                    PlayerPointData player = dataSnapshot.getValue(PlayerPointData.class);
-                    if(player != null)
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
                     {
-                        LatLng geoLocation = new LatLng(location.latitude, location.longitude);
-                        mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation, player);
-                        mHomeListener.fb_playerPoint_onDataChange(key, player);
+                        PlayerPointData player = dataSnapshot.getValue(PlayerPointData.class);
+                        if(player != null)
+                        {
+                            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+                            mHomeListener.gf_playerPoint_onKeyEntered(key, geoLocation, player);
+                            mHomeListener.fb_playerPoint_onDataChange(key, player);
+                        }
                     }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError)
-                {
-                    mHomeListener.fb_playerPoint_onCancelled(databaseError);
-                }
-            });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+                        mHomeListener.fb_playerPoint_onCancelled(databaseError);
+                    }
+                });
+            }
         }
 
         @Override
