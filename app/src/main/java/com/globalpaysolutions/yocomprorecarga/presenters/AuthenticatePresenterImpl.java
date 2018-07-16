@@ -302,6 +302,7 @@ public class AuthenticatePresenterImpl implements IAuthenticatePresenter, Authen
         UserData.getInstance(mContext).saveAuthenticationKey(pResponse.getAuthenticationKey());
         UserData.getInstance(mContext).saveNickname(pResponse.getNickname());
         UserData.getInstance(mContext).hasAuthenticated(true);
+        UserData.getInstance(mContext).saveCountryID(String.valueOf(pResponse.getCountryID()));
 
         //Saves if user has nickname
         if(pResponse.getNickname() != null || !TextUtils.equals(pResponse.getNickname(), ""))

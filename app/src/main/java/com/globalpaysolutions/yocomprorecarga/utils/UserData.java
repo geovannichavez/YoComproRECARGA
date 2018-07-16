@@ -1183,4 +1183,10 @@ public class UserData
     {
         return mPreferences.getBoolean(KEY_AUTH_LOCAL_USER_EXISTS, false);
     }
+
+    public void saveCountryID(String countryID)
+    {
+        mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryID);
+        mEditor.commit();
+    }
 }

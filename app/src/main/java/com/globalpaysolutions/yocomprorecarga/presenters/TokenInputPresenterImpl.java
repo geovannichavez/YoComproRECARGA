@@ -120,6 +120,9 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
             mInteractor.setConfirmedCountry(true);
             mInteractor.setConfirmedPhone(true); //TODO
 
+            if(response.getCountryID() > 0)
+                mUserData.saveCountryID(String.valueOf(response.getCountryID()));
+
             mInteractor.anonymousAuthFirebase(this, response);
 
         }

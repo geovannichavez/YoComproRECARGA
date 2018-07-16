@@ -86,9 +86,9 @@
                 android:gravity="center_horizontal"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="-6sp"
-                android:maxLines="3"
+                android:maxLines="4"
                 android:textColor="@color/pure_black"
-                android:textSize="@dimen/dimen_normal_12"
+                android:textSize="@dimen/dimen_normal_10"
                 tools:text="Aprobecha un café gratis al comprar un desayuno" />
 
             <Space
