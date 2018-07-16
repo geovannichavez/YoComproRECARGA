@@ -14,6 +14,7 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICompletePro
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CompleteProfileView;
+import com.google.firebase.auth.FirebaseUser;
 import com.onesignal.OneSignal;
 
 import java.net.SocketTimeoutException;
@@ -76,6 +77,7 @@ public class CompleteProfilePresenterImpl implements ICompleteProfilePresenter, 
             OneSignal.sendTag(Constants.ONESIGNAL_USER_TAG_KEY, UserData.getInstance(mContext).GetMsisdn());
 
             mView.navigateMain();
+
         }
         catch (Exception ex)
         {
