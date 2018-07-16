@@ -15,38 +15,43 @@ public class PendingsResponse
     @SerializedName("GetNewTrivia")
     @Expose
     private int getNewTrivia;
-
     @SerializedName("NewAge")
     @Expose
     private int newAge;
+    @SerializedName("NewFeed")
+    @Expose
+    private int newFeed;
 
-
-    public String getMessage()
-    {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message)
-    {
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public int getGetNewTrivia()
-    {
+    public int getGetNewTrivia() {
         return getNewTrivia;
     }
 
-    public void setGetNewTrivia(int getNewTrivia)
-    {
+    public void setGetNewTrivia(int getNewTrivia) {
         this.getNewTrivia = getNewTrivia;
     }
 
-    public int getNewAge()
-    {
+    public int getNewAge() {
         return newAge;
     }
 
-    public void setNewAge(int newAge)
-    { this.newAge = newAge; }
+    public void setNewAge(int newAge) {
+        this.newAge = newAge;
+    }
+
+    public int getNewFeed() {
+        return newFeed;
+    }
+
+    public void setNewFeed(int newFeed) {
+        this.newFeed = newFeed;
+    }
 
 }

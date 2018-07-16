@@ -32,13 +32,14 @@ public class Main extends ImmersiveActivity implements MainView
     private static final String TAG = Main.class.getSimpleName();
 
     //Layouts and Views
-    ImageButton buttonSettings;
+    ImageView buttonSettings;
     ImageView bgTimemachine;
     ImageView icNewChallenge;
     ImageView icNewTrivia;
+    ImageView icFeed;
     TextView tvPendingCh;
     ShowcaseView mShowcaseView;
-    ImageButton btnTravel;
+    ImageView btnTravel;
     //MVP
     MainPresenterImpl mPresenter;
 
@@ -57,12 +58,13 @@ public class Main extends ImmersiveActivity implements MainView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonSettings = (ImageButton) findViewById(R.id.buttonSettings);
+        buttonSettings = (ImageView) findViewById(R.id.buttonSettings);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         icNewChallenge = (ImageView) findViewById(R.id.icNewChallenge);
         icNewTrivia = (ImageView) findViewById(R.id.icNewTrivia);
         tvPendingCh = (TextView) findViewById(R.id.tvPendingCh);
-        btnTravel = (ImageButton) findViewById(R.id.btnTravel);
+        btnTravel = (ImageView) findViewById(R.id.btnTravel);
+        icFeed = (ImageView) findViewById(R.id.icFeed);
 
         mShowcaseCounter = 0;
 
@@ -326,12 +328,22 @@ public class Main extends ImmersiveActivity implements MainView
     }
 
     @Override
+    public void setNewsFeedActive(boolean available)
+    {
+        if (available)
+            Picasso.with(this).load(R.drawable.ic_news_on).into(icFeed);
+        else
+            Picasso.with(this).load(R.drawable.ic_news_off).into(icFeed);
+    }
+
+    @Override
     public void setClickListeners()
     {
         try
         {
             icNewTrivia.setOnClickListener(triviaClick);
             icNewChallenge.setOnClickListener(challengesClick);
+            icFeed.setOnClickListener(feedClick);
         }
         catch (Exception ex)
         {
@@ -369,6 +381,15 @@ public class Main extends ImmersiveActivity implements MainView
             challenges.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(challenges);
             finish();
+        }
+    };
+
+    private View.OnClickListener feedClick = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            
         }
     };
 
