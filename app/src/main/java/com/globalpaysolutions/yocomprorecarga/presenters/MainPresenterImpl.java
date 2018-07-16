@@ -88,7 +88,10 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setTriviaAvailable(false);
 
             //News
-            mView.setNewsFeedActive(true);
+            if(UserData.getInstance(mContext).getNewFeed() > 0)
+                mView.setNewsFeedActive(true);
+            else
+                mView.setNewsFeedActive(false);
 
         }
         catch (Exception ex)
@@ -307,6 +310,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
             UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
             UserData.getInstance(mContext).saveNewAge(response.getNewAge());
+            UserData.getInstance(mContext).saveNewFeed(response.getNewFeed());
 
             //Challenges
             String pending = response.getMessage();
@@ -328,6 +332,12 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setNewAgeAvailable(true);
             else
                 mView.setNewAgeAvailable(false);
+
+            //New Feed
+            if(response.getNewFeed() > 0)
+                mView.setNewsFeedActive(true);
+            else
+                mView.setNewsFeedActive(false);
 
         }
         catch (Exception ex)

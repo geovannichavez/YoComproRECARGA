@@ -150,6 +150,9 @@ public class UserData
     //NewAge
     private static final String KEY_NEW_AGE = "KEY_NEW_AGE";
 
+    //New Feed
+    private static final String KEY_NEW_FEED = "key_new_feed";
+
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
     private static final String KEY_SECOND_ERA_UPDATE_ERA_SELECTED = "key_second_era_update_era_selected";
@@ -1194,5 +1197,21 @@ public class UserData
     {
         mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_BACKGROUND_URL, urlBackground);
         mEditor.commit();
+    }
+    public void saveNewFeed(int newFeed)
+    {
+        mEditor.putInt(KEY_NEW_FEED, newFeed);
+        mEditor.commit();
+    }
+
+    public void deleteNewFeed()
+    {
+        mEditor.putInt(KEY_NEW_FEED, 0);
+        mEditor.commit();
+    }
+
+    public int getNewFeed()
+    {
+        return mPreferences.getInt(KEY_NEW_FEED, 0);
     }
 }

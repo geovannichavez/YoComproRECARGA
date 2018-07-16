@@ -10,6 +10,7 @@ import com.globalpaysolutions.yocomprorecarga.interactors.NewsListener;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.api.NewsResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.INewsPresenter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.NewsView;
 
 import java.net.SocketTimeoutException;
@@ -33,6 +34,9 @@ public class NewsPresenterImpl implements INewsPresenter, NewsListener
     public void initialize()
     {
         mView.initialize();
+
+        //Deletes feed pending
+        UserData.getInstance(mContext).deleteNewFeed();
     }
 
     @Override
