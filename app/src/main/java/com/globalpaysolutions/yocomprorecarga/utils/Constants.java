@@ -88,7 +88,7 @@ public class Constants
     public static final String URI_MAP_VALUE_LATITUDE = "latitude";
     public static final String URI_MAP_VALUE_LONGITUDE = "longitude";
     public static final String URI_MAP_VALUE_SPONSORID = "brandid";
-    public static final String URI_MAP_VALUE_VISIBLE = "visible";
+    public static final String URI_MAP_VALUE_EXCHANGE_TYPE = "exchangeType";
 
 
     //Prize Detail Bundle Keys

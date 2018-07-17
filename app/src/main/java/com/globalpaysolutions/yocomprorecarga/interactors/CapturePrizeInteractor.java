@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.interactors;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
@@ -225,13 +224,13 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
     }
 
     @Override
-    public void atemptRedeemSponsorPrize(int sponsorID, int prizeType)
+    public void atemptRedeemSponsorPrize(int sponsorID, int exchangeType)
     {
         try
         {
             RedeemSponsorPrizeReqBody requestBody = new RedeemSponsorPrizeReqBody();
             requestBody.setSponsorID(1); //TODO: Cambiar por valor de parametro 'sponsorID'
-            requestBody.setType(prizeType);
+            requestBody.setType(exchangeType);
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             final Call<WinPrizeResponse> call = apiService.redeemSponsorPrize(mUserData.getUserAuthenticationKey(),

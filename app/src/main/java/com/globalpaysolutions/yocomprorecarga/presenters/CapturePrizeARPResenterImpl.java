@@ -101,15 +101,16 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         mView.switchChestVisible(false);
 
-        if (m3Dcompatible)
-        {
+        //TODO: Se quitó validacion para que se registre el listenr del ArquictectView
+        //if (m3Dcompatible)
+        //{
             mView.on3DChestClick();
-        }
-        else
-        {
+        //}
+        //else
+        //{
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
-        }
+        //}
     }
 
     @Override
@@ -162,7 +163,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             String latitude;
             String longitude;
             String brandID;
-            String visible;
+            String exchangeType;
 
 
             synchronized (this)
@@ -225,12 +226,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 urlMap = getSponsorUrlMap(pArchitectURL);
                 firebaseKey = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
                 brandID = urlMap.get(Constants.URI_MAP_VALUE_SPONSORID);
-                visible = urlMap.get(Constants.URI_MAP_VALUE_VISIBLE);
+                exchangeType = urlMap.get(Constants.URI_MAP_VALUE_EXCHANGE_TYPE);
 
-                //If is visible, then is Sponsored Prize, otherwise id Treasure Hunt
-                int exchange =  (Integer.valueOf(visible) > 0)
-                        ? Constants.SponsorExchangeType.SponsorPrizeExchange.getValue()
-                        : Constants.SponsorExchangeType.TreasureHunt.getValue();
+                //Exchanges:
+                // 1 - Sponsored Wildcard
+                // 2 - Sponsored treasure hunt
+                // 3 - Sponsored scanning image
+                int exchange =  Integer.valueOf(exchangeType);
 
                 mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
                 mInteractor.atemptRedeemSponsorPrize(Integer.valueOf(brandID), exchange);
@@ -1121,9 +1123,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         String[] params = url.split("//");
 
         Map<String, String> map = new HashMap<>();
-        map.put(Constants.URI_MAP_VALUE_SPONSORID, params[1]);
-        map.put(Constants.URI_MAP_VALUE_VISIBLE, params[2]);
-        map.put(Constants.URI_MAP_VALUE_FIREBASE_ID, params[3]);
+        map.put(Constants.URI_MAP_VALUE_SPONSORID, params[2]);
+        map.put(Constants.URI_MAP_VALUE_EXCHANGE_TYPE, params[3]);
+        map.put(Constants.URI_MAP_VALUE_FIREBASE_ID, params[4]);
 
         return map;
     }

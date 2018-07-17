@@ -310,12 +310,12 @@ public class Main extends ImmersiveActivity implements MainView
     {
         try
         {
-            /*if(active)
+            if(active)
                 Picasso.with(this).load(R.drawable.ic_challenge_on).into(icNewChallenge);
             else
                 Picasso.with(this).load(R.drawable.ic_challenge_off).into(icNewChallenge);
 
-            tvPendingCh.setText(pending);*/
+            tvPendingCh.setText(pending);
         }
         catch (Exception ex)
         {
