@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -62,41 +61,44 @@ public class BitmapUtils
         return marker;
     }
 
-    public static void save(Bitmap bitmap, String name)
+    public static void save(Context context, Bitmap bitmap, String name)
     {
-        File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
 
-        if(!file1.exists())
-            file1.mkdirs();
+        File directory = context.getFilesDir();
+        File existingFile = new File(directory, name);
 
-        OutputStream outStream = null;
-        File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
-        try
+        if(!existingFile.exists())
         {
-            outStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.close();
+            try
+            {
 
-            Log.i(TAG, "Bitmap saved!");
+                FileOutputStream outputStream = context.openFileOutput(name, Context.MODE_PRIVATE);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                outputStream.close();
 
-        }
-        catch (Exception e)
-        {
-            Log.e(TAG, "Error while saving bitmap: " + e.getMessage());
+                Log.i(TAG, "Bitmap saved!");
+
+            }
+            catch (Exception e)
+            {
+                Log.e(TAG, "Error while saving bitmap: " + e.getMessage());
+            }
         }
     }
 
-    public static Bitmap retrieve(String chestName)
+    public static Bitmap retrieve(Context context, String chestName)
     {
         Bitmap bitmap = null;
 
         try
         {
-            File f = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/" + chestName + ".png");
+            File directory = context.getFilesDir();
+            File existingFile = new File(directory, chestName);
+
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-            bitmap = BitmapFactory.decodeStream(new FileInputStream(f), null, options);
+            bitmap = BitmapFactory.decodeStream(new FileInputStream(existingFile), null, options);
         }
         catch (FileNotFoundException e)
         {

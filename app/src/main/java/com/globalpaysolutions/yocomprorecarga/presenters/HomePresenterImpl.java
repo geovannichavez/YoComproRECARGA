@@ -374,7 +374,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             //Checks if welcome user is available for welcome chest
             if(UserData.getInstance(mContext).checkWelcomeChestAvailable())
             {
-                Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
+                Bitmap goldMarker = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_GOLD);
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                 float latt = Float.valueOf(String.valueOf(location.getLatitude()));
@@ -566,7 +566,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     final String name = markerUrl.getLastPathSegment();
 
                     //Checks if bitmap already exists
-                    Bitmap marker = BitmapUtils.retrieve(name);
+                    Bitmap marker = BitmapUtils.retrieve(mContext, name);
 
                     if(marker != null)
                     {
@@ -642,7 +642,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            Bitmap goldMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_GOLD);
+            Bitmap goldMarker = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_GOLD);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
 
             Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, goldMarker, sponsor);
@@ -672,7 +672,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            Bitmap silverMarker = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_SILVER);
+            Bitmap silverMarker = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_SILVER);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
             Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, silverMarker, sponsor);
 
@@ -701,7 +701,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            Bitmap bronzeBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_BRONZE);
+            Bitmap bronzeBitmap = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_BRONZE);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
             Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, bronzeBitmap, sponsor);
 
@@ -735,7 +735,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void gf_wildcardPoint_onKeyEntered(String pKey, LatLng pLocation, boolean p3DCompatible)
     {
-        Bitmap wildcardBitmap = BitmapUtils.retrieve(Constants.NAME_CHEST_TYPE_WILDCARD);
+        Bitmap wildcardBitmap = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_WILDCARD);
         mView.addWildcardPoint(pKey, pLocation, wildcardBitmap);
     }
 
@@ -953,7 +953,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             // If 'visible' must draw marker on map
             if(sponsorPrizeData.getVisible() > 0)
             {
-                Bitmap sponsorMarkerBmp = BitmapUtils.retrieve(sponsorPrizeData.getName());
+                Bitmap sponsorMarkerBmp = BitmapUtils.retrieve(mContext, sponsorPrizeData.getName());
 
                 //If sponsor bitmap does not exists
                 if(sponsorMarkerBmp == null)
@@ -966,7 +966,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                         {
                             //Saves bitmap
                             Bitmap resizedBitmap = BitmapUtils.scaleMarker(bitmap, mContext);
-                            BitmapUtils.save(resizedBitmap, sponsorPrizeData.getName());
+                            BitmapUtils.save(mContext, resizedBitmap, sponsorPrizeData.getName());
 
                             //Draws marker on map
                             mView.addSponsorPrizePoint(key, location, resizedBitmap);
@@ -1042,23 +1042,17 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
-            File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
 
-            if(!file1.exists())
-                file1.mkdirs();
-
-            OutputStream outStream = null;
-            File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
-
-            outStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.close();
+            FileOutputStream outputStream = mContext.openFileOutput(name, Context.MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.close();
 
             Log.i(TAG, "Bitmap saved!");
+
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Log.e(TAG, "Error downloading worldcup marker: " + ex.getMessage());
+            Log.e(TAG, "Error while saving bitmap: " + e.getMessage());
         }
     }
 

@@ -19,6 +19,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IEraSelectionPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.LimitedFunctionality;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.EraSelectionView;
@@ -252,18 +253,12 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
 
     private void saveBitmap(Bitmap bitmap, String name)
     {
-        File file1 = new File(Environment.getExternalStorageDirectory()+"/rgsrcs/");
-
-        if(!file1.exists())
-            file1.mkdirs();
-
-        OutputStream outStream = null;
-        File file = new File(Environment.getExternalStorageDirectory() + "/rgsrcs/"+ name +".png");
         try
         {
-            outStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-            outStream.close();
+
+            FileOutputStream outputStream = mContext.openFileOutput(name, Context.MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.close();
 
             Log.i(TAG, "Bitmap saved!");
 
