@@ -46,25 +46,26 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private DatabaseReference mWildcardPoints = mRootReference.child("locationWildcardYCR");
     private DatabaseReference mWildcardPointsData = mRootReference.child("locationWildcardYCRData");
 
-    //private DatabaseReference mPlayerRecarGO = mRootReference.child("locationPlayerRecargo");
-    //private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
-
-    //References
-    private static GeoFire mGoldPointsRef;
-    private static GeoFire mSilverPointsRef;
-    private static GeoFire mBronzePointsRef;
-    private static GeoFire mWildcardPointsRef;
+    private DatabaseReference mPlayerRecarGO = mRootReference.child("locationPlayerRecargo");
+    private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
 
     private DatabaseReference mSponsorPrize = mRootReference.child("locationSponsorYCR");
     private DatabaseReference mSponsorPrizeData = mRootReference.child("locationSponsorYCRData");
 
+    //References
+    private  GeoFire mGoldPointsRef;
+    private  GeoFire mSilverPointsRef;
+    private  GeoFire mBronzePointsRef;
+    private  GeoFire mWildcardPointsRef;
+    private  GeoFire mSponsorPointsRef;
+
 
     //GeoFire Queries
-    private static GeoQuery mGoldPointsQuery;
-    private static GeoQuery mSilverPointsQuery;
-    private static GeoQuery mBronzePointsQuery;
-    private static GeoQuery mWildcardPointsQuery;
-    private static GeoQuery mSponsorPrizeQuery;
+    private  GeoQuery mGoldPointsQuery;
+    private  GeoQuery mSilverPointsQuery;
+    private  GeoQuery mBronzePointsQuery;
+    private  GeoQuery mWildcardPointsQuery;
+    private  GeoQuery mSponsorPrizeQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -82,6 +83,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             mSilverPointsRef = new GeoFire(mSilverPoints);
             mBronzePointsRef = new GeoFire(mBronzePoints);
             mWildcardPointsRef = new GeoFire(mWildcardPoints);
+            mSponsorPointsRef = new GeoFire(mSponsorPrize);
         }
         catch (Exception ex)
         {
@@ -170,7 +172,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     @Override
     public void sponsorPrizeQuery(GeoLocation location, double radius)
     {
-        mSponsorPrizeQuery = GeofireSingleton.getInstance().getSponsorPrizeRef().queryAtLocation(location, radius);
+        mSponsorPrizeQuery = mSponsorPointsRef.queryAtLocation(location, radius);
         mSponsorPrizeQuery.addGeoQueryEventListener(new GeoQueryEventListener()
         {
             @Override

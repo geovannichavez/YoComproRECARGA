@@ -129,10 +129,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             double radius = (mUserData.Is3DCompatibleDevice()) ? Constants.AR_POI_RADIOS_KM : Constants.RECARSTOP_2D_RADIUS_KM;
             GeoLocation location = new GeoLocation(pLocation.latitude, pLocation.longitude);
-            //this.mFirebaseInteractor.goldPointsQuery(location, radius);
-            //this.mFirebaseInteractor.silverPointsQuery(location, radius);
-            //this.mFirebaseInteractor.bronzePointsQuery(location, radius);
-            //this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
+            this.mFirebaseInteractor.goldPointsQuery(location, radius);
+            this.mFirebaseInteractor.silverPointsQuery(location, radius);
+            this.mFirebaseInteractor.bronzePointsQuery(location, radius);
+            this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
             this.mFirebaseInteractor.sponsorPrizeQuery(location, 0.1);
         }
         catch (Exception ex)
