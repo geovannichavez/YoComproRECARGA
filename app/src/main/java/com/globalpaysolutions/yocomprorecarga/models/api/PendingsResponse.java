@@ -42,19 +42,6 @@ public class PendingsResponse
         return newAge;
     }
 
-<<<<<<< HEAD
-    public void setNewAge(int newAge) {
-        this.newAge = newAge;
-    }
-
-    public int getNewFeed() {
-        return newFeed;
-    }
-
-    public void setNewFeed(int newFeed) {
-        this.newFeed = newFeed;
-    }
-=======
     public void setNewAge(int newAge)
     {
         this.newAge = newAge;
@@ -70,6 +57,5 @@ public class PendingsResponse
         this.newFeed = newFeed;
     }
 
->>>>>>> SponsorPrize
 
 }

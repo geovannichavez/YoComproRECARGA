@@ -333,10 +333,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             else
                 mView.setNewAgeAvailable(false);
 
-<<<<<<< HEAD
-=======
             //New Feed
->>>>>>> SponsorPrize
             if(response.getNewFeed() > 0)
                 mView.setNewsFeedActive(true);
             else
