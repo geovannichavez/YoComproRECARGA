@@ -52,6 +52,8 @@ public class StringsURL
 
     public final static String REDEEM_PRIZE = "WinPrize";
 
+    public final static String TREASURE_HUNT = "";
+
     public static final String POS_YOCOMPRORECARGA = "http://csncusgats.cloudapp.net:8074/v1/view/CreditCard/Index";
 
     public static final String LEADERBOARDS = "leaderboards/";

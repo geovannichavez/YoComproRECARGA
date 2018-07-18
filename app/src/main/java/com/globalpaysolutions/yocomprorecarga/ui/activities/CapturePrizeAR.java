@@ -34,6 +34,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.ChestData2D;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.CapturePrizeARPResenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
@@ -41,6 +42,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ChestSelector;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -115,7 +117,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
-                finish();//TODO: Verificar si deberia de hacerse
+                finish();
             }
         });
 
@@ -312,7 +314,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void switchRecarcoinVisible(boolean pVisible)
+    public void switchChestVisible(boolean pVisible)
     {
         int visible = (pVisible) ? View.VISIBLE : View.GONE;
         ivPrize2D.setVisibility(visible);
@@ -432,6 +434,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                     {
                         Intent store = new Intent(CapturePrizeAR.this, PrizeDetail.class);
                         store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        store.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.MAP);
                         startActivity(store);
                         finish();
                     }
@@ -503,7 +506,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), souvenirName));
             //tvSouvenirDesc.setText(souvenirDescription);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
 
             souvenirDialog = builder.setView(dialogView).create();
@@ -639,7 +641,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_GOLD);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_GOLD, 0, 0);
         }
         catch (Exception ex)
         {
@@ -670,7 +672,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_SILVER);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_SILVER, 0, 0);
         }
         catch (Exception ex)
         {
@@ -707,7 +709,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_BRONZE);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_BRONZE, 0, 0);
         }
         catch (Exception ex)
         {
@@ -744,7 +746,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         try
         {
-            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_WILDCARD);
+            mPresenter.registerKeyEntered(pKey, pLocation, pAgeID, Constants.NAME_CHEST_TYPE_WILDCARD, 0, 0 );
         }
         catch (Exception ex)
         {
@@ -768,6 +770,43 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     public void onWildcardPointCancelled(DatabaseError pDatabaseError)
     {
         //Nothing to do here
+    }
+
+    @Override
+    public void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData)
+    {
+        //TODO: Cambiar modelo 3D del metodo
+        if(UserData.getInstance(this).Is3DCompatibleDevice())
+        {
+            this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
+                    location.longitude + ", " + prizeData.getVisible() + ", '" + prizeData.getName() + "', '" + key + "', "
+                    + prizeData.getSponsorid() + ")");
+        }
+
+    }
+
+    @Override
+    public void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor)
+    {
+
+    }
+
+    @Override
+    public void onSponsorPrizeKeyExited(String pKey)
+    {
+
+    }
+
+    @Override
+    public void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData)
+    {
+
+    }
+
+    @Override
+    public void onSponsorPrizePointCancelled(DatabaseError pDatabaseError)
+    {
+
     }
 
     @Override
@@ -807,6 +846,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     {
         Intent prizeDetails = new Intent(this, PrizeDetail.class);
         prizeDetails.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        prizeDetails.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.MAP);
         startActivity(prizeDetails);
         finish();
     }
@@ -1016,6 +1056,31 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
         catch (Exception ex)
         {
             Log.e(TAG, "Error drwing wildcard chest 2d: " +  ex.getMessage());
+        }
+    }
+
+    @Override
+    public void drawChestSponsor2D(String pKey, LatLng location, int sponsorID, int exchangeType)
+    {
+        try
+        {
+            ChestData2D data = new ChestData2D();
+            data.setLocation(location);
+            data.setChestType(Constants.VALUE_CHEST_TYPE_SPONSOR);
+            data.setSponsorID(sponsorID);
+            data.setExchangeType(exchangeType);
+
+            mFirbaseObjects.clear();
+            mFirbaseObjects.put(pKey, data);
+
+
+            //Gets drawable according to sponsor
+            int resourceID = ChestSelector.getInstance(this).getSponsorResource(sponsorID).get(Constants.CHEST_STATE_CLOSED);
+            Picasso.with(this).load(resourceID).into(ivPrize2D);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error drwing silver chest 2d: " +  ex.getMessage());
         }
     }
 
@@ -1262,16 +1327,21 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 String firebaseID = entry.getKey();
                 ChestData2D chestData = entry.getValue();
 
-               if(chestData.getChestType() != Constants.VALUE_CHEST_TYPE_WILDCARD)
-               {
-                   //Atempt to exchange chest
-                   mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
-               }
-               else
-               {
-                   //Wildcard touched!
-                   mPresenter.touchWildcard_2D(firebaseID, Constants.VALUE_CHEST_TYPE_WILDCARD);
-               }
+                switch (chestData.getChestType())
+                {
+                    case Constants.VALUE_CHEST_TYPE_WILDCARD:
+                        //Wildcard touched!
+                        mPresenter.touchWildcard_2D(firebaseID, Constants.VALUE_CHEST_TYPE_WILDCARD);
+                        break;
+                    case Constants.VALUE_CHEST_TYPE_SPONSOR:
+                        //Redeem sponsor prize
+                        mPresenter.redeemSponsorPrize(chestData.getSponsorID(), chestData.getExchangeType());
+                        break;
+                    default:
+                        //Atempt to exchange chest
+                        mPresenter.exchangeCoinsChest_2D(chestData.getLocation(), firebaseID, chestData.getChestType());
+                        break;
+                }
             }
             catch (Exception ex)
             {

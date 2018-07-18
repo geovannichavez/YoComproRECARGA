@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +27,7 @@ public interface CapturePrizeView
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
     void obtainUserProgress();
-    void switchRecarcoinVisible(boolean pVisible);
+    void switchChestVisible(boolean pVisible);
     void blinkRecarcoin();
     void stopVibrate();
     void showToast(String pText);
@@ -65,6 +66,12 @@ public interface CapturePrizeView
     void onWildcardPointDataChange(String pKey, WildcardYCRData pGoldPointData);
     void onWildcardPointCancelled(DatabaseError pDatabaseError);
 
+    void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData);
+    void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor);
+    void onSponsorPrizeKeyExited(String pKey);
+    void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData);
+    void onSponsorPrizePointCancelled(DatabaseError pDatabaseError);
+
     void changeToOpenChest(int pChestType, int pEraID);
     void navigateToWildcard();
 
@@ -76,6 +83,5 @@ public interface CapturePrizeView
     void drawChestSilver2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestBronze2D(String pKey, LatLng pLocation, int pAgeID);
     void drawChestWildcard2D(String pKey, LatLng pLocation, int pAgeID);
-
-
+    void drawChestSponsor2D(String pKey, LatLng location, int sponsorID, int exchangeType);
 }

@@ -33,6 +33,12 @@ public class NewsPresenterImpl implements INewsPresenter, NewsListener
     public void initialize()
     {
         mView.initialize();
+<<<<<<< HEAD
+=======
+
+        //Deletes feed pending
+        UserData.getInstance(mContext).deleteNewFeed();
+>>>>>>> SponsorPrize
     }
 
     @Override

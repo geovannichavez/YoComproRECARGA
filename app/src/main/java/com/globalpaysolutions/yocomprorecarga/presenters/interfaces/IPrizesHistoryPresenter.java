@@ -7,7 +7,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters.interfaces;
 public interface IPrizesHistoryPresenter
 {
     void initialize();
-    void retrievePrizes();
+    void retrievePrizes(int menuOption, int categoryID);
     void copyCodeToClipboard(String code);
     void markPrizeRedeemed(int winPrizeID, boolean redeemed);
 }

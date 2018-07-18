@@ -1,138 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="100">
+    android:layout_height="wrap_content">
 
-    <!--    Column 1: Weight 15-->
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="105dp"
-        android:layout_weight="15"
-        android:gravity="center">
+    <ImageView
+        android:id="@+id/bgPrizeItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
 
-        <ImageView
-            android:id="@+id/ivPrizeIcon"
-            android:layout_width="38dp"
-            android:layout_height="21dp"
-            android:src="@drawable/ic_prize_first"/>
-    </RelativeLayout>
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="fill_parent"
-        android:background="@drawable/custom_dashed_vertical_line"/>
+    <!-- Layer 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-    <!--    Column 2: Weight 40-->
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="105dp"
-        android:layout_weight="40"
-        android:gravity="center">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="32" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="68"
             android:orientation="vertical"
-            android:padding="@dimen/margin_6dp">
+            android:weightSum="100">
 
-            <TextView
-                android:id="@+id/tvPrizeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:maxLines="3"
-                android:text="Nevagcion Ilimitada 1 Sem."
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/pure_black"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="70" />
 
-            <TextView
-                android:id="@+id/tvPin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_horizontal"
-                android:text="Nevega ilimitado por 7 dias gbgbbbgbgbgbgbgbggbgb  "
-                android:textColor="@color/pure_black"
-                fontPath="fonts/lato_semibold.ttf"
-                android:textSize="12sp"
-                android:maxLines="3"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="67"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/bg_prize_pin" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/btnExchange"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="31"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_exchange_prize_pin" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="13"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="43"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center_vertical|end"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:text="@string/label_answer_exchanged_prize"
+                    android:textColor="@color/pure_black"
+                    android:textSize="@dimen/dimen_normal_10" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/swRedeemed"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="23"
+                    android:textOff=""
+                    android:textOn=""
+                    android:theme="@style/BrandedSwitch" />
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="fill_parent"
-        android:background="@drawable/custom_dashed_vertical_line"/>
+    <!-- Layer 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
-
-    <!--    Column 3: Weight 20 -->
-    <RelativeLayout
-        android:paddingLeft="@dimen/margin_6dp"
-        android:paddingStart="@dimen/margin_6dp"
-        android:paddingEnd="@dimen/margin_6dp"
-        android:paddingRight="@dimen/margin_6dp"
-        android:layout_width="0dp"
-        android:layout_height="105dp"
-        android:layout_weight="20"
-        android:gravity="center">
-
-        <TextView
-            android:text="SMS al 323 rfrffrfrfrfrf"
-            android:id="@+id/tvExchange"
-            android:textSize="14sp"
-            android:maxLines="3"
-            android:textStyle="bold"
-            android:gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/pure_black"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="1dp"
-        android:layout_height="fill_parent"
-        android:background="@drawable/custom_dashed_vertical_line"/>
-
-    <!--    Column4: Weight 25 -->
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="105dp"
-        android:layout_weight="25"
-        android:gravity="center">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="32" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="68"
             android:orientation="vertical"
-            android:padding="@dimen/margin_6dp">
+            android:weightSum="100">
 
-            <TextView
-                android:id="@+id/lblRedeemed"
-                fontPath="fonts/lato_semibold.ttf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:maxLines="2"
-                android:text="¿Canjeado?"
-                android:textColor="@color/pure_black"
-                android:textSize="10sp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40" />
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/swRedeemed"
-                android:textOff=""
-                android:textOn=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPrizeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="@dimen/prize_item_title_size"
+                    tools:text="SMS ILIM TODAS LAS REDES 24H" />
+
+                <TextView
+                    android:id="@+id/ivDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="@dimen/prize_item_content_size"
+                    tools:text="Ganaste mensaje de texto ilimitados a todas las redes durante 24 horas" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/tvPin"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="68"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:src="@drawable/bg_prize_pin"
+                    android:textColor="@color/white_textView_color"
+                    android:textSize="@dimen/dimen_normal_12"
+                    tools:text="PIN: 032946404556715" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="32" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15" />
+
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-
-</LinearLayout>
+</FrameLayout>

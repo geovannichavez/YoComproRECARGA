@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_era_selection"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory" >
-
+    tools:context="com.globalpaysolutions.yocomprorecarga.ui.activities.PrizesHistory">
 
 
     <RelativeLayout
@@ -16,195 +14,174 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/bgprizes"
+            android:id="@+id/bgTimemachine"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bg_background_4"/>
+            android:scaleType="centerCrop" />
 
+        <!-- Layer 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="100"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="11"/>
+                android:layout_weight="11" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:weightSum="100"
                 android:layout_weight="87"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"/>
-                <ImageView
+                    android:layout_weight="4" />
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="92"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_achv_panel"/>
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="20"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_panel_prizes_header" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="80"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_panel_prizes_body" />
+
+                </LinearLayout>
+
+
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="4"/>
+                    android:layout_weight="4" />
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2" />
 
         </LinearLayout>
 
+        <!-- Layer 2 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="100"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"/>
+                android:layout_weight="2.5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.5"/>
+                    android:layout_weight="4" />
 
                 <ImageButton
                     android:id="@+id/btnBack"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="16"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:scaleType="fitCenter"
-                    android:layout_weight="25"
-                    app:srcCompat="@drawable/ic_back_3"/>
+                    app:srcCompat="@drawable/ic_back_3" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.5"/>
+                    android:layout_weight="4" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:src="@drawable/bg_title_3"/>
+                    android:layout_weight="52"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_title_3" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"/>
-
+                    android:layout_weight="24" />
 
             </LinearLayout>
-
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="5"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="75"
-                android:weightSum="100"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/lvHistory"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="80"
-                    tools:listitem="@layout/custom_prizes_history_listview_item" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10" />
-
-
-
-            </LinearLayout>
-
-
-
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"/>
+                android:layout_weight="25" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
+                android:layout_weight="60"
                 android:orientation="horizontal"
                 android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"/>
+                    android:layout_weight="8" />
 
-                <ImageButton
-                    android:id="@+id/btnActivatePrize"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/lvHistory"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_button_red_3"/>
+                    android:layout_weight="84"
+                    tools:listitem="@layout/custom_prizes_history_listview_item" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"/>
-
+                    android:layout_weight="8" />
 
 
             </LinearLayout>
 
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3.5"/>
+                android:layout_weight="14" />
 
         </LinearLayout>
 
+        <!-- Layer 3 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="100"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2.5"/>
-
+                android:layout_weight="2.5" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,136 +193,149 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="32"/>
+                    android:layout_weight="24" />
 
                 <TextView
                     android:id="@+id/TextView43"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="46"
-                    android:gravity="center"
+                    android:layout_weight="52"
                     android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
                     android:text="Premios"
-                    android:textSize="18sp"
                     android:textAllCaps="true"
-                    android:textColor="#ffffff"/>
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="32"/>
+                    android:layout_weight="24" />
 
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4.5"/>
+                android:layout_weight="3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="40"
+                android:layout_weight="7"
                 android:orientation="horizontal"
                 android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"/>
+                    android:layout_weight="8" />
 
-                <TextView
-                    android:id="@+id/tvNoPrizesYetTitle"
+                <ImageView
+                    android:id="@+id/btnWeeklyPrizes1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="80"
-                    android:fontFamily="@font/baloo_regular"
-                    android:gravity="center"
-                    android:maxLines="2"
-                    android:text="@string/title_no_prizes_yet"
-                    android:textAllCaps="true"
-                    android:textColor="@color/color_red_recargo"
-                    android:textSize="16sp"
-                    android:visibility="invisible" />
+                    android:layout_weight="40"
+                    android:src="@drawable/btn_weekly_prizes_off" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"/>
+                    android:layout_weight="4" />
 
+                <ImageView
+                    android:id="@+id/btnEarnedPrizes2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="40"
+                    android:src="@drawable/btn_earned_prizes_on" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" />
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20"
+                android:layout_weight="7"
                 android:orientation="horizontal"
                 android:weightSum="100">
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"/>
+                    android:layout_weight="10" />
 
-                <TextView
-                    android:id="@+id/tvNoPrizesYetContent"
+
+                <ImageView
+                    android:id="@+id/btnCategory1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="80"
-                    android:fontFamily="@font/baloo_regular"
-                    android:gravity="center"
-                    android:maxLines="3"
-                    android:text="@string/label_no_prizes_yet"
-                    android:textSize="12sp"
-                    android:visibility="invisible" />
+                    android:layout_weight="17"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_prize_phones_on" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="10"/>
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnCategory2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="17"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_prize_food_off" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnCategory3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="17"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_prize_stores_off" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4" />
+
+                <ImageView
+                    android:id="@+id/btnCategory4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="17"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_prize_electronics_off" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10" />
 
             </LinearLayout>
 
-
-
-
-
-
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="16.5"/>
-
-            <TextView
-                android:id="@+id/tvActivatePrize"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6"
-                android:gravity="center"
-                android:fontFamily="@font/baloo_regular"
-                android:text="Activar Premio"
-                android:textColor="#ffffff"
-                android:textAllCaps="true"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3.5"/>
-
-
+                android:layout_weight="79.5" />
         </LinearLayout>
 
 
-
-
-
-
     </RelativeLayout>
-
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>

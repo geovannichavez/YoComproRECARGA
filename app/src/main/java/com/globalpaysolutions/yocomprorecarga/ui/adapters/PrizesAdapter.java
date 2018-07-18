@@ -17,6 +17,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.Prize;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,26 +48,14 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         try
         {
 
+            holder.bgPrizeItem.setImageResource(R.drawable.bg_prize_item);
+
+
             final Prize currentItem = mPrizesHistoryList.get(position);
-
-            switch (currentItem.getLevel())
-            {
-                case 1:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_first));
-                    break;
-                case 2:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_second));
-                    break;
-                case 3:
-                    holder.icon.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_prize_third));
-                    break;
-                default:
-                    Log.i(TAG, "No icon provided for prize");
-                    break;
-            }
-
+            Picasso.with(mContext).load(currentItem.getBackgroundPrizeHistory()).into(holder.bgPrizeItem);
             holder.title.setText(currentItem.getTitle());
-            holder.pin.setText(String.format(mContext.getString(R.string.label_code), currentItem.getCode()));
+            holder.pin.setText(String.format(mContext.getString(R.string.label_pin), currentItem.getCode()));
+            holder.description.setText(currentItem.getDescription());
             holder.pin.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -105,6 +94,8 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
                 }
             });
 
+
+
         }
         catch (Exception ex)
         {
@@ -125,23 +116,42 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         this.mPresenter = presenter;
     }
 
+    public void clear()
+    {
+        final int size = mPrizesHistoryList.size();
+
+        if (size > 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                mPrizesHistoryList.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
+
     class PrizesHistoryViewHolder extends RecyclerView.ViewHolder
     {
         ImageView icon;
         TextView title;
+        TextView description;
         TextView pin;
         TextView exchangeMethod;
+        ImageView btnExchange;
         SwitchCompat swRedeemed;
+        ImageView bgPrizeItem;
 
         PrizesHistoryViewHolder(View row)
         {
             super(row);
 
-            icon = (ImageView) row.findViewById(R.id.ivPrizeIcon);
             title = (TextView) row.findViewById(R.id.tvPrizeName);
             pin = (TextView) row.findViewById(R.id.tvPin);
-            exchangeMethod = (TextView) row.findViewById(R.id.tvExchange);
+            description = (TextView) row.findViewById(R.id.ivDescription) ;
+            btnExchange = (ImageView) row.findViewById(R.id.btnExchange);
             swRedeemed = (SwitchCompat) row.findViewById(R.id.swRedeemed);
+            bgPrizeItem = (ImageView) row.findViewById(R.id.bgPrizeItem);
         }
     }
 }

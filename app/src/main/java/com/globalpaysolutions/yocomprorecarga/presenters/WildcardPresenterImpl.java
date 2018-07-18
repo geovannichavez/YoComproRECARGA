@@ -1,6 +1,7 @@
 package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
+import android.hardware.usb.UsbRequest;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
@@ -100,6 +101,7 @@ public class WildcardPresenterImpl implements IWildcardPresenter, WildcardListen
                     UserData.getInstance(mContext).saveLastPrizeLevel(response.getPrizeLevel());
                     UserData.getInstance(mContext).saveLastPrizeLogoUrl(response.getLogoUrl());
                     UserData.getInstance(mContext).saveLastPrizeExchangedColor(response.getHexColor());
+                    UserData.getInstance(mContext).saveLastPrizeBackgroundUrl(response.getUrlBackground());
                     mView.navigateToPrizeDetail();
                 }
             }

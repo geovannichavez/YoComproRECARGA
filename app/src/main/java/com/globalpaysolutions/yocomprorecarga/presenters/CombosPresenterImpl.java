@@ -138,6 +138,7 @@ public class CombosPresenterImpl implements ICombosPresenter, CombosListener
                 UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
                 UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
                 UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
+                UserData.getInstance(mContext).saveLastPrizeBackgroundUrl(redeemPrize.getUrlBackground());
 
                 //Saves tracking and updates UI
                 if(redeemPrize.getTracking() != null)

@@ -80,6 +80,7 @@ public class UserData
     private static final String KEY_LAST_PRIZE_EXCHANGED_LEVEL = "usr_last_prize_exchanged_level";
     private static final String KEY_LAST_PRIZE_EXCHANGED_IMGURL = "usr_last_prize_exchanged_img_url";
     private static final String KEY_LAST_PRIZE_EXCHANGED_HEXCOLOR = "usr_last_prize_exchanged_hex_color";
+    private static final String KEY_LAST_PRIZE_EXCHANGED_BACKGROUND_URL = "key_last_prize_exchanged_background_url";
 
 
     //Device
@@ -148,6 +149,9 @@ public class UserData
 
     //NewAge
     private static final String KEY_NEW_AGE = "KEY_NEW_AGE";
+
+    //New Feed
+    private static final String KEY_NEW_FEED = "key_new_feed";
 
     //Other App Settings
     private static final String KEY_APP_MARKERS_COUNT = "key_app_markers_count";
@@ -754,6 +758,11 @@ public class UserData
         return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_HEXCOLOR, "");
     }
 
+    public String getLastPrizeBackgroundUrl()
+    {
+        return mPreferences.getString(KEY_LAST_PRIZE_EXCHANGED_BACKGROUND_URL, "");
+    }
+
     public String getFacebookFullname()
     {
         return mPreferences.getString(KEY_AUTH_PROVIDER_FULLNAME, "");
@@ -1188,5 +1197,26 @@ public class UserData
     {
         mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryID);
         mEditor.commit();
+    }
+    public void saveLastPrizeBackgroundUrl(String urlBackground)
+    {
+        mEditor.putString(KEY_LAST_PRIZE_EXCHANGED_BACKGROUND_URL, urlBackground);
+        mEditor.commit();
+    }
+    public void saveNewFeed(int newFeed)
+    {
+        mEditor.putInt(KEY_NEW_FEED, newFeed);
+        mEditor.commit();
+    }
+
+    public void deleteNewFeed()
+    {
+        mEditor.putInt(KEY_NEW_FEED, 0);
+        mEditor.commit();
+    }
+
+    public int getNewFeed()
+    {
+        return mPreferences.getInt(KEY_NEW_FEED, 0);
     }
 }

@@ -214,6 +214,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                         int prizeLevel = response.getPrize().getPrizeLevel();
                         String prizeLogoUrl = response.getPrize().getLogoUrl();
                         String prizeHexColor = response.getPrize().getHexColor();
+                        String urlBackground = response.getPrize().getUrlBackground();
 
                         UserData.getInstance(mContext).saveLastPrizeTitle(prizeTitle);
                         UserData.getInstance(mContext).saveLastPrizeDescription(prizeDescription);
@@ -222,6 +223,7 @@ public class TriviaPresenterImpl implements ITriviaPresenter, TriviaListener
                         UserData.getInstance(mContext).saveLastPrizeLevel(prizeLevel);
                         UserData.getInstance(mContext).saveLastPrizeLogoUrl(prizeLogoUrl);
                         UserData.getInstance(mContext).saveLastPrizeExchangedColor(prizeHexColor);
+                        UserData.getInstance(mContext).saveLastPrizeBackgroundUrl(urlBackground);
                         mView.navigatePrizeDetail();
 
                         break;

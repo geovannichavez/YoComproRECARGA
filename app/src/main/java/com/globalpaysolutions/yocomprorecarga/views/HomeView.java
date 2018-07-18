@@ -61,6 +61,10 @@ public interface HomeView
     void movePlayerPoint(String key, LatLng location);
     void removePlayerPoint(String key);
 
+    void addSponsorPrizePoint(String key, LatLng location, Bitmap markerBmp);
+    void addSponsorPrizeData(String key, String title, String snippet, MarkerData markerData);
+    void removeSponsorPrizePoint(String key);
+
     void showToast(String string);
     void startShowcase();
 

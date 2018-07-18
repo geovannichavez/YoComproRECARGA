@@ -21,6 +21,7 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.presenters.WildcardPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
+import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.views.WildcardView;
 import com.squareup.picasso.Picasso;

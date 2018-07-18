@@ -219,6 +219,46 @@ public class ChestSelector
         return resourceMap;
     }
 
+    public HashMap<String, Integer> getSponsorResource(int sponsorID)
+    {
+        HashMap<String, Integer> resourceMap = new HashMap<>();
+        int drawableClosed = 0;
+        int drawableOpen = 0;
+
+        try
+        {
+            //TODO: Poner los nombres reales de los recursos 2D de sponsors
+            switch (sponsorID)
+            {
+                case 1: //Sponsor 1
+                    resourceMap.clear();
+                    drawableClosed = getDrawableId("img_wildcard_chest_2d_closed");
+                    drawableOpen = getDrawableId("img_wildcard_chest_2d_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 2: //Sponsor 2
+                    drawableClosed = getDrawableId("img_02_wildcard_chest_closed");
+                    drawableOpen = getDrawableId("img_02_wildcard_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+                case 3: //Sponsor 3
+                    drawableClosed = getDrawableId("img_03_wildcard_chest_closed");
+                    drawableOpen = getDrawableId("img_03_wildcard_chest_open");
+                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
+                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return resourceMap;
+    }
+
     private int getDrawableId(String resourceName)
     {
         int drawableId = 0;

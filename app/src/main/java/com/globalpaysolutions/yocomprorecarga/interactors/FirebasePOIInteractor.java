@@ -10,6 +10,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
@@ -54,12 +55,16 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private static GeoFire mBronzePointsRef;
     private static GeoFire mWildcardPointsRef;
 
+    private DatabaseReference mSponsorPrize = mRootReference.child("locationSponsorYCR");
+    private DatabaseReference mSponsorPrizeData = mRootReference.child("locationSponsorYCRData");
+
 
     //GeoFire Queries
     private static GeoQuery mGoldPointsQuery;
     private static GeoQuery mSilverPointsQuery;
     private static GeoQuery mBronzePointsQuery;
     private static GeoQuery mWildcardPointsQuery;
+    private static GeoQuery mSponsorPrizeQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -159,6 +164,78 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void sponsorPrizeQuery(GeoLocation location, double radius)
+    {
+        mSponsorPrizeQuery = GeofireSingleton.getInstance().getSponsorPrizeRef().queryAtLocation(location, radius);
+        mSponsorPrizeQuery.addGeoQueryEventListener(new GeoQueryEventListener()
+        {
+            @Override
+            public void onKeyEntered(final String key, GeoLocation location)
+            {
+                LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+                mFirebaseListener.gf_sponsorPrize_onKeyEntered(key, geoLocation);
+            }
+
+            @Override
+            public void onKeyExited(String key)
+            {
+                mFirebaseListener.gf_sponsorPrize_onKeyExited(key, UserData.getInstance(mContext).Is3DCompatibleDevice());
+            }
+
+            @Override
+            public void onKeyMoved(String key, GeoLocation location)
+            {
+
+            }
+
+            @Override
+            public void onGeoQueryReady()
+            {
+                mFirebaseListener.gf_sponsorPrize_onGeoQueryReady();
+            }
+
+            @Override
+            public void onGeoQueryError(DatabaseError error)
+            {
+
+            }
+        });
+    }
+
+    @Override
+    public void sponsorPrizeQueryUpdateCriteria(GeoLocation location, double radius)
+    {
+
+    }
+
+    @Override
+    public void retrieveSponsorPrizeData(final String key, final LatLng location)
+    {
+        try
+        {
+            mSponsorPrizeData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    SponsorPrizeData sponsorData = dataSnapshot.getValue(SponsorPrizeData.class);
+                    mFirebaseListener.fb_sponsorPrize_onDataChange(key, location, sponsorData);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    mFirebaseListener.fb_sponsorPrize_onCancelled(databaseError);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
     }
 

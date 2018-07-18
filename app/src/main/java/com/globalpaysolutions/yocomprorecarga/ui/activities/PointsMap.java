@@ -43,12 +43,14 @@ import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.presenters.HomePresenterImpl;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.ButtonAnimator;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogCreator;
 import com.globalpaysolutions.yocomprorecarga.utils.CustomDialogScenarios;
 import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.ShowcaseTextPainter;
+import com.globalpaysolutions.yocomprorecarga.utils.SponsoredChest;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -103,6 +105,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     private Map<String, Marker> mWildcardPointsMarkers;
     private Map<String, Marker> mPlayerPointsMarkers;
     private Map<String, String> mSalePointMarkersFirebaseKeys;
+    private Map<String, Marker> mSponsorPrizeMarkers;
     private Map<String, Bitmap> mBitmapMarkers;
 
     @Override
@@ -175,6 +178,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
         mBronzePointsMarkers = new HashMap<>();
         mWildcardPointsMarkers = new HashMap<>();
         mSalePointMarkersFirebaseKeys = new HashMap<>();
+        mSponsorPrizeMarkers = new HashMap<>();
         mPlayerPointsMarkers = new HashMap<>();
         mBitmapMarkers = new HashMap<>();
 
@@ -210,7 +214,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             }
         });*/
 
-        //TODO: Verificar si el rendimiento del metodo deprecado es mejor que el metodo actual
         /** Se utiliza el metodo deprecado por cuestiones de rendimiento **/
         mGoogleMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener()
         {
@@ -423,7 +426,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
 
             mPresenter.updateVendorsPntCriteria(currentLocation);
             //mPresenter.writeCurrentPlayerLocation(currentLocation); //Updates current user location
-            mPresenter.updatePrizePntCriteria(currentLocation); //TODO: No se había implementado este metodo
+            mPresenter.updatePrizePntCriteria(currentLocation); //No se había implementado este metodo
             mPresenter.updatePlayersPntCriteria(currentLocation);
 
             //mPresenter.checkWelcomeChest(pLocation);
@@ -674,7 +677,6 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
                 else
                     marker = mGoogleMap.addMarker(new MarkerOptions().position(pLocation)
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_gold_point)));
-
 
                 mGoldPointsMarkers.put(pKey, marker);
             }
@@ -975,6 +977,75 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             Marker marker = mPlayerPointsMarkers.get(key);
             marker.remove();
             mPlayerPointsMarkers.remove(key);
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addSponsorPrizePoint(String key, LatLng location, Bitmap markerBmp)
+    {
+        try
+        {
+            Marker marker = mSponsorPrizeMarkers.get(key);
+            if(marker != null)
+            {
+                Log.i(TAG, String.format("Marker for key %1$s was already inserted", key));
+            }
+            else
+            {
+                //If bitmaps comes null, then use the resource
+                if(markerBmp != null)
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
+                            .icon(BitmapDescriptorFactory.fromBitmap(markerBmp)));
+                else
+                    marker = mGoogleMap.addMarker(new MarkerOptions().position(location)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_sponsor_prize_point)));
+
+                mSponsorPrizeMarkers.put(key, marker);
+            }
+
+        }
+        catch (NullPointerException npe)
+        {
+            Log.i(TAG, "Handled: NullPointerException when trying to remove marker from map");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addSponsorPrizeData(String key, String title, String snippet, MarkerData markerData)
+    {
+        try
+        {
+            Marker marker = mSponsorPrizeMarkers.get(key);
+            marker.setSnippet(snippet);
+            marker.setTitle(title);
+            marker.setTag(markerData);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeSponsorPrizePoint(String key)
+    {
+        try
+        {
+            Marker marker = mSponsorPrizeMarkers.get(key);
+            marker.remove();
+            mSponsorPrizeMarkers.remove(key);
         }
         catch (NullPointerException npe)
         {
