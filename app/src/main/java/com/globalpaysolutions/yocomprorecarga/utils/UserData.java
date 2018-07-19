@@ -170,6 +170,9 @@ public class UserData
     //Google
     private static final String KEY_GOOGLE_PHOTO_URL = "key_google_photo_url";
 
+    //Sponsors
+    private static final String KEY_SPONSORS_DATA = "key_sponsors_data";
+
     private UserData(Context pContext)
     {
         UserData.mContext = pContext;
@@ -1218,5 +1221,22 @@ public class UserData
     public int getNewFeed()
     {
         return mPreferences.getInt(KEY_NEW_FEED, 0);
+    }
+
+    public String getSponsorsArray()
+    {
+        return mPreferences.getString(KEY_SPONSORS_DATA, "");
+    }
+
+    public void saveSponsorsArray(String updated)
+    {
+        mEditor.putString(KEY_SPONSORS_DATA, updated);
+        mEditor.commit();
+    }
+
+    public void deleteSponsorsArray()
+    {
+        mEditor.remove(KEY_SPONSORS_DATA);
+        mEditor.commit();
     }
 }

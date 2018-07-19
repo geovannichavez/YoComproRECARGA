@@ -177,7 +177,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             String[] params = pArchitectURL.split("//");
             String type = params[1];
 
-            if(!TextUtils.equals(type, "Sponsor"))
+            if(!TextUtils.equals(type, "SponsorItem"))
             {
                 //Gets url hashmap
                 urlMap = getURLMap(pArchitectURL);
