@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="108dp">
 
     <ImageView
         android:id="@+id/bgNewItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_new_item" />
@@ -22,20 +22,28 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
-        <ImageView
-            android:id="@+id/icSponsor"
+        <RelativeLayout
+            android:layout_weight="23"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/icSponsor"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                tools:src="@drawable/claro_logo"
+                android:scaleType="centerInside" />
+        </RelativeLayout>
+        <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="30"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside" />
+            android:layout_weight="3" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="65" />
+            android:layout_weight="71" />
 
     </LinearLayout>
 
@@ -49,52 +57,51 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="40" />
+            android:layout_weight="29" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="58"
+            android:layout_weight="69"
             android:orientation="vertical"
             android:weightSum="100">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="8" />
+                android:layout_weight="6" />
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="42"
+                android:layout_weight="32"
                 android:fontFamily="@font/baloo_regular"
                 android:gravity="center_horizontal|bottom"
-                android:lineSpacingExtra="-6sp"
+                android:lineSpacingExtra="-8sp"
                 android:maxLines="2"
                 android:textAllCaps="true"
                 android:textColor="@color/pure_black"
-                android:textSize="@dimen/dimen_normal_13"
+                android:textSize="@dimen/dimen_normal_12"
                 tools:text="Día de descuento en PUMA usultan" />
 
             <TextView
                 android:id="@+id/tvContent"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="42"
-                android:fontFamily="@font/baloo_regular"
+                android:layout_weight="56"
+                android:fontFamily="@font/lato_semibold"
                 android:gravity="center_horizontal"
                 android:includeFontPadding="false"
-                android:lineSpacingExtra="-6sp"
                 android:maxLines="4"
                 android:textColor="@color/pure_black"
                 android:textSize="@dimen/dimen_normal_10"
-                tools:text="Aprobecha un café gratis al comprar un desayuno" />
+                tools:text="ElPibeGO! te espera en Claro Metrocentro Santa Ana, para ser retado si lo vences te acercas a ganar un PlayStation 4" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="8" />
+                android:layout_weight="6" />
         </LinearLayout>
 
         <Space

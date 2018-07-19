@@ -171,10 +171,77 @@
             android:weightSum="100">
 
             <!-- w: 9-->
-            <Space
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="9"   />
+                android:layout_weight="9"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25" />
+
+
+
+                <LinearLayout
+                    android:weightSum="100"
+                    android:orientation="horizontal"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <Space
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icNewChallenge"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_challenge_off" />
+                    <Space
+                        android:layout_weight="6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icNewTrivia"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_trivia_off" />
+                    <Space
+                        android:layout_weight="6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:id="@+id/icFeed"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="24"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_news_off" />
+
+                    <Space
+                        android:layout_weight="8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25" />
+
+            </LinearLayout>
 
             <!-- w: 20-->
             <Space
@@ -312,40 +379,20 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
 
-                    <ImageView
-                        android:id="@+id/icNewChallenge"
+                    <TextView
+                        android:id="@+id/tvPendingCh"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="24"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_challenge_off" />
-                    <Space
-                        android:layout_weight="6"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
+                        android:gravity="center"
+                        android:textColor="@color/white_textView_color"
+                        android:fontFamily="@font/baloo_regular"
+                        android:textSize="@dimen/dimen_normal_16"
+                        tools:text="12"
 
-                    <ImageView
-                        android:id="@+id/icNewTrivia"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="24"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_trivia_off" />
+                         />
                     <Space
-                        android:layout_weight="6"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent" />
-
-                    <ImageView
-                        android:id="@+id/icFeed"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="24"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_news_off" />
-
-                    <Space
-                        android:layout_weight="8"
+                        android:layout_weight="68"
                         android:layout_width="0dp"
                         android:layout_height="match_parent" />
 
