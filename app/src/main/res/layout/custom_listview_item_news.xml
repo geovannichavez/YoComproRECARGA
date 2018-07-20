@@ -24,7 +24,34 @@
             android:layout_height="match_parent"
             android:layout_weight="3" />
 
-        <RelativeLayout
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="23"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="14" />
+
+            <ImageView
+                android:id="@+id/icSponsor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="45"
+                android:scaleType="centerInside"
+                android:src="@drawable/claro_logo" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="41" />
+
+        </LinearLayout>
+
+        <!--<RelativeLayout
             android:layout_weight="23"
             android:layout_width="0dp"
             android:layout_height="match_parent">
@@ -34,7 +61,7 @@
                 android:layout_height="100dp"
                 tools:src="@drawable/claro_logo"
                 android:scaleType="centerInside" />
-        </RelativeLayout>
+        </RelativeLayout>-->
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
