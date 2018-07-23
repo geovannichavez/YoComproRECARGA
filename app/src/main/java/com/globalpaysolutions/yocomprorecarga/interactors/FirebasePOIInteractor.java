@@ -49,17 +49,17 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     //private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
 
     //References
-    private static GeoFire mGoldPointsRef;
-    private static GeoFire mSilverPointsRef;
-    private static GeoFire mBronzePointsRef;
-    private static GeoFire mWildcardPointsRef;
+    private GeoFire mGoldPointsRef;
+    private GeoFire mSilverPointsRef;
+    private GeoFire mBronzePointsRef;
+    private GeoFire mWildcardPointsRef;
 
 
     //GeoFire Queries
-    private static GeoQuery mGoldPointsQuery;
-    private static GeoQuery mSilverPointsQuery;
-    private static GeoQuery mBronzePointsQuery;
-    private static GeoQuery mWildcardPointsQuery;
+    private GeoQuery mGoldPointsQuery;
+    private GeoQuery mSilverPointsQuery;
+    private GeoQuery mBronzePointsQuery;
+    private GeoQuery mWildcardPointsQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -73,10 +73,11 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     {
         try
         {
-            mGoldPointsRef = new GeoFire(mGoldPoints);
+            /*mGoldPointsRef = new GeoFire(mGoldPoints);
             mSilverPointsRef = new GeoFire(mSilverPoints);
             mBronzePointsRef = new GeoFire(mBronzePoints);
-            mWildcardPointsRef = new GeoFire(mWildcardPoints);
+            mWildcardPointsRef = new GeoFire(mWildcardPoints);*/
+            new InitializeGeolocation().execute();
         }
         catch (Exception ex)
         {
@@ -403,6 +404,21 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     *
     *******************************************************
     */
+
+    private class InitializeGeolocation extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            //GeoFire
+            mGoldPointsRef = new GeoFire(mGoldPoints);
+            mSilverPointsRef = new GeoFire(mSilverPoints);
+            mBronzePointsRef = new GeoFire(mBronzePoints);
+            mWildcardPointsRef = new GeoFire(mWildcardPoints);
+            return null;
+        }
+    }
 
     private class ExecuteGoldPointsQuery extends AsyncTask<Void, Void, Void>
     {
