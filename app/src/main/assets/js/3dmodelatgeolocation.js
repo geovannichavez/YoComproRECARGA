@@ -168,7 +168,7 @@ createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitu
 createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude,longitude, key,age) {
 
     exchanging=false;
-    var modelWildcard = new AR.Model("assets/"+age+"/Wildcard.wt3", {
+    var modelWildcard = new AR.Model("http://www.clarorocket.com/v1/rg/ar/assets/assets/"+age+"/Wildcard.wt3", {
                                  onLoaded: this.worldLoaded,
                                  scale: {
                                  x: 1,
