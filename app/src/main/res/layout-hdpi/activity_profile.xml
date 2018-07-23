@@ -369,8 +369,7 @@
         android:layout_marginLeft="92dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="@+id/imgProfilePic"
-        app:layout_constraintTop_toTopOf="@+id/imgProfilePic"
-        tools:src="@drawable/ic_profile_country_flag"/>
+        app:layout_constraintTop_toTopOf="@+id/imgProfilePic" />
 
     <TextView
         android:id="@+id/lblTitle"

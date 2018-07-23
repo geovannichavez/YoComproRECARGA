@@ -374,7 +374,6 @@
         android:layout_marginStart="112dp"
         android:layout_marginLeft="112dp"
         android:scaleType="fitCenter"
-        tools:src="@drawable/ic_profile_country_flag"
         app:layout_constraintStart_toStartOf="@+id/imgProfilePic"
         app:layout_constraintTop_toTopOf="@+id/imgProfilePic" />
 
