@@ -10,6 +10,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.IFirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.android.gms.maps.model.LatLng;
@@ -45,21 +46,26 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     private DatabaseReference mWildcardPoints = mRootReference.child("locationWildcardYCR");
     private DatabaseReference mWildcardPointsData = mRootReference.child("locationWildcardYCRData");
 
-    //private DatabaseReference mPlayerRecarGO = mRootReference.child("locationPlayerRecargo");
-    //private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
+    private DatabaseReference mPlayerRecarGO = mRootReference.child("locationPlayerRecargo");
+    private DatabaseReference mPlayerRecarGOData = mRootReference.child("locationPlayerRecargoData");
+
+    private DatabaseReference mSponsorPrize = mRootReference.child("locationSponsorYCR");
+    private DatabaseReference mSponsorPrizeData = mRootReference.child("locationSponsorYCRData");
 
     //References
-    private GeoFire mGoldPointsRef;
-    private GeoFire mSilverPointsRef;
-    private GeoFire mBronzePointsRef;
-    private GeoFire mWildcardPointsRef;
+    private  GeoFire mGoldPointsRef;
+    private  GeoFire mSilverPointsRef;
+    private  GeoFire mBronzePointsRef;
+    private  GeoFire mWildcardPointsRef;
+    private  GeoFire mSponsorPointsRef;
 
 
     //GeoFire Queries
-    private GeoQuery mGoldPointsQuery;
-    private GeoQuery mSilverPointsQuery;
-    private GeoQuery mBronzePointsQuery;
-    private GeoQuery mWildcardPointsQuery;
+    private  GeoQuery mGoldPointsQuery;
+    private  GeoQuery mSilverPointsQuery;
+    private  GeoQuery mBronzePointsQuery;
+    private  GeoQuery mWildcardPointsQuery;
+    private  GeoQuery mSponsorPrizeQuery;
 
     public FirebasePOIInteractor(Context pContext, FirebasePOIListener pListener)
     {
@@ -164,6 +170,53 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
     }
 
     @Override
+    public void sponsorPrizeQuery(GeoLocation location, double radius)
+    {
+        mSponsorPrizeQuery = mSponsorPointsRef.queryAtLocation(location, radius);
+        mSponsorPrizeQuery.addGeoQueryEventListener(sponsorPrizeListener);
+    }
+
+    @Override
+    public void sponsorPrizeQueryUpdateCriteria(GeoLocation location, double radius)
+    {
+        try
+        {
+            mSponsorPrizeQuery.setLocation(location, radius);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void retrieveSponsorPrizeData(final String key, final LatLng location)
+    {
+        try
+        {
+            mSponsorPrizeData.child(key).addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    SponsorPrizeData sponsorData = dataSnapshot.getValue(SponsorPrizeData.class);
+                    mFirebaseListener.fb_sponsorPrize_onDataChange(key, location, sponsorData);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError)
+                {
+                    mFirebaseListener.fb_sponsorPrize_onCancelled(databaseError);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
     public void detachFirebaseListeners()
     {
         try
@@ -172,6 +225,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             mSilverPointsQuery.removeGeoQueryEventListener(silverPointsListener);
             mBronzePointsQuery.removeGeoQueryEventListener(bronzePointsListener);
             mWildcardPointsQuery.removeGeoQueryEventListener(wildcardPointsListener);
+            mSponsorPrizeQuery.removeGeoQueryEventListener(sponsorPrizeListener);
         }
         catch (Exception ex)
         {
@@ -394,6 +448,40 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
         }
     };
 
+    private GeoQueryEventListener sponsorPrizeListener = new GeoQueryEventListener()
+    {
+        @Override
+        public void onKeyEntered(final String key, GeoLocation location)
+        {
+            LatLng geoLocation = new LatLng(location.latitude, location.longitude);
+            mFirebaseListener.gf_sponsorPrize_onKeyEntered(key, geoLocation);
+        }
+
+        @Override
+        public void onKeyExited(String key)
+        {
+            mFirebaseListener.gf_sponsorPrize_onKeyExited(key, UserData.getInstance(mContext).Is3DCompatibleDevice());
+        }
+
+        @Override
+        public void onKeyMoved(String key, GeoLocation location)
+        {
+
+        }
+
+        @Override
+        public void onGeoQueryReady()
+        {
+            mFirebaseListener.gf_sponsorPrize_onGeoQueryReady();
+        }
+
+        @Override
+        public void onGeoQueryError(DatabaseError error)
+        {
+
+        }
+    };
+
 
 
     /*
@@ -416,6 +504,7 @@ public class FirebasePOIInteractor implements IFirebasePOIInteractor
             mSilverPointsRef = new GeoFire(mSilverPoints);
             mBronzePointsRef = new GeoFire(mBronzePoints);
             mWildcardPointsRef = new GeoFire(mWildcardPoints);
+            mSponsorPointsRef = new GeoFire(mSponsorPrize);
             return null;
         }
     }

@@ -14,6 +14,9 @@ public class Prize
     private int level;
     private boolean redeemedPrize;
     private int winPrizeID;
+    private String backgroundPrizeHistory;
+    private String backgroundWinPrize;
+    private String urlLogo;
 
     public String getRegDate()
     {
@@ -94,4 +97,35 @@ public class Prize
     {
         this.winPrizeID = winPrizeID;
     }
+
+    public String getBackgroundPrizeHistory()
+    {
+        return backgroundPrizeHistory;
+    }
+
+    public void setBackgroundPrizeHistory(String backgroundPrizeHistory)
+    {
+        this.backgroundPrizeHistory = backgroundPrizeHistory;
+    }
+
+    public String getBackgroundWinPrize()
+    {
+        return backgroundWinPrize;
+    }
+
+    public void setBackgroundWinPrize(String backgroundWinPrize)
+    {
+        this.backgroundWinPrize = backgroundWinPrize;
+    }
+
+    public String getUrlLogo()
+    {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo)
+    {
+        this.urlLogo = urlLogo;
+    }
+
 }

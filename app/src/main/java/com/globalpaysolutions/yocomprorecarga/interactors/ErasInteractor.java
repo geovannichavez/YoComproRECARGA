@@ -14,8 +14,8 @@ import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.BitmapScaler;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
@@ -192,7 +191,7 @@ public class ErasInteractor implements IErasInteractor
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                 {
-                    Bitmap bitmapScaled = BitmapScaler.scaleMarker(bitmap, mContext);
+                    Bitmap bitmapScaled = BitmapUtils.scaleMarker(bitmap, mContext);
                     mBitmapExecutions = mBitmapExecutions + 1;
                     listener.onRetrieveBitmapSuccess(bitmapScaled, markerName, eraSelection, destiny, mBitmapExecutions);
                 }
@@ -254,7 +253,7 @@ public class ErasInteractor implements IErasInteractor
                 InputStream input = connection.getInputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(input);
 
-                mBitmap = BitmapScaler.scaleMarker(bitmap, mContext);
+                mBitmap = BitmapUtils.scaleMarker(bitmap, mContext);
             }
             catch (Exception e)
             {

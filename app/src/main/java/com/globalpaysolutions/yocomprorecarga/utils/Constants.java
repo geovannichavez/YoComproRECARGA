@@ -72,10 +72,13 @@ public class Constants
     public static final int VALUE_CHEST_TYPE_SILVER = 2;
     public static final int VALUE_CHEST_TYPE_BRONZE = 1;
     public static final int VALUE_CHEST_TYPE_WILDCARD = 4;
+    public static final int VALUE_CHEST_TYPE_SPONSOR = 5;
+
     public static final String NAME_CHEST_TYPE_GOLD = "Gold";
     public static final String NAME_CHEST_TYPE_SILVER = "Silver";
     public static final String NAME_CHEST_TYPE_BRONZE = "Bronze";
     public static final String NAME_CHEST_TYPE_WILDCARD = "Wildcard";
+    public static final String NAME_CHEST_TYPE_SPONSOR_PRIZE = "SponsorPrize";
 
     public static final String WELCOME_CHEST_FIREBASE_KEY = "FreeChest";
 
@@ -84,6 +87,9 @@ public class Constants
     public static final String URI_MAP_VALUE_FIREBASE_ID = "firebaseID";
     public static final String URI_MAP_VALUE_LATITUDE = "latitude";
     public static final String URI_MAP_VALUE_LONGITUDE = "longitude";
+    public static final String URI_MAP_VALUE_SPONSORID = "brandid";
+    public static final String URI_MAP_VALUE_EXCHANGE_TYPE = "exchangeType";
+
 
     //Prize Detail Bundle Keys
     public static final String BUNDLE_PRIZE_TITLE = "bundle_data_prize_title";
@@ -92,6 +98,8 @@ public class Constants
     public static final String BUNDLE_PRIZE_TYPE = "bundle_data_prize_type";
     public static final String BUNDLE_PRIZE_IMAGE = "bundle_prize_image";
     public static final String BUNDLE_PRIZE_DESCRIPTION = "bundle_data_prize_description";
+    public static final String BUNDLE_PRIZE_BACKGROUND = "bundle_prize_background";
+    public static final String BUNDLE_PRIZE_FLAG_DETAILS = "bundle_prize_flag_details";
     public static final String BUNDLE_PRE_SET_LAST_PRIZE_CODE = "bundle_pre_set_last_prize_code";
     public static final String BUNDLE_CHALLENGE_ID = "bundle_challenge_received_id";
     public static final String BUNDLE_CHALLENGE_BET = "bundle_challenge_received_bet";
@@ -160,6 +168,7 @@ public class Constants
     public static final String TAG_MARKER_SILVER = "tag_marker_silver";
     public static final String TAG_MARKER_BRONZE = "tag_marker_bronze";
     public static final String TAG_MARKER_WILDCARD = "tag_marker_wildcard";
+    public static final String TAG_MARKER_SPONSORPRIZE = "tag_marker_sponsorprize";
 
 
     //Challenge
@@ -198,6 +207,7 @@ public class Constants
     public static final String FACEBOOK = "Facebook";
     public static final String GOOGLE = "Google";
     public static final String LOCAL = "Local";
+    public static final String BUNDLE_PRIZEDET_BACKS = "bundle_prizedet_backs";
 
     public static String PLATFORM = "ANDROID";
 
@@ -229,6 +239,37 @@ public class Constants
         SOUVENIRs_GROUPED, SOUVENIRS
     }
 
+    public enum PrizeDetailsNavigationStack
+    {
+        PRIZES, COMBOS, SOUVENIRS, TRIVIA, MAP
+    }
+
+    public enum SponsorExchangeType
+    {
+        SponsorPrizeExchange(1), TreasureHunt(2), ImageScanning(3);
+
+        private int value;
+
+        SponsorExchangeType(int value)
+        {
+            this.value = value;
+        }
+
+        public int getValue()
+        {
+            return this.value;
+        }
+    }
+
     //Auth
     public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
+
+    public static final int PRIZES_MENU_OPTION_1 = 1; //Weekly
+    public static final int PRIZES_MENU_OPTION_2 = 2; //Earned
+
+    public static final int PRIZES_CATEGORY_1 = 1; //Phones
+    public static final int PRIZES_CATEGORY_2 = 2; //Food
+    public static final int PRIZES_CATEGORY_3 = 3; //Shop
+    public static final int PRIZES_CATEGORY_4 = 4; //Electronics
+
 }

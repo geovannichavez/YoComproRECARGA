@@ -15,5 +15,4 @@ public interface PrizeDetailView
     void setClickListeners();
     void navigateToSms(Intent sms);
     void showAchievementDialog();
-    void loadBackground();
 }

@@ -30,9 +30,11 @@ import com.globalpaysolutions.yocomprorecarga.models.api.LeaderboardsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NewsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.NicknameReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.PrizesHistoryResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseItemResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PurchaseStoreReqBody;
+import com.globalpaysolutions.yocomprorecarga.models.api.RedeemSponsorPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RedeemedPrizeReqBody;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterClientResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.RegisterPhoneConsumerReqBody;
@@ -56,11 +58,8 @@ import com.globalpaysolutions.yocomprorecarga.models.api.UpdateChallengeResponse
 import com.globalpaysolutions.yocomprorecarga.models.api.ValidateLocalSmsResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.WorldCupCountriesRspns;
-import com.globalpaysolutions.yocomprorecarga.ui.activities.WorldCupCountries;
 import com.globalpaysolutions.yocomprorecarga.utils.StringsURL;
 import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -153,6 +152,13 @@ public interface ApiInterface
                                        @Header("Platform") String pPlatform);
 
     @Headers("Content-Type: application/json")
+    @POST(StringsURL.REDEEM_SPONSOR_PRIZE)
+    Call<WinPrizeResponse> redeemSponsorPrize(@Header("authenticationKey") String pAuthKey,
+                                              @Header("AppVersion") String pAppVersion,
+                                              @Header("Platform") String pPlatform,
+                                              @Body RedeemSponsorPrizeReqBody requestBody);
+
+    @Headers("Content-Type: application/json")
     @POST(StringsURL.LEADERBOARDS)
     Call<LeaderboardsResponse> retrieveLeaderboards(@Header("authenticationKey") String pAuthKey, @Body LeaderboardReqBody pInterval);
 
@@ -160,7 +166,8 @@ public interface ApiInterface
     @POST(StringsURL.PRIZES_HISTORY)
     Call<PrizesHistoryResponse> retrievePrizsHistory(@Header("authenticationKey") String pAuthKey,
                                                      @Header("AppVersion") String pAppVersion,
-                                                     @Header("Platform") String pPlatform);
+                                                     @Header("Platform") String pPlatform,
+                                                     @Body PrizesHistoryReqBody request);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.SET_REDEEMED_PRIZE)
@@ -318,5 +325,6 @@ public interface ApiInterface
                                @Header("AppVersion") String pAppVersion,
                                @Header("Platform") String pPlatform,
                                @Body FeedReqBody request);
+
 
 }

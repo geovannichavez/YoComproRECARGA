@@ -33,6 +33,15 @@ public class PrizeData
     @SerializedName("WinPrizeID")
     @Expose
     private int winPrizeID;
+    @SerializedName("BackgroundPrizeHistory")
+    @Expose
+    private String backgroundPrizeHistory;
+    @SerializedName("BackgroundWinPrize")
+    @Expose
+    private String backgroundWinPrize;
+    @SerializedName("UrlLogo")
+    @Expose
+    private String urlLogo;
 
     public String getRegDate()
     {
@@ -112,6 +121,36 @@ public class PrizeData
     public void setWinPrizeID(int winPrizeID)
     {
         this.winPrizeID = winPrizeID;
+    }
+
+    public String getBackgroundPrizeHistory()
+    {
+        return backgroundPrizeHistory;
+    }
+
+    public void setBackgroundPrizeHistory(String backgroundPrizeHistory)
+    {
+        this.backgroundPrizeHistory = backgroundPrizeHistory;
+    }
+
+    public String getBackgroundWinPrize()
+    {
+        return backgroundWinPrize;
+    }
+
+    public void setBackgroundWinPrize(String backgroundWinPrize)
+    {
+        this.backgroundWinPrize = backgroundWinPrize;
+    }
+
+    public String getUrlLogo()
+    {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo)
+    {
+        this.urlLogo = urlLogo;
     }
 
 }

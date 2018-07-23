@@ -49,6 +49,9 @@ public class WinPrizeResponse
     @SerializedName("WaitTime")
     @Expose
     private String waitTime;
+    @SerializedName("UrlBackground")
+    @Expose
+    private String urlBackground;
 
     public String getTitle()
     {
@@ -179,5 +182,15 @@ public class WinPrizeResponse
     public void setWaitTime(String waitTime)
     {
         this.waitTime = waitTime;
+    }
+
+    public String getUrlBackground()
+    {
+        return urlBackground;
+    }
+
+    public void setUrlBackground(String urlBackground)
+    {
+        this.urlBackground = urlBackground;
     }
 }

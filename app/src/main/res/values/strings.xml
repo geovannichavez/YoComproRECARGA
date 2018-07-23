@@ -158,7 +158,6 @@
     <!--    SPECIAL SIGNS   -->
     <string name="sign_plus">+%1$s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -228,6 +227,7 @@
     <string name="label_prize_name">Premio</string>
     <string name="label_prize_exchange">Canje</string>
     <string name="label_code">Código: %1$s</string>
+    <string name="label_pin">PIN: %1$s</string>
 
     <!--    CONTENT DESCRIPTION     -->
     <string name="contentdescription_indicator">indicator</string>
@@ -438,6 +438,7 @@
     <string name="label_loading_trivia">Cargando trivia, espere...</string>
     <string name="label_time">Tiempo</string>
     <string name="label_prize">Premio</string>
+    <string name="label_prize_period">Premio:</string>
     <string name="label_congratulations_you_earned_coins">Lo has hecho muy bien, lograste conseguir %1$s. ¡Sigue jugando para ganar más!</string>
     <string name="title_trivia_wrong_answer">¡Respuesta Incorrecta!</string>
     <string name="content_trivia_wrong_answer">Tu respuesta no es correcta ¡Sigue jugando a la trivia!</string>
@@ -467,6 +468,9 @@
     <string name="validation_required_lastname">Tu apellido es requerido</string>
     <string name="title_dialog_invalid_lastname">Apellido Inválido</string>
     <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
+    <string name="label_answer_exchanged_prize">¿Premio canjeado?</string>
+    <string name="label_copy_pin_activate_prize">Copia este PIN y Activa tu premio</string>
+    <string name="label_second_line_activate_pin_prize">o puedes enviar un SMS al 323 con el PIN de tu premio</string>
     <string name="label_noticias">Noticias</string>
 
 

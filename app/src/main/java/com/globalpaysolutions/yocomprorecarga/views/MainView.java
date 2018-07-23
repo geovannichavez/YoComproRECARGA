@@ -16,4 +16,6 @@ public interface MainView
     void setNewsFeedActive(boolean available);
     void setClickListeners();
     void navigateTrivia();
+
+
 }

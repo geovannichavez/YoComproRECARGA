@@ -262,6 +262,7 @@ public class Combos extends AppCompatActivity implements CombosView
     public void navigatePrizeDetails()
     {
         Intent intent = new Intent(this, PrizeDetail.class);
+        intent.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.COMBOS);
         startActivity(intent);
     }
 

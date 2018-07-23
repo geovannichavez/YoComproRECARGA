@@ -45,6 +45,9 @@ public class TriviaTypePrize
     @SerializedName("TotalSouvenirs")
     @Expose
     private int totalSouvenirs;
+    @SerializedName("UrlBackground")
+    @Expose
+    private String urlBackground;
 
     public String getCode()
     {
@@ -164,5 +167,15 @@ public class TriviaTypePrize
     public void setTotalSouvenirs(int totalSouvenirs)
     {
         this.totalSouvenirs = totalSouvenirs;
+    }
+
+    public String getUrlBackground()
+    {
+        return urlBackground;
+    }
+
+    public void setUrlBackground(String urlBackground)
+    {
+        this.urlBackground = urlBackground;
     }
 }

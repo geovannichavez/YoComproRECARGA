@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -77,6 +78,19 @@ public class Main extends ImmersiveActivity implements MainView
                 ButtonAnimator.getInstance(Main.this).animateButton(v);
                 Intent intro = new Intent(Main.this, Intro.class);
                 startActivity(intro);
+            }
+        });
+
+        icFeed.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                ButtonAnimator.getInstance(Main.this).animateButton(view);
+                Intent news = new Intent(Main.this, News.class);
+                NavFlagsUtil.addFlags(news);
+                startActivity(news);
+                finish();
             }
         });
 

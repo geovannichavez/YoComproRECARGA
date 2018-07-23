@@ -178,4 +178,38 @@
         <item name="android:textColor">@color/ActivityWhiteBackground</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+   <!-- ********************************
+
+        Branded Switch
+
+   ************************************     -->
+    <style name="BrandedSwitch.control" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#e6e600</item>
+        <item name="colorSwitchThumbNormal">#cc0000</item>
+    </style>
+
+    <style name="BrandedSwitch.text" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#ffa000</item>
+        <item name="android:textSize">9dp</item>
+    </style>
+
+    <style name="BrandedCheckBox" parent="AppTheme">
+        <item name="colorAccent">#aaf000</item>
+        <item name="colorControlNormal">#00f7c2</item>
+    </style>
+
+    <style name="BrandedSwitch" parent="AppTheme">
+        <!--<item name="colorAccent">#39ac39</item>-->
+        <!--<item name="colorControlActivated">@color/custom_switch_gray</item>-->
+        <item name="colorAccent">@color/custom_switch_gray</item>
+    </style>
+
+
+    <!--<style name="dark_switch_theme" >
+        <item name="thumbTint">@color/custom_switch_gray</item>
+        <item name="trackTint">@color/custom_switch_gray</item>
+    </style>-->
+
 </resources>

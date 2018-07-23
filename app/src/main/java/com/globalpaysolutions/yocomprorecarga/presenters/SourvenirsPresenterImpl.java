@@ -2,6 +2,7 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.globalpaysolutions.yocomprorecarga.R;
@@ -133,6 +134,7 @@ public class SourvenirsPresenterImpl implements ISourvenirsPresenter, SouvenirsL
                 UserData.getInstance(mContext).saveLastPrizeLevel(redeemPrize.getPrizeLevel());
                 UserData.getInstance(mContext).saveLastPrizeLogoUrl(redeemPrize.getLogoUrl());
                 UserData.getInstance(mContext).saveLastPrizeExchangedColor(redeemPrize.getHexColor());
+                UserData.getInstance(mContext).saveLastPrizeBackgroundUrl(redeemPrize.getUrlBackground());
 
                 //Saves tracking and updates UI
                 if(redeemPrize.getTracking() != null)

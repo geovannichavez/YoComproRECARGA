@@ -1,7 +1,6 @@
 package com.globalpaysolutions.yocomprorecarga.ui.activities;
 
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,11 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -34,6 +30,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.ImmersiveActivity;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerClickListener;
 import com.globalpaysolutions.yocomprorecarga.utils.RecyclerTouchListener;
 import com.globalpaysolutions.yocomprorecarga.views.PrizesHistoryView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,10 +44,15 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     Toolbar toolbar;
     RecyclerView mHistoryListview;
     ProgressDialog progressDialog;
-    ImageButton btnActivatePrize;
     ImageButton btnBack;
-    TextView tvNoPrizesYetTitle;
-    TextView tvNoPrizesYetContent;
+    //TextView tvNoPrizesYetTitle;
+    //TextView tvNoPrizesYetContent;
+    ImageView btnWeeklyPrizes1;
+    ImageView btnEarnedPrizes2;
+    ImageView btnCategory1;
+    ImageView btnCategory2;
+    ImageView btnCategory3;
+    ImageView btnCategory4;
     ImageView bgTimemachine;
 
     //Adapters
@@ -58,6 +60,10 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
 
     //MVP
     PrizesHistoryPresenterImpl mPresenter;
+
+    //Global
+    private int mCurrentCategory = 0;
+    private int mCurrentMenu = 0;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -73,23 +79,21 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
 
         //Layouts
         mHistoryListview = (RecyclerView) findViewById(R.id.lvHistory);
-        btnActivatePrize = (ImageButton) findViewById(R.id.btnActivatePrize);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        tvNoPrizesYetTitle = (TextView) findViewById(R.id.tvNoPrizesYetTitle);
-        tvNoPrizesYetContent = (TextView) findViewById(R.id.tvNoPrizesYetContent);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
+        btnWeeklyPrizes1 = (ImageView) findViewById(R.id.btnWeeklyPrizes1);
+        btnEarnedPrizes2 = (ImageView) findViewById(R.id.btnEarnedPrizes2);
+        btnCategory1 = (ImageView) findViewById(R.id.btnCategory1);
+        btnCategory2 = (ImageView) findViewById(R.id.btnCategory2);
+        btnCategory3 = (ImageView) findViewById(R.id.btnCategory3);
+        btnCategory4 = (ImageView) findViewById(R.id.btnCategory4);
 
-        btnActivatePrize.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                ButtonAnimator.getInstance(PrizesHistory.this).animateButton(v);
-                Intent intent = new Intent(PrizesHistory.this, RedeemPrize.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        btnWeeklyPrizes1.setOnClickListener(weeklyPrizesListener);
+        btnEarnedPrizes2.setOnClickListener(earnedPrizesListener);
+        btnCategory1.setOnClickListener(category1Listener);
+        btnCategory2.setOnClickListener(category2Listener);
+        btnCategory3.setOnClickListener(category3Listener);
+        btnCategory4.setOnClickListener(category4Listener);
 
         btnBack.setOnClickListener(new View.OnClickListener()
         {
@@ -110,7 +114,10 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         //Initialize views
         mPresenter.initialize();
 
-        mPresenter.retrievePrizes();
+        mCurrentCategory = Constants.PRIZES_CATEGORY_1;
+        mCurrentMenu = Constants.PRIZES_CATEGORY_2;
+
+        mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
 
     }
 
@@ -119,11 +126,9 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     {
        try
        {
-           //Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
+           Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
 
            mHistoryListview.setVisibility(View.VISIBLE);
-           tvNoPrizesYetTitle.setVisibility(View.INVISIBLE);
-           tvNoPrizesYetContent.setVisibility(View.INVISIBLE);
        }
        catch (Exception ex)
        {
@@ -138,7 +143,6 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         //Llenado de items en el GridView
         try
         {
-
             //Adapter
             mPrizesAdapter = new PrizesAdapter(this, prizes, mPresenter);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplication());
@@ -150,6 +154,20 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
             mHistoryListview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
             mHistoryListview.getRecycledViewPool().setMaxRecycledViews(1,0); //To prevent recycle
             mHistoryListview.setAdapter(mPrizesAdapter);
+            mHistoryListview.addOnItemTouchListener(new RecyclerTouchListener(this, mHistoryListview, new RecyclerClickListener()
+            {
+                @Override
+                public void onClick(View view, int position)
+                {
+                    navigateDetails(prizes.get(position));
+                }
+
+                @Override
+                public void onLongClick(View view, int position)
+                {
+
+                }
+            }));
 
             mPrizesAdapter.notifyDataSetChanged();
 
@@ -198,13 +216,125 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         createDialog(dialogModel.getTitle(), dialogModel.getLine1(), dialogModel.getAcceptButton());
     }
 
-    @Override
-    public void showNoPrizesText()
+    View.OnClickListener weeklyPrizesListener = new View.OnClickListener()
     {
-        tvNoPrizesYetTitle.setVisibility(View.VISIBLE);
-        tvNoPrizesYetContent.setVisibility(View.VISIBLE);
-        mHistoryListview.setVisibility(View.INVISIBLE);
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentMenu = Constants.PRIZES_MENU_OPTION_1;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Changes views
+            btnWeeklyPrizes1.setImageResource(R.drawable.btn_weekly_prizes_on);
+            btnEarnedPrizes2.setImageResource(R.drawable.btn_earned_prizes_off);
+        }
+    };
+
+    View.OnClickListener earnedPrizesListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentMenu = Constants.PRIZES_MENU_OPTION_2;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Changes views
+            btnWeeklyPrizes1.setImageResource(R.drawable.btn_weekly_prizes_off);
+            btnEarnedPrizes2.setImageResource(R.drawable.btn_earned_prizes_on);
+        }
+    };
+
+    View.OnClickListener category1Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentCategory = Constants.PRIZES_CATEGORY_1;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Change views
+            btnCategory1.setImageResource(R.drawable.btn_prize_phones_on);
+            btnCategory2.setImageResource(R.drawable.btn_prize_food_off);
+            btnCategory3.setImageResource(R.drawable.btn_prize_stores_off);
+            btnCategory4.setImageResource(R.drawable.btn_prize_electronics_off);
+        }
+    };
+    View.OnClickListener category2Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentCategory = Constants.PRIZES_CATEGORY_2;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Change views
+            btnCategory1.setImageResource(R.drawable.btn_prize_phones_off);
+            btnCategory2.setImageResource(R.drawable.btn_prize_food_on);
+            btnCategory3.setImageResource(R.drawable.btn_prize_stores_off);
+            btnCategory4.setImageResource(R.drawable.btn_prize_electronics_off);
+
+        }
+    };
+
+    View.OnClickListener category3Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentCategory = Constants.PRIZES_CATEGORY_3;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Change views
+            btnCategory1.setImageResource(R.drawable.btn_prize_phones_off);
+            btnCategory2.setImageResource(R.drawable.btn_prize_food_off);
+            btnCategory3.setImageResource(R.drawable.btn_prize_stores_on);
+            btnCategory4.setImageResource(R.drawable.btn_prize_electronics_off);
+        }
+    };
+
+    View.OnClickListener category4Listener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            ButtonAnimator.getInstance(PrizesHistory.this).animateButton(view);
+            mCurrentCategory = Constants.PRIZES_CATEGORY_4;
+            mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
+
+            //Change views
+            btnCategory1.setImageResource(R.drawable.btn_prize_phones_off);
+            btnCategory2.setImageResource(R.drawable.btn_prize_food_off);
+            btnCategory3.setImageResource(R.drawable.btn_prize_stores_off);
+            btnCategory4.setImageResource(R.drawable.btn_prize_electronics_on);
+        }
+    };
+
+    private void navigateDetails(Prize prize)
+    {
+        try
+        {
+            Intent prizeDetail = new Intent(this, PrizeDetail.class);
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_TITLE, prize.getTitle());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_DESCRIPTION, prize.getDescription());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_CODE, prize.getCode());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_DIAL, prize.getDialNumberOrPlace());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_IMAGE, prize.getUrlLogo());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_BACKGROUND, prize.getBackgroundWinPrize());
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZE_FLAG_DETAILS, true);
+            prizeDetail.putExtra(Constants.BUNDLE_PRIZEDET_BACKS, Constants.PrizeDetailsNavigationStack.PRIZES);
+            startActivity(prizeDetail);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
+
 
     /*
     *

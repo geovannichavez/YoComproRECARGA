@@ -22,6 +22,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.ExchangeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.Tracking;
 import com.globalpaysolutions.yocomprorecarga.models.api.WinPrizeResponse;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
+import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SponsorPrizeData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRData;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePrizeARPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
@@ -98,17 +99,18 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         m3Dcompatible = mUserData.Is3DCompatibleDevice();
 
-        mView.switchRecarcoinVisible(false);
+        mView.switchChestVisible(false);
 
-        if (m3Dcompatible)
-        {
+        //TODO: Se quitó validacion para que se registre el listenr del ArquictectView
+        //if (m3Dcompatible)
+        //{
             mView.on3DChestClick();
-        }
-        else
-        {
+        //}
+        //else
+        //{
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
-        }
+        //}
     }
 
     @Override
@@ -131,6 +133,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             this.mFirebaseInteractor.silverPointsQuery(location, radius);
             this.mFirebaseInteractor.bronzePointsQuery(location, radius);
             this.mFirebaseInteractor.wildcardPointsQuery(location,radius);
+            this.mFirebaseInteractor.sponsorPrizeQuery(location, 0.1);
         }
         catch (Exception ex)
         {
@@ -154,6 +157,15 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     {
         try
         {
+            Map<String, String> urlMap;
+            String firebaseKey;
+            String chestType;
+            String latitude;
+            String longitude;
+            String brandID;
+            String exchangeType;
+
+
             synchronized (this)
             {
                 if (mIsRunning)
@@ -162,45 +174,70 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mIsRunning = true;
 
-            Map<String, String> urlMap = getURLMap(pArchitectURL);
-            String firebaseID = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
-            String chestType = urlMap.get(Constants.URI_MAP_VALUE_CHEST_TYPE);
-            String latitude = urlMap.get(Constants.URI_MAP_VALUE_LATITUDE);
-            String longitude = urlMap.get(Constants.URI_MAP_VALUE_LONGITUDE);
-            int chestValue = 0;
+            String[] params = pArchitectURL.split("//");
+            String type = params[1];
 
-            LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
-            Log.i(TAG, "Chest type: " + chestType + "; FirebaseID: " + firebaseID + "; lat: " + latitude + "; long: " + longitude);
-
-            switch (chestType)
+            if(!TextUtils.equals(type, "SponsorItem"))
             {
-                case Constants.NAME_CHEST_TYPE_GOLD:
-                    chestValue = Constants.VALUE_CHEST_TYPE_GOLD;
-                    break;
-                case Constants.NAME_CHEST_TYPE_SILVER:
-                    chestValue = Constants.VALUE_CHEST_TYPE_SILVER;
-                    break;
-                case Constants.NAME_CHEST_TYPE_BRONZE:
-                    chestValue = Constants.VALUE_CHEST_TYPE_BRONZE;
-                    break;
-                case Constants.NAME_CHEST_TYPE_WILDCARD:
-                    chestValue = Constants.VALUE_CHEST_TYPE_WILDCARD;
-                    break;
-                default:
-                    Log.e(TAG, "No chest type found");
-                    break;
-            }
+                //Gets url hashmap
+                urlMap = getURLMap(pArchitectURL);
+                firebaseKey = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
+                chestType = urlMap.get(Constants.URI_MAP_VALUE_CHEST_TYPE);
+                latitude = urlMap.get(Constants.URI_MAP_VALUE_LATITUDE);
+                longitude = urlMap.get(Constants.URI_MAP_VALUE_LONGITUDE);
 
-            if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
-            {
-                mUserData.saveLastWildcardTouched(firebaseID, chestValue);
-                mView.navigateToWildcard();
+                int chestValue = 0;
+                LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
+
+                switch (chestType)
+                {
+                    case Constants.NAME_CHEST_TYPE_GOLD:
+                        chestValue = Constants.VALUE_CHEST_TYPE_GOLD;
+                        break;
+                    case Constants.NAME_CHEST_TYPE_SILVER:
+                        chestValue = Constants.VALUE_CHEST_TYPE_SILVER;
+                        break;
+                    case Constants.NAME_CHEST_TYPE_BRONZE:
+                        chestValue = Constants.VALUE_CHEST_TYPE_BRONZE;
+                        break;
+                    case Constants.NAME_CHEST_TYPE_WILDCARD:
+                        chestValue = Constants.VALUE_CHEST_TYPE_WILDCARD;
+                        break;
+                    default:
+                        Log.e(TAG, "No chest type found");
+                        break;
+                }
+
+                if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
+                {
+                    mUserData.saveLastWildcardTouched(firebaseKey, chestValue);
+                    mView.navigateToWildcard();
+                }
+                else
+                {
+                    mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
+                    mInteractor.openCoinsChest(location, firebaseKey, chestValue, mUserData.getEraID());
+                }
+
             }
             else
             {
+                //Gets sponsored url prize
+                urlMap = getSponsorUrlMap(pArchitectURL);
+                firebaseKey = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
+                brandID = urlMap.get(Constants.URI_MAP_VALUE_SPONSORID);
+                exchangeType = urlMap.get(Constants.URI_MAP_VALUE_EXCHANGE_TYPE);
+
+                //Exchanges:
+                // 1 - Sponsored Wildcard
+                // 2 - Sponsored treasure hunt
+                // 3 - Sponsored scanning image
+                int exchange =  Integer.valueOf(exchangeType);
+
                 mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
-                mInteractor.openCoinsChest(location, firebaseID, chestValue, mUserData.getEraID());
+                mInteractor.atemptRedeemSponsorPrize(Integer.valueOf(brandID), exchange);
             }
+
         }
         catch (Exception ex)
         {
@@ -244,6 +281,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
+    public void redeemSponsorPrize(int sponsorID, int exchangeType)
+    {
+        mInteractor.atemptRedeemSponsorPrize(sponsorID, exchangeType);
+    }
+
+    @Override
     public void handle2DCoinTouch()
     {
         mView.stopVibrate();
@@ -276,7 +319,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void checkForWelcomeChest()
     {
-        if(mUserData.checkWelcomeChestAvailable()) //TODO: Cambiar a true
+        if(mUserData.checkWelcomeChestAvailable())
         {
             double lat = (double) mUserData.getWelcomeChestLat();
             double longt = (double) mUserData.getWelcomeChestLong();
@@ -318,34 +361,42 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType)
+    public void registerKeyEntered(String pKey, LatLng location, int ageID, String chestType, int sponsorID, int exchangeType)
     {
         try
         {
-            //If there is no key, then is the first entered
+            //If there is no key saved, then is the first entered
             if(TextUtils.equals(this.getFirstKeyEntered2D(), ""))
             {
                 //Saves first key entered
                 this.saveFirstKeyEntered2D(pKey);
 
-                //Draws chests
-                switch (chestType)
+                //If sponsorID is 0 or lower, then is not a sponsor point
+                if(sponsorID > 0)
                 {
-                    case Constants.NAME_CHEST_TYPE_GOLD:
-                        mView.drawChestGold2D(pKey, location, ageID);
-                        break;
-                    case Constants.NAME_CHEST_TYPE_SILVER:
-                        mView.drawChestSilver2D(pKey, location, ageID);
-                        break;
-                    case Constants.NAME_CHEST_TYPE_BRONZE:
-                        mView.drawChestBronze2D(pKey, location, ageID);
-                        break;
-                    case Constants.NAME_CHEST_TYPE_WILDCARD:
-                        mView.drawChestWildcard2D(pKey, location, ageID);
-                        break;
+                    mView.drawChestSponsor2D(pKey, location, sponsorID, exchangeType); //chestType is sponsor
+                }
+                else
+                {
+                    //Draws chests
+                    switch (chestType)
+                    {
+                        case Constants.NAME_CHEST_TYPE_GOLD:
+                            mView.drawChestGold2D(pKey, location, ageID);
+                            break;
+                        case Constants.NAME_CHEST_TYPE_SILVER:
+                            mView.drawChestSilver2D(pKey, location, ageID);
+                            break;
+                        case Constants.NAME_CHEST_TYPE_BRONZE:
+                            mView.drawChestBronze2D(pKey, location, ageID);
+                            break;
+                        case Constants.NAME_CHEST_TYPE_WILDCARD:
+                            mView.drawChestWildcard2D(pKey, location, ageID);
+                            break;
+                    }
                 }
 
-                mView.switchRecarcoinVisible(true);
+                mView.switchChestVisible(true);
                 mView.blinkRecarcoin();
             }
         }
@@ -469,7 +520,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             mView.stopVibrate();
             mView.removeBlinkingAnimation();
-            mView.switchRecarcoinVisible(false);
+            mView.switchChestVisible(false);
 
             //Deletes last key entered
             this.deleteSpecificFirstKeyEntered2D(pKey);
@@ -518,7 +569,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
 
             mView.removeBlinkingAnimation();
-            mView.switchRecarcoinVisible(false);
+            mView.switchChestVisible(false);
 
             //Deletes last key entered
             this.deleteSpecificFirstKeyEntered2D(pKey);
@@ -564,7 +615,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mView.stopVibrate();
 
             mView.removeBlinkingAnimation();
-            mView.switchRecarcoinVisible(false);
+            mView.switchChestVisible(false);
 
             //Deletes last key entered
             this.deleteSpecificFirstKeyEntered2D(pKey);
@@ -619,7 +670,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
             mView.removeBlinkingAnimation();
 
-            mView.switchRecarcoinVisible(false);
+            mView.switchChestVisible(false);
 
             //Deletes last key entered
             this.deleteSpecificFirstKeyEntered2D(pKey);
@@ -632,6 +683,30 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
     @Override
     public void gf_wildcardPoint_onGeoQueryReady()
+    {
+
+    }
+
+    /*
+    *
+    *
+    *   SPONSOR LISTENER  IMPLEMENTATION
+    *
+    * */
+    @Override
+    public void gf_sponsorPrize_onKeyEntered(String key, LatLng location)
+    {
+        mFirebaseInteractor.retrieveSponsorPrizeData(key, location);
+    }
+
+    @Override
+    public void gf_sponsorPrize_onKeyExited(String key, boolean compatible3D)
+    {
+
+    }
+
+    @Override
+    public void gf_sponsorPrize_onGeoQueryReady()
     {
 
     }
@@ -682,6 +757,43 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void fb_wildcardPoint_onCancelled(DatabaseError databaseError)
     {
         mView.onWildcardPointCancelled(databaseError);
+    }
+
+    @Override
+    public void fb_sponsorPrize_onDataChange(String key, LatLng location, SponsorPrizeData sponsorPrizeData)
+    {
+        if(sponsorPrizeData != null)
+        {
+            //If chest is not last excnaged
+            //if(!TextUtils.equals(mUserData.getLastExchangedChestID(), key))
+            //{
+
+            if (UserData.getInstance(mContext).Is3DCompatibleDevice())
+            {
+                mView.onSponsorPrizeKeyEntered(key, location, sponsorPrizeData);
+            }
+            else
+            {
+                if(!TextUtils.equals(mCurrentChestKey, key))
+                {
+                    mCurrentChestKey = key;
+
+                    //Draws chest on screen
+                    registerKeyEntered(key, location, mUserData.getEraID(),
+                            Constants.NAME_CHEST_TYPE_SPONSOR_PRIZE, //ChestType
+                            Integer.valueOf(sponsorPrizeData.getSponsorid()), //SponsorID
+                            Constants.SponsorExchangeType.SponsorPrizeExchange.getValue()); //ExchangeType
+                }
+            }
+
+            //}
+        }
+    }
+
+    @Override
+    public void fb_sponsorPrize_onCancelled(DatabaseError databaseError)
+    {
+
     }
 
     @Override
@@ -860,7 +972,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            if (!mUserData.Is3DCompatibleDevice())
            {
                mView.removeBlinkingAnimation();
-               mView.switchRecarcoinVisible(false);
+               mView.switchChestVisible(false);
            }
            else
            {
@@ -880,7 +992,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            if(!mUserData.Is3DCompatibleDevice())
            {
                mView.removeBlinkingAnimation();
-               mView.switchRecarcoinVisible(false);
+               mView.switchChestVisible(false);
            }
        }
     }
@@ -898,7 +1010,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             if(!mUserData.Is3DCompatibleDevice())
             {
                 this.mView.obtainUserProgress();
-                mView.switchRecarcoinVisible(false);
+                mView.switchChestVisible(false);
             }
 
         }
@@ -911,11 +1023,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void onRedeemPrizeSuccess(WinPrizeResponse pResponse)
     {
+        mIsRunning = false;
 
         DialogViewModel dialog = new DialogViewModel();
         mView.hideLoadingDialog();
 
-        //if(pResponse.getWaitTime() == null || pResponse.getTracking() != null)
         if(TextUtils.equals(pResponse.getResponseCode(), "00"))
         {
             //Saves tracking and updates UI
@@ -936,6 +1048,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             mUserData.saveLastPrizeLevel(pResponse.getPrizeLevel());
             mUserData.saveLastPrizeLogoUrl(pResponse.getLogoUrl());
             mUserData.saveLastPrizeExchangedColor(pResponse.getHexColor());
+            mUserData.saveLastPrizeBackgroundUrl(pResponse.getUrlBackground());
 
             if(pResponse.getAchievement() != null)
             {
@@ -1001,6 +1114,18 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         map.put(Constants.URI_MAP_VALUE_FIREBASE_ID, params[2]);
         map.put(Constants.URI_MAP_VALUE_LATITUDE, params[3]);
         map.put(Constants.URI_MAP_VALUE_LONGITUDE, params[4]);
+
+        return map;
+    }
+
+    private Map<String, String> getSponsorUrlMap(String url)
+    {
+        String[] params = url.split("//");
+
+        Map<String, String> map = new HashMap<>();
+        map.put(Constants.URI_MAP_VALUE_SPONSORID, params[2]);
+        map.put(Constants.URI_MAP_VALUE_EXCHANGE_TYPE, params[3]);
+        map.put(Constants.URI_MAP_VALUE_FIREBASE_ID, params[4]);
 
         return map;
     }

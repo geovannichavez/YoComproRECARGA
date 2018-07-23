@@ -17,5 +17,4 @@ public interface PrizesHistoryView
     void showLoadingDialog(String label);
     void hideLoadingDialog();
     void showGenericDialog(DialogViewModel dialogModel);
-    void showNoPrizesText();
 }

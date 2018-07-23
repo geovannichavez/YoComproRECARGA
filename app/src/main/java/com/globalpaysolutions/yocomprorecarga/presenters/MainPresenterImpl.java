@@ -3,6 +3,8 @@ package com.globalpaysolutions.yocomprorecarga.presenters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +15,10 @@ import com.globalpaysolutions.yocomprorecarga.interactors.FirebasePOIInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.MainInteractor;
 import com.globalpaysolutions.yocomprorecarga.interactors.interfaces.MainListener;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleResponse;
+import com.globalpaysolutions.yocomprorecarga.models.SponsorItem;
+import com.globalpaysolutions.yocomprorecarga.models.SponsorsArray;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
+import com.globalpaysolutions.yocomprorecarga.models.api.Sponsor;
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IMainPresenter;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.AcceptTerms;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Authenticate;
@@ -25,12 +30,20 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.Permissions;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.PointsMap;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.TokenInput;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
+import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.EraSelectionValidator;
+import com.globalpaysolutions.yocomprorecarga.utils.SponsoredChest;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -52,6 +65,10 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
     private MainInteractor mInteractor;
     private AppCompatActivity mActivity;
     private FirebasePOIInteractor mFirebaseInteractor;
+    private SponsoredChest mSponsoredChest;
+
+    private HashSet<SponsorItem> mSponsorsArray;
+    private int mSponsorCounter = 0;
 
     public MainPresenterImpl(Context context, AppCompatActivity activity, MainView view)
     {
@@ -60,7 +77,10 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
         this.mActivity = activity;
         this.mInteractor = new MainInteractor(mContext);
         this.mUserData = UserData.getInstance(mContext);
+        this.mSponsoredChest = new SponsoredChest(mContext);
         this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, null);
+
+        mSponsorsArray = new HashSet<>();
     }
 
 
@@ -88,7 +108,13 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                 mView.setTriviaAvailable(false);
 
             //News
-            mView.setNewsFeedActive(false);
+            if(UserData.getInstance(mContext).getNewFeed() > 0)
+                mView.setNewsFeedActive(true);
+            else
+                mView.setNewsFeedActive(false);
+
+            //Deletes sponsors array (to update any new sponsror in array)
+            //UserData.getInstance(mContext).deleteSponsorsArray();
 
         }
         catch (Exception ex)
@@ -277,7 +303,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
     {
         try
         {
-            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//TODO: Debe ser mayor a cero
+            if(UserData.getInstance(mContext).getTriviaPeding() > 0)//Must be greater than zero
                 mView.navigateTrivia();
 
         }catch (Exception ex)
@@ -307,6 +333,7 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             UserData.getInstance(mContext).savePendingChallenges(response.getMessage());
             UserData.getInstance(mContext).saveTriviaPending(response.getGetNewTrivia());
             UserData.getInstance(mContext).saveNewAge(response.getNewAge());
+            UserData.getInstance(mContext).saveNewFeed(response.getNewFeed());
 
             //Challenges
             String pending = response.getMessage();
@@ -329,11 +356,62 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
             else
                 mView.setNewAgeAvailable(false);
 
+            //New Feed
             if(response.getNewFeed() > 0)
                 mView.setNewsFeedActive(true);
             else
                 mView.setNewsFeedActive(false);
 
+            //Saves sponsors
+            for (final Sponsor item: response.getSponsor())
+            {
+                Picasso.with(mContext).load(item.getMarkerUrl()).into(new Target()
+                {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+                    {
+                        try
+                        {
+                            URI uri = new URI(item.getMarkerUrl());
+                            String path = uri.getPath();
+                            String sponsorName = path.substring(path.lastIndexOf('/') + 1);
+
+                            //Removes extension and whitesaces in order to get only the file name
+                            sponsorName = sponsorName.replaceAll(" ", "%20");
+                            sponsorName = sponsorName.replace(".png", "");
+
+                            addSponsorArray(sponsorName);
+                            BitmapUtils.save(mContext, bitmap, sponsorName);
+                        }
+                        catch (URISyntaxException ex)
+                        {
+                            Log.e(TAG, "Error trying to get name from url: " + ex.getReason());
+                        }
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable)
+                    { }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable)
+                    { }
+                });
+            }
+
+
+            if(mSponsorCounter == response.getSponsor().size())
+            {
+                //Updates in case there are saved sponsor that are not longer available
+                //mSponsoredChest.updateSponsors(mSponsorsArray);
+
+                Gson gson = new Gson();
+                SponsorsArray sponsorsObject = new SponsorsArray();
+                sponsorsObject.setArray(mSponsorsArray);
+
+                String jsonArray = gson.toJson(sponsorsObject, SponsorsArray.class);
+                UserData.getInstance(mContext).saveSponsorsArray(jsonArray);
+            }
         }
         catch (Exception ex)
         {
@@ -341,9 +419,26 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
         }
     }
 
+    private void addSponsorArray(String sponsorName)
+    {
+        try
+        {
+            SponsorItem sponsorItem = new SponsorItem();
+            sponsorItem.setName(sponsorName);
+
+            if(!mSponsorsArray.contains(sponsorItem))
+                mSponsorsArray.add(sponsorItem);
+
+            mSponsorCounter = mSponsorCounter + 1;
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
     @Override
     public void onRetrieveError(int codeStatus, Throwable throwable, String requiredVersion, SimpleResponse errorResponse)
     {
-
     }
 }
