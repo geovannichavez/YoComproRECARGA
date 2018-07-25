@@ -16,6 +16,7 @@ import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionReq;
 import com.globalpaysolutions.yocomprorecarga.models.api.EraSelectionResponse;
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.MarkerUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -191,7 +192,7 @@ public class ErasInteractor implements IErasInteractor
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                 {
-                    Bitmap bitmapScaled = BitmapUtils.scaleMarker(bitmap, mContext);
+                    Bitmap bitmapScaled = MarkerUtils.scaleMarker(bitmap, mContext);
                     mBitmapExecutions = mBitmapExecutions + 1;
                     listener.onRetrieveBitmapSuccess(bitmapScaled, markerName, eraSelection, destiny, mBitmapExecutions);
                 }
@@ -253,7 +254,7 @@ public class ErasInteractor implements IErasInteractor
                 InputStream input = connection.getInputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(input);
 
-                mBitmap = BitmapUtils.scaleMarker(bitmap, mContext);
+                mBitmap = MarkerUtils.scaleMarker(bitmap, mContext);
             }
             catch (Exception e)
             {

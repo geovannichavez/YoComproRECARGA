@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,7 +24,6 @@ import com.globalpaysolutions.yocomprorecarga.models.DialogViewModel;
 import com.globalpaysolutions.yocomprorecarga.models.MarkerData;
 import com.globalpaysolutions.yocomprorecarga.models.SimpleMessageResponse;
 import com.globalpaysolutions.yocomprorecarga.models.api.PendingsResponse;
-import com.globalpaysolutions.yocomprorecarga.models.api.Sponsor;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.LocationPrizeYCRData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.PlayerPointData;
 import com.globalpaysolutions.yocomprorecarga.models.geofire_data.SalePointData;
@@ -35,22 +33,20 @@ import com.globalpaysolutions.yocomprorecarga.models.geofire_data.WildcardYCRDat
 import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.IHomePresenter;
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
+import com.globalpaysolutions.yocomprorecarga.utils.MarkerUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.SponsoredChest;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.HomeView;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.database.DatabaseError;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.SocketTimeoutException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +72,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     private int mLocationUpdatesCount;
     private SponsoredChest mSponsoredChest;
 
+
     public HomePresenterImpl(HomeView pView, AppCompatActivity pActivity, Context pContext)
     {
         mView = pView;
@@ -91,6 +88,9 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
 
         this.mMarkerMap = new HashMap<>();
         mLocationUpdatesCount = 0;
+
+        //mSponsorMaxWidthPx = BitmapUtils.pixelsFromDp(mContext, Constants.SPONSOR_ICMARKER_DP_WIDTH_SIZE);
+        //mSponsorMaxHeightPx = BitmapUtils.pixelsFromDp(mContext, Constants.SPONSOR_ICMARKER_DP_HEIGHT_SIZE);
     }
 
     @Override
@@ -181,6 +181,15 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         dialog.setAcceptButton(mContext.getString(R.string.button_yes));
         dialog.setCanelButton(mContext.getString(R.string.button_no));
         mView.showCustomStoreReportDialog(dialog, pStoreName, pAddress, pLocation, pFirebaseID);
+    }
+
+    @Override
+    public void resume()
+    {
+        if (!this.mGoogleLocationApiManager.isConnectionEstablished())
+            this.mGoogleLocationApiManager.connect();
+
+        mFirebaseInteractor.initializePOIGeolocation();
     }
 
     @Override
@@ -583,7 +592,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                             @Override
                             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                             {
-                                bitmap = BitmapUtils.scaleMarker(bitmap, mContext);
+                                bitmap = MarkerUtils.scaleMarker(bitmap, mContext);
 
                                 saveBitmap(bitmap, name);
                                 mView.addWorldcupPlayerMarker(key, location, bitmap);
@@ -648,7 +657,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
             Bitmap goldMarker = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_GOLD);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
 
-            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, goldMarker, sponsor);
+            Bitmap marker = MarkerUtils.getSponsoredMarker(mContext, goldMarker, sponsor);
 
             mView.addGoldPoint(pKey, pLocation, marker);
         }
@@ -677,7 +686,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             Bitmap silverMarker = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_SILVER);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
-            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, silverMarker, sponsor);
+            Bitmap marker = MarkerUtils.getSponsoredMarker(mContext, silverMarker, sponsor);
 
             mView.addSilverPoint(pKey, pLocation, marker);
         }
@@ -706,7 +715,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         {
             Bitmap bronzeBitmap = BitmapUtils.retrieve(mContext, Constants.NAME_CHEST_TYPE_BRONZE);
             Bitmap sponsor = mSponsoredChest.getRandomSponsorBitmap();
-            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, bronzeBitmap, sponsor);
+            Bitmap marker = MarkerUtils.getSponsoredMarker(mContext, bronzeBitmap, sponsor);
 
             mView.addBronzePoint(pKey, pLocation, marker);
         }
@@ -968,7 +977,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
                         {
                             //Saves bitmap
-                            Bitmap resizedBitmap = BitmapUtils.scaleMarker(bitmap, mContext);
+                            Bitmap resizedBitmap = MarkerUtils.scaleMarker(bitmap, mContext);
                             BitmapUtils.save(mContext, resizedBitmap, sponsorPrizeData.getName());
 
                             //Draws marker on map

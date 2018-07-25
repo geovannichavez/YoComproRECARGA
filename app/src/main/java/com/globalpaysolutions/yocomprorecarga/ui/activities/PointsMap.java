@@ -1338,6 +1338,13 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
     */
 
     @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mPresenter.resume();
+    }
+
+    @Override
     protected void onStop()
     {
         super.onStop();

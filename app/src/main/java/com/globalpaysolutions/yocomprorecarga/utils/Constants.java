@@ -201,6 +201,9 @@ public class Constants
     public static final String ERA_WORLDCUP_NAME = "Futbolística";
     public static final int MARKER_MAX_WIDTH_DP_SIZE = 50;
     public static final int MARKER_MAX_HEIGHT_DP_SIZE = 44;
+    public static final int SPONSOR_ICMARKER_DP_WIDTH_SIZE = 25;
+    public static final int SPONSOR_ICMARKER_DP_HEIGHT_SIZE = 22;
+
     public static final String ACHV_GOLD_COLLECTOR = "Recolector de Oro";
     public static final String ACHV_SOUV_COLLECTOR = "Coleccionista de Souvenir";
     public static final String ACHV_PRIZE_WINNER = "Ganador de Premios";
@@ -208,6 +211,8 @@ public class Constants
     public static final String GOOGLE = "Google";
     public static final String LOCAL = "Local";
     public static final String BUNDLE_PRIZEDET_BACKS = "bundle_prizedet_backs";
+
+    public static final String PREFIX_SPONSORED_MARKER_ICON = "spnsred_";
 
     public static String PLATFORM = "ANDROID";
 
@@ -260,6 +265,7 @@ public class Constants
             return this.value;
         }
     }
+
 
     //Auth
     public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";

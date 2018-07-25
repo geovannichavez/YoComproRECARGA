@@ -33,6 +33,7 @@ import com.globalpaysolutions.yocomprorecarga.ui.activities.ValidatePhone;
 import com.globalpaysolutions.yocomprorecarga.utils.BitmapUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.EraSelectionValidator;
+import com.globalpaysolutions.yocomprorecarga.utils.MarkerUtils;
 import com.globalpaysolutions.yocomprorecarga.utils.SponsoredChest;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.MainView;
@@ -69,6 +70,8 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
 
     private HashSet<SponsorItem> mSponsorsArray;
     private int mSponsorCounter = 0;
+    private int mSponsorMaxWidthPx;
+    private int mSponsorMaxHeightPx;
 
     public MainPresenterImpl(Context context, AppCompatActivity activity, MainView view)
     {
@@ -79,6 +82,10 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
         this.mUserData = UserData.getInstance(mContext);
         this.mSponsoredChest = new SponsoredChest(mContext);
         this.mFirebaseInteractor = new FirebasePOIInteractor(mContext, null);
+
+
+        mSponsorMaxWidthPx = BitmapUtils.pixelsFromDp(mContext, Constants.SPONSOR_ICMARKER_DP_WIDTH_SIZE);
+        mSponsorMaxHeightPx = BitmapUtils.pixelsFromDp(mContext, Constants.SPONSOR_ICMARKER_DP_HEIGHT_SIZE);
 
         mSponsorsArray = new HashSet<>();
     }
@@ -380,8 +387,17 @@ public class MainPresenterImpl implements IMainPresenter, MainListener
                             sponsorName = sponsorName.replaceAll(" ", "%20");
                             sponsorName = sponsorName.replace(".png", "");
 
+                            //Adds prefix "spnsred_" to name. Ex. "spnsred_wendys", in order to identify bitmap type
+                            sponsorName = Constants.PREFIX_SPONSORED_MARKER_ICON + sponsorName;
+
+
                             addSponsorArray(sponsorName);
-                            BitmapUtils.save(mContext, bitmap, sponsorName);
+
+                            //Resizes sponsor icon
+                            Bitmap resizedSponsorIc = MarkerUtils.scaleSponsorIcon(bitmap, mSponsorMaxWidthPx, mSponsorMaxHeightPx);
+
+                            //Saves resized sponsor icon with prefix in name
+                            BitmapUtils.save(mContext, resizedSponsorIc, sponsorName);
                         }
                         catch (URISyntaxException ex)
                         {

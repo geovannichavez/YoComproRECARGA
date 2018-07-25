@@ -702,7 +702,18 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void gf_sponsorPrize_onKeyExited(String key, boolean compatible3D)
     {
+        if(!compatible3D)
+        {
+            mView.removeBlinkingAnimation();
+            mView.switchChestVisible(false);
 
+            //Deletes last key entered
+            this.deleteSpecificFirstKeyEntered2D(key);
+        }
+        else
+        {
+            mView.onSponsorPrizeKeyExited(key);
+        }
     }
 
     @Override

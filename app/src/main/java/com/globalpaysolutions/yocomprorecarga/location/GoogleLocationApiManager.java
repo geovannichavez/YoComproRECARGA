@@ -161,7 +161,7 @@ public class GoogleLocationApiManager implements GoogleApiClient.ConnectionCallb
         // this was causing exceptions
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         mGoogleApiClient.disconnect();
-        locationCallback.onLocationApiManagerDisconnected();
+        //locationCallback.onLocationApiManagerDisconnected();
     }
 
     public GoogleApiClient getGoogleApiClient()

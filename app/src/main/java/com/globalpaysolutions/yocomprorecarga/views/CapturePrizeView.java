@@ -67,10 +67,10 @@ public interface CapturePrizeView
     void onWildcardPointCancelled(DatabaseError pDatabaseError);
 
     void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData);
-    void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor);
+    //void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor);
     void onSponsorPrizeKeyExited(String pKey);
-    void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData);
-    void onSponsorPrizePointCancelled(DatabaseError pDatabaseError);
+    //void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData);
+    //void onSponsorPrizePointCancelled(DatabaseError pDatabaseError);
 
     void changeToOpenChest(int pChestType, int pEraID);
     void navigateToWildcard();

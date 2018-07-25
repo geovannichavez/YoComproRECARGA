@@ -226,39 +226,12 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     public void onCoinLongClick()
     {
 
-        ivPrize2D.setOnTouchListener(new View.OnTouchListener()
+        ivPrize2D.setOnClickListener(new View.OnClickListener()
         {
-            long then;
-            long longClickDuration = Constants.REQUIRED_TIME_TOUCH_MILLISECONDS;
-
             @Override
-            public boolean onTouch(View view, MotionEvent event)
+            public void onClick(View view)
             {
-                if (event.getAction() == MotionEvent.ACTION_DOWN)
-                {
-
-                    then = System.currentTimeMillis();
-
-                    //Stops vibrating and removes animation
-
-                    mPresenter.handle2DCoinTouch();
-                }
-                else if (event.getAction() == MotionEvent.ACTION_UP)
-                {
-                    if ((System.currentTimeMillis() - then) > longClickDuration)
-                    {
-                        //Long click behavior here
-                        return false;
-                    }
-                    else
-                    {
-                        //Short click behavior here
-                        mPresenter.handleCoinExchangeKeyUp();
-                        return true;
-                    }
-                }
-
-                return false;
+                mPresenter.handle2DCoinTouch();
             }
         });
     }
@@ -775,38 +748,20 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     @Override
     public void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData)
     {
-        //TODO: Cambiar modelo 3D del metodo
         if(UserData.getInstance(this).Is3DCompatibleDevice())
         {
             this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
                     location.longitude + ", " + prizeData.getVisible() + ", '" + prizeData.getName() + "', '" + key + "', "
                     + prizeData.getSponsorid() + ")");
         }
-
     }
 
-    @Override
-    public void onSponsorPrizeKeyEntered_2D(String key, LatLng location, int eraID, String sponsor)
-    {
 
-    }
 
     @Override
     public void onSponsorPrizeKeyExited(String pKey)
     {
-
-    }
-
-    @Override
-    public void onSponsorPrizePointDataChange(String pKey, SponsorPrizeData sponsorPrizeData)
-    {
-
-    }
-
-    @Override
-    public void onSponsorPrizePointCancelled(DatabaseError pDatabaseError)
-    {
-
+        this.architectView.callJavascript("World.deleteObjectGeo()");
     }
 
     @Override
