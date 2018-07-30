@@ -53,7 +53,7 @@ public class PrizeDetailPresenterImpl implements IPrizeDetailPresenter
                 data.putString(Constants.BUNDLE_PRIZE_DESCRIPTION, mUserData.getLastPrizeDescription());
                 data.putString(Constants.BUNDLE_PRIZE_CODE, mUserData.getLastPrizeCode());
                 data.putString(Constants.BUNDLE_PRIZE_DIAL, mUserData.getLastPrizeDial());
-                data.putString(Constants.BUNDLE_PRIZE_IMAGE, mUserData.getLastPrizeEraImage());
+                data.putString(Constants.BUNDLE_PRIZE_IMAGE, mUserData.getLasPrizeLogoUrl());
                 data.putInt(Constants.BUNDLE_PRIZE_TYPE, mUserData.getLastPrizeLevel());
                 data.putString(Constants.BUNDLE_PRIZE_BACKGROUND, mUserData.getLastPrizeBackgroundUrl());
                 mView.updateViews(data);

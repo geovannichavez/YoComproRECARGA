@@ -229,7 +229,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         try
         {
             RedeemSponsorPrizeReqBody requestBody = new RedeemSponsorPrizeReqBody();
-            requestBody.setSponsorID(1); //TODO: Cambiar por valor de parametro 'sponsorID'
+            requestBody.setSponsorID(sponsorID); //TODO: Cambiar por valor de parametro 'sponsorID'
             requestBody.setType(exchangeType);
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);

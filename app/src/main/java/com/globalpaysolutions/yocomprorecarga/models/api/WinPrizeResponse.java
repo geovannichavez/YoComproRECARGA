@@ -16,7 +16,7 @@ public class WinPrizeResponse
     @SerializedName("Description")
     @Expose
     private String description;
-    @SerializedName("LogoUrl")
+    @SerializedName("logoUrl")
     @Expose
     private String logoUrl;
     @SerializedName("HexColor")

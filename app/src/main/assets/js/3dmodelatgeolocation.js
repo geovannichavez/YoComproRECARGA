@@ -310,7 +310,7 @@ createOverlays: function createOverlaysFn() {
                                  exchanging = true;
                                  brandAnim.start(1);
                                  setTimeout(function() {
-                                            var architectSdkUrl = "architectsdk://Sponsor//1//3//3";
+                                            var architectSdkUrl = "architectsdk://Sponsor//2//3//3";
                                             document.location = architectSdkUrl;
                                             exchanging = false;
                                             },2000);

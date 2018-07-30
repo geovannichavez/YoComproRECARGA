@@ -1028,10 +1028,8 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             mFirbaseObjects.clear();
             mFirbaseObjects.put(pKey, data);
 
-
             //Gets drawable according to sponsor
-            int resourceID = ChestSelector.getInstance(this).getSponsorResource(sponsorID).get(Constants.CHEST_STATE_CLOSED);
-            Picasso.with(this).load(resourceID).into(ivPrize2D);
+            Picasso.with(this).load(ChestSelector.getInstance(this).getSponsorResource(sponsorID)).into(ivPrize2D);
         }
         catch (Exception ex)
         {
