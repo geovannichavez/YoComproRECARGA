@@ -200,10 +200,11 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     }
 
     @Override
-    public void on3DChestClick()
+    public void register3DClickListener()
     {
         try
         {
+            //TODO: Cambiar url de premio por escaneo
             this.architectView.registerUrlListener(new ArchitectView.ArchitectUrlListener()
             {
                 @Override

@@ -104,7 +104,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         //TODO: Se quitó validacion para que se registre el listenr del ArquictectView
         //if (m3Dcompatible)
         //{
-            mView.on3DChestClick();
+            mView.register3DClickListener();
         //}
         //else
         //{
@@ -220,6 +220,13 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 }
 
             }
+            else if(TextUtils.equals(type, "block2D"))
+            {
+                if(params[2].equals("1"))
+                    mView.switchChestVisible(false);
+                else
+                    mView.switchChestVisible(true);
+            }
             else
             {
                 //Gets sponsored url prize
@@ -283,6 +290,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void redeemSponsorPrize(int sponsorID, int exchangeType)
     {
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
         mInteractor.atemptRedeemSponsorPrize(sponsorID, exchangeType);
     }
 
@@ -1032,7 +1040,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     }
 
     @Override
-    public void onRedeemPrizeSuccess(WinPrizeResponse pResponse)
+    public void onRedeemPrizeSuccess(WinPrizeResponse pResponse, boolean isSponsorPrize)
     {
         mIsRunning = false;
 
@@ -1045,11 +1053,14 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             if(pResponse.getTracking() != null)
                 mInteractor.saveUserTracking(pResponse.getTracking());
 
-            //Updates indicators
-            mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
-                    mUserData.getTotalWonCoins(),
-                    String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
-            mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
+            if(!isSponsorPrize)
+            {
+                //Updates indicators
+                mView.updateIndicators(String.valueOf(pResponse.getTracking().getTotalWinPrizes()),
+                        mUserData.getTotalWonCoins(),
+                        String.valueOf(pResponse.getTracking().getTotalSouvenirs()));
+                mView.updatePrizeButton(pResponse.getTracking().getCurrentCoinsProgress());
+            }
 
             //Saves last saved prize
             mUserData.saveLastPrizeTitle(pResponse.getTitle());

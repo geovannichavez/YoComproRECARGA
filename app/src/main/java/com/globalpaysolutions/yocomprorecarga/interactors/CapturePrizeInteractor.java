@@ -187,7 +187,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                 if(response.isSuccessful())
                 {
                     WinPrizeResponse redeemPrize = response.body();
-                    mListener.onRedeemPrizeSuccess(redeemPrize);
+                    mListener.onRedeemPrizeSuccess(redeemPrize, false);
                 }
                 else
                 {
@@ -229,7 +229,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
         try
         {
             RedeemSponsorPrizeReqBody requestBody = new RedeemSponsorPrizeReqBody();
-            requestBody.setSponsorID(sponsorID); //TODO: Cambiar por valor de parametro 'sponsorID'
+            requestBody.setSponsorID(sponsorID);
             requestBody.setType(exchangeType);
 
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -244,7 +244,7 @@ public class CapturePrizeInteractor implements ICapturePrizeInteractor
                     if(response.isSuccessful())
                     {
                         WinPrizeResponse redeemPrize = response.body();
-                        mListener.onRedeemPrizeSuccess(redeemPrize);
+                        mListener.onRedeemPrizeSuccess(redeemPrize, true);
                     }
                     else
                     {

@@ -110,6 +110,7 @@ public class PrizesHistoryPresenterImpl implements IPrizesHistoryPresenter, Priz
                 prize.setBackgroundWinPrize(item.getBackgroundWinPrize());
                 prize.setBackgroundPrizeHistory(item.getBackgroundPrizeHistory());
                 //prize.setUrlBackground(item.getUrlBackground()); TODO: Url de background de item
+                prize.setUrlLogo(item.getUrlLogo());
 
                 //metadata
                 prize.setWinPrizeID(item.getWinPrizeID());

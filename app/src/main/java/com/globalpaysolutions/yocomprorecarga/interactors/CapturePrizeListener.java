@@ -14,6 +14,6 @@ public interface CapturePrizeListener
     void onTrackingError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
     void onOpenChestSuccess(ExchangeResponse pExchangeResponse, int chestType, String firebaseID);
     void onOpenChestError(int pCodeStatus, Throwable pThrowable, String requiredVersion);
-    void onRedeemPrizeSuccess(WinPrizeResponse pResponse);
+    void onRedeemPrizeSuccess(WinPrizeResponse pResponse, boolean isSponsorPrize);
     void onRedeemPrizeError(int pCodeStatus, Throwable pThrowable, String requiredVersion);
 }
