@@ -347,7 +347,7 @@ createOverlays: function createOverlaysFn() {
 //    var brandAnim1 = new AR.ModelAnimation(modelBrand1, "Scene");
 
 
-    var modelBrand2 = new AR.Model("assets/Futbolistica/Wildcard.wt3", {
+    var modelBrand2 = new AR.Model("assets/Viejo Oeste/GoldChest.wt3", {
     //var modelBrand2 = new AR.Model("assets/Acuatica/Wildcard.wt3", {
                                    onLoaded: this.worldLoaded,
                                    scale: {
