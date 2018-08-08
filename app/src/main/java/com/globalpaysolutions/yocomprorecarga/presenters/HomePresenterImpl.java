@@ -403,12 +403,13 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void onLocationChanged(Location location)
     {
+        //TODO: Quitar comentarios para que se ejecuten condiciones
         try
         {
             if(location != null)
             {
                 //Checks if location received is fake
-                if(!MockLocationUtility.isMockLocation(location, mContext))
+                /*if(!MockLocationUtility.isMockLocation(location, mContext))
                 {
                     //Checks apps blacklist
                     if(MockLocationUtility.isMockAppInstalled(mContext) <= 0 )
@@ -428,7 +429,18 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     {
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                     }
-                }
+                }*/
+
+                String firebaseKey = UserData.getInstance(mContext).getAuthProviderId();
+                GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
+
+                //Inserts location if setting is set to 'Visible'
+                if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+                    mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+                else
+                    mInteractor.deletePlayerLocation(firebaseKey);
+
+                mView.updateUserLocationOnMap(location);
             }
         }
         catch (Exception ex)
@@ -442,9 +454,10 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     {
         try
         {
+            //TODO: Quitar comentarios par que se ejecuten condiciones
             if(location != null)
             {
-                //Checks if location received is fake
+                /*//Checks if location received is fake
                 if(!MockLocationUtility.isMockLocation(location, mContext))
                 {
                     //Checks apps in blaclist
@@ -452,7 +465,8 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                         mView.setInitialUserLocation(location);
                     else
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
-                }
+                }*/
+                mView.setInitialUserLocation(location);
             }
         }
         catch (Exception ex)

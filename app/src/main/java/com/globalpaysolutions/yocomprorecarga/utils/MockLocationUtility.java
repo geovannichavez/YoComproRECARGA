@@ -25,7 +25,8 @@ public class MockLocationUtility
         this.mContext = context;
     }
 
-    public static boolean isMockLocation(Location location, Context context)
+    //TODO: Cambiar a 'public'
+    private static boolean isMockLocation(Location location, Context context)
     {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2)
         {
@@ -102,7 +103,8 @@ public class MockLocationUtility
         return !mockLocation.equals("0");
     }
 
-    public static int isMockAppInstalled(Context context)
+    //TODO: Cambiar a 'public'
+    private static int isMockAppInstalled(Context context)
     {
         PackageManager packageManager = context.getPackageManager();
 
