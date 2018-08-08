@@ -310,7 +310,7 @@ createOverlays: function createOverlaysFn() {
                                  exchanging = true;
                                  brandAnim.start(1);
                                  setTimeout(function() {
-                                            var architectSdkUrl = "architectsdk://Sponsor//2//3//3";
+                                            var architectSdkUrl = "architectsdk://Sponsor//2//3//3"; // [1]SponsorID, [2]ExchangeType, [3]FirebaseID
                                             document.location = architectSdkUrl;
                                             exchanging = false;
                                             },2000);
@@ -364,7 +364,7 @@ createOverlays: function createOverlaysFn() {
                                    exchanging = true;
                                    brandAnim2.start(1);
                                    setTimeout(function() {
-                                              var architectSdkUrl = "architectsdk://Sponsor//2//3//3";
+                                              var architectSdkUrl = "architectsdk://Sponsor//2//3//3"; // [1]SponsorID, [2]ExchangeType, [3]FirebaseID
                                               document.location = architectSdkUrl;
                                               exchanging = false;
                                               },3000);

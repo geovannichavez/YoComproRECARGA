@@ -15,14 +15,10 @@ public class Constants
 
     //Firebase
     public static final double SALES_POINTS_RADIUS_KM = 2;
-    //public static final double VENDOR_RADIUS_KM = 5;
     public static final double VENDOR_RADIUS_KM = 1;
     public static final double PRIZES_STOP_RADIUS_KM = 2;
-    //public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.5;
     public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.350;
-    //public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 1;
     public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 0.5;
-    //public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
     public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 0.75;
 
     public static final double PLAYER_RADIUS_KM = 1; // 1,000 meters

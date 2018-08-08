@@ -10,8 +10,8 @@ android {
         applicationId "com.globalpaysolutions.yocomprorecarga"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 69
-        versionName "1.55" // Era Acuatica
+        versionCode 70
+        versionName "1.60" // Era Acuatica
 
         //OneSignal
         manifestPlaceholders = [onesignal_app_id               : "1ec1e355-543b-4e69-8651-d2d0ac579797",
