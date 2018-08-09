@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -749,11 +750,21 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
     @Override
     public void onSponsorPrizeKeyEntered(String key, LatLng location, SponsorPrizeData prizeData)
     {
+        //TODO: Quitar validacion de nombre de modelo 3D
         if(UserData.getInstance(this).Is3DCompatibleDevice())
         {
-            this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
-                    location.longitude + ", " + prizeData.getVisible() + ", '" + prizeData.getName() + "', '" + key + "', "
-                    + prizeData.getSponsorid() + ")");
+            if(!TextUtils.equals(prizeData.getName(), "Metro"))
+            {
+                this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
+                        location.longitude + ", " + prizeData.getVisible() + ", 'Metro', '" + key + "', "
+                        + prizeData.getSponsorid() + ")");
+            }
+            else
+            {
+                this.architectView.callJavascript("World.createModelSponsorAtLocation(" + location.latitude + ", " +
+                        location.longitude + ", " + prizeData.getVisible() + ", '" + prizeData.getName() + "', '" + key + "', "
+                        + prizeData.getSponsorid() + ")");
+            }
         }
     }
 
