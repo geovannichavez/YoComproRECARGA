@@ -27,7 +27,6 @@ import com.globalpaysolutions.yocomprorecarga.presenters.interfaces.ICapturePriz
 import com.globalpaysolutions.yocomprorecarga.ui.activities.Souvenirs;
 import com.globalpaysolutions.yocomprorecarga.ui.activities.SouvenirsGroups;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
-import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
@@ -37,6 +36,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Josué Chávez on 29/03/2017.
@@ -1080,69 +1080,67 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
         try
         {
-            String lat = String.valueOf(location.getLatitude());
-            String lng = String.valueOf(location.getLongitude());
-            long time = location.getTime();
-
-            float latt = Float.valueOf(lat);
-            float longt = Float.valueOf(lng);
+            String currentLat = String.valueOf(location.getLatitude());
+            String currentLng = String.valueOf(location.getLongitude());
+            long currentTime = System.currentTimeMillis();
 
             //Checks if there was some last chest's location saved before
-            Double savedLat = (double) mUserData.getLastChestLocationLatitude();
-            Double savedLong = (double) mUserData.getLastChestLocationLongitude();
+            double savedLat = Double.valueOf(mUserData.getLastChestLocationLatitude());
+            double savedLong = Double.valueOf(mUserData.getLastChestLocationLongitude());
             long savedTime = mUserData.getLastChestLocationTime();
 
             //If saved lat and long are 0, means there are no saved locations, so user is allowed
             if(savedLat == 0 && savedLong == 0)
             {
-                mUserData.saveLastChestLocationLongitude(longt);
-                mUserData.saveLastChestLocationLatitude(latt);
-                mUserData.saveLastChestLocationTime(time);
+                mUserData.saveLastChestLocationLongitude(currentLng);
+                mUserData.saveLastChestLocationLatitude(currentLat);
+                mUserData.saveLastChestLocationTime(currentTime);
                 allowed = true;
             }
             else //if there are locations saved, evaluate if is allowed to open the chest
             {
-                //---------
-                //Double fart = (Math.sqrt((location.getLatitude() - savedLat)^2) + (location.getLongitude() - savedLong)^2)) / (time between GPS points)
-
-                //---------------------------
-                //double speed = 0;
-                //speed = Math.sqrt(Math.pow(location.getLatitude() - savedLat, 2) + Math.pow(location.getLongitude() - savedLong, 2))
-                //        / (time -  savedTime);
-
-
-                /*//if there is speed from location
-                if (pCurrentLocation.hasSpeed())
-                    //get location speed
-                    speed = pCurrentLocation.getSpeed();
-                this.mLastLocation = pCurrentLocation;
-                ////////////
-                //DO WHAT YOU WANT WITH speed VARIABLE
-                ////////////*/
-
-                //--------------------------------------------
-
                 // Generic location object
                 Location lastLocation = new Location("");
                 lastLocation.setLongitude(savedLong);
                 lastLocation.setLatitude(savedLat);
 
-                double elapsedTime = (time - savedTime) / 1_000; // Convert milliseconds to seconds
-                double calculatedSpeed = lastLocation.distanceTo(location) / elapsedTime;
+                double elapsedTime = TimeUnit.MILLISECONDS.toSeconds((currentTime - savedTime)); // Convert milliseconds to seconds
+                double distanceMeters = lastLocation.distanceTo(location);
+                double calculatedSpeed = distanceMeters / elapsedTime;
 
-                // 6 mps equals to 21.6 kph (average bike riding)
-                if(calculatedSpeed > 6)
+                //Log to see actual distance in meters
+                Log.i(TAG, "Distance lastLocation to current: " + String.valueOf(distanceMeters/1000) +  " Kms.");
+
+                // Bike riding
+                if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1) // meters
                 {
-                    // allowed = !(calculatedSpeed > 6);
-                    allowed = false;
+                    if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE )
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed =  true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
                 }
-                else
+                else // Car trip
                 {
-                    allowed = true;
-                    mUserData.saveLastChestLocationLatitude(latt);
-                    mUserData.saveLastChestLocationLongitude(longt);
-                    mUserData.saveLastChestLocationTime(time);
+                    if(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE)
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed = true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
                 }
+
             }
         }
         catch (Exception ex)

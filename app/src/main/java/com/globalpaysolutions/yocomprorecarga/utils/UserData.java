@@ -63,7 +63,7 @@ public class UserData
     private static final String KEY_LAST_CHEST_ID = "usr_last_chest_exchanged";
     private static final String KEY_FIRST_CHEST_KEY_ENTERED = "key_last_chest_key_entered";
     private static final String KEY_LAST_CHEST_LOCATION_LATITUDE = "key_last_chest_location_latitude";
-    private static final String KEY_LAST_CHEST_LOCATION_LONGITUDE = "key_last_chest_location_latitude";
+    private static final String KEY_LAST_CHEST_LOCATION_LONGITUDE = "key_last_chest_location_longitude";
     private static final String KEY_LAST_CHEST_LOCATION_TIME = "key_last_chest_location_time";
 
     //Achievements
@@ -1113,32 +1113,35 @@ public class UserData
         mEditor.commit();
     }
 
-    public void saveLastChestLocationLatitude(float lat)
+    public void saveLastChestLocationLatitude(String lat)
     {
-        mEditor.putFloat(KEY_LAST_CHEST_LOCATION_LATITUDE, lat);
+        mEditor.putString(KEY_LAST_CHEST_LOCATION_LATITUDE, lat);
         mEditor.commit();
     }
 
-    public void saveLastChestLocationLongitude(float logt)
+    public void saveLastChestLocationLongitude(String logt)
     {
-        mEditor.putFloat(KEY_LAST_CHEST_LOCATION_LONGITUDE, logt);
+        mEditor.putString(KEY_LAST_CHEST_LOCATION_LONGITUDE, logt);
         mEditor.commit();
     }
 
     public void saveLastChestLocationTime(long time)
     {
+        mEditor.remove(KEY_LAST_CHEST_LOCATION_TIME);
+        mEditor.commit();
+        // Brand new time
         mEditor.putLong(KEY_LAST_CHEST_LOCATION_TIME, time);
         mEditor.commit();
     }
 
-    public float getLastChestLocationLatitude()
+    public String getLastChestLocationLatitude()
     {
-        return mPreferences.getFloat(KEY_LAST_CHEST_LOCATION_LATITUDE, 0);
+        return mPreferences.getString(KEY_LAST_CHEST_LOCATION_LATITUDE, "0");
     }
 
-    public float getLastChestLocationLongitude()
+    public String getLastChestLocationLongitude()
     {
-        return mPreferences.getFloat(KEY_LAST_CHEST_LOCATION_LONGITUDE, 0);
+        return mPreferences.getString(KEY_LAST_CHEST_LOCATION_LONGITUDE, "0");
     }
 
     public long getLastChestLocationTime()

@@ -18,14 +18,14 @@ public class Constants
     //public static final double VENDOR_RADIUS_KM = 5;
     public static final double VENDOR_RADIUS_KM = 1;
     public static final double PRIZES_STOP_RADIUS_KM = 2;
-    //public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.5;
     public static final double BRONZE_CHESTS_QUERY_RADIUS_KM = 0.350;
-    //public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 1;
     public static final double SILVER_CHESTS_QUERY_RADIUS_KM = 0.5;
-    //public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 2;
     public static final double GOLD_CHESTS_QUERY_RADIUS_KM = 0.75;
 
     public static final double PLAYER_RADIUS_KM = 1; // 1,000 meters
+
+    //Map
+    public static final int GOOGLE_MAPS_ZOOM_CAMERA = 19;
 
 
     //Permissions
@@ -59,7 +59,7 @@ public class Constants
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.006;
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.035; //35 meters
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.02; //20 meters
-    public static final double RECARSTOP_2D_RADIUS_KM = 0.015; //15 meters
+    public static final double RECARSTOP_2D_RADIUS_KM = 0.030; //15 meters //TODO: Cambiar a 0.015
     public static final int ONRADIUS_VIBRATION_TIME_MILLISECONDS = 100;
     public static final int ONRADIUS_VIBRATION_SLEEP_MILLISECONDS = 500;
     public static final int OUT_RADIUS_VIBRATION_TIME_MILLISECONDS = 130;
@@ -135,6 +135,20 @@ public class Constants
     //Chest states
     public static final String CHEST_STATE_OPEN = "open";
     public static final String CHEST_STATE_CLOSED = "closed";
+
+    //Chest exchange speed
+    public static final int DISTANCE_ALLOWED_STAGE_1 = 650; // Meters
+    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 2; // 2 mps is equivalent to 120 meters per minute
+
+    public static final float SPEED_CAR_MPS_CHEST_EXCHANGE = 7; //7 mps is equivalento to 25.20 kph
+                                                             //9 mps is equivalento to 32.40 kph
+                                                             //16 mps is equivalento to 57.60 kph
+                                                             // 27 mps is equivalent to 97.2 kph
+                                                             // 33 mps is equivalent to 118.8 kph
+                                                             // 24 mps is equivalent to 86.4 kph
+                                                             // 6 mps equals to 21.6 kph (average bike riding)
+
+    public static final int SPEED_PENALTY_TIME_MILLIS = 120000;
 
     public static final String ACHIEVEMENT_FROM_SOUVENIR_SALE = "achievement_from_souvenir_sale";
 
