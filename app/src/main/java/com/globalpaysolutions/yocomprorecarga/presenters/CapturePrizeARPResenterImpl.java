@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.LevelStartEvent;
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.CapturePrizeInteractor;
@@ -1121,6 +1122,20 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     else
                     {
                         allowed =  true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
+                }
+                else if (distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_2) // 1400 meters
+                {
+                    if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE_2)
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed = true;
                         mUserData.saveLastChestLocationLatitude(currentLat);
                         mUserData.saveLastChestLocationLongitude(currentLng);
                         mUserData.saveLastChestLocationTime(currentTime);

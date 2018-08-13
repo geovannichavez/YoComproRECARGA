@@ -138,15 +138,19 @@ public class Constants
 
     //Chest exchange speed
     public static final int DISTANCE_ALLOWED_STAGE_1 = 650; // Meters
-    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 2; // 2 mps is equivalent to 120 meters per minute
+    public static final int DISTANCE_ALLOWED_STAGE_2 = 1400; // Meters
+    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 2; // 2 mps is equivalent to 120 meters per minute: 7.2 Kms/h
 
-    public static final float SPEED_CAR_MPS_CHEST_EXCHANGE = 7; //7 mps is equivalento to 25.20 kph
-                                                             //9 mps is equivalento to 32.40 kph
-                                                             //16 mps is equivalento to 57.60 kph
-                                                             // 27 mps is equivalent to 97.2 kph
-                                                             // 33 mps is equivalent to 118.8 kph
-                                                             // 24 mps is equivalent to 86.4 kph
-                                                             // 6 mps equals to 21.6 kph (average bike riding)
+    public static final float SPEED_CAR_MPS_CHEST_EXCHANGE = 6; //6 mps is equivalento to 25.20 kph
+                                                                 // 7 mps is equivalento to 25.20 kph
+                                                                 //9 mps is equivalento to 32.40 kph
+                                                                 //16 mps is equivalento to 57.60 kph
+                                                                 // 27 mps is equivalent to 97.2 kph
+                                                                 // 33 mps is equivalent to 118.8 kph
+                                                                 // 24 mps is equivalent to 86.4 kph
+                                                                 // 6 mps equals to 21.6 kph (average bike riding)
+
+    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE_2 = 3; // 3 mps is equivalent to 120 meters per minute: 10.8 Kms/h
 
     public static final int SPEED_PENALTY_TIME_MILLIS = 120000;
 
