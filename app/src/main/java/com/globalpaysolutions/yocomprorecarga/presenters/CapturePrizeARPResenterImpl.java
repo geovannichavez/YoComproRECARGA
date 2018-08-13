@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.LevelStartEvent;
 import com.firebase.geofire.GeoLocation;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.interactors.CapturePrizeInteractor;
@@ -198,7 +197,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
 
 
-            if(isAllowedSpeedExchange(chestLocation))
+            if(isAllowedSpeedExchange(chestLocation, firebaseID))
             {
                 if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
                 {
@@ -232,7 +231,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         //mView.changeToOpenChest(pChestType, mUserData.getEraID());
-        if(isAllowedSpeedExchange(mCurrentLocation))
+        if(isAllowedSpeedExchange(mCurrentLocation, pFirebaseID))
         {
             mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
@@ -1075,7 +1074,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
     }
 
-    private boolean isAllowedSpeedExchange(Location location)
+    private boolean isAllowedSpeedExchange(Location location, String firebaseKey)
     {
         boolean allowed = false;
 
@@ -1112,50 +1111,78 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 //Log to see actual distance in meters
                 Log.i(TAG, "Distance lastLocation to current: " + String.valueOf(distanceMeters/1000) +  " Kms.");
 
-                // Bike riding
-                if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1) // meters
-                {
-                    if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE )
-                    {
-                        allowed = false;
-                    }
-                    else
-                    {
-                        allowed =  true;
-                        mUserData.saveLastChestLocationLatitude(currentLat);
-                        mUserData.saveLastChestLocationLongitude(currentLng);
-                        mUserData.saveLastChestLocationTime(currentTime);
-                    }
-                }
-                else if (distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_2) // 1400 meters
-                {
-                    if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE_2)
-                    {
-                        allowed = false;
-                    }
-                    else
-                    {
-                        allowed = true;
-                        mUserData.saveLastChestLocationLatitude(currentLat);
-                        mUserData.saveLastChestLocationLongitude(currentLng);
-                        mUserData.saveLastChestLocationTime(currentTime);
-                    }
-                }
-                else // Car trip
-                {
-                    if(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE)
-                    {
-                        allowed = false;
-                    }
-                    else
-                    {
-                        allowed = true;
-                        mUserData.saveLastChestLocationLatitude(currentLat);
-                        mUserData.saveLastChestLocationLongitude(currentLng);
-                        mUserData.saveLastChestLocationTime(currentTime);
-                    }
-                }
+                // Saves time and location of exchange atempt
+                //mUserData.saveLastChestLocationLatitude(currentLat);
+                //mUserData.saveLastChestLocationLongitude(currentLng);
+                //mUserData.saveLastChestLocationTime(currentTime);
 
+
+                if(distanceMeters <= 0 && calculatedSpeed <= 0)
+                {
+
+                    if(TextUtils.equals(firebaseKey, mUserData.getLastExchangedChestID()))
+                    {
+                        allowed = (elapsedTime > 1800);
+                    }
+                    else
+                    {
+                        allowed = true;
+                    }
+                    //allowed = !TextUtils.equals(firebaseKey, mUserData.getLastExchangedChestID()) ||
+                    //        (elapsedTime > TimeUnit.MINUTES.toSeconds(30));
+                }
+                else
+                {
+                    if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1) // meters
+                    {
+                        // Walking
+                        //allowed = !(calculatedSpeed > Constants.SPEED_WALK_MPS_CHEST_EXCHANGE);
+                        if(calculatedSpeed > Constants.SPEED_WALK_MPS_CHEST_EXCHANGE)
+                        {
+                            allowed = false;
+                        }
+                        else
+                        {
+                            allowed = true;
+                            mUserData.saveLastChestLocationLatitude(currentLat);
+                            mUserData.saveLastChestLocationLongitude(currentLng);
+                            mUserData.saveLastChestLocationTime(currentTime);
+                        }
+                    }
+                    else if (distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_2) // 1400 meters
+                    {
+                        // Bike riding
+                        //allowed = !(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE);
+
+                        if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE)
+                        {
+                            allowed = false;
+                        }
+                        else
+                        {
+                            allowed = true;
+                            mUserData.saveLastChestLocationLatitude(currentLat);
+                            mUserData.saveLastChestLocationLongitude(currentLng);
+                            mUserData.saveLastChestLocationTime(currentTime);
+                        }
+                    }
+                    else
+                    {
+                        // Car trip
+                        //allowed = !(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE);
+                        if(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE)
+                        {
+                            allowed = false;
+                        }
+                        else
+                        {
+                            allowed = true;
+                            mUserData.saveLastChestLocationLatitude(currentLat);
+                            mUserData.saveLastChestLocationLongitude(currentLng);
+                            mUserData.saveLastChestLocationTime(currentTime);
+                        }
+                    }
+                }
             }
         }
         catch (Exception ex)
