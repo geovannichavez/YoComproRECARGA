@@ -1,27 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="145dp"
-              android:gravity="center"
-              android:orientation="vertical"
-              android:padding="@dimen/margin_8dp">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lblEraName"
-        android:text="Prueba de Sonido"
-        android:fontFamily="@font/baloo_regular"
-        android:gravity="center"
-        android:textColor="@color/color_dark_gray"
-        android:textStyle="bold"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="223dp">
 
-    <ImageView
-        android:id="@+id/imgEraMainImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:layout_marginBottom="@dimen/margin_8dp"
-        android:src="@drawable/img_first_era_box"/>
+        <!-- Layer 1 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="94"
+                android:weightSum="100"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <Space
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <ImageView
+                    android:id="@+id/ivEraFrame"
+                    android:src="@drawable/bg_era_item_frame_selected"
+                    android:layout_weight="94"
+                    android:scaleType="fitXY"
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+                <Space
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3" />
+
+        </LinearLayout>
+
+        <!-- Layer 2 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="20"
+                android:weightSum="100"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="12"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/ivEraCounter"
+                    android:src="@drawable/ic_souv_counter_era_selection"
+                    android:layout_width="0dp"
+                    android:scaleType="centerInside"
+                    android:layout_weight="40"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/btnEraStatus"
+                    android:src="@drawable/ic_locked_era"
+                    android:layout_width="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
+                    android:layout_weight="36"/>
+
+                <!--<ImageView
+                    android:src="@drawable/ic_era_selected"
+                    android:layout_width="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
+                    android:layout_weight="36"/>-->
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="12"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+        </LinearLayout>
+
+        <!-- Layer 3 -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="100"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_weight="8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_weight="60"
+                android:weightSum="100"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <Space
+                    android:layout_weight="7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/ivEraPoster"
+                    android:src="@drawable/ic_coming_soon_era_poster"
+                    android:layout_width="0dp"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:layout_weight="86"/>
+
+                <Space
+                    android:layout_weight="7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <Space
+                android:layout_weight="30"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+        </LinearLayout>
+
+
+        <!-- Layer 4 -->
+        <LinearLayout
+            android:weightSum="100"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="20"
+                android:weightSum="100"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:id="@+id/tvSouvsCounter"
+                    android:textColor="@color/white_textView_color"
+                    android:fontFamily="@font/baloo_regular"
+                    android:gravity="center"
+                    android:textSize="@dimen/dimen_normal_20"
+                    tools:text="23"
+                    android:layout_weight="16"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_weight="54"
+                    android:layout_height="match_parent" />
+
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

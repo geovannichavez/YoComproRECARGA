@@ -44,17 +44,16 @@ public class ErasAdapter extends ArrayAdapter<AgesListModel>
         }
         row.setTag(currentItem);
 
-        TextView lblEraName = (TextView) row.findViewById(R.id.lblEraName);
-        ImageView imgEraMainImage = (ImageView) row.findViewById(R.id.imgEraMainImage);
+        ImageView ivEraFrame;
+        ImageView ivEraCounter;
+        ImageView btnEraStatus;
+        ImageView ivEraPoster = row.findViewById(R.id.ivEraPoster);
+        TextView tvSouvsCounter;
 
-        lblEraName.setText(currentItem.getName());
 
-        if (imgEraMainImage == null)
-        {
-            imgEraMainImage = new ImageView(mContext);
-        }
 
-        Picasso.with(mContext).load(currentItem.getMainImage()).into(imgEraMainImage);
+
+
 
         return row;
     }
