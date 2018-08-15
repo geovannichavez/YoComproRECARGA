@@ -113,11 +113,11 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="15" />
+                android:layout_weight="13" />
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_weight="85"
+                android:layout_weight="87"
                 android:weightSum="100"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" >

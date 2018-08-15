@@ -102,6 +102,7 @@ public class UserData
     private static final String KEY_SOUVENIR_PRICE = "usr_souvenir_prce";
     private static final String KEY_SOUVENIR_PROGRESS = "key_souvenir_progress";
     private static final String KEY_SOUVENIR_GROUPED_RAW_RESPONSE = "key_souvenir_grouped_raw_response";
+    private static final String KEY_SOUVENIR_TOTAL_COUNT = "key_souvenir_total_count";
 
     //Era
     private static final String KEY_ERA_ID = "usr_age_id";
@@ -1188,5 +1189,16 @@ public class UserData
     {
         mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryID);
         mEditor.commit();
+    }
+
+    public void saveTotalSouvs(int totalSouvs)
+    {
+        mEditor.putInt(KEY_SOUVENIR_TOTAL_COUNT, totalSouvs);
+        mEditor.commit();
+    }
+
+    public int getTotalSouvs()
+    {
+        return mPreferences.getInt(KEY_SOUVENIR_TOTAL_COUNT, 0);
     }
 }

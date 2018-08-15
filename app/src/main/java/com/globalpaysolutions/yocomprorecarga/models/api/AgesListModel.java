@@ -11,26 +11,29 @@ public class AgesListModel
 {
     @SerializedName("ageID")
     @Expose
-    private Integer ageID;
+    private int ageID;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("status")
     @Expose
-    private Integer status;
+    private int status;
     @SerializedName("iconImage")
     @Expose
     private String iconImage;
     @SerializedName("mainImage")
     @Expose
     private String mainImage;
+    @SerializedName("RequiredSouvenir")
+    @Expose
+    private int requiredSouvenir;
 
-    public Integer getAgeID()
+    public int getAgeID()
     {
         return ageID;
     }
 
-    public void setAgeID(Integer ageID)
+    public void setAgeID(int ageID)
     {
         this.ageID = ageID;
     }
@@ -45,12 +48,12 @@ public class AgesListModel
         this.name = name;
     }
 
-    public Integer getStatus()
+    public int getStatus()
     {
         return status;
     }
 
-    public void setStatus(Integer status)
+    public void setStatus(int status)
     {
         this.status = status;
     }
@@ -74,5 +77,16 @@ public class AgesListModel
     {
         this.mainImage = mainImage;
     }
+
+    public int getRequiredSouvenir()
+    {
+        return requiredSouvenir;
+    }
+
+    public void setRequiredSouvenir(int requiredSouvenir)
+    {
+        this.requiredSouvenir = requiredSouvenir;
+    }
+
 
 }
