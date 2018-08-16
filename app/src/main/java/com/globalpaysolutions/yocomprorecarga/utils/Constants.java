@@ -59,7 +59,7 @@ public class Constants
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.006;
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.035; //35 meters
     //public static final double RECARSTOP_2D_RADIUS_KM = 0.02; //20 meters
-    public static final double RECARSTOP_2D_RADIUS_KM = 0.030; //15 meters //TODO: Cambiar a 0.015
+    public static final double RECARSTOP_2D_RADIUS_KM = 0.015; //15 meters
     public static final int ONRADIUS_VIBRATION_TIME_MILLISECONDS = 100;
     public static final int ONRADIUS_VIBRATION_SLEEP_MILLISECONDS = 500;
     public static final int OUT_RADIUS_VIBRATION_TIME_MILLISECONDS = 130;
@@ -137,8 +137,9 @@ public class Constants
     public static final String CHEST_STATE_CLOSED = "closed";
 
     //Chest exchange speed
-    public static final int DISTANCE_ALLOWED_STAGE_1 = 650; // Meters
-    public static final int DISTANCE_ALLOWED_STAGE_2 = 1400; // Meters
+    public static final int DISTANCE_ALLOWED_STAGE_1 = 60; // Meters
+    public static final int DISTANCE_ALLOWED_STAGE_2 = 650; // Meters
+    public static final int DISTANCE_ALLOWED_STAGE_3 = 1400; // Meters
 
     public static final float SPEED_WALK_MPS_CHEST_EXCHANGE = 2; // 2 mps is equivalent to 120 meters per minute: 7.2 Kms/h
     public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 3; // 3 mps is equivalent to 180 meters per minute: 10.8 Kms/h
@@ -151,6 +152,7 @@ public class Constants
                                                                  // 33 mps is equivalent to 118.8 kph
                                                                  // 24 mps is equivalent to 86.4 kph
                                                                  // 6 mps equals to 21.6 kph (average bike riding)
+    public static final float DISTANCE_BETWEEN_CHESTS_METERS = 30;
 
 
 
