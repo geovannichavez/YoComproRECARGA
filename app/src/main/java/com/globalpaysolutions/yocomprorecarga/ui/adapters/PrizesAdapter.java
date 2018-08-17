@@ -3,6 +3,8 @@ package com.globalpaysolutions.yocomprorecarga.ui.adapters;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -18,6 +20,7 @@ import com.globalpaysolutions.yocomprorecarga.models.Prize;
 import com.globalpaysolutions.yocomprorecarga.presenters.PrizesHistoryPresenterImpl;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -48,11 +51,30 @@ public class PrizesAdapter extends RecyclerView.Adapter<PrizesAdapter.PrizesHist
         try
         {
 
-            holder.bgPrizeItem.setImageResource(R.drawable.bg_prize_item);
+
 
 
             final Prize currentItem = mPrizesHistoryList.get(position);
-            Picasso.with(mContext).load(currentItem.getBackgroundPrizeHistory()).into(holder.bgPrizeItem);
+            Picasso.with(mContext).load(currentItem.getBackgroundPrizeHistory()).into(new Target()
+            {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from)
+                {
+                    holder.bgPrizeItem.setImageBitmap(bitmap);
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable)
+                {
+
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable)
+                {
+                    holder.bgPrizeItem.setImageResource(R.drawable.bg_prize_item);
+                }
+            });
             holder.title.setText(currentItem.getTitle());
             holder.pin.setText(String.format(mContext.getString(R.string.label_pin), currentItem.getCode()));
             holder.description.setText(currentItem.getDescription());

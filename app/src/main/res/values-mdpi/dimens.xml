@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="prize_item_title_size">12sp</dimen>
-    <dimen name="prize_item_content_size">10sp</dimen>
+    <dimen name="prize_item_content_size">9sp</dimen>
 
     <dimen name="dimen_normal_10">8sp</dimen>
     <dimen name="dimen_normal_12">10sp</dimen>

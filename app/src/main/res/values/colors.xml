@@ -68,6 +68,7 @@
     <color name="color_red_soft_recargo">#ac1c25</color>
     <color name="color_title_recargo">#2b343f</color>
     <color name="color_paragraph_recargo">#191e25</color>
+    <color name="color_pinlk_loading">#e6d2d3</color>
 
     <!-- GREEEN THEME -->
     <color name="yvr_green_color">#88a80d</color>
