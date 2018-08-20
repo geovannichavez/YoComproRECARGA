@@ -389,7 +389,7 @@ public class PointsMap extends ImmersiveActivity implements OnMapReadyCallback, 
             Log.d(TAG, "setInitialUserLocation");
 
             LatLng currentLocation = new LatLng(pLocation.getLatitude(), pLocation.getLongitude());
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(17).build();
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(currentLocation).zoom(Constants.GOOGLE_MAPS_ZOOM_CAMERA).build();
             mGoogleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             mPresenter.vendorsPointsQuery(currentLocation);

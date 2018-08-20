@@ -115,7 +115,7 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
                 Intent store = new Intent(CapturePrizeAR.this, PointsMap.class);
                 store.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(store);
-                finish();//TODO: Verificar si deberia de hacerse
+                finish();
             }
         });
 
@@ -503,7 +503,6 @@ public class CapturePrizeAR extends ImmersiveActivity implements CapturePrizeVie
             tvSouvenirName.setText(String.format(getString(R.string.label_congrats_souvenir_name), souvenirName));
             //tvSouvenirDesc.setText(souvenirDescription);
 
-            //TODO: Architecture violation - Requests made on Views
             Picasso.with(this).load(url).into(imgSouvenir);
 
             souvenirDialog = builder.setView(dialogView).create();

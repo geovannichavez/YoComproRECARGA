@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Josué Chávez on 29/03/2017.
@@ -152,6 +153,11 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void exchangeCoinsChest(String pArchitectURL)
     {
+        Location chestLocation = mCurrentLocation;
+
+        String latitude = "";
+        String longitude = "";
+
         try
         {
             synchronized (this)
@@ -165,8 +171,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             Map<String, String> urlMap = getURLMap(pArchitectURL);
             String firebaseID = urlMap.get(Constants.URI_MAP_VALUE_FIREBASE_ID);
             String chestType = urlMap.get(Constants.URI_MAP_VALUE_CHEST_TYPE);
-            String latitude = urlMap.get(Constants.URI_MAP_VALUE_LATITUDE);
-            String longitude = urlMap.get(Constants.URI_MAP_VALUE_LONGITUDE);
+            latitude = urlMap.get(Constants.URI_MAP_VALUE_LATITUDE);
+            longitude = urlMap.get(Constants.URI_MAP_VALUE_LONGITUDE);
             int chestValue = 0;
 
             LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
@@ -191,16 +197,29 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     break;
             }
 
-            if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
+
+            if(isAllowedSpeedExchange(chestLocation, firebaseID))
             {
-                mUserData.saveLastWildcardTouched(firebaseID, chestValue);
-                mView.navigateToWildcard();
+                if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
+                {
+                    mUserData.saveLastWildcardTouched(firebaseID, chestValue);
+                    mView.navigateToWildcard();
+                }
+                else
+                {
+                    mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
+                    mInteractor.openCoinsChest(location, firebaseID, chestValue, mUserData.getEraID());
+                }
             }
             else
             {
-                mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
-                mInteractor.openCoinsChest(location, firebaseID, chestValue, mUserData.getEraID());
+                DialogViewModel dialog = new DialogViewModel();
+                dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
+                dialog.setLine1(mContext.getString(R.string.label_cheating_suspection));
+                dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+                mView.showImageDialog(dialog, R.drawable.ic_alert, false);
             }
+
         }
         catch (Exception ex)
         {
@@ -213,8 +232,19 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         //mView.changeToOpenChest(pChestType, mUserData.getEraID());
-        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
-        mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
+        if(isAllowedSpeedExchange(mCurrentLocation, pFirebaseID))
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+            mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
+        }
+        else
+        {
+            DialogViewModel dialog = new DialogViewModel();
+            dialog.setTitle(mContext.getString(R.string.cant_redeem_title));
+            dialog.setLine1(mContext.getString(R.string.label_cheating_suspection));
+            dialog.setAcceptButton(mContext.getString(R.string.button_accept));
+            mView.showImageDialog(dialog, R.drawable.ic_alert, false);
+        }
     }
 
     @Override
@@ -276,7 +306,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     @Override
     public void checkForWelcomeChest()
     {
-        if(mUserData.checkWelcomeChestAvailable()) //TODO: Cambiar a true
+        if(mUserData.checkWelcomeChestAvailable())
         {
             double lat = (double) mUserData.getWelcomeChestLat();
             double longt = (double) mUserData.getWelcomeChestLong();
@@ -384,7 +414,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            if(location != null)
            {
                // Validates location from property
-               if(!MockLocationUtility.isMockLocation(location, mContext))
+               /*if(!MockLocationUtility.isMockLocation(location, mContext))
                {
                    //Check apps blacklist
                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
@@ -396,7 +426,10 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                    {
                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                    }
-               }
+               }*/
+
+               mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+               mCurrentLocation = location;
            }
         }
         catch (Exception ex)
@@ -426,6 +459,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                     }
                 }
+
+                mView.locationManagerConnected(location.getLatitude(), location.getLongitude(), location.getAccuracy());
+                mCurrentLocation = location;
             }
         }
         catch (Exception ex)
@@ -1036,6 +1072,110 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             Log.e(TAG, "Error deleting key from shared preferences: " +ex.getMessage());
         }
+    }
+
+    private boolean isAllowedSpeedExchange(Location location, String firebaseKey)
+    {
+        boolean allowed = false;
+
+        try
+        {
+            String currentLat = String.valueOf(location.getLatitude());
+            String currentLng = String.valueOf(location.getLongitude());
+            long currentTime = System.currentTimeMillis();
+
+            //Checks if there was some last chest's location saved before
+            double savedLat = Double.valueOf(mUserData.getLastChestLocationLatitude());
+            double savedLong = Double.valueOf(mUserData.getLastChestLocationLongitude());
+            long savedTime = mUserData.getLastChestLocationTime();
+
+            //If saved lat and long are 0, means there are no saved locations, so user is allowed
+            if(savedLat == 0 && savedLong == 0)
+            {
+                mUserData.saveLastChestLocationLongitude(currentLng);
+                mUserData.saveLastChestLocationLatitude(currentLat);
+                mUserData.saveLastChestLocationTime(currentTime);
+                allowed = true;
+            }
+            else //if there are locations saved, evaluate if is allowed to open the chest
+            {
+                // Generic location object
+                Location lastLocation = new Location("");
+                lastLocation.setLongitude(savedLong);
+                lastLocation.setLatitude(savedLat);
+
+                double elapsedTime = TimeUnit.MILLISECONDS.toSeconds((currentTime - savedTime)); // Convert milliseconds to seconds
+                double distanceMeters = lastLocation.distanceTo(location);
+                double calculatedSpeed = distanceMeters / elapsedTime;
+
+                //Log to see actual distance in meters
+                Log.i(TAG, "Distance lastLocation to current: " + String.valueOf(distanceMeters/1000) +  " Kms.");
+
+
+                if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1)
+                {
+                    allowed = true;
+                    mUserData.saveLastChestLocationLatitude(currentLat);
+                    mUserData.saveLastChestLocationLongitude(currentLng);
+                    mUserData.saveLastChestLocationTime(currentTime);
+                }
+                else if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_2) // meters
+                {
+                    // Walking
+                    //allowed = !(calculatedSpeed > Constants.SPEED_WALK_MPS_CHEST_EXCHANGE);
+                    if(calculatedSpeed > Constants.SPEED_WALK_MPS_CHEST_EXCHANGE)
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed = true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
+                }
+                else if (distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_3) // 1400 meters
+                {
+                    // Bike riding
+                    //allowed = !(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE);
+
+                    if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE)
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed = true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
+                }
+                else
+                {
+                    // Car trip
+                    //allowed = !(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE);
+                    if(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE)
+                    {
+                        allowed = false;
+                    }
+                    else
+                    {
+                        allowed = true;
+                        mUserData.saveLastChestLocationLatitude(currentLat);
+                        mUserData.saveLastChestLocationLongitude(currentLng);
+                        mUserData.saveLastChestLocationTime(currentTime);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+
+        return allowed;
     }
 
     private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String requiredVersion)
