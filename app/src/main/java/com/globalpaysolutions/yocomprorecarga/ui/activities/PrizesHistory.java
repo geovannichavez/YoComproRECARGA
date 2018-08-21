@@ -89,7 +89,6 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
                 smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
                 smsIntent.putExtra("sms_body", "");
                 startActivity(smsIntent);
-                finish();
             }
         });
 
