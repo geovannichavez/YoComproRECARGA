@@ -202,7 +202,7 @@
                     android:layout_weight="52"
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
-                    android:text="Premios"
+                    android:text="Cupones"
                     android:textAllCaps="true"
                     android:textColor="#ffffff"
                     android:textSize="18sp" />

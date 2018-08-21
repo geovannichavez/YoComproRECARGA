@@ -291,7 +291,7 @@
         android:fontFamily="@font/baloo_regular"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:text="@string/title_prizes"
+        android:text="@string/title_cupons"
         android:textAllCaps="true"
         android:textColor="@color/white_textView_color"
         android:textSize="22sp"

@@ -169,7 +169,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/baloo_regular"
-            android:text="@string/label_prizes_button"
+            android:text="@string/title_cupons"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageButton6"
             app:layout_constraintEnd_toEndOf="@+id/imageButton6"
