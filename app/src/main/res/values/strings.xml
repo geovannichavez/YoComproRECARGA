@@ -468,6 +468,7 @@
     <string name="title_dialog_invalid_lastname">Apellido Inválido</string>
     <string name="label_dialog_invalid_lastname">El apellido ingresado no es válido</string>
     <string name="label_noticias">Noticias</string>
+    <string name="label_cheating_suspection">Parece que esta no es tu ubicación actual. Asegúrate de no usar ubicaciones falsas.</string>
 
 
 </resources>

@@ -304,7 +304,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
     @Override
     public void startShowcase()
     {
-        if(!mUserData.showcaseMapSeen()) //TODO: Cambiar a false
+        if(!mUserData.showcaseMapSeen())
         {
             mView.startShowcase();
         }
@@ -365,7 +365,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
         try
         {
             //Checks if welcome user is available for welcome chest
-            if(UserData.getInstance(mContext).checkWelcomeChestAvailable()) //TODO: pasar a 'true'
+            if(UserData.getInstance(mContext).checkWelcomeChestAvailable())
             {
                 Bitmap goldMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_GOLD);
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -429,6 +429,17 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                     }
                 }
+
+                String firebaseKey = UserData.getInstance(mContext).getAuthProviderId();
+                GeoLocation geoLocation = new GeoLocation(location.getLatitude(), location.getLongitude());
+
+                //Inserts location if setting is set to 'Visible'
+                if(UserData.getInstance(mContext).checkCurrentLocationVisible())
+                    mInteractor.setPlayerLocation(firebaseKey, geoLocation);
+                else
+                    mInteractor.deletePlayerLocation(firebaseKey);
+
+                mView.updateUserLocationOnMap(location);
             }
         }
         catch (Exception ex)
@@ -453,6 +464,7 @@ public class HomePresenterImpl implements IHomePresenter, HomeListener, Firebase
                     else
                         mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                 }
+                mView.setInitialUserLocation(location);
             }
         }
         catch (Exception ex)

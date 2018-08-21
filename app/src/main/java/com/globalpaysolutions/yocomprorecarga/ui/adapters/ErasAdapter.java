@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.models.api.AgesListModel;
+import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -44,17 +45,46 @@ public class ErasAdapter extends ArrayAdapter<AgesListModel>
         }
         row.setTag(currentItem);
 
-        TextView lblEraName = (TextView) row.findViewById(R.id.lblEraName);
-        ImageView imgEraMainImage = (ImageView) row.findViewById(R.id.imgEraMainImage);
+        ImageView ivEraFrame = row.findViewById(R.id.ivEraFrame);
+        ImageView ivEraCounter = row.findViewById(R.id.ivEraCounter);
+        ImageView btnEraStatus = row.findViewById(R.id.btnEraStatus);
+        ImageView ivEraPoster = row.findViewById(R.id.ivEraPoster);
+        TextView tvSouvsCounter = row.findViewById(R.id.tvSouvsCounter);
 
-        lblEraName.setText(currentItem.getName());
+        int totalSouvs = UserData.getInstance(mContext).getTotalSouvs();
 
-        if (imgEraMainImage == null)
+
+
+        if(currentItem != null)
         {
-            imgEraMainImage = new ImageView(mContext);
-        }
+            Picasso.with(mContext).load(currentItem.getMainImage()).into(ivEraPoster);
 
-        Picasso.with(mContext).load(currentItem.getMainImage()).into(imgEraMainImage);
+            if(currentItem.getAgeID() == UserData.getInstance(mContext).getEraID()) // Selected era
+            {
+                ivEraFrame.setImageResource(R.drawable.bg_era_item_frame_selected);
+                btnEraStatus.setImageResource(R.drawable.ic_era_selected);
+            }
+            else
+            {
+                ivEraFrame.setImageResource(R.drawable.bg_era_item_frame);
+
+                if(currentItem.getStatus() > 0) // Era unlocked
+                    btnEraStatus.setImageResource(R.drawable.ic_unlocked_era);
+                else
+                    btnEraStatus.setImageResource(R.drawable.ic_locked_era);
+            }
+
+            if(currentItem.getRequiredSouvenir() > 0)
+            {
+                String label = String.valueOf(totalSouvs) + "/" + String.valueOf(currentItem.getRequiredSouvenir());
+                tvSouvsCounter.setText(label);
+            }
+            else
+            {
+                tvSouvsCounter.setText("0");
+            }
+
+        }
 
         return row;
     }

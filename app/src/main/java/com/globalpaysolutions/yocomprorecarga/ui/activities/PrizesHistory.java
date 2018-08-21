@@ -84,10 +84,11 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.getInstance(PrizesHistory.this).animateButton(v);
-                Intent intent = new Intent(PrizesHistory.this, RedeemPrize.class);
-                startActivity(intent);
-                finish();
+                Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+                smsIntent.setType("vnd.android-dir/mms-sms");
+                smsIntent.putExtra("address", Constants.SMS_NUMBER_PRIZE_EXCHANGE);
+                smsIntent.putExtra("sms_body", "");
+                startActivity(smsIntent);
             }
         });
 

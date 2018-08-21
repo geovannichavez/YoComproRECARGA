@@ -69,7 +69,6 @@ public class CompleteProfilePresenterImpl implements ICompleteProfilePresenter, 
             UserData.getInstance(mContext).hasSetNickname(true);
             UserData.getInstance(mContext).saveNickname(choosenNickname.toLowerCase());
 
-            //TODO: debe actualizarse la info del usuario (nombre, apellido, etc)
             UserData.getInstance(mContext).saveUserGeneralInfo(firstName,lastName, null,
                     UserData.getInstance(mContext).getUserPhone());
 

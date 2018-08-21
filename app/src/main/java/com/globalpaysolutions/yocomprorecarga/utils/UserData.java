@@ -62,6 +62,9 @@ public class UserData
     private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
     private static final String KEY_LAST_CHEST_ID = "usr_last_chest_exchanged";
     private static final String KEY_FIRST_CHEST_KEY_ENTERED = "key_last_chest_key_entered";
+    private static final String KEY_LAST_CHEST_LOCATION_LATITUDE = "key_last_chest_location_latitude";
+    private static final String KEY_LAST_CHEST_LOCATION_LONGITUDE = "key_last_chest_location_longitude";
+    private static final String KEY_LAST_CHEST_LOCATION_TIME = "key_last_chest_location_time";
 
     //Achievements
     private static final String KEY_ACHIEVEMENT_TITLE = "usr_achievement_title";
@@ -102,6 +105,7 @@ public class UserData
     private static final String KEY_SOUVENIR_PRICE = "usr_souvenir_prce";
     private static final String KEY_SOUVENIR_PROGRESS = "key_souvenir_progress";
     private static final String KEY_SOUVENIR_GROUPED_RAW_RESPONSE = "key_souvenir_grouped_raw_response";
+    private static final String KEY_SOUVENIR_TOTAL_COUNT = "key_souvenir_total_count";
 
     //Era
     private static final String KEY_ERA_ID = "usr_age_id";
@@ -1110,6 +1114,42 @@ public class UserData
         mEditor.commit();
     }
 
+    public void saveLastChestLocationLatitude(String lat)
+    {
+        mEditor.putString(KEY_LAST_CHEST_LOCATION_LATITUDE, lat);
+        mEditor.commit();
+    }
+
+    public void saveLastChestLocationLongitude(String logt)
+    {
+        mEditor.putString(KEY_LAST_CHEST_LOCATION_LONGITUDE, logt);
+        mEditor.commit();
+    }
+
+    public void saveLastChestLocationTime(long time)
+    {
+        mEditor.remove(KEY_LAST_CHEST_LOCATION_TIME);
+        mEditor.commit();
+        // Brand new time
+        mEditor.putLong(KEY_LAST_CHEST_LOCATION_TIME, time);
+        mEditor.commit();
+    }
+
+    public String getLastChestLocationLatitude()
+    {
+        return mPreferences.getString(KEY_LAST_CHEST_LOCATION_LATITUDE, "0");
+    }
+
+    public String getLastChestLocationLongitude()
+    {
+        return mPreferences.getString(KEY_LAST_CHEST_LOCATION_LONGITUDE, "0");
+    }
+
+    public long getLastChestLocationTime()
+    {
+        return mPreferences.getLong(KEY_LAST_CHEST_LOCATION_TIME, 0);
+    }
+
     public String getFirstKeyEntered()
     {
         return mPreferences.getString(KEY_FIRST_CHEST_KEY_ENTERED, "");
@@ -1188,5 +1228,16 @@ public class UserData
     {
         mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryID);
         mEditor.commit();
+    }
+
+    public void saveTotalSouvs(int totalSouvs)
+    {
+        mEditor.putInt(KEY_SOUVENIR_TOTAL_COUNT, totalSouvs);
+        mEditor.commit();
+    }
+
+    public int getTotalSouvs()
+    {
+        return mPreferences.getInt(KEY_SOUVENIR_TOTAL_COUNT, 0);
     }
 }

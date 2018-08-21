@@ -118,7 +118,7 @@ public class TokenInputPresenterImpl implements ITokenInputPresenter, TokenInput
         {
             mUserData.saveAuthenticationKey(response.getAuthenticationKey());
             mInteractor.setConfirmedCountry(true);
-            mInteractor.setConfirmedPhone(true); //TODO
+            mInteractor.setConfirmedPhone(true);
 
             if(response.getCountryID() > 0)
                 mUserData.saveCountryID(String.valueOf(response.getCountryID()));
