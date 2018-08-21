@@ -15,7 +15,10 @@ public class AgesResponse
     private Ages ages;
     @SerializedName("count")
     @Expose
-    private Integer count;
+    private int count;
+    @SerializedName("TotalSouvenir")
+    @Expose
+    private int totalSouvenir;
 
     public Ages getAges()
     {
@@ -27,13 +30,23 @@ public class AgesResponse
         this.ages = ages;
     }
 
-    public Integer getCount()
+    public int getCount()
     {
         return count;
     }
 
-    public void setCount(Integer count)
+    public void setCount(int count)
     {
         this.count = count;
+    }
+
+    public int getTotalSouvenir()
+    {
+        return totalSouvenir;
+    }
+
+    public void setTotalSouvenir(int totalSouvenir)
+    {
+        this.totalSouvenir = totalSouvenir;
     }
 }

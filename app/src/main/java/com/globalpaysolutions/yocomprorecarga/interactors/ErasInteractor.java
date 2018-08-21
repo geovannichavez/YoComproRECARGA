@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
 
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 import retrofit2.Call;
@@ -132,7 +131,7 @@ public class ErasInteractor implements IErasInteractor
                 if (response.isSuccessful())
                 {
                     AgesResponse eras = response.body();
-                    listener.onRetrieveSuccess(eras.getAges().getAgesListModel());
+                    listener.onRetrieveSuccess(eras.getAges().getAgesListModel(), response.body().getTotalSouvenir());
                 }
                 else
                 {

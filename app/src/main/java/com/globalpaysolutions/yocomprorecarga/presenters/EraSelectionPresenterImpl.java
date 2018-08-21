@@ -94,9 +94,10 @@ public class EraSelectionPresenterImpl implements IEraSelectionPresenter, ErasLi
 
 
     @Override
-    public void onRetrieveSuccess(List<AgesListModel> eras)
+    public void onRetrieveSuccess(List<AgesListModel> eras, int totalSouvs)
     {
         mView.hideLoadingDialog();
+        UserData.getInstance(mContext).saveTotalSouvs(totalSouvs);
         mView.renderEras(eras);
     }
 

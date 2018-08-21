@@ -84,6 +84,7 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
             @Override
             public void onClick(View v)
             {
+                //TODO: Cambiar a pantalla de enviar SMS
                 ButtonAnimator.getInstance(PrizesHistory.this).animateButton(v);
                 Intent intent = new Intent(PrizesHistory.this, RedeemPrize.class);
                 startActivity(intent);

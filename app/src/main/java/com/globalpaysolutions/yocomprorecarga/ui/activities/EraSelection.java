@@ -42,7 +42,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
 
     //Layouts and Views
     ListView lvEras;
-    TextView lblEraName;
+    //TextView lblEraName;
     ImageButton btnBack;
     ProgressDialog mProgressDialog;
     ImageView bgTimemachine;
@@ -78,7 +78,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
         }
 
         lvEras = (ListView) findViewById(R.id.lvEras);
-        lblEraName = (TextView) findViewById(R.id.lblEraName);
+        //lblEraName = (TextView) findViewById(R.id.lblEraName);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         bgTimemachine = (ImageView) findViewById(R.id.bgTimemachine);
         gifTravel = (GifImageView) findViewById(R.id.gifTravel);
@@ -108,7 +108,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     @Override
     public void setBackground()
     {
-        Picasso.with(this).load(R.drawable.bg_time_machine).into(bgTimemachine);
+        Picasso.with(this).load(R.drawable.bg_background_4).into(bgTimemachine);
     }
 
     @Override
@@ -293,14 +293,7 @@ public class EraSelection extends ImmersiveActivity implements EraSelectionView
     @Override
     public void setSelectedEraName(String eraName)
     {
-        try
-        {
-            lblEraName.setText(eraName);
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
+
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface ErasListener
 {
-    void onRetrieveSuccess(List<AgesListModel> eras);
+    void onRetrieveSuccess(List<AgesListModel> eras, int totalSouvs);
     void onRetrieveError(int pCodeStatus, Throwable pThrowable, String pRequiredVersion);
     void onEraSelectionSuccess(EraSelectionResponse eraSelection, String destiny);
     void onEraSelectionError(int pCodeStatus, Throwable pThrowable, SimpleResponse simpleResponse, String pRequiredVersion);
