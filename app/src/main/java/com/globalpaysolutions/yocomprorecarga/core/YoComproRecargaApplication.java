@@ -11,7 +11,6 @@ import android.util.Log;
 import com.adform.adformtrackingsdk.AdformTrackingSdk;
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
-import com.flurry.android.FlurryAgent;
 import com.globalpaysolutions.yocomprorecarga.R;
 import com.globalpaysolutions.yocomprorecarga.utils.Constants;
 import com.globalpaysolutions.yocomprorecarga.utils.OneSignalNotificationOpenedHandler;
@@ -116,11 +115,6 @@ public class YoComproRecargaApplication extends Application
                 .build()
         );
 
-        //Flurry SDK
-        new FlurryAgent.Builder()
-                .withLogEnabled(true)
-                .withLogLevel(VERBOSE)
-                .build(this, "QD8CKDD7WRF2HFHFDNRX");
     }
 
     @Override
