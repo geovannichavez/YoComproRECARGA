@@ -34,7 +34,6 @@ import java.net.SocketTimeoutException;
 import java.util.Map;
 import java.util.Set;
 
-import static com.flurry.sdk.eh.i;
 
 /**
  * Created by Josué Chávez on 13/01/2017.
