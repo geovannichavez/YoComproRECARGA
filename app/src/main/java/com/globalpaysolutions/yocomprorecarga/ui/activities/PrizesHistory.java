@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -54,6 +55,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
     ImageView btnCategory3;
     ImageView btnCategory4;
     ImageView bgTimemachine;
+    TextView lblEarnedPrizes;
+    TextView lblWeeklyPrizes;
 
     //Adapters
     PrizesAdapter mPrizesAdapter;
@@ -87,6 +90,8 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
         btnCategory2 = (ImageView) findViewById(R.id.btnCategory2);
         btnCategory3 = (ImageView) findViewById(R.id.btnCategory3);
         btnCategory4 = (ImageView) findViewById(R.id.btnCategory4);
+        lblEarnedPrizes = (TextView) findViewById(R.id.lblEarnedPrizes);
+        lblWeeklyPrizes = (TextView) findViewById(R.id.lblWeeklyPrizes);
 
         btnWeeklyPrizes1.setOnClickListener(weeklyPrizesListener);
         btnEarnedPrizes2.setOnClickListener(earnedPrizesListener);
@@ -226,8 +231,10 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
             mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
 
             //Changes views
-            btnWeeklyPrizes1.setImageResource(R.drawable.btn_weekly_prizes_on);
-            btnEarnedPrizes2.setImageResource(R.drawable.btn_earned_prizes_off);
+            btnWeeklyPrizes1.setImageResource(R.drawable.btn_cupons_type_on);
+            lblWeeklyPrizes.setTextColor(getResources().getColor(R.color.white_textView_color));
+            btnEarnedPrizes2.setImageResource(R.drawable.btn_cupons_type_off);
+            lblEarnedPrizes.setTextColor(getResources().getColor(R.color.color_dark_gray_pressed));
         }
     };
 
@@ -241,8 +248,11 @@ public class PrizesHistory extends ImmersiveActivity implements PrizesHistoryVie
             mPresenter.retrievePrizes(mCurrentMenu, mCurrentCategory);
 
             //Changes views
-            btnWeeklyPrizes1.setImageResource(R.drawable.btn_weekly_prizes_off);
-            btnEarnedPrizes2.setImageResource(R.drawable.btn_earned_prizes_on);
+            btnWeeklyPrizes1.setImageResource(R.drawable.btn_cupons_type_off);
+            lblWeeklyPrizes.setTextColor(getResources().getColor(R.color.color_dark_gray_pressed));
+            btnEarnedPrizes2.setImageResource(R.drawable.btn_cupons_type_on);
+            lblEarnedPrizes.setTextColor(getResources().getColor(R.color.white_textView_color));
+
         }
     };
 
