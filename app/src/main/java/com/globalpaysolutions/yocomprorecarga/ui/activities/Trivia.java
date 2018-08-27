@@ -489,14 +489,21 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
-            mAnswered = true;
-            alreadyPressed = true;
-            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_on);
-            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
-            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
-            mAnswerID = (int)view.getTag();
+            try
+            {
+                mAnswered = true;
+                alreadyPressed = true;
+                btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_on);
+                btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
+                btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
+                mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 1, mTriviaID, mAnswered,mPoints);
+                mPresenter.answerTrivia(mAnswerID, 1, mTriviaID, mAnswered,mPoints);
+            }
+            catch (Exception ex)
+            {
+                Log.e(TAG, "Error:  " + ex.getMessage());
+            }
         }
     };
 
@@ -505,14 +512,21 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
-            mAnswered = true;
-            alreadyPressed = true;
-            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
-            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_on);
-            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
-            mAnswerID = (int)view.getTag();
+            try
+            {
+                mAnswered = true;
+                alreadyPressed = true;
+                btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
+                btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_on);
+                btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_off);
+                mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 2, mTriviaID, mAnswered,mPoints);
+                mPresenter.answerTrivia(mAnswerID, 2, mTriviaID, mAnswered,mPoints);
+            }
+            catch (Exception ex)
+            {
+                Log.e(TAG, "Error: " + ex.getMessage());
+            }
         }
     };
 
@@ -521,14 +535,21 @@ public class Trivia extends AppCompatActivity implements TriviaView
         @Override
         public void onClick(View view)
         {
-            mAnswered = true;
-            alreadyPressed = true;
-            btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
-            btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
-            btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
-            mAnswerID = (int)view.getTag();
+            try
+            {
+                mAnswered = true;
+                alreadyPressed = true;
+                btnAnswer1.setImageResource(R.drawable.btn_trivia_answer_off);
+                btnAnswer2.setImageResource(R.drawable.btn_trivia_answer_off);
+                btnAnswer3.setImageResource(R.drawable.btn_trivia_answer_on);
+                mAnswerID = (int)view.getTag();
 
-            mPresenter.answerTrivia(mAnswerID, 3, mTriviaID, mAnswered,mPoints);
+                mPresenter.answerTrivia(mAnswerID, 3, mTriviaID, mAnswered,mPoints);
+            }
+            catch (Exception ex)
+            {
+                Log.e(TAG, "Error: " + ex.getMessage());
+            }
         }
     };
 

@@ -1076,7 +1076,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
     private boolean isAllowedSpeedExchange(Location location, String firebaseKey)
     {
-        boolean allowed = false;
+        boolean allowed = true;
 
         try
         {
@@ -1095,7 +1095,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 mUserData.saveLastChestLocationLongitude(currentLng);
                 mUserData.saveLastChestLocationLatitude(currentLat);
                 mUserData.saveLastChestLocationTime(currentTime);
-                allowed = true;
             }
             else //if there are locations saved, evaluate if is allowed to open the chest
             {
@@ -1114,7 +1113,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
                 if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1)
                 {
-                    allowed = true;
                     mUserData.saveLastChestLocationLatitude(currentLat);
                     mUserData.saveLastChestLocationLongitude(currentLng);
                     mUserData.saveLastChestLocationTime(currentTime);
@@ -1129,7 +1127,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     }
                     else
                     {
-                        allowed = true;
                         mUserData.saveLastChestLocationLatitude(currentLat);
                         mUserData.saveLastChestLocationLongitude(currentLng);
                         mUserData.saveLastChestLocationTime(currentTime);
@@ -1146,7 +1143,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     }
                     else
                     {
-                        allowed = true;
                         mUserData.saveLastChestLocationLatitude(currentLat);
                         mUserData.saveLastChestLocationLongitude(currentLng);
                         mUserData.saveLastChestLocationTime(currentTime);
@@ -1162,7 +1158,6 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     }
                     else
                     {
-                        allowed = true;
                         mUserData.saveLastChestLocationLatitude(currentLat);
                         mUserData.saveLastChestLocationLongitude(currentLng);
                         mUserData.saveLastChestLocationTime(currentTime);
