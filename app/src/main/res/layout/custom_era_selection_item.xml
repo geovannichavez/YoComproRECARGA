@@ -188,8 +188,8 @@
                     android:textColor="@color/white_textView_color"
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
-                    android:textSize="@dimen/dimen_normal_20"
-                    tools:text="23"
+                    android:textSize="@dimen/dimen_normal_16"
+                    tools:text="20/23"
                     android:layout_weight="16"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />

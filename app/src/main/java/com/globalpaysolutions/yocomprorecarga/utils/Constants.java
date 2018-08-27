@@ -142,7 +142,7 @@ public class Constants
     public static final int DISTANCE_ALLOWED_STAGE_3 = 1400; // Meters
 
     public static final float SPEED_WALK_MPS_CHEST_EXCHANGE = 2; // 2 mps is equivalent to 120 meters per minute: 7.2 Kms/h
-    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 3; // 3 mps is equivalent to 180 meters per minute: 10.8 Kms/h
+    public static final float SPEED_BIKE_MPS_CHEST_EXCHANGE = 4; // 3 mps is equivalent to 180 meters per minute: 10.8 Kms/h
                                                                  // 4 mps is equivalent to 240 meters per minute: 14.40 Kms/h
     public static final float SPEED_CAR_MPS_CHEST_EXCHANGE = 6;  // 6 mps is equivalento to 21.60 kph
                                                                  // 7 mps is equivalento to 25.20 kph
