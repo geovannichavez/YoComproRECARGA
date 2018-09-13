@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.globalpaysolutions.yocomprorecarga.utils.MockLocationUtility;
 import com.globalpaysolutions.yocomprorecarga.utils.UserData;
 import com.globalpaysolutions.yocomprorecarga.views.CapturePrizeView;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DatabaseError;
 
 import java.io.IOException;
@@ -62,6 +64,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     private static String mCurrentChestKey;
     private boolean mIsRunning;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     public CapturePrizeARPResenterImpl(Context pContext, AppCompatActivity pActivity, CapturePrizeView pView)
     {
         mCurrentChestKey = "";
@@ -71,6 +75,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         this.mView = pView;
         this.mUserData = UserData.getInstance(mContext);
         this.mInteractor = new CapturePrizeInteractor(mContext, this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(mContext);
         mIsRunning = false;
     }
 
@@ -109,6 +114,12 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             mView.onCoinLongClick();
             mView.hideArchViewLoadingMessage();
+        }
+
+        String nickname = UserData.getInstance(mContext).getNickname();
+        if(!TextUtils.isEmpty(nickname))
+        {
+            Crashlytics.setUserIdentifier(nickname);
         }
     }
 
@@ -414,7 +425,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
            if(location != null)
            {
                // Validates location from property
-               /*if(!MockLocationUtility.isMockLocation(location, mContext))
+               if(!MockLocationUtility.isMockLocation(location, mContext))
                {
                    //Check apps blacklist
                    if(MockLocationUtility.isMockAppInstalled(mContext) <= 0)
@@ -426,10 +437,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                    {
                        mView.showToast(mContext.getString(R.string.toast_mock_apps_may_be_installed));
                    }
-               }*/
-
-               mView.updateUserLocation(location.getLatitude(), location.getLongitude(), location.getAccuracy());
-               mCurrentLocation = location;
+               }
            }
         }
         catch (Exception ex)
@@ -1076,6 +1084,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
 
     private boolean isAllowedSpeedExchange(Location location, String firebaseKey)
     {
+        String tag = "SpeedExchange";
         boolean allowed = true;
 
         try
@@ -1108,7 +1117,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 double calculatedSpeed = distanceMeters / elapsedTime;
 
                 //Log to see actual distance in meters
-                Log.i(TAG, "Distance lastLocation to current: " + String.valueOf(distanceMeters/1000) +  " Kms.");
+                logAnalyticsInfo(2,"Distance lastLocation to current: " +
+                        String.valueOf(distanceMeters/1000) +  " Kms.", tag, Constants.FirebaseAnalyticsEvents.new_location_speed.name());
 
 
                 if(distanceMeters < Constants.DISTANCE_ALLOWED_STAGE_1)
@@ -1124,6 +1134,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     if(calculatedSpeed > Constants.SPEED_WALK_MPS_CHEST_EXCHANGE)
                     {
                         allowed = false;
+                        logAnalyticsInfo(1, "Changed to 'allowed = false' on WALKING speed validation. " +
+                                "CalculatedSpeed: " + String.valueOf(calculatedSpeed), tag, Constants.FirebaseAnalyticsEvents.new_location_speed.name());
                     }
                     else
                     {
@@ -1140,6 +1152,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     if(calculatedSpeed > Constants.SPEED_BIKE_MPS_CHEST_EXCHANGE)
                     {
                         allowed = false;
+                        logAnalyticsInfo(1, "Changed to 'allowed = false' on BIKE speed validation. " +
+                                "CalculatedSpeed: " + String.valueOf(calculatedSpeed), tag, Constants.FirebaseAnalyticsEvents.new_location_speed.name());
                     }
                     else
                     {
@@ -1155,6 +1169,8 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                     if(calculatedSpeed > Constants.SPEED_CAR_MPS_CHEST_EXCHANGE)
                     {
                         allowed = false;
+                        logAnalyticsInfo(1, "Changed to 'allowed = false' on CAR speed validation. " +
+                                "CalculatedSpeed: " + String.valueOf(calculatedSpeed), tag, Constants.FirebaseAnalyticsEvents.new_location_speed.name());
                     }
                     else
                     {
@@ -1167,10 +1183,31 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         }
         catch (Exception ex)
         {
-            Log.e(TAG, "Error: " + ex.getMessage());
+            Crashlytics.logException(ex);
         }
 
         return allowed;
+    }
+
+    private void logAnalyticsInfo(int priority, String msg, String tag, String event)
+    {
+        try
+        {
+            if(mFirebaseAnalytics != null)
+            {
+                String message = UserData.getInstance(mContext).getNickname() + ": @ " + msg;
+
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.FirebaseAnalyticsParams.PRIORITY.name(), priority);
+                bundle.putString(Constants.FirebaseAnalyticsParams.MESSAGE.name(), message);
+                bundle.putString(Constants.FirebaseAnalyticsParams.TAG.name(), tag);
+                mFirebaseAnalytics.logEvent(event, bundle);
+            }
+        }
+        catch (Exception ex)
+        {
+            Crashlytics.log("logCrashlyticsInfo: " + ex.getMessage());
+        }
     }
 
     private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String requiredVersion)
