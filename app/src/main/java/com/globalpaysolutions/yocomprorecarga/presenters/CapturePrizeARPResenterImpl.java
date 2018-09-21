@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -209,7 +210,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             }
 
 
-            if(isAllowedSpeedExchange(chestLocation, firebaseID))
+            /*if(isAllowedSpeedExchange(chestLocation, firebaseID))
             {
                 if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
                 {
@@ -229,6 +230,17 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
                 dialog.setLine1(mContext.getString(R.string.label_cheating_suspection));
                 dialog.setAcceptButton(mContext.getString(R.string.button_accept));
                 mView.showImageDialog(dialog, R.drawable.ic_alert, false);
+            }*/
+
+            if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
+            {
+                mUserData.saveLastWildcardTouched(firebaseID, chestValue);
+                mView.navigateToWildcard();
+            }
+            else
+            {
+                mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
+                mInteractor.openCoinsChest(location, firebaseID, chestValue, mUserData.getEraID());
             }
 
         }
@@ -243,7 +255,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
     public void exchangeCoinsChest_2D(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         //mView.changeToOpenChest(pChestType, mUserData.getEraID());
-        if(isAllowedSpeedExchange(mCurrentLocation, pFirebaseID))
+        /*if(isAllowedSpeedExchange(mCurrentLocation, pFirebaseID))
         {
             mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
             mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
@@ -255,7 +267,9 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
             dialog.setLine1(mContext.getString(R.string.label_cheating_suspection));
             dialog.setAcceptButton(mContext.getString(R.string.button_accept));
             mView.showImageDialog(dialog, R.drawable.ic_alert, false);
-        }
+        }*/
+        mView.showLoadingDialog(mContext.getString(R.string.label_loading_please_wait));
+        mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType, mUserData.getEraID());
     }
 
     @Override
@@ -1091,7 +1105,7 @@ public class CapturePrizeARPResenterImpl implements ICapturePrizeARPresenter, Fi
         {
             String currentLat = String.valueOf(location.getLatitude());
             String currentLng = String.valueOf(location.getLongitude());
-            long currentTime = System.currentTimeMillis();
+            long currentTime = SystemClock.elapsedRealtime();
 
             //Checks if there was some last chest's location saved before
             double savedLat = Double.valueOf(mUserData.getLastChestLocationLatitude());
